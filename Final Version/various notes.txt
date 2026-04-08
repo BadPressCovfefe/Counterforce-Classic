@@ -1,0 +1,69 @@
+report Enjoy playing Counterforce? You can now donate to support the project via our website at www.CounterforceGame.com. 
+event Enjoy playing Counterforce? You can now donate to support the project via our website at www.CounterforceGame.com. 
+
+
+12 hours:43200000
+16 hours:57600000
+20 hours:72000000
+24 hours:86400000
+28 hours:100800000
+32 hours:115200000
+
+2 days:  172800000
+3 days:  259200000
+4 days:  345600000
+5 days:  432000000
+7 days:  604800000
+10 days: 864000000
+14 days: 1210000000
+16 days: 1382000000
+18 days: 1555000000
+20 days: 1728000000
+24 days: 2074000000
+
+Sus IPs: 
+172.58.22.163
+213.87.131.20
+46.211.110.29
+
+200.68.128.104
+95.168.121.27
+
+event 6 days until the Battle Royale event. Check Discord #announcements for more information.
+report 6 days until the Battle Royale event. Check Discord #announcements for more information.
+
+Process: com.apps.fast.counterforcetest, PID: 859
+    java.lang.NullPointerException: Attempt to invoke virtual method 'int java.lang.Integer.intValue()' on a null object reference
+        at launch.game.systems.MissileSystem.GetSlotMissileType(MissileSystem.java:168)
+        at com.apps.fast.launch.launchviews.controls.MissileSystemControl.GetSlotContents(MissileSystemControl.java:513)
+        at com.apps.fast.launch.launchviews.controls.SlotControl.Update(SlotControl.java:86)
+        at com.apps.fast.launch.launchviews.controls.SlotControl.Setup(SlotControl.java:78)
+        at com.apps.fast.launch.launchviews.controls.SlotControl.<init>(SlotControl.java:43)
+        at com.apps.fast.launch.launchviews.controls.MissileSystemControl.GenerateSlotTable(MissileSystemControl.java:732)
+        at com.apps.fast.launch.launchviews.controls.MissileSystemControl.Setup(MissileSystemControl.java:198)
+        at com.apps.fast.launch.launchviews.controls.MissileSystemControl.<init>(MissileSystemControl.java:175)
+        at com.apps.fast.launch.launchviews.entities.BomberView.Setup(BomberView.java:42)
+        at com.apps.fast.launch.launchviews.entities.AircraftView.<init>(AircraftView.java:59)
+        at com.apps.fast.launch.launchviews.entities.BomberView.<init>(BomberView.java:36)
+        at com.apps.fast.launch.activities.MainActivity.ApplySelectedEntityView(MainActivity.java:1861)
+        at com.apps.fast.launch.activities.MainActivity.SelectEntity(MainActivity.java:1416)
+        at com.apps.fast.launch.launchviews.PurchaseLaunchableView.ReturnToParentView(PurchaseLaunchableView.java:740)
+        at com.apps.fast.launch.launchviews.PurchaseLaunchableView.access$600(PurchaseLaunchableView.java:36)
+        at com.apps.fast.launch.launchviews.PurchaseLaunchableView$1$1.onClick(PurchaseLaunchableView.java:194)
+		
+		
+Prize options:
+-Boost a radar station range to 3.0km (Normal max is 1.5km)
+-Boost a sentry range to 7.5 km. (Normal max 2.0km)
+-Boost a bunker to 5000 HP. (Normal max is 3000 hp)
+-Boost an ABM site to 3 slots. (Normal 1 slot)
+
+((entity instanceof Missile || entity instanceof Aircraft || entity instanceof Interceptor) && game.IsInsideRadarRange(entity, game.GetOurPlayer()))
+
+v47 todo:  
+-Aircraft approaching the level of fuel needed to return to base send a firebase message to their owner.
+-Add toggleable "return when low of fuel" button to aircraft. 
+-Fix "Time to target: %s"
+-Add aircraft names to "selectaircraftview."
+-Add cancel button to "selectaircraftview."
+-Add toggle return button to aircraftview. 

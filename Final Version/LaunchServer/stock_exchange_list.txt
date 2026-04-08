@@ -1,0 +1,18 @@
+New York Stock Exchange,40.7069,-74.0113
+Toronto Stock Exchange,43.6481,-79.3802
+Mexican Stock Exchange,19.4326,-99.1332
+São Paulo Stock Exchange,-23.5505,-46.6333
+Buenos Aires Stock Exchange,-34.6037,-58.3816
+Santiago Stock Exchange,-33.4489,-70.6693
+London Stock Exchange,51.5155,-0.0922
+Euronext Paris,48.8647,2.3426
+Frankfurt Stock Exchange,50.1109,8.6821
+Tokyo Stock Exchange,35.6828,139.759
+Shanghai Stock Exchange,31.2304,121.4737
+Hong Kong Stock Exchange,22.2855,114.1577
+Johannesburg Stock Exchange,-26.2041,28.0473
+Nairobi Securities Exchange,-1.2921,36.8219
+Egyptian Exchange (Cairo),30.0444,31.2357
+Australian Securities Exchange (Sydney),-33.8688,151.2093
+New Zealand Exchange (Wellington),-41.2865,174.7762
+Port Moresby Stock Exchange,-9.4783,147.1509

@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="?attr/PanelTransparency">
+    <ScrollView
+        android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fadeScrollbars="false"
+                android:scrollbarThumbVertical="?attr/ScrollBarColour">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/players_title"
+                android:id="@+id/txtPlayerJoins"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"/>
+
+            <TextView
+                android:id="@+id/txtGettingStats"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:text="@string/getting_stats"
+                android:textColor="?attr/WarningColour"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/lytYourLot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/txtPlayerCount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:hint="@string/player_count"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="?attr/WarningColour"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/txtOnlinePlayerCount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:hint="@string/online_player_count"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="?attr/WarningColour"
+                    android:visibility="gone" />
+
+                <EditText
+                    android:id="@+id/txtFilter"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/TextViewHeight"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="@drawable/edittext_background"
+                    android:hint="@string/filter"
+                    android:inputType="text" />
+
+                <TextView
+                    android:id="@+id/btnSortBy"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/ButtonHeight"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:layout_marginBottom="@dimen/MainViewSpacing"
+                    android:background="@drawable/text_button_normal"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:text="Sort by" />
+
+                <LinearLayout
+                    android:id="@+id/lytNavTop"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/btnPrevTop"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:background="@drawable/text_button_normal"
+                        android:clickable="true"
+                        android:gravity="right"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/ButtonEdgePadding">
+
+                        <TextView
+                            android:id="@+id/txtPrevTop"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/HorizontalSpacing"
+                            android:layout_marginRight="@dimen/HorizontalSpacing"
+                            android:gravity="center_horizontal"
+                            android:text="@string/prev10"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/txtFromToTop"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/HorizontalSpacing"
+                        android:layout_marginRight="@dimen/HorizontalSpacing"
+                        android:text="1"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <LinearLayout
+                        android:id="@+id/btnNextTop"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:background="@drawable/text_button_normal"
+                        android:clickable="true"
+                        android:gravity="right"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/ButtonEdgePadding">
+
+                        <TextView
+                            android:id="@+id/txtNextTop"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/HorizontalSpacing"
+                            android:layout_marginRight="@dimen/HorizontalSpacing"
+                            android:gravity="center_horizontal"
+                            android:text="@string/next10"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lytPlayers"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:orientation="vertical" />
+
+                <LinearLayout
+                    android:id="@+id/lytNavBottom"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/btnPrevBottom"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:background="@drawable/text_button_normal"
+                        android:clickable="true"
+                        android:gravity="right"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/ButtonEdgePadding">
+
+                        <TextView
+                            android:id="@+id/txtPrevBottom"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/HorizontalSpacing"
+                            android:layout_marginRight="@dimen/HorizontalSpacing"
+                            android:gravity="center_horizontal"
+                            android:text="@string/prev10"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/txtFromToBottom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/HorizontalSpacing"
+                        android:layout_marginRight="@dimen/HorizontalSpacing"
+                        android:text="1"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <LinearLayout
+                        android:id="@+id/btnNextBottom"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:background="@drawable/text_button_normal"
+                        android:clickable="true"
+                        android:gravity="right"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/ButtonEdgePadding">
+
+                        <TextView
+                            android:id="@+id/txtNextBottom"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/HorizontalSpacing"
+                            android:layout_marginRight="@dimen/HorizontalSpacing"
+                            android:gravity="center_horizontal"
+                            android:text="@string/next10"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:background="@drawable/text_button_normal"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/ButtonHeight"
+                android:text="@string/close"
+                android:id="@+id/textView8"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:clickable="true"
+                android:onClick="ReturnToMainView"
+                android:layout_marginBottom="@dimen/MainViewSpacing"/>
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

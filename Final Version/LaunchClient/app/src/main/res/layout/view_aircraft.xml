@@ -1,0 +1,633 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:foreground="@drawable/view_frame">
+    <ScrollView
+        android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/PanelTransparency"
+                android:fadeScrollbars="false"
+                android:scrollbarThumbVertical="?attr/ScrollBarColour">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/MainViewSpacing"
+            android:layout_marginTop="@dimen/MainViewSpacing"
+            android:layout_marginRight="@dimen/MainViewSpacing"
+            android:layout_marginBottom="@dimen/MainViewSpacing"
+            android:paddingBottom="@dimen/Overscroll">
+
+            <com.apps.fast.launch.views.EntityControls
+                android:id="@+id/entityControls"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <ImageView
+                    android:layout_width="@dimen/PlayerInfoIconSize"
+                    android:layout_height="@dimen/PlayerInfoIconSize"
+                    android:id="@+id/imgAircraft"
+                    android:src="@drawable/marker_fighter_default"/>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/CloseButtonSize">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Aircraft Title"
+                        android:id="@+id/txtAircraftTitle"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                    <TextView
+                        android:id="@+id/txtName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:text="Name" />
+
+                    <TextView
+                        android:id="@+id/txtNameButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/detail_button"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/ButtonEdgePadding"
+                        android:text="Name" />
+
+                    <TextView
+                        android:id="@+id/txtHPTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:text="HP" />
+
+                    <LinearLayout
+                        android:id="@+id/lytNameEdit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+                        <EditText
+                            android:id="@+id/txtNameEdit"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/TextViewHeight"
+                            android:layout_weight="1"
+                            android:background="@drawable/edittext_background"
+                            android:hint="@string/type_name"
+                            android:inputType="textCapSentences"
+                            android:maxLength="12" />
+
+                        <LinearLayout
+                            android:id="@+id/btnApplyName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:background="@drawable/text_button_normal"
+                            android:clickable="true"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imageView24"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:layout_weight="1"
+                                android:padding="@dimen/ButtonImagePadding"
+                                android:src="@drawable/button_ok" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/txtInfantryStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Ready" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/SeparatorThickness"
+                android:background="?attr/ButtonEdgeColour"
+                android:layout_marginTop="@dimen/SeperatorMargins"
+                android:layout_marginBottom="@dimen/SeperatorMargins"/>
+
+            <TextView
+                android:id="@+id/txtToTarget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/missile_to_target"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="?attr/InfoColour"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/txtOrphan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/orphaned_aircraft"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="?attr/AltUIColour"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/lytTargets"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone" />
+
+            <View
+                android:id="@+id/viewToTarget"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/SeparatorThickness"
+                android:layout_marginTop="@dimen/SeperatorMargins"
+                android:layout_marginBottom="@dimen/SeperatorMargins"
+                android:background="?attr/ButtonEdgeColour"
+                android:visibility="gone" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/technical_data"
+                android:id="@+id/textView12"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="@string/speed"
+                        android:id="@+id/speed_title"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="@string/fuel"
+                        android:id="@+id/txtFuelTitle"/>
+
+                    <TextView
+                        android:id="@+id/txtFlaresTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/flares"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/SeperatorMargins">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="0"
+                        android:id="@+id/txtSpeed"
+                        android:textColor="?attr/AltUIColour"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="0"
+                        android:id="@+id/txtFuelLevel"
+                        android:textColor="?attr/AltUIColour"/>
+
+                    <TextView
+                        android:id="@+id/txtFlares"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="?attr/AltUIColour"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/SeparatorThickness"
+                android:background="?attr/ButtonEdgeColour"
+                android:layout_marginTop="@dimen/SeperatorMargins"
+                android:layout_marginBottom="@dimen/SeperatorMargins"/>
+
+            <LinearLayout
+                android:id="@+id/lytMode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/SystemBackgroundColour"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/btnModeAuto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/text_button_normal"
+                        android:padding="@dimen/ButtonImagePadding"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/sam_mode_auto" />
+
+                    <ImageButton
+                        android:id="@+id/btnModeSemi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/text_button_normal"
+                        android:padding="@dimen/ButtonImagePadding"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/sam_mode_semi" />
+
+                    <ImageButton
+                        android:id="@+id/btnModeManual"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/text_button_normal"
+                        android:padding="@dimen/ButtonImagePadding"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/sam_mode_manual" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/viewMode"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/SeparatorThickness"
+                android:layout_marginTop="@dimen/SeperatorMargins"
+                android:layout_marginBottom="@dimen/SeperatorMargins"
+                android:background="?attr/ButtonEdgeColour"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/lytControls"
+                android:layout_marginBottom="@dimen/MainViewSpacing"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/btnMove"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView53"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/text_button_normal"
+                        android:padding="@dimen/ButtonImagePadding"
+                        android:src="@drawable/button_move" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnCeaseFire"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/MainViewSpacing"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/text_button_normal"
+                        android:padding="@dimen/ButtonImagePadding"
+                        android:src="@drawable/button_stop" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnAttack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSpacing"
+                    android:clickable="true"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/text_button_normal"
+                        android:padding="@dimen/ButtonImagePadding"
+                        android:src="@drawable/button_attack" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnDigIn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/MainViewSpacing"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView52"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/text_button_normal"
+                        android:padding="@dimen/ButtonImagePadding"
+                        android:src="@drawable/button_return" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnScan"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/MainViewSpacing"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imgScan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/text_button_normal"
+                        android:padding="@dimen/ButtonImagePadding"
+                        android:src="@drawable/button_radar_active" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnToggleReturn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/MainViewSpacing"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imgToggleReturn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/text_button_normal"
+                        android:padding="@dimen/ButtonImagePadding"
+                        android:src="@drawable/button_auto_return" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnKamikaze"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/MainViewSpacing"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/imgKamikaze"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/text_button_normal"
+                        android:padding="@dimen/ButtonImagePadding"
+                        android:src="@drawable/button_kamikaze" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/btnSetNewHomebase"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clickable="true"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
+
+                    <ImageView
+                        android:id="@+id/imageView26"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/text_button_normal"
+                        android:padding="@dimen/ButtonImagePadding"
+                        android:src="@drawable/button_new_homebase" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnLaunchInterceptor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSpacing"
+                    android:clickable="true"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView17"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/text_button_normal"
+                        android:padding="@dimen/ButtonImagePadding"
+                        android:src="@drawable/button_interceptor_target_aircraft" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnRefuel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSpacing"
+                    android:clickable="true"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView19"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/text_button_normal"
+                        android:padding="@dimen/ButtonImagePadding"
+                        android:src="@drawable/button_refuel_aircraft" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnProvideFuel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSpacing"
+                    android:clickable="true"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/text_button_normal"
+                        android:padding="@dimen/ButtonImagePadding"
+                        android:src="@drawable/button_provide_fuel" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnElectronicWarfare"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSpacing"
+                    android:clickable="true"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView20"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/text_button_normal"
+                        android:padding="@dimen/ButtonImagePadding"
+                        android:src="@drawable/button_electronic_warfare" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtMissiles"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/missiles"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <FrameLayout
+                android:id="@+id/lytMissiles"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/MainViewSpacing">
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/txtInterceptors"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/interceptors"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <FrameLayout
+                android:id="@+id/lytInterceptors"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/MainViewSpacing">
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/txtCargo"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cargo"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <FrameLayout
+                android:id="@+id/lytCargo"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/MainViewSpacing">
+
+            </FrameLayout>
+
+            <View
+                android:id="@+id/viewAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/SeparatorThickness"
+                android:layout_marginTop="@dimen/SeperatorMargins"
+                android:background="?attr/ButtonEdgeColour"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginBottom="@dimen/MainViewSpacing"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:id="@+id/btnAdminDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/MediumButtonSize"
+                        android:layout_height="@dimen/MediumButtonSize"
+                        android:background="@drawable/text_button_normal"
+                        android:padding="@dimen/ButtonImagePadding"
+                        android:src="@drawable/button_erase" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

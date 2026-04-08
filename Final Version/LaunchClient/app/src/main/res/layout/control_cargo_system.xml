@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+    android:background="@drawable/text_button_normal"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/lytCapacity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/MainViewSideMargin"
+        android:layout_marginTop="@dimen/MainViewSpacing"
+        android:layout_marginRight="@dimen/MainViewSideMargin"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/txtInputs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/inputs"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/txtCapacity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/cargo_capacity"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/MainViewSpacing"
+        android:id="@+id/lytContents"
+        android:layout_marginBottom="@dimen/MainViewSpacing">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btnLoadCargo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/MainViewSideMargin"
+        android:layout_marginRight="@dimen/MainViewSideMargin"
+        android:layout_marginBottom="@dimen/MainViewSpacing"
+        android:background="@drawable/text_button_normal"
+        android:clickable="true"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/imgLoadCargo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:padding="@dimen/ButtonEdgePadding"
+            android:text="@string/load_cargo"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="?attr/InfoColour" />
+    </LinearLayout>
+
+</LinearLayout>

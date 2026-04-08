@@ -1,0 +1,35 @@
+Monuments
+Name,Latitude,Longitude
+Angkor Wat,Latitude,Longitude
+Sydney Opera House,Latitude,Longitude
+Eiffel Tower,Latitude,Longitude
+Taj Mahal,Latitude,Longitude
+Burj Khalifa,Latitude,Longitude
+Machu Picchu,Latitude,Longitude
+Great Wall of China,Latitude,Longitude
+Mount Rushmore,Latitude,Longitude
+Mont Saint-Michel,Latitude,Longitude
+The Acropolis,Latitude,Longitude
+The Brandenburg Gate,Latitude,Longitude
+Easter Island,Latitude,Longitude
+Golden Gate Bridge,Latitude,Longitude
+Neuschwanstein Castle,Latitude,Longitude
+Leaning Tower of Pisa,Latitude,Longitude
+Great Pyramid of Giza,Latitude,Longitude
+Victoria Falls,Latitude,Longitude
+Western Wall,Latitude,Longitude
+Giant's Causeway,Latitude,Longitude
+Buckingham Palace,Latitude,Longitude
+La Sagrada Familia,Latitude,Longitude
+Christ the Redeemer,Latitude,Longitude
+Hagia Sophia,Latitude,Longitude
+The Colosseum,Latitude,Longitude
+The Grand Palace,Latitude,Longitude
+Statue of Liberty,Latitude,Longitude
+Petra,Latitude,Longitude
+Stonehenge,Latitude,Longitude
+Blue Domes of Oia,Latitude,Longitude
+Mount Fuji,Latitude,Longitude
+Potala Palace,Latitude,Longitude
+Chernobyl,Latitude,Longitude
+Pearl Harbor,Latitude,Longitude

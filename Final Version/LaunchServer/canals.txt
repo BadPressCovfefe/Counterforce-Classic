@@ -1,0 +1,16 @@
+1,St. Claire River,42.039850,-83.148518
+1,St. Claire River,43.178302,-82.311124
+2,St. Marys River,46.172302,-83.672267
+2,St. Marys River,46.551636,-84.688487
+3,Welland Canal,43.307029,-79.213808
+3,Welland Canal,42.856088,-79.250157
+4,St. Lawrence River,44.081163,-76.415690
+4,St. Lawrence River,47.327849,-70.300331
+5,Panama Canal,9.386977,-79.922041
+5,Panama Canal,8.886332,-79.538752
+6,Suez Canal,29.919432,32.539190
+6,Suez Canal,31.316123,32.387287
+7,Dardanelles Strait,40.013751,26.062405
+7,Dardanelles Strait,40.458657,26.850821
+8,Bosporus,40.974270,28.985440
+8,Bosporus,41.238708,29.144793

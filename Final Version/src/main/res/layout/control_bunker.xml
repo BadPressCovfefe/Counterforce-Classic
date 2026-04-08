@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/btnUpgradeBunkerHP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/MainViewSpacing"
+        android:layout_marginLeft="@dimen/MainViewSideMargin"
+        android:layout_marginRight="@dimen/MainViewSideMargin"
+        android:layout_marginBottom="@dimen/MainViewSpacing"
+        android:background="@drawable/text_button_normal"
+        android:clickable="true"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/imageView52"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/ButtonImagePadding"
+            android:src="@drawable/upgrade_hp" />
+
+        <TextView
+            android:id="@+id/txtBunkerHPUpgrade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/ButtonInset"
+            android:layout_weight="0"
+            android:text="@string/upgrade"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <LinearLayout
+            android:id="@+id/lytMoreish1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:orientation="vertical"></LinearLayout>
+
+        <TextView
+            android:id="@+id/txtBunkerHPUpgradeCost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/ButtonInset"
+            android:layout_weight="0"
+            android:text="£yay"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/MainViewSideMargin"
+        android:layout_marginLeft="@dimen/MainViewSideMargin"
+        android:layout_marginBottom="@dimen/MainViewSpacing"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtBunkerDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bunker_description"
+            android:textColor="?attr/InfoColour"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    </LinearLayout>
+
+</LinearLayout>

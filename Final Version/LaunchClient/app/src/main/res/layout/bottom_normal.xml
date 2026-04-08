@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:fadingEdgeLength="48dp"
+        android:requiresFadingEdge="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/btnBuild"
+                android:layout_width="@dimen/PlayerInfoIconSize"
+                android:layout_height="@dimen/PlayerInfoIconSize"
+                android:layout_margin="@dimen/ButtonInset"
+                android:background="@drawable/text_button_normal"
+                android:onClick="ButtonBuild"
+                android:padding="@dimen/ButtonImagePadding"
+                android:scaleType="fitCenter"
+                android:src="@drawable/button_build" />
+
+            <ImageView
+                android:id="@+id/btnCargo"
+                android:layout_width="@dimen/PlayerInfoIconSize"
+                android:layout_height="@dimen/PlayerInfoIconSize"
+                android:layout_margin="@dimen/ButtonInset"
+                android:background="@drawable/text_button_normal"
+                android:onClick="ButtonCargo"
+                android:padding="@dimen/ButtonImagePadding"
+                android:scaleType="fitCenter"
+                android:src="@drawable/button_cargo" />
+
+            <ImageView
+                android:id="@+id/btnReports"
+                android:layout_width="@dimen/PlayerInfoIconSize"
+                android:layout_height="@dimen/PlayerInfoIconSize"
+                android:layout_margin="@dimen/ButtonInset"
+                android:background="@drawable/text_button_normal"
+                android:onClick="ButtonReports"
+                android:padding="@dimen/ButtonImagePadding"
+                android:scaleType="fitCenter"
+                android:src="@drawable/button_reports" />
+
+            <ImageView
+                android:id="@+id/btnSendMessage"
+                android:layout_width="@dimen/PlayerInfoIconSize"
+                android:layout_height="@dimen/PlayerInfoIconSize"
+                android:layout_margin="@dimen/ButtonInset"
+                android:layout_weight="1"
+                android:background="@drawable/text_button_normal"
+                android:onClick="ButtonSendMessage"
+                android:padding="@dimen/ButtonImagePadding"
+                android:scaleType="fitCenter"
+                android:src="@drawable/button_send_message" />
+
+            <ImageView
+                android:id="@+id/btnCallAirdrop"
+                android:layout_width="@dimen/PlayerInfoIconSize"
+                android:layout_height="@dimen/PlayerInfoIconSize"
+                android:layout_margin="@dimen/ButtonInset"
+                android:layout_weight="1"
+                android:background="@drawable/text_button_normal"
+                android:onClick="ButtonCallAirdrop"
+                android:padding="@dimen/ButtonImagePadding"
+                android:scaleType="fitCenter"
+                android:src="@drawable/call_airdrop" />
+
+            <ImageView
+                android:id="@+id/btnWarnings"
+                android:layout_width="@dimen/PlayerInfoIconSize"
+                android:layout_height="@dimen/PlayerInfoIconSize"
+                android:layout_margin="@dimen/ButtonInset"
+                android:background="@drawable/text_button_normal"
+                android:onClick="ButtonWarnings"
+                android:padding="@dimen/ButtonImagePadding"
+                android:scaleType="fitCenter"
+                android:src="@drawable/button_threats" />
+
+            <ImageView
+                android:id="@+id/btnProspect"
+                android:layout_width="@dimen/PlayerInfoIconSize"
+                android:layout_height="@dimen/PlayerInfoIconSize"
+                android:layout_margin="@dimen/ButtonInset"
+                android:layout_weight="1"
+                android:background="@drawable/text_button_normal"
+                android:onClick="ButtonProspect"
+                android:padding="@dimen/ButtonImagePadding"
+                android:scaleType="fitCenter"
+                android:src="@drawable/button_prospect" />
+
+            <ImageView
+                android:id="@+id/btnDiplomacy"
+                android:layout_width="@dimen/PlayerInfoIconSize"
+                android:layout_height="@dimen/PlayerInfoIconSize"
+                android:layout_margin="@dimen/ButtonInset"
+                android:background="@drawable/text_button_normal"
+                android:onClick="ButtonDiplomacy"
+                android:padding="@dimen/ButtonImagePadding"
+                android:scaleType="fitCenter"
+                android:src="@drawable/button_diplomacy" />
+
+            <ImageView
+                android:id="@+id/btnPlayers"
+                android:layout_width="@dimen/PlayerInfoIconSize"
+                android:layout_height="@dimen/PlayerInfoIconSize"
+                android:layout_margin="@dimen/ButtonInset"
+                android:background="@drawable/text_button_normal"
+                android:onClick="ButtonPlayers"
+                android:padding="@dimen/ButtonImagePadding"
+                android:scaleType="fitCenter"
+                android:src="@drawable/button_players" />
+
+            <ImageView
+                android:id="@+id/btnDiscord"
+                android:layout_width="@dimen/PlayerInfoIconSize"
+                android:layout_height="@dimen/PlayerInfoIconSize"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/ButtonInset"
+                android:layout_weight="1"
+                android:background="@drawable/text_button_normal"
+                android:onClick="ButtonDiscord"
+                android:padding="@dimen/ButtonImagePadding"
+                android:scaleType="fitCenter"
+                android:src="@drawable/button_discord" />
+
+            <ImageView
+                android:id="@+id/btnSettings"
+                android:layout_width="@dimen/PlayerInfoIconSize"
+                android:layout_height="@dimen/PlayerInfoIconSize"
+                android:layout_margin="@dimen/ButtonInset"
+                android:background="@drawable/text_button_normal"
+                android:onClick="ButtonSettings"
+                android:padding="@dimen/ButtonImagePadding"
+                android:scaleType="fitCenter"
+                android:src="@drawable/button_settings" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+</LinearLayout>

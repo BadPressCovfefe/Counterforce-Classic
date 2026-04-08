@@ -1,0 +1,400 @@
+<project version="4">
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Corbin/Desktop/v44.0/LaunchClient/app/src/main/res/layout/view_player.xml" value="0.20153985507246377" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/activity_purchase_launchable.xml" value="0.21" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/bottom_missile_target.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/bottom_move_order.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/bottom_normal.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/control_airbase.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/control_alliance.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/control_bunker.xml" value="0.5" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/control_farm.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/control_missile_slot.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/control_missile_system - Copy.xml" value="0.17255434782608695" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/control_missile_system.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/control_radar_station.xml" value="0.17255434782608695" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/control_solar_panel.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/launch_dialog.xml" value="0.20153985507246377" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/main_normal.xml" value="0.20153985507246377" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/view_aircraft.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/view_aircraft_base.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/view_alliance.xml" value="0.20153985507246377" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/view_alliance_affiliate.xml" value="0.20153985507246377" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/view_build.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/view_diplomacy.xml" value="0.20153985507246377" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/view_diplomacy_action.xml" value="0.20153985507246377" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/view_distanced_entity.xml" value="0.17255434782608695" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/view_entitycontrols.xml" value="0.17255434782608695" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/view_fighter.xml" value="0.25" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/view_interceptor.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/view_map_click.xml" value="0.20153985507246377" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/view_missile - Copy.xml" value="0.17255434782608695" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/view_missile.xml" value="0.20153985507246377" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/view_missile_selection.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/view_player.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/view_player_missiles.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/view_player_rank.xml" value="0.5" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/view_relationship.xml" value="0.20153985507246377" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/view_settings.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/view_structure.xml" value="0.20153985507246377" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/view_structure_maintenance.xml" value="0.20153985507246377" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/view_war.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/view_warnings.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Desktop/v46.0 Non-crap Economy Update/LaunchClient/app/src/main/res/layout/view_wealth_rules.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/drawable/detail_button_borderless.xml" value="0.2585" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/drawable/detail_button_disabled.xml" value="0.2585" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/drawable/detail_button_highlighted.xml" value="0.2585" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/drawable/detail_button_information.xml" value="0.2585" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/drawable/edittext_background.xml" value="0.2585" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/drawable/text_button_normal.xml" value="0.2585" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/drawable/view_frame.xml" value="0.2585" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/drawable/visibility_toolbox.xml" value="0.2585" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/activity_game_guide.xml" value="0.24347826086956523" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/activity_purchase_aircraft.xml" value="0.1490036231884058" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/activity_purchase_launchable.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/activity_purchase_ship.xml" value="0.1490036231884058" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/activity_purchase_submarine.xml" value="0.25" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/bottom_artillery_target.xml" value="0.21829710144927536" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/bottom_electronic_warfare.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/bottom_load_cargo.xml" value="0.25" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/bottom_load_loot.xml" value="0.25" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/bottom_missile_target.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/bottom_move_cargo.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/bottom_normal.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/bottom_refuel_aircraft.xml" value="0.21829710144927536" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/bottom_torpedo_target.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/bottom_transfer_cargo.xml" value="0.2604166666666667" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/bottom_unit_command.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/control_airbase.xml" value="0.21" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/control_aircraft_system.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/control_alliance.xml" value="0.5" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/control_armory.xml" value="0.22" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/control_artillery_system.xml" value="0.25" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/control_cargo_system.xml" value="0.9" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/control_comms_tower.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/control_haulable_slot.xml" value="0.25" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/control_missile_slot.xml" value="0.22" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/control_missile_system.xml" value="0.15081521739130435" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/control_ore_mine.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/control_processor.xml" value="0.31145833333333334" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/control_radar_station.xml" value="0.21829710144927536" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/control_sentry_gun.xml" value="0.21829710144927536" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/control_shipyard_slot.xml" value="0.22" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/control_warehouse.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/main_disclaimer.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/main_normal.xml" value="0.22" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_aircraft.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_aircraft_base.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_aircraft_maintenance.xml" value="0.22" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_aircrafttype_selection.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_alliance.xml" value="0.21829710144927536" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_build.xml" value="0.25" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_build_new.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_build_processor.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_cargo_truck.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_city.xml" value="0.15081521739130435" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_city_maintenance.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_design_aircraft.xml" value="0.25" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_design_ship.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_design_submarine.xml" value="0.25" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_diplomacy.xml" value="0.21829710144927536" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_entitycontrols.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_infantry.xml" value="0.37083333333333335" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_infantry_maintenance.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_interceptor_selection.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_map_click.xml" value="0.15081521739130435" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_missile.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_missile_selection.xml" value="0.5" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_naval_production.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_player.xml" value="0.21829710144927536" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_player_rank.xml" value="0.21829710144927536" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_privacy_zones.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_select_missile.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_select_torpedo.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_ship.xml" value="0.25" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_shiptype_selection.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_shipyard.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_structure.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_submarine.xml" value="0.5" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_submarinetype_selection.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_tank.xml" value="0.22" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_torpedo.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_torpedo_selection.xml" value="0.25" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce-Final-Version/Final Version/LaunchClient/app/src/main/res/layout/view_wealth_rules.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v49.0 Comms Efficiency Update/LaunchClient/app/src/main/res/layout/bottom_normal.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v49.0 Comms Efficiency Update/LaunchClient/app/src/main/res/layout/control_airbase.xml" value="0.21" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v49.0 Comms Efficiency Update/LaunchClient/app/src/main/res/layout/view_aircraft.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v49.0 Comms Efficiency Update/LaunchClient/app/src/main/res/layout/view_aircraft_base.xml" value="0.21" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v49.0 Comms Efficiency Update/LaunchClient/app/src/main/res/layout/view_aircraft_quickselect.xml" value="0.5" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v49.0 Comms Efficiency Update/LaunchClient/app/src/main/res/layout/view_select_aircraft.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v52.0 Missile Accuracy Update/LaunchClient/app/src/main/res/layout/bottom_link_depot.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v52.0 Missile Accuracy Update/LaunchClient/app/src/main/res/layout/bottom_missile_target.xml" value="0.25" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v52.0 Missile Accuracy Update/LaunchClient/app/src/main/res/layout/bottom_normal.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v52.0 Missile Accuracy Update/LaunchClient/app/src/main/res/layout/control_logisticsdepot.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v52.0 Missile Accuracy Update/LaunchClient/app/src/main/res/layout/view_diplomacy.xml" value="0.25" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v52.0 Missile Accuracy Update/LaunchClient/app/src/main/res/layout/view_players.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v52.0 Missile Accuracy Update/LaunchClient/app/src/main/res/layout/view_settings.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v52.0 Mssile Rebalance/LaunchClient/app/src/main/res/drawable/view_frame.xml" value="0.183" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v52.0 Mssile Rebalance/LaunchClient/app/src/main/res/layout/bottom_icbm_target.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v52.0 Mssile Rebalance/LaunchClient/app/src/main/res/layout/control_missile_system.xml" value="0.25" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v52.0 Mssile Rebalance/LaunchClient/app/src/main/res/layout/control_ore_mine.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/drawable/checkbox.xml" value="0.1945" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/drawable/checkbox_checked.xml" value="0.1945" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/drawable/detail_button.xml" value="0.1945" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/drawable/detail_button_disabled.xml" value="0.1945" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/drawable/detail_button_highlighted.xml" value="0.1945" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/drawable/detail_button_information.xml" value="0.1945" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/drawable/edittext_background.xml" value="0.1945" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/drawable/progress_bar.xml" value="0.1945" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/drawable/text_button_green.xml" value="0.1945" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/drawable/view_frame.xml" value="0.1945" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/drawable/visibility_toolbox.xml" value="0.1945" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/activity_main.xml" value="0.15081521739130435" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/activity_purchase_aircraft.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/activity_purchase_launchable.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/bottom_electronic_warfare.xml" value="0.21" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/bottom_icbm_target.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/bottom_link_depot.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/bottom_missile_target.xml" value="0.12" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/bottom_move_order.xml" value="0.25" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/bottom_place_blueprint.xml" value="0.28634039444850257" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/bottom_set_target.xml" value="0.1" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/bottom_transfer_fuel.xml" value="0.17300724637681159" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/bottom_unit_command.xml" value="0.21" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/control_airbase.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/control_alliance.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/control_bank.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/control_barracks.xml" value="0.25" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/control_cargo_entry.xml" value="0.25" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/control_cargo_system.xml" value="0.12" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/control_comms_tower.xml" value="0.22" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/control_farm.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/control_missile_slot.xml" value="0.21" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/control_missile_system.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/control_radar_station.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/control_sentry_gun.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/launch_dialog.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/main_normal.xml" value="0.25" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/view_aircraft.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/view_aircraft_base.xml" value="0.5" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/view_aircraft_maintenance.xml" value="0.5" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/view_aircraft_quickselect.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/view_aircrafttype_selection.xml" value="0.38699690402476783" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/view_airdrop.xml" value="0.21" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/view_blueprint.xml" value="0.21" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/view_build.xml" value="0.30434782608695654" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/view_change_tax_rate.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/view_city.xml" value="0.25" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/view_city_maintenance.xml" value="0.5" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/view_design_aircraft.xml" value="0.25" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/view_distanced_entity.xml" value="0.15081521739130435" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/view_dotncarry_memorial.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/view_entitycontrols.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/view_icbm.xml" value="0.25" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/view_infantry.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/view_infantry_maintenance.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/view_interceptor.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/view_interceptor_selection.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/view_loot.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/view_map_click.xml" value="0.21" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/view_missile.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/view_missile_selection.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/view_player.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/view_player_rank.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/view_raisebounty.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/view_select_missile.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/view_send_message.xml" value="0.25" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/view_settings.xml" value="0.21" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/view_structure.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/view_tank.xml" value="0.25" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/view_tank_maintenance.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/GitHub/Counterforce/v53.0 MIRV Update/LaunchClient/app/src/main/res/layout/view_wealth_rules.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/NetBeansProjects/Launch/LaunchClient/app/src/main/res/layout/activity_main.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/Corbin/Documents/NetBeansProjects/Launch/LaunchClient/app/src/main/res/layout/activity_purchase_launchable.xml" value="0.15" />
+        <entry key="..\:/Users/Corbin/Documents/NetBeansProjects/Launch/LaunchClient/app/src/main/res/layout/button_purchase.xml" value="0.15896739130434784" />
+        <entry key="..\:/Users/Corbin/Documents/NetBeansProjects/Launch/LaunchClient/app/src/main/res/layout/control_missile_system.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Corbin/Documents/NetBeansProjects/Launch/LaunchClient/app/src/main/res/layout/main_splash.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/Corbin/Documents/NetBeansProjects/Launch/LaunchClient/app/src/main/res/layout/view_build.xml" value="0.25" />
+        <entry key="..\:/Users/Corbin/Documents/NetBeansProjects/Launch/LaunchClient/app/src/main/res/layout/view_interceptor.xml" value="0.4083333333333333" />
+        <entry key="..\:/Users/Corbin/Documents/NetBeansProjects/Launch/LaunchClient/app/src/main/res/layout/view_interceptor_selection.xml" value="0.33" />
+        <entry key="..\:/Users/Corbin/Documents/NetBeansProjects/Launch/LaunchClient/app/src/main/res/layout/view_missile.xml" value="0.25" />
+        <entry key="..\:/Users/Corbin/Documents/NetBeansProjects/Launch/LaunchClient/app/src/main/res/layout/view_player.xml" value="0.2" />
+        <entry key="..\:/Users/Corbin/Documents/NetBeansProjects/Launch/LaunchClient/app/src/main/res/layout/view_player_interceptors.xml" value="0.2" />
+        <entry key="..\:/Users/Corbin/Documents/NetBeansProjects/Launch/LaunchClient/app/src/main/res/layout/view_player_rank.xml" value="0.15896739130434784" />
+        <entry key="..\:/Users/Corbin/Documents/NetBeansProjects/Launch/LaunchClient/app/src/main/res/layout/view_players.xml" value="0.15896739130434784" />
+        <entry key="..\:/Users/Corbin/Documents/NetBeansProjects/Launch/LaunchClient/app/src/main/res/layout/view_privacy_zones.xml" value="0.15896739130434784" />
+        <entry key="..\:/Users/Corbin/Documents/NetBeansProjects/Launch/LaunchClient/app/src/main/res/layout/view_settings.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Desktop/v47.0 Airpower Update/LaunchClient/app/src/main/res/layout/activity_purchase_launchable.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Desktop/v47.0 Airpower Update/LaunchClient/app/src/main/res/layout/bottom_move_order.xml" value="0.18885869565217392" />
+        <entry key="..\:/Users/conta/Desktop/v47.0 Airpower Update/LaunchClient/app/src/main/res/layout/control_airbase.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Desktop/v47.0 Airpower Update/LaunchClient/app/src/main/res/layout/main_normal.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Desktop/v47.0 Airpower Update/LaunchClient/app/src/main/res/layout/tutorial_welcome.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Desktop/v47.0 Airpower Update/LaunchClient/app/src/main/res/layout/view_airccraft_maintenance.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Desktop/v47.0 Airpower Update/LaunchClient/app/src/main/res/layout/view_aircraft.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Desktop/v47.0 Airpower Update/LaunchClient/app/src/main/res/layout/view_aircraft_base.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Desktop/v47.0 Airpower Update/LaunchClient/app/src/main/res/layout/view_aircraft_quickselect.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Desktop/v47.0 Airpower Update/LaunchClient/app/src/main/res/layout/view_alliance_affiliate.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Desktop/v47.0 Airpower Update/LaunchClient/app/src/main/res/layout/view_alliance_surrender'.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Desktop/v47.0 Airpower Update/LaunchClient/app/src/main/res/layout/view_alliance_surrender.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Desktop/v47.0 Airpower Update/LaunchClient/app/src/main/res/layout/view_diplomacy.xml" value="0.2" />
+        <entry key="..\:/Users/conta/Desktop/v47.0 Airpower Update/LaunchClient/app/src/main/res/layout/view_diplomacy_action.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Desktop/v47.0 Airpower Update/LaunchClient/app/src/main/res/layout/view_map_click.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Desktop/v47.0 Airpower Update/LaunchClient/app/src/main/res/layout/view_missile.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Desktop/v47.0 Airpower Update/LaunchClient/app/src/main/res/layout/view_missile_selection.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Desktop/v47.0 Airpower Update/LaunchClient/app/src/main/res/layout/view_player.xml" value="0.5" />
+        <entry key="..\:/Users/conta/Desktop/v47.0 Airpower Update/LaunchClient/app/src/main/res/layout/view_select_aircraft.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Desktop/v47.0 Airpower Update/LaunchClient/app/src/main/res/layout/view_select_missile.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Desktop/v47.0 Airpower Update/LaunchClient/app/src/main/res/layout/view_settings.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Desktop/v47.0 Airpower Update/LaunchClient/app/src/main/res/layout/view_structure.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Desktop/v47.0 Airpower Update/LaunchClient/app/src/main/res/layout/view_structure_maintenance.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Desktop/v47.0 Airpower Update/LaunchClient/app/src/main/res/layout/view_wealth_rules.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/Launch - 35.1/LaunchClient/app/src/main/res/layout/main_majorupdate.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/Launch - 35.1/LaunchClient/app/src/main/res/layout/main_normal.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/Launch - 35.1/LaunchClient/app/src/main/res/layout/main_splash.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/Launch - 35.1/LaunchClient/app/src/main/res/layout/view_missile.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v36.0/v37.0/Launch - 37.0/LaunchClient/app/src/main/res/layout/activity_purchase_launchable.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v36.0/v37.0/Launch - 37.0/LaunchClient/app/src/main/res/layout/bottom_missile_target.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v36.0/v37.0/Launch - 37.0/LaunchClient/app/src/main/res/layout/bottom_normal.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v36.0/v37.0/Launch - 37.0/LaunchClient/app/src/main/res/layout/button_purchase.xml" value="0.2" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v36.0/v37.0/Launch - 37.0/LaunchClient/app/src/main/res/layout/control_missile_slot.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v36.0/v37.0/Launch - 37.0/LaunchClient/app/src/main/res/layout/control_missile_system.xml" value="0.2" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v36.0/v37.0/Launch - 37.0/LaunchClient/app/src/main/res/layout/control_ore_mine.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v36.0/v37.0/Launch - 37.0/LaunchClient/app/src/main/res/layout/main_normal.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v36.0/v37.0/Launch - 37.0/LaunchClient/app/src/main/res/layout/view_distanced_entity.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v36.0/v37.0/Launch - 37.0/LaunchClient/app/src/main/res/layout/view_entitycontrols.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v36.0/v37.0/Launch - 37.0/LaunchClient/app/src/main/res/layout/view_interceptor.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v36.0/v37.0/Launch - 37.0/LaunchClient/app/src/main/res/layout/view_interceptor_selection.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v36.0/v37.0/Launch - 37.0/LaunchClient/app/src/main/res/layout/view_map_click.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v36.0/v37.0/Launch - 37.0/LaunchClient/app/src/main/res/layout/view_map_select.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v36.0/v37.0/Launch - 37.0/LaunchClient/app/src/main/res/layout/view_missile.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v36.0/v37.0/Launch - 37.0/LaunchClient/app/src/main/res/layout/view_missile_selection.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v36.0/v37.0/Launch - 37.0/LaunchClient/app/src/main/res/layout/view_player_rank.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v36.0/v37.0/Launch - 37.0/LaunchClient/app/src/main/res/layout/view_select_missile.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v36.0/v37.0/Launch - 37.0/LaunchClient/app/src/main/res/layout/view_settings.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v36.0/v37.0/Launch - 37.0/LaunchClient/app/src/main/res/layout/view_structure.xml" value="0.22" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v36.0/v37.0/Launch - 37.0/LaunchClient/app/src/main/res/layout/view_structure_maintenance.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v36.0/v38.0/v39.0/Launch - 39.0/LaunchClient/app/src/main/res/layout/view_missile_selection.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/activity_purchase_launchable.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/bottom_interceptor_target.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/bottom_missile_target.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/bottom_normal.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/control_missile_slot.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/control_missile_system.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/control_ore_mine.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/control_radar_station.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/control_sentry_gun.xml" value="0.22" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/launch_dialog.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/main_normal.xml" value="0.23278985507246377" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/tutorial_welcome.xml" value="0.15729483282674772" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/view_alliance.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/view_alliance_affiliate.xml" value="0.15729483282674772" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/view_build.xml" value="0.5" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/view_diplomacy.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/view_entitycontrols.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/view_givewealth.xml" value="0.5" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/view_interceptor.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/view_interceptor_selection.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/view_map_click.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/view_map_select.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/view_missile.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/view_missile_selection.xml" value="0.5814332247557004" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/view_player.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/view_player_interceptors.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/view_player_rank.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/view_raisebounty.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/view_select_interceptor.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/view_select_missile.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/view_settings.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/view_structure.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/view_structure_maintenance.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/view_warnings.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v39.0/LaunchClient/app/src/main/res/layout/view_wealth_rules.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v44.0/LaunchClient/app/src/main/res/layout/activity_main.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v44.0/LaunchClient/app/src/main/res/layout/control_missile_slot.xml" value="0.75" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v44.0/LaunchClient/app/src/main/res/layout/control_ore_mine.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v44.0/LaunchClient/app/src/main/res/layout/control_radar_station.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v44.0/LaunchClient/app/src/main/res/layout/view_build.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v44.0/LaunchClient/app/src/main/res/layout/view_diplomacy.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v44.0/LaunchClient/app/src/main/res/layout/view_entitycontrols.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v44.0/LaunchClient/app/src/main/res/layout/view_interceptor.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v44.0/LaunchClient/app/src/main/res/layout/view_interceptor_selection.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v44.0/LaunchClient/app/src/main/res/layout/view_map_click.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v44.0/LaunchClient/app/src/main/res/layout/view_missile.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v44.0/LaunchClient/app/src/main/res/layout/view_missile_selection.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v44.0/LaunchClient/app/src/main/res/layout/view_player.xml" value="0.5" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v44.0/LaunchClient/app/src/main/res/layout/view_settings.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v44.0/LaunchClient/app/src/main/res/layout/view_structure.xml" value="0.5" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v44.0/LaunchClient/app/src/main/res/layout/view_wealth_rules.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v48.0 Radar-Focused Mini Update/LaunchClient/app/src/main/res/layout/bottom_move_order.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v48.0 Radar-Focused Mini Update/LaunchClient/app/src/main/res/layout/bottom_new_homebase.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v48.0 Radar-Focused Mini Update/LaunchClient/app/src/main/res/layout/main_normal.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v48.0 Radar-Focused Mini Update/LaunchClient/app/src/main/res/layout/view_aircraft.xml" value="0.16" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v48.0 Radar-Focused Mini Update/LaunchClient/app/src/main/res/layout/view_aircraft_base.xml" value="0.67" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v48.0 Radar-Focused Mini Update/LaunchClient/app/src/main/res/layout/view_aircraft_quickselect.xml" value="0.67" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v48.0 Radar-Focused Mini Update/LaunchClient/app/src/main/res/layout/view_map_click.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v48.0 Radar-Focused Mini Update/LaunchClient/app/src/main/res/layout/view_map_select.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v48.0 Radar-Focused Mini Update/LaunchClient/app/src/main/res/layout/view_missile_selection.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v48.0 Radar-Focused Mini Update/LaunchClient/app/src/main/res/layout/view_select_aircraft.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v48.0 Radar-Focused Mini Update/LaunchClient/app/src/main/res/layout/view_select_missile.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v48.0 Radar-Focused Mini Update/LaunchClient/app/src/main/res/layout/view_structure.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v49.0 Comms Efficiency Update/LaunchClient/app/src/main/res/layout/bottom_new_homebase.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v49.0 Comms Efficiency Update/LaunchClient/app/src/main/res/layout/control_airbase.xml" value="0.5" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v49.0 Comms Efficiency Update/LaunchClient/app/src/main/res/layout/control_bank.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v49.0 Comms Efficiency Update/LaunchClient/app/src/main/res/layout/control_bunker.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v49.0 Comms Efficiency Update/LaunchClient/app/src/main/res/layout/control_missile_system.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v49.0 Comms Efficiency Update/LaunchClient/app/src/main/res/layout/view_aircraft.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v49.0 Comms Efficiency Update/LaunchClient/app/src/main/res/layout/view_aircraft_base.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v49.0 Comms Efficiency Update/LaunchClient/app/src/main/res/layout/view_alliance_affiliate.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v49.0 Comms Efficiency Update/LaunchClient/app/src/main/res/layout/view_build.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v49.0 Comms Efficiency Update/LaunchClient/app/src/main/res/layout/view_diplomacy.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v49.0 Comms Efficiency Update/LaunchClient/app/src/main/res/layout/view_diplomacy_action.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v49.0 Comms Efficiency Update/LaunchClient/app/src/main/res/layout/view_distanced_entity.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v49.0 Comms Efficiency Update/LaunchClient/app/src/main/res/layout/view_givewealth.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v49.0 Comms Efficiency Update/LaunchClient/app/src/main/res/layout/view_missile.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v49.0 Comms Efficiency Update/LaunchClient/app/src/main/res/layout/view_missile_selection.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v49.0 Comms Efficiency Update/LaunchClient/app/src/main/res/layout/view_select_missile.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v49.0 Comms Efficiency Update/LaunchClient/app/src/main/res/layout/view_structure.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v50.0 Bank Update/LaunchClient/app/src/main/res/layout/bottom_link_depot.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v50.0 Bank Update/LaunchClient/app/src/main/res/layout/control_airbase.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v50.0 Bank Update/LaunchClient/app/src/main/res/layout/control_bank.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v50.0 Bank Update/LaunchClient/app/src/main/res/layout/control_logisticsdepot.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v50.0 Bank Update/LaunchClient/app/src/main/res/layout/main_normal.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v50.0 Bank Update/LaunchClient/app/src/main/res/layout/view_aircraft.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v50.0 Bank Update/LaunchClient/app/src/main/res/layout/view_aircraft_base.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v50.0 Bank Update/LaunchClient/app/src/main/res/layout/view_build.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v50.0 Bank Update/LaunchClient/app/src/main/res/layout/view_wealth_rules.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v51.0 Logistics Depot Update/LaunchClient/app/src/main/res/layout/activity_purchase_launchable.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v51.0 Logistics Depot Update/LaunchClient/app/src/main/res/layout/control_logisticsdepot.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v51.0 Logistics Depot Update/LaunchClient/app/src/main/res/layout/main_normal.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v51.0 Logistics Depot Update/LaunchClient/app/src/main/res/layout/view_build.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v51.0 Logistics Depot Update/LaunchClient/app/src/main/res/layout/view_chat.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v51.0 Logistics Depot Update/LaunchClient/app/src/main/res/layout/view_chat_message.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v51.0 Logistics Depot Update/LaunchClient/app/src/main/res/layout/view_distanced_entity.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v51.0 Logistics Depot Update/LaunchClient/app/src/main/res/layout/view_missile.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v51.0 Logistics Depot Update/LaunchClient/app/src/main/res/layout/view_missile_selection.xml" value="0.25" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v51.0 Logistics Depot Update/LaunchClient/app/src/main/res/layout/view_select_missile.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v51.0 Logistics Depot Update/LaunchClient/app/src/main/res/layout/view_settings.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v51.0 Logistics Depot Update/LaunchClient/app/src/main/res/layout/view_wealth_rules.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v52.0 Missile Accuracy Update/LaunchClient/app/src/main/res/layout/view_chat.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v52.0 Missile Accuracy Update/LaunchClient/app/src/main/res/layout/view_missile.xml" value="0.33" />
+        <entry key="..\:/Users/conta/Documents/GitHub/Counterforce/v52.0 Missile Accuracy Update/LaunchClient/app/src/main/res/layout/view_missile_selection.xml" value="0.5" />
+      </map>
+    </option>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="jbr-21" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

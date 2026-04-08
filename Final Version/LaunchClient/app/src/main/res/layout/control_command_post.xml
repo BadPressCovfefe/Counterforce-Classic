@@ -1,0 +1,1038 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/lytStructures"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fadeScrollbars="false"
+        android:orientation="vertical"
+        android:scrollbarThumbVertical="?attr/ScrollBarColour"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtDescSAM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:background="?attr/TextViewBackgroundColour"
+                android:text="@string/desc_sam_site"
+                android:textColor="?attr/InfoColour"
+                android:textStyle="bold" />
+
+            <com.apps.fast.launch.views.PurchaseButton
+                android:id="@+id/btnBuildSAM"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/txtDescSentry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:background="?attr/TextViewBackgroundColour"
+                android:text="@string/desc_sentry_gun"
+                android:textColor="?attr/InfoColour"
+                android:textStyle="bold" />
+
+            <com.apps.fast.launch.views.PurchaseButton
+                android:id="@+id/btnBuildSentryGun"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/txtDescWatchTower"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:background="?attr/TextViewBackgroundColour"
+                android:text="@string/desc_watch_tower"
+                android:textColor="?attr/InfoColour"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <com.apps.fast.launch.views.PurchaseButton
+                android:id="@+id/btnBuildWatchTower"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/txtDescMiss"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:background="?attr/TextViewBackgroundColour"
+                android:text="@string/desc_missile_launcher"
+                android:textColor="?attr/InfoColour"
+                android:textStyle="bold" />
+
+            <com.apps.fast.launch.views.PurchaseButton
+                android:id="@+id/btnBuildMissileLauncher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/txtDescArtilleryGun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:background="?attr/TextViewBackgroundColour"
+                android:text="@string/desc_artillery_gun"
+                android:textColor="?attr/InfoColour"
+                android:textStyle="bold" />
+
+            <com.apps.fast.launch.views.PurchaseButton
+                android:id="@+id/btnBuildArtilleryGun"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/txtDescAirbase"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:background="?attr/TextViewBackgroundColour"
+                android:text="@string/airbase_description"
+                android:textColor="?attr/InfoColour"
+                android:textStyle="bold" />
+
+            <com.apps.fast.launch.views.PurchaseButton
+                android:id="@+id/btnBuildAirbase"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/txtDescICBMSilo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:background="?attr/TextViewBackgroundColour"
+                android:text="@string/desc_icbm_silo"
+                android:textColor="?attr/InfoColour"
+                android:textStyle="bold" />
+
+            <com.apps.fast.launch.views.PurchaseButton
+                android:id="@+id/btnBuildNukeLauncher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/txtDescArmory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:background="?attr/TextViewBackgroundColour"
+                android:text="@string/armory_description"
+                android:textColor="?attr/InfoColour"
+                android:textStyle="bold" />
+
+            <com.apps.fast.launch.views.PurchaseButton
+                android:id="@+id/btnBuildArmory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/txtDescBarracks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:background="?attr/TextViewBackgroundColour"
+                android:text="@string/barracks_description"
+                android:textColor="?attr/InfoColour"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <com.apps.fast.launch.views.PurchaseButton
+                android:id="@+id/btnBuildBarracks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/txtDescABMSilo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:background="?attr/TextViewBackgroundColour"
+                android:text="@string/desc_abm_silo"
+                android:textColor="?attr/InfoColour"
+                android:textStyle="bold" />
+
+            <com.apps.fast.launch.views.PurchaseButton
+                android:id="@+id/btnBuildABMSilo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/txtDescOreMine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:background="?attr/TextViewBackgroundColour"
+                android:text="@string/desc_ore_mine"
+                android:textColor="?attr/InfoColour"
+                android:textStyle="bold" />
+
+            <com.apps.fast.launch.views.PurchaseButton
+                android:id="@+id/btnBuildOreMine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/txtDescWarehouse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:background="?attr/TextViewBackgroundColour"
+                android:text="@string/desc_warehouse"
+                android:textColor="?attr/InfoColour"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+            <com.apps.fast.launch.views.PurchaseButton
+                android:id="@+id/btnBuildWarehouse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/txtDescScrapYard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:background="?attr/TextViewBackgroundColour"
+                android:text="@string/desc_scrap_yard"
+                android:textColor="?attr/InfoColour"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+            <com.apps.fast.launch.views.PurchaseButton
+                android:id="@+id/btnBuildScrapYard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/txtDescRadarStation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:background="?attr/TextViewBackgroundColour"
+                android:text="@string/desc_radar_station"
+                android:textColor="?attr/InfoColour"
+                android:textStyle="bold" />
+
+            <com.apps.fast.launch.views.PurchaseButton
+                android:id="@+id/btnBuildRadarStation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/txtDescProcessor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:background="?attr/TextViewBackgroundColour"
+                android:text="@string/desc_processor"
+                android:textColor="?attr/InfoColour"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/btnBuildProcessor"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:layout_weight="1"
+                android:background="@drawable/text_button_normal"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/ButtonInset"
+                    android:layout_marginRight="@dimen/ButtonInset"
+                    android:layout_marginBottom="@dimen/ButtonInset"
+                    android:layout_weight="1"
+                    android:src="@drawable/build_processor" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtDescDistributor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:background="?attr/TextViewBackgroundColour"
+                android:text="@string/desc_distributor"
+                android:textColor="?attr/InfoColour"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/btnBuildDistributor"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:layout_weight="1"
+                android:background="@drawable/text_button_normal"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/ButtonInset"
+                    android:layout_marginRight="@dimen/ButtonInset"
+                    android:layout_marginBottom="@dimen/ButtonInset"
+                    android:layout_weight="1"
+                    android:src="@drawable/build_distributor" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/lytProcessors"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/PanelTransparency"
+        android:fadeScrollbars="false"
+        android:orientation="vertical"
+        android:scrollbarThumbVertical="?attr/ScrollBarColour"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtProcessors"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/ButtonInset"
+                android:layout_marginBottom="@dimen/ButtonInset"
+                android:gravity="center"
+                android:text="@string/processors"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <ImageView
+                android:id="@+id/imgModeControl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/build_processor"
+                android:visibility="visible" />
+
+            <LinearLayout
+                android:id="@+id/lytContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtGranary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/ButtonInset"
+                    android:layout_marginBottom="@dimen/ButtonInset"
+                    android:gravity="center"
+                    android:text="@string/title_granary"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/txtChooseResource"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:layout_marginBottom="@dimen/MainViewSpacing"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:text="@string/processors_choose_type"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtDescGranary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:text="@string/desc_granary"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <com.apps.fast.launch.views.PurchaseButton
+                    android:id="@+id/btnBuildGranary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/txtFoundry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/ButtonInset"
+                    android:layout_marginBottom="@dimen/ButtonInset"
+                    android:gravity="center"
+                    android:text="@string/title_foundry"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/txtDescFoundry"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:text="@string/desc_foundry"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <com.apps.fast.launch.views.PurchaseButton
+                    android:id="@+id/btnBuildFoundry"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/txtOilRefinery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/ButtonInset"
+                    android:layout_marginBottom="@dimen/ButtonInset"
+                    android:gravity="center"
+                    android:text="@string/title_oil_refinery"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/txtDescOilRefinery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:text="@string/desc_oil_refinery"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <com.apps.fast.launch.views.PurchaseButton
+                    android:id="@+id/btnBuildOilRefinery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/txtConstructionYard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/ButtonInset"
+                    android:layout_marginBottom="@dimen/ButtonInset"
+                    android:gravity="center"
+                    android:text="@string/title_construction_yard"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/txtDescConstructionYard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:text="@string/desc_construction_yard"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <com.apps.fast.launch.views.PurchaseButton
+                    android:id="@+id/btnBuildConstructionYard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/txtPowerPlant"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/ButtonInset"
+                    android:layout_marginBottom="@dimen/ButtonInset"
+                    android:gravity="center"
+                    android:text="@string/title_power_plant"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/txtDescPowerPlant"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:text="@string/desc_power_plant"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <com.apps.fast.launch.views.PurchaseButton
+                    android:id="@+id/btnBuildPowerPlant"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/txtNuclearPowerPlant"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/ButtonInset"
+                    android:layout_marginBottom="@dimen/ButtonInset"
+                    android:gravity="center"
+                    android:text="@string/title_nuclear_power_plant"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/txtDescNuclearPowerPlant"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:text="@string/desc_nuclear_power_plant"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <com.apps.fast.launch.views.PurchaseButton
+                    android:id="@+id/btnBuildNuclearPowerPlant"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/txtEnrichmentFacility"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/ButtonInset"
+                    android:layout_marginBottom="@dimen/ButtonInset"
+                    android:gravity="center"
+                    android:text="@string/title_enrichment_facility"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/txtDescEnrichmentFacility"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:text="@string/desc_enrichment_facility"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <com.apps.fast.launch.views.PurchaseButton
+                    android:id="@+id/btnBuildEnrichmentFacility"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/txtLaboratory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/ButtonInset"
+                    android:layout_marginBottom="@dimen/ButtonInset"
+                    android:gravity="center"
+                    android:text="@string/title_laboratory"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/txtDescLaboratory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:text="@string/desc_laboratory"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <com.apps.fast.launch.views.PurchaseButton
+                    android:id="@+id/btnBuildLaboratory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/txtMachineShop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/ButtonInset"
+                    android:layout_marginBottom="@dimen/ButtonInset"
+                    android:gravity="center"
+                    android:text="@string/title_machine_shop"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/txtDescMachineShop"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:text="@string/desc_machine_shop"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <com.apps.fast.launch.views.PurchaseButton
+                    android:id="@+id/btnBuildMachineShop"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/txtLithographyPlant"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/ButtonInset"
+                    android:layout_marginBottom="@dimen/ButtonInset"
+                    android:gravity="center"
+                    android:text="@string/title_lithography_plant"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/txtDescLithographyPlant"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:text="@string/desc_lithography_plant"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <com.apps.fast.launch.views.PurchaseButton
+                    android:id="@+id/btnBuildLithographyPlant"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/MainViewSideMargin"
+                android:layout_marginBottom="@dimen/MainViewSideMargin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/btnCancel"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/ButtonHeight"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:layout_weight="1"
+                    android:background="@drawable/text_button_normal"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:text="@string/cancel"
+                    android:visibility="visible" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/lytDistributors"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/PanelTransparency"
+        android:fadeScrollbars="false"
+        android:orientation="vertical"
+        android:scrollbarThumbVertical="?attr/ScrollBarColour"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/ButtonInset"
+                android:layout_marginBottom="@dimen/ButtonInset"
+                android:gravity="center"
+                android:text="@string/distributors"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/build_distributor"
+                android:visibility="visible" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:gravity="center"
+                    android:text="@string/distributors_choose_resource"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:gravity="center"
+                    android:text="@string/resource_title_iron"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <com.apps.fast.launch.views.PurchaseButton
+                    android:id="@+id/btnIron"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:gravity="center"
+                    android:text="@string/resource_title_coal"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <com.apps.fast.launch.views.PurchaseButton
+                    android:id="@+id/btnCoal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:gravity="center"
+                    android:text="@string/resource_title_oil"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <com.apps.fast.launch.views.PurchaseButton
+                    android:id="@+id/btnOil"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:gravity="center"
+                    android:text="@string/resource_title_crops"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <com.apps.fast.launch.views.PurchaseButton
+                    android:id="@+id/btnCrops"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:gravity="center"
+                    android:text="@string/resource_title_uranium"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <com.apps.fast.launch.views.PurchaseButton
+                    android:id="@+id/btnUranium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:gravity="center"
+                    android:text="@string/resource_title_electricity"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <com.apps.fast.launch.views.PurchaseButton
+                    android:id="@+id/btnElectricity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:gravity="center"
+                    android:text="@string/resource_title_stone"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <com.apps.fast.launch.views.PurchaseButton
+                    android:id="@+id/btnConcrete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:gravity="center"
+                    android:text="@string/resource_title_lumber"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <com.apps.fast.launch.views.PurchaseButton
+                    android:id="@+id/btnLumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:gravity="center"
+                    android:text="@string/resource_title_food"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <com.apps.fast.launch.views.PurchaseButton
+                    android:id="@+id/btnFood"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:gravity="center"
+                    android:text="@string/resource_title_fuel"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <com.apps.fast.launch.views.PurchaseButton
+                    android:id="@+id/btnFuel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:gravity="center"
+                    android:text="@string/resource_title_steel"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <com.apps.fast.launch.views.PurchaseButton
+                    android:id="@+id/btnSteel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:gravity="center"
+                    android:text="@string/resource_title_construction_supplies"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <com.apps.fast.launch.views.PurchaseButton
+                    android:id="@+id/btnConstructionSupplies"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:gravity="center"
+                    android:text="@string/resource_title_machinery"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <com.apps.fast.launch.views.PurchaseButton
+                    android:id="@+id/btnMachinery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:gravity="center"
+                    android:text="@string/resource_title_electronics"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <com.apps.fast.launch.views.PurchaseButton
+                    android:id="@+id/btnElectronics"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:gravity="center"
+                    android:text="@string/resource_title_medicine"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <com.apps.fast.launch.views.PurchaseButton
+                    android:id="@+id/btnMedicine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:gravity="center"
+                    android:text="@string/resource_title_enriched_uranium"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <com.apps.fast.launch.views.PurchaseButton
+                    android:id="@+id/btnFissile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/MainViewSideMargin"
+                android:layout_marginBottom="@dimen/MainViewSideMargin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/btnCancelDistributors"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/ButtonHeight"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:layout_weight="1"
+                    android:background="@drawable/text_button_normal"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:text="@string/cancel"
+                    android:visibility="visible" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

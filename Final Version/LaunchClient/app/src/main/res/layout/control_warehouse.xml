@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/lytBuildTrucks"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtDescCargoTruck"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/MainViewSideMargin"
+            android:layout_marginTop="@dimen/MainViewSpacing"
+            android:layout_marginRight="@dimen/MainViewSideMargin"
+            android:background="?attr/TextViewBackgroundColour"
+            android:text="@string/desc_cargo_truck"
+            android:textColor="?attr/InfoColour"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.apps.fast.launch.views.PurchaseButton
+                android:id="@+id/btnBuildCargoTruck"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/SeparatorThickness"
+        android:layout_marginTop="@dimen/SeperatorMargins"
+        android:layout_marginBottom="@dimen/SeperatorMargins"
+        android:background="?attr/ButtonEdgeColour" />
+
+    <TextView
+        android:id="@+id/txtQueue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/MainViewSideMargin"
+        android:layout_marginBottom="@dimen/SeperatorMargins"
+        android:layout_marginRight="@dimen/MainViewSideMargin"
+        android:text="@string/production_queue"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="?attr/GoodColour" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/MainViewSideMargin"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/lytProduction"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/MainViewSideMargin"
+            android:layout_marginRight="@dimen/MainViewSideMargin"
+            android:background="@drawable/text_button_normal"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imgProduction"
+                android:layout_width="@dimen/PlayerInfoIconSize"
+                android:layout_height="@dimen/PlayerInfoIconSize"
+                android:padding="@dimen/ButtonImagePadding"
+                android:layout_gravity="center"
+                android:src="@drawable/marker_truck" />
+
+            <TextView
+                android:id="@+id/txtPrepTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/ButtonInset"
+                android:layout_marginBottom="@dimen/ButtonInset"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="1:23:05"
+                android:textColor="?attr/BadColour"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view17"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/SeparatorThickness"
+        android:layout_marginTop="@dimen/SeperatorMargins"
+        android:layout_marginBottom="@dimen/SeperatorMargins"
+        android:background="?attr/ButtonEdgeColour" />
+
+    <TextView
+        android:id="@+id/txtStorage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/MainViewSideMargin"
+        android:layout_marginRight="@dimen/MainViewSideMargin"
+        android:layout_marginBottom="@dimen/SeperatorMargins"
+        android:text="@string/warehouse_storage"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="?attr/GoodColour" />
+
+    <FrameLayout
+        android:id="@+id/lytCargo"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/MainViewSideMargin"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/MainViewSpacing">
+
+    </FrameLayout>
+
+</LinearLayout>

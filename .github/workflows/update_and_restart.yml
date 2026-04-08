@@ -1,0 +1,18 @@
+name: Update and Restart Program
+
+on:
+  push:
+    branches:
+      - main  # Trigger on main branch pushes
+
+jobs:
+  update-and-restart:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Run batch file
+      run: |
+        update_and_restart.bat

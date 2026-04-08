@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/PanelTransparency">
+    <ScrollView
+        android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fadeScrollbars="false"
+                android:scrollbarThumbVertical="?attr/ScrollBarColour">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/txtNoAircraft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:text="@string/no_available_aircraft"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="?attr/BadColour"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/lytAvailableAircrafts"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:orientation="vertical" />
+
+            <TextView
+                android:id="@+id/btnCancel"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/ButtonHeight"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:layout_marginBottom="@dimen/MainViewSpacing"
+                android:background="@drawable/text_button_normal"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="ReturnToMainView"
+                android:text="@string/cancel" />
+
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

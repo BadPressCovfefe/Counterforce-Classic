@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:foreground="@drawable/view_frame">
+    <ScrollView
+        android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/PanelTransparency"
+                android:fadeScrollbars="false"
+                android:scrollbarThumbVertical="?attr/ScrollBarColour">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/MainViewSpacing"
+            android:layout_marginTop="@dimen/MainViewSpacing"
+            android:layout_marginRight="@dimen/MainViewSpacing"
+            android:layout_marginBottom="@dimen/MainViewSpacing"
+            android:paddingBottom="@dimen/Overscroll">
+
+            <com.apps.fast.launch.views.EntityControls
+                android:id="@+id/entityControls"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <ImageView
+                    android:layout_width="@dimen/PlayerInfoIconSize"
+                    android:layout_height="@dimen/PlayerInfoIconSize"
+                    android:id="@+id/imgMissile"
+                    android:src="@drawable/marker_missile"/>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/CloseButtonSize">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Missile Title"
+                        android:id="@+id/txtMissileTitle"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/SeparatorThickness"
+                android:background="?attr/ButtonEdgeColour"
+                android:layout_marginTop="@dimen/SeperatorMargins"
+                android:layout_marginBottom="@dimen/SeperatorMargins"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/missile_to_target"
+                android:id="@+id/txtToTarget"
+                android:textColor="?attr/AltUIColour"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/potential_targets"
+                android:id="@+id/txtPotentialTargets"
+                android:textColor="?attr/GoodColour"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/none"
+                android:textColor="?attr/BadColour"
+                android:id="@+id/txtNoTargets"/>
+
+            <TextView
+                android:id="@+id/txtNoRadarCoverage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/no_radar_coverage_targets"
+                android:textColor="?attr/BadColour"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lytTargets"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/SeparatorThickness"
+                android:background="?attr/ButtonEdgeColour"
+                android:layout_marginTop="@dimen/SeperatorMargins"
+                android:layout_marginBottom="@dimen/SeperatorMargins"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/technical_data"
+                android:id="@+id/textView12"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="@string/speed"
+                        android:id="@+id/speed_title"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="@string/range"
+                        android:id="@+id/range_title"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="@string/blast_radius"
+                        android:id="@+id/txtBlastRadiusTitle"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="@string/max_damage"
+                        android:id="@+id/txtMaxDamageTitle"/>
+
+                    <TextView
+                        android:id="@+id/txtEMPRadiusTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/emp_radius_title"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/SeperatorMargins">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="0"
+                        android:id="@+id/txtSpeed"
+                        android:textColor="?attr/AltUIColour"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="0"
+                        android:id="@+id/txtRange"
+                        android:textColor="?attr/AltUIColour"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="0"
+                        android:id="@+id/txtBlastRadius"
+                        android:textColor="?attr/AltUIColour"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="0"
+                        android:id="@+id/txtMaxDamage"
+                        android:textColor="?attr/AltUIColour"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="0"
+                        android:id="@+id/txtEMPRadius"
+                        android:textColor="?attr/AltUIColour"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/SeparatorThickness"
+                android:background="?attr/ButtonEdgeColour"
+                android:layout_marginTop="@dimen/SeperatorMargins"
+                android:layout_marginBottom="@dimen/SeperatorMargins"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/MainViewSpacing"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtStealthDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/stealth_information"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="?attr/InfoColour"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/txtECMDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ecm_information"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="?attr/InfoColour"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnLaunchInterceptor"
+                android:clickable="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView17"
+                    android:src="@drawable/button_interceptor_target"
+                    android:background="@drawable/text_button_normal"
+                    android:padding="@dimen/ButtonImagePadding"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

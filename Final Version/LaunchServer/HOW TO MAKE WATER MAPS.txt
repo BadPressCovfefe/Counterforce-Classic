@@ -1,0 +1,88 @@
+HOW TO ADD WATER MAPS:
+
+Principle of operation: The game identifies water from land by checking a series of .bmp images. 
+When a coordinate is checked, the TerrainChecker class will check the WaterMap list to see which 
+WaterMap object(s) contain the given coordinate. From there, it will use the coordinates of the 
+corners of the WaterMap along with the image width and height to convert the lat/long coordinate 
+into an image x, y coordinate. If the pixel at that location is white, that coordinate is water. 
+If none of the WaterMap objects in the array in TerrainChecker contains the coordinate, 
+TerrainChecker will then move to water_map.bmp and perform the same check. water_map.bmp is a map 
+of the entire world. I forget the exact dimensions, but it is in the neighborhood of 24,000 x 24,000.
+
+ABOUT WATERMAP:
+
+WaterMap objects contain a black and white .bmp image of a spot on the map, the lat/long of the 
+Northwest corner of the image, and the lat/long of the southeast corner. The .bmp images are stored 
+in \\Launchserver\maps. At the bottom of config.xml (found in the LaunchServer folder) is a list of 
+water maps. Each entry looks like this:
+
+	<WaterMap FileName="dniprovska_gulf_map.bmp">
+		<NorthwestBound>
+			<Latitude>47.186821</Latitude>
+			<Longitude>31.351942</Longitude>
+		</NorthwestBound>
+		<SoutheastBound>
+			<Latitude>46.382637</Latitude>
+			<Longitude>32.585263</Longitude>
+		</SoutheastBound>
+	</WaterMap>
+	
+DEALING WITH MAP OVERLAP:
+
+Note that the file name includes the file extension. Now, what happens if two or more maps overlap 
+the same area? Which one will the game check? The game will check whichever map in TerrainChecker.HighResMaps 
+first contains the coordinate as it iterates the list (which occurs in TerrainChecker.CoordinateIsWater). 
+Because HighResMaps is populated from the config list, and because the config is parsed from the 
+top to the bottom, the end result is that whichever entry in config.xml is closer to the top of the 
+list is the one that will be checked first. For example, dniprovska_gulf_map.bmp and crimea_map.bmp
+overlap eachother. If a coordinate in the dniprovska gulf is checked and crimea_map.bmp is closer to 
+the top of the list, then because crimea_map.bmp is a more zoomed-out image, the resolution of dniprovska 
+gulf will be lower and the accuracy will be much less. To remedy this issue, dniprovska_gulf_map.bmp must 
+be further up the list in config.xml than crimea_map.bmp.
+
+CREATING A MAP.BMP AND ALIGNING COORDINATES:
+
+There is fundamentally no REQUIRED way to do this. The basic requirements are as follows: 
+1. The image must be a .bmp image.
+2. The coordinates at the northwest and southeast corners of the image need to be accurate. (Well, they 
+don't NEED to be. You are free to make the image as accurate or inaccurate as you want.)
+
+The way that I obtained semi-accurate coordinates is as follows:
+1. Open up Google Map Theme Maker in the browser. Use the legacy theme designer. 
+2. Make the theme black-and-white. Water must be white.
+3. In a separate tab, open up the normal Google Map. Set the theme to "layers" instead of "satellite."
+4. Go to the area of the map you want to make a WaterMap of. Set the zoom levels of the theme maker and 
+the Google Map to be roughly the same. 
+5. Pick a terrain feature that you can identify between both maps. On the GoogleMap, click that terrain 
+feature to obtain a coordinate. Use the coordinate to establish one of the four sides of the image. 
+(Northern latitude, southern latitude, western longitude, eastern longitude.)
+6. Once all four sides have a lat or long, pick the NW and SE intersections and get the lat/longs of each.
+7. Take a screenshot of the theme maker map and paste it into your chosen image editing software. (I use Gimp.) 
+8. Crop the image to the appropriate bounds that you selected given the terrain features.
+9. Export your .bmp image to \\Launchserver\maps.
+10. Create a new entry in config.xml. according to the format below:
+
+	<WaterMap FileName="dniprovska_gulf_map.bmp">
+		<NorthwestBound>
+			<Latitude>47.186821</Latitude>
+			<Longitude>31.351942</Longitude>
+		</NorthwestBound>
+		<SoutheastBound>
+			<Latitude>46.382637</Latitude>
+			<Longitude>32.585263</Longitude>
+		</SoutheastBound>
+	</WaterMap>
+	<WaterMap FileName="example_map.bmp">
+		<NorthwestBound>
+			<Latitude>45.186821</Latitude>
+			<Longitude>29.351942</Longitude>
+		</NorthwestBound>
+		<SoutheastBound>
+			<Latitude>43.382637</Latitude>
+			<Longitude>36.585263</Longitude>
+		</SoutheastBound>
+	</WaterMap>
+	
+11. Remember, if the maps are going to overlap, the more zoomed-in one needs to be on top.
+
+You are finished.

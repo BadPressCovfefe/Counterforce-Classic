@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fadeScrollbars="false"
+            android:scrollbarThumbVertical="?attr/ScrollBarColour"
+            android:background="?attr/PanelTransparency">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/PanelTransparency">
+
+        <LinearLayout
+            android:id="@+id/lytPage1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:text="@string/introduction_title"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:text="@string/introduction1" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:text="@string/introduction_cities" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:text="@string/introduction2" />
+
+            <ImageView
+                android:layout_width="@dimen/MainMenuButtonSize"
+                android:layout_height="@dimen/MainMenuButtonSize"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/ButtonImagePadding"
+                android:background="@drawable/text_button_normal"
+                android:padding="@dimen/ButtonImagePadding"
+                android:scaleType="fitCenter"
+                android:src="@drawable/button_build" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:text="@string/introduction3" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:text="@string/introduction4" />
+
+            <ImageView
+                android:layout_width="@dimen/MainMenuButtonSize"
+                android:layout_height="@dimen/MainMenuButtonSize"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/ButtonImagePadding"
+                android:background="@drawable/text_button_normal"
+                android:padding="@dimen/ButtonImagePadding"
+                android:scaleType="fitCenter"
+                android:src="@drawable/button_help" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:text="@string/introduction5" />
+
+            <ImageView
+                android:layout_width="@dimen/MainMenuButtonSize"
+                android:layout_height="@dimen/MainMenuButtonSize"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/ButtonImagePadding"
+                android:background="@drawable/text_button_normal"
+                android:onClick="ButtonDiscord"
+                android:padding="@dimen/ButtonImagePadding"
+                android:scaleType="fitCenter"
+                android:src="@drawable/button_discord" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:text="@string/introduction6" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lytPage2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:text="@string/rules"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/SeparatorThickness"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/SeperatorMargins"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:layout_marginBottom="@dimen/SeperatorMargins"
+                android:background="?attr/ButtonEdgeColour" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:text="@string/rules1"
+                android:textColor="?attr/BadColour"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:text="@string/rules2" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:text="@string/rules3" />
+
+            <TextView
+                android:id="@+id/textView148"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:text="@string/rules4" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:text="@string/rules5" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lytPage3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:text="@string/disclaimer"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:text="@string/disclaimer1" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:text="@string/disclaimer2" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:text="@string/disclaimer3" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:text="@string/disclaimer4" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:text="@string/disclaimer5" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/SeparatorThickness"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/SeperatorMargins"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:layout_marginBottom="@dimen/SeperatorMargins"
+                android:background="?attr/ButtonEdgeColour" />
+
+            <CheckBox
+                android:id="@+id/chkAgree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:button="@drawable/checkbox"
+                android:checked="false"
+                android:paddingLeft="@dimen/ButtonEdgePadding"
+                android:text="@string/agreement"
+                android:textColor="?attr/MainUIColour" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/SeparatorThickness"
+            android:background="?attr/ButtonEdgeColour"
+            android:layout_marginTop="@dimen/SeperatorMargins"
+            android:layout_marginLeft="@dimen/MainViewSideMargin"
+            android:layout_marginRight="@dimen/MainViewSideMargin"/>
+
+        <LinearLayout
+            android:id="@+id/lytNavTop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/MainViewSideMargin"
+            android:layout_marginTop="@dimen/MainViewSpacing"
+            android:layout_marginBottom="@dimen/MainViewSpacing"
+            android:layout_marginRight="@dimen/MainViewSideMargin"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/btnBack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@drawable/text_button_normal"
+                android:clickable="true"
+                android:gravity="right"
+                android:layout_marginRight="@dimen/MainViewSpacing"
+                android:orientation="horizontal"
+                android:padding="@dimen/ButtonEdgePadding">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/HorizontalSpacing"
+                    android:layout_marginRight="@dimen/HorizontalSpacing"
+                    android:gravity="center_horizontal"
+                    android:text="@string/back"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnNext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@drawable/text_button_normal"
+                android:clickable="true"
+                android:gravity="right"
+                android:layout_marginLeft="@dimen/MainViewSpacing"
+                android:orientation="horizontal"
+                android:padding="@dimen/ButtonEdgePadding">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/HorizontalSpacing"
+                    android:layout_marginRight="@dimen/HorizontalSpacing"
+                    android:gravity="center_horizontal"
+                    android:text="@string/next"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/MainViewSideMargin"
+            android:layout_marginTop="@dimen/MainViewSpacing"
+            android:layout_marginRight="@dimen/MainViewSideMargin"
+            android:text="@string/privacy"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/textView24"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/MainViewSideMargin"
+            android:layout_marginTop="@dimen/MainViewSpacing"
+            android:layout_marginRight="@dimen/MainViewSideMargin"
+            android:text="@string/privacy1"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/textView217"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/MainViewSideMargin"
+            android:layout_marginTop="@dimen/MainViewSpacing"
+            android:layout_marginRight="@dimen/MainViewSideMargin"
+            android:text="@string/privacy2"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/textView213"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/MainViewSideMargin"
+            android:layout_marginTop="@dimen/MainViewSpacing"
+            android:layout_marginRight="@dimen/MainViewSideMargin"
+            android:text="@string/privacy3"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/imageView27"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/button_privacy"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/textView218"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/MainViewSideMargin"
+            android:layout_marginTop="@dimen/MainViewSpacing"
+            android:layout_marginRight="@dimen/MainViewSideMargin"
+            android:text="@string/privacy4"
+            android:visibility="gone" />
+
+
+
+    </LinearLayout>
+</ScrollView>

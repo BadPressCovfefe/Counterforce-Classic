@@ -1,0 +1,106 @@
+{
+  "project_info": {
+    "project_number": "761702222652",
+    "project_id": "counterforce-8d62b",
+    "storage_bucket": "counterforce-8d62b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:761702222652:android:4fb9b3f0bf91f477452c39",
+        "android_client_info": {
+          "package_name": "com.apps.fast.counterforce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "761702222652-dmn2u11ag957io2jbbh7a5nljl14l739.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAXGKJwzgAnULKTbIah2jq8LwH8RatWnw"
+        },
+        {
+          "current_key": "AIzaSyDWt3os975FK2fEMJntTZnQN4Iu06cra7E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "761702222652-dmn2u11ag957io2jbbh7a5nljl14l739.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:761702222652:android:f22835c86c7ccbbc452c39",
+        "android_client_info": {
+          "package_name": "com.apps.fast.counterforceclassic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "761702222652-dmn2u11ag957io2jbbh7a5nljl14l739.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAXGKJwzgAnULKTbIah2jq8LwH8RatWnw"
+        },
+        {
+          "current_key": "AIzaSyDWt3os975FK2fEMJntTZnQN4Iu06cra7E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "761702222652-dmn2u11ag957io2jbbh7a5nljl14l739.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:761702222652:android:8a8160f205da7603452c39",
+        "android_client_info": {
+          "package_name": "com.apps.fast.counterforcetest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "761702222652-dmn2u11ag957io2jbbh7a5nljl14l739.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAXGKJwzgAnULKTbIah2jq8LwH8RatWnw"
+        },
+        {
+          "current_key": "AIzaSyDWt3os975FK2fEMJntTZnQN4Iu06cra7E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "761702222652-dmn2u11ag957io2jbbh7a5nljl14l739.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

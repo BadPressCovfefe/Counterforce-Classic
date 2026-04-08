@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:foreground="@drawable/view_frame">
+
+    <ScrollView
+        android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/PanelTransparency"
+                android:fadeScrollbars="false"
+                android:scrollbarThumbVertical="?attr/ScrollBarColour">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <TextView
+                android:id="@+id/txtBuildStructureTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:text="@string/title_build_structure"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/txtBuildStructure"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:text="@string/select_build_structure"
+                android:textColor="?attr/WarningColour"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/txtTooClose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:text="@string/blueprint_too_close"
+                android:textColor="?attr/BadColour"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/txtTooFar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:text="@string/too_far_from_post"
+                android:textColor="?attr/BadColour"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/txtNoDeposit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:text="@string/no_nearby_deposit"
+                android:textColor="?attr/BadColour"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/lytControls"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginBottom="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/btnBuildStructure"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/HorizontalSpacing"
+                    android:layout_weight="1"
+                    android:background="@drawable/text_button_normal"
+                    android:clickable="true"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/ButtonImagePadding"
+                        android:src="@drawable/button_build" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnCancel"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/HorizontalSpacing"
+                    android:layout_weight="1"
+                    android:background="@drawable/text_button_normal"
+                    android:clickable="true"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/ButtonImagePadding"
+                        android:src="@drawable/button_cancel" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

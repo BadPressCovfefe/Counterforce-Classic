@@ -1,0 +1,29 @@
+Eco Update Take 2:
+-Add farm structure
+-Add solar panel structure
+-Add structure-specific separation-distance parameter.
+-Make the camera follow selected entities. 
+
+-Add missile maintenance cost
+-Larger silos cost more to maintain
+-Add unique offline structure maintenance costs to config
+
+-Implement mip-mapping
+-De-implement clustering, convert all icons to fuction the way missile/loot icons do.
+-Remove weekly reset
+-Add surrender-war button
+-Add break-affiliation button (surrendering and breaking affiliation should cost money to do)
+-Examine the feasibility of adding a "propose peace-treaty" button and implement if it isn't too difficult. 
+-Convert survivor bonus from set amount to $25 * days survived.
+	-Add "days since last death" counter to Player class.
+	-Counter should increment each time DayEnded() and reset to 0 every time the player is killed. 
+
+Farm: 
+-Once per 3-7 days, spawns a whole bunch of wheat in radius. 
+-Field must be sowed and fertlized by visiting in person.
+-
+
+Solar panel:
+-Can be built close together.
+-Produces electricity loot every X minutes worth $X that expires every X time.
+-

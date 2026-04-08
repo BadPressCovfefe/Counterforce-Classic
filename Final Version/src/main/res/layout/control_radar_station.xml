@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:visibility="visible">
+
+    <LinearLayout
+        android:id="@+id/btnUpgradeRadarRange"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/MainViewSideMargin"
+        android:layout_marginTop="@dimen/MainViewSpacing"
+        android:layout_marginRight="@dimen/MainViewSideMargin"
+        android:layout_marginBottom="@dimen/MainViewSpacing"
+        android:background="@drawable/text_button_normal"
+        android:clickable="true"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/imageView51"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/ButtonImagePadding"
+            android:src="@drawable/upgrade_radar_range" />
+
+        <TextView
+            android:id="@+id/txtRadarRangeUpgrade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/ButtonInset"
+            android:layout_weight="0"
+            android:text="@string/upgrade"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <LinearLayout
+            android:id="@+id/lytMoreish"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:orientation="vertical"></LinearLayout>
+
+        <TextView
+            android:id="@+id/txtRadarRangeUpgradeCost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/ButtonInset"
+            android:layout_weight="0"
+            android:text="£yay"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btnUpgradeRadarBoost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/MainViewSideMargin"
+        android:layout_marginTop="@dimen/MainViewSpacing"
+        android:layout_marginRight="@dimen/MainViewSideMargin"
+        android:background="@drawable/text_button_normal"
+        android:clickable="true"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/imageView52"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/ButtonImagePadding"
+            android:src="@drawable/upgrade_radar_boost" />
+
+        <TextView
+            android:id="@+id/txtRadarBoostUpgrade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/ButtonInset"
+            android:layout_weight="0"
+            android:text="@string/upgrade"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <LinearLayout
+            android:id="@+id/lytMoreish1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:orientation="vertical"></LinearLayout>
+
+        <TextView
+            android:id="@+id/txtRadarBoostUpgradeCost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/ButtonInset"
+            android:layout_weight="0"
+            android:text="£yay"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/MainViewSpacing"
+        android:layout_marginBottom="@dimen/MainViewSpacing"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/MainViewSideMargin"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/HitChance_Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/accuracy_bonus_title"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/SeperatorMargins"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtHitChance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="?attr/AltUIColour" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/MainViewSideMargin"
+        android:layout_marginLeft="@dimen/MainViewSideMargin"
+        android:layout_marginBottom="@dimen/MainViewSpacing"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/RadarDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/radar_description"
+            android:textColor="?attr/InfoColour"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    </LinearLayout>
+
+</LinearLayout>
+

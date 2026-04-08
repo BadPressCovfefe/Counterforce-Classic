@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginBottom="@dimen/MainViewSpacing"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/lytMovementOptions"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/btnMovePlayer"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/SeperatorMargins"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/imageView23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/SeperatorMargins"
+                    android:background="@drawable/text_button_normal"
+                    android:padding="@dimen/ButtonImagePadding"
+                    android:src="@drawable/button_move_player" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnMoveAircraft"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/SeperatorMargins"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/SeperatorMargins"
+                    android:background="@drawable/text_button_normal"
+                    android:padding="@dimen/ButtonImagePadding"
+                    android:src="@drawable/button_aircraft_move" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnMoveInfantry"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/SeperatorMargins"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/SeperatorMargins"
+                    android:background="@drawable/text_button_normal"
+                    android:padding="@dimen/ButtonImagePadding"
+                    android:src="@drawable/button_move_infantry" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnMoveTank"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/SeperatorMargins"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/SeperatorMargins"
+                    android:background="@drawable/text_button_normal"
+                    android:padding="@dimen/ButtonImagePadding"
+                    android:src="@drawable/button_move_tank" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnMoveShip"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/SeperatorMargins"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/SeperatorMargins"
+                    android:background="@drawable/text_button_normal"
+                    android:padding="@dimen/ButtonImagePadding"
+                    android:src="@drawable/button_move_ship" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnMoveSubmarine"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/SeperatorMargins"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/SeperatorMargins"
+                    android:background="@drawable/text_button_normal"
+                    android:padding="@dimen/ButtonImagePadding"
+                    android:src="@drawable/button_move_submarine" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnMoveTruck"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/SeperatorMargins"
+                    android:background="@drawable/text_button_normal"
+                    android:padding="@dimen/ButtonImagePadding"
+                    android:src="@drawable/button_move_cargo_truck" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lytAttackOptions"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/btnAircraftTarget"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/SeperatorMargins"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/SeperatorMargins"
+                    android:background="@drawable/text_button_normal"
+                    android:padding="@dimen/ButtonImagePadding"
+                    android:src="@drawable/button_aircraft_target" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnTargetTank"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/SeperatorMargins"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/SeperatorMargins"
+                    android:background="@drawable/text_button_normal"
+                    android:padding="@dimen/ButtonImagePadding"
+                    android:src="@drawable/button_tank_target" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnInterceptorTarget"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/SeperatorMargins"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/SeperatorMargins"
+                    android:background="@drawable/text_button_normal"
+                    android:padding="@dimen/ButtonImagePadding"
+                    android:src="@drawable/button_interceptor_target_aircraft" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnMissileTarget"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/SeperatorMargins"
+                    android:background="@drawable/text_button_normal"
+                    android:padding="@dimen/ButtonImagePadding"
+                    android:src="@drawable/button_missile_target" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/btnArtilleryTarget"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/SeperatorMargins"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/SeperatorMargins"
+                    android:background="@drawable/text_button_normal"
+                    android:padding="@dimen/ButtonImagePadding"
+                    android:src="@drawable/button_artillery_target" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnKamikaze"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/SeperatorMargins"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/SeperatorMargins"
+                    android:background="@drawable/text_button_normal"
+                    android:padding="@dimen/ButtonImagePadding"
+                    android:src="@drawable/button_kamikaze" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnInfantryCapture"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/SeperatorMargins"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/SeperatorMargins"
+                    android:background="@drawable/text_button_normal"
+                    android:padding="@dimen/ButtonImagePadding"
+                    android:src="@drawable/button_capture" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnPlayerCapture"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/SeperatorMargins"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/SeperatorMargins"
+                    android:background="@drawable/text_button_normal"
+                    android:padding="@dimen/ButtonImagePadding"
+                    android:src="@drawable/button_player_capture" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnInfantryTarget"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/SeperatorMargins"
+                    android:background="@drawable/text_button_normal"
+                    android:padding="@dimen/ButtonImagePadding"
+                    android:src="@drawable/button_infantry_running_target" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lytLiberateOptions"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/btnLiberateTarget"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/SeperatorMargins"
+                    android:background="@drawable/text_button_normal"
+                    android:padding="@dimen/ButtonImagePadding"
+                    android:src="@drawable/button_infantry_liberate" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,16 @@
+Hint: Attack resource deposits with missiles to extract more resources from them. Be warned: this is not 100% efficient and will destroy some of the resources!
+Hint: Torpedoes can be destroyed with missiles and other torpedoes.
+Hint: Nuclear-armed interceptors have a perfect hit rate, and will destroy some missiles and aircraft in the blast radius.
+Hint: Use machinery in airbases to speed up aircraft production.
+Hint: Use machinery in armories to speed up tank production.
+Hint: Use machinery in shipyards to speed up ship production.
+Hint: Tanks are very effective against structures and infantry.
+Hint: Ground-attack aircraft are very effective against all ground units.
+Hint: Giving infantry food increases their range.
+Hint: Giving tanks and trucks fuel increases their range.
+Hint: Infantry that have medicine on-hand will use it to automatically heal each hour whent they are not in combat.
+Hint: Owned or allied tanks and infantry in city limits reduce the chance of an insurrectionist attack if city happiness is low.
+Hint: To capture a city, build a structure near it, then select the city and hit the capture button.
+Hint: Shipyards are captured automatically when structures are built nearby.
+Hint: Nukes detonated in airburst mode to less damage to a greater area and produce EMP, disabling structures. 
+Hint: Nukes in groundburst mode deal much greater damage to a smaller area and produce radiation.

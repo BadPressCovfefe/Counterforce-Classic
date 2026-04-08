@@ -1,0 +1,680 @@
+<resources>
+    <string name="app_name">Counterforce TEST</string>
+    <string name="notification_text">You\'re under attack!</string>
+    <string name="notification_text_ally">Your ally is under attack!</string>
+    <string name="welcome">Welcome, Commander!</string>
+
+    <string name="disclaimer">Disclaimer</string>
+    <string name="privacy">Privacy</string>
+    <string name="rules">Rules</string>
+    <string name="disclaimer1">This is a real-world, real-time, location based game. Take care whilst playing, and always be aware of hazards around you.</string>
+    <string name="disclaimer2">Playing this game whilst driving, operating machinery, cycling, or whilst in command of air or water craft may be illegal and dangerous.</string>
+    <string name="disclaimer3">Observe all local laws, and do not engage in unlawful trespass or other criminal activity.</string>
+    <string name="disclaimer4">You are solely responsible for your decision to play this game, and any consequences that may arise from doing so. Keep it fun, stay safe, and don\'t neglect other life responsibilities!</string>
+    <string name="privacy1">Counterforce is a free game that does not engage in any marketing whatsoever, and personal information will be treated with utmost respect. Policy changes will always be by prior agreement in order to continue playing, should Counterforce ever become a marketable product.</string>
+    <string name="privacy2">A unique, securely-encrypted key derived from your device\'s identity is used for the sole purpose of identifying your account. Other non-personally-identifying parameters of the device, and lists of running apps/services, may be accessed to prevent cheating.</string>
+    <string name="privacy3">Your real world location will be shared with other players. A \"Privacy Zone\" feature exists which allows you to obscure sensitive locations such as home and workplaces from the game. It is advisable to make use of this facility before you begin playing, by clicking the icon on the registration screen or accessing it in the Settings menu later. It bears the following symbol:</string>
+    <string name="privacy4">All in-game activity is logged on the server for administration, debugging and development purposes. Cooperation with the UK authorities (or their nominated parties) will be made in the highly unlikely event that they should wish to access the data for the purposes of law enforcement, security or national interests.</string>
+    <string name="rules1">Manipulating your GPS location (\"location spoofing\"), multi-accounting from one device and use of emulators are STRICTLY FORBIDDEN. These are all easily detected, and permanent IP bans, with NO PRIOR WARNING, shall apply to each. DO NOT CONTINUE IF YOU ARE USING AN EMULATOR, HAVE MODIFIED YOUR DEVICE\'S IMEI/MEID OR HAVE ANY APPS INSTALLED THAT WOULD FACILITATE GPS POSITION MANIPULATION OR MULTI ACCOUNTING (Such as \"Fake GPS Location\" and \"Parallel Space\"). This is taken very seriously and there will be no more warnings! Play fair or don\'t play at all!</string>
+    <string name="rules2">Usernames, avatars or other in-game communications that are offensive, pornographic, gory or discriminatory will not be tolerated and offending players will be banned. If you have a problem with other cultures, the game provides other legitimate features with which to express your disapproval; but don\'t be surprised when they shoot back!</string>
+    <string name="rules3">The gameplay mechanics, features and configurations are subject to change at any time, without notice, for development purposes. All players are invited (and encouraged) to share their opinions on these matters via the Discord group.</string>
+    <string name="rules4">Exploiting \"faults\" with the game rules, or other forms of \"gamesmanship\", is actively encouraged; it makes the issues easier to identify and fix!</string>
+    <string name="agreement">I agree to the above, that I am solely responsible for my own actions and choice to play this game, and will exercise common sense when doing so.</string>
+    <string name="noimei">Device Identity Problem</string>
+    <string name="noimei1">A unique identity could not be determined for this device, because it is either a non-cellular tablet, emulator, unsupported phone, or the "Telephony"/"Read Phone State" permission was not enabled.</string>
+    <string name="noimei2">Unfortunately, only cellular phones (or other devices that at least take a SIM card) are supported.</string>
+    <string name="noimei3">Emulator use is strictly forbidden. Registering an account with one will result in a permanent ban not only for that account, but for all devices that are determined to have shared the same IP or geographical address too! DO NOT CONTINUE if this is the case. Press \"Quit\".</string>
+    <string name="noimei4">If you are using a regular cellular phone and thus getting this message in error, please \"Quit\", check that all permissions required by this app are enabled in the app settings, and try again. Please e-mail the developer or report to the Discord group if this does not fix the problem.</string>
+
+    <string name="gun_system">Gun System</string>
+    <string name="missile_system">Cruise Missile System</string>
+    <string name="air_defence_system">Air Defence System</string>
+
+    <string name="hp">%1$dhp</string>
+    <string name="hps">%1$d/%2$dhp</string>
+    <string name="pts">%1$spt</string>
+    <string name="multiplier">x%1$s</string>
+    <string name="rank_format">%1$d/%2$d</string>
+    <string name="unranked">Unranked</string>
+
+    <string name="cms_not_fitted">Equip this system to fire missiles from your location.</string>
+    <string name="sam_not_fitted">Equip this system to intercept enemy missiles from your location.</string>
+
+    <string name="empty">Empty</string>
+
+    <string name="desc_missile_launcher">Missile launch sites fire cruise missiles, allowing you to attack other players globally.</string>
+
+    <string name="main_text_splash">Systems initialising...</string>
+    <string name="main_text_help">Need help?</string>
+    <string name="main_communications_status">Communications:</string>
+    <string name="main_positioning_status">Positioning:</string>
+    <string name="main_comms_establishing">Establishing...</string>
+    <string name="main_location_searching">Searching...</string>
+    <string name="main_comms_established">Established at %s latency.</string>
+    <string name="main_location_found">Established at %s accuracy.</string>
+    <string name="main_location_found_not_good_enough">Established at %1$s accuracy, but must be better than %2$s. Searching for better...</string>
+    <string name="build_structures">Build Structures</string>
+    <string name="cannot_build">You cannot build here as you are too close to other structures.\nYou must be at least %1$s from:</string>
+    <string name="cannot_build_ore_mine">You cannot build an ore mine here as all ore in the vicinity is already being mined.\nYou must be at least %1$s from:</string>
+    <string name="purchase_missile">Purchase a missile</string>
+    <string name="wealth_title">Wealth</string>
+    <string name="wealth_generating">You are generating %1$s per hour.</string>
+    <string name="wealth_costs">Your online structures cost %1$s per hour.</string>
+    <string name="maintenance_costs">Cost-maintainable structures:</string>
+    <string name="total_wealth_generation">Total 24 hourly generation: %1$s</string>
+    <string name="negative_equity">Your maintenance costs exceed your wealth generation.</string>
+    <string name="rules_title">Rules</string>
+    <string name="location">Location</string>
+    <string name="location_updates">Recent updates:</string>
+    <string name="using_location">Using %1$s location (%2$.6f, %3$.6f) with accuracy %4$s from %5$s ago.</string>
+    <string name="network_unavailable">Network updates unavailable.</string>
+    <string name="gps_unavailable">GPS updates unavailable.</string>
+    <string name="none">NONE</string>
+    <string name="location_data">%1$s - %2$s (%3$.6f, %4$.6f) @ %5$s</string>
+    <string name="attacking">Attacking %1$s</string>
+    <string name="engaging">Engaging %1$s</string>
+    <string name="intercepting">Intercepting %1$s</string>
+    <string name="upload_avatar_title">Upload avatar</string>
+    <string name="preview">Preview:</string>
+    <string name="reports">Reports</string>
+    <string name="players_title">Players</string>
+    <string name="players_join_title">The following players wish to join %1$s</string>
+    <string name="notification_sound">Notification sound:</string>
+    <string name="sound_air_raid">Air Raid</string>
+    <string name="sound_default">Default</string>
+    <string name="off">Off</string>
+    <string name="notification_vibrate">Notification vibrate:</string>
+    <string name="vibrate_long">Long</string>
+    <string name="vibrate_short">Short</string>
+    <string name="short_distances">Short distance units:</string>
+    <string name="long_distances">Long distance units:</string>
+    <string name="speeds">Speed units:</string>
+    <string name="currency_symbol">Currency symbol:</string>
+    <string name="no_available_missiles">You have no available missiles in range of this target.</string>
+    <string name="no_available_interceptors">You have no available interceptors in range of this target.</string>
+    <string name="privacy_zone_title">Privacy zones</string>
+    <string name="privacy_zone_blurb">Click on the map to define a new privacy zone, or click existing zones to edit them.</string>
+    <string name="privacy_radius">Radius:</string>
+    <string name="privacy_move_out">Your player is currently within this privacy zone. It will become effective only once your player has moved outside of it.</string>
+    <string name="privacy_in_zone">You are in a privacy zone. Using your last location outside of this zone.</string>
+    <string name="sort">Sort:</string>
+    <string name="missile_launcher">Missile Launcher</string>
+    <string name="sam_site">SAM Site</string>
+    <string name="missile_site">Missile Site</string>
+    <string name="sentry_gun">Sentry Gun</string>
+    <string name="ore_mine">Ore Mine</string>
+    <string name="registration">Please register a username and avatar:</string>
+    <string name="alliances">Alliances</string>
+    <string name="create_alliance">Create Alliance</string>
+    <string name="join_alliance">Join Alliance</string>
+    <string name="leave_alliance">Leave Alliance</string>
+    <string name="declare_war">Declare War</string>
+    <string name="alliance_creation">Please specify an alliance name, description and avatar:</string>
+    <string name="your_alliance">You are a member of:</string>
+    <string name="your_alliance_war">Your alliance is at war with this alliance.</string>
+    <string name="alliance_joining">You have requested to join this alliance, and are waiting for a leader to approve or decline.</string>
+
+    <string name="missile">Missile</string>
+    <string name="interceptor">Interceptor</string>
+    <string name="loot">Loot</string>
+    <string name="named_entity">%1$s (%2$s)</string>
+    <string name="owners_entity">%1$s\'s %2$s</string>
+    <string name="missile_type">%1$s %2$s</string>
+    <string name="missile_site_title">missile site</string>
+    <string name="sam_site_title">SAM site</string>
+    <string name="sentry_gun_title">sentry gun</string>
+    <string name="ore_mine_title">ore mine</string>
+    <string name="threats">Threats</string>
+    <string name="cancel">CANCEL</string>
+    <string name="close">CLOSE</string>
+    <string name="cont">CONTINUE</string>
+    <string name="test_notification">TEST NOTIFICATION</string>
+    <string name="close_account">CLOSE ACCOUNT</string>
+    <string name="finish">FINISH</string>
+    <string name="clear_all">CLEAR ALL</string>
+    <string name="delete">DELETE</string>
+    <string name="save">SAVE</string>
+    <string name="play_store">PLAY STORE</string>
+    <string name="next10">10 &gt;&gt;</string>
+    <string name="prev10">&lt;&lt; 10</string>
+    <string name="number_range">%1$d - %2$d</string>
+    <string name="imei_quit">QUIT</string>
+    <string name="player_name">ENTER USERNAME</string>
+
+    <string name="frequency">FREQUENCY</string>
+    <string name="interval">Interval (15min or more):</string>
+    <string name="alliance_name">ALLIANCE NAME</string>
+    <string name="alliance_description">DESCRIPTION (Max 140 chars)</string>
+
+    <string name="username_taken">Username taken. Please specify another.</string>
+    <string name="alliance_name_taken">Alliance name taken. Please specify another.</string>
+    <string name="specify_alliance_name">Please specify an alliance name.</string>
+
+    <string name="notifications">Notifications</string>
+    <string name="units">Units</string>
+    <string name="other">Other</string>
+
+    <string name="value_unknown">...</string>
+
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_yes">YES</string>
+    <string name="dialog_no">NO</string>
+    <string name="launching_missile">Launching missile...</string>
+    <string name="launching_interceptor">Launching interceptor...</string>
+    <string name="uploading_avatar">Uploading avatar...</string>
+    <string name="downloading_avatar">DOWNLOADING AVATARS</string>
+    <string name="respawning">Respawning...</string>
+    <string name="constructing">Constructing...</string>
+    <string name="purchasing">Purchasing...</string>
+    <string name="registering">Registering...</string>
+    <string name="selling">Selling...</string>
+    <string name="decommissioning">Decommissioning...</string>
+    <string name="closing_account">Closing account...</string>
+    <string name="repairing">Repairing...</string>
+    <string name="healing">Healing...</string>
+    <string name="configuring">Configuring...</string>
+    <string name="upgrading">Upgrading...</string>
+    <string name="creating_alliance">Creating alliance...</string>
+    <string name="joining_alliance">Joining alliance...</string>
+    <string name="leaving_alliance">Leaving alliance...</string>
+    <string name="declaring_war">Declaring war...</string>
+    <string name="promoting">Promoting...</string>
+    <string name="accepting">Accepting...</string>
+    <string name="rejecting">Rejecting...</string>
+    <string name="kicking">Kicking...</string>
+
+    <string name="state_online_name">Online</string>
+    <string name="state_booting_name">Booting</string>
+    <string name="state_selling_name">Selling</string>
+    <string name="state_offline_name">Offline</string>
+
+    <string name="version_mismatch_minor">A software update is available.</string>
+    <string name="version_mismatch_major_title">A major software update has been released.</string>
+    <string name="version_mismatch_major">The update must be installed before you can log in again. It should be available to all regions within a few hours.</string>
+    <string name="must_specify_target_map">You must specify a target. Touch locations or entities on the map to designate them as a target first.</string>
+    <string name="must_specify_target_missile">You must specify a target. Touch missiles on the map to designate them as a target first.</string>
+    <string name="target_out_of_range">Target out of range. You may only designate a target within the range circle.</string>
+    <string name="deliberate_friendly_fire">Wilful friendly fire is not allowed.</string>
+    <string name="cannot_intercept">Your interceptor cannot intercept the selected missile.</string>
+    <string name="waiting_for_data">Waiting for data. Please try again in a moment.</string>
+    <string name="you_must_respawn">You must respawn before you can do this!</string>
+    <string name="insufficient_funds">Insufficient funds.</string>
+    <string name="players_cant_carry_nukes">Players cannot carry nuclear weapons. You must build a missile site.</string>
+    <string name="players_cant_carry_ICBM">Players cannot carry ICBMs. You must build an ICBM Silo.</string>
+    <string name="site_not_ICBM">You must build an ICBM Silo to purchase ICBMs.</string>
+    <string name="reloading_cant_fire">The system is reloading and cannot yet fire.</string>
+    <string name="preparing_cant_fire">This missile is preparing and cannot yet fire.</string>
+    <string name="offline_cant_fire">The system is offline and cannot fire.</string>
+    <string name="out_of_range">Target out of missile range.</string>
+    <string name="decommission_confirm">Decommission %1$s for %2$s refund? (this will take %3$s to complete)</string>
+    <string name="sell_confirm">Sell %1$s for %2$s?</string>
+    <string name="repair_confirm">Remotely repair %1$s for %2$s? Note that you can repair it for free by visiting its location.</string>
+    <string name="close_account_confirm">Are you sure you want to close your account?\n\nYour player will be removed from the game, and deleted completely after %1$s provided you don\'t open the app.\n\nYou can cancel this by opening the app again within this time.\n\nNote that your player will "die" as per normal game rules, losing points accordingly, but also suffering a minimum 24 hour respawn time to prevent abuse of this function. Any attacking players will receive full points for killing you.</string>
+    <string name="purchase_missile_system">Purchase missile system for %1$s?</string>
+    <string name="purchase_sam_system">Purchase air defence system for %1$s?</string>
+    <string name="construct_confirm">Construct a %1$s at your location for %2$s?</string>
+    <string name="construct_confirm_vowel">Construct an %1$s at your location for %2$s?</string>
+    <string name="construct_name_cms">cruise missile launcher</string>
+    <string name="construct_name_ncms">ICBM launch silo</string>
+    <string name="construct_name_sam">SAM site</string>
+    <string name="construct_name_sentry_gun">sentry gun</string>
+    <string name="construct_name_ore_mine">ore mine</string>
+    <string name="quit">Quit Counterforce?</string>
+    <string name="confirm_auto">Switch SAM site to auto?\n\nIn auto mode, the SAM site will engage threats automatically at any time, regardless of whether you\'re online or alive.</string>
+    <string name="confirm_semi">Switch SAM site to semi auto?\n\nIn semi auto mode, the SAM site will only automatically engage threats when you are offline or dead. You will have control whenever you are online and alive.</string>
+    <string name="confirm_manual">Switch SAM site to manual?\n\nIn manual mode, the SAM site will not engage threats automatically. You will have full control.</string>
+    <string name="confirm_join_alliance">Request to join %1$s?</string>
+    <string name="confirm_join_alliance_cancel_other">Request to join %1$s? This will cancel your request to join %2$s.</string>
+    <string name="confirm_leave_alliance">Leave %1$s? You will have to wait %2$s before you can join or create another alliance.</string>
+    <string name="confirm_disband_alliance">Leave %1$s? As you are the only leader, this will disband the alliance. You will have to wait %2$s before you can join or create another alliance.</string>
+    <string name="confirm_promote">Promote %1$s to be a leader of %2$s? This promotion will be permanent until they leave.</string>
+    <string name="confirm_kick">Kick %1$s out of %2$s?</string>
+    <string name="confirm_declare_war">Declare war on %1$s?</string>
+    <string name="cannot_ally">You are in the cooloff period from leaving your previous alliance, and must wait %1$s before you can create or join another.</string>
+
+    <string name="north">North</string>
+    <string name="northeast">Northeast</string>
+    <string name="east">East</string>
+    <string name="southeast">Southeast</string>
+    <string name="south">South</string>
+    <string name="southwest">Southwest</string>
+    <string name="west">West</string>
+    <string name="northwest">Northwest</string>
+
+    <string name="player_idle">Idle.</string>
+    <string name="player_dead">You are dead. You may respawn in %s.</string>
+    <string name="player_spectating">Spectating. You may respawn now.</string>
+    <string name="player_dead_name">Here lies the body of %s</string>
+    <string name="player_respawn_protected">Respawn protected until %1$s.</string>
+    <string name="player_seen">Last seen %1$s.</string>
+    <string name="online_now">Online now.</string>
+    <string name="alliance_members">Members:</string>
+
+    <string name="type_name">Name:</string>
+    <string name="range">Range:</string>
+    <string name="blast_radius">Blast Radius:</string>
+    <string name="max_damage">Max Damage:</string>
+    <string name="speed">Speed:</string>
+    <string name="prep_time">Build Time:</string>
+    <string name="flight_time">Flight Time:</string>
+
+    <string name="missile_to_target">Will reach target in %s.</string>
+    <string name="potential_targets">Potential targets:</string>
+    <string name="technical_data">Technical Data</string>
+    <string name="ready">Ready</string>
+    <string name="offline">Offline</string>
+
+    <string name="state_offline">OFFLINE</string>
+    <string name="state_booting">BOOTING IN %s</string>
+    <string name="state_online">ONLINE</string>
+    <string name="state_decommissioning">DECOMMISSIONING IN %s</string>
+
+    <string name="loot_value">Worth %s.</string>
+    <string name="expires_in">Expires in %s.</string>
+
+    <string name="threat_missile">Incoming %1$s missile, launched by %2$s.</string>
+    <string name="threat_time">Time to impact: %1$s</string>
+
+    <string name="wealth">Wealth:</string>
+
+    <string name="champion">Champion</string>
+    <string name="veteran">Veteran</string>
+    <string name="regular">Regular</string>
+    <string name="noob">Noob</string>
+    <string name="awol">AWOL</string>
+
+    <string name="lat_long">(%1$s, %2$s)</string>
+    <string name="nearest_entities">Nearest points of interest:</string>
+
+    <string name="km">km</string>
+
+    <string name="health_dead">Dead</string>
+    <string name="health_destroyed">Destroyed</string>
+
+    <string name="help_avatar">Use two fingers to set the avatar image bounds.</string>
+    <string name="null_avatar">Please select the avatar image bounds.</string>
+
+    <string name="notification_minutes">"%d min"</string>
+
+    <string name="unit_metre">m</string>
+    <string name="unit_yard">yd</string>
+    <string name="unit_foot">ft</string>
+    <string name="unit_kilometer">km</string>
+    <string name="unit_stat_mi">mi</string>
+    <string name="unit_naut_mi">nm</string>
+    <string name="unit_kph">km/h</string>
+    <string name="unit_mph">mph</string>
+    <string name="unit_knot">kts</string>
+    <string name="buy">Buy</string>
+    <string name="upgrade">%1$s &#x2794; %2$s</string>
+    <string name="downgrade">%1$s &#129144; %2$s</string>
+    <string name="upgrade_to_nuclear">No nukes &#x2794; Nukes</string>
+    <string name="upgrade_slots_confirm">Upgrade the launcher from %1$d slots to %2$d for %3$s?</string>
+    <string name="upgrade_reload_confirm">Upgrade the reload system from %1$s to %2$s for %3$s?</string>
+    <string name="upgrade_nuclear_confirm">Upgrade to take nuclear missiles for %1$s?</string>
+    <string name="confirm_online">Bring %1$s online?\n\nIt will cost %2$s per hour to run.\n\nIt will take %3$s to boot.</string>
+    <string name="confirm_offline">Take %1$s offline?\n\nYou will save %2$s per hour.\n\nIt takes %3$s to bring it back online.</string>
+    <string name="heal_confirm">You will heal naturally in %1$s. Heal fully now for %2$s?</string>
+    <string name="heal_radiation_confirm">You will die of radiation poisoning unless you leave the radioactive area or it dissipates. Heal fully now for %1$s?</string>
+    <string name="heal_full_health">You are already at full health.</string>
+    <string name="heal_dead">You are dead and cannot heal.</string>
+    <string name="title_target_gun">Designate Gun Target</string>
+    <string name="title_target_missile">Designate Missile Target</string>
+    <string name="title_target_interceptor">Specify Threat</string>
+    <string name="target_instructions">Touch map to specify target.</string>
+    <string name="target_cost">This attack will cost %1$s.</string>
+    <string name="flight_time_target">Flight Time: %1$s</string>
+    <string name="friendly_fire_warning">FRIENDLY FIRE</string>
+    <string name="warnings">Warnings</string>
+    <string name="problems">Problems</string>
+
+    <string name="warning_aircover">NO AIR COVER</string>
+    <string name="warning_aircover_text">Build a SAM site or buy an air defence system to protect yourself from threats.</string>
+    <string name="warning_attack">NO ATTACK CAPABILITY</string>
+    <string name="warning_attack_text">Build a missile site or buy a cruise missile system.</string>
+    <string name="warning_expenses">EXPENSES EXCEED INCOME</string>
+    <string name="warning_expenses_text">Your structures will spontaneously go offline if you can\'t afford the hourly costs.</string>
+    <string name="warning_dead">YOU ARE DEAD</string>
+    <string name="warning_dead_text">You can\'t do anything and aren\'t generating income. Respawn as soon as possible.</string>
+    <string name="warning_radiation">AREA IS RADIOACTIVE. Dosage: %d rads/hr</string>
+    <string name="warning_radiation_text">Radiation slowly drains your HP. If you can\'t leave, you should heal yourself periodically.</string>
+    <string name="warning_wealth_cap">WEALTH CAP REACHED</string>
+    <string name="warning_wealth_cap_text">Hourly wealth generation stops above %1$s. Spend some money!</string>
+
+    <string name="at_war_with">At War With:</string>
+    <string name="members">Members:</string>
+
+    <string name="empty_slot_count">Slots: %1$d/%2$d</string>
+
+    <string name="worth">Worth:</string>
+    <string name="offences">Offences:</string>
+    <string name="defences">Defences:</string>
+
+    <string name="unaffiliated">Unaffiliated</string>
+
+    <string name="attacking_elite">%1$s is much more powerful than you. Attacking them will likely result in a devastating retaliation. Continue?</string>
+    <string name="attacking_respawn_protected">%1$s is respawn protected. Them and their semi-transparent structures are currently invulnerable for %2$s. Continue?</string>
+    <string name="attacking_respawn_protected_you">You are currently respawn protected, and will be invulnerable for %1$s. Launching a missile will remove this invulnerability now. Continue?</string>
+    <string name="testdefunct_interceptor_respawn_protected_you">You are currently respawn protected, and will be invulnerable for %1$s. Manually launching an interceptor will remove this invulnerability now. Continue?</string>
+
+    <string name="sort_by">Sort player list by</string>
+    <string name="sort_members">Sorted by members</string>
+    <string name="sort_wealth">Sorted by wealth</string>
+    <string name="sort_worth">Sorted by worth</string>
+    <string name="sort_offences">Sorted by offences</string>
+    <string name="sort_defences">Sorted by defences</string>
+
+    <string name="sort_name_members">Members</string>
+    <string name="sort_name_wealth">Wealth</string>
+    <string name="sort_name_worth">Worth</string>
+    <string name="sort_name_offences">Offences</string>
+    <string name="sort_name_defences">Defences</string>
+
+    <string name="enabled">Enabled</string>
+    <string name="allies">Allies</string>
+
+    <string name="insufficient_slots">No more free weapon slots.</string>
+    <string name="purchase_confirm">Purchase the selected munitions for %1$s?</string>
+
+    <string name="nuclear_information">Nuclear missiles create a radioactive area that damages players, and a large EMP pulse that can knock structures offline.</string>
+    <string name="tracking_information">This missile will follow targeted players, even if they move.</string>
+    <string name="ICBM_information">ICBMs carry powerful warheads around the globe at extreme speeds and can only be intercepted by Anti-Ballistic Missiles.</string>
+
+    <string name="admin_longpress">Long-press for admin options.</string>
+    <string name="ban_longpress">Long-press to ban this player.</string>
+    <string name="ban_confirm">Ban %1$s?</string>
+    <string name="poison_longpress">Long-press to poison-ban this player.</string>
+    <string name="poison_confirm">Poison ban %1$s?</string>
+    <string name="avreset_longpress">Long-press to reset this player\'s avatar.</string>
+    <string name="avreset_confirm">Reset %1$s\'s avatar?</string>
+
+    <string name="interceptor_out_of_range">Specified target out of range.</string>
+    <string name="interceptor_too_slow">Specified target too fast.</string>
+    <string name="fast_missile_information">This missile cannot be engaged by some interceptor types.</string>
+
+    <string name="unnamed">(Unnamed)</string>
+
+    <string name="disable_audio">Disable sounds</string>
+
+    <string name="rename">Rename player:</string>
+
+    <string name="theme">Theme: %1$s</string>
+    <string name="select_theme">Select theme</string>
+
+    <string name="tutorial_welcome">Welcome, commander. Would you like a tutorial?</string>
+
+    <string name="filter">FILTER</string>
+
+    <string name="specify_username">Please specify a valid username. It must contain valid, visible characters and comply with the game rules.</string>
+
+    <string name="value_unknown_reconnect">...%1$d</string>
+    <string name="value_unknown_download">%1$d%2$s</string>
+    <string name="bytes_per_sec">B/s</string>
+    <string name="kilobytes_per_sec">Kb/s</string>
+    <string name="megabytes_per_sec">Mb/s</string>
+
+    <string name="offer_affiliation">Offer Affiliation</string>
+    <string name="confirm_offer_affiliation">Offer affiliation to %1$s?</string>
+    <string name="confirm_accept_affiliation">Accept affiliation from %1$s?</string>
+    <string name="your_alliance_affiliated">Your alliance is affiliated with this alliance.</string>
+    <string name="your_alliance_affiliation_proposed">An affiliation proposal exists between your alliance and this one.</string>
+    <string name="affiliated_with">Affiliated With:</string>
+    <string name="alliances_affiliate_title">The following alliances wish to affiliate with %1$s</string>
+
+    <string name="noimei5">Alternatively, press \"Generate Identity\" to create a restricted, non-supported and non-recoverable tablet account.</string>
+    <string name="imei_generate">GENERATE IDENTITY</string>
+
+    <string name="confirm_reject_affiliation">Reject affiliation proposal from %1$s?</string>
+    <string name="confirm_declare_war_reject">Reject affiliation proposal and declare war on %1$s? This war will last until the end of the week (%2$s) or until either alliance disbands.</string>
+
+    <string name="clustering">Icons to cluster (0=disable):</string>
+    <string name="number">NUMBER</string>
+
+    <string name="permissions_title">Permissions</string>
+    <string name="permissions">Counterforce requires the following permissions to be enabled:</string>
+
+    <string name="permissions_state_granted">GRANTED</string>
+    <string name="permissions_state_not_granted">NOT GRANTED</string>
+
+    <string name="permission_internet">Internet</string>
+    <string name="permission_internet_reason">Counterforce is a multiplayer online game, and therefore requires internet access.</string>
+    <string name="permission_network">Access Network State</string>
+    <string name="permission_network_reason">TCP/IP is required for Counterforce to communicate with the game server, which this permission enables.</string>
+    <string name="permission_vibrate">Vibrate</string>
+    <string name="permission_vibrate_reason">Counterforce offers optional vibration to accompany \"under attack\" warnings.</string>
+    <string name="permission_storage">Storage</string>
+    <string name="permission_storage_reason">Configuration files and other game elements are cached on your device for efficiency. Counterforce must be able to read and write to storage to facilitate this.</string>
+    <string name="permission_location">Location</string>
+    <string name="permission_location_reason">Counterforce is a location-based game that uses your device\'s GPS to place your character in the game world. The \"fine location\" permission is required for this to work.</string>
+    <string name="permission_phone">Phone State</string>
+    <string name="permission_phone_reason">Your Counterforce account requires a unique identity, which is securely derived from your device\'s IMEI\/MEID. The \"read phone state\" permission enables this information to be retreived.</string>
+    <string name="permission_reboot">Receive Boot Completed</string>
+    <string name="permission_reboot_reason">Counterforce raises optional \"under attack\" notifications. This permission enables the threat checking service to automatically re-enable itself after a reboot.</string>
+
+    <string name="permissions_enable">Press the button below to show prompts asking you to enable the permissions. If this doesn\'t work, you will need to enable the permissions in Android Settings \> Apps \> Counterforce \> Permissions</string>
+    <string name="button_enable_permissions">ENABLE PERMISSIONS</string>
+
+    <string name="notification_channel_name">Under attack alerts</string>
+    <string name="notification_channel_description">You will receive warnings that you or your allies are under attack.</string>
+    <string name="diplomacy">Sending diplomats...</string>
+
+    <string name="defensive_structures">Defensive Structures</string>
+
+    <string name="desc_sentry_gun">Sentry guns provide very short range defence against missiles. Build near radar stations for increased accuracy.</string>
+    <string name="desc_ore_mine">Ore mines generate ore players can go collect.</string>
+    <string name="desc_ore_mine_warning">This area is already being mined. Further online ore mines will significantly reduce the value of ore discovered!</string>
+
+    <string name="ore_mine_competing">%1$d\/%2$d (%3$s)</string>
+
+    <string name="radioactive">This area is radioactive until %1$s</string>
+
+    <string name="location_help">Counterforce is struggling to determine your location. Please ensure your device\'s GPS is switched on, with high accuracy enabled. If you\'ve already done this, try taking your device outside or near a window.</string>
+
+    <string name="default_zoom">Default zoom:</string>
+
+    <string name="general_error">A general error occurred. Please contact an administrator.</string>
+
+    <string name="connection_settings">Connection Settings (Do not change!):</string>
+    <string name="server_url">Server URL:</string>
+    <string name="tcp_port">TCP Port:</string>
+
+    <string name="invalid_connection">The new connection settings were not applied as they were invalid.</string>
+
+    <string name="stability_days">%1$d days stable</string>
+    <string name="bountys">%1$s bounty</string>
+    <string name="no_bounty">No bounty</string>
+
+    <string name="testdefunct_nuke_respawn_protected_you">You are currently respawn protected, and will be invulnerable for %1$s. Buying anything nuclear will remove this invulnerability now. Continue?</string>
+
+    <string name="war">War</string>
+
+    <string name="debug">Debug</string>
+
+    <string name="winning">Winning</string>
+    <string name="draw">Draw</string>
+
+    <string name="damage_inflicted">Damage Inflicted</string>
+    <string name="damage_received">Damage Received</string>
+    <string name="damage">Damage</string>
+    <string name="cost">Cost</string>
+    <string name="efficiency">Efficiency</string>
+    <string name="income">Income</string>
+
+    <string name="getting_stats">Getting stats...</string>
+
+    <string name="rubbish">Rubbish!</string>
+
+    <string name="hp_efficiency">%s%s/hp</string>
+
+    <string name="alliance_leave_engaged">You cannot leave an alliance while in battle!</string>
+    <string name="alliance_kick_engaged">%s is still in battle and cannot be kicked!</string>
+    <string name="alliance_join_engaged">You cannot join an alliance while in battle!</string>
+    <string name="alliance_accept_engaged">%s is still in battle and cannot be accepted yet!</string>
+
+    <string name="alliance_create_rspawnprot">You cannot create an alliance while respawn protected. Your respawn protection ends in %1$s.</string>
+    <string name="notification_text_nuke_escalation">Nuclear escalation!</string>
+    <string name="nuclear_escalations">Nuclear escalations</string>
+    <string name="notification_settings">Notification sound &amp; vibration are now part of Apps &amp; Notifications in Android settings.</string>
+
+    <string name="banned">Banned</string>
+    <string name="reason">Reason</string>
+    <string name="duration">Duration</string>
+
+    <string name="income_and_bonuses">Income &amp; bonuses:</string>
+
+    <string name="bonus_basic_income">Basic Income</string>
+    <string name="bonus_diplomatic_presence">Diplomatic Presence</string>
+    <string name="bonus_political_engagement">Political Engagement</string>
+    <string name="bonus_defender_of_the_nation">Defender of the Nation</string>
+    <string name="bonus_nuclear_superpower">Nuclear Superpower</string>
+    <string name="bonus_weekly_kills">Weekly Kills</string>
+    <string name="bonus_survivor">Survivor</string>
+    <string name="bonus_hippy">Hippie</string>
+    <string name="bonus_peace_maker">Peace Maker</string>
+    <string name="bonus_war_monger">War Monger</string>
+    <string name="bonus_lone_wolf">Lone Wolf</string>
+
+    <string name="bonus_basic_income_description">For being alive. This amount will increase by 50 every time you rank up.</string>
+    <string name="bonus_diplomatic_presence_description">Upload an avatar.</string>
+    <string name="bonus_political_engagement_description">Join or create an alliance, that has an avatar.</string>
+    <string name="bonus_defender_of_the_nation_description">Possess a defence system consisting of at least one online structure.</string>
+    <string name="bonus_nuclear_superpower_description">Possess an ICBM silo.</string>
+    <string name="bonus_weekly_kills_description">Cumulative bonus. You have killed %1$d players this week. Kill %2$d to earn %3$s more per hour.</string>
+    <string name="bonus_survivor_description">Staying alive, all week.</string>
+    <string name="bonus_hippy_description">No attacks made this week yet.</string>
+    <string name="bonus_peace_maker_description">Being allied or affiliated with %1$s of players. Currently %2$s.</string>
+    <string name="bonus_war_monger_description">Being at war with %1$s of players. Currently %2$s.</string>
+    <string name="bonus_lone_wolf_description">Being over %1$s from the nearest other player. Nearest: %2$s at %3$s.</string>
+
+    <string name="admin_options">Admin Options</string>
+    <string name="temp_ban">Temp Ban</string>
+    <string name="perm_ban">Perm Ban</string>
+    <string name="ban_reason">Ban reason:</string>
+    <string name="ban_reason_specify">You must specify a ban reason!</string>
+    <string name="common_reason_name">Having a name that broke the game rules</string>
+    <string name="common_reason_image">Uploading an image that broke the game rules</string>
+    <string name="common_reason_multiaccounting">Multiple accounts</string>
+    <string name="common_reason_emulator">GPS spoofers, emulators etc</string>
+    <string name="name_reset">Reset name</string>
+    <string name="avatar_reset">Reset avatar</string>
+    <string name="namereset_longpress">Long-press to reset this player\'s name.</string>
+    <string name="namereset_confirm">Reset %1$s\'s name?</string>
+
+    <string name="stats">Stats</string>
+
+    <string name="desc_radar_station">Radar Stations provide an accuracy bonus to your SAM sites, ABM silos, and sentry guns.</string>
+    <string name="radar_range">Radar Range:</string>
+    <string name="construct_name_radar_station">radar station</string>
+    <string name="upgrade_radar_range_confirm">Upgrade the accuracy bonus range from %1$s to %2$s for %3$s?</string>
+    <string name="radar_station">Radar Station</string>
+    <string name="radar_station_title">radar station</string>
+    <string name="warning_no_radar">NO ACTIVE RADAR</string>
+    <string name="warning_no_radar_text">You have no online radar stations! Build one or turn one online so you can see the whole map.</string>
+    <string name="no_radar_coverage">No radar coverage in this area!</string>
+    <string name="desc_abm_silo">Anti-Ballistic Missile Silos hold interceptor missiles that can shoot down incoming ICBMs, protecting you from certain destruction. Build near a radar station to get an accuracy boost.</string>
+    <string name="construct_name_abm_silo">ABM Silo</string>
+    <string name="entity_outside_radar_range">This object is beyond your radar range. Move closer or activate a radar station to see it.</string>
+    <string name="type_engagement_distance">Enter in KM:</string>
+    <string name="engagement_distance_title">Engagement Distance:</string>
+    <string name="target_outside_radar_range">This target is beyond your radar range. Move closer or activate a nearby radar station to attack it.</string>
+    <string name="abm_silo_title">ABM Silo</string>
+    <string name="abm_interceptor_information">This interceptor can reliably destroy ICBMs and will only automatically fire at ICBMs. (ICBMs reduce the hit chance by 40%)</string>
+    <string name="warhead_title">Warhead:</string>
+    <string name="warhead_desc">%s</string>
+    <string name="emp_radius_title">EMP Radius:</string>
+    <string name="rad_radius_title">Radiation:</string>
+    <string name="interceptor_accuracy">%s</string>
+    <string name="nuke_site_title">ICBM silo</string>
+    <string name="sentry_accuracy">Hit rate:</string>
+    <string name="accuracy_bonus_title">Accuracy Bonus:</string>
+    <string name="upgrade_radar_boost_confirm">Upgrade the radar accuracy bonus from %1$s to %2$s for %3$s?</string>
+    <string name="radar_description">Radar stations give an accuracy bonus to structures that are inside the blue circle around the radar station. The bonus will stack to a maximum of 100%. However, ECM and stealth missiles still have a chance to dodge even a 100% accuracy rate.</string>
+    <string name="sentry_gun_description">Sentry guns offer close-quarters protection to you and your structures. They have a default hit rate of 25%. You can increase this amount by building a radar station near by. Sentry guns with no radar station assisting them cannot shoot down missiles with electronic countermeasures. The range of the sentry gun can be upgraded and is shown as the blue circle on the map.</string>
+    <string name="sam_site_description">SAM sites store interceptors that destroy incoming missiles. By default, SAM sites offer no accuracy bonus to their interceptors. Build a radar station near by to increase the accuracy bonus of the SAM site, which will be added to interceptors launched from this SAM site. The SAM will not fire on anything beyond its engagement distance, shown as an orange circle on the map. Tap the engagement distance button to set a custom range.</string>
+    <string name="missile_site_description">Missile sites hold missiles you can use to attack your enemies. They can be upgraded to a maximum capacity of 126 missile slots.</string>
+    <string name="ore_mine_description">Ore mines generate ore players can collect. Oremines built too close together will compete and reduce the maximum value of the ore they will produce.</string>
+    <string name="desc_sam_site">SAM sites store interceptor missiles and engage enemy cruise missiles with them, protecting you and your assets. Build near a radar station to increase accuracy.</string>
+    <string name="desc_gun_turret">Gun turrets fire artillery shells at ground targets, for base defence or lighter close-range assaults. Build near a radar station to increase accuracy.</string>
+    <string name="upgrade_sentry_range_confirm">Upgrade the sentry range from %1$s to %2$s for %3$s?</string>
+    <string name="ecm_information">This missile has electronic countermeasures that reduce interceptor and sentry gun accuracy by %s.</string>
+    <string name="no_radar_coverage_targets">No radar coverage in the area. Targets unknown.</string>
+    <string name="no_radar_coverage_target">No radar coverage in the area. Target unknown.</string>
+    <string name="player_count_title">Player Count:</string>
+    <string name="total_worth_title">Total Player Worth:</string>
+    <string name="world_stats">World Stats</string>
+    <string name="tech_tier_title">World Tech Level:</string>
+    <string name="next_tier_title">Worth Until Next Tier:</string>
+    <string name="give_wealth">Press + to transfer %1$s to %2$s. Current amount to send: %3$s.</string>
+    <string name="unban">Unban Player</string>
+    <string name="unban_longpress">Long-press to unban this player.</string>
+    <string name="unban_confirm">Unban %s?</string>
+    <string name="rank_up_message">You have been promoted to the rank of %s. Your basic income has increased.</string>
+    <string name="rank_down_message">You have been demoted to the rank of %s. Your basic income has decreased.</string>
+    <string name="lower_ranked_player">This player is a much lower rank than you. You will lose experience if you attack them. Continue?</string>
+    <string name="total_kills">Kills:</string>
+    <string name="total_deaths">Deaths:</string>
+    <string name="kills_deaths_ratio">KDR:</string>
+    <string name="rank_title">Rank:</string>
+    <string name="experience_title">XP:</string>
+    <string name="bounty_title">BOUNTY: %s</string>
+    <string name="insufficient_wealth_transfer">You can\'t afford to send this much wealth.</string>
+    <string name="cant_add_more">You cannot afford to add any more wealth.</string>
+    <string name="cant_give_wealth">You cannot transfer funds while respawn protected or to a respawn protected player.</string>
+    <string name="sort_total_kills">Total Kills</string>
+    <string name="sort_total_deaths">Total Deaths</string>
+    <string name="bounty">Bounty</string>
+    <string name="sort_kdr">Kill/Death Ratio</string>
+    <string name="raising_bounty">Raising Bounty...</string>
+    <string name="giving_wealth">Giving Wealth...</string>
+    <string name="button_add">&#43;%1$s</string>
+    <string name="button_subtract">&#8722;%1$s</string>
+    <string name="button_send">Send:</string>
+    <string name="give_wealth_hint">You cannot send money if you are respawn protected, or to players who are respawn protected.</string>
+    <string name="raise_bounty_hint">You cannot raise bounty if you are respawn protected or raise the bounty of a respawn protected player.</string>
+    <string name="button_raise_bounty">Raise bounty by:</string>
+    <string name="cant_raise_bounty">You cannot raise bounty while respawn protected or to a respawn protected player.</string>
+    <string name="sort_rank">Rank</string>
+    <string name="confirm_give_wealth">Send %1$s?</string>
+    <string name="confirm_raise_bounty">Raise bounty by %1$s?</string>
+    <string name="net_worth_bounty">You must have a net worth of at least %s before you can raise bounty.</string>
+    <string name="net_worth_give_wealth">You must have a net worth of at least %s before you can give another player wealth.</string>
+    <string name="setting_token">Setting up alert service...</string>
+    <string name="stealth_information">This missile has stealth technology that makes it invisible to other players when launched. It can be detected by other players in flight and has a greater chance of evading interceptors and sentry guns.</string>
+    <string name="stealth_description">This missile has stealth technology that makes it invisible to other players when launched. It can be detected by other players in flight and has a greater chance of evading interceptors and sentry guns.</string>
+    <string name="threat_missile_stealth">Incoming %1$s stealth missile.</string>
+    <string name="attacking_noob">%1$s is a new player. If you kill them, a bounty will be placed on your head and you will lose XP. Continue?</string>
+    <string name="default_notification_channel_id">default</string>
+    <string name="cancel_decommission_confirm">Cancel the decommissioning of this structure?</string>
+    <string name="player_terrorist">Terrorist</string>
+    <string name="player_newb">Noob</string>
+    <string name="supporter_chad">Chad</string>
+    <string name="supporter_gigachad">Gigachad</string>
+    <string name="supporter_sigma">Sigma Grindset</string>
+    <string name="low_xp_respawn">You have less than -2500 experience. You will have no respawn protection when you respawn, and will be vulnerable to attack.</string>
+    <string name="nuke_respawn_protected_you">You are currently respawn protected, and will be invulnerable for %1$s. Buying anything nuclear will remove this invulnerability now. Continue?</string>
+    <string name="jihadist_respawn">You are considered a suicide attacker. You will have no respawn protection when you respawn, and will be immediately vulnerable to attack.</string>
+
+    <string name="ore_mine_irradiated">AREA RADIOACTIVE. PRODUCTION STOPPED.</string>
+    <string name="industrial_structures">Industrial Structures</string>
+    <string name="desc_solar_panel">Solar panels produce electricity players can go collect.</string>
+    <string name="solar_panel_too_close">You are too close to a solar panel to build another one.</string>
+    <string name="construct_name_solar_panel">solar panel</string>
+    <string name="construct_name_bunker">bunker</string>
+    <string name="desc_bunker">Bunkers protect players from radiation and missiles.</string>
+    <string name="ore_mine_too_close">You are too close to an ore mine to build another one.</string>
+    <string name="upgrade_bunker_hp_confirm">Upgrade the bunker max hitpoints from %1$s to %2$s for %3$s?</string>
+    <string name="war_start_time">War started: %s</string>
+    <string name="surrender_war">Surrender War</string>
+    <string name="break_affiliation">Break Affiliation</string>
+    <string name="confirm_surrender_war">Surrender to %1$s? You will lose experience and they will get a reward.</string>
+    <string name="confirm_break_affiliation">Break affiliation with %1$s?</string>
+    <string name="bunker_too_close">You are too close to a bunker to build another one.</string>
+    <string name="bunker">Bunker</string>
+    <string name="solar_panel">Solar Panel</string>
+    <string name="bunker_title">bunker</string>
+    <string name="solar_panel_title">solar panel</string>
+    <string name="confirm_auto_silo">Switch ICBM silo to auto-retaliate? In auto mode, the silo will return fire at the owner of any incoming ICBMs whether you are online or offline.</string>
+    <string name="confirm_semi_silo">Switch ICBM silo to semi-auto? In semi-auto mode the silo will retaliate against the owner of incoming ICBMs only if you are offline.</string>
+    <string name="confirm_manual_silo">Switch ICBM silo to manual? In manual mode, the silo will not retaliate.</string>
+    <string name="bunker_description">Bunkers protect nearby players from missiles and radiation.</string>
+</resources>

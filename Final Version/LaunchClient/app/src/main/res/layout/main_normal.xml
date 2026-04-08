@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/lytMain">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lytTop">
+
+            <LinearLayout
+                android:id="@+id/lytMoneyPoints"
+                android:background="@drawable/text_button_normal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/ButtonEdgePadding"
+                android:layout_marginBottom="@dimen/ButtonEdgePadding"
+                android:layout_marginLeft="@dimen/ButtonEdgePadding"
+                android:layout_marginRight="@dimen/CloseButtonBorderWidth"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtMoney"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ButtonEdgePadding"
+                    android:layout_marginLeft="@dimen/ButtonEdgePadding"
+                    android:maxLines="1"
+                    android:text="Money"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lytGPSSig"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ButtonEdgePadding"
+                android:layout_marginBottom="@dimen/ButtonEdgePadding"
+                android:layout_marginLeft="@dimen/CloseButtonBorderWidth"
+                android:layout_marginRight="@dimen/CloseButtonBorderWidth"
+                android:layout_weight="0"
+                android:background="@drawable/text_button_normal"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/ButtonEdgePadding"
+                    android:layout_marginTop="@dimen/ButtonEdgePadding"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imgGPS"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="center"
+                        android:src="@drawable/button_location" />
+
+                    <TextView
+                        android:id="@+id/txtGPS"
+                        android:layout_width="@dimen/MainMenuButtonSize"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        android:text="GPS"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/ButtonEdgePadding"
+                    android:layout_marginBottom="@dimen/ButtonEdgePadding"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imgSignal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="center"
+                        android:src="@drawable/button_signal" />
+
+                    <TextView
+                        android:id="@+id/txtSignal"
+                        android:layout_width="@dimen/MainMenuButtonSize"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        android:text="Sig"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imgSelect"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginRight="@dimen/ButtonEdgePadding"
+                android:focusableInTouchMode="false"
+                android:layout_gravity="center"
+                android:src="@drawable/view_select"
+                android:tintMode="src_over" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtDebug"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:maxLines="1"
+            android:text="DEBUG"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="?attr/BadColour"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/txtSelecting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/selecting_instructions"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="?attr/InfoColour"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="@integer/MiddleViewWeightNormal"
+            android:id="@+id/lytEmpty">
+
+            <LinearLayout
+                android:id="@+id/lytOverlay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtPrivacyZone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/MainViewSideMargin"
+                    android:text="@string/privacy_in_zone"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/txtMain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/MainViewSideMargin"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
+
+                <ImageView
+                    android:id="@+id/imgRadiation"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSpacing"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/radiation_trefoil"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/txtEvent1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="?attr/InfoColour"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/txtEvent2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="?attr/InfoColour"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/txtEvent3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="?attr/InfoColour"
+                    android:visibility="gone"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="@integer/BottomViewWeight"
+            android:id="@+id/lytBottom">
+
+        </FrameLayout>
+
+    </LinearLayout>
+</FrameLayout>

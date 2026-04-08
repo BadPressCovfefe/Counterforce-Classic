@@ -1,0 +1,56 @@
+Puget Sound Naval Shipyard,47.56034,-122.64344,47.862774,-122.42771,false
+Bath Iron Works,43.907455,-69.81514,43.755993,-69.69111,false
+Norfolk Naval Shipyard,36.809834,-76.30072,36.960594,-76.36098,false
+Shkval Shipyard,69.21415,33.31128,69.36493,33.650784,false
+Амурский судостроительный завод,50.541676,137.04866,52.93291,141.34561,false
+Fincantieri S.p.A.,44.091213,9.878075,43.875957,9.939969,false
+Blohm + Voss Shipyard,53.53955,9.961251,54.020515,8.66583,false
+BAE Shipbuilding,54.110107,-3.23703,53.98322,-3.139072,false
+Alexandria Shipyard,31.171999,29.867804,31.252813,29.784363,false
+Mazagon Dock Shipyard,18.967005,72.84748,18.84222,72.81918,false
+COTECMAR Naval Shipyard,10.327258,-75.50452,10.35065,-75.662636,false
+EMGEPRON Naval Shipyard,-22.89577,-43.171886,-23.031654,-43.107914,false
+Osborne Naval Shipyard,-34.787388,138.50558,-34.799763,138.18076,false
+Sumitomo Heavy Industries,35.32494,139.65392,35.02834,139.6651,false
+Boustead Naval Shipyard,4.232307,100.60688,4.317561,100.51039,false
+Fincantieri Bay Shipbuilding,44.840992,-87.381096,44.83419,-87.38662,false
+Severnaya Verf,59.869892,30.234175,59.940487,29.997732,false
+Mykolaiv Shipyard,46.975574,32.00752,46.51683,31.314852,false
+Agila Subic Shipyard,14.816467,120.21287,14.676341,120.18033,false
+Irving Shipbuilding,44.665028,-63.59355,44.45083,-63.38122,false
+BAE Systems Australia,-37.86406,144.90828,-38.881634,144.48346,false
+Euskalduna Shipyard,43.347107,-3.039133,43.522694,-3.079721,false
+Balmain Shipyard,-33.855785,151.18735,-33.84718,151.43254,false
+Pearl Harbor Naval Shipyard,21.352638,-157.95016,21.260456,-157.96571,false
+Bangor Submarine Base,47.742874,-122.73137,47.794262,-122.7147,false
+BAE Systems Australia,-37.86406,144.90828,-38.881634,144.48346,false
+Defoe Shipbuilding Co.,43.61581,-83.86805,43.698708,-83.83327,false
+Canadian Maritime Engineering,46.207775,-60.249523,46.275055,-60.16811,false
+Garden Reach Shipbuilding,22.551613,88.28224,21.865734,88.051865,false
+CME Pictou Shipyard,45.678177,-62.699085,45.7511,-62.469387,false
+Aalborg Portland Shipyard,57.047047,10.060266,56.96058,10.544181,false
+PT Industri Kapal,-5.108573,119.43122,-5.084335,119.35751,false
+Newport Shipyard,33.61255,-117.925934,33.5408,-118.028244,false
+Rotterdam Shipyard,51.955110,4.057946,52.155965,3.464909,false
+Veracruz Shipyard,19.210374,-96.126341,19.250445,-96.078699,false
+Port Everglades,26.09,-80.12,0,0,true
+Port of Ponta Delgada,37.74,-25.67,0,0,true
+Port of Constanta,44.17,28.65,0,0,true
+Port of Darwin,-12.46,130.84,0,0,true
+Port of Auckland,-36.85,174.76,0,0,true
+Port of Durban,-29.86,31.03,0,0,true
+Port of Houston,29.374063,-94.89206,0,0,true
+Port of Balboa,8.92,-79.55,0,0,true
+Port of Valencia,39.47,-0.37,0,0,true
+Port of Sevastopol,44.62,33.53,0,0,true
+Port of Mombasa,-4.04,39.66,0,0,true
+Port of Cleveland,41.5,-81.7,0,0,true
+Port of Los Angeles,33.74,-118.27,0,0,true
+Port of Ho Chi Minh City,10.78,106.7,0,0,true
+Port of Hong Kong,22.28,114.16,0,0,true
+Port of Busan,35.1,129.04,0,0,true
+Port of Kaohsiung,22.62,120.31,0,0,true
+Pearl Harbor,21.351864,-157.95375,0,0,true
+Port of Philadelphia,39.888645,-75.18126,0,0,true
+Port of Olympia,47.05337,-122.90232,0,0,true
+

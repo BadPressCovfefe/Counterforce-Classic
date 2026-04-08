@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fadeScrollbars="false"
+        android:background="?attr/PanelTransparency"
+        android:scrollbarThumbVertical="?attr/ScrollBarColour">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/txtExtractors"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/ButtonInset"
+                android:layout_marginBottom="@dimen/ButtonInset"
+                android:gravity="center"
+                android:text="@string/extractors"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <ImageView
+                android:id="@+id/imgModeControl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/build_oremine"
+                android:visibility="visible" />
+
+            <LinearLayout
+                android:id="@+id/lytContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtChooseResource"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:gravity="center"
+                    android:text="@string/extractors_choose_type"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtExtractorCount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:gravity="center"
+                    android:text="@string/extractor_count"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:gravity="center"
+                    android:text="@string/build_cities_hint"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtOreMineInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:gravity="center"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:text="@string/info_extractor_output"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/btnOreMine"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="@drawable/text_button_normal"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/ButtonInset"
+                        android:layout_marginBottom="@dimen/ButtonInset"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/ore_mine"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txtCoalMineInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:gravity="center"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:text="@string/info_extractor_output"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/btnCoalMine"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="@drawable/text_button_normal"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/ButtonInset"
+                        android:layout_marginBottom="@dimen/ButtonInset"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/coal_mine_title"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txtSaltPeterMineInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:gravity="center"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:text="@string/info_extractor_output"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/btnSaltPeterMine"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="@drawable/text_button_normal"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/ButtonInset"
+                        android:layout_marginBottom="@dimen/ButtonInset"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/fertilizer_mine_title"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txtFarmInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:gravity="center"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:text="@string/info_extractor_output"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/btnFarm"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="@drawable/text_button_normal"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/ButtonInset"
+                        android:layout_marginBottom="@dimen/ButtonInset"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/farm"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txtOilWellInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:gravity="center"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:text="@string/info_extractor_output"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/btnOilWell"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="@drawable/text_button_normal"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/ButtonInset"
+                        android:layout_marginBottom="@dimen/ButtonInset"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/oil_well_title"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txtQuarryInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:gravity="center"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:text="@string/info_extractor_output"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/btnQuarry"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="@drawable/text_button_normal"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/ButtonInset"
+                        android:layout_marginBottom="@dimen/ButtonInset"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/quarry_title"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txtLumberMillInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:gravity="center"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:text="@string/info_extractor_output"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/btnLumberMill"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="@drawable/text_button_normal"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/ButtonInset"
+                        android:layout_marginBottom="@dimen/ButtonInset"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/lumber_mill_title"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txtSolarPanelInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:gravity="center"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:text="@string/info_extractor_output"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/btnSolarPanel"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="@drawable/text_button_normal"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/ButtonInset"
+                        android:layout_marginBottom="@dimen/ButtonInset"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/solar_panel"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txtUraniumMineInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:gravity="center"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:text="@string/info_extractor_output"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/btnUraniumMine"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="@drawable/text_button_normal"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/ButtonInset"
+                        android:layout_marginBottom="@dimen/ButtonInset"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/uranium_mine_title"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txtGoldMineInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:gravity="center"
+                    android:text="@string/info_extractor_output"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
+
+                <LinearLayout
+                    android:id="@+id/btnGoldMine"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:background="@drawable/text_button_normal"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/ButtonInset"
+                        android:layout_marginBottom="@dimen/ButtonInset"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/gold_mine_title"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/MainViewSideMargin"
+                android:layout_marginBottom="@dimen/MainViewSideMargin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/btnCancel"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/ButtonHeight"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="@dimen/MainViewSideMargin"
+                    android:layout_marginRight="@dimen/MainViewSideMargin"
+                    android:layout_weight="1"
+                    android:background="@drawable/text_button_normal"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:text="@string/cancel"
+                    android:visibility="visible" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>

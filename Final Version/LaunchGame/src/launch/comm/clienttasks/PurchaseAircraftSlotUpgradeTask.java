@@ -1,0 +1,34 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package launch.comm.clienttasks;
+
+import launch.comm.LaunchSession;
+import tobcomm.TobComm;
+import launch.game.LaunchClientGameInterface;
+
+
+/**
+ *
+ * @author tobster
+ */
+public class PurchaseAircraftSlotUpgradeTask extends Task
+{
+    private int lAirbaseID;
+    
+    public PurchaseAircraftSlotUpgradeTask(LaunchClientGameInterface gameInterface, int lAirbaseID)
+    {
+        super(gameInterface);
+        this.lAirbaseID = lAirbaseID;
+        
+        gameInterface.ShowTaskMessage(TaskMessage.UPGRADING);
+    }
+    
+    @Override
+    public void Start(TobComm comm)
+    {
+        comm.SendCommand(LaunchSession.AirbaseCapacityUpgrade, lAirbaseID);
+    }
+}

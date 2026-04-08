@@ -1,0 +1,803 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fadeScrollbars="false"
+            android:orientation="vertical"
+            android:scrollbarThumbVertical="?attr/ScrollBarColour"
+            android:background="?attr/PanelTransparency">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/MainViewSideMargin"
+        android:layout_marginRight="@dimen/MainViewSideMargin"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imgAvatar"
+                android:layout_width="@dimen/PlayerInfoIconSize"
+                android:layout_height="@dimen/PlayerInfoIconSize"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/MainViewSpacing" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtName"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/txtNameButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:background="@drawable/detail_button"
+                    android:padding="@dimen/ButtonEdgePadding"
+                    android:text="Name"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lytNameEdit"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/TextViewHeight"
+                android:inputType="textCapSentences"
+                android:id="@+id/txtNameEdit"
+                android:hint="@string/alliance_name"
+                android:maxLength="32"
+                android:layout_weight="1"
+                android:background="@drawable/edittext_background"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:id="@+id/btnApplyName"
+                android:clickable="true"
+                android:background="@drawable/text_button_normal">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/imageView24"
+                    android:src="@drawable/button_ok"
+                    android:padding="@dimen/ButtonImagePadding"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view10"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/SeparatorThickness"
+            android:layout_marginTop="@dimen/SeperatorMargins"
+            android:layout_marginBottom="@dimen/SeperatorMargins"
+            android:layout_weight="1"
+            android:background="?attr/ButtonEdgeColour" />
+
+        <TextView
+            android:id="@+id/txtDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Description" />
+
+        <TextView
+            android:id="@+id/txtDescriptionButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/detail_button"
+            android:gravity="center"
+            android:padding="@dimen/ButtonEdgePadding"
+            android:text="Description" />
+
+        <LinearLayout
+            android:id="@+id/lytDescriptionEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <EditText
+                android:id="@+id/txtDescriptionEdit"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/TextViewHeight"
+                android:layout_weight="1"
+                android:background="@drawable/edittext_background"
+                android:hint="@string/alliance_description"
+                android:inputType="textCapSentences"
+                android:maxLength="140" />
+
+            <LinearLayout
+                android:id="@+id/btnApplyDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:background="@drawable/text_button_normal"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView25"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="@dimen/ButtonImagePadding"
+                    android:src="@drawable/button_ok" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view11"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/SeparatorThickness"
+            android:layout_marginTop="@dimen/SeperatorMargins"
+            android:layout_weight="1"
+            android:background="?attr/ButtonEdgeColour" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/MainViewSpacing"
+            android:background="@drawable/detail_button"
+            android:padding="@dimen/MainViewSpacing"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtStats"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/alliance_stats"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <View
+                    android:id="@+id/view9"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/SeparatorThickness"
+                    android:layout_marginTop="@dimen/SeperatorMargins"
+                    android:layout_marginBottom="@dimen/SeperatorMargins"
+                    android:background="?attr/ButtonEdgeColour" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="131dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtFoundedTimeTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/founded_on"
+                            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                        <TextView
+                            android:id="@+id/txtFounderNameTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/founder_name"
+                            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                        <TextView
+                            android:id="@+id/txtWarsWonTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/wars_won"
+                            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                        <TextView
+                            android:id="@+id/txtWarsLostTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/wars_lost"
+                            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                        <TextView
+                            android:id="@+id/txtAllianceDisbandsTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/alliances_disbanded"
+                            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                        <TextView
+                            android:id="@+id/txtAffiliationsBrokenTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/affiliations_broken"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/txtICBMCountTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/icbm_count"
+                            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                        <TextView
+                            android:id="@+id/txtABMCountTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/abm_count"
+                            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                        <TextView
+                            android:id="@+id/txtWealthTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/wealth"
+                            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                        <TextView
+                            android:id="@+id/txtTaxRateTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/alliance_tax_rate"
+                            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                        <TextView
+                            android:id="@+id/txtMembersTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/members"
+                            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/SeperatorMargins"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtFoundedTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="6/9/1969"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="?attr/GoodColour" />
+
+                        <TextView
+                            android:id="@+id/txtFounderName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="CaptainPoopyhead"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="?attr/GoodColour" />
+
+                        <TextView
+                            android:id="@+id/txtWarsWon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="69"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="?attr/GoodColour" />
+
+                        <TextView
+                            android:id="@+id/txtWarsLost"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="69"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="?attr/GoodColour" />
+
+                        <TextView
+                            android:id="@+id/txtAlliancesDisbanded"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="69"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="?attr/GoodColour" />
+
+                        <TextView
+                            android:id="@+id/txtAffiliationsBroken"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="69"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="?attr/GoodColour" />
+
+                        <TextView
+                            android:id="@+id/txtICBMCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="69"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="?attr/GoodColour" />
+
+                        <TextView
+                            android:id="@+id/txtABMCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="69"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="?attr/GoodColour" />
+
+                        <TextView
+                            android:id="@+id/txtWealth"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="$42069"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="?attr/GoodColour" />
+
+                        <TextView
+                            android:id="@+id/txtTaxRate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="69%"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="?attr/GoodColour" />
+
+                        <TextView
+                            android:id="@+id/txtMembers"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="69"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="?attr/GoodColour" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lytLeaderControls"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/MainViewSpacing"
+            android:layout_weight="1"
+            android:background="@drawable/detail_button"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="@dimen/MainViewSpacing">
+
+            <TextView
+                android:id="@+id/txtLeaderControls"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/alliance_leader_controls"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <View
+                android:id="@+id/view6"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/SeparatorThickness"
+                android:layout_marginTop="@dimen/SeperatorMargins"
+                android:layout_marginBottom="@dimen/SeperatorMargins"
+                android:layout_weight="1"
+                android:background="?attr/ButtonEdgeColour" />
+
+            <TextView
+                android:id="@+id/btnPanic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/detail_button"
+                android:gravity="center"
+                android:padding="@dimen/SeekBarSize"
+                android:text="@string/alliance_panic"
+                android:textColor="?attr/BadColour"
+                android:textFontWeight="500"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <View
+                android:id="@+id/view7"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/SeparatorThickness"
+                android:layout_marginTop="@dimen/SeperatorMargins"
+                android:layout_marginBottom="@dimen/SeperatorMargins"
+                android:layout_weight="1"
+                android:background="?attr/ButtonEdgeColour" />
+
+            <TextView
+                android:id="@+id/txtWithdraw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/alliance_withdraw"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="?attr/InfoColour" />
+
+            <LinearLayout
+                android:id="@+id/btnWithdraw1k"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/MainViewBottomMargin"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:background="@drawable/detail_button"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/txtWithdraw1k"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSpacing"
+                    android:text="@string/button_subtract"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnWithdraw10k"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/MainViewBottomMargin"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:layout_marginBottom="@dimen/MainViewSpacing"
+                android:background="@drawable/detail_button"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/txtWithdraw10k"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSpacing"
+                    android:text="@string/button_subtract"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnWithdraw100k"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/MainViewBottomMargin"
+                android:layout_marginBottom="@dimen/MainViewSpacing"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:background="@drawable/detail_button"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/txtWithdraw100k"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/MainViewSpacing"
+                    android:text="@string/button_subtract"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view8"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/SeparatorThickness"
+                android:layout_marginBottom="@dimen/SeperatorMargins"
+                android:layout_weight="1"
+                android:background="?attr/ButtonEdgeColour" />
+
+            <TextView
+                android:id="@+id/btnChangeTaxRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/detail_button"
+                android:gravity="center"
+                android:padding="@dimen/SeekBarSize"
+                android:text="@string/alliance_adjust_tax"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtJoining"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/MainViewSpacing"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/alliance_joining"
+            android:textColor="?attr/InfoColour"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/txtAtWar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/your_alliance_war"
+            android:textColor="?attr/BadColour"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/txtAffiliated"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/your_alliance_affiliated"
+            android:textColor="?attr/InfoColour"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/txtAffiliationOffered"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/your_alliance_affiliation_proposed"
+            android:textColor="?attr/InfoColour"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/txtPrisoner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/cant_leave_alliance_prisoner"
+            android:textColor="?attr/InfoColour"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/btnJoinAlliance"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/MainViewSpacing"
+            android:background="@drawable/detail_button"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/ButtonEdgePadding"
+                android:src="@drawable/button_alliance_join"/>
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="@string/join_alliance"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnLeaveAlliance"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/MainViewSpacing"
+            android:background="@drawable/detail_button"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/ButtonEdgePadding"
+                android:src="@drawable/button_alliance_leave"/>
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="@string/leave_alliance"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnDeclareWar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/MainViewSpacing"
+            android:background="@drawable/detail_button"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/ButtonEdgePadding"
+                android:src="@drawable/button_declare_war"/>
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="@string/declare_war"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnSurrenderWar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/MainViewSpacing"
+            android:background="@drawable/detail_button"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/ButtonEdgePadding"
+                android:src="@drawable/button_surrender" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="@string/surrender_war"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnOfferAffiliation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/MainViewSpacing"
+            android:background="@drawable/detail_button"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView41"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/ButtonEdgePadding"
+                android:src="@drawable/button_propose_affiliation"/>
+
+            <TextView
+                android:id="@+id/textView31"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="@string/offer_affiliation"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnCancelOffer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/MainViewSpacing"
+            android:background="@drawable/detail_button"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/ButtonEdgePadding"
+                android:src="@drawable/button_break_affiliation"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="@string/cancel_affiliation"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lytAtWarWith"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/MainViewSpacing"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/txtAtWarWith"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/SeperatorMargins"
+                android:text="@string/at_war_with"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="?attr/BadColour"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lytAffiliatedWith"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/MainViewSpacing"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/txtAffiliatedWith"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/SeperatorMargins"
+                android:text="@string/affiliated_with"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="?attr/InfoColour"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lytMembers"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/MainViewSpacing"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/SeperatorMargins"
+                android:text="@string/members"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
+        </LinearLayout>
+
+        <TextView
+            android:background="@drawable/text_button_normal"
+            android:id="@+id/textView8"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/ButtonHeight"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/MainViewSpacing"
+            android:layout_marginTop="@dimen/MainViewSpacing"
+            android:clickable="true"
+            android:gravity="center"
+            android:onClick="ReturnToMainView"
+            android:text="@string/close"/>
+    </LinearLayout>
+</ScrollView>

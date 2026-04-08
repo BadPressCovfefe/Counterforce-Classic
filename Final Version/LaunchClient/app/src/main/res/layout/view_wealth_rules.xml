@@ -1,0 +1,1519 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="?attr/PanelTransparency">
+    <ScrollView
+        android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fadeScrollbars="false"
+                android:scrollbarThumbVertical="?attr/ScrollBarColour">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/wealth_title"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:background="@drawable/detail_button"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:text="@string/wealth"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/detail_button"
+                    android:text="Type"
+                    android:textColor="?attr/GoodColour"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="center"
+                    android:text="Quantity"
+                    android:textColor="?attr/GoodColour"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="center"
+                    android:text="Each"
+                    android:textColor="?attr/GoodColour"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="center"
+                    android:text="Total"
+                    android:textColor="?attr/GoodColour"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/detail_button"
+                    android:text="Basic Income"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="1"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtBasicIncomeEach"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="$0"
+                    android:textColor="?attr/GoodColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtBasicIncome"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="$0"
+                    android:textColor="?attr/GoodColour"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/detail_button"
+                    android:text="Rank"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtRankPayQuantity"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="5"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtRankPayEach"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="$300"
+                    android:textColor="?attr/GoodColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtRankPay"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="$1500"
+                    android:textColor="?attr/GoodColour"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/detail_button"
+                    android:text="Hourly Alliance Tax"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtAllianceTaxQuantity"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="n/a"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtAllianceTaxEach"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="15%"
+                    android:textColor="?attr/BadColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtAllianceTax"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="$1725"
+                    android:textColor="?attr/BadColour"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/detail_button"
+                    android:text="Structures"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtStructureQuantity"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="0"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtStructureCostEach"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="$8-$80"
+                    android:textColor="?attr/BadColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtStructureCost"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="$0"
+                    android:textColor="?attr/BadColour"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/detail_button"
+                    android:text="Aircraft"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtAircraftQuantity"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="0"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtAircraftCostEach"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="n/a"
+                    android:textColor="?attr/BadColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtAircraftCost"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="$0"
+                    android:textColor="?attr/BadColour"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/detail_button"
+                    android:text="Ships"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtShipQuantity"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="0"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtShipCostEach"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="n/a"
+                    android:textColor="?attr/BadColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtShipCost"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="$0"
+                    android:textColor="?attr/BadColour"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/detail_button"
+                    android:text="Submarines"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtSubmarineQuantity"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="0"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtSubmarineCostEach"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="n/a"
+                    android:textColor="?attr/BadColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtSubmarineCost"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="$0"
+                    android:textColor="?attr/BadColour"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/detail_button"
+                    android:text="ICBMs"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtICBMQuantity"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="0"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtICBMCostEach"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="$50"
+                    android:textColor="?attr/BadColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtICBMCost"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="$0"
+                    android:textColor="?attr/BadColour"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/detail_button"
+                    android:text="ABMs"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtABMQuantity"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="0"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtABMCostEach"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="$50"
+                    android:textColor="?attr/BadColour" />
+
+                <TextView
+                    android:id="@+id/txtABMCost"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="$0"
+                    android:textColor="?attr/BadColour"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/detail_button"
+                    android:text="Missiles"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtMissileQuantity"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="0"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtMissileCostEach"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="$0"
+                    android:textColor="?attr/BadColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtMissileCost"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="$0"
+                    android:textColor="?attr/BadColour"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:orientation="horizontal"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/detail_button"
+                    android:text="Interceptors"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtInterceptorQuantity"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="0"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtInterceptorCostEach"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="$0"
+                    android:textColor="?attr/BadColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtInterceptorCost"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="$0"
+                    android:textColor="?attr/BadColour"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/detail_button"
+                    android:text="Torpedoes"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtTorpedoQuantity"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="0"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtTorpedoCostEach"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="$0"
+                    android:textColor="?attr/BadColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtTorpedoCost"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="$0"
+                    android:textColor="?attr/BadColour"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/detail_button"
+                    android:text="Cargo Trucks"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtCargoTruckQuantity"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="1"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtCargoTruckCostEach"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="$0"
+                    android:textColor="?attr/BadColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtCargoTruckCost"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="$0"
+                    android:textColor="?attr/BadColour"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/detail_button"
+                    android:text="Tanks"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtTankQuantity"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="0"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtTankCostEach"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="500"
+                    android:textColor="?attr/BadColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtTankCost"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="$0"
+                    android:textColor="?attr/BadColour"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/detail_button"
+                    android:text="Infantry"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtInfantryQuantity"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="0"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtInfantryCostEach"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="500"
+                    android:textColor="?attr/BadColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtInfantryCost"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="$0"
+                    android:textColor="?attr/BadColour"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/detail_button"
+                    android:text="Gross Hourly"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtGrossHourly"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="$0"
+                    android:textColor="?attr/GoodColour"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/detail_button"
+                    android:text="Total Hourly Expenses"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtHourlyExpenses"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="$10000"
+                    android:textColor="?attr/BadColour"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/detail_button"
+                    android:text="Net Hourly"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtNetHourly"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="$0"
+                    android:textColor="?attr/GoodColour"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/detail_button"
+                    android:text="Daily City Tax Revenue"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtCityTax"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="$10000"
+                    android:textColor="?attr/GoodColour"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/detail_button"
+                    android:text="Net Daily"
+                    android:textColor="?attr/WarningColour"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/txtNetDaily"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/detail_button"
+                    android:gravity="right"
+                    android:text="$0"
+                    android:textColor="?attr/GoodColour"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtCollectedYesterday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:text="@string/income_collected_yesterday"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/negative_equity"
+                android:id="@+id/txtNegativeEquity"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:textColor="?attr/BadColour"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/txtBonuses"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:text="@string/income_and_bonuses"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/txtGettingStats"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:text="@string/getting_stats"
+                android:textColor="?attr/WarningColour"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/lytBonusBasicIncome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:background="@drawable/detail_button"
+                android:visibility="gone">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/bonus_basic_income"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_marginLeft="@dimen/MainViewSpacing"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="£###"
+                    android:id="@+id/txtBasicIncomeVal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_marginRight="@dimen/MainViewSpacing"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lytBonusDiplomaticPresence"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:background="@drawable/detail_button"
+                android:visibility="gone">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/bonus_diplomatic_presence"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_marginLeft="@dimen/MainViewSpacing"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="£###"
+                    android:id="@+id/txtDiplomaticPresenceVal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_marginRight="@dimen/MainViewSpacing"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lytBonusPoliticalEngagement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:background="@drawable/detail_button"
+                android:visibility="gone">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/bonus_political_engagement"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_marginLeft="@dimen/MainViewSpacing"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="£###"
+                    android:id="@+id/txtPoliticalEngagementVal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_marginRight="@dimen/MainViewSpacing"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lytBonusDefenderOfTheNation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:background="@drawable/detail_button"
+                android:visibility="gone">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/bonus_defender_of_the_nation"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_marginLeft="@dimen/MainViewSpacing"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="£###"
+                    android:id="@+id/txtDefenderOfTheNationVal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_marginRight="@dimen/MainViewSpacing"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lytBonusNuclearSuperpower"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:background="@drawable/detail_button"
+                android:visibility="gone">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/bonus_nuclear_superpower"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_marginLeft="@dimen/MainViewSpacing"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="£###"
+                    android:id="@+id/txtNuclearSuperpowerVal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_marginRight="@dimen/MainViewSpacing"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lytBonusSurvivor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:background="@drawable/detail_button"
+                android:visibility="gone">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/bonus_survivor"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_marginLeft="@dimen/MainViewSpacing"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="£###"
+                    android:id="@+id/txtSurvivorVal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_marginRight="@dimen/MainViewSpacing"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lytBonusHippy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:background="@drawable/detail_button"
+                android:visibility="gone">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/bonus_hippy"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_marginLeft="@dimen/MainViewSpacing"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="£###"
+                    android:id="@+id/txtHippyVal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_marginRight="@dimen/MainViewSpacing"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lytBonusPeaceMaker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:background="@drawable/detail_button"
+                android:visibility="gone">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/bonus_peace_maker"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_marginLeft="@dimen/MainViewSpacing"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="£###"
+                    android:id="@+id/txtPeaceMakerVal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_marginRight="@dimen/MainViewSpacing"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lytBonusWarMonger"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:background="@drawable/detail_button"
+                android:visibility="gone">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/bonus_war_monger"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_marginLeft="@dimen/MainViewSpacing"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="£###"
+                    android:id="@+id/txtWarMongerVal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_marginRight="@dimen/MainViewSpacing"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lytBonusLoneWolf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:background="@drawable/detail_button"
+                android:visibility="gone">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/bonus_lone_wolf"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_marginLeft="@dimen/MainViewSpacing"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="£###"
+                    android:id="@+id/txtLoneWolfVal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_marginRight="@dimen/MainViewSpacing"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/maintenance_costs"
+                android:id="@+id/txtHourlyCosts"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/none"
+                android:id="@+id/txtMaintenanceNone"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:textColor="?attr/BadColour"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/lytCostsVisButtons"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imgShowOnline"
+                    android:layout_weight="1"
+                    android:src="@drawable/button_online"
+                    android:focusableInTouchMode="false"
+                    android:tintMode="src_over"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imgShowOffline"
+                    android:layout_weight="1"
+                    android:src="@drawable/button_offline"
+                    android:focusableInTouchMode="false"
+                    android:tintMode="src_over"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imgShowMissileSites"
+                    android:layout_weight="1"
+                    android:src="@drawable/view_missile_sites"
+                    android:focusableInTouchMode="false"
+                    android:tintMode="src_over"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imgShowSAMSites"
+                    android:layout_weight="1"
+                    android:src="@drawable/view_sam_sites"
+                    android:focusableInTouchMode="false"
+                    android:tintMode="src_over"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imgShowSentryGuns"
+                    android:layout_weight="1"
+                    android:src="@drawable/view_sentry_guns"
+                    android:focusableInTouchMode="false"
+                    android:tintMode="src_over"/>
+
+                <ImageView
+                    android:id="@+id/imgShowRadarStations"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:focusableInTouchMode="false"
+                    android:src="@drawable/view_radar_stations"
+                    android:tintMode="src_over"
+                    android:visibility="visible" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin">
+
+                <ImageView
+                    android:id="@+id/imgShowOreMines"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:focusableInTouchMode="false"
+                    android:src="@drawable/view_ore_mines"
+                    android:tintMode="src_over" />
+
+                <ImageView
+                    android:id="@+id/imgShowCommandPosts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:focusableInTouchMode="false"
+                    android:src="@drawable/icon_command_post"
+                    android:tintMode="src_over" />
+
+                <ImageView
+                    android:id="@+id/imgShowAirbases"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:focusableInTouchMode="false"
+                    android:src="@drawable/icon_airbase"
+                    android:tintMode="src_over" />
+
+                <ImageView
+                    android:id="@+id/imgShowWarehouses"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:focusableInTouchMode="false"
+                    android:src="@drawable/icon_logisticsdepot"
+                    android:tintMode="src_over" />
+
+                <ImageView
+                    android:id="@+id/imgShowArmory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:focusableInTouchMode="false"
+                    android:src="@drawable/icon_armory"
+                    android:tintMode="src_over" />
+
+                <ImageView
+                    android:id="@+id/imgShowArtilleryGuns"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:focusableInTouchMode="false"
+                    android:src="@drawable/icon_artillery_gun"
+                    android:tintMode="src_over" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin">
+
+                <ImageView
+                    android:id="@+id/imgShowWatchTowers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:focusableInTouchMode="false"
+                    android:src="@drawable/icon_watch_tower"
+                    android:tintMode="src_over" />
+
+                <ImageView
+                    android:id="@+id/imgShowDistributors"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:focusableInTouchMode="false"
+                    android:src="@drawable/icon_distributor"
+                    android:tintMode="src_over" />
+
+                <ImageView
+                    android:id="@+id/imgShowProcessors"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:focusableInTouchMode="false"
+                    android:src="@drawable/icon_processor"
+                    android:tintMode="src_over" />
+
+                <ImageView
+                    android:id="@+id/imgShowScrapYards"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:focusableInTouchMode="false"
+                    android:src="@drawable/icon_scrap_yard"
+                    android:tintMode="src_over" />
+
+                <ImageView
+                    android:id="@+id/imgShowAircrafts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:focusableInTouchMode="false"
+                    android:src="@drawable/marker_fighter_default"
+                    android:tintMode="src_over" />
+
+                <ImageView
+                    android:id="@+id/imgShowTanks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:focusableInTouchMode="false"
+                    android:src="@drawable/marker_tank_east"
+                    android:tintMode="src_over" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/lytCostsVisButtonsRow6"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin">
+
+                <ImageView
+                    android:id="@+id/imgShowInfantries"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:focusableInTouchMode="false"
+                    android:src="@drawable/marker_infantry"
+                    android:tintMode="src_over" />
+
+                <ImageView
+                    android:id="@+id/imgShowCargoTrucks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:focusableInTouchMode="false"
+                    android:src="@drawable/marker_truck"
+                    android:tintMode="src_over" />
+
+                <ImageView
+                    android:id="@+id/imgShowShips"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:focusableInTouchMode="false"
+                    android:src="@drawable/marker_ship_destroyer"
+                    android:tintMode="src_over" />
+
+                <ImageView
+                    android:id="@+id/imgShowSubmarines"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:focusableInTouchMode="false"
+                    android:src="@drawable/marker_submarine_medium"
+                    android:tintMode="src_over" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/lytHourlyCosts"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"></LinearLayout>
+
+            <TextView
+                android:background="@drawable/detail_button"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/ButtonHeight"
+                android:text="@string/close"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:clickable="true"
+                android:onClick="ReturnToMainView"
+                android:layout_marginBottom="@dimen/MainViewSpacing"/>
+
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

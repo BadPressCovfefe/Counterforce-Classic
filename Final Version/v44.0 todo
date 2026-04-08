@@ -1,0 +1,50 @@
+Update 44.0 goals: 
+
+Server:
+
+-Add full assortment of stealth missiles to T3
+
+L1 ore mine: 
+-Iron mine
+-competition radius 5000 km
+-competition multiplier 90%
+-12000/hr income
+
+L2 ore mine:
+-Copper mine
+-competition radius 10000 km
+-competition multiplier 80%
+-24000/hr income
+
+L3 ore mine:
+-Silver mine
+-competition radius 15000 km
+-competition multiplier 70%
+-36000/hr income
+
+L4 ore mine:
+-Gold mine
+-competition radius 20038 km
+-competition multiplier 60%
+-48000/hr income
+
+Changelog so far: 
+
+-Ore mines now provide direct income
+-Ore mines are now upgradeable
+-Ore mine competition radius now increases with upgrades
+-Ore mines show lines to competing ore mines. Green if the competitor is friendly, red if it isn't a friendly
+-Wealth screen now displays income from oremines
+-Some hourly bonuses have been reduced
+-Some hourly bonuses have been increased
+-The server will no longer announce either wealth transfers or bounty increases
+-Players who receive wealth from another player now get a report telling them they received a wealth transfers
+-Stealth missile detection radius is now displayed on the map as a circle around the target. (Note this isn't always accurate however, as the stealth missile will be detected by a player or their radar stations, not all their structures. So if, for example, you are shooting over a player to hit a structure 100 km behind them, you're missile will be detected 100 km sooner than the circle indicates.)
+-ABM silos and ICBM silos now show up separately from SAM sites and Missile sites when using the map selection rectangle
+-Added "cancel decommission" button
+-Each structure now has a different bounty value and player deaths pay out 10,000 or the bounty, whichever is lower. 
+-Counterforce default map theme has been improved so it isn't unusable crap. 
+-You can now EMP youself and your allies. (The price of the high altitude EMP has been increased.)
+-Rubble value has been changed from min 25% max 75% to min 5% max 50%. 
+-Decommission value has been lowered from 80% to 70%.
+

@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "neural-cable-422818-h8",
+  "private_key_id": "11c1ff129052ffe9992cdba076e575cef2d66ca0",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDDs9Gn6UQvLOm0\n5LFBIaAO8g3hj7LsRfMez9eNqexHor/OyHQQa4vuLOcO5+9OE1NJ2is7ee1nTzzG\nSBRhsbz9DtM9FFUQAJWO7zPnPvpVhY1uwJBR5hWv6YP+awryRwJbIzmixdcaZQNk\nn2+ajtOnAon01A06GyW4nIc448iUlQk+8dHvjcfYHSG0NBzQAuhh+9e/CD82Ro3j\n1dx06pmUVdD2mtAsUsZXyVEM5Ppg+kZPbEdYcN1jBY3eZtyOzGmiuj4NHHFqs2yz\nP03XTP+Pw2058Lg91r713QE1rOihRDTlTkMXf8GHM/kDXoWJQNye0Feqjjp80MYa\n2GWhfsB/AgMBAAECggEAAtv2NLNSRTQtR/DNbCuvGHjN3h1I2m3dMvaLaizw4E0O\n61j/ZRwFI9oxGAUoeGYM4ffXiNtrrgY415bHAXRk0/eq+2n4Ii84ACobgoXnh2dX\nnSYgFao8Z+EMBiQPOWHzNVyq42drkJ2oMoiny0TJ79c4J8UPWml6IBvdV+XwEMek\nGYFzq86ZYJYEG1cJihNJzZfHUFt4nVivtm7lDenTzAQiLw4FPrv8JMOAUQ6EMmvN\n8f6kj3Vms97h1V6v4/sQsoxZgHjZoQouasgYvh2Ny47EzEhMrsiEzM9SF/+tlU/z\n+xDMQoQbdHcG+RAURuDdt7CGmq8bZU94ylStRxtanQKBgQDsnJ4udVCWD//oFOb8\n27lycyJ33AEawsWJ3TyU0m/2hu8RXfaGaXumeyjnpdqMILfpanve8yKgqMod2Ggi\nTmVMRDd9OI15K7CVY7+EwEuFHzuASTJDuawni4e4fUhTcCwTVm+dKBP9PYWEimFG\ngG4GhYL3JnjtlasHS/00Zj9LlQKBgQDTvQybQPN8mARxRbI4Y0nk655yKjQzVq6V\n1xz1mwZHHxDfGEC/u9PQp+rZ0Ci1YuHhbSMO74rir+qBd+LaKBWnsvwfZAnLwnh+\nBW+agxMl7E2Lm0uhz+jufOHxV0R6MNEzmZ+Y4lsQd4n5/w7NJjH968kWZnut2BOr\n4Mc+qEv2wwKBgDn3xOks5KlfEhsRw+V/D1fyzScAR2T/AtZb1VPAmp2TQU7H7nXP\nsfN/iO33vCtIeMY+yEo+1uT1dU8KjbiZ7EdbDx0mlcJx6bkvzuP/GIFsvW8Yf7AH\n9R1bGc0hJG8MtD+olX+zKfKI+AUYwew72rjOTN+wFUBfwp7vBwGnayphAoGANjGe\n9mXLbEpkaLGUCgavtR3xcfsHXVSEXumuCdbh5nY3FULZ37ktX6x62cEDilmCwvXy\nETKSc67e8MBEmd3EnSWcjlRGhZaCzI6LoBqIXh57Qo4+722Niuz/z4ushTHVecWK\nKdFVyYMvF4OGwE9UYE9nKoqUgUxazJU9qfXda40CgYAwWiYKsV1cztqk257AeWEb\nJHZqQsiZGEw2c/k3fFK2VLlqSHja4W5XDjmLHLR1uWx/4+XR+iO5kgEFXhhutX1w\ng8xhLNE8HRRLhwBRKIbMSTjOe+sCKR/3flirlN7FVPmZGAvnh31IE+MeaI5/6zzr\nN5MjPTkSYpjFKCa5FuGX6A==\n-----END PRIVATE KEY-----\n",
+  "client_email": "play-billing-verifier@neural-cable-422818-h8.iam.gserviceaccount.com",
+  "client_id": "110372418506993227366",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/play-billing-verifier%40neural-cable-422818-h8.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

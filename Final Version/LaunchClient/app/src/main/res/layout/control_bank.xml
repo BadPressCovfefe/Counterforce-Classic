@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/btnUpgradeBankCapacity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/MainViewSpacing"
+        android:layout_marginLeft="@dimen/MainViewSideMargin"
+        android:layout_marginRight="@dimen/MainViewSideMargin"
+        android:layout_marginBottom="@dimen/MainViewSpacing"
+        android:background="@drawable/text_button_normal"
+        android:clickable="true"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/imageView52"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/ButtonImagePadding"/>
+
+        <TextView
+            android:id="@+id/txtBankCapacityUpgrade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/ButtonInset"
+            android:layout_weight="0"
+            android:text="@string/upgrade"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <LinearLayout
+            android:id="@+id/lytMoreish1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:orientation="vertical"></LinearLayout>
+
+        <TextView
+            android:id="@+id/txtBankCapacityUpgradeCost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/ButtonInset"
+            android:layout_weight="0"
+            android:text="£yay"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtMoneyStats"
+        android:layout_marginLeft="@dimen/MainViewSideMargin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="?attr/InfoColour"
+        android:text="@string/bank_money_stats"  />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/SeparatorThickness"
+        android:background="?attr/ButtonEdgeColour"
+        android:layout_marginLeft="@dimen/MainViewSideMargin"
+        android:layout_marginRight="@dimen/MainViewSideMargin"
+        android:layout_marginTop="@dimen/SeperatorMargins"
+        android:layout_marginBottom="@dimen/SeperatorMargins"/>
+
+    <LinearLayout
+        android:id="@+id/lytBankAction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/MainViewSpacing"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/lytWithdrawMoney"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtWithdraw"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="?attr/InfoColour"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="@string/withdraw" />
+
+                    <LinearLayout
+                        android:id="@+id/btnWithdraw1k"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/ButtonHeight"
+                        android:layout_marginLeft="@dimen/MainViewSideMargin"
+                        android:layout_marginTop="@dimen/MainViewSpacing"
+                        android:layout_marginRight="@dimen/MainViewSideMargin"
+                        android:background="@drawable/detail_button"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:id="@+id/txtWithdraw1k"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/MainViewSpacing"
+                            android:text="@string/button_subtract"
+                            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btnWithdraw10k"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/ButtonHeight"
+                        android:layout_marginLeft="@dimen/MainViewSideMargin"
+                        android:layout_marginTop="@dimen/MainViewSpacing"
+                        android:layout_marginRight="@dimen/MainViewSideMargin"
+                        android:background="@drawable/detail_button"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:id="@+id/txtWithdraw10k"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/MainViewSpacing"
+                            android:text="@string/button_subtract"
+                            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btnWithdraw100k"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/ButtonHeight"
+                        android:layout_marginLeft="@dimen/MainViewSideMargin"
+                        android:layout_marginTop="@dimen/MainViewSpacing"
+                        android:layout_marginRight="@dimen/MainViewSideMargin"
+                        android:background="@drawable/detail_button"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:id="@+id/txtWithdraw100k"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/MainViewSpacing"
+                            android:text="@string/button_subtract"
+                            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lytDepositMoney"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtDeposit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="?attr/InfoColour"
+                        android:gravity="center"
+                        android:text="@string/deposit"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <LinearLayout
+                        android:id="@+id/btnDeposit1k"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/ButtonHeight"
+                        android:layout_marginLeft="@dimen/MainViewSideMargin"
+                        android:layout_marginTop="@dimen/MainViewSpacing"
+                        android:layout_marginRight="@dimen/MainViewSideMargin"
+                        android:layout_weight="1"
+                        android:background="@drawable/detail_button"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:id="@+id/txtDeposit1k"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/MainViewSpacing"
+                            android:text="@string/button_add"
+                            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btnDeposit10k"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/ButtonHeight"
+                        android:layout_marginLeft="@dimen/MainViewSideMargin"
+                        android:layout_marginTop="@dimen/MainViewSpacing"
+                        android:layout_marginRight="@dimen/MainViewSideMargin"
+                        android:background="@drawable/detail_button"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:id="@+id/txtDeposit10k"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/MainViewSpacing"
+                            android:text="@string/button_add"
+                            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btnDeposit100k"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/ButtonHeight"
+                        android:layout_marginLeft="@dimen/MainViewSideMargin"
+                        android:layout_marginTop="@dimen/MainViewSpacing"
+                        android:layout_marginRight="@dimen/MainViewSideMargin"
+                        android:background="@drawable/detail_button"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:id="@+id/txtDeposit100k"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/MainViewSpacing"
+                            android:text="@string/button_add"
+                            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

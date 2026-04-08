@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:background="?attr/ButtonTransparency"
+              android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/btnUpgradeAircraftSlots"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/MainViewSideMargin"
+        android:layout_marginRight="@dimen/MainViewSideMargin"
+        android:background="@drawable/text_button_normal"
+        android:clickable="true"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/ButtonImagePadding"
+            android:src="@drawable/upgrade_aircraft_slots" />
+
+        <TextView
+            android:id="@+id/txtAircraftSlotUpgrade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/ButtonInset"
+            android:layout_weight="0"
+            android:text="@string/upgrade"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <LinearLayout
+            android:id="@+id/lytMore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:orientation="vertical"></LinearLayout>
+
+        <ImageView
+            android:id="@+id/imgMachineryCost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/ButtonEdgePadding"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/resource_icon_machinery" />
+
+        <TextView
+            android:id="@+id/txtAircraftSlotUpgradeCost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="@dimen/ButtonInset"
+            android:layout_marginBottom="@dimen/ButtonInset"
+            android:layout_marginRight="@dimen/ButtonInset"
+            android:layout_weight="0"
+            android:text="£yay"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/MainViewSideMargin"
+        android:layout_marginTop="@dimen/MainViewSpacing"
+        android:layout_marginRight="@dimen/MainViewSideMargin"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/MainViewSpacing"
+            android:id="@+id/btnOpen"
+            android:clickable="true">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imgOpen"
+                android:src="@drawable/marker_airbase_open"
+                android:background="@drawable/text_button_normal"
+                android:padding="@dimen/ButtonImagePadding"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtAirbaseSlots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/airbase_slots"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="?attr/GoodColour" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lytAirbaseOptions"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/MainViewSpacing"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtDescFighter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/MainViewSideMargin"
+            android:layout_marginTop="@dimen/MainViewSpacing"
+            android:layout_marginRight="@dimen/MainViewSideMargin"
+            android:background="?attr/TextViewBackgroundColour"
+            android:text="@string/desc_fighter"
+            android:textColor="?attr/InfoColour"
+            android:textStyle="bold" />
+
+        <com.apps.fast.launch.views.PurchaseButton
+            android:id="@+id/btnBuildFighter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/txtDescBomber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/MainViewSideMargin"
+            android:layout_marginTop="@dimen/MainViewSpacing"
+            android:layout_marginRight="@dimen/MainViewSideMargin"
+            android:background="?attr/TextViewBackgroundColour"
+            android:text="@string/desc_bomber"
+            android:textColor="?attr/InfoColour"
+            android:textStyle="bold" />
+
+        <com.apps.fast.launch.views.PurchaseButton
+            android:id="@+id/btnBuildBomber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/txtDescStealthFighter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/MainViewSideMargin"
+            android:layout_marginTop="@dimen/MainViewSpacing"
+            android:layout_marginRight="@dimen/MainViewSideMargin"
+            android:background="?attr/TextViewBackgroundColour"
+            android:text="@string/desc_stealth_fighter"
+            android:textColor="?attr/InfoColour"
+            android:textStyle="bold" />
+
+        <com.apps.fast.launch.views.PurchaseButton
+            android:id="@+id/btnBuildStealthFighter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/txtDescStealthBomber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/MainViewSideMargin"
+            android:layout_marginTop="@dimen/MainViewSpacing"
+            android:layout_marginRight="@dimen/MainViewSideMargin"
+            android:background="?attr/TextViewBackgroundColour"
+            android:text="@string/desc_stealth_bomber"
+            android:textColor="?attr/InfoColour"
+            android:textStyle="bold" />
+
+        <com.apps.fast.launch.views.PurchaseButton
+            android:id="@+id/btnBuildStealthBomber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/txtDescAWACs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/MainViewSideMargin"
+            android:layout_marginTop="@dimen/MainViewSpacing"
+            android:layout_marginRight="@dimen/MainViewSideMargin"
+            android:background="?attr/TextViewBackgroundColour"
+            android:text="@string/desc_awacs"
+            android:textColor="?attr/InfoColour"
+            android:textStyle="bold" />
+
+        <com.apps.fast.launch.views.PurchaseButton
+            android:id="@+id/btnBuildAWACs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/txtDescRefueler"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/MainViewSideMargin"
+            android:layout_marginTop="@dimen/MainViewSpacing"
+            android:layout_marginRight="@dimen/MainViewSideMargin"
+            android:background="?attr/TextViewBackgroundColour"
+            android:text="@string/desc_refueler"
+            android:textColor="?attr/InfoColour"
+            android:textStyle="bold" />
+
+        <com.apps.fast.launch.views.PurchaseButton
+            android:id="@+id/btnBuildRefueler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/txtDescCargoPlane"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/MainViewSideMargin"
+            android:layout_marginTop="@dimen/MainViewSpacing"
+            android:layout_marginRight="@dimen/MainViewSideMargin"
+            android:background="?attr/TextViewBackgroundColour"
+            android:text="@string/desc_cargo_plane"
+            android:textColor="?attr/InfoColour"
+            android:textStyle="bold" />
+
+        <com.apps.fast.launch.views.PurchaseButton
+            android:id="@+id/btnBuildCargoPlane"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/txtDescAttackAircraft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/MainViewSideMargin"
+            android:layout_marginTop="@dimen/MainViewSpacing"
+            android:layout_marginRight="@dimen/MainViewSideMargin"
+            android:background="?attr/TextViewBackgroundColour"
+            android:text="@string/desc_attack_aircraft"
+            android:textColor="?attr/InfoColour"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <com.apps.fast.launch.views.PurchaseButton
+            android:id="@+id/btnBuildAttackAircraft"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/txtDescSSB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/MainViewSideMargin"
+            android:layout_marginTop="@dimen/MainViewSpacing"
+            android:layout_marginRight="@dimen/MainViewSideMargin"
+            android:background="?attr/TextViewBackgroundColour"
+            android:text="@string/desc_ssb"
+            android:textColor="?attr/InfoColour"
+            android:textStyle="bold" />
+
+        <com.apps.fast.launch.views.PurchaseButton
+            android:id="@+id/btnBuildSSB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lytShipOptions"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/MainViewSpacing"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtDescMultiRole"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/MainViewSideMargin"
+            android:layout_marginTop="@dimen/MainViewSpacing"
+            android:layout_marginRight="@dimen/MainViewSideMargin"
+            android:background="?attr/TextViewBackgroundColour"
+            android:text="@string/desc_multi_role"
+            android:textColor="?attr/InfoColour"
+            android:textStyle="bold" />
+
+        <com.apps.fast.launch.views.PurchaseButton
+            android:id="@+id/btnBuildMultiRole"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/SeparatorThickness"
+        android:layout_marginTop="@dimen/SeperatorMargins"
+        android:layout_marginBottom="@dimen/SeperatorMargins"
+        android:background="?attr/ButtonEdgeColour" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:id="@+id/lytAircraftSlots"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/MainViewSideMargin"
+            android:layout_marginTop="@dimen/MainViewSpacing"
+            android:layout_marginRight="@dimen/MainViewSideMargin"
+            android:layout_marginBottom="@dimen/MainViewSpacing"
+            android:orientation="vertical">
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
