@@ -1,0 +1,68 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+
+android {
+    signingConfigs {
+        debug {
+            storeFile file(var4)
+            storePassword '7878787456'
+            keyAlias 'key1'
+            keyPassword '7878787456'
+        }
+    }
+    compileSdkVersion 35
+
+    defaultConfig {
+        applicationId "com.apps.fast.counterforceclassic"
+        minSdk 26//Release
+        //applicationId "com.apps.fast.counterforcetest"    //Debug
+        targetSdkVersion 35
+        versionCode 382
+        versionName "88.4"
+        signingConfig signingConfigs.debug
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            zipAlignEnabled true
+        }
+    }
+    namespace 'com.apps.fast.launch'
+
+    //Includes the source .java files in the project.
+    /*sourceSets
+    {
+        main.java.srcDirs += '../../TobComm/src'
+        main.java.srcDirs += '../../LaunchGame/src'
+    }*/
+}
+
+dependencies {
+    implementation platform("com.google.firebase:firebase-bom:34.9.0")
+    implementation "androidx.activity:activity:1.7.2"
+    implementation "androidx.activity:activity-ktx:1.7.2"
+    implementation 'androidx.annotation:annotation:1.8.0'
+    implementation 'androidx.work:work-runtime:2.9.0'
+
+    implementation 'com.google.firebase:firebase-messaging:24.0.1'
+    implementation 'com.google.firebase:firebase-installations:18.0.0'
+
+    implementation 'com.google.android.gms:play-services-base:18.5.0'
+    implementation 'com.google.android.gms:play-services-maps:19.0.0'
+    implementation 'com.google.android.gms:play-services-location:21.3.0'
+    implementation 'com.google.android.gms:play-services-auth:21.0.0'
+
+    implementation 'com.google.android.gms:play-services-maps:18.2.0'
+    implementation 'com.google.maps.android:android-maps-utils:0.5+'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
+
+    // Optional (to be replaced with Play Integrity later)
+    implementation 'com.google.android.gms:play-services-safetynet:18.0.1'
+    implementation files('C:\\Users\\Corbin\\Documents\\GitHub\\Counterforce-Classic\\LaunchGame\\dist\\LaunchGame.jar')
+    implementation files('C:\\Users\\Corbin\\Documents\\GitHub\\Counterforce-Classic\\TobComm\\dist\\TobComm.jar')
+
+    // Your custom libraries
+}
+

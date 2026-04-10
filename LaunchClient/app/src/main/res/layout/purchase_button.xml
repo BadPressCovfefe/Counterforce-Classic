@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:id="@+id/purchaseButtonRoot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/MainViewSideMargin"
+        android:layout_marginTop="@dimen/MainViewSpacing"
+        android:layout_marginRight="@dimen/MainViewSideMargin"
+        android:background="@drawable/text_button_normal"
+        android:orientation="horizontal">
+
+        <!-- Unit icon -->
+        <ImageView
+            android:id="@+id/unitIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/ButtonInset"
+            android:layout_marginStart="@dimen/ButtonInset"
+            android:layout_marginEnd="@dimen/ButtonInset"
+            android:layout_marginBottom="@dimen/ButtonInset"
+            android:src="@drawable/build_missile_tank" />
+
+        <!-- Spacer pushes the button to the right -->
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/txtCost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/ButtonEdgePadding"
+            android:layout_gravity="center"
+            android:text="$100000"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    </LinearLayout>
+</merge>
+

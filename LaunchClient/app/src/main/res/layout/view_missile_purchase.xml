@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginBottom="@dimen/SelectListSpacing"
+              android:id="@+id/lytMain">
+
+    <LinearLayout
+        android:id="@+id/lytType"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/ButtonHeight"
+        android:gravity="center"
+        android:background="@drawable/text_button_normal"
+        android:padding="@dimen/ButtonEdgePadding"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/ButtonEdgePadding"
+            android:layout_weight="1"
+            android:text="TLAM"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imgNuclear"
+                android:layout_width="@dimen/SmallButtonSize"
+                android:layout_height="@dimen/SmallButtonSize"
+                android:layout_gravity="center"
+                android:padding="@dimen/CloseButtonBorderWidth"
+                android:clickable="true"
+                android:src="@drawable/radiation_trefoil" />
+
+            <ImageView
+                android:id="@+id/imgFast"
+                android:layout_width="@dimen/SmallButtonSize"
+                android:layout_height="@dimen/SmallButtonSize"
+                android:layout_gravity="center"
+                android:padding="@dimen/CloseButtonBorderWidth"
+                android:clickable="true"
+                android:src="@drawable/fast_missile" />
+
+            <ImageView
+                android:id="@+id/imgSonobuoy"
+                android:layout_width="@dimen/SmallButtonSize"
+                android:layout_height="@dimen/SmallButtonSize"
+                android:layout_gravity="center"
+                android:padding="@dimen/CloseButtonBorderWidth"
+                android:clickable="true"
+                android:src="@drawable/icon_sonar" />
+
+            <ImageView
+                android:id="@+id/imgEMP"
+                android:layout_width="@dimen/SmallButtonSize"
+                android:layout_height="@dimen/SmallButtonSize"
+                android:layout_gravity="center"
+                android:padding="@dimen/CloseButtonBorderWidth"
+                android:clickable="true"
+                android:src="@drawable/resource_icon_electricity" />
+
+            <ImageView
+                android:id="@+id/imgICBM"
+                android:layout_width="@dimen/SmallButtonSize"
+                android:layout_height="@dimen/SmallButtonSize"
+                android:layout_gravity="center"
+                android:padding="@dimen/CloseButtonBorderWidth"
+                android:clickable="true"
+                android:src="@drawable/is_icbm" />
+
+            <ImageView
+                android:id="@+id/imgTracking"
+                android:layout_width="@dimen/SmallButtonSize"
+                android:layout_height="@dimen/SmallButtonSize"
+                android:layout_gravity="center"
+                android:padding="@dimen/CloseButtonBorderWidth"
+                android:clickable="true"
+                android:src="@drawable/player_targetting" />
+
+            <ImageView
+                android:id="@+id/imgECM"
+                android:layout_width="@dimen/SmallButtonSize"
+                android:layout_height="@dimen/SmallButtonSize"
+                android:padding="@dimen/CloseButtonBorderWidth"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:src="@drawable/ecm_missile" />
+
+            <ImageView
+                android:id="@+id/imgAntiShip"
+                android:layout_width="@dimen/SmallButtonSize"
+                android:layout_height="@dimen/SmallButtonSize"
+                android:padding="@dimen/CloseButtonBorderWidth"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:src="@drawable/icon_antiship" />
+
+            <ImageView
+                android:id="@+id/imgAntiSubmarine"
+                android:layout_width="@dimen/SmallButtonSize"
+                android:layout_height="@dimen/SmallButtonSize"
+                android:layout_gravity="center"
+                android:padding="@dimen/CloseButtonBorderWidth"
+                android:clickable="true"
+                android:src="@drawable/icon_antisubmarine" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imgType"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:src="@drawable/marker_missile" />
+
+        <TextView
+            android:id="@+id/txtCost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/ButtonEdgePadding"
+            android:text="$100000"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lytSpecs"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/detail_button"
+        android:orientation="vertical"
+        android:padding="@dimen/ButtonEdgePadding"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/MainViewSpacing"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/lytRange"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtRangeTitle"
+                        android:layout_width="103dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/SeperatorMargins"
+                        android:text="@string/range"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <TextView
+                        android:id="@+id/txtRange"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Range"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lytWeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtEMPRadiusTitle"
+                        android:layout_width="103dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:text="@string/emp_radius_title"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <TextView
+                        android:id="@+id/txtWeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="EMP Radius"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lytHP"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:id="@+id/txtWarheadTitle"
+                        android:layout_width="103dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:text="@string/warhead_title"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <TextView
+                        android:id="@+id/txtHP"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="100 mt"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lytSpeed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtSpeedTitle"
+                        android:layout_width="103dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/SeperatorMargins"
+                        android:text="@string/speed"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <TextView
+                        android:id="@+id/txtSpeed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Speed"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lytCEP"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtAccuracyTitle"
+                        android:layout_width="103dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/SeperatorMargins"
+                        android:text="@string/cep_title"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <TextView
+                        android:id="@+id/txtAccuracy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/sort_name_accuracy"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lytPrepTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtPrepTimeTitle"
+                        android:layout_width="103dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/SeperatorMargins"
+                        android:text="@string/prep_time"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <TextView
+                        android:id="@+id/txtPrepTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Prep Time"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/MainViewSpacing"
+                android:text=""
+                android:textColor="?attr/WarningColour"
+                android:textSize="@dimen/ReallyBigText" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
