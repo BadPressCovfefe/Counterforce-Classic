@@ -2208,14 +2208,12 @@ public class XMLGameLoader
                             Element eleShipyard = (Element)nodes.item(i);
                             int lID = GetIntAttribute(eleShipyard, XMLDefs.ID);
                             String strName = GetStringElement(eleShipyard, XMLDefs.NAME);
-                            boolean bPortOnly = GetBooleanElement(eleShipyard, XMLDefs.PORT);
                             GeoCoord geoPosition = GetPositionElement(eleShipyard, XMLDefs.POSITION);
                             GeoCoord geoOutput = GetPositionElement(eleShipyard, XMLDefs.OUTPUT_COORD);
                             int lOwnerID = GetIntElement(eleShipyard, XMLDefs.OWNER_ID);
                             short nHP = GetShortElement(eleShipyard, XMLDefs.HP);
                             short nMaxHP = Defs.SHIPYARD_MAX_HP;
                             boolean bContested = GetBooleanElement(eleShipyard, XMLDefs.CONTESTED);
-                            CargoSystem cargo = GetCargoSystem(eleShipyard, XMLDefs.CARGO_SYSTEM, game, new EntityPointer(lID, EntityType.SHIPYARD));
                             byte cCapacity = GetByteElement(eleShipyard, XMLDefs.PRODUCTION_CAPACITY);
 
                             if(cCapacity == 0)
@@ -2227,10 +2225,8 @@ public class XMLGameLoader
                             {
                                 Queue = GetShipyardQueue(eleShipyard, XMLDefs.QUEUE);
                             }
-
-                            cargo.SetCapacity(Defs.SHIPYARD_MAX_STORAGE_KG);
-
-                            game.AddShipyard(new Shipyard(lID, strName, geoPosition, geoOutput, lOwnerID, nHP, nMaxHP, bContested, cargo, bPortOnly, cCapacity, Queue));
+                            
+                            game.AddShipyard(new Shipyard(lID, strName, geoPosition, geoOutput, lOwnerID, nHP, nMaxHP, bContested, cCapacity, Queue));
                         }
                         catch(Exception ex)
                         {

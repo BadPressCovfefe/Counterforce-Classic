@@ -13,125 +13,10 @@
         android:orientation="vertical"
         android:visibility="gone">
 
-        <TextView
-            android:id="@+id/txtDescMBT"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/MainViewSideMargin"
-            android:layout_marginTop="@dimen/MainViewSpacing"
-            android:layout_marginRight="@dimen/MainViewSideMargin"
-            android:background="?attr/TextViewBackgroundColour"
-            android:text="@string/desc_mbt"
-            android:textColor="?attr/InfoColour"
-            android:textStyle="bold" />
-
         <com.apps.fast.launch.views.PurchaseButton
             android:id="@+id/btnBuildMBT"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/txtDescSPAAG"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/MainViewSideMargin"
-            android:layout_marginTop="@dimen/MainViewSpacing"
-            android:layout_marginRight="@dimen/MainViewSideMargin"
-            android:background="?attr/TextViewBackgroundColour"
-            android:text="@string/desc_spaag"
-            android:textColor="?attr/InfoColour"
-            android:textStyle="bold"
-            android:visibility="gone" />
-
-        <com.apps.fast.launch.views.PurchaseButton
-            android:id="@+id/btnBuildSPAAG"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/txtDescSAMTank"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/MainViewSideMargin"
-            android:layout_marginTop="@dimen/MainViewSpacing"
-            android:layout_marginRight="@dimen/MainViewSideMargin"
-            android:background="?attr/TextViewBackgroundColour"
-            android:text="@string/desc_sam_tank"
-            android:textColor="?attr/InfoColour"
-            android:textStyle="bold"
-            android:visibility="gone" />
-
-        <com.apps.fast.launch.views.PurchaseButton
-            android:id="@+id/btnBuildSAMTank"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/txtDescMissileTank"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/MainViewSideMargin"
-            android:layout_marginTop="@dimen/MainViewSpacing"
-            android:layout_marginRight="@dimen/MainViewSideMargin"
-            android:background="?attr/TextViewBackgroundColour"
-            android:text="@string/desc_missile_tank"
-            android:textColor="?attr/InfoColour"
-            android:textStyle="bold"
-            android:visibility="gone" />
-
-        <com.apps.fast.launch.views.PurchaseButton
-            android:id="@+id/btnBuildMissileTank"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/txtDescHowitzer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/MainViewSideMargin"
-            android:layout_marginTop="@dimen/MainViewSpacing"
-            android:layout_marginRight="@dimen/MainViewSideMargin"
-            android:background="?attr/TextViewBackgroundColour"
-            android:text="@string/desc_howitzer"
-            android:textColor="?attr/InfoColour"
-            android:textStyle="bold"
-            android:visibility="gone" />
-
-        <com.apps.fast.launch.views.PurchaseButton
-            android:id="@+id/btnBuildHowitzer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/lytBuildInfantry"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <TextView
-            android:id="@+id/txtDescInfantry"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/MainViewSideMargin"
-            android:layout_marginTop="@dimen/MainViewSpacing"
-            android:layout_marginRight="@dimen/MainViewSideMargin"
-            android:background="?attr/TextViewBackgroundColour"
-            android:text="@string/desc_infantry"
-            android:textColor="?attr/InfoColour"
-            android:textStyle="bold"
-            android:visibility="gone" />
-
-        <com.apps.fast.launch.views.PurchaseButton
-            android:id="@+id/btnBuildInfantry"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone" />
 
     </LinearLayout>
 
@@ -141,8 +26,7 @@
         android:layout_height="@dimen/SeparatorThickness"
         android:layout_marginTop="@dimen/SeperatorMargins"
         android:layout_marginBottom="@dimen/SeperatorMargins"
-        android:background="?attr/ButtonEdgeColour"
-        android:visibility="visible" />
+        android:background="?attr/ButtonEdgeColour" />
 
     <TextView
         android:id="@+id/txtQueue"
@@ -196,33 +80,5 @@
         </LinearLayout>
 
     </LinearLayout>
-
-    <View
-        android:id="@+id/view17"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/SeparatorThickness"
-        android:layout_marginTop="@dimen/SeperatorMargins"
-        android:layout_marginBottom="@dimen/SeperatorMargins"
-        android:background="?attr/ButtonEdgeColour" />
-
-    <TextView
-        android:id="@+id/txtStorage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/MainViewSideMargin"
-        android:layout_marginRight="@dimen/MainViewSideMargin"
-        android:layout_marginBottom="@dimen/SeperatorMargins"
-        android:text="@string/warehouse_storage"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="?attr/GoodColour" />
-
-    <FrameLayout
-        android:id="@+id/lytCargo"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="@dimen/MainViewSideMargin"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/MainViewSpacing">
-
-    </FrameLayout>
 
 </LinearLayout>

@@ -334,7 +334,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:focusableInTouchMode="false"
-                    android:src="@drawable/view_missile_sites"
+                    android:src="@drawable/marker_missilesite"
                     android:tintMode="src_over" />
 
                 <ImageView
@@ -343,7 +343,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:focusableInTouchMode="false"
-                    android:src="@drawable/view_sam_sites"
+                    android:src="@drawable/marker_samsite"
                     android:tintMode="src_over" />
 
                 <ImageView
@@ -352,7 +352,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:focusableInTouchMode="false"
-                    android:src="@drawable/view_sentry_guns"
+                    android:src="@drawable/marker_sentry"
                     android:tintMode="src_over" />
 
             </LinearLayout>
@@ -367,21 +367,12 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/imgShowOreMines"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/view_ore_mines"
-                    android:tintMode="src_over" />
-
-                <ImageView
                     android:id="@+id/imgShowCommandPosts"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:focusableInTouchMode="false"
-                    android:src="@drawable/icon_command_post"
+                    android:src="@drawable/marker_command_post"
                     android:tintMode="src_over" />
 
                 <ImageView
@@ -390,7 +381,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:focusableInTouchMode="false"
-                    android:src="@drawable/icon_airbase"
+                    android:src="@drawable/marker_airbase"
                     android:tintMode="src_over" />
 
                 <ImageView
@@ -399,7 +390,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:focusableInTouchMode="false"
-                    android:src="@drawable/icon_logisticsdepot"
+                    android:src="@drawable/marker_bank"
                     android:tintMode="src_over" />
 
                 <ImageView
@@ -408,28 +399,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:focusableInTouchMode="false"
-                    android:src="@drawable/icon_armory"
+                    android:src="@drawable/marker_armory"
                     android:tintMode="src_over" />
-
-                <ImageView
-                    android:id="@+id/imgShowRadarStations"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/view_radar_stations"
-                    android:tintMode="src_over"
-                    android:visibility="visible" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lytCostsVisButtonsRow3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/MainViewSideMargin"
-                android:layout_marginTop="@dimen/MainViewSpacing"
-                android:layout_marginRight="@dimen/MainViewSideMargin"
-                android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/imgShowArtilleryGuns"
@@ -437,45 +408,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:focusableInTouchMode="false"
-                    android:src="@drawable/icon_artillery_gun"
+                    android:src="@drawable/marker_artillery_gun"
                     android:tintMode="src_over" />
-
-                <ImageView
-                    android:id="@+id/imgShowDistributors"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/icon_distributor"
-                    android:tintMode="src_over" />
-
-                <ImageView
-                    android:id="@+id/imgShowProcessors"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/icon_processor"
-                    android:tintMode="src_over" />
-
-                <ImageView
-                    android:id="@+id/imgShowScrapYards"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/icon_scrap_yard"
-                    android:tintMode="src_over" />
-
-                <ImageView
-                    android:id="@+id/imgShowBarracks"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/icon_barracks"
-                    android:tintMode="src_over" />
-
             </LinearLayout>
 
             <TextView
@@ -524,40 +458,12 @@
                     android:tintMode="src_over" />
 
                 <ImageView
-                    android:id="@+id/imgShowBlastRadii"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/view_blastradii"
-                    android:tintMode="src_over" />
-
-                <ImageView
-                    android:id="@+id/imgShowMissileTrails"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/show_missile_trails"
-                    android:tintMode="src_over" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/MainViewSideMargin"
-                android:layout_marginTop="@dimen/MainViewSpacing"
-                android:layout_marginRight="@dimen/MainViewSideMargin"
-                android:orientation="horizontal">
-
-                <ImageView
                     android:id="@+id/imgShowShips"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:focusableInTouchMode="false"
-                    android:src="@drawable/marker_ship_destroyer"
+                    android:src="@drawable/marker_destroyer"
                     android:tintMode="src_over" />
 
                 <ImageView
@@ -566,7 +472,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:focusableInTouchMode="false"
-                    android:src="@drawable/marker_submarine_medium"
+                    android:src="@drawable/marker_attack_sub"
                     android:tintMode="src_over" />
 
                 <ImageView
@@ -575,25 +481,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:focusableInTouchMode="false"
-                    android:src="@drawable/marker_fighter_default"
-                    android:tintMode="src_over" />
-
-                <ImageView
-                    android:id="@+id/imgShowShipyards"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/marker_shipyard_not_producing"
-                    android:tintMode="src_over" />
-
-                <ImageView
-                    android:id="@+id/imgShowPorts"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/marker_port"
+                    android:src="@drawable/marker_fighter"
                     android:tintMode="src_over" />
 
             </LinearLayout>
@@ -607,12 +495,21 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/imgShowShipyards"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:focusableInTouchMode="false"
+                    android:src="@drawable/marker_shipyard"
+                    android:tintMode="src_over" />
+
+                <ImageView
                     android:id="@+id/imgShowMissiles"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:focusableInTouchMode="false"
-                    android:src="@drawable/view_missiles"
+                    android:src="@drawable/marker_missile"
                     android:tintMode="src_over" />
 
                 <ImageView
@@ -625,67 +522,12 @@
                     android:tintMode="src_over" />
 
                 <ImageView
-                    android:id="@+id/imgShowMonuments"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/marker_monument"
-                    android:tintMode="src_over" />
-
-                <ImageView
-                    android:id="@+id/imgShowRadarEffects"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/view_radarcoverage"
-                    android:tintMode="src_over" />
-
-                <ImageView
-                    android:id="@+id/imgShowInfantries"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/view_infantry"
-                    android:tintMode="src_over" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/MainViewSideMargin"
-                android:layout_marginTop="@dimen/MainViewSpacing"
-                android:layout_marginRight="@dimen/MainViewSideMargin"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/imgShowCargoTrucks"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/view_truck"
-                    android:tintMode="src_over" />
-
-                <ImageView
                     android:id="@+id/imgShowTanks"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:focusableInTouchMode="false"
-                    android:src="@drawable/view_mbt"
-                    android:tintMode="src_over" />
-
-                <ImageView
-                    android:id="@+id/imgShowSPAAGs"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/view_spaag"
+                    android:src="@drawable/marker_tank_east"
                     android:tintMode="src_over" />
 
                 <ImageView
@@ -704,273 +546,6 @@
                     android:layout_weight="1"
                     android:focusableInTouchMode="false"
                     android:src="@drawable/view_loots"
-                    android:tintMode="src_over" />
-
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/MainViewSideMargin"
-                android:layout_marginTop="@dimen/MainViewSpacing"
-                android:layout_marginRight="@dimen/MainViewSideMargin"
-                android:gravity="center"
-                android:text="@string/loot_filters"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/MainViewSideMargin"
-                android:layout_marginTop="@dimen/MainViewSpacing"
-                android:layout_marginRight="@dimen/MainViewSideMargin"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/imgShowIronLoot"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/resource_icon_iron"
-                    android:tintMode="src_over" />
-
-                <ImageView
-                    android:id="@+id/imgShowCoalLoot"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/resource_icon_coal"
-                    android:tintMode="src_over" />
-
-                <ImageView
-                    android:id="@+id/imgShowOilLoot"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/resource_icon_oil"
-                    android:tintMode="src_over" />
-
-                <ImageView
-                    android:id="@+id/imgShowCropLoot"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/resource_icon_crops"
-                    android:tintMode="src_over" />
-
-                <ImageView
-                    android:id="@+id/imgShowUraniumLoot"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/resource_icon_uranium"
-                    android:tintMode="src_over" />
-
-                <ImageView
-                    android:id="@+id/imgShowLumberLoot"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/resource_icon_lumber"
-                    android:tintMode="src_over" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/MainViewSideMargin"
-                android:layout_marginTop="@dimen/MainViewSpacing"
-                android:layout_marginRight="@dimen/MainViewSideMargin"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/imgShowWealthLoot"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/resource_icon_wealth"
-                    android:tintMode="src_over" />
-
-                <ImageView
-                    android:id="@+id/imgShowElectricityLoot"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/resource_icon_electricity"
-                    android:tintMode="src_over" />
-
-                <ImageView
-                    android:id="@+id/imgShowConcreteLoot"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/resource_icon_concrete"
-                    android:tintMode="src_over" />
-
-                <ImageView
-                    android:id="@+id/imgShowFuelLoot"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/resource_icon_fuel"
-                    android:tintMode="src_over" />
-
-                <ImageView
-                    android:id="@+id/imgShowFoodLoot"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/resource_icon_food"
-                    android:tintMode="src_over" />
-
-                <ImageView
-                    android:id="@+id/imgShowSteelLoot"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/resource_icon_steel"
-                    android:tintMode="src_over" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/MainViewSideMargin"
-                android:layout_marginTop="@dimen/MainViewSpacing"
-                android:layout_marginRight="@dimen/MainViewSideMargin"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/imgShowConstructionSuppliesLoot"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/resource_icon_construction_supplies"
-                    android:tintMode="src_over" />
-
-                <ImageView
-                    android:id="@+id/imgShowMachineryLoot"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/resource_icon_machinery"
-                    android:tintMode="src_over" />
-
-                <ImageView
-                    android:id="@+id/imgShowElectronicsLoot"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/resource_icon_electronics"
-                    android:tintMode="src_over" />
-
-                <ImageView
-                    android:id="@+id/imgShowMedicineLoot"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/resource_icon_medicine"
-                    android:tintMode="src_over" />
-
-                <ImageView
-                    android:id="@+id/imgShowEnrichedUraniumLoot"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/resource_icon_fissile_material"
-                    android:tintMode="src_over" />
-
-                <ImageView
-                    android:id="@+id/imgShowAntimatterLoot"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/resource_icon_antimatter"
-                    android:tintMode="src_over" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/MainViewSideMargin"
-                android:layout_marginTop="@dimen/MainViewSpacing"
-                android:layout_marginRight="@dimen/MainViewSideMargin"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/imgShowGoldLoot"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/resource_icon_gold"
-                    android:tintMode="src_over" />
-
-                <ImageView
-                    android:id="@+id/imgShowKnowledgeLoot"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/resource_icon_knowledge"
-                    android:tintMode="src_over" />
-
-                <ImageView
-                    android:id="@+id/imgShowLaborLoot"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/resource_icon_labor"
-                    android:tintMode="src_over" />
-
-                <ImageView
-                    android:id="@+id/imgShowFertilizerLoot"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/resource_icon_fertilizer"
-                    android:tintMode="src_over" />
-
-                <ImageView
-                    android:id="@+id/imgShowExplosivesLoot"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/resource_icon_explosives"
-                    android:tintMode="src_over" />
-
-                <ImageView
-                    android:id="@+id/imgShowNerveAgentLoot"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/resource_icon_nerve_agent"
                     android:tintMode="src_over" />
 
             </LinearLayout>

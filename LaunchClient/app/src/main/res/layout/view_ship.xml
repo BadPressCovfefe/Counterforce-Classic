@@ -34,7 +34,7 @@
                     android:layout_width="@dimen/PlayerInfoIconSize"
                     android:layout_height="@dimen/PlayerInfoIconSize"
                     android:id="@+id/imgShip"
-                    android:src="@drawable/marker_ship_destroyer"/>
+                    android:src="@drawable/marker_destroyer"/>
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -334,25 +334,6 @@
                     android:orientation="horizontal"/>
 
                 <LinearLayout
-                    android:id="@+id/btnScanner"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/MainViewSpacing"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/imgScanner"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/text_button_normal"
-                        android:padding="@dimen/ButtonImagePadding"
-                        android:src="@drawable/view_radarcoverage" />
-
-                </LinearLayout>
-
-                <LinearLayout
                     android:id="@+id/btnSonar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -461,16 +442,6 @@
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <TextView
-                    android:id="@+id/txtArtillery"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/MainViewSideMargin"
-                    android:background="@drawable/text_button_normal"
-                    android:gravity="center"
-                    android:text="@string/artillery"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <TextView
                     android:id="@+id/txtInterceptors"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -488,16 +459,6 @@
                     android:background="@drawable/text_button_normal"
                     android:gravity="center"
                     android:text="@string/aircraft"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <TextView
-                    android:id="@+id/txtCargo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/MainViewSideMargin"
-                    android:background="@drawable/text_button_normal"
-                    android:gravity="center"
-                    android:text="@string/cargo"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
             </LinearLayout>

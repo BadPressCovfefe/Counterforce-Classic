@@ -47,7 +47,7 @@
                 android:layout_gravity="center"
                 android:padding="@dimen/CloseButtonBorderWidth"
                 android:clickable="true"
-                android:src="@drawable/fast_missile" />
+                android:src="@drawable/icon_fast" />
 
             <ImageView
                 android:id="@+id/imgSonobuoy"

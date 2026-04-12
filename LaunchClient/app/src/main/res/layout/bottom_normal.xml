@@ -38,17 +38,6 @@
                 android:src="@drawable/button_build" />
 
             <ImageView
-                android:id="@+id/btnCargo"
-                android:layout_width="@dimen/PlayerInfoIconSize"
-                android:layout_height="@dimen/PlayerInfoIconSize"
-                android:layout_margin="@dimen/ButtonInset"
-                android:background="@drawable/text_button_normal"
-                android:onClick="ButtonCargo"
-                android:padding="@dimen/ButtonImagePadding"
-                android:scaleType="fitCenter"
-                android:src="@drawable/button_cargo" />
-
-            <ImageView
                 android:id="@+id/btnReports"
                 android:layout_width="@dimen/PlayerInfoIconSize"
                 android:layout_height="@dimen/PlayerInfoIconSize"
@@ -58,30 +47,6 @@
                 android:padding="@dimen/ButtonImagePadding"
                 android:scaleType="fitCenter"
                 android:src="@drawable/button_reports" />
-
-            <ImageView
-                android:id="@+id/btnSendMessage"
-                android:layout_width="@dimen/PlayerInfoIconSize"
-                android:layout_height="@dimen/PlayerInfoIconSize"
-                android:layout_margin="@dimen/ButtonInset"
-                android:layout_weight="1"
-                android:background="@drawable/text_button_normal"
-                android:onClick="ButtonSendMessage"
-                android:padding="@dimen/ButtonImagePadding"
-                android:scaleType="fitCenter"
-                android:src="@drawable/button_send_message" />
-
-            <ImageView
-                android:id="@+id/btnCallAirdrop"
-                android:layout_width="@dimen/PlayerInfoIconSize"
-                android:layout_height="@dimen/PlayerInfoIconSize"
-                android:layout_margin="@dimen/ButtonInset"
-                android:layout_weight="1"
-                android:background="@drawable/text_button_normal"
-                android:onClick="ButtonCallAirdrop"
-                android:padding="@dimen/ButtonImagePadding"
-                android:scaleType="fitCenter"
-                android:src="@drawable/call_airdrop" />
 
             <ImageView
                 android:id="@+id/btnWarnings"
@@ -95,16 +60,17 @@
                 android:src="@drawable/button_threats" />
 
             <ImageView
-                android:id="@+id/btnProspect"
+                android:id="@+id/btnDiscord"
                 android:layout_width="@dimen/PlayerInfoIconSize"
                 android:layout_height="@dimen/PlayerInfoIconSize"
+                android:layout_gravity="center"
                 android:layout_margin="@dimen/ButtonInset"
                 android:layout_weight="1"
                 android:background="@drawable/text_button_normal"
-                android:onClick="ButtonProspect"
+                android:onClick="ButtonDiscord"
                 android:padding="@dimen/ButtonImagePadding"
                 android:scaleType="fitCenter"
-                android:src="@drawable/button_prospect" />
+                android:src="@drawable/button_discord" />
 
             <ImageView
                 android:id="@+id/btnDiplomacy"
@@ -127,19 +93,6 @@
                 android:padding="@dimen/ButtonImagePadding"
                 android:scaleType="fitCenter"
                 android:src="@drawable/button_players" />
-
-            <ImageView
-                android:id="@+id/btnDiscord"
-                android:layout_width="@dimen/PlayerInfoIconSize"
-                android:layout_height="@dimen/PlayerInfoIconSize"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/ButtonInset"
-                android:layout_weight="1"
-                android:background="@drawable/text_button_normal"
-                android:onClick="ButtonDiscord"
-                android:padding="@dimen/ButtonImagePadding"
-                android:scaleType="fitCenter"
-                android:src="@drawable/button_discord" />
 
             <ImageView
                 android:id="@+id/btnSettings"

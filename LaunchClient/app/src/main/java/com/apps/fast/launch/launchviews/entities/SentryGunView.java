@@ -52,9 +52,9 @@ public class SentryGunView extends StructureView
             SentryGun sentry = (SentryGun)structureShadow;
 
             if(sentry.GetIsWatchTower())
-                imgLogo.setImageResource(R.drawable.icon_watch_tower);
+                imgLogo.setImageResource(R.drawable.marker_artillery_gun);
             else
-                imgLogo.setImageResource(R.drawable.icon_sentry);
+                imgLogo.setImageResource(R.drawable.marker_sentry);
         }
 
         lytConfig.addView(systemView);

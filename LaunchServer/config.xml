@@ -156,6 +156,17 @@
   <BlueprintExpiry>259200000</BlueprintExpiry>
   <BlueprintBuildDistance>0.05</BlueprintBuildDistance>
   <MissileTypes>
+    <MissileType ID="1141" Name="Delivery Balloon">
+      <AssetID>7</AssetID>
+      <Purchasable>true</Purchasable>
+      <MissileSpeed>100</MissileSpeed>
+      <Range>20038</Range>
+	  <Yield>50</Yield>
+	  <Accuracy>1.0</Accuracy>
+	  <Costs>
+		<Resource Quantity="25000" Type="WEALTH"/>
+	</Costs>
+    </MissileType>
     <MissileType ID="1140" Name="Shahed">
       <AssetID>9</AssetID>
       <Purchasable>true</Purchasable>

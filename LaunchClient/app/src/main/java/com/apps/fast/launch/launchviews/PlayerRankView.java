@@ -125,13 +125,7 @@ public class PlayerRankView extends LaunchView
                         txtAlliance.setText(game.GetAlliance(player.GetAllianceMemberID()).GetName());
                         txtAlliance.setTextColor(Utilities.ColourFromAttr(context, R.attr.WarningColour));
 
-                        if(player.GetPrisoner())
-                        {
-                            txtAlliance.setText(game.GetAlliance(player.GetAllianceMemberID()).GetName()  + " " + context.getString(R.string.pow));
-                            imgLeader.setVisibility(VISIBLE);
-                            imgLeader.setImageResource(R.drawable.icon_prisoner);
-                        }
-                        else if(player.GetIsAnMP())
+                        if(player.GetIsAnMP())
                         {
                             imgLeader.setVisibility(VISIBLE);
                             imgLeader.setImageResource(R.drawable.icon_leader);

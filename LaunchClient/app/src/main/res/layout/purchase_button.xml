@@ -21,23 +21,40 @@
             android:layout_marginStart="@dimen/ButtonInset"
             android:layout_marginEnd="@dimen/ButtonInset"
             android:layout_marginBottom="@dimen/ButtonInset"
-            android:src="@drawable/build_missile_tank" />
+            android:src="@drawable/build_tank" />
 
         <!-- Spacer pushes the button to the right -->
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"/>
-
-        <TextView
-            android:id="@+id/txtCost"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/ButtonEdgePadding"
-            android:layout_gravity="center"
-            android:text="$100000"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/mbt"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/txtDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/desc_mbt"
+                android:textColor="?attr/InfoColour"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
+                android:id="@+id/txtCost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Cost: $150000"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+        </LinearLayout>
 
     </LinearLayout>
 </merge>

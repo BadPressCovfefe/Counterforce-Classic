@@ -32,21 +32,21 @@
                     android:id="@+id/imgMissile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/view_missiles"
+                    android:src="@drawable/marker_missile"
                     android:visibility="gone" />
 
                 <ImageView
                     android:id="@+id/imgInterceptor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/view_interceptors"
+                    android:src="@drawable/marker_interceptor"
                     android:visibility="gone" />
 
                 <ImageView
                     android:id="@+id/imgTorpedo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/marker_torpedo_classic"
+                    android:src="@drawable/marker_torpedo"
                     android:visibility="gone" />
 
                 <TextView

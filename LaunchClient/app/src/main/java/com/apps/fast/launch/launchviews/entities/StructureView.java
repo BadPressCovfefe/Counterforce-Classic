@@ -56,21 +56,14 @@ public abstract class StructureView extends LaunchView implements LaunchUICommon
     private LinearLayout btnSell;
     private LinearLayout btnCancelSale;
     private LinearLayout btnRepair;
-    private LinearLayout lytResources;
     protected FrameLayout lytConfig;
     protected LaunchView systemView;
     protected Structure structureShadow;
-    private ResourceSystem resources;
 
     public StructureView(LaunchClientGame game, MainActivity activity, LaunchEntity structure)
     {
         super(game, activity, true);
         structureShadow = (Structure)structure;
-
-        if(structureShadow != null)
-        {
-            resources = structureShadow.GetResourceSystem();
-        }
 
         Setup();
     }
@@ -91,7 +84,6 @@ public abstract class StructureView extends LaunchView implements LaunchUICommon
         lytNameEdit = findViewById(R.id.lytNameEdit);
         txtNameEdit = findViewById(R.id.txtNameEdit);
         btnApplyName = findViewById(R.id.btnApplyName);
-        lytResources = findViewById(R.id.lytResources);
 
         txtOffline = findViewById(R.id.txtOffline);
         txtBooting = findViewById(R.id.txtBooting);
@@ -258,7 +250,7 @@ public abstract class StructureView extends LaunchView implements LaunchUICommon
                                 {
                                     launchDialog.dismiss();
 
-                                    if(game.GetOurPlayer().GetCargoSystem().ContainsQuantities(Costs))
+                                    if(game.GetOurPlayer().GetWealth() >= Costs.get(Resource.ResourceType.WEALTH))
                                     {
                                         game.RepairEntity(structureShadow.GetPointer());
                                     }
@@ -289,8 +281,6 @@ public abstract class StructureView extends LaunchView implements LaunchUICommon
             {
                 lytConfig.setVisibility(GONE);
             }
-
-            Utilities.DrawResourceSystem(context, resources, lytResources);
 
             txtLoad.setOnClickListener(new OnClickListener()
             {
@@ -348,9 +338,6 @@ public abstract class StructureView extends LaunchView implements LaunchUICommon
                         }
 
                         btnRepair.setVisibility(structure.AtFullHealth() ? GONE : VISIBLE);
-
-                        resources = structure.GetResourceSystem();
-                        Utilities.DrawResourceSystem(context, resources, lytResources);
                     }
                     else
                     {

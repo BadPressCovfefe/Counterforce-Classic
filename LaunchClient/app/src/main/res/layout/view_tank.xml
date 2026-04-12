@@ -151,49 +151,6 @@
                 android:layout_marginBottom="@dimen/SeperatorMargins"/>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="@string/resources"
-                    android:layout_marginBottom="@dimen/ButtonEdgePadding"
-                    android:padding="@dimen/CloseButtonBorderWidth"
-                    android:textColor="?attr/WarningColour"
-                    android:layout_gravity="center"/>
-
-                <LinearLayout
-                    android:id="@+id/lytResources"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical" />
-
-                <TextView
-                    android:id="@+id/txtLoad"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="@string/load_cargo"
-                    android:background="@drawable/text_button_normal"
-                    android:layout_marginTop="@dimen/MainViewSpacing"
-                    android:padding="@dimen/CloseButtonBorderWidth"
-                    android:textColor="?attr/WarningColour"
-                    android:layout_gravity="center"/>
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/SeparatorThickness"
-                android:background="?attr/ButtonEdgeColour"
-                android:layout_marginTop="@dimen/SeperatorMargins"
-                android:layout_marginBottom="@dimen/SeperatorMargins"/>
-
-            <LinearLayout
                 android:id="@+id/lytReload"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -333,26 +290,6 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/btnDigIn"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/MainViewSpacing"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/imageView52"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center_vertical"
-                        android:background="@drawable/text_button_normal"
-                        android:padding="@dimen/ButtonImagePadding"
-                        android:src="@drawable/button_dig_in" />
-                </LinearLayout>
-
-                <LinearLayout
                     android:id="@+id/btnSetTarget"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -368,24 +305,6 @@
                         android:background="@drawable/text_button_normal"
                         android:padding="@dimen/ButtonImagePadding"
                         android:src="@drawable/button_tank_target" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/btnTransferCargo"
-                    android:clickable="true"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="@dimen/HorizontalSpacing"
-                    android:background="@drawable/text_button_normal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/button_load_cargo"
-                        android:padding="@dimen/ButtonImagePadding"
-                        android:layout_weight="1"/>
                 </LinearLayout>
 
                 <LinearLayout

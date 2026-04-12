@@ -2,7 +2,6 @@ package com.apps.fast.launch.launchviews;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
@@ -12,17 +11,14 @@ import android.widget.TextView;
 
 import com.apps.fast.launch.R;
 import com.apps.fast.launch.activities.MainActivity;
-import com.apps.fast.launch.components.ClientDefs;
 import com.apps.fast.launch.components.Sounds;
 import com.apps.fast.launch.components.TextUtilities;
 import com.apps.fast.launch.components.Utilities;
 import com.apps.fast.launch.launchviews.entities.AirbaseView;
 import com.apps.fast.launch.launchviews.entities.ShipView;
 import com.apps.fast.launch.launchviews.entities.SubmarineView;
-import com.apps.fast.launch.views.CostView;
 import com.apps.fast.launch.views.LaunchDialog;
 import com.apps.fast.launch.views.LaunchablePurchaseSelectionView;
-import com.apps.fast.launch.views.LaunchableSelectionView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,35 +26,22 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 import launch.game.Config;
 import launch.game.LaunchClientGame;
 import launch.game.entities.Airbase;
 import launch.game.entities.AirplaneInterface;
-import launch.game.entities.Airplane;
-import launch.game.entities.AirplaneInterface;
-import launch.game.entities.ArtilleryGun;
 import launch.game.entities.LaunchEntity;
 import launch.game.entities.MapEntity;
-import launch.game.entities.Missile;
 import launch.game.entities.MissileSite;
-import launch.game.entities.NavalVessel;
-import launch.game.entities.Player;
 import launch.game.entities.SAMSite;
 import launch.game.entities.Ship;
 import launch.game.entities.Submarine;
-import launch.game.entities.Tank;
-import launch.game.entities.TankInterface;
-import launch.game.entities.conceptuals.Resource;
-import launch.game.entities.conceptuals.Resource.ResourceType;
 import launch.game.systems.MissileSystem;
 import launch.game.types.InterceptorType;
 import launch.game.types.LaunchType;
 import launch.game.types.MissileType;
 import launch.game.systems.LaunchSystem.SystemType;
-import launch.utilities.LaunchUtilities;
 import launch.utilities.MissileStats;
 
 /**

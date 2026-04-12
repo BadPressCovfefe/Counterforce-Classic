@@ -34,14 +34,8 @@ public class ABMSystemControl extends LaunchView implements SlotListener
     private LinearLayout lytMissileSlots;
 
     private LinearLayout btnUpgradeSlots;
-    private TextView txtSlotUpgrade;
-    private TextView txtSlotUpgradeCost;
 
     private LinearLayout btnUpgradeReload;
-    private TextView txtReloadUpgrade;
-    private TextView txtReloadUpgradeCost;
-
-    private LinearLayout btnSell;
 
     private int lFittedToID;
     private boolean bIsMissiles;
@@ -71,14 +65,8 @@ public class ABMSystemControl extends LaunchView implements SlotListener
         lytMissileSlots = (LinearLayout)findViewById(R.id.lytMissileSlots);
 
         btnUpgradeSlots = (LinearLayout) findViewById(R.id.btnUpgradeSlots);
-        txtSlotUpgrade = (TextView) findViewById(R.id.txtSlotUpgrade);
-        txtSlotUpgradeCost = (TextView) findViewById(R.id.txtSlotUpgradeCost);
 
         btnUpgradeReload = (LinearLayout) findViewById(R.id.btnUpgradeReload);
-        txtReloadUpgrade = (TextView) findViewById(R.id.txtReloadUpgrade);
-        txtReloadUpgradeCost = (TextView) findViewById(R.id.txtReloadUpgradeCost);
-
-        btnSell = (LinearLayout) findViewById(R.id.btnSell);
 
         final MissileSystem system = GetMissileSystem();
 
@@ -173,11 +161,11 @@ public class ABMSystemControl extends LaunchView implements SlotListener
             String strTypeName = "UNSPECIFIED - TELL THE DEV";
             InterceptorType type = game.GetConfig().GetInterceptorType(lType);
             strTypeName = type.GetName();
-            Map<Resource.ResourceType, Long> Costs = game.GetSaleValue(type.GetCosts());
+            long oCost = type.GetCost();
 
             final LaunchDialog launchDialog = new LaunchDialog();
             launchDialog.SetHeaderPurchase();
-            launchDialog.SetMessage(context.getString(R.string.sell_confirm, strTypeName, TextUtilities.GetCostStatement(Costs)));
+            launchDialog.SetMessage(context.getString(R.string.sell_confirm, strTypeName, TextUtilities.GetCurrencyString(oCost)));
             launchDialog.SetOnClickYes(new View.OnClickListener()
             {
                 @Override

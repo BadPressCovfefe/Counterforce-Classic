@@ -12,7 +12,7 @@
         android:layout_height="@dimen/PlayerInfoIconSize"
         android:layout_gravity="center"
         android:padding="@dimen/ButtonImagePadding"
-        android:src="@drawable/marker_ship_destroyer"/>
+        android:src="@drawable/marker_destroyer"/>
 
     <TextView
         android:id="@+id/txtBuildTime"

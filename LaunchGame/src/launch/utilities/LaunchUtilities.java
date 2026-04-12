@@ -429,14 +429,7 @@ public class LaunchUtilities
                 bEntityTypeVisible = SPAAGS_VISIBLE;
         }
         else if(entity instanceof Shipyard)
-        {
-            Shipyard shipyard = (Shipyard)entity;
-            
-            if(shipyard.GetPortOnly())
-                bEntityTypeVisible = PORTS_VISIBLE;
-            else
-                bEntityTypeVisible = SHIPYARDS_VISIBLE;
-        }
+            bEntityTypeVisible = SHIPYARDS_VISIBLE;
         else if(entity instanceof ScrapYard)
             bEntityTypeVisible = SCRAP_YARDS_VISIBLE;
         else if(entity instanceof Ship)

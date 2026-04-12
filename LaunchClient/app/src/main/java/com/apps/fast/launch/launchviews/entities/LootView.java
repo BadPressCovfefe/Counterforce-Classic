@@ -9,13 +9,11 @@ import com.apps.fast.launch.UI.EntityIconBitmaps;
 import com.apps.fast.launch.activities.MainActivity;
 import com.apps.fast.launch.components.TextUtilities;
 import com.apps.fast.launch.launchviews.LaunchView;
-import com.apps.fast.launch.launchviews.controls.HaulableSlotControl;
 import com.apps.fast.launch.views.EntityControls;
 
 import launch.game.LaunchClientGame;
 import launch.game.entities.Haulable;
 import launch.game.entities.Loot;
-import launch.game.EntityPointer.EntityType;
 import launch.game.entities.conceptuals.Resource;
 import launch.game.entities.conceptuals.StoredLaunchable;
 
@@ -77,16 +75,6 @@ public class LootView extends LaunchView
                     txtLootTitle.setText(context.getString(R.string.interceptors));
                 }
                 break;
-            }
-
-            if(haulable != null)
-            {
-                HaulableSlotControl slotControl = new HaulableSlotControl(game, activity, haulable);
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
-                layoutParams.weight = 1.0f;
-                slotControl.setLayoutParams(layoutParams);
-
-                lytContents.addView(slotControl);
             }
 
             Update();

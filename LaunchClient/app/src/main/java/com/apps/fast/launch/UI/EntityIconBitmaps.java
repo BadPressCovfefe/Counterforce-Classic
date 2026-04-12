@@ -55,18 +55,6 @@ public class EntityIconBitmaps
 
     private static final Map<Integer, Bitmap[]> CustomAssets = new HashMap<>();
 
-    public static Bitmap GetDefaultPlayerBitmap(Context context, LaunchClientGame game, Player player)
-    {
-        Allegiance allegiance = game.GetAllegiance(game.GetOurPlayer(), player);
-        return GetTintedResBitmap(context, R.drawable.marker_player, DefaultPlayerBitmaps, allegiance);
-    }
-
-    public static Bitmap GetDeadPlayerBitmap(Context context, LaunchClientGame game, Player player)
-    {
-        Allegiance allegiance = game.GetAllegiance(game.GetOurPlayer(), player);
-        return GetTintedResBitmap(context, R.drawable.marker_player_dead, DeadPlayerBitmaps, allegiance);
-    }
-
     public static Bitmap GetRubbleBitmap(Context context, LaunchClientGame game, Rubble rubble)
     {
         Allegiance allegiance = game.GetAllegiance(game.GetOurPlayer(), rubble);
@@ -78,22 +66,7 @@ public class EntityIconBitmaps
     {
         Allegiance allegiance = game.GetAllegiance(game.GetOurPlayer(), shipyard);
 
-        if(shipyard.GetPortOnly())
-        {
-            if(shipyard.Destroyed())
-                return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_port_destroyed), LaunchUICommon.AllegianceColours[allegiance.ordinal()]);
-            else
-                return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_port), LaunchUICommon.AllegianceColours[allegiance.ordinal()]);
-        }
-        else
-        {
-            if(shipyard.Destroyed())
-                return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_shipyard_destroyed), LaunchUICommon.AllegianceColours[allegiance.ordinal()]);
-            else if(shipyard.GetProducing())
-                return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_shipyard_producing), LaunchUICommon.AllegianceColours[allegiance.ordinal()]);
-            else
-                return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_shipyard_not_producing), LaunchUICommon.AllegianceColours[allegiance.ordinal()]);
-        }
+        return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_shipyard), LaunchUICommon.AllegianceColours[allegiance.ordinal()]);
     }
 
     public static Bitmap GetMissileBitmap(MainActivity activity, LaunchClientGame game, MissileType type, Allegiance allegiance, int lAssetID)
@@ -102,75 +75,20 @@ public class EntityIconBitmaps
 
         Bitmap bitmap = CheckAndGetCustomBitmap(activity, game, lAssetID, allegiance);
 
-        if(bitmap != null && activity.GetTheme() != ClientDefs.THEME_CLASSIC)
+        if(bitmap != null && type.GetECM())
         {
-            if(type.GetECM())
-            {
-                Canvas canvas = new Canvas(bitmap);
-                canvas.drawBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_ecm), 0, 0, null);
-            }
-
-            return bitmap;
+            Canvas canvas = new Canvas(bitmap);
+            canvas.drawBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_ecm), 0, 0, null);
         }
-        else
-        {
-            Bitmap classicBitmap;
 
-            if(type.GetICBM())
-            {
-                classicBitmap = GetTintedResBitmap(activity, R.drawable.marker_missilenuke_classic, DefaultNukeBitmaps, allegiance);
-
-                Bitmap baseMap = Bitmap.createBitmap(128, 128, Bitmap.Config.ARGB_8888);
-                Canvas canvas = new Canvas(baseMap);
-                canvas.drawBitmap(classicBitmap, 32, 32, null);
-
-                return baseMap;
-            }
-            else if(type.GetStealth())
-            {
-                classicBitmap = GetTintedResBitmap(activity, R.drawable.marker_classic_missile_stealth, DefaultMissileBitmaps, allegiance);
-
-                if(type.GetECM())
-                {
-                    Canvas canvas = new Canvas(classicBitmap);
-                    canvas.drawBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_ecm), 0, 0, null);
-                }
-
-                return classicBitmap;
-            }
-            else if(type.GetArtillery())
-            {
-                classicBitmap = GetTintedResBitmap(activity, R.drawable.marker_shell_classic, DefaultMissileBitmaps, allegiance);
-
-                return classicBitmap;
-            }
-            else
-            {
-                classicBitmap = GetTintedResBitmap(activity, R.drawable.marker_classic_missile, DefaultMissileBitmaps, allegiance);
-
-                if(type.GetECM())
-                {
-                    Canvas canvas = new Canvas(classicBitmap);
-                    canvas.drawBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_ecm), 0, 0, null);
-                }
-
-                return classicBitmap;
-            }
-        }
+        return bitmap == null ? LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_missile), LaunchUICommon.AllegianceColours[allegiance.ordinal()]) : bitmap;
     }
 
     public static Bitmap GetTorpedoBitmap(MainActivity activity, LaunchClientGame game, TorpedoType type, Allegiance allegiance, int lAssetID)
     {
         Context context = activity;
 
-        if(activity.GetTheme() != ClientDefs.THEME_CLASSIC)
-        {
-            return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_torpedo), LaunchUICommon.AllegianceColours[allegiance.ordinal()]);
-        }
-        else
-        {
-            return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_torpedo_classic), LaunchUICommon.AllegianceColours[allegiance.ordinal()]);
-        }
+        return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_torpedo), LaunchUICommon.AllegianceColours[allegiance.ordinal()]);
     }
 
     public static Bitmap GetInterceptorBitmap(MainActivity activity, LaunchClientGame game, InterceptorType type, Allegiance allegiance, int lAssetID)
@@ -276,17 +194,7 @@ public class EntityIconBitmaps
 
     public static Bitmap GetLootBitmap(Context context, Loot loot)
     {
-        if(loot.GetLootType() != CargoSystem.LootType.RESOURCES)
-            return BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_container);
-        else
-            return GetResourceTypeBitmap(context, ResourceType.values()[loot.GetCargoID()]);
-    }
-
-    public static Bitmap GetAirdropBitmap(Context context, Airdrop airdrop)
-    {
-        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_airdrop);
-
-        return LaunchUICommon.TintBitmap(bitmap, LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
+        return BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_loot_7);
     }
 
     public static Bitmap GetAircraftBitmap(Context context, LaunchClientGame game, AirplaneInterface aircraft)
@@ -333,14 +241,10 @@ public class EntityIconBitmaps
         switch(aircraftType)
         {
             case BOMBER: bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_bomber); break;
-            case FIGHTER: bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_fighter_default); break;
-            case STEALTH_FIGHTER: bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_stealth_fighter_default); break;
-            case STEALTH_BOMBER: bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_stealth_bomber_default); break;
-            case SSB: bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_fast_bomber); break;
-            case AWACS: bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_awacs); break;
+            case FIGHTER: bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_fighter); break;
+            case SSB: bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_ssb); break;
             case REFUELER: bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_tanker); break;
-            case CARGO_PLANE: bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_cargoplane); break;
-            case MULTI_ROLE: bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_strikefighter); break;
+            case MULTI_ROLE: bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_multi_role); break;
             case ATTACK_AIRCRAFT: bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_attack_aircraft); break;
 
             default: bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.todo); break;
@@ -360,47 +264,15 @@ public class EntityIconBitmaps
     {
         switch(type)
         {
-            case FRIGATE: return BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_ship_frigate);
-            case DESTROYER: return BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_ship_destroyer);
-            case AMPHIB: return BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_ship_amphib);
-            case CARGO_SHIP: return BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_ship_cargo);
-            case FLEET_OILER: return BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_ship_fleet_oiler);
-            case SUPER_CARRIER: return BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_ship_supercarrier);
-            case ATTACK_SUB: return BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_submarine_small);
-            case SSBN: return BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_submarine_medium);
+            case FRIGATE: return BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_frigate);
+            case DESTROYER: return BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_destroyer);
+            case AMPHIB: return BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_amphib);
+            case FLEET_OILER: return BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_fleet_oiler);
+            case SUPER_CARRIER: return BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_carrier);
+            case ATTACK_SUB: return BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_attack_sub);
+            case SSBN: return BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_ssbn);
         }
 
         return BitmapFactory.decodeResource(context.getResources(), R.drawable.todo);
-    }
-
-    public static Bitmap GetResourceBitmap(Context context)
-    {
-        return BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_resources);
-    }
-
-    public static Bitmap GetResourceTypeBitmap(Context context, ResourceType type)
-    {
-        switch(type)
-        {
-            case OIL: return BitmapFactory.decodeResource(context.getResources(), R.drawable.resource_icon_oil);
-            case IRON: return BitmapFactory.decodeResource(context.getResources(), R.drawable.resource_icon_iron);
-            case COAL: return BitmapFactory.decodeResource(context.getResources(), R.drawable.resource_icon_coal);
-            case CROPS: return BitmapFactory.decodeResource(context.getResources(), R.drawable.resource_icon_crops);
-            case URANIUM: return BitmapFactory.decodeResource(context.getResources(), R.drawable.resource_icon_uranium);
-            case GOLD: return BitmapFactory.decodeResource(context.getResources(), R.drawable.resource_icon_gold);
-            case ELECTRICITY: return BitmapFactory.decodeResource(context.getResources(), R.drawable.resource_icon_electricity);
-            case WEALTH: return BitmapFactory.decodeResource(context.getResources(), R.drawable.resource_icon_wealth);
-            case CONCRETE: return BitmapFactory.decodeResource(context.getResources(), R.drawable.resource_icon_concrete);
-            case LUMBER: return BitmapFactory.decodeResource(context.getResources(), R.drawable.resource_icon_lumber);
-            case FOOD: return BitmapFactory.decodeResource(context.getResources(), R.drawable.resource_icon_food);
-            case FUEL: return BitmapFactory.decodeResource(context.getResources(), R.drawable.resource_icon_fuel);
-            case STEEL: return BitmapFactory.decodeResource(context.getResources(), R.drawable.resource_icon_steel);
-            case CONSTRUCTION_SUPPLIES: return BitmapFactory.decodeResource(context.getResources(), R.drawable.resource_icon_construction_supplies);
-            case MACHINERY: return BitmapFactory.decodeResource(context.getResources(), R.drawable.resource_icon_machinery);
-            case ELECTRONICS: return BitmapFactory.decodeResource(context.getResources(), R.drawable.resource_icon_electronics);
-            case MEDICINE: return BitmapFactory.decodeResource(context.getResources(), R.drawable.resource_icon_medicine);
-            case ENRICHED_URANIUM: return BitmapFactory.decodeResource(context.getResources(), R.drawable.resource_icon_fissile_material);
-            default: return BitmapFactory.decodeResource(context.getResources(), R.drawable.resource_icon_not_found);
-        }
     }
 }

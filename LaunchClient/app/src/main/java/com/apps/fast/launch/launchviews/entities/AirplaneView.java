@@ -16,7 +16,6 @@ import com.apps.fast.launch.activities.MainActivity;
 import com.apps.fast.launch.components.TextUtilities;
 import com.apps.fast.launch.components.Utilities;
 import com.apps.fast.launch.launchviews.LaunchView;
-import com.apps.fast.launch.launchviews.controls.CargoSystemControl;
 import com.apps.fast.launch.launchviews.controls.MissileSystemControl;
 import com.apps.fast.launch.views.ButtonFlasher;
 import com.apps.fast.launch.views.EntityControls;
@@ -32,8 +31,6 @@ import launch.game.LaunchClientGame;
 import launch.game.entities.Airbase;
 import launch.game.entities.AirplaneInterface;
 import launch.game.entities.Airplane;
-import launch.game.entities.AirplaneInterface;
-import launch.game.entities.HaulerInterface;
 import launch.game.entities.LaunchEntity;
 import launch.game.entities.MapEntity;
 import launch.game.entities.Movable;
@@ -57,8 +54,6 @@ public class AirplaneView extends LaunchView implements LaunchUICommon.AircraftI
     private LinearLayout btnRefuel;
     private LinearLayout btnProvideFuel;
     private LinearLayout btnMove;
-    private LinearLayout btnScan;
-    private ImageView imgScan;
     private LinearLayout btnReturn;
     private LinearLayout btnKamikaze;
     private LinearLayout btnSetNewHomebase;
@@ -87,12 +82,8 @@ public class AirplaneView extends LaunchView implements LaunchUICommon.AircraftI
     protected FrameLayout lytMissiles;
     protected TextView txtInterceptors;
     protected FrameLayout lytInterceptors;
-    protected TextView txtCargo;
-    protected FrameLayout lytCargo;
-
     protected LaunchView missileSystem;  //Missiles
     protected LaunchView interceptorSystem; //Interceptors
-    protected LaunchView cargoSystem; //Cargo
 
     private LinearLayout lytMode;
     private ImageButton btnAuto;
@@ -140,11 +131,6 @@ public class AirplaneView extends LaunchView implements LaunchUICommon.AircraftI
             interceptorSystem = new MissileSystemControl(game, activity, aircraftShadow.GetID(), aircraftShadow.GetAirplane(), false);
         }
 
-        if(aircraft.HasCargo())
-        {
-            cargoSystem = new CargoSystemControl(game, activity, (HaulerInterface)aircraftShadow.GetAirplane());
-        }
-
         Setup();
     }
 
@@ -166,8 +152,6 @@ public class AirplaneView extends LaunchView implements LaunchUICommon.AircraftI
         btnRefuel = findViewById(R.id.btnRefuel);
         btnProvideFuel = findViewById(R.id.btnProvideFuel);
         btnMove = findViewById(R.id.btnMove);
-        btnScan = findViewById(R.id.btnScan);
-        imgScan = findViewById(R.id.imgScan);
         btnReturn = findViewById(R.id.btnDigIn);
         btnKamikaze = findViewById(R.id.btnKamikaze);
         btnAttack = findViewById(R.id.btnAttack);
@@ -187,8 +171,6 @@ public class AirplaneView extends LaunchView implements LaunchUICommon.AircraftI
         lytMissiles = findViewById(R.id.lytMissiles);
         txtInterceptors = findViewById(R.id.txtInterceptors);
         lytInterceptors = findViewById(R.id.lytInterceptors);
-        txtCargo = findViewById(R.id.txtCargo);
-        lytCargo = findViewById(R.id.lytCargo);
 
         txtName = findViewById(R.id.txtName);
         txtNameButton = findViewById(R.id.txtNameButton);
@@ -542,17 +524,6 @@ public class AirplaneView extends LaunchView implements LaunchUICommon.AircraftI
                 lytInterceptors.setVisibility(GONE);
                 txtInterceptors.setVisibility(GONE);
             }
-
-            if(cargoSystem != null)
-            {
-                lytCargo.addView(cargoSystem);
-                lytCargo.setBackgroundColor(Utilities.ColourFromAttr(context, R.attr.SystemBackgroundColour));
-            }
-            else
-            {
-                txtCargo.setVisibility(GONE);
-                lytCargo.setVisibility(GONE);
-            }
         }
         else
         {
@@ -560,8 +531,6 @@ public class AirplaneView extends LaunchView implements LaunchUICommon.AircraftI
             lytMissiles.setVisibility(GONE);
             txtInterceptors.setVisibility(GONE);
             lytInterceptors.setVisibility(GONE);
-            txtCargo.setVisibility(GONE);
-            lytCargo.setVisibility(GONE);
         }
 
         if(bFlying)
@@ -715,62 +684,6 @@ public class AirplaneView extends LaunchView implements LaunchUICommon.AircraftI
                 btnProvideFuel.setVisibility(GONE);
             }
 
-            if(aircraft.HasScanner())
-            {
-                btnScan.setVisibility(VISIBLE);
-
-                if(aircraft.GetRadarActive())
-                {
-                    imgScan.setImageResource(R.drawable.button_radar_active);
-                }
-                else
-                {
-                    imgScan.setImageResource(R.drawable.button_radar_inactive);
-                }
-
-                btnScan.setOnClickListener(new OnClickListener()
-                {
-                    @Override
-                    public void onClick(View view)
-                    {
-                        if(!aircraft.GetRadarActive())
-                        {
-                            final LaunchDialog launchDialog = new LaunchDialog();
-                            launchDialog.SetHeaderLaunch();
-                            launchDialog.SetMessage(context.getString(R.string.toggle_radar_confirm_aircraft));
-                            launchDialog.SetOnClickYes(new OnClickListener()
-                            {
-                                @Override
-                                public void onClick(View view)
-                                {
-                                    launchDialog.dismiss();
-                                    game.RadarScan(aircraft.GetPointer());
-                                    Update();
-                                }
-                            });
-                            launchDialog.SetOnClickNo(new OnClickListener()
-                            {
-                                @Override
-                                public void onClick(View view)
-                                {
-                                    launchDialog.dismiss();
-                                }
-                            });
-                            launchDialog.show(activity.getFragmentManager(), "");
-                        }
-                        else
-                        {
-                            game.RadarScan(aircraft.GetPointer());
-                            Update();
-                        }
-                    }
-                });
-            }
-            else
-            {
-                btnScan.setVisibility(GONE);
-            }
-
             btnReturn.setOnClickListener(new OnClickListener()
             {
                 @Override
@@ -816,7 +729,6 @@ public class AirplaneView extends LaunchView implements LaunchUICommon.AircraftI
             lytControls.setVisibility(GONE);
             lytMissiles.setVisibility(GONE);
             lytInterceptors.setVisibility(GONE);
-            lytCargo.setVisibility(GONE);
             btnLaunchInterceptor.setVisibility(VISIBLE);
             btnAttack.setVisibility(GONE);
             btnRefuel.setVisibility(GONE);
@@ -844,7 +756,6 @@ public class AirplaneView extends LaunchView implements LaunchUICommon.AircraftI
         btnReturn.setVisibility(GONE);
         txtToTarget.setVisibility(GONE);
         viewToTarget.setVisibility(GONE);
-        btnScan.setVisibility(GONE);
         btnProvideFuel.setVisibility(GONE);
         btnElectronicWarfare.setVisibility(GONE);
 
@@ -893,7 +804,6 @@ public class AirplaneView extends LaunchView implements LaunchUICommon.AircraftI
             lytControls.setVisibility(GONE);
             lytMissiles.setVisibility(GONE);
             lytInterceptors.setVisibility(GONE);
-            lytCargo.setVisibility(GONE);
             btnAttack.setVisibility(GONE);
             btnRefuel.setVisibility(GONE);
             btnProvideFuel.setVisibility(GONE);
@@ -933,18 +843,6 @@ public class AirplaneView extends LaunchView implements LaunchUICommon.AircraftI
 
                         if(bOwnedByPlayer)
                         {
-                            if(aircraft.HasScanner())
-                            {
-                                if(aircraft.GetRadarActive())
-                                {
-                                    imgScan.setImageResource(R.drawable.button_radar_active);
-                                }
-                                else
-                                {
-                                    imgScan.setImageResource(R.drawable.button_radar_inactive);
-                                }
-                            }
-
                             if(aircraft.GetMoveOrders() != Movable.MoveOrders.WAIT && aircraft.GetMoveOrders() != Movable.MoveOrders.MOVE)
                             {
                                 btnCeaseFire.setVisibility(VISIBLE);
@@ -1051,15 +949,5 @@ public class AirplaneView extends LaunchView implements LaunchUICommon.AircraftI
     public List<AirplaneInterface> GetCurrentAircrafts()
     {
         return null;
-    }
-
-    @Override
-    public void EntityUpdated(LaunchEntity entity)
-    {
-        if(entity.ApparentlyEquals((LaunchEntity)aircraftShadow))
-        {
-            if(aircraftShadow.HasCargo())
-                cargoSystem = new CargoSystemControl(game, activity, (HaulerInterface)aircraftShadow);
-        }
     }
 }

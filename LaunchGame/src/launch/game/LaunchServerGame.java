@@ -484,17 +484,6 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
 
             LaunchPerf.Measure(LaunchPerf.Metric.AircraftDefencesTick);
 
-            try
-            {
-                ProcessActiveRadars();
-            }
-            catch(Exception ex)
-            {
-                LaunchLog.ConsoleMessage(ex.toString());
-            }
-
-            LaunchPerf.Measure(LaunchPerf.Metric.RadarTick);
-
             if(Shipyards.isEmpty())
             {
                 application.LoadShipyards(this);
@@ -5165,62 +5154,6 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
         }
     }
     
-    public void ProcessActiveRadars()
-    {
-        for(ScannerInterface scanner : GetActiveRadars())
-        {
-            MapEntity radar = (MapEntity)scanner;
-            float fltRadarRange = scanner.GetRadarRange();
-            
-            if(scanner.GetRadarActive())
-            {
-                for(EntityPointer pointer : quadtree.GetAffectedDetectables(radar.GetPosition().GetCopy(), fltRadarRange))
-                {
-                    MapEntity detectable = pointer.GetMapEntity(game);
-
-                    if(detectable != null && !detectable.GetVisible())
-                    {
-                        if(detectable instanceof Submarine && ((Submarine)detectable).Submerged())
-                            continue;
-                        
-                        if(!EntityIsFriendly(GetOwner(detectable), GetOwner(radar)))
-                        {
-                            if((detectable instanceof Airplane && ((Airplane)detectable).GetStealth()))
-                            {
-                                fltRadarRange *= Defs.STEALTH_DETECTION_FRACTION;
-                            }
-                            else if(detectable instanceof Missile)
-                            {
-                                Missile missile = (Missile)detectable;
-                                MissileType type = config.GetMissileType(missile.GetType());
-                                
-                                if(type != null)
-                                {
-                                    if(type.GetStealth())
-                                    {
-                                        fltRadarRange *= Defs.STEALTH_DETECTION_FRACTION;
-                                    }
-                                    else if(type.GetICBM())
-                                    {
-                                        detectable.SetVisible(Integer.MAX_VALUE);
-                                        EntityUpdated(detectable, false);
-                                        continue;
-                                    }
-                                } 
-                            }
-                            
-                            if(detectable.GetPosition().DistanceTo(radar.GetPosition()) <= fltRadarRange)
-                            {
-                                detectable.SetVisible(Defs.RADAR_SCAN_VISIBILITY_TIME);
-                                EntityUpdated(detectable, false);
-                            }
-                        }
-                    }  
-                }
-            } 
-        }
-    }
-    
     private boolean AttackerIsATroll(Player attacker, Player defender)
     {
         return GetNetWorthMultiplier(attacker, defender) < 0.15f && attacker.GetKDR() < 0.1f;
@@ -5385,7 +5318,6 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
 
                     if(shipyard.Destroyed())
                     {
-                        CargoSystemDestroyed(shipyard.GetOwnerID(), shipyard, shipyard.GetPosition(), shipyard.GetCargoSystem(), null);
                         ProcessPlayerXPGain(inflictor.GetID(), Defs.CITY_KILLED_XP, String.format("You destroyed %s!", shipyard.GetName()));
                         
                         if(owner != null)
@@ -5642,12 +5574,6 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                         
                         int lRebootTime = config.GetStructureBootTime(player);
                         
-                        if(structure.GetResourceSystem().ChargeQuantity(ResourceType.ELECTRONICS, Defs.EMP_RESIST_ELECTRONICS_COST))
-                        {
-                            lRebootTime *= Defs.EMP_RESIST_MULTIPLIER;
-                            CreateReport(victim, new LaunchReport(String.format("Your %s used %d electronics to resist %s's EMP pulse.", structure.GetTypeName(), Defs.EMP_RESIST_ELECTRONICS_COST, player.GetName()), true, player.GetID(), victim.GetID()));
-                        }
-                        
                         if(victim != null)
                         {
                             structure.Reboot(lRebootTime);
@@ -5657,11 +5583,6 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                         else
                         {
                             structure.Reboot(lRebootTime);
-                        }
-                        
-                        if(structure instanceof ScannerInterface radar)
-                        {
-                            radar.SetRadarActive(false);
                         }
                         
                         EntityUpdated(structure, false);
@@ -5676,7 +5597,7 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
             {
                 if(random.nextFloat() < 0.3f)
                 {
-                    aircraft.InflictDamage((short)(LaunchUtilities.GetRandomIntInBounds(0, aircraft.GetMaxHP())));
+                    aircraft.InflictDamage((short)1);
 
                     if(aircraft.Destroyed())
                     {
@@ -8284,26 +8205,6 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                                     CreateReport(player, new LaunchReport(String.format("Your infantry captured a %s!", shipyard.GetTypeName()), true, player.GetID()));
                                 }
 
-                                CargoSystem cargo = shipyard.GetCargoSystem();
-                                
-                                for(StoredTank tank : cargo.GetTanks())
-                                {
-                                    tank.Capture(player.GetID());
-                                    player.AddOwnedEntity(tank);
-                                }
-
-                                for(StoredCargoTruck truck : cargo.GetCargoTrucks())
-                                {
-                                    truck.Capture(player.GetID());
-                                    player.AddOwnedEntity(truck);
-                                }
-
-                                for(StoredInfantry storedInfantry : cargo.GetInfantries())
-                                {
-                                    storedInfantry.Capture(player.GetID());
-                                    player.AddOwnedEntity(storedInfantry);
-                                }
-
                                 EntityUpdated(shipyard, false);
                             } 
                         }
@@ -9533,25 +9434,16 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
         {
             if(shipyard.GetOwnedBy(lPlayerID))
             {
-                boolean bPlayerHasTheMoney;
-                
-                CargoSystem system = shipyard.GetCargoSystem();
-                bPlayerHasTheMoney = player.GetWealth() >= Defs.SHIPYARD_UPGRADE_WEALTH_COST;
-                
-                if(system != null)
+                if(player.SubtractWealth(Defs.SHIPYARD_UPGRADE_WEALTH_COST))
                 {
-                    if(bPlayerHasTheMoney)
-                    {
-                        shipyard.UpgradeProductionCapacity();
-                        player.SubtractWealth(Defs.SHIPYARD_UPGRADE_WEALTH_COST);
-                        EntityUpdated(shipyard, false);
+                    shipyard.UpgradeProductionCapacity();
+                    EntityUpdated(shipyard, false);
 
-                        ProcessPlayerXPGain(lPlayerID, Defs.SHIPYARD_UPGRADE_XP, "You upgraded a shipyard.");
-                        CreateEvent(new LaunchEvent(String.format("%s upgraded %s's production capacity.", player.GetName(), shipyard.GetName()), SoundEffect.CONSTRUCTION));
-                        CreateReport(new LaunchReport(String.format("%s upgraded %s's production capacity.", player.GetName(), shipyard.GetName()), false, lPlayerID));
-                        return true;
-                    }
-                }  
+                    ProcessPlayerXPGain(lPlayerID, Defs.SHIPYARD_UPGRADE_XP, "You upgraded a shipyard.");
+                    CreateEvent(new LaunchEvent(String.format("%s upgraded %s's production capacity.", player.GetName(), shipyard.GetName()), SoundEffect.CONSTRUCTION));
+                    CreateReport(new LaunchReport(String.format("%s upgraded %s's production capacity.", player.GetName(), shipyard.GetName()), false, lPlayerID));
+                    return true;
+                }
             }
         }
         
@@ -9656,71 +9548,12 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
     @Override
     public boolean RadarScan(int lPlayerID, EntityPointer pointer)
     {
-        Player player = GetPlayer(lPlayerID);
-        MapEntity mapScanner = pointer.GetMapEntity(this);
-        ScannerInterface scanner = (ScannerInterface)mapScanner;
-        
-        if(scanner != null && player != null)
-        {
-            if(mapScanner.GetOwnedBy(lPlayerID) && player.Functioning())
-            {
-                if(!scanner.GetRadarActive())
-                {
-                    scanner.SetRadarActive(true);
-                    EntityUpdated((MapEntity)scanner, false);
-                    return true;
-                } 
-                else
-                {
-                    scanner.SetRadarActive(false);
-                    mapScanner.SetVisible(Defs.RADAR_SCAN_VISIBILITY_TIME);
-                    EntityUpdated((MapEntity)scanner, false);
-                    return true;
-                }
-            }
-        }
-        
         return false;   
     }
     
     @Override
     public boolean PurchaseInfantry(int lPlayerID, int lArmoryID, boolean bUseSubstitutes)
     {
-        /*Player player = GetPlayer(lPlayerID);
-        Armory barracks = GetArmory(lArmoryID);
-        
-        if(player != null && barracks != null && player.Functioning() && barracks.GetIsBarracks() && !barracks.GetProducing() && barracks.GetOwnedBy(lPlayerID))
-        {
-            Map<ResourceType, Long> Costs = Defs.INFANTRY_UNIT_BUILD_COST;
-                
-            if(bUseSubstitutes)
-                Costs = GetSubstitutionCost(Costs);
-            else
-                Costs = GetRequiredCost(Costs);
-                
-            if(ProcessPlayerPurchase(lPlayerID, Costs, barracks.GetResourceSystem(), null, bUseSubstitutes, PurchaseType.OFFENSIVE))
-            {
-                int lBuildTime = Defs.INFANTRY_BUILD_TIME;
-                
-                if(barracks.GetResourceSystem().ChargeQuantities(Defs.BOOSTER_TYPES_INFANTRY_BUILD))
-                {
-                    lBuildTime *= Defs.PRODUCTION_BONUS_MULTIPLIER;
-                }
-
-                if(player.GetBoss())
-                {
-                    lBuildTime = 0;
-                }
-
-                ProcessPlayerXPGain(lPlayerID, Defs.INFANTRY_PURCHASED_XP, "You built infantry.");
-                barracks.SetProducing(EntityType.INFANTRY, lBuildTime); //When this timer runs out, produce an infantry.
-                EntityUpdated(barracks, true);
-                CreateEvent(new LaunchEvent(String.format("%s purchased an infantry unit.", player.GetName()), SoundEffect.EQUIP));
-
-                return true;
-            }
-        }*/
-        
         return false;
     }
     
@@ -9931,7 +9764,7 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
         
         if(player != null && shipyard != null)
         {
-            if(player.Functioning() && !shipyard.Destroyed() && !shipyard.GetPortOnly())
+            if(player.Functioning() && !shipyard.Destroyed())
             {
                 if(shipyard.GetOwnerID() == LaunchEntity.ID_NONE || shipyard.GetOwnedBy(lPlayerID) || GetAllegiance(shipyard, player) == Allegiance.ALLY)
                 {
@@ -9953,13 +9786,8 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
 
                     if(shipyard.HasCapacityRemaining() && !shipyard.Destroyed())
                     {
-                        if(ProcessPlayerPurchase(player.GetID(), costs, null, shipyard.GetCargoSystem(), bUseSubstitutes, purchaseType))
-                        {
-                            if(shipyard.GetCargoSystem().ChargeQuantities(Defs.BOOSTER_TYPES_SHIP_BUILD))
-                            {
-                                oBuildTime *= Defs.PRODUCTION_BONUS_MULTIPLIER;
-                            }
-                            
+                        if(ProcessPlayerPurchase(player.GetID(), costs, null, null, bUseSubstitutes, purchaseType))
+                        {                            
                             if(player.GetBoss())
                             {
                                 oBuildTime = 0;
@@ -10351,29 +10179,6 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                     {
                         CreateEvent(new LaunchEvent(String.format("%s captured a %s", player.GetName(), shipyard.GetTypeName()), SoundEffect.INFANTRY_CAPTURE));
                         CreateReport(player, new LaunchReport(String.format("You captured a %s!", shipyard.GetTypeName()), true, player.GetID()));
-                    }
-
-                    CargoSystem system = shipyard.GetCargoSystem();
-                    
-                    if(system != null)
-                    {
-                        for(StoredTank tank : system.GetTanks())
-                        {
-                            tank.Capture(lPlayerID);
-                            player.AddOwnedEntity(tank);
-                        }
-
-                        for(StoredCargoTruck truck : system.GetCargoTrucks())
-                        {
-                            truck.Capture(lPlayerID);
-                            player.AddOwnedEntity(truck);
-                        }
-
-                        for(StoredInfantry storedInfantry : system.GetInfantries())
-                        {
-                            storedInfantry.Capture(lPlayerID);
-                            player.AddOwnedEntity(storedInfantry);
-                        }
                     }
 
                     EntityUpdated(shipyard, false);
@@ -16628,7 +16433,7 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
     
     public void GenerateShipyard(String strName, GeoCoord geoPosition, GeoCoord geoOutput, boolean bPortOnly)
     {
-        Shipyard shipyard = new Shipyard(GetAtomicID(lShipyardIndex, Shipyards), geoPosition, strName, geoOutput, Defs.SHIPYARD_MAX_HP, Defs.SHIPYARD_MAX_HP, bPortOnly);
+        Shipyard shipyard = new Shipyard(GetAtomicID(lShipyardIndex, Shipyards), geoPosition, strName, geoOutput, Defs.SHIPYARD_MAX_HP, Defs.SHIPYARD_MAX_HP);
         AddShipyard(shipyard);
     }
     

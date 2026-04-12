@@ -577,16 +577,6 @@
             android:textColor="?attr/InfoColour"
             android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/txtPrisoner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/cant_leave_alliance_prisoner"
-            android:textColor="?attr/InfoColour"
-            android:visibility="gone" />
-
         <LinearLayout
             android:id="@+id/btnJoinAlliance"
             android:layout_width="match_parent"

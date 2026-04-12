@@ -154,63 +154,21 @@
             android:visibility="gone" />
 
         <LinearLayout
+            android:id="@+id/btnPower"
             android:layout_width="wrap_content"
-            android:layout_marginTop="@dimen/MainViewSpacing"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:layout_marginLeft="@dimen/MainViewSpacing"
             android:orientation="horizontal">
 
-            <LinearLayout
-                android:id="@+id/btnCeaseFire"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginRight="@dimen/MainViewSpacing"
-                android:clickable="true"
-                android:orientation="horizontal"
-                android:visibility="gone">
-
-                <ImageView
-                    android:layout_width="@dimen/MediumButtonSize"
-                    android:layout_height="@dimen/MediumButtonSize"
-                    android:background="@drawable/text_button_normal"
-                    android:padding="@dimen/ButtonImagePadding"
-                    android:src="@drawable/button_stop" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/btnAttack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:clickable="true"
-                android:orientation="horizontal"
-                android:visibility="visible">
-
-                <ImageView
-                    android:layout_width="@dimen/MediumButtonSize"
-                    android:layout_height="@dimen/MediumButtonSize"
-                    android:background="@drawable/text_button_normal"
-                    android:padding="@dimen/ButtonImagePadding"
-                    android:src="@drawable/button_attack" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/btnPower"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:clickable="true"
-                android:layout_marginLeft="@dimen/MainViewSpacing"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/imgPower"
-                    android:layout_width="@dimen/MediumButtonSize"
-                    android:layout_height="@dimen/MediumButtonSize"
-                    android:background="@drawable/text_button_normal"
-                    android:padding="@dimen/ButtonImagePadding"
-                    android:src="@drawable/button_onoffmix" />
-            </LinearLayout>
+            <ImageView
+                android:id="@+id/imgPower"
+                android:layout_width="@dimen/MediumButtonSize"
+                android:layout_height="@dimen/MediumButtonSize"
+                android:background="@drawable/text_button_normal"
+                android:padding="@dimen/ButtonImagePadding"
+                android:src="@drawable/button_onoffmix" />
         </LinearLayout>
 
     </LinearLayout>

@@ -29,9 +29,6 @@ public class WarehouseControl extends LaunchView
     private int lID;
     private boolean bOurStructure;
     private Warehouse warehouse;
-
-    protected FrameLayout lytCargo;
-    protected LaunchView cargoSystem; //Cargo
     private PurchaseButton btnBuildCargoTruck;
     private LinearLayout lytBuildTrucks;
     private LinearLayout lytProduction;
@@ -50,11 +47,6 @@ public class WarehouseControl extends LaunchView
         {
             bOurStructure = (game.GetWarehouse(lID).GetOwnerID() == game.GetOurPlayerID());
             warehouse = game.GetWarehouse(lID);
-
-            if(game.EntityIsFriendly(warehouse, game.GetOurPlayer()))
-            {
-                cargoSystem = new CargoSystemControl(game, activity, warehouse);
-            }
         }
         else
         {
@@ -73,22 +65,8 @@ public class WarehouseControl extends LaunchView
         lytProduction = findViewById(R.id.lytProduction);
         txtPrepTime = findViewById(R.id.txtPrepTime);
         txtDescCargoTruck = findViewById(R.id.txtDescCargoTruck);
-        lytCargo = findViewById(R.id.lytCargo);
         imgProduction = findViewById(R.id.imgProduction);
         lytBuildTrucks = findViewById(R.id.lytBuildTrucks);
-
-        if(game.EntityIsFriendly(warehouse, game.GetOurPlayer()))
-        {
-            if(cargoSystem != null)
-            {
-                lytCargo.addView(cargoSystem);
-                lytCargo.setBackgroundColor(Utilities.ColourFromAttr(context, R.attr.SystemBackgroundColour));
-            }
-            else
-            {
-                lytCargo.setVisibility(GONE);
-            }
-        }
 
         if(bOurStructure)
         {
@@ -138,10 +116,6 @@ public class WarehouseControl extends LaunchView
 
                     if(bOurStructure)
                     {
-                        cargoSystem = new CargoSystemControl(game, activity, warehouse);
-                        lytCargo.removeAllViews();
-                        lytCargo.addView(cargoSystem);
-
                         if(warehouse.GetProducing())
                         {
                             lytBuildTrucks.setVisibility(GONE);

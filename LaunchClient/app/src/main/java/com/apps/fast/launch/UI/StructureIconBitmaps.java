@@ -48,21 +48,14 @@ public class StructureIconBitmaps
     private static final Bitmap[] SAMSiteBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
     private static final Bitmap[] SentryGunBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
     private static final Bitmap[] WatchTowerBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
-    private static final Bitmap[] OreMineBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
-    private static final Bitmap[] RadarStationBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
     private static final Bitmap[] ABMSiteBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
     private static final Bitmap[] CommandPostBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
     private static final Bitmap[] AirbaseBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
     private static final Bitmap[] OpenAirbaseBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
     private static final Bitmap[] ArmoryBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
-    private static final Bitmap[] BarracksBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
     private static final Bitmap[] BankBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
     private static final Bitmap[] WarehouseBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
-    private static final Bitmap[] MissileFactoryBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
-    private static final Bitmap[] ProcessorBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
-    private static final Bitmap[] DistributorBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
     private static final Bitmap[] ArtilleryGunBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
-    private static final Bitmap[] ScrapYardBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
 
     private static void GenerateStructureBitmap(Context context, Bitmap[] Container, int lIndex, Allegiance allegiance, StructureIndexRunStatus runStatus, int lRes)
     {
@@ -103,29 +96,11 @@ public class StructureIconBitmaps
 
         if(structure instanceof MissileSite)
         {
-            if(((MissileSite)structure).CanTakeICBM() && structure.GetOffline())
-            {
-                if(NuclearMissileSiteBitmaps[lIndex] == null)
-                {
-                    GenerateStructureBitmap(context, NuclearMissileSiteBitmaps, lIndex, allegiance, runStatus, R.drawable.marker_missilesitenuke_offline);
-                }
-
-                return NuclearMissileSiteBitmaps[lIndex];
-            }
-            else if(((MissileSite)structure).CanTakeICBM() && structure.GetBooting())
-            {
-                if(NuclearMissileSiteBitmaps[lIndex] == null)
-                {
-                    GenerateStructureBitmap(context, NuclearMissileSiteBitmaps, lIndex, allegiance, runStatus, R.drawable.marker_missilesitenuke_booting);
-                }
-
-                return NuclearMissileSiteBitmaps[lIndex];
-            }
-            else if(((MissileSite)structure).CanTakeICBM())
+            if(((MissileSite)structure).CanTakeICBM())
             {
                 if (NuclearMissileSiteBitmaps[lIndex] == null)
                 {
-                    GenerateStructureBitmap(context, NuclearMissileSiteBitmaps, lIndex, allegiance, runStatus, R.drawable.marker_missilesitenuke);
+                    GenerateStructureBitmap(context, NuclearMissileSiteBitmaps, lIndex, allegiance, runStatus, R.drawable.marker_icbm_silo);
                 }
 
                 return NuclearMissileSiteBitmaps[lIndex];
@@ -143,20 +118,11 @@ public class StructureIconBitmaps
 
         if(structure instanceof SAMSite)
         {
-            if(((SAMSite)structure).GetIsABMSilo() && structure.GetOffline())
+            if(((SAMSite)structure).GetIsABMSilo())
             {
-                if (ABMSiteBitmaps[lIndex] == null)
+                if(ABMSiteBitmaps[lIndex] == null)
                 {
-                    GenerateStructureBitmap(context, ABMSiteBitmaps, lIndex, allegiance, runStatus, R.drawable.marker_abmsite_offline);
-                }
-
-                return ABMSiteBitmaps[lIndex];
-            }
-            else if(((SAMSite)structure).GetIsABMSilo())
-            {
-                if (ABMSiteBitmaps[lIndex] == null)
-                {
-                    GenerateStructureBitmap(context, ABMSiteBitmaps, lIndex, allegiance, runStatus, R.drawable.marker_abmsite_online);
+                    GenerateStructureBitmap(context, ABMSiteBitmaps, lIndex, allegiance, runStatus, R.drawable.marker_abmsite);
                 }
 
                 return ABMSiteBitmaps[lIndex];
@@ -187,43 +153,13 @@ public class StructureIconBitmaps
             }
             else
             {
-                if(WatchTowerBitmaps[lIndex] == null)
+                if(ArtilleryGunBitmaps[lIndex] == null)
                 {
-                    GenerateStructureBitmap(context, WatchTowerBitmaps, lIndex, allegiance, runStatus, R.drawable.marker_artillery_gun);
+                    GenerateStructureBitmap(context, ArtilleryGunBitmaps, lIndex, allegiance, runStatus, R.drawable.marker_artillery_gun);
                 }
 
-                return WatchTowerBitmaps[lIndex];
+                return ArtilleryGunBitmaps[lIndex];
             }
-        }
-
-        if(structure instanceof ArtilleryGun)
-        {
-            if(ArtilleryGunBitmaps[lIndex] == null)
-            {
-                GenerateStructureBitmap(context, ArtilleryGunBitmaps, lIndex, allegiance, runStatus, R.drawable.marker_artillery_gun);
-            }
-
-            return ArtilleryGunBitmaps[lIndex];
-        }
-
-        if(structure instanceof OreMine)
-        {
-            if(OreMineBitmaps[lIndex] == null)
-            {
-                GenerateStructureBitmap(context, OreMineBitmaps, lIndex, allegiance, runStatus, R.drawable.marker_oremine);
-            }
-
-            return OreMineBitmaps[lIndex];
-        }
-
-        if(structure instanceof RadarStation)
-        {
-            if(RadarStationBitmaps[lIndex] == null)
-            {
-                GenerateStructureBitmap(context, RadarStationBitmaps, lIndex, allegiance, runStatus, R.drawable.marker_radarstation);
-            }
-
-            return RadarStationBitmaps[lIndex];
         }
 
         if(structure instanceof CommandPost)
@@ -238,100 +174,32 @@ public class StructureIconBitmaps
 
         if(structure instanceof Airbase)
         {
-            Airbase airbase = (Airbase)structure;
-
-            if(airbase.GetAircraftSystem().GetOpen())
+            if(AirbaseBitmaps[lIndex] == null)
             {
-                if(OpenAirbaseBitmaps[lIndex] == null)
-                {
-                    GenerateStructureBitmap(context, OpenAirbaseBitmaps, lIndex, allegiance, runStatus, R.drawable.marker_airbase_open);
-                }
-
-                return OpenAirbaseBitmaps[lIndex];
+                GenerateStructureBitmap(context, AirbaseBitmaps, lIndex, allegiance, runStatus, R.drawable.marker_airbase);
             }
-            else
-            {
-                if(AirbaseBitmaps[lIndex] == null)
-                {
-                    GenerateStructureBitmap(context, AirbaseBitmaps, lIndex, allegiance, runStatus, R.drawable.marker_airbase);
-                }
 
-                return AirbaseBitmaps[lIndex];
-            }
+            return AirbaseBitmaps[lIndex];
         }
 
         if(structure instanceof Armory)
         {
-            Armory armory = (Armory)structure;
-
-            if(armory.GetIsBarracks())
+            if(ArmoryBitmaps[lIndex] == null)
             {
-                if(BarracksBitmaps[lIndex] == null)
-                {
-                    GenerateStructureBitmap(context, BarracksBitmaps, lIndex, allegiance, runStatus, R.drawable.marker_barracks);
-                }
-
-                return BarracksBitmaps[lIndex];
-            }
-            else
-            {
-                if(ArmoryBitmaps[lIndex] == null)
-                {
-                    GenerateStructureBitmap(context, ArmoryBitmaps, lIndex, allegiance, runStatus, R.drawable.marker_armory);
-                }
-
-                return ArmoryBitmaps[lIndex];
-            }
-        }
-
-        if(structure instanceof Bank)
-        {
-            if(BankBitmaps[lIndex] == null)
-            {
-                GenerateStructureBitmap(context, BankBitmaps, lIndex, allegiance, runStatus, R.drawable.marker_bank);
+                GenerateStructureBitmap(context, ArmoryBitmaps, lIndex, allegiance, runStatus, R.drawable.marker_armory);
             }
 
-            return BankBitmaps[lIndex];
+            return ArmoryBitmaps[lIndex];
         }
 
         if(structure instanceof Warehouse)
         {
             if(WarehouseBitmaps[lIndex] == null)
             {
-                GenerateStructureBitmap(context, WarehouseBitmaps, lIndex, allegiance, runStatus, R.drawable.marker_warehouse);
+                GenerateStructureBitmap(context, WarehouseBitmaps, lIndex, allegiance, runStatus, R.drawable.marker_bank);
             }
 
             return WarehouseBitmaps[lIndex];
-        }
-
-        if(structure instanceof Processor)
-        {
-            if(ProcessorBitmaps[lIndex] == null)
-            {
-                GenerateStructureBitmap(context, ProcessorBitmaps, lIndex, allegiance, runStatus, R.drawable.marker_processor);
-            }
-
-            return ProcessorBitmaps[lIndex];
-        }
-
-        if(structure instanceof Distributor)
-        {
-            if(DistributorBitmaps[lIndex] == null)
-            {
-                GenerateStructureBitmap(context, DistributorBitmaps, lIndex, allegiance, runStatus, R.drawable.marker_distributor);
-            }
-
-            return DistributorBitmaps[lIndex];
-        }
-
-        if(structure instanceof ScrapYard)
-        {
-            if(ScrapYardBitmaps[lIndex] == null)
-            {
-                GenerateStructureBitmap(context, ScrapYardBitmaps, lIndex, allegiance, runStatus, R.drawable.marker_scrap_yard);
-            }
-
-            return ScrapYardBitmaps[lIndex];
         }
 
         return null;
@@ -343,48 +211,15 @@ public class StructureIconBitmaps
         {
             case MISSILE_SITE: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_missilesite), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
             case SAM_SITE: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_samsite), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
-            case BANK: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_bank), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
             case COMMAND_POST: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_command_post), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
             case AIRBASE: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_airbase), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
-            case ABM_SILO: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_abmsite_offline), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
-            case ORE_MINE: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_oremine), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
+            case ABM_SILO: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_abmsite), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
             case SENTRY_GUN: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_sentry), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
             case WATCH_TOWER: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_artillery_gun), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
-            case RADAR_STATION: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_radarstation), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
-            case WAREHOUSE: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_warehouse), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
-            case NUCLEAR_MISSILE_SITE: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_missilesitenuke), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
+            case WAREHOUSE: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_bank), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
+            case NUCLEAR_MISSILE_SITE: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_icbm_silo), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
             case ARTILLERY_GUN: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_artillery_gun), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
             case ARMORY: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_armory), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
-            case BARRACKS: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_barracks), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
-            case SCRAP_YARD: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_scrap_yard), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
-            case PROCESSOR: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_processor), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
-            case DISTRIBUTOR: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_distributor), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
-            default: return BitmapFactory.decodeResource(context.getResources(), R.drawable.todo);
-        }
-    }
-
-    public static Bitmap GetBlueprintBitmap(Context context, LaunchClientGame game, EntityType structureType)
-    {
-        switch(structureType)
-        {
-            case MISSILE_SITE: return BitmapFactory.decodeResource(context.getResources(), R.drawable.blueprint_missilesite);
-            case SAM_SITE: return BitmapFactory.decodeResource(context.getResources(), R.drawable.blueprint_samsite);
-            case BANK: return BitmapFactory.decodeResource(context.getResources(), R.drawable.blueprint_bank);
-            case COMMAND_POST: return BitmapFactory.decodeResource(context.getResources(), R.drawable.blueprint_command_post);
-            case AIRBASE: return BitmapFactory.decodeResource(context.getResources(), R.drawable.blueprint_airbase);
-            case ABM_SILO: return BitmapFactory.decodeResource(context.getResources(), R.drawable.blueprint_abmsite);
-            case ORE_MINE: return BitmapFactory.decodeResource(context.getResources(), R.drawable.blueprint_oremine);
-            case SENTRY_GUN: return BitmapFactory.decodeResource(context.getResources(), R.drawable.blueprint_sentry);
-            case WATCH_TOWER: return BitmapFactory.decodeResource(context.getResources(), R.drawable.blueprint_artillery_gun);
-            case RADAR_STATION: return BitmapFactory.decodeResource(context.getResources(), R.drawable.blueprint_radarstation);
-            case WAREHOUSE: return BitmapFactory.decodeResource(context.getResources(), R.drawable.blueprint_logisticsdepot);
-            case NUCLEAR_MISSILE_SITE: return BitmapFactory.decodeResource(context.getResources(), R.drawable.blueprint_missilesitenuke);
-            case ARTILLERY_GUN: return BitmapFactory.decodeResource(context.getResources(), R.drawable.blueprint_artillery_gun);
-            case ARMORY: return BitmapFactory.decodeResource(context.getResources(), R.drawable.blueprint_armory);
-            case BARRACKS: return BitmapFactory.decodeResource(context.getResources(), R.drawable.blueprint_barracks);
-            case SCRAP_YARD: return BitmapFactory.decodeResource(context.getResources(), R.drawable.blueprint_scrap_yard);
-            case PROCESSOR: return BitmapFactory.decodeResource(context.getResources(), R.drawable.blueprint_processor);
-            case DISTRIBUTOR: return BitmapFactory.decodeResource(context.getResources(), R.drawable.blueprint_distributor);
             default: return BitmapFactory.decodeResource(context.getResources(), R.drawable.todo);
         }
     }

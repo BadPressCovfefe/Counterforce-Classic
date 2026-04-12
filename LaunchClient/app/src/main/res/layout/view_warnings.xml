@@ -146,7 +146,7 @@
                         android:layout_width="@dimen/PlayerInfoIconSize"
                         android:layout_height="@dimen/PlayerInfoIconSize"
                         android:layout_margin="@dimen/ButtonEdgePadding"
-                        android:src="@drawable/icon_sam" />
+                        android:src="@drawable/marker_samsite" />
 
                     <LinearLayout
                         android:id="@+id/lytText1"

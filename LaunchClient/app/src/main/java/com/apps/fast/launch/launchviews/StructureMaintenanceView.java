@@ -258,7 +258,7 @@ public class StructureMaintenanceView extends LaunchView implements LaunchUIComm
         {
             if(((MissileSite)iconControlStructure).CanTakeICBM())
             {
-                imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_missilesitenuke), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
+                imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_icbm_silo), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
 
                 lytModeControls.setVisibility(VISIBLE);
 
@@ -403,7 +403,7 @@ public class StructureMaintenanceView extends LaunchView implements LaunchUIComm
             }
             else
             {
-                imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_missile_site), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
+                imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_missilesite), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
             }
         }
         else if(iconControlStructure instanceof SAMSite)
@@ -414,11 +414,11 @@ public class StructureMaintenanceView extends LaunchView implements LaunchUIComm
 
             if(samSite.GetIsABMSilo())
             {
-                imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_abmsite_offline), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
+                imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_abmsite), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
             }
             else
             {
-                imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_sam), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
+                imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_samsite), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
             }
 
             flasherAuto = new ButtonFlasher(btnAuto);
@@ -570,208 +570,28 @@ public class StructureMaintenanceView extends LaunchView implements LaunchUIComm
 
             if(gun.GetIsWatchTower())
             {
-                imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_watch_tower), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
+                imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_artillery_gun), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
             }
             else
             {
-                imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_sentry), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
+                imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_sentry), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
             }
-        }
-        else if(iconControlStructure instanceof OreMine)
-        {
-            imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_oremine), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
-        }
-        else if(iconControlStructure instanceof RadarStation)
-        {
-            imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_radarstation), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
         }
         else if(iconControlStructure instanceof CommandPost)
         {
-            imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_command_post), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
+            imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_command_post), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
         }
         else if(iconControlStructure instanceof Airbase)
         {
-            Airbase airbase = (Airbase)iconControlStructure;
-
-            if(airbase.GetAircraftSystem().GetOpen())
-                imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_airbase_open), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
-            else
-                imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_airbase), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
+            imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_airbase), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
         }
         else if(iconControlStructure instanceof Armory)
         {
-            imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_armory), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
-        }
-        else if(iconControlStructure instanceof Bank)
-        {
-            imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_bank), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
+            imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_armory), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
         }
         else if(iconControlStructure instanceof Warehouse)
         {
-            imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_logisticsdepot), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
-        }
-        else if(iconControlStructure instanceof Processor)
-        {
-            imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_processor), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
-        }
-        else if(iconControlStructure instanceof Distributor)
-        {
-            imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_distributor), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
-        }
-        else if(iconControlStructure instanceof ArtilleryGun)
-        {
-            ArtilleryGun artillery = (ArtilleryGun)iconControlStructure;
-
-            imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_artillery_gun), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
-
-            lytModeControls.setVisibility(VISIBLE);
-
-            flasherAuto = new ButtonFlasher(btnAuto);
-            flasherSemi = new ButtonFlasher(btnSemi);
-            flasherManual = new ButtonFlasher(btnManual);
-
-            if(structureShadow != null)
-            {
-                btnAuto.setOnClickListener(new OnClickListener()
-                {
-                    @Override
-                    public void onClick(View view)
-                    {
-                        if (!game.GetSAMSite(structureShadow.GetID()).GetAuto())
-                        {
-                            final LaunchDialog launchDialog = new LaunchDialog();
-                            launchDialog.SetHeaderSAMControl();
-                            launchDialog.SetMessage(context.getString(R.string.confirm_auto));
-                            launchDialog.SetOnClickYes(new View.OnClickListener()
-                            {
-                                @Override
-                                public void onClick(View view)
-                                {
-                                    launchDialog.dismiss();
-
-                                    game.SetSAMSiteMode(structureShadow.GetPointer(), ArtilleryGun.MODE_AUTO);
-                                }
-                            });
-                            launchDialog.SetOnClickNo(new View.OnClickListener()
-                            {
-                                @Override
-                                public void onClick(View view)
-                                {
-                                    launchDialog.dismiss();
-                                }
-                            });
-                            launchDialog.show(activity.getFragmentManager(), "");
-                        }
-                    }
-                });
-
-                btnSemi.setOnClickListener(new OnClickListener()
-                {
-                    @Override
-                    public void onClick(View view)
-                    {
-                        if (!game.GetSAMSite(structureShadow.GetID()).GetSemiAuto())
-                        {
-                            final LaunchDialog launchDialog = new LaunchDialog();
-                            launchDialog.SetHeaderSAMControl();
-                            launchDialog.SetMessage(context.getString(R.string.confirm_semi));
-                            launchDialog.SetOnClickYes(new View.OnClickListener()
-                            {
-                                @Override
-                                public void onClick(View view)
-                                {
-                                    launchDialog.dismiss();
-
-                                    game.SetSAMSiteMode(structureShadow.GetPointer(), ArtilleryGun.MODE_SEMI_AUTO);
-                                }
-                            });
-                            launchDialog.SetOnClickNo(new View.OnClickListener()
-                            {
-                                @Override
-                                public void onClick(View view)
-                                {
-                                    launchDialog.dismiss();
-                                }
-                            });
-                            launchDialog.show(activity.getFragmentManager(), "");
-                        }
-                    }
-                });
-
-                btnManual.setOnClickListener(new OnClickListener()
-                {
-                    @Override
-                    public void onClick(View view)
-                    {
-                        if (!game.GetSAMSite(structureShadow.GetID()).GetManual())
-                        {
-                            final LaunchDialog launchDialog = new LaunchDialog();
-                            launchDialog.SetHeaderSAMControl();
-                            launchDialog.SetMessage(context.getString(R.string.confirm_manual));
-                            launchDialog.SetOnClickYes(new View.OnClickListener()
-                            {
-                                @Override
-                                public void onClick(View view)
-                                {
-                                    launchDialog.dismiss();
-
-                                    game.SetSAMSiteMode(structureShadow.GetPointer(), ArtilleryGun.MODE_MANUAL);
-                                }
-                            });
-                            launchDialog.SetOnClickNo(new View.OnClickListener()
-                            {
-                                @Override
-                                public void onClick(View view)
-                                {
-                                    launchDialog.dismiss();
-                                }
-                            });
-                            launchDialog.show(activity.getFragmentManager(), "");
-                        }
-                    }
-                });
-            }
-            else if(StructureList != null)
-            {
-                final List<EntityPointer> Pointers = new ArrayList<>();
-
-                for(Object object : StructureList)
-                {
-                    Structure structure = (Structure)object;
-                    Pointers.add(structure.GetPointer());
-                }
-
-                btnAuto.setOnClickListener(new OnClickListener()
-                {
-                    @Override
-                    public void onClick(View view)
-                    {
-                        game.SetSAMSiteModes(Pointers, ArtilleryGun.MODE_AUTO);
-                    }
-                });
-
-                btnSemi.setOnClickListener(new OnClickListener()
-                {
-                    @Override
-                    public void onClick(View view)
-                    {
-                        game.SetSAMSiteModes(Pointers, ArtilleryGun.MODE_SEMI_AUTO);
-                    }
-                });
-
-                btnManual.setOnClickListener(new OnClickListener()
-                {
-                    @Override
-                    public void onClick(View view)
-                    {
-                        game.SetSAMSiteModes(Pointers, ArtilleryGun.MODE_MANUAL);
-                    }
-                });
-            }
-        }
-        else if(iconControlStructure instanceof ScrapYard)
-        {
-            imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_scrap_yard), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
+            imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_bank), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
         }
 
         Update();

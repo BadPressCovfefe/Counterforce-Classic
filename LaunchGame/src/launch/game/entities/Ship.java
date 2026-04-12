@@ -24,7 +24,7 @@ import launch.utilities.ShortDelay;
  *
  * @author Corbin
  */
-public class Ship extends NavalVessel implements ScannerInterface, AirbaseInterface, FuelableInterface, HaulerInterface, ArtilleryInterface
+public class Ship extends NavalVessel implements AirbaseInterface, FuelableInterface, HaulerInterface, ArtilleryInterface
 {
     private static final int DATA_SIZE = 9;
     
@@ -459,31 +459,6 @@ public class Ship extends NavalVessel implements ScannerInterface, AirbaseInterf
     public boolean HasSupport()
     {
         return this.type == EntityType.FLEET_OILER;
-    }
-    
-    @Override
-    public boolean GetRadarActive()
-    {
-        return this.bRadarActive;
-    }
-    
-    @Override
-    public void SetRadarActive(boolean bActive)
-    {
-        this.bRadarActive = bActive;
-    }
-    
-    @Override
-    public float GetRadarRange()
-    {
-        switch(type)
-        {
-            case FRIGATE: return Defs.FRIGATE_SCANNER_RANGE;
-            case DESTROYER: return Defs.DESTROYER_SCANNER_RANGE;
-            case SUPER_CARRIER: return Defs.SUPER_CARRIER_SCANNER_RANGE;
-        }
-        
-        return -1f;
     }
     
     @Override

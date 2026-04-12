@@ -8,20 +8,14 @@ import com.apps.fast.launch.R;
 import com.apps.fast.launch.activities.MainActivity;
 import com.apps.fast.launch.components.TextUtilities;
 import com.apps.fast.launch.launchviews.LaunchView;
-import com.apps.fast.launch.launchviews.controls.HaulableSlotControl;
 import com.apps.fast.launch.views.EntityControls;
 import com.apps.fast.launch.views.LaunchDialog;
 
 import java.util.Map;
 
-import launch.game.Defs;
 import launch.game.LaunchClientGame;
-import launch.game.entities.Haulable;
-import launch.game.entities.Loot;
 import launch.game.entities.Rubble;
 import launch.game.entities.conceptuals.Resource;
-import launch.game.entities.conceptuals.StoredLaunchable;
-import launch.game.systems.CargoSystem;
 
 /**
  * Created by tobster on 09/11/15.
@@ -68,38 +62,33 @@ RubbleView extends LaunchView
                     {
                         Map<Resource.ResourceType, Long> Costs = game.GetRepairCost(rubble);
 
-                        CargoSystem system = game.GetOurPlayer().GetCargoSystem();
-
-                        if(system != null)
+                        if(game.GetOurPlayer().GetWealth() >= Costs.get(Resource.ResourceType.WEALTH))
                         {
-                            if(system.ContainsQuantities(Costs))
+                            final LaunchDialog launchDialog = new LaunchDialog();
+                            launchDialog.SetHeaderPurchase();
+                            launchDialog.SetMessage(context.getString(R.string.rebuild_rubble_confirm, TextUtilities.GetCostStatement(Costs)));
+                            launchDialog.SetOnClickYes(new View.OnClickListener()
                             {
-                                final LaunchDialog launchDialog = new LaunchDialog();
-                                launchDialog.SetHeaderPurchase();
-                                launchDialog.SetMessage(context.getString(R.string.rebuild_rubble_confirm, TextUtilities.GetCostStatement(Costs)));
-                                launchDialog.SetOnClickYes(new View.OnClickListener()
+                                @Override
+                                public void onClick(View view)
                                 {
-                                    @Override
-                                    public void onClick(View view)
-                                    {
-                                        launchDialog.dismiss();
-                                        game.RepairEntity(rubble.GetPointer());
-                                    }
-                                });
-                                launchDialog.SetOnClickNo(new View.OnClickListener()
-                                {
-                                    @Override
-                                    public void onClick(View view)
-                                    {
-                                        launchDialog.dismiss();
-                                    }
-                                });
-                                launchDialog.show(activity.getFragmentManager(), "");
-                            }
-                            else
+                                    launchDialog.dismiss();
+                                    game.RepairEntity(rubble.GetPointer());
+                                }
+                            });
+                            launchDialog.SetOnClickNo(new View.OnClickListener()
                             {
-                                activity.ShowBasicOKDialog(context.getString(R.string.insufficient_wealth));
-                            }
+                                @Override
+                                public void onClick(View view)
+                                {
+                                    launchDialog.dismiss();
+                                }
+                            });
+                            launchDialog.show(activity.getFragmentManager(), "");
+                        }
+                        else
+                        {
+                            activity.ShowBasicOKDialog(context.getString(R.string.insufficient_wealth));
                         }
                     }
                 });

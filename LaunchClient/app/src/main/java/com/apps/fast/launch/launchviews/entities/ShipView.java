@@ -56,8 +56,6 @@ public class ShipView extends LaunchView implements LaunchUICommon.ShipInfoProvi
     private LinearLayout lytControls; //Should only be visible to the owner.
     private LinearLayout btnMove;
     private LinearLayout btnStop;
-    private LinearLayout btnScan;
-    private ImageView imgScan;
     private LinearLayout btnSonar;
     private LinearLayout btnSeekFuel;
     private LinearLayout btnProvideFuel;
@@ -141,8 +139,6 @@ public class ShipView extends LaunchView implements LaunchUICommon.ShipInfoProvi
         lytControls = findViewById(R.id.lytControls);
         btnMove = findViewById(R.id.btnMove);
         btnStop = findViewById(R.id.btnStop);
-        btnScan = findViewById(R.id.btnScanner);
-        imgScan = findViewById(R.id.imgScanner);
         btnSonar = findViewById(R.id.btnSonar);
         btnSeekFuel = findViewById(R.id.btnSeekFuel);
         btnProvideFuel = findViewById(R.id.btnProvideFuel);
@@ -589,60 +585,6 @@ public class ShipView extends LaunchView implements LaunchUICommon.ShipInfoProvi
                 btnSonar.setVisibility(GONE);
             }
 
-            if(shipShadow.HasScanner())
-            {
-                btnScan.setVisibility(VISIBLE);
-
-                if(shipShadow.GetRadarActive())
-                {
-                    imgScan.setImageResource(R.drawable.button_radar_active);
-                }
-                else
-                {
-                    imgScan.setImageResource(R.drawable.button_radar_inactive);
-                }
-
-                btnScan.setOnClickListener(new OnClickListener()
-                {
-                    @Override
-                    public void onClick(View view)
-                    {
-                        if(!shipShadow.GetRadarActive())
-                        {
-                            final LaunchDialog launchDialog = new LaunchDialog();
-                            launchDialog.SetHeaderLaunch();
-                            launchDialog.SetMessage(context.getString(R.string.toggle_radar_confirm_ship));
-                            launchDialog.SetOnClickYes(new OnClickListener()
-                            {
-                                @Override
-                                public void onClick(View view)
-                                {
-                                    launchDialog.dismiss();
-                                    game.RadarScan(shipShadow.GetPointer());
-                                }
-                            });
-                            launchDialog.SetOnClickNo(new OnClickListener()
-                            {
-                                @Override
-                                public void onClick(View view)
-                                {
-                                    launchDialog.dismiss();
-                                }
-                            });
-                            launchDialog.show(activity.getFragmentManager(), "");
-                        }
-                        else
-                        {
-                            game.RadarScan(shipShadow.GetPointer());
-                        }
-                    }
-                });
-            }
-            else
-            {
-                btnScan.setVisibility(GONE);
-            }
-
             txtNameButton.setOnClickListener(new OnClickListener()
             {
                 @Override
@@ -741,18 +683,6 @@ public class ShipView extends LaunchView implements LaunchUICommon.ShipInfoProvi
                     String strName = Utilities.GetEntityName(context, ship);
                     txtName.setText(strName);
                     txtNameButton.setText(strName);
-
-                    if(bOwnedByPlayer && ship.HasScanner())
-                    {
-                        if(ship.GetRadarActive())
-                        {
-                            imgScan.setImageResource(R.drawable.button_radar_active);
-                        }
-                        else
-                        {
-                            imgScan.setImageResource(R.drawable.button_radar_inactive);
-                        }
-                    }
 
                     if(ship.GetGeoTarget() != null && game.EntityIsFriendly(ship, game.GetOurPlayer()) && ship.GetMoveOrders() != Movable.MoveOrders.WAIT)
                     {

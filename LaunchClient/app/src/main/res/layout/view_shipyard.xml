@@ -36,7 +36,7 @@
                     android:layout_width="@dimen/PlayerInfoIconSize"
                     android:layout_height="@dimen/PlayerInfoIconSize"
                     android:id="@+id/imgProduction"
-                    android:src="@drawable/marker_shipyard_producing"/>
+                    android:src="@drawable/marker_shipyard"/>
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -48,20 +48,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Bath Iron Works"
+                        android:text="@string/shipyard_title"
                         android:id="@+id/txtName"
                         android:gravity="center_vertical"
                         android:layout_gravity="center_vertical"
                         />
-
-                    <TextView
-                        android:id="@+id/txtShipyard"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="?attr/InfoColour"
-                        android:layout_gravity="center_vertical"
-                        android:gravity="center_vertical"
-                        android:text="@string/shipyard"/>
 
                     <TextView
                         android:id="@+id/txtHP"
@@ -96,18 +87,6 @@
                 android:layout_marginBottom="@dimen/SeperatorMargins"
                 android:background="?attr/ButtonEdgeColour" />
 
-            <TextView
-                android:id="@+id/txtOccupied"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/MainViewSideMargin"
-                android:layout_marginRight="@dimen/MainViewSideMargin"
-                android:text="TextView"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="?attr/InfoColour"
-                android:textStyle="bold"
-                android:visibility="gone" />
-
             <LinearLayout
                 android:id="@+id/lytContents"
                 android:layout_width="match_parent"
@@ -120,135 +99,43 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/txtDescAttackSub"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/MainViewSideMargin"
-                        android:layout_marginRight="@dimen/MainViewSideMargin"
-                        android:background="?attr/TextViewBackgroundColour"
-                        android:text="@string/desc_attack_sub"
-                        android:textColor="?attr/InfoColour"
-                        android:textStyle="bold" />
-
                     <com.apps.fast.launch.views.PurchaseButton
                         android:id="@+id/btnBuildAttackSub"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
-
-                    <TextView
-                        android:id="@+id/txtDescSSBN"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/SeperatorMargins"
-                        android:layout_marginLeft="@dimen/MainViewSideMargin"
-                        android:layout_marginRight="@dimen/MainViewSideMargin"
-                        android:background="?attr/TextViewBackgroundColour"
-                        android:text="@string/desc_ssbn"
-                        android:textColor="?attr/InfoColour"
-                        android:textStyle="bold" />
 
                     <com.apps.fast.launch.views.PurchaseButton
                         android:id="@+id/btnBuildSSBN"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
 
-                    <TextView
-                        android:id="@+id/txtDescFrigate"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/SeperatorMargins"
-                        android:layout_marginLeft="@dimen/MainViewSideMargin"
-                        android:layout_marginRight="@dimen/MainViewSideMargin"
-                        android:background="?attr/TextViewBackgroundColour"
-                        android:text="@string/desc_frigate"
-                        android:textColor="?attr/InfoColour"
-                        android:textStyle="bold" />
-
                     <com.apps.fast.launch.views.PurchaseButton
                         android:id="@+id/btnBuildFrigate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
-
-                    <TextView
-                        android:id="@+id/txtDescDestroyer"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/SeperatorMargins"
-                        android:layout_marginLeft="@dimen/MainViewSideMargin"
-                        android:layout_marginRight="@dimen/MainViewSideMargin"
-                        android:background="?attr/TextViewBackgroundColour"
-                        android:text="@string/desc_destroyer"
-                        android:textColor="?attr/InfoColour"
-                        android:textStyle="bold" />
 
                     <com.apps.fast.launch.views.PurchaseButton
                         android:id="@+id/btnBuildDestroyer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
 
-                    <TextView
-                        android:id="@+id/txtDescAmphib"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/SeperatorMargins"
-                        android:layout_marginLeft="@dimen/MainViewSideMargin"
-                        android:layout_marginRight="@dimen/MainViewSideMargin"
-                        android:background="?attr/TextViewBackgroundColour"
-                        android:text="@string/desc_amphib"
-                        android:textColor="?attr/InfoColour"
-                        android:textStyle="bold" />
-
                     <com.apps.fast.launch.views.PurchaseButton
                         android:id="@+id/btnBuildAmphib"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-
-                    <TextView
-                        android:id="@+id/txtDescCargoShip"
-                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/SeperatorMargins"
-                        android:layout_marginLeft="@dimen/MainViewSideMargin"
-                        android:layout_marginRight="@dimen/MainViewSideMargin"
-                        android:background="?attr/TextViewBackgroundColour"
-                        android:text="@string/desc_cargo_ship"
-                        android:textColor="?attr/InfoColour"
-                        android:textStyle="bold" />
+                        android:visibility="gone" />
 
                     <com.apps.fast.launch.views.PurchaseButton
                         android:id="@+id/btnBuildCargoShip"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-
-                    <TextView
-                        android:id="@+id/txtDescFleetOiler"
-                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/SeperatorMargins"
-                        android:layout_marginLeft="@dimen/MainViewSideMargin"
-                        android:layout_marginRight="@dimen/MainViewSideMargin"
-                        android:background="?attr/TextViewBackgroundColour"
-                        android:text="@string/desc_fleet_oiler"
-                        android:textColor="?attr/InfoColour"
-                        android:textStyle="bold" />
+                        android:visibility="gone" />
 
                     <com.apps.fast.launch.views.PurchaseButton
                         android:id="@+id/btnBuildFleetOiler"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-
-                    <TextView
-                        android:id="@+id/txtDescSuperCarrier"
-                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/SeperatorMargins"
-                        android:layout_marginLeft="@dimen/MainViewSideMargin"
-                        android:layout_marginRight="@dimen/MainViewSideMargin"
-                        android:background="?attr/TextViewBackgroundColour"
-                        android:text="@string/desc_super_carrier"
-                        android:textColor="?attr/InfoColour"
-                        android:textStyle="bold" />
+                        android:visibility="gone" />
 
                     <com.apps.fast.launch.views.PurchaseButton
                         android:id="@+id/btnBuildSuperCarrier"
@@ -296,7 +183,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/ButtonImagePadding"
-                            android:src="@drawable/marker_shipyard_not_producing" />
+                            android:src="@drawable/marker_shipyard" />
 
                         <TextView
                             android:id="@+id/txtSlotUpgrade"
@@ -402,44 +289,6 @@
                 android:layout_marginBottom="@dimen/MainViewSpacing"
                 android:orientation="horizontal"
                 android:visibility="visible">
-
-                <LinearLayout
-                    android:id="@+id/btnCapture"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
-
-                    <ImageView
-                        android:id="@+id/imgCapture"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/text_button_normal"
-                        android:padding="@dimen/ButtonImagePadding"
-                        android:src="@drawable/button_capture_city" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/btnAbandon"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/MainViewSpacing"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
-
-                    <ImageView
-                        android:id="@+id/imgAbandon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/text_button_normal"
-                        android:padding="@dimen/ButtonImagePadding"/>
-
-                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/btnAttack"

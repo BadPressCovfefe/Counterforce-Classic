@@ -876,34 +876,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/MainViewSideMargin"
                 android:layout_marginRight="@dimen/MainViewSideMargin"
-                android:orientation="horizontal"
-                android:visibility="gone">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/detail_button"
-                    android:text="Daily City Tax Revenue"
-                    android:textColor="?attr/WarningColour"
-                    android:textStyle="normal" />
-
-                <TextView
-                    android:id="@+id/txtCityTax"
-                    android:layout_width="64dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/detail_button"
-                    android:gravity="right"
-                    android:text="$10000"
-                    android:textColor="?attr/GoodColour"
-                    android:textStyle="normal" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/MainViewSideMargin"
-                android:layout_marginRight="@dimen/MainViewSideMargin"
                 android:orientation="horizontal">
 
                 <TextView
@@ -927,18 +899,6 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/txtCollectedYesterday"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="@dimen/MainViewSideMargin"
-                android:layout_marginTop="@dimen/MainViewSpacing"
-                android:layout_marginRight="@dimen/MainViewSideMargin"
-                android:text="@string/income_collected_yesterday"
-                android:textStyle="bold"
-                android:visibility="gone" />
-
-            <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/negative_equity"
@@ -949,287 +909,6 @@
                 android:layout_marginRight="@dimen/MainViewSideMargin"
                 android:textColor="?attr/BadColour"
                 android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/txtBonuses"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="@dimen/MainViewSideMargin"
-                android:layout_marginTop="@dimen/MainViewSpacing"
-                android:layout_marginRight="@dimen/MainViewSideMargin"
-                android:text="@string/income_and_bonuses"
-                android:textStyle="bold"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@+id/txtGettingStats"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/MainViewSideMargin"
-                android:text="@string/getting_stats"
-                android:textColor="?attr/WarningColour"
-                android:visibility="gone" />
-
-            <LinearLayout
-                android:id="@+id/lytBonusBasicIncome"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/MainViewSpacing"
-                android:layout_marginLeft="@dimen/MainViewSideMargin"
-                android:layout_marginRight="@dimen/MainViewSideMargin"
-                android:background="@drawable/detail_button"
-                android:visibility="gone">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/bonus_basic_income"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_marginLeft="@dimen/MainViewSpacing"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="£###"
-                    android:id="@+id/txtBasicIncomeVal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_marginRight="@dimen/MainViewSpacing"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lytBonusDiplomaticPresence"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/MainViewSpacing"
-                android:layout_marginLeft="@dimen/MainViewSideMargin"
-                android:layout_marginRight="@dimen/MainViewSideMargin"
-                android:background="@drawable/detail_button"
-                android:visibility="gone">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/bonus_diplomatic_presence"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_marginLeft="@dimen/MainViewSpacing"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="£###"
-                    android:id="@+id/txtDiplomaticPresenceVal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_marginRight="@dimen/MainViewSpacing"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lytBonusPoliticalEngagement"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/MainViewSpacing"
-                android:layout_marginLeft="@dimen/MainViewSideMargin"
-                android:layout_marginRight="@dimen/MainViewSideMargin"
-                android:background="@drawable/detail_button"
-                android:visibility="gone">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/bonus_political_engagement"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_marginLeft="@dimen/MainViewSpacing"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="£###"
-                    android:id="@+id/txtPoliticalEngagementVal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_marginRight="@dimen/MainViewSpacing"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lytBonusDefenderOfTheNation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/MainViewSpacing"
-                android:layout_marginLeft="@dimen/MainViewSideMargin"
-                android:layout_marginRight="@dimen/MainViewSideMargin"
-                android:background="@drawable/detail_button"
-                android:visibility="gone">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/bonus_defender_of_the_nation"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_marginLeft="@dimen/MainViewSpacing"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="£###"
-                    android:id="@+id/txtDefenderOfTheNationVal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_marginRight="@dimen/MainViewSpacing"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lytBonusNuclearSuperpower"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/MainViewSpacing"
-                android:layout_marginLeft="@dimen/MainViewSideMargin"
-                android:layout_marginRight="@dimen/MainViewSideMargin"
-                android:background="@drawable/detail_button"
-                android:visibility="gone">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/bonus_nuclear_superpower"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_marginLeft="@dimen/MainViewSpacing"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="£###"
-                    android:id="@+id/txtNuclearSuperpowerVal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_marginRight="@dimen/MainViewSpacing"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lytBonusSurvivor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/MainViewSpacing"
-                android:layout_marginLeft="@dimen/MainViewSideMargin"
-                android:layout_marginRight="@dimen/MainViewSideMargin"
-                android:background="@drawable/detail_button"
-                android:visibility="gone">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/bonus_survivor"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_marginLeft="@dimen/MainViewSpacing"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="£###"
-                    android:id="@+id/txtSurvivorVal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_marginRight="@dimen/MainViewSpacing"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lytBonusHippy"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/MainViewSpacing"
-                android:layout_marginLeft="@dimen/MainViewSideMargin"
-                android:layout_marginRight="@dimen/MainViewSideMargin"
-                android:background="@drawable/detail_button"
-                android:visibility="gone">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/bonus_hippy"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_marginLeft="@dimen/MainViewSpacing"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="£###"
-                    android:id="@+id/txtHippyVal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_marginRight="@dimen/MainViewSpacing"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lytBonusPeaceMaker"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/MainViewSpacing"
-                android:layout_marginLeft="@dimen/MainViewSideMargin"
-                android:layout_marginRight="@dimen/MainViewSideMargin"
-                android:background="@drawable/detail_button"
-                android:visibility="gone">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/bonus_peace_maker"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_marginLeft="@dimen/MainViewSpacing"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="£###"
-                    android:id="@+id/txtPeaceMakerVal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_marginRight="@dimen/MainViewSpacing"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lytBonusWarMonger"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/MainViewSpacing"
-                android:layout_marginLeft="@dimen/MainViewSideMargin"
-                android:layout_marginRight="@dimen/MainViewSideMargin"
-                android:background="@drawable/detail_button"
-                android:visibility="gone">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/bonus_war_monger"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_marginLeft="@dimen/MainViewSpacing"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="£###"
-                    android:id="@+id/txtWarMongerVal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_marginRight="@dimen/MainViewSpacing"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lytBonusLoneWolf"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/MainViewSpacing"
-                android:layout_marginLeft="@dimen/MainViewSideMargin"
-                android:layout_marginRight="@dimen/MainViewSideMargin"
-                android:background="@drawable/detail_button"
-                android:visibility="gone">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/bonus_lone_wolf"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_marginLeft="@dimen/MainViewSpacing"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="£###"
-                    android:id="@+id/txtLoneWolfVal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_marginRight="@dimen/MainViewSpacing"/>
-            </LinearLayout>
 
             <TextView
                 android:layout_width="fill_parent"
@@ -1284,7 +963,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/imgShowMissileSites"
                     android:layout_weight="1"
-                    android:src="@drawable/view_missile_sites"
+                    android:src="@drawable/marker_missilesite"
                     android:focusableInTouchMode="false"
                     android:tintMode="src_over"/>
                 <ImageView
@@ -1292,7 +971,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/imgShowSAMSites"
                     android:layout_weight="1"
-                    android:src="@drawable/view_sam_sites"
+                    android:src="@drawable/marker_samsite"
                     android:focusableInTouchMode="false"
                     android:tintMode="src_over"/>
                 <ImageView
@@ -1300,19 +979,9 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/imgShowSentryGuns"
                     android:layout_weight="1"
-                    android:src="@drawable/view_sentry_guns"
+                    android:src="@drawable/marker_sentry"
                     android:focusableInTouchMode="false"
                     android:tintMode="src_over"/>
-
-                <ImageView
-                    android:id="@+id/imgShowRadarStations"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/view_radar_stations"
-                    android:tintMode="src_over"
-                    android:visibility="visible" />
 
             </LinearLayout>
 
@@ -1325,21 +994,12 @@
                 android:layout_marginRight="@dimen/MainViewSideMargin">
 
                 <ImageView
-                    android:id="@+id/imgShowOreMines"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/view_ore_mines"
-                    android:tintMode="src_over" />
-
-                <ImageView
                     android:id="@+id/imgShowCommandPosts"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:focusableInTouchMode="false"
-                    android:src="@drawable/icon_command_post"
+                    android:src="@drawable/marker_command_post"
                     android:tintMode="src_over" />
 
                 <ImageView
@@ -1348,7 +1008,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:focusableInTouchMode="false"
-                    android:src="@drawable/icon_airbase"
+                    android:src="@drawable/marker_airbase"
                     android:tintMode="src_over" />
 
                 <ImageView
@@ -1357,7 +1017,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:focusableInTouchMode="false"
-                    android:src="@drawable/icon_logisticsdepot"
+                    android:src="@drawable/marker_bank"
                     android:tintMode="src_over" />
 
                 <ImageView
@@ -1366,7 +1026,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:focusableInTouchMode="false"
-                    android:src="@drawable/icon_armory"
+                    android:src="@drawable/marker_armory"
                     android:tintMode="src_over" />
 
                 <ImageView
@@ -1375,7 +1035,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:focusableInTouchMode="false"
-                    android:src="@drawable/icon_artillery_gun"
+                    android:src="@drawable/marker_artillery_gun"
                     android:tintMode="src_over" />
 
             </LinearLayout>
@@ -1389,48 +1049,12 @@
                 android:layout_marginRight="@dimen/MainViewSideMargin">
 
                 <ImageView
-                    android:id="@+id/imgShowWatchTowers"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/icon_watch_tower"
-                    android:tintMode="src_over" />
-
-                <ImageView
-                    android:id="@+id/imgShowDistributors"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/icon_distributor"
-                    android:tintMode="src_over" />
-
-                <ImageView
-                    android:id="@+id/imgShowProcessors"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/icon_processor"
-                    android:tintMode="src_over" />
-
-                <ImageView
-                    android:id="@+id/imgShowScrapYards"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/icon_scrap_yard"
-                    android:tintMode="src_over" />
-
-                <ImageView
                     android:id="@+id/imgShowAircrafts"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:focusableInTouchMode="false"
-                    android:src="@drawable/marker_fighter_default"
+                    android:src="@drawable/marker_fighter"
                     android:tintMode="src_over" />
 
                 <ImageView
@@ -1440,26 +1064,6 @@
                     android:layout_weight="1"
                     android:focusableInTouchMode="false"
                     android:src="@drawable/marker_tank_east"
-                    android:tintMode="src_over" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/lytCostsVisButtonsRow6"
-                android:layout_marginTop="@dimen/MainViewSpacing"
-                android:layout_marginLeft="@dimen/MainViewSideMargin"
-                android:layout_marginRight="@dimen/MainViewSideMargin">
-
-                <ImageView
-                    android:id="@+id/imgShowInfantries"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/marker_infantry"
                     android:tintMode="src_over" />
 
                 <ImageView
@@ -1477,7 +1081,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:focusableInTouchMode="false"
-                    android:src="@drawable/marker_ship_destroyer"
+                    android:src="@drawable/marker_destroyer"
                     android:tintMode="src_over" />
 
                 <ImageView
@@ -1486,7 +1090,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:focusableInTouchMode="false"
-                    android:src="@drawable/marker_submarine_medium"
+                    android:src="@drawable/marker_attack_sub"
                     android:tintMode="src_over" />
 
             </LinearLayout>

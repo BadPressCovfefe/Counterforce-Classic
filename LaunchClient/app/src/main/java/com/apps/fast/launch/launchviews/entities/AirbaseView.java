@@ -34,7 +34,7 @@ public class AirbaseView extends StructureView
 
         airbase = (Airbase)structureShadow;
 
-        imgLogo.setImageResource(R.drawable.icon_airbase);
+        imgLogo.setImageResource(R.drawable.marker_airbase);
 
         if(structureShadow.GetOwnerID() == game.GetOurPlayerID())
         {

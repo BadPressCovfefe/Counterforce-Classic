@@ -61,22 +61,15 @@ public class WealthRulesView extends LaunchView
     private ImageView imgShowMissileSites;
     private ImageView imgShowSAMSites;
     private ImageView imgShowSentryGuns;
-    private ImageView imgShowWatchTowers;
-    private ImageView imgShowOreMines;
-    private ImageView imgShowRadarStations;
     private ImageView imgShowCommandPosts;
     private ImageView imgShowAirbases;
     private ImageView imgShowArmory;
-    private ImageView imgShowWarehouses;
-    private ImageView imgShowScrapYards;
-    private ImageView imgShowProcessors;
-    private ImageView imgShowDistributors;
+    private ImageView imgShowBanks;
     private ImageView imgShowArtilleryGuns;
     private ImageView imgShowAircrafts;
     private ImageView imgShowTanks;
     private ImageView imgShowShips;
     private ImageView imgShowSubmarines;
-    private ImageView imgShowInfantry;
     private ImageView imgShowCargoTrucks;
     private TextView txtRankPayQuantity;
     private TextView txtRankPayEach;
@@ -130,21 +123,11 @@ public class WealthRulesView extends LaunchView
     private boolean bShowMissileSites;
     private boolean bShowSAMSites;
     private boolean bShowSentryGuns;
-    private boolean bShowWatchTowers;
-    private boolean bShowOreMines;
-    private boolean bShowRadarStations;
-    private boolean bShowSolarPanels;
-    private boolean bShowFarms;
     private boolean bShowCommandPosts;
     private boolean bShowAirbases;
     private boolean bShowArmory;
     private boolean bShowBanks;
-    private boolean bShowWarehouses;
-    private boolean bShowMissileFactorys;
     private boolean bShowArtilleryGuns;
-    private boolean bShowProcessors;
-    private boolean bShowDistributors;
-    private boolean bShowScrapYards;
     private boolean bShowAircrafts;
     private boolean bShowInfantry;
     private boolean bShowTanks;
@@ -203,21 +186,13 @@ public class WealthRulesView extends LaunchView
         imgShowMissileSites = findViewById(R.id.imgShowMissileSites);
         imgShowSAMSites = findViewById(R.id.imgShowSAMSites);
         imgShowSentryGuns = findViewById(R.id.imgShowSentryGuns);
-        imgShowWatchTowers = findViewById(R.id.imgShowWatchTowers);
-        imgShowOreMines = findViewById(R.id.imgShowOreMines);
         imgShowCommandPosts = findViewById(R.id.imgShowCommandPosts);
-        imgShowRadarStations = findViewById(R.id.imgShowRadarStations);
         imgShowAirbases = findViewById(R.id.imgShowAirbases);
         imgShowArmory = findViewById(R.id.imgShowArmory);
-        imgShowWarehouses = findViewById(R.id.imgShowWarehouses);
-
-        imgShowScrapYards = findViewById(R.id.imgShowScrapYards);
-        imgShowProcessors = findViewById(R.id.imgShowProcessors);
-        imgShowDistributors = findViewById(R.id.imgShowDistributors);
+        imgShowBanks = findViewById(R.id.imgShowWarehouses);
         imgShowArtilleryGuns = findViewById(R.id.imgShowArtilleryGuns);
         imgShowAircrafts = findViewById(R.id.imgShowAircrafts);
         imgShowTanks = findViewById(R.id.imgShowTanks);
-        imgShowInfantry = findViewById(R.id.imgShowInfantries);
         imgShowCargoTrucks = findViewById(R.id.imgShowCargoTrucks);
         imgShowShips = findViewById(R.id.imgShowShips);
         imgShowSubmarines = findViewById(R.id.imgShowSubmarines);
@@ -452,21 +427,11 @@ public class WealthRulesView extends LaunchView
         bShowMissileSites = true;
         bShowSAMSites = true;
         bShowSentryGuns = true;
-        bShowWatchTowers = true;
-        bShowOreMines = true;
-        bShowRadarStations = true;
-        bShowSolarPanels = true;
-        bShowFarms = true;
-        bShowDistributors = true;
         bShowArtilleryGuns = true;
-        bShowProcessors = true;
-        bShowScrapYards = true;
         bShowCommandPosts = true;
         bShowAirbases = true;
         bShowArmory = true;
         bShowBanks = true;
-        bShowWarehouses = true;
-        bShowMissileFactorys = true;
         bShowAircrafts = true;
         bShowTanks = true;
         bShowInfantry = true;
@@ -572,44 +537,6 @@ public class WealthRulesView extends LaunchView
             }
         });
 
-        imgShowWatchTowers.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                bShowWatchTowers = !bShowWatchTowers;
-
-                activity.runOnUiThread(new Runnable()
-                {
-                    @Override
-                    public void run()
-                    {
-                        imgShowWatchTowers.setColorFilter(bShowWatchTowers? 0 : LaunchUICommon.COLOUR_TINTED);
-                        RebuildCostableEntityList();
-                    }
-                });
-            }
-        });
-
-        imgShowOreMines.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                bShowOreMines = !bShowOreMines;
-
-                activity.runOnUiThread(new Runnable()
-                {
-                    @Override
-                    public void run()
-                    {
-                        imgShowOreMines.setColorFilter(bShowOreMines? 0 : LaunchUICommon.COLOUR_TINTED);
-                        RebuildCostableEntityList();
-                    }
-                });
-            }
-        });
-
         imgShowCommandPosts.setOnClickListener(new OnClickListener()
         {
             @Override
@@ -623,25 +550,6 @@ public class WealthRulesView extends LaunchView
                     public void run()
                     {
                         imgShowCommandPosts.setColorFilter(bShowCommandPosts? 0 : LaunchUICommon.COLOUR_TINTED);
-                        RebuildCostableEntityList();
-                    }
-                });
-            }
-        });
-
-        imgShowRadarStations.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                bShowRadarStations = !bShowRadarStations;
-
-                activity.runOnUiThread(new Runnable()
-                {
-                    @Override
-                    public void run()
-                    {
-                        imgShowRadarStations.setColorFilter(bShowRadarStations? 0 : LaunchUICommon.COLOUR_TINTED);
                         RebuildCostableEntityList();
                     }
                 });
@@ -686,63 +594,6 @@ public class WealthRulesView extends LaunchView
             }
         });
 
-        /*imgShowBanks.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                bShowBanks = !bShowBanks;
-
-                activity.runOnUiThread(new Runnable()
-                {
-                    @Override
-                    public void run()
-                    {
-                        imgShowBanks.setColorFilter(bShowBanks? 0 : LaunchUICommon.COLOUR_TINTED);
-                        RebuildCostableEntityList();
-                    }
-                });
-            }
-        });*/
-
-        imgShowWarehouses.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                bShowWarehouses = !bShowWarehouses;
-
-                activity.runOnUiThread(new Runnable()
-                {
-                    @Override
-                    public void run()
-                    {
-                        imgShowWarehouses.setColorFilter(bShowWarehouses? 0 : LaunchUICommon.COLOUR_TINTED);
-                        RebuildCostableEntityList();
-                    }
-                });
-            }
-        });
-
-        /*imgShowMissileFactorys.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                bShowMissileFactorys = !bShowMissileFactorys;
-
-                activity.runOnUiThread(new Runnable()
-                {
-                    @Override
-                    public void run()
-                    {
-                        imgShowMissileFactorys.setColorFilter(bShowMissileFactorys? 0 : LaunchUICommon.COLOUR_TINTED);
-                        RebuildCostableEntityList();
-                    }
-                });
-            }
-        });*/
-
         imgShowArtilleryGuns.setOnClickListener(new OnClickListener()
         {
             @Override
@@ -756,63 +607,6 @@ public class WealthRulesView extends LaunchView
                     public void run()
                     {
                         imgShowArtilleryGuns.setColorFilter(bShowArtilleryGuns? 0 : LaunchUICommon.COLOUR_TINTED);
-                        RebuildCostableEntityList();
-                    }
-                });
-            }
-        });
-
-        imgShowDistributors.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                bShowDistributors = !bShowDistributors;
-
-                activity.runOnUiThread(new Runnable()
-                {
-                    @Override
-                    public void run()
-                    {
-                        imgShowDistributors.setColorFilter(bShowDistributors? 0 : LaunchUICommon.COLOUR_TINTED);
-                        RebuildCostableEntityList();
-                    }
-                });
-            }
-        });
-
-        imgShowScrapYards.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                bShowScrapYards = !bShowScrapYards;
-
-                activity.runOnUiThread(new Runnable()
-                {
-                    @Override
-                    public void run()
-                    {
-                        imgShowScrapYards.setColorFilter(bShowScrapYards? 0 : LaunchUICommon.COLOUR_TINTED);
-                        RebuildCostableEntityList();
-                    }
-                });
-            }
-        });
-
-        imgShowProcessors.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                bShowProcessors = !bShowProcessors;
-
-                activity.runOnUiThread(new Runnable()
-                {
-                    @Override
-                    public void run()
-                    {
-                        imgShowProcessors.setColorFilter(bShowProcessors? 0 : LaunchUICommon.COLOUR_TINTED);
                         RebuildCostableEntityList();
                     }
                 });
@@ -851,25 +645,6 @@ public class WealthRulesView extends LaunchView
                     public void run()
                     {
                         imgShowTanks.setColorFilter(bShowTanks? 0 : LaunchUICommon.COLOUR_TINTED);
-                        RebuildCostableEntityList();
-                    }
-                });
-            }
-        });
-
-        imgShowInfantry.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                bShowInfantry = !bShowInfantry;
-
-                activity.runOnUiThread(new Runnable()
-                {
-                    @Override
-                    public void run()
-                    {
-                        imgShowInfantry.setColorFilter(bShowInfantry? 0 : LaunchUICommon.COLOUR_TINTED);
                         RebuildCostableEntityList();
                     }
                 });
@@ -1198,15 +973,6 @@ public class WealthRulesView extends LaunchView
         if(!bShowSentryGuns && entity instanceof SentryGun && !((SentryGun)entity).GetIsWatchTower())
             return false;
 
-        if(!bShowWatchTowers && entity instanceof SentryGun && ((SentryGun)entity).GetIsWatchTower())
-            return false;
-
-        if(!bShowOreMines && entity instanceof OreMine)
-            return false;
-
-        if(!bShowRadarStations && entity instanceof RadarStation)
-            return false;
-
         if(!bShowCommandPosts && entity instanceof CommandPost)
             return false;
 
@@ -1219,22 +985,7 @@ public class WealthRulesView extends LaunchView
         if(!bShowBanks && entity instanceof Bank)
             return false;
 
-        if(!bShowWarehouses && entity instanceof Warehouse)
-            return false;
-
-        if(!bShowMissileFactorys && entity instanceof MissileFactory)
-            return false;
-
         if(!bShowArtilleryGuns && entity instanceof ArtilleryGun)
-            return false;
-
-        if(!bShowDistributors && entity instanceof Distributor)
-            return false;
-
-        if(!bShowProcessors && entity instanceof Processor)
-            return false;
-
-        if(!bShowScrapYards && entity instanceof ScrapYard)
             return false;
 
         if(!bShowAircrafts && entity instanceof AirplaneInterface)
@@ -1316,240 +1067,6 @@ public class WealthRulesView extends LaunchView
                                         }
                                     }
                                 }
-
-                                //TODO: Collected yesterday
-                                //txtCollectedYesterday.setText(TextUtilities.GetCurrencyString(ourPlayer.GetWealthYesterday()));
-                                //txtCollectedYesterday.setVisibility(VISIBLE);
-                                /*txtBasicIncomeVal.setText(TextUtilities.GetCurrencyString(config.GetHourlyWealth(ourPlayer)));
-                                if(game.GetBasicIncomeEligible(ourPlayer))
-                                {
-                                    lytBonusBasicIncome.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableNormal));
-                                    txtBasicIncomeVal.setTextColor(Utilities.ColourFromAttr(context, R.attr.GoodColour));
-                                }
-                                else
-                                {
-                                    lytBonusBasicIncome.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableDisabled));
-                                    txtBasicIncomeVal.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
-                                }
-
-                                lytBonusBasicIncome.setOnClickListener(new OnClickListener()
-                                {
-                                    @Override
-                                    public void onClick(View view)
-                                    {
-                                        activity.ShowBasicOKDialog(context.getString(R.string.bonus_basic_income_description));
-                                    }
-                                });
-
-                                //txtDiplomaticPresenceVal.setText(TextUtilities.GetCurrencyString(config.GetHourlyBonusDiplomaticPresence()));
-                                if(game.GetDiplomaticPresenceEligible(ourPlayer))
-                                {
-                                    lytBonusDiplomaticPresence.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableNormal));
-                                    txtDiplomaticPresenceVal.setTextColor(Utilities.ColourFromAttr(context, R.attr.GoodColour));
-                                }
-                                else
-                                {
-                                    lytBonusDiplomaticPresence.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableDisabled));
-                                    txtDiplomaticPresenceVal.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
-                                }
-
-                                lytBonusDiplomaticPresence.setOnClickListener(new OnClickListener()
-                                {
-                                    @Override
-                                    public void onClick(View view)
-                                    {
-                                        activity.ShowBasicOKDialog(context.getString(R.string.bonus_diplomatic_presence_description));
-                                    }
-                                });
-
-                                //txtPoliticalEngagementVal.setText(TextUtilities.GetCurrencyString(config.GetHourlyBonusPoliticalEngagement()));
-                                if(game.GetPoliticalEngagementEligible(ourPlayer))
-                                {
-                                    lytBonusPoliticalEngagement.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableNormal));
-                                    txtPoliticalEngagementVal.setTextColor(Utilities.ColourFromAttr(context, R.attr.GoodColour));
-                                }
-                                else
-                                {
-                                    lytBonusPoliticalEngagement.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableDisabled));
-                                    txtPoliticalEngagementVal.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
-                                }
-
-                                lytBonusPoliticalEngagement.setOnClickListener(new OnClickListener()
-                                {
-                                    @Override
-                                    public void onClick(View view)
-                                    {
-                                        activity.ShowBasicOKDialog(context.getString(R.string.bonus_political_engagement_description));
-                                    }
-                                });
-
-                                //txtDefenderOfTheNationVal.setText(TextUtilities.GetCurrencyString(config.GetHourlyBonusDefenderOfTheNation()));
-                                if(game.GetDefenderOfTheNationEligible(ourPlayer))
-                                {
-                                    lytBonusDefenderOfTheNation.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableNormal));
-                                    txtDefenderOfTheNationVal.setTextColor(Utilities.ColourFromAttr(context, R.attr.GoodColour));
-                                }
-                                else
-                                {
-                                    lytBonusDefenderOfTheNation.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableDisabled));
-                                    txtDefenderOfTheNationVal.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
-                                }
-
-                                lytBonusDefenderOfTheNation.setOnClickListener(new OnClickListener()
-                                {
-                                    @Override
-                                    public void onClick(View view)
-                                    {
-                                        activity.ShowBasicOKDialog(context.getString(R.string.bonus_defender_of_the_nation_description));
-                                    }
-                                });
-
-                                //txtNuclearSuperpowerVal.setText(TextUtilities.GetCurrencyString(config.GetHourlyBonusNuclearSuperpower()));
-                                if(game.GetNuclearSuperpowerEligible(ourPlayer))
-                                {
-                                    lytBonusNuclearSuperpower.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableNormal));
-                                    txtNuclearSuperpowerVal.setTextColor(Utilities.ColourFromAttr(context, R.attr.GoodColour));
-                                }
-                                else
-                                {
-                                    lytBonusNuclearSuperpower.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableDisabled));
-                                    txtNuclearSuperpowerVal.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
-                                }
-
-                                lytBonusNuclearSuperpower.setOnClickListener(new OnClickListener()
-                                {
-                                    @Override
-                                    public void onClick(View view)
-                                    {
-                                        activity.ShowBasicOKDialog(context.getString(R.string.bonus_nuclear_superpower_description));
-                                    }
-                                });
-
-                                //txtSurvivorVal.setText(TextUtilities.GetCurrencyString(config.GetHourlyBonusSurvivor()));
-                                if(game.GetSurvivorEligible(ourPlayer))
-                                {
-                                    lytBonusSurvivor.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableNormal));
-                                    txtSurvivorVal.setTextColor(Utilities.ColourFromAttr(context, R.attr.GoodColour));
-                                }
-                                else
-                                {
-                                    lytBonusSurvivor.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableDisabled));
-                                    txtSurvivorVal.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
-                                }
-
-                                lytBonusSurvivor.setOnClickListener(new OnClickListener()
-                                {
-                                    @Override
-                                    public void onClick(View view)
-                                    {
-                                        activity.ShowBasicOKDialog(context.getString(R.string.bonus_survivor_description));
-                                    }
-                                });
-
-                                //txtHippyVal.setText(TextUtilities.GetCurrencyString(config.GetHourlyBonusHippy()));
-                                if(game.GetHippyEligible(ourPlayer))
-                                {
-                                    lytBonusHippy.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableNormal));
-                                    txtHippyVal.setTextColor(Utilities.ColourFromAttr(context, R.attr.GoodColour));
-                                }
-                                else
-                                {
-                                    lytBonusHippy.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableDisabled));
-                                    txtHippyVal.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
-                                }
-
-                                lytBonusHippy.setOnClickListener(new OnClickListener()
-                                {
-                                    @Override
-                                    public void onClick(View view)
-                                    {
-                                        activity.ShowBasicOKDialog(context.getString(R.string.bonus_hippy_description));
-                                    }
-                                });
-
-                                if(lActivePlayers > 0)
-                                {
-                                    //txtPeaceMakerVal.setText(TextUtilities.GetCurrencyString(config.GetHourlyBonusPeaceMaker()));
-                                    final float fltFriends = (float)lFriends / (float)lActivePlayers;
-
-                                    if((fltFriends > Defs.RELATIONSHIP_BONUS_THRESHOLD))
-                                    {
-                                        lytBonusPeaceMaker.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableNormal));
-                                        txtPeaceMakerVal.setTextColor(Utilities.ColourFromAttr(context, R.attr.GoodColour));
-                                    }
-                                    else
-                                    {
-                                        lytBonusPeaceMaker.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableDisabled));
-                                        txtPeaceMakerVal.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
-                                    }
-
-                                    lytBonusPeaceMaker.setOnClickListener(new OnClickListener()
-                                    {
-                                        @Override
-                                        public void onClick(View view)
-                                        {
-                                            activity.ShowBasicOKDialog(context.getString(R.string.bonus_peace_maker_description, TextUtilities.GetPercentStringFromFraction(Defs.RELATIONSHIP_BONUS_THRESHOLD), TextUtilities.GetPercentStringFromFraction(fltFriends)));
-                                        }
-                                    });
-
-                                    //txtWarMongerVal.setText(TextUtilities.GetCurrencyString(config.GetHourlyBonusWarMonger()));
-                                    final float fltEnemies = (float)lEnemies / (float)lActivePlayers;
-
-                                    if((fltEnemies > Defs.RELATIONSHIP_BONUS_THRESHOLD))
-                                    {
-                                        lytBonusWarMonger.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableNormal));
-                                        txtWarMongerVal.setTextColor(Utilities.ColourFromAttr(context, R.attr.GoodColour));
-                                    }
-                                    else
-                                    {
-                                        lytBonusWarMonger.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableDisabled));
-                                        txtWarMongerVal.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
-                                    }
-
-                                    lytBonusWarMonger.setOnClickListener(new OnClickListener()
-                                    {
-                                        @Override
-                                        public void onClick(View view)
-                                        {
-                                            activity.ShowBasicOKDialog(context.getString(R.string.bonus_war_monger_description, TextUtilities.GetPercentStringFromFraction(Defs.RELATIONSHIP_BONUS_THRESHOLD), TextUtilities.GetPercentStringFromFraction(fltEnemies)));
-                                        }
-                                    });
-
-                                    //txtLoneWolfVal.setText(TextUtilities.GetCurrencyString(config.GetHourlyBonusLoneWolf()));
-                                    if(false /*nearestPlayer.GetPosition().DistanceTo(ourPlayer.GetPosition()) > config.GetLoneWolfDistance())
-                                    {
-                                        lytBonusLoneWolf.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableNormal));
-                                        txtLoneWolfVal.setTextColor(Utilities.ColourFromAttr(context, R.attr.GoodColour));
-                                    }
-                                    else
-                                    {
-                                        lytBonusLoneWolf.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableDisabled));
-                                        txtLoneWolfVal.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
-                                    }
-
-                                    final Player finalNearestPlayer = nearestPlayer;
-                                    final float finalFltNearestPlayerDistance = fltNearestPlayerDistance;
-                                    lytBonusLoneWolf.setOnClickListener(new OnClickListener()
-                                    {
-                                        @Override
-                                        public void onClick(View view)
-                                        {
-                                            //activity.ShowBasicOKDialog(context.getString(R.string.bonus_lone_wolf_description, TextUtilities.GetDistanceStringFromKM(config.GetLoneWolfDistance()), finalNearestPlayer.GetName(), TextUtilities.GetDistanceStringFromKM(finalFltNearestPlayerDistance)));
-                                        }
-                                    });
-
-                                    lytBonusPeaceMaker.setVisibility(VISIBLE);
-                                    lytBonusWarMonger.setVisibility(VISIBLE);
-                                    lytBonusLoneWolf.setVisibility(VISIBLE);
-                                }
-
-                                lytBonusBasicIncome.setVisibility(VISIBLE);
-                                lytBonusDiplomaticPresence.setVisibility(VISIBLE);
-                                lytBonusPoliticalEngagement.setVisibility(VISIBLE);
-                                lytBonusDefenderOfTheNation.setVisibility(VISIBLE);
-                                lytBonusNuclearSuperpower.setVisibility(VISIBLE);
-                                lytBonusSurvivor.setVisibility(VISIBLE);
-                                lytBonusHippy.setVisibility(VISIBLE);*/
                             }
                         });
 
@@ -1603,31 +1120,6 @@ public class WealthRulesView extends LaunchView
                                 {
                                     EntityViews.remove(aircraftMaintenanceView);
                                     lytHourlyCosts.removeView(aircraftMaintenanceView);
-                                }
-                            });
-                        }
-                    }
-                }
-            }
-        }
-
-        if(entity instanceof InfantryInterface)
-        {
-            if(((InfantryInterface)entity).GetOwnerID() == game.GetOurPlayerID())
-            {
-                for(final InfantryMaintenanceView infantryMaintenanceView : GetInfantryViews())
-                {
-                    if(entity.ApparentlyEquals((LaunchEntity)infantryMaintenanceView.GetCurrentInfantry()))
-                    {
-                        if(!ShouldBeVisible(entity))
-                        {
-                            activity.runOnUiThread(new Runnable()
-                            {
-                                @Override
-                                public void run()
-                                {
-                                    EntityViews.remove(infantryMaintenanceView);
-                                    lytHourlyCosts.removeView(infantryMaintenanceView);
                                 }
                             });
                         }
@@ -1784,28 +1276,6 @@ public class WealthRulesView extends LaunchView
             }
         }
 
-        if(entity instanceof InfantryInterface)
-        {
-            if(((InfantryInterface)entity).GetOwnerID() == game.GetOurPlayerID())
-            {
-                for(final InfantryMaintenanceView infantryMaintenanceView : GetInfantryViews())
-                {
-                    if(entity.ApparentlyEquals((LaunchEntity)infantryMaintenanceView.GetCurrentInfantry()))
-                    {
-                        activity.runOnUiThread(new Runnable()
-                        {
-                            @Override
-                            public void run()
-                            {
-                                EntityViews.remove(infantryMaintenanceView);
-                                lytHourlyCosts.removeView(infantryMaintenanceView);
-                            }
-                        });
-                    }
-                }
-            }
-        }
-
         if(entity instanceof TankInterface)
         {
             if(((TankInterface)entity).GetOwnerID() == game.GetOurPlayerID())
@@ -1916,19 +1386,6 @@ public class WealthRulesView extends LaunchView
         {
             if(view instanceof AircraftMaintenanceView)
                 Result.add((AircraftMaintenanceView)view);
-        }
-
-        return Result;
-    }
-
-    public List<InfantryMaintenanceView> GetInfantryViews()
-    {
-        List<InfantryMaintenanceView> Result = new ArrayList<>();
-
-        for(LaunchView view : new ArrayList<>(EntityViews))
-        {
-            if(view instanceof InfantryMaintenanceView)
-                Result.add((InfantryMaintenanceView)view);
         }
 
         return Result;

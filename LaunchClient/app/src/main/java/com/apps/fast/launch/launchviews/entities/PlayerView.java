@@ -737,13 +737,7 @@ public class PlayerView extends LaunchView
                             txtPlayerAlliance.setTextColor(Utilities.ColourFromAttr(context, R.attr.GoodColour));
                         }
 
-                        if(player.GetPrisoner() && game.GetAlliance(player.GetAllianceMemberID()) != null)
-                        {
-                            txtPlayerAlliance.setText(game.GetAlliance(player.GetAllianceMemberID()).GetName() + " " + context.getString(R.string.pow));
-                            imgLeader.setVisibility(VISIBLE);
-                            imgLeader.setImageResource(R.drawable.icon_prisoner);
-                        }
-                        else if(player.GetIsAnMP())
+                        if(player.GetIsAnMP())
                         {
                             imgLeader.setVisibility(VISIBLE);
                             imgLeader.setImageResource(R.drawable.icon_leader);

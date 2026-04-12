@@ -16,10 +16,8 @@ import com.apps.fast.launch.components.TextUtilities;
 import com.apps.fast.launch.components.Utilities;
 import com.apps.fast.launch.launchviews.entities.ShipView;
 import com.apps.fast.launch.launchviews.entities.SubmarineView;
-import com.apps.fast.launch.views.CostView;
 import com.apps.fast.launch.views.LaunchDialog;
 import com.apps.fast.launch.views.LaunchablePurchaseSelectionView;
-import com.apps.fast.launch.views.LaunchableSelectionView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,10 +35,7 @@ import launch.game.entities.Submarine;
 import launch.game.entities.conceptuals.Resource;
 import launch.game.systems.LaunchSystem.SystemType;
 import launch.game.systems.MissileSystem;
-import launch.game.types.InterceptorType;
-import launch.game.types.MissileType;
 import launch.game.types.TorpedoType;
-import launch.utilities.LaunchUtilities;
 import launch.utilities.MissileStats;
 
 

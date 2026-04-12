@@ -34,7 +34,7 @@
                     android:layout_width="@dimen/PlayerInfoIconSize"
                     android:layout_height="@dimen/PlayerInfoIconSize"
                     android:id="@+id/imgSubmarine"
-                    android:src="@drawable/marker_submarine_medium"/>
+                    android:src="@drawable/marker_ssbn"/>
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -292,25 +292,6 @@
                     android:layout_weight="1"
                     android:clickable="true"
                     android:orientation="horizontal"/>
-
-                <LinearLayout
-                    android:id="@+id/btnDive"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/MainViewSpacing"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/imgDive"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/text_button_normal"
-                        android:padding="@dimen/ButtonImagePadding"
-                        android:src="@drawable/button_dive" />
-
-                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/btnSonar"

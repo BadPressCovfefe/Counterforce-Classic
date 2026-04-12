@@ -55,7 +55,6 @@ public class TankView extends LaunchView implements LaunchUICommon.TankInfoProvi
 
     private LinearLayout btnMove;
     private LinearLayout btnCeaseFire;
-    private LinearLayout btnDigIn;
     private LinearLayout lytControls;
     private LinearLayout btnSell;
     private TextView txtHP;
@@ -66,7 +65,6 @@ public class TankView extends LaunchView implements LaunchUICommon.TankInfoProvi
     protected LinearLayout btnApplyName;
     protected ImageView imgTank;
     private FrameLayout lytLaunchables;
-    private LinearLayout btnTransferCargo;
 
     private LinearLayout lytMode;
     private ImageButton btnAuto;
@@ -81,37 +79,11 @@ public class TankView extends LaunchView implements LaunchUICommon.TankInfoProvi
     private View viewToTarget;
     private LaunchView launchableSystem;
     private boolean bOwnedByPlayer;
-    private ResourceSystem resources;
-    private LinearLayout lytResources;
 
     public TankView(LaunchClientGame game, MainActivity activity, TankInterface tank)
     {
         super(game, activity, true);
         this.tankShadow = tank;
-
-        if(tank instanceof Tank)
-            resources = ((Tank)tank).GetResourceSystem();
-
-        switch(tankShadow.GetType())
-        {
-            case MISSILE_TANK:
-            {
-                launchableSystem = new MissileSystemControl(game, activity, tankShadow.GetID(), (LaunchEntity)tankShadow, true);
-            }
-            break;
-
-            case SAM_TANK:
-            {
-                launchableSystem = new MissileSystemControl(game, activity, tankShadow.GetID(), (LaunchEntity)tankShadow, false);
-            }
-            break;
-
-            case HOWITZER:
-            {
-                launchableSystem = new ArtillerySystemControl(game, activity, tankShadow.GetID(), (Tank)tankShadow);
-            }
-            break;
-        }
 
         bOwnedByPlayer = tankShadow.GetOwnerID() == game.GetOurPlayerID();
 
@@ -131,11 +103,8 @@ public class TankView extends LaunchView implements LaunchUICommon.TankInfoProvi
         lytControls = findViewById(R.id.lytControls);
         txtHP = findViewById(R.id.txtHP);
         txtTankStatus = findViewById(R.id.txtTankStatus);
-        btnDigIn = findViewById(R.id.btnDigIn);
         lytLaunchables = findViewById(R.id.lytLaunchables);
-        btnTransferCargo = findViewById(R.id.btnTransferCargo);
         btnCeaseFire = findViewById(R.id.btnCeaseFire);
-        lytResources = findViewById(R.id.lytResources);
 
         lytReload = (LinearLayout) findViewById(R.id.lytReload);
         txtReloading = (TextView) findViewById(R.id.txtReloading);
@@ -299,8 +268,6 @@ public class TankView extends LaunchView implements LaunchUICommon.TankInfoProvi
                     btnSetTarget.setVisibility(GONE);
                 }
 
-                Utilities.DrawResourceSystem(context, resources, lytResources);
-
                 txtLoad.setOnClickListener(new OnClickListener()
                 {
                     @Override
@@ -420,15 +387,6 @@ public class TankView extends LaunchView implements LaunchUICommon.TankInfoProvi
 
             imgTank.setImageBitmap(LandUnitIconBitmaps.GetLandUnitBitmap(context, game, tank));
 
-            btnTransferCargo.setOnClickListener(new OnClickListener()
-            {
-                @Override
-                public void onClick(View view)
-                {
-                    activity.TransferCargoMode(null, tank, true);
-                }
-            });
-
             btnCeaseFire.setOnClickListener(new OnClickListener()
             {
                 @Override
@@ -464,55 +422,12 @@ public class TankView extends LaunchView implements LaunchUICommon.TankInfoProvi
                     }
                 });
             }
-
-            if(tank.GetMobile())
-            {
-                btnDigIn.setVisibility(VISIBLE);
-            }
-            else
-            {
-                btnDigIn.setVisibility(GONE);
-            }
-
-            btnDigIn.setOnClickListener(new OnClickListener()
-            {
-                @Override
-                public void onClick(View view)
-                {
-                    if(tank.GetMobile())
-                    {
-                        final LaunchDialog launchDialog = new LaunchDialog();
-                        launchDialog.SetHeaderLaunch();
-                        launchDialog.SetMessage(context.getString(R.string.dig_in_confirm));
-                        launchDialog.SetOnClickYes(new OnClickListener()
-                        {
-                            @Override
-                            public void onClick(View view)
-                            {
-                                launchDialog.dismiss();
-
-                                game.UnitCommand(Movable.MoveOrders.DEFEND, Collections.singletonList(((LaunchEntity) tankShadow).GetPointer()), null, null, CargoSystem.LootType.NONE, 0, 0);
-                            }
-                        });
-                        launchDialog.SetOnClickNo(new OnClickListener()
-                        {
-                            @Override
-                            public void onClick(View view)
-                            {
-                                launchDialog.dismiss();
-                            }
-                        });
-                        launchDialog.show(activity.getFragmentManager(), "");
-                    }
-                }
-            });
         }
         else
         {
             StoredTank tank = (StoredTank)tankShadow;
 
             TextUtilities.AssignHealthStringAndAppearance(txtHP, tank);
-            btnDigIn.setVisibility(GONE);
         }
 
         String strName = Utilities.GetEntityName(context, (NamableInterface)tankShadow);
@@ -586,11 +501,9 @@ public class TankView extends LaunchView implements LaunchUICommon.TankInfoProvi
         }
         else
         {
-            btnDigIn.setVisibility(GONE);
             btnMove.setVisibility(GONE);
             lytLaunchables.setVisibility(GONE);
             txtTankStatus.setVisibility(GONE);
-            btnTransferCargo.setVisibility(GONE);
         }
     }
 
@@ -678,9 +591,6 @@ public class TankView extends LaunchView implements LaunchUICommon.TankInfoProvi
                                     flasherManual.TurnOff(context);
                                 }
                             }
-
-                            resources = tank.GetResourceSystem();
-                            Utilities.DrawResourceSystem(context, resources, lytResources);
                         }
 
                         if(game.EntityIsFriendly(game.GetPlayer(tank.GetOwnerID()), game.GetOurPlayer()))

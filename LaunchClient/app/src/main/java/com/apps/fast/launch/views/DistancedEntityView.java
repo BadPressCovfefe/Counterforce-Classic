@@ -93,23 +93,11 @@ public class DistancedEntityView extends FrameLayout
             imgType.setImageBitmap(EntityIconBitmaps.GetLootBitmap(activity, loot));
             txtEntityName.setText(TextUtilities.GetEntityTypeAndName(entity, game));
         }
-        else if(entity instanceof ResourceDeposit)
-        {
-            ResourceDeposit deposit = (ResourceDeposit)entity;
-
-            imgType.setImageBitmap(EntityIconBitmaps.GetResourceBitmap(activity));
-            txtEntityName.setText(TextUtilities.GetResourceDepositTitle(deposit));
-        }
         else if(entity instanceof Rubble)
         {
             Rubble rubble = ((Rubble)entity);
 
             imgType.setImageBitmap(EntityIconBitmaps.GetRubbleBitmap(activity, game, rubble));
-            txtEntityName.setText(TextUtilities.GetEntityTypeAndName(entity, game));
-        }
-        else if(entity instanceof Airdrop)
-        {
-            imgType.setImageBitmap(EntityIconBitmaps.GetAirdropBitmap(activity, ((Airdrop)entity)));
             txtEntityName.setText(TextUtilities.GetEntityTypeAndName(entity, game));
         }
         else if(entity instanceof Airplane)

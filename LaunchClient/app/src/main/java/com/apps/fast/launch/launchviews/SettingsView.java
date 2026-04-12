@@ -45,67 +45,26 @@ public class SettingsView extends LaunchView
     private ImageView imgShowMissileSites;
     private ImageView imgShowSAMSites;
     private ImageView imgShowSentryGuns;
-    private ImageView imgShowOreMines;
     private ImageView imgShowCommandPosts;
     private ImageView imgShowAirbases;
     private ImageView imgShowWarehouses;
     private ImageView imgShowArmory;
-    private ImageView imgShowBarracks;
-    private ImageView imgShowRadarStations;
     private ImageView imgShowArtilleryGuns;
-    private ImageView imgShowDistributors;
-    private ImageView imgShowProcessors;
-    private ImageView imgShowScrapYards;
     private ImageView imgShowNeutral;
     private ImageView imgShowFriendly;
     private ImageView imgShowEnemy;
-    private ImageView imgShowBlastRadii;
-    private ImageView imgShowRadarEffects;
-    private ImageView imgShowMissileTrails;
     private ImageView imgShowRadiations;
     private ImageView imgShowLoots;
     private ImageView imgShowShips;
     private ImageView imgShowSubmarines;
     private ImageView imgShowAircraft;
     private ImageView imgShowShipyards;
-    private ImageView imgShowPorts;
     private ImageView imgShowMissiles;
     private ImageView imgShowInterceptors;
-    private ImageView imgShowMonuments;
-    private ImageView imgShowInfantries;
-    private ImageView imgShowCargoTrucks;
     private ImageView imgShowTanks;
-    private ImageView imgShowSPAAGs;
-    private ImageView imgShowIronLoot;
-    private ImageView imgShowCoalLoot;
-    private ImageView imgShowOilLoot;
-    private ImageView imgShowCropLoot;
-    private ImageView imgShowUraniumLoot;
-    private ImageView imgShowGoldLoot;
-    private ImageView imgShowLumberLoot;
-    private ImageView imgShowFertilizerLoot;
-    private ImageView imgShowWealthLoot;
-    private ImageView imgShowElectricityLoot;
-    private ImageView imgShowConcreteLoot;
-    private ImageView imgShowFuelLoot;
-    private ImageView imgShowFoodLoot;
-    private ImageView imgShowSteelLoot;
-    private ImageView imgShowConstructionSuppliesLoot;
-    private ImageView imgShowExplosivesLoot;
-    private ImageView imgShowNerveAgentLoot;
-    private ImageView imgShowMachineryLoot;
-    private ImageView imgShowElectronicsLoot;
-    private ImageView imgShowMedicineLoot;
-    private ImageView imgShowEnrichedUraniumLoot;
-    private ImageView imgShowAntimatterLoot;
-    private ImageView imgShowLaborLoot;
-    private ImageView imgShowKnowledgeLoot;
-
-    private CheckBox chkNotifications;
     private LinearLayout lytNotificationSettings;
     private CheckBox chkNukeEscalationNotifications;
     private CheckBox chkAllyNotifications;
-    private CheckBox chkDebugNotifications;
     private TextView txtNotifications;
     private TextView txtInterval;
     private TextView btnTest;
@@ -179,67 +138,27 @@ public class SettingsView extends LaunchView
         imgShowMissileSites = findViewById(R.id.imgShowMissileSites);
         imgShowSAMSites = findViewById(R.id.imgShowSAMSites);
         imgShowSentryGuns = findViewById(R.id.imgShowSentryGuns);
-        imgShowOreMines = findViewById(R.id.imgShowOreMines);
         imgShowCommandPosts = findViewById(R.id.imgShowCommandPosts);
         imgShowAirbases = findViewById(R.id.imgShowAirbases);
         imgShowWarehouses = findViewById(R.id.imgShowWarehouses);
         imgShowArmory = findViewById(R.id.imgShowArmory);
-        imgShowBarracks = findViewById(R.id.imgShowBarracks);
-        imgShowRadarStations = findViewById(R.id.imgShowRadarStations);
         imgShowArtilleryGuns = findViewById(R.id.imgShowArtilleryGuns);
-        imgShowDistributors = findViewById(R.id.imgShowDistributors);
-        imgShowProcessors = findViewById(R.id.imgShowProcessors);
-        imgShowScrapYards = findViewById(R.id.imgShowScrapYards);
         imgShowNeutral = findViewById(R.id.imgShowNeutral);
         imgShowFriendly = findViewById(R.id.imgShowFriendly);
         imgShowEnemy = findViewById(R.id.imgShowEnemy);
-        imgShowBlastRadii = findViewById(R.id.imgShowBlastRadii);
-        imgShowRadarEffects = findViewById(R.id.imgShowRadarEffects);
-        imgShowMissileTrails = findViewById(R.id.imgShowMissileTrails);
         imgShowRadiations = findViewById(R.id.imgShowRadiations);
         imgShowLoots = findViewById(R.id.imgShowLoots);
         imgShowShips = findViewById(R.id.imgShowShips);
         imgShowSubmarines = findViewById(R.id.imgShowSubmarines);
         imgShowAircraft = findViewById(R.id.imgShowAircraft);
         imgShowShipyards = findViewById(R.id.imgShowShipyards);
-        imgShowPorts = findViewById(R.id.imgShowPorts);
         imgShowMissiles = findViewById(R.id.imgShowMissiles);
         imgShowInterceptors = findViewById(R.id.imgShowInterceptors);
-        imgShowMonuments = findViewById(R.id.imgShowMonuments);
-        imgShowIronLoot = findViewById(R.id.imgShowIronLoot);
-        imgShowCoalLoot = findViewById(R.id.imgShowCoalLoot);
-        imgShowOilLoot = findViewById(R.id.imgShowOilLoot);
-        imgShowCropLoot = findViewById(R.id.imgShowCropLoot);
-        imgShowUraniumLoot = findViewById(R.id.imgShowUraniumLoot);
-        imgShowGoldLoot = findViewById(R.id.imgShowGoldLoot);
-        imgShowLumberLoot = findViewById(R.id.imgShowLumberLoot);
-        imgShowFertilizerLoot = findViewById(R.id.imgShowFertilizerLoot);
-        imgShowWealthLoot = findViewById(R.id.imgShowWealthLoot);
-        imgShowElectricityLoot = findViewById(R.id.imgShowElectricityLoot);
-        imgShowConcreteLoot = findViewById(R.id.imgShowConcreteLoot);
-        imgShowFuelLoot = findViewById(R.id.imgShowFuelLoot);
-        imgShowFoodLoot = findViewById(R.id.imgShowFoodLoot);
-        imgShowSteelLoot = findViewById(R.id.imgShowSteelLoot);
-        imgShowConstructionSuppliesLoot = findViewById(R.id.imgShowConstructionSuppliesLoot);
-        imgShowExplosivesLoot = findViewById(R.id.imgShowExplosivesLoot);
-        imgShowNerveAgentLoot = findViewById(R.id.imgShowNerveAgentLoot);
-        imgShowMachineryLoot = findViewById(R.id.imgShowMachineryLoot);
-        imgShowElectronicsLoot = findViewById(R.id.imgShowElectronicsLoot);
-        imgShowMedicineLoot = findViewById(R.id.imgShowMedicineLoot);
-        imgShowEnrichedUraniumLoot = findViewById(R.id.imgShowEnrichedUraniumLoot);
-        imgShowAntimatterLoot = findViewById(R.id.imgShowAntimatterLoot);
-        imgShowLaborLoot = findViewById(R.id.imgShowLaborLoot);
-        imgShowKnowledgeLoot = findViewById(R.id.imgShowKnowledgeLoot);
-        imgShowInfantries = findViewById(R.id.imgShowInfantries);
-        imgShowCargoTrucks = findViewById(R.id.imgShowCargoTrucks);
         imgShowTanks = findViewById(R.id.imgShowTanks);
-        imgShowSPAAGs = findViewById(R.id.imgShowSPAAGs);
 
-        chkNotifications = findViewById(R.id.chkNotifications);
         lytNotificationSettings = findViewById(R.id.lytNotificationSettings);
         chkNukeEscalationNotifications = findViewById(R.id.chkNukeEscalationNotifications);
         chkAllyNotifications = findViewById(R.id.chkAllyNotifications);
-        chkDebugNotifications = findViewById(R.id.chkDebugNotifications);
         txtNotifications = findViewById(R.id.txtNotifications);
         txtInterval = findViewById(R.id.txtInterval);
         btnTest = findViewById(R.id.btnTest);
@@ -379,17 +298,6 @@ public class SettingsView extends LaunchView
             }
         });
 
-        imgShowOreMines.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.ORE_MINES_VISIBLE = !LaunchUtilities.ORE_MINES_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
         imgShowCommandPosts.setOnClickListener(new OnClickListener()
         {
             @Override
@@ -434,67 +342,12 @@ public class SettingsView extends LaunchView
             }
         });
 
-        imgShowBarracks.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.BARRACKS_VISIBLE = !LaunchUtilities.BARRACKS_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
-        imgShowRadarStations.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.RADAR_STATIONS_VISIBLE = !LaunchUtilities.RADAR_STATIONS_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
         imgShowArtilleryGuns.setOnClickListener(new OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
                 LaunchUtilities.ARTILLERY_GUNS_VISIBLE = !LaunchUtilities.ARTILLERY_GUNS_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
-        imgShowDistributors.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.DISTRIBUTORS_VISIBLE = !LaunchUtilities.DISTRIBUTORS_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
-        imgShowProcessors.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.PROCESSORS_VISIBLE = !LaunchUtilities.PROCESSORS_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
-        imgShowScrapYards.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.SCRAP_YARDS_VISIBLE = !LaunchUtilities.SCRAP_YARDS_VISIBLE;
                 MapToolIconsChanged();
                 activity.RebuildMap();
             }
@@ -533,39 +386,6 @@ public class SettingsView extends LaunchView
             }
         });
 
-        imgShowBlastRadii.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                activity.ToggleShowBlastRadii(!activity.bShowBlastRadii);
-                MapToolIconsChanged();
-                Update();
-            }
-        });
-
-        imgShowRadarEffects.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                activity.ToggleShowRadarEffects(!activity.bShowRadarEffects);
-                MapToolIconsChanged();
-                Update();
-            }
-        });
-
-        imgShowMissileTrails.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                activity.ToggleShowMissileTrails(!activity.bShowMissileTrails);
-                MapToolIconsChanged();
-                Update();
-            }
-        });
-
         imgShowRadiations.setOnClickListener(new OnClickListener()
         {
             @Override
@@ -588,45 +408,12 @@ public class SettingsView extends LaunchView
             }
         });
 
-        imgShowInfantries.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.INFANTRIES_VISIBLE = !LaunchUtilities.INFANTRIES_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
-        imgShowCargoTrucks.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.CARGO_TRUCKS_VISIBLE = !LaunchUtilities.CARGO_TRUCKS_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
         imgShowTanks.setOnClickListener(new OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
                 LaunchUtilities.TANKS_VISIBLE = !LaunchUtilities.TANKS_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
-        imgShowSPAAGs.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.SPAAGS_VISIBLE = !LaunchUtilities.SPAAGS_VISIBLE;
                 MapToolIconsChanged();
                 activity.RebuildMap();
             }
@@ -676,17 +463,6 @@ public class SettingsView extends LaunchView
             }
         });
 
-        imgShowPorts.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.PORTS_VISIBLE = !LaunchUtilities.PORTS_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
         imgShowMissiles.setOnClickListener(new OnClickListener()
         {
             @Override
@@ -704,281 +480,6 @@ public class SettingsView extends LaunchView
             public void onClick(View view)
             {
                 LaunchUtilities.INTERCEPTORS_VISIBLE = !LaunchUtilities.INTERCEPTORS_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
-        imgShowMonuments.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.MONUMENTS_VISIBLE = !LaunchUtilities.MONUMENTS_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
-        imgShowIronLoot.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.IRON_LOOT_VISIBLE = !LaunchUtilities.IRON_LOOT_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
-        imgShowCoalLoot.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.COAL_LOOT_VISIBLE = !LaunchUtilities.COAL_LOOT_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
-        imgShowOilLoot.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.OIL_LOOT_VISIBLE = !LaunchUtilities.OIL_LOOT_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
-        imgShowCropLoot.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.CROP_LOOT_VISIBLE = !LaunchUtilities.CROP_LOOT_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
-        imgShowUraniumLoot.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.URANIUM_LOOT_VISIBLE = !LaunchUtilities.URANIUM_LOOT_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
-        imgShowGoldLoot.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.GOLD_LOOT_VISIBLE = !LaunchUtilities.GOLD_LOOT_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
-        imgShowLaborLoot.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.LABOR_LOOT_VISIBLE = !LaunchUtilities.LABOR_LOOT_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
-        imgShowKnowledgeLoot.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.KNOWLEDGE_LOOT_VISIBLE = !LaunchUtilities.KNOWLEDGE_LOOT_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
-        imgShowLumberLoot.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.LUMBER_LOOT_VISIBLE = !LaunchUtilities.LUMBER_LOOT_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
-        imgShowFertilizerLoot.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.FERTILIZER_LOOT_VISIBLE = !LaunchUtilities.FERTILIZER_LOOT_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
-        imgShowWealthLoot.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.WEALTH_LOOT_VISIBLE = !LaunchUtilities.WEALTH_LOOT_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
-        imgShowElectricityLoot.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.ELECTRICITY_LOOT_VISIBLE = !LaunchUtilities.ELECTRICITY_LOOT_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
-        imgShowConcreteLoot.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.CONCRETE_LOOT_VISIBLE = !LaunchUtilities.CONCRETE_LOOT_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
-        imgShowFuelLoot.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.FUEL_LOOT_VISIBLE = !LaunchUtilities.FUEL_LOOT_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
-        imgShowFoodLoot.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.FOOD_LOOT_VISIBLE = !LaunchUtilities.FOOD_LOOT_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
-        imgShowSteelLoot.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.STEEL_LOOT_VISIBLE = !LaunchUtilities.STEEL_LOOT_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
-        imgShowConstructionSuppliesLoot.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.CONSTRUCTION_SUPPLIES_LOOT_VISIBLE = !LaunchUtilities.CONSTRUCTION_SUPPLIES_LOOT_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
-        imgShowExplosivesLoot.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.EXPLOSIVES_LOOT_VISIBLE = !LaunchUtilities.EXPLOSIVES_LOOT_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
-        imgShowNerveAgentLoot.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.NERVE_AGENT_LOOT_VISIBLE = !LaunchUtilities.NERVE_AGENT_LOOT_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
-        imgShowMachineryLoot.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.MACHINERY_LOOT_VISIBLE = !LaunchUtilities.MACHINERY_LOOT_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
-        imgShowElectronicsLoot.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.ELECTRONICS_LOOT_VISIBLE = !LaunchUtilities.ELECTRONICS_LOOT_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
-        imgShowMedicineLoot.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.MEDICINE_LOOT_VISIBLE = !LaunchUtilities.MEDICINE_LOOT_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
-        imgShowEnrichedUraniumLoot.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.FISSILE_LOOT_VISIBLE = !LaunchUtilities.FISSILE_LOOT_VISIBLE;
-                MapToolIconsChanged();
-                activity.RebuildMap();
-            }
-        });
-
-        imgShowAntimatterLoot.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                LaunchUtilities.ANTIMATTER_LOOT_VISIBLE = !LaunchUtilities.ANTIMATTER_LOOT_VISIBLE;
                 MapToolIconsChanged();
                 activity.RebuildMap();
             }
@@ -1644,26 +1145,17 @@ public class SettingsView extends LaunchView
             @Override
             public void run()
             {
-                imgShowBlastRadii.setColorFilter(activity.bShowBlastRadii ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowRadarEffects.setColorFilter(activity.bShowRadarEffects ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowMissileTrails.setColorFilter(activity.bShowMissileTrails ?  0 : LaunchUICommon.COLOUR_TINTED);
-
                 imgShowOnline.setColorFilter(LaunchUtilities.ONLINE_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
                 imgShowBooting.setColorFilter(LaunchUtilities.BOOTING_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
                 imgShowOffline.setColorFilter(LaunchUtilities.OFFLINE_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
                 imgShowMissileSites.setColorFilter(LaunchUtilities.MISSILE_SITES_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
                 imgShowSAMSites.setColorFilter(LaunchUtilities.SAM_SITES_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
                 imgShowSentryGuns.setColorFilter(LaunchUtilities.SENTRY_GUNS_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowOreMines.setColorFilter(LaunchUtilities.ORE_MINES_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
                 imgShowCommandPosts.setColorFilter(LaunchUtilities.COMMAND_POSTS_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
                 imgShowAirbases.setColorFilter(LaunchUtilities.AIRBASES_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
                 imgShowWarehouses.setColorFilter(LaunchUtilities.WAREHOUSES_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
                 imgShowArmory.setColorFilter(LaunchUtilities.ARMORIES_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowRadarStations.setColorFilter(LaunchUtilities.RADAR_STATIONS_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
                 imgShowArtilleryGuns.setColorFilter(LaunchUtilities.ARTILLERY_GUNS_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowDistributors.setColorFilter(LaunchUtilities.DISTRIBUTORS_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowProcessors.setColorFilter(LaunchUtilities.PROCESSORS_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowScrapYards.setColorFilter(LaunchUtilities.SCRAP_YARDS_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
                 imgShowNeutral.setColorFilter(LaunchUtilities.NEUTRAL_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
                 imgShowFriendly.setColorFilter(LaunchUtilities.FRIENDLY_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
                 imgShowEnemy.setColorFilter(LaunchUtilities.ENEMY_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
@@ -1673,39 +1165,9 @@ public class SettingsView extends LaunchView
                 imgShowSubmarines.setColorFilter(LaunchUtilities.SUBMARINES_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
                 imgShowAircraft.setColorFilter(LaunchUtilities.AIRCRAFTS_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
                 imgShowShipyards.setColorFilter(LaunchUtilities.SHIPYARDS_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowPorts.setColorFilter(LaunchUtilities.PORTS_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
                 imgShowMissiles.setColorFilter(LaunchUtilities.MISSILES_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
                 imgShowInterceptors.setColorFilter(LaunchUtilities.INTERCEPTORS_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowMonuments.setColorFilter(LaunchUtilities.MONUMENTS_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowIronLoot.setColorFilter(LaunchUtilities.IRON_LOOT_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowCoalLoot.setColorFilter(LaunchUtilities.COAL_LOOT_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowOilLoot.setColorFilter(LaunchUtilities.OIL_LOOT_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowCropLoot.setColorFilter(LaunchUtilities.CROP_LOOT_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowUraniumLoot.setColorFilter(LaunchUtilities.URANIUM_LOOT_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowGoldLoot.setColorFilter(LaunchUtilities.GOLD_LOOT_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowLaborLoot.setColorFilter(LaunchUtilities.LABOR_LOOT_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowKnowledgeLoot.setColorFilter(LaunchUtilities.KNOWLEDGE_LOOT_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowLumberLoot.setColorFilter(LaunchUtilities.LUMBER_LOOT_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowFertilizerLoot.setColorFilter(LaunchUtilities.FERTILIZER_LOOT_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowWealthLoot.setColorFilter(LaunchUtilities.WEALTH_LOOT_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowElectricityLoot.setColorFilter(LaunchUtilities.ELECTRICITY_LOOT_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowConcreteLoot.setColorFilter(LaunchUtilities.CONCRETE_LOOT_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowFuelLoot.setColorFilter(LaunchUtilities.FUEL_LOOT_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowFoodLoot.setColorFilter(LaunchUtilities.FOOD_LOOT_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowSteelLoot.setColorFilter(LaunchUtilities.STEEL_LOOT_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowConstructionSuppliesLoot.setColorFilter(LaunchUtilities.CONSTRUCTION_SUPPLIES_LOOT_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowExplosivesLoot.setColorFilter(LaunchUtilities.EXPLOSIVES_LOOT_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowNerveAgentLoot.setColorFilter(LaunchUtilities.NERVE_AGENT_LOOT_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowMachineryLoot.setColorFilter(LaunchUtilities.MACHINERY_LOOT_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowElectronicsLoot.setColorFilter(LaunchUtilities.ELECTRONICS_LOOT_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowMedicineLoot.setColorFilter(LaunchUtilities.MEDICINE_LOOT_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowEnrichedUraniumLoot.setColorFilter(LaunchUtilities.FISSILE_LOOT_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowAntimatterLoot.setColorFilter(LaunchUtilities.ANTIMATTER_LOOT_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
-
-                imgShowInfantries.setColorFilter(LaunchUtilities.INFANTRIES_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowCargoTrucks.setColorFilter(LaunchUtilities.CARGO_TRUCKS_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
                 imgShowTanks.setColorFilter(LaunchUtilities.TANKS_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
-                imgShowSPAAGs.setColorFilter(LaunchUtilities.SPAAGS_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
             }
         });
     }

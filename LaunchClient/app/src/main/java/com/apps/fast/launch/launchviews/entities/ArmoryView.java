@@ -46,15 +46,7 @@ public class ArmoryView extends StructureView
             });
         }
 
-        if(structureShadow instanceof Armory)
-        {
-            Armory armory = (Armory)structureShadow;
-
-            if(armory.GetIsBarracks())
-                imgLogo.setImageResource(R.drawable.icon_barracks);
-            else
-                imgLogo.setImageResource(R.drawable.icon_armory);
-        }
+        imgLogo.setImageResource(R.drawable.marker_armory);
 
         lytConfig.addView(systemView);
         Update();

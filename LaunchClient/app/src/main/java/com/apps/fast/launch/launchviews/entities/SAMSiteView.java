@@ -71,7 +71,7 @@ public class SAMSiteView extends StructureView
         flasherSemi = new ButtonFlasher(btnSemi);
         flasherManual = new ButtonFlasher(btnManual);
 
-        imgLogo.setImageResource(R.drawable.icon_sam);
+        imgLogo.setImageResource(R.drawable.marker_samsite);
         lytMode.setVisibility(VISIBLE);
 
         if(structureShadow.GetOwnerID() == game.GetOurPlayerID())

@@ -33,7 +33,6 @@ import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
@@ -44,6 +43,7 @@ import com.apps.fast.launch.UI.LandUnitIconBitmaps;
 import com.apps.fast.launch.UI.StructureIconBitmaps;
 import com.apps.fast.launch.UI.map.LaunchClusterItem;
 import com.apps.fast.launch.UI.map.SelectableMapFragment;
+import com.apps.fast.launch.components.BlastEffect;
 import com.apps.fast.launch.components.ClientDefs;
 import com.apps.fast.launch.components.Locatifier;
 import com.apps.fast.launch.components.Sounds;
@@ -51,19 +51,15 @@ import com.apps.fast.launch.components.TextUtilities;
 import com.apps.fast.launch.components.TutorialController;
 import com.apps.fast.launch.components.Utilities;
 import com.apps.fast.launch.launchviews.BannedView;
-import com.apps.fast.launch.launchviews.BottomArtilleryTarget;
 import com.apps.fast.launch.launchviews.BottomBuildStructure;
 import com.apps.fast.launch.launchviews.BottomElectronicWarfare;
 import com.apps.fast.launch.launchviews.BottomInterceptorTarget;
-import com.apps.fast.launch.launchviews.BottomLoadLoot;
 import com.apps.fast.launch.launchviews.BottomMissileTarget;
 import com.apps.fast.launch.launchviews.BottomMoveOrder;
 import com.apps.fast.launch.launchviews.BottomNewHomebase;
-import com.apps.fast.launch.launchviews.BottomPlaceBlueprint;
 import com.apps.fast.launch.launchviews.BottomRangeFinder;
 import com.apps.fast.launch.launchviews.BottomTorpedoTarget;
 import com.apps.fast.launch.launchviews.BottomTransferAccount;
-import com.apps.fast.launch.launchviews.BottomTransferCargo;
 import com.apps.fast.launch.launchviews.BottomUnitCommand;
 import com.apps.fast.launch.launchviews.BuildViewNew;
 import com.apps.fast.launch.launchviews.ChatView;
@@ -77,7 +73,6 @@ import com.apps.fast.launch.launchviews.MapClickView;
 import com.apps.fast.launch.launchviews.MapSelectView;
 import com.apps.fast.launch.launchviews.NoIMEIView;
 import com.apps.fast.launch.launchviews.PermissionsView;
-import com.apps.fast.launch.launchviews.PlayerCargoView;
 import com.apps.fast.launch.launchviews.PlayersView;
 import com.apps.fast.launch.launchviews.PrivacyZonesView;
 import com.apps.fast.launch.launchviews.RegisterView;
@@ -94,19 +89,10 @@ import com.apps.fast.launch.launchviews.entities.ABMSiteView;
 import com.apps.fast.launch.launchviews.entities.AirbaseView;
 import com.apps.fast.launch.launchviews.entities.AirplaneView;
 import com.apps.fast.launch.launchviews.entities.AirdropView;
-import com.apps.fast.launch.launchviews.entities.ArtilleryGunView;
-import com.apps.fast.launch.launchviews.entities.BankView;
 import com.apps.fast.launch.launchviews.entities.ArmoryView;
-import com.apps.fast.launch.launchviews.entities.BlueprintView;
 import com.apps.fast.launch.launchviews.entities.CommandPostView;
-import com.apps.fast.launch.launchviews.entities.CargoTruckView;
-import com.apps.fast.launch.launchviews.entities.DistributorView;
 import com.apps.fast.launch.launchviews.entities.DotncarryMemorialView;
-import com.apps.fast.launch.launchviews.entities.InfantryView;
 import com.apps.fast.launch.launchviews.entities.InterceptorView;
-import com.apps.fast.launch.launchviews.entities.ProcessorView;
-import com.apps.fast.launch.launchviews.entities.ResourceDepositView;
-import com.apps.fast.launch.launchviews.entities.ScrapYardView;
 import com.apps.fast.launch.launchviews.entities.ShipView;
 import com.apps.fast.launch.launchviews.entities.ShipyardView;
 import com.apps.fast.launch.launchviews.entities.SubmarineView;
@@ -118,14 +104,11 @@ import com.apps.fast.launch.launchviews.entities.RubbleView;
 import com.apps.fast.launch.launchviews.entities.MissileSiteView;
 import com.apps.fast.launch.launchviews.entities.MissileView;
 import com.apps.fast.launch.launchviews.entities.NukeSiteView;
-import com.apps.fast.launch.launchviews.entities.OreMineView;
 import com.apps.fast.launch.launchviews.entities.PlayerView;
-import com.apps.fast.launch.launchviews.entities.RadarStationView;
 import com.apps.fast.launch.launchviews.entities.SAMSiteView;
 import com.apps.fast.launch.launchviews.entities.SentryGunView;
 import com.apps.fast.launch.launchviews.entities.TankView;
 import com.apps.fast.launch.views.LaunchDialog;
-import com.apps.fast.launch.components.RadarEffect;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -136,7 +119,6 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -165,10 +147,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.maps.android.clustering.Cluster;
 import com.google.maps.android.clustering.ClusterItem;
 import com.google.maps.android.clustering.ClusterManager;
-import com.google.maps.android.data.geojson.GeoJsonFeature;
 import com.google.maps.android.data.geojson.GeoJsonLayer;
-import com.google.maps.android.data.geojson.GeoJsonLineStringStyle;
-import com.google.maps.android.data.geojson.GeoJsonPolygonStyle;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -182,7 +161,6 @@ import java.nio.ByteBuffer;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -296,7 +274,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     private boolean bMapModeZoom = true;
     public boolean bShowBlastRadii = true;
     public boolean bShowMissileTrails = true;
-    public boolean bShowRadarEffects = false;
     private boolean bShowFirstLocation = true;
     private boolean bRebuildMap = false;
 
@@ -313,8 +290,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     private Map<Integer, Circle> EMPMarkers = new ConcurrentHashMap<>();
     private Map<Integer, Circle> ABMEMPMarkers = new ConcurrentHashMap<>();
     private Map<Integer, Marker> ThreatMarkers = new ConcurrentHashMap<>();
-    //private List<BlastEffect> BlastEffects = new ArrayList<>();
-    private Map<EntityType, Map<Integer, RadarEffect>> RadarEffects = new ConcurrentHashMap<>();
+    private List<BlastEffect> BlastEffects = new ArrayList<>();
     private Map<Integer, Marker> DepositMarkers = new ConcurrentHashMap<>();
     private Map<EntityType, Map<Integer, Marker>> AllMarkers = new ConcurrentHashMap<>();
     private Map<EntityType, Map<Integer, GroundOverlay>> AllOverlays = new ConcurrentHashMap<>();
@@ -433,6 +409,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
         SharedPreferences sharedPreferences = getSharedPreferences(ClientDefs.SETTINGS, Context.MODE_PRIVATE);
         bShowFirstLocation = sharedPreferences.getBoolean(ClientDefs.SETTINGS_INITIAL_ZOOM, ClientDefs.SETTINGS_INITIAL_ZOOM_DEFAULT);
+
         switch (sharedPreferences.getInt(ClientDefs.SETTINGS_THEME, ClientDefs.SETTINGS_THEME_DEFAULT))
         {
             case ClientDefs.THEME_LAUNCH:
@@ -441,18 +418,21 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 lMapTheme = ClientDefs.THEME_LAUNCH;
             }
             break;
+
             case ClientDefs.THEME_BORING:
             {
                 setTheme(R.style.AppTheme);
                 lMapTheme = ClientDefs.THEME_BORING;
             }
             break;
+
             case ClientDefs.THEME_CONTAMINATED:
             {
                 setTheme(R.style.ContaminatedTheme);
                 lMapTheme = ClientDefs.THEME_CONTAMINATED;
             }
             break;
+
             case ClientDefs.THEME_CLASSIC:
             {
                 setTheme(R.style.ClassicTheme);
@@ -1094,14 +1074,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                     }
                     break;
 
-                    case SET_ARTILLERY_TARGET:
-                    {
-                        MainNormalView normalView = new MainNormalView(game, me);
-                        SetView(normalView);
-                        normalView.BottomLayoutShowView(new BottomArtilleryTarget(game, me, lTargettingSiteID, targetSystemType));
-                    }
-                    break;
-
                     case TURN_INFANTRY:
                     {
                         MainNormalView normalView = new MainNormalView(game, me);
@@ -1206,14 +1178,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                     }
                     break;
 
-                    case PLACE_BLUEPRINT:
-                    {
-                        MainNormalView normalView = new MainNormalView(game, me);
-                        SetView(normalView);
-                        normalView.BottomLayoutShowView(new BottomPlaceBlueprint(game, me, blueprintType, blueprintResourceType));
-                    }
-                    break;
-
                     case BUILD_STRUCTURE:
                     {
                         MainNormalView normalView = new MainNormalView(game, me);
@@ -1230,22 +1194,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                     }
                     break;
 
-                    case TRANSFER_CARGO:
-                    {
-                        MainNormalView normalView = new MainNormalView(game, me);
-                        SetView(normalView);
-
-                        if(cargoTransferEntity == null)
-                        {
-                            normalView.BottomLayoutShowView(new BottomTransferCargo(game, me, cargoToTransfer));
-                        }
-                        else
-                        {
-                            normalView.BottomLayoutShowView(new BottomTransferCargo(game, me, cargoTransferEntity, cargoToTransfer, bFromCargo));
-                        }
-                    }
-                    break;
-
                     case TRANSFER_ACCOUNT:
                     {
                         MainNormalView normalView = new MainNormalView(game, me);
@@ -1255,14 +1203,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                         {
                             normalView.BottomLayoutShowView(new BottomTransferAccount(game, me, transferAccountFromPlayer));
                         }
-                    }
-                    break;
-
-                    case LOAD_LOOT:
-                    {
-                        MainNormalView normalView = new MainNormalView(game, me);
-                        SetView(normalView);
-                        normalView.BottomLayoutShowView(new BottomLoadLoot(game, me, targeter));
                     }
                     break;
 
@@ -2566,15 +2506,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                         .strokeWidth(5.0f)));
                             }
 
-                            if(ship.HasScanner())
-                            {
-                                CircleOverlays.add(map.addCircle(new CircleOptions()
-                                        .center(Utilities.GetLatLng(entity.GetPosition()))
-                                        .radius(ship.GetRadarRange() * Defs.METRES_PER_KM)
-                                        .strokeColor(Utilities.ColourFromAttr(context, R.attr.RadarColor))
-                                        .strokeWidth(3.0f)));
-                            }
-
                             if(game.EntityIsFriendly(entity, game.GetOurPlayer()))
                             {
                                 if(ship.HasInterceptors())
@@ -2739,17 +2670,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                     if(entity instanceof Airplane)
                     {
                         Airplane aircraft = ((Airplane)entity);
-
-                        if(aircraft.GetAircraftType() == EntityType.AWACS)
-                        {
-                            float fltScannerRange = aircraft.GetRadarRange();
-
-                            CircleOverlays.add(map.addCircle(new CircleOptions()
-                                    .center(Utilities.GetLatLng(entity.GetPosition()))
-                                    .radius(fltScannerRange * Defs.METRES_PER_KM)
-                                    .strokeColor(Utilities.ColourFromAttr(context, R.attr.RadarColor))
-                                    .strokeWidth(3.0f)));
-                        }
 
                         if(aircraft.HasCannon())
                         {
@@ -2991,29 +2911,13 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             {
                 mainView.BottomLayoutShowView(new SentryGunView(game, this, selectedEntity));
             }
-            else if(selectedEntity instanceof ArtilleryGun)
-            {
-                mainView.BottomLayoutShowView(new ArtilleryGunView(game, this, selectedEntity));
-            }
-            else if(selectedEntity instanceof OreMine)
-            {
-                mainView.BottomLayoutShowView(new OreMineView(game, this, selectedEntity));
-            }
             else if(selectedEntity instanceof CommandPost)
             {
                 mainView.BottomLayoutShowView(new CommandPostView(game, this, selectedEntity));
             }
-            else if(selectedEntity instanceof Bank)
-            {
-                mainView.BottomLayoutShowView(new BankView(game, this, selectedEntity));
-            }
             else if(selectedEntity instanceof Warehouse)
             {
                 mainView.BottomLayoutShowView(new WarehouseView(game, this, selectedEntity));
-            }
-            else if(selectedEntity instanceof RadarStation)
-            {
-                mainView.BottomLayoutShowView(new RadarStationView(game, this, selectedEntity));
             }
             else if(selectedEntity instanceof Loot)
             {
@@ -3035,41 +2939,13 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             {
                 mainView.BottomLayoutShowView(new ArmoryView(game, this, selectedEntity));
             }
-            else if(selectedEntity instanceof Processor)
-            {
-                mainView.BottomLayoutShowView(new ProcessorView(game, this, selectedEntity));
-            }
-            else if(selectedEntity instanceof Distributor)
-            {
-                mainView.BottomLayoutShowView(new DistributorView(game, this, selectedEntity));
-            }
-            else if(selectedEntity instanceof ScrapYard)
-            {
-                mainView.BottomLayoutShowView(new ScrapYardView(game, this, selectedEntity));
-            }
             else if(selectedEntity instanceof Airplane)
             {
                 mainView.BottomLayoutShowView(new AirplaneView(game, this, ((Airplane)selectedEntity), false));
             }
-            else if(selectedEntity instanceof Blueprint)
-            {
-                mainView.BottomLayoutShowView(new BlueprintView(game, this, selectedEntity.GetID()));
-            }
-            else if(selectedEntity instanceof Infantry)
-            {
-                mainView.BottomLayoutShowView(new InfantryView(game, this, ((Infantry)selectedEntity)));
-            }
             else if(selectedEntity instanceof Tank)
             {
                 mainView.BottomLayoutShowView(new TankView(game, this, ((Tank)selectedEntity)));
-            }
-            else if(selectedEntity instanceof CargoTruck)
-            {
-                mainView.BottomLayoutShowView(new CargoTruckView(game, this, ((CargoTruck)selectedEntity)));
-            }
-            else if(selectedEntity instanceof ResourceDeposit)
-            {
-                mainView.BottomLayoutShowView(new ResourceDepositView(game, this, selectedEntity.GetID()));
             }
             else if(selectedEntity instanceof Shipyard)
             {
@@ -3801,11 +3677,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         ReturnToMainView();
     }
 
-    public void PLaceBlueprint(GeoCoord geoLocation)
-    {
-        ((BottomPlaceBlueprint)((MainNormalView)CurrentView).GetBottomView()).LocationSelected(geoLocation, map);
-    }
-
     public void BuildStructureMode(int lCommandCenterID, EntityType structureType, ResourceType resourceType, boolean bUseSubstitutes)
     {
         interactionMode = InteractionMode.BUILD_STRUCTURE;
@@ -4229,55 +4100,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    public void SetTransferCargoTarget(MapEntity entity)
-    {
-        if(targetTrajectory != null)
-        {
-            targetTrajectory.remove();
-        }
-
-        PatternItem dash = new Dash(10);
-        PatternItem gap = new Gap(20);
-
-        List<PatternItem> trajectoryPattern = Arrays.asList(gap, dash);
-
-        targetTrajectory = map.addPolyline(new PolylineOptions()
-                .add(Utilities.GetLatLng(geoTargetingOrigin))
-                .add(Utilities.GetLatLng(entity.GetPosition()))
-                .pattern(trajectoryPattern)
-                .width(3.0f)
-                .geodesic(true)
-                .color(Utilities.ColourFromAttr(this, R.attr.WarningColour)));
-
-        ((BottomTransferCargo)((MainNormalView)CurrentView).GetBottomView()).EntitySelected(entity, targetTrajectory, map);
-    }
-
-    public void SetLoadLootTarget(MapEntity entity)
-    {
-        if(targetTrajectory != null)
-        {
-            targetTrajectory.remove();
-        }
-
-        PatternItem dash = new Dash(10);
-        PatternItem gap = new Gap(20);
-
-        List<PatternItem> trajectoryPattern = Arrays.asList(gap, dash);
-
-        targetTrajectory = map.addPolyline(new PolylineOptions()
-                .add(Utilities.GetLatLng(geoTargetingOrigin))
-                .add(Utilities.GetLatLng(entity.GetPosition()))
-                .pattern(trajectoryPattern)
-                .width(3.0f)
-                .geodesic(true)
-                .color(Utilities.ColourFromAttr(this, R.attr.WarningColour)));
-
-        if(targeter != null)
-        {
-            ((BottomLoadLoot)((MainNormalView)CurrentView).GetBottomView()).EntitySelected(entity, targetTrajectory, map);
-        }
-    }
-
     public void SelectRefueler(MapEntity refueler)
     {
         if(targetTrajectory != null)
@@ -4411,45 +4233,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
                 ((BottomMissileTarget)((MainNormalView)CurrentView).GetBottomView()).LocationSelected(geoLocation, targetTrajectory, map);
             }
-        }
-    }
-
-    public void TargetArtillery(GeoCoord geoLocation, MapEntity entity)
-    {
-        for(Circle targetBlastRadius : targetBlastRadii)
-        {
-            if (targetBlastRadius != null)
-            {
-                targetBlastRadius.remove();
-            }
-        }
-
-        targetBlastRadii.clear();
-
-        if(targetTrajectory != null)
-        {
-            targetTrajectory.remove();
-        }
-
-        if(entity != null)
-        {
-            targetTrajectory = map.addPolyline(new PolylineOptions()
-                    .add(Utilities.GetLatLng(geoTargetingOrigin))
-                    .add(Utilities.GetLatLng(entity.GetPosition()))
-                    .geodesic(true)
-                    .color(Utilities.ColourFromAttr(this, R.attr.MissilePathColour)));
-
-            ((BottomArtilleryTarget)((MainNormalView)CurrentView).GetBottomView()).TargetSelected(entity, targetTrajectory, map);
-        }
-        else
-        {
-            targetTrajectory = map.addPolyline(new PolylineOptions()
-                    .add(Utilities.GetLatLng(geoTargetingOrigin))
-                    .add(Utilities.GetLatLng(geoLocation))
-                    .geodesic(true)
-                    .color(Utilities.ColourFromAttr(this, R.attr.MissilePathColour)));
-
-            ((BottomArtilleryTarget)((MainNormalView)CurrentView).GetBottomView()).LocationSelected(geoLocation, targetTrajectory, map);
         }
     }
 
@@ -5079,12 +4862,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             }
             break;
 
-            case PLACE_BLUEPRINT:
-            {
-                PLaceBlueprint(new GeoCoord(latLng.latitude, latLng.longitude, true));
-            }
-            break;
-
             case BUILD_STRUCTURE:
             {
                 BuildStructure(new GeoCoord(latLng.latitude, latLng.longitude, true));
@@ -5475,14 +5252,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     {
         SharedPreferences sharedPreferences = getSharedPreferences(ClientDefs.SETTINGS, Context.MODE_PRIVATE);
 
-        if(!sharedPreferences.getBoolean(ClientDefs.HAS_CLICKED_BUILD_BUTTON, ClientDefs.HAS_CLICKED_BUILD_BUTTON_DEFAULT) && sharedPreferences.getBoolean(ClientDefs.SETTINGS_SHOW_HINTS, ClientDefs.SETTINGS_SHOW_HINTS_DEFAULT))
-        {
-            ShowBasicOKDialog(getString(R.string.build_virgin_info));
-            SharedPreferences.Editor editor = getSharedPreferences(ClientDefs.SETTINGS, Context.MODE_PRIVATE).edit();
-            editor.putBoolean(ClientDefs.HAS_CLICKED_BUILD_BUTTON, true);
-            editor.commit();
-        }
-
         if(!game.GetInteractionReady())
         {
             ShowBasicOKDialog(getString(R.string.waiting_for_data));
@@ -5500,102 +5269,9 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    public void ButtonProspect(View view)
-    {
-        /*SharedPreferences sharedPreferences = getSharedPreferences(ClientDefs.SETTINGS, Context.MODE_PRIVATE);
-
-        if(!sharedPreferences.getBoolean(ClientDefs.HAS_CLICKED_PROSPECT_BUTTON, ClientDefs.HAS_CLICKED_PROSPECT_BUTTON_DEFAULT))
-        {
-            ShowBasicOKDialog(getString(R.string.prospect_virgin_info));
-            SharedPreferences.Editor editor = getSharedPreferences(ClientDefs.SETTINGS, Context.MODE_PRIVATE).edit();
-            editor.putBoolean(ClientDefs.HAS_CLICKED_PROSPECT_BUTTON, true);
-            editor.commit();
-        }*/
-
-        if(!game.GetInteractionReady())
-        {
-            ShowBasicOKDialog(getString(R.string.waiting_for_data));
-        }
-        else if(game.GetNearbyDeposit(game.GetOurPlayer()) != null)
-        {
-            ShowBasicOKDialog(getString(R.string.cant_prospect_too_close, TextUtilities.GetDistanceStringFromKM(Defs.DEPOSIT_RADIUS)));
-        }
-        else if(!game.GetOurPlayer().GetCanProspect())
-        {
-            ShowBasicOKDialog(getString(R.string.prospect_reloading, TextUtilities.GetTimeAmount(game.GetOurPlayer().GetProspectCooldownRemaining())));
-        }
-        else
-        {
-            game.Prospect();
-        }
-    }
-
-    public void ButtonCallAirdrop(View view)
-    {
-        SharedPreferences sharedPreferences = getSharedPreferences(ClientDefs.SETTINGS, Context.MODE_PRIVATE);
-
-        if(!sharedPreferences.getBoolean(ClientDefs.HAS_CLICKED_AIRDROP_BUTTON, ClientDefs.HAS_CLICKED_AIRDROP_BUTTON_DEFAULT) && sharedPreferences.getBoolean(ClientDefs.SETTINGS_SHOW_HINTS, ClientDefs.SETTINGS_SHOW_HINTS_DEFAULT))
-        {
-            ShowBasicOKDialog(getString(R.string.airdrop_virgin_info));
-            SharedPreferences.Editor editor = getSharedPreferences(ClientDefs.SETTINGS, Context.MODE_PRIVATE).edit();
-            editor.putBoolean(ClientDefs.HAS_CLICKED_AIRDROP_BUTTON, true);
-            editor.commit();
-        }
-
-        if(!game.GetInteractionReady())
-        {
-            ShowBasicOKDialog(getString(R.string.waiting_for_data));
-        }
-        else if(!game.GetOurPlayer().GetCanCallAirdrop())
-        {
-            ShowBasicOKDialog(getString(R.string.airdrop_reloading, TextUtilities.GetTimeAmount(game.GetOurPlayer().GetAirdropCooldownRemaining())));
-        }
-        else
-        {
-            game.CallAirdrop();
-        }
-    }
-
-    public void ButtonCargo(View view)
-    {
-        SharedPreferences sharedPreferences = getSharedPreferences(ClientDefs.SETTINGS, Context.MODE_PRIVATE);
-
-        if(!sharedPreferences.getBoolean(ClientDefs.HAS_CLICKED_INVENTORY_BUTTON, ClientDefs.HAS_CLICKED_INVENTORY_BUTTON_DEFAULT) && sharedPreferences.getBoolean(ClientDefs.SETTINGS_SHOW_HINTS, ClientDefs.SETTINGS_SHOW_HINTS_DEFAULT))
-        {
-            ShowBasicOKDialog(getString(R.string.inventory_virgin_info));
-            SharedPreferences.Editor editor = getSharedPreferences(ClientDefs.SETTINGS, Context.MODE_PRIVATE).edit();
-            editor.putBoolean(ClientDefs.HAS_CLICKED_INVENTORY_BUTTON, true);
-            editor.commit();
-        }
-
-        if(!game.GetInteractionReady())
-        {
-            ShowBasicOKDialog(getString(R.string.waiting_for_data));
-        }
-        else
-        {
-            runOnUiThread(new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    SetView(new PlayerCargoView(game, me));
-                }
-            });
-        }
-    }
-
     public void ButtonDiplomacy(View view)
     {
         SharedPreferences sharedPreferences = getSharedPreferences(ClientDefs.SETTINGS, Context.MODE_PRIVATE);
-
-        if(!sharedPreferences.getBoolean(ClientDefs.HAS_CLICKED_ALLIANCES_BUTTON, ClientDefs.HAS_CLICKED_ALLIANCES_BUTTON_DEFAULT) && sharedPreferences.getBoolean(ClientDefs.SETTINGS_SHOW_HINTS, ClientDefs.SETTINGS_SHOW_HINTS_DEFAULT))
-        {
-            ShowBasicOKDialog(getString(R.string.alliances_virgin_info));
-            SharedPreferences.Editor editor = getSharedPreferences(ClientDefs.SETTINGS, Context.MODE_PRIVATE).edit();
-            editor.putBoolean(ClientDefs.HAS_CLICKED_ALLIANCES_BUTTON, true);
-            editor.commit();
-        }
 
         if(!game.GetInteractionReady())
         {
@@ -5627,14 +5303,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     {
         SharedPreferences sharedPreferences = getSharedPreferences(ClientDefs.SETTINGS, Context.MODE_PRIVATE);
 
-        if(!sharedPreferences.getBoolean(ClientDefs.HAS_CLICKED_REPORTS_BUTTON, ClientDefs.HAS_CLICKED_REPORTS_BUTTON_DEFAULT) && sharedPreferences.getBoolean(ClientDefs.SETTINGS_SHOW_HINTS, ClientDefs.SETTINGS_SHOW_HINTS_DEFAULT))
-        {
-            ShowBasicOKDialog(getString(R.string.reports_virgin_info));
-            SharedPreferences.Editor editor = getSharedPreferences(ClientDefs.SETTINGS, Context.MODE_PRIVATE).edit();
-            editor.putBoolean(ClientDefs.HAS_CLICKED_REPORTS_BUTTON, true);
-            editor.commit();
-        }
-
         if(!game.GetInteractionReady())
         {
             ShowBasicOKDialog(getString(R.string.waiting_for_data));
@@ -5657,14 +5325,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     {
         SharedPreferences sharedPreferences = getSharedPreferences(ClientDefs.SETTINGS, Context.MODE_PRIVATE);
 
-        if(!sharedPreferences.getBoolean(ClientDefs.HAS_CLICKED_THREATS_BUTTON, ClientDefs.HAS_CLICKED_THREATS_BUTTON_DEFAULT) && sharedPreferences.getBoolean(ClientDefs.SETTINGS_SHOW_HINTS, ClientDefs.SETTINGS_SHOW_HINTS_DEFAULT))
-        {
-            ShowBasicOKDialog(getString(R.string.threats_virgin_info));
-            SharedPreferences.Editor editor = getSharedPreferences(ClientDefs.SETTINGS, Context.MODE_PRIVATE).edit();
-            editor.putBoolean(ClientDefs.HAS_CLICKED_THREATS_BUTTON, true);
-            editor.commit();
-        }
-
         if(!game.GetInteractionReady())
         {
             ShowBasicOKDialog(getString(R.string.waiting_for_data));
@@ -5685,14 +5345,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     public void ButtonPlayers(View view)
     {
         SharedPreferences sharedPreferences = getSharedPreferences(ClientDefs.SETTINGS, Context.MODE_PRIVATE);
-
-        if(!sharedPreferences.getBoolean(ClientDefs.HAS_CLICKED_PLAYERS_BUTTON, ClientDefs.HAS_CLICKED_PLAYERS_BUTTON_DEFAULT) && sharedPreferences.getBoolean(ClientDefs.SETTINGS_SHOW_HINTS, ClientDefs.SETTINGS_SHOW_HINTS_DEFAULT))
-        {
-            ShowBasicOKDialog(getString(R.string.players_virgin_info));
-            SharedPreferences.Editor editor = getSharedPreferences(ClientDefs.SETTINGS, Context.MODE_PRIVATE).edit();
-            editor.putBoolean(ClientDefs.HAS_CLICKED_PLAYERS_BUTTON, true);
-            editor.commit();
-        }
 
         if(!game.GetInteractionReady())
         {
@@ -5715,62 +5367,12 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     {
         SharedPreferences sharedPreferences = getSharedPreferences(ClientDefs.SETTINGS, Context.MODE_PRIVATE);
 
-        if(!sharedPreferences.getBoolean(ClientDefs.HAS_CLICKED_SETTINGS_BUTTON, ClientDefs.HAS_CLICKED_SETTINGS_BUTTON_DEFAULT) && sharedPreferences.getBoolean(ClientDefs.SETTINGS_SHOW_HINTS, ClientDefs.SETTINGS_SHOW_HINTS_DEFAULT))
-        {
-            ShowBasicOKDialog(getString(R.string.settings_virgin_info));
-            SharedPreferences.Editor editor = getSharedPreferences(ClientDefs.SETTINGS, Context.MODE_PRIVATE).edit();
-            editor.putBoolean(ClientDefs.HAS_CLICKED_SETTINGS_BUTTON, true);
-            editor.commit();
-        }
-
         runOnUiThread(new Runnable()
             {
                 @Override
                 public void run()
                 {
                     SetView(new SettingsView(game, me));
-                }
-            });
-    }
-
-    public void ButtonSendMessage(View view)
-    {
-        SharedPreferences sharedPreferences = getSharedPreferences(ClientDefs.SETTINGS, Context.MODE_PRIVATE);
-
-        if(!sharedPreferences.getBoolean(ClientDefs.HAS_CLICKED_CHAT_BUTTON, ClientDefs.HAS_CLICKED_CHAT_BUTTON_DEFAULT) && sharedPreferences.getBoolean(ClientDefs.SETTINGS_SHOW_HINTS, ClientDefs.SETTINGS_SHOW_HINTS_DEFAULT))
-        {
-            ShowBasicOKDialog(getString(R.string.chat_virgin_info));
-            SharedPreferences.Editor editor = getSharedPreferences(ClientDefs.SETTINGS, Context.MODE_PRIVATE).edit();
-            editor.putBoolean(ClientDefs.HAS_CLICKED_CHAT_BUTTON, true);
-            editor.commit();
-        }
-
-        runOnUiThread(new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    /*MissileFactory factoryToUse = null;
-
-                    for(MissileFactory factory : game.GetMissileFactorys())
-                    {
-                        if(factory.GetOnline() && factory.GetOwnedBy(game.GetOurPlayerID()))
-                        {
-                            factoryToUse = factory;
-                            break;
-                        }
-                    }
-
-                    if(factoryToUse != null)
-                    {
-                        SetView(new ChatView(game, me, factoryToUse.GetID()));
-                    }
-                    else
-                    {
-                        ShowBasicOKDialog(getString(R.string.no_missile_factory));
-                    }*/
-
-                    SetView(new ChatView(game, me));
                 }
             });
     }
@@ -6137,12 +5739,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                             //Populate map.
                             map.clear();
 
-                            if(CurrentView instanceof MainNormalView)
-                            {
-                                if(((MainNormalView)CurrentView).GetBottomView() instanceof BottomArtilleryTarget)
-                                    ((BottomArtilleryTarget)((MainNormalView)CurrentView).GetBottomView()).MapCleared();
-                            }
-
                             PrivacyZoneMarkers = new ConcurrentHashMap<>();
                             InterceptorMarkers = new ConcurrentHashMap<>();
 
@@ -6187,15 +5783,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                             EMPMarkers = new ConcurrentHashMap<>();
                             ABMEMPMarkers = new ConcurrentHashMap<>();
                             ThreatMarkers = new ConcurrentHashMap<>();
-                            //BlastEffects = new ArrayList<>();
-
-                            for(Map<Integer, RadarEffect> subMap : RadarEffects.values())
-                            {
-                                for(RadarEffect radar : subMap.values())
-                                    radar.Finish();
-                            }
-
-                            RadarEffects = new ConcurrentHashMap<>();
+                            BlastEffects = new ArrayList<>();
 
                             switch (interactionMode)
                             {
@@ -6541,12 +6129,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                             }
                         }
 
-                        for(Map<Integer, RadarEffect> subMap : RadarEffects.values())
-                        {
-                            for(RadarEffect radar : subMap.values())
-                                radar.Tick();
-                        }
-
                         if(interactionMode != InteractionMode.SET_TARGET && interactionMode != InteractionMode.MOVE_ORDER && interactionMode != InteractionMode.CAPTURE_TARGET)
                         {
                             if(selectedEntity instanceof Movable && selectedEntity != homebaseChangeAircraft)
@@ -6562,6 +6144,11 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
                         //Move entities that can move.
 
+                        for(BlastEffect blastEffect : BlastEffects)
+                        {
+                            blastEffect.Tick();
+                        }
+
                         if(AllMarkers.get(EntityType.MISSILE) != null)
                         {
                             for(Map.Entry<Integer, Marker> entry : AllMarkers.get(EntityType.MISSILE).entrySet())
@@ -6569,17 +6156,20 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                 Missile missile = game.GetMissile(entry.getKey());
                                 Marker marker = entry.getValue();
 
-                                if(marker != null && missile != null && marker.isVisible())
+                                if(missile != null)
                                 {
-                                    marker.setPosition(Utilities.GetLatLng(missile.GetPosition()));
-                                    marker.setRotation((float) GeoCoord.ToDegrees(missile.GetPosition().GetLastBearing()));
-                                }
+                                    if(marker != null && marker.isVisible())
+                                    {
+                                        marker.setPosition(Utilities.GetLatLng(missile.GetPosition()));
+                                        marker.setRotation((float) GeoCoord.ToDegrees(missile.GetPosition().GetLastBearing()));
+                                    }
 
-                                Marker threatMarker = ThreatMarkers.get(missile.GetID());
+                                    Marker threatMarker = ThreatMarkers.get(missile.GetID());
 
-                                if(threatMarker != null && missile != null && threatMarker.isVisible())
-                                {
-                                    threatMarker.setPosition(Utilities.GetLatLng(missile.GetPosition()));
+                                    if(threatMarker != null && threatMarker.isVisible())
+                                    {
+                                        threatMarker.setPosition(Utilities.GetLatLng(missile.GetPosition()));
+                                    }
                                 }
                             }
                         }
@@ -6686,16 +6276,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                 {
                                     marker.setVisible(true);
                                 }
-
-                                if(aircraft != null && aircraft.GetRadarActive() && RadarEffects.get(aircraft.GetEntityType()) != null && bShowRadarEffects)
-                                {
-                                    RadarEffect radar = RadarEffects.get(aircraft.GetEntityType()).get(aircraft.GetID());
-
-                                    if(radar != null)
-                                    {
-                                        radar.SetCenter(Utilities.GetLatLng(aircraft.GetPosition()));
-                                    }
-                                }
                             }
                         }
 
@@ -6763,16 +6343,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                     if(ship.Moving())
                                     {
                                         marker.setPosition(Utilities.GetLatLng(ship.GetPosition()));
-                                    }
-
-                                    if(ship.GetRadarActive() && RadarEffects.get(ship.GetEntityType()) != null && bShowRadarEffects)
-                                    {
-                                        RadarEffect radar = RadarEffects.get(ship.GetEntityType()).get(ship.GetID());
-
-                                        if(radar != null)
-                                        {
-                                            radar.SetCenter(Utilities.GetLatLng(ship.GetPosition()));
-                                        }
                                     }
                                 }
                             }
@@ -7123,16 +6693,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                 AddEntityToChunk(player);
                             }
 
-                            if(RadarEffects.get(player.GetEntityType()) != null && bShowRadarEffects)
-                            {
-                                RadarEffect radar = RadarEffects.get(player.GetEntityType()).get(player.GetID());
-
-                                if(radar != null)
-                                {
-                                    radar.SetCenter(Utilities.GetLatLng(player.GetPosition()));
-                                }
-                            }
-
                             return;
                         }
                     }
@@ -7198,15 +6758,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             Canvas canvas = new Canvas(newMap);
             canvas.drawBitmap(bitmap, 32, 32, null);
             canvas.drawBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.admin_overlay), 0, 0, null);
-
-            return BitmapDescriptorFactory.fromBitmap(newMap);
-        }
-        else if(player.GetChampion())
-        {
-            Bitmap newMap = Bitmap.createBitmap(128,128, Bitmap.Config.ARGB_8888);
-            Canvas canvas = new Canvas(newMap);
-            canvas.drawBitmap(bitmap, 32, 32, null);
-            canvas.drawBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.champion_overlay), 0, 0, null);
 
             return BitmapDescriptorFactory.fromBitmap(newMap);
         }
@@ -7399,8 +6950,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                     case GIVING: strText = getString(R.string.giving_wealth); break;
                     case SETTING_TOKEN: strText = getString(R.string.setting_token); break;
                     case TRANSMITTING: strText = getString(R.string.transmitting); break;
-                    case CAPTURING: strText = getString(R.string.capturing); break;
-                    case PROSPECTING: strText = getString(R.string.prospecting); break;
                     case PINGING: strText = getString(R.string.pinging); break;
                     case SCANNING: strText = getString(R.string.scanning); break;
                     case MIGRATING: strText = getString(R.string.migrating); break;
@@ -7888,26 +7437,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         });
     }
 
-    public void ToggleShowRadarEffects(boolean bShow)
-    {
-        bShowRadarEffects = bShow;
-
-        /*runOnUiThread(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                for(Map<Integer, RadarEffect> subMap : RadarEffects.values())
-                {
-                    for(RadarEffect radar : subMap.values())
-                        radar.ToggleVisible(bShow);
-                }
-            }
-        });*/
-
-        RebuildMap();
-    }
-
     public void ToggleShowMissileTrails(boolean bShow)
     {
         bShowMissileTrails = bShow;
@@ -8195,7 +7724,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void MissileExploded(Missile missile)
     {
-        /*if(missile != null)
+        if(missile != null)
         {
             MissileType type = game.GetConfig().GetMissileType(missile.GetType());
 
@@ -8204,21 +7733,21 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 if(type.GetNuclear())
                     BlastEffects.add(new BlastEffect(me, map, game, missile));
             }
-        }*/
+        }
     }
 
     @Override
     public void InterceptorReachedTarget(Interceptor interceptor)
     {
-        /*if(game.GetConfig().GetInterceptorType(interceptor.GetType()).GetNuclear())
-            BlastEffects.add(new BlastEffect(me, map, game, interceptor));*/
+        if(game.GetConfig().GetInterceptorType(interceptor.GetType()).GetNuclear())
+            BlastEffects.add(new BlastEffect(me, map, game, interceptor));
     }
 
     @Override
     public void TorpedoExploded(Torpedo torpedo)
     {
-        /*if(game.GetConfig().GetTorpedoType(torpedo.GetType()).GetNuclear())
-            BlastEffects.add(new BlastEffect(me, map, game, torpedo));*/
+        if(game.GetConfig().GetTorpedoType(torpedo.GetType()).GetNuclear())
+            BlastEffects.add(new BlastEffect(me, map, game, torpedo));
     }
 
     private Map<Integer, Marker> GetEntityMarkerMap(MapEntity entity)
@@ -8320,36 +7849,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                         if(AllMarkers.get(typeToAdd) == null)
                         {
                             AllMarkers.put(typeToAdd, new ConcurrentHashMap<>());
-                        }
-
-                        if(entity instanceof ScannerInterface && bShowRadarEffects)
-                        {
-                            ScannerInterface scanner = (ScannerInterface)entity;
-
-                            if(scanner.GetRadarActive())
-                            {
-                                //Get map of RadarEffects according to entity type.
-                                //If map is null, then map for this entity type has not been created yet.
-                                //Create the appropriate type of map.
-                                //Add it to RadarEffects.
-
-                                Map<Integer, RadarEffect> RadarEffectMap = RadarEffects.get(entity.GetEntityType());
-
-                                if(RadarEffectMap != null)
-                                {
-                                    //Map already exists. Cool.
-                                    RadarEffectMap.put(entity.GetID(), new RadarEffect(me, map, entity.GetPosition(), scanner.GetRadarRange(), game.WouldBeFriendlyFire(game.GetOwner(entity), game.GetOurPlayer()), bShowRadarEffects));
-                                }
-                                else
-                                {
-                                    //Map doesn't exist yet. Make one and add it to RadarEffects.
-                                    RadarEffectMap = new ConcurrentHashMap<>();
-
-                                    RadarEffectMap.put(entity.GetID(), new RadarEffect(me, map, entity.GetPosition(), scanner.GetRadarRange(), game.WouldBeFriendlyFire(game.GetOwner(entity), game.GetOurPlayer()), bShowRadarEffects));
-
-                                    RadarEffects.put(entity.GetEntityType(), RadarEffectMap);
-                                }
-                            }
                         }
 
                         //"Non-marker" markers.
@@ -8489,21 +7988,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                         .color(Utilities.ColourFromAttr(context, R.attr.MissilePathColour))));
                             }
                         }
-                        else if(entity instanceof ResourceDeposit)
-                        {
-                            MarkerOptions options = new MarkerOptions();
-                            options.position(Utilities.GetLatLng(entity.GetPosition()));
-                            options.icon(BitmapDescriptorFactory.fromBitmap(EntityIconBitmaps.GetResourceBitmap(context)));
-                            options.anchor(0.5f, 0.5f);
-
-                            if(DepositMarkers.containsKey(entity.GetID()))
-                            {
-                                DepositMarkers.get(entity.GetID()).remove();
-                                DepositMarkers.remove(entity.GetID());
-                            }
-
-                            DepositMarkers.put(entity.GetID(), map.addMarker(options));
-                        }
                         else
                         {
                             //Map markers generally.
@@ -8592,16 +8076,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
                                     options = null;
                                 }
-                            }
-                            else if(entity instanceof Blueprint)
-                            {
-                                options.icon(BitmapDescriptorFactory.fromBitmap(StructureIconBitmaps.GetBlueprintBitmap(context, game, ((Blueprint)entity).GetType())));
-                            }
-                            else if(entity instanceof Airdrop)
-                            {
-                                Airdrop airdrop = ((Airdrop)entity);
-
-                                options.icon(BitmapDescriptorFactory.fromBitmap(EntityIconBitmaps.GetAirdropBitmap(context, airdrop)));
                             }
                             else if(game.EntityIsFriendly(entity, game.GetOurPlayer()) || entity.GetVisible())
                             {
@@ -8935,21 +8409,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                         {
                             ClearSelectedEntity();
                             InformationMode(false);
-                        }
-                    }
-                }
-
-                if(entity instanceof ScannerInterface)
-                {
-                    Map<Integer, RadarEffect> SubMap = RadarEffects.get(entity.GetEntityType());
-
-                    if(SubMap != null)
-                    {
-                        RadarEffect effect = SubMap.get(entity.GetID());
-
-                        if(effect != null)
-                        {
-                            effect.Finish();
                         }
                     }
                 }

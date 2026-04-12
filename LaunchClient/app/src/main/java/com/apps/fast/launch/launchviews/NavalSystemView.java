@@ -1,25 +1,17 @@
 package com.apps.fast.launch.launchviews;
 
-import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.apps.fast.launch.R;
 import com.apps.fast.launch.activities.MainActivity;
-import com.apps.fast.launch.components.Sounds;
-import com.apps.fast.launch.components.TextUtilities;
 import com.apps.fast.launch.launchviews.controls.ArtillerySystemControl;
-import com.apps.fast.launch.launchviews.controls.CargoSystemControl;
 import com.apps.fast.launch.launchviews.controls.MissileSystemControl;
 import com.apps.fast.launch.launchviews.controls.SLBMSystemControl;
 import com.apps.fast.launch.launchviews.controls.TorpedoSystemControl;
-import com.apps.fast.launch.views.LaunchDialog;
 
 import launch.game.LaunchClientGame;
 import launch.game.entities.NavalVessel;
 import launch.game.entities.Ship;
-import launch.game.systems.CargoSystem;
-import launch.game.systems.LaunchSystem;
 import launch.game.systems.LaunchSystem.SystemType;
 
 /**
@@ -80,12 +72,6 @@ public class NavalSystemView extends LaunchView
             case SHIP_ARTILLERY:
             {
                 systemControl = new ArtillerySystemControl(game, activity, host.GetID(), (Ship)host);
-            }
-            break;
-
-            case SHIP_CARGO:
-            {
-                systemControl = new CargoSystemControl(game, activity, (Ship)host);
             }
             break;
 

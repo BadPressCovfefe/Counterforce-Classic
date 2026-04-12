@@ -192,22 +192,6 @@ public class BottomUnitCommand extends LaunchView
                 imgCommand.setImageResource(R.drawable.button_attack);
             }
             break;
-
-            case CAPTURE:
-            {
-                txtCommandTitle.setText(R.string.title_set_target);
-                txtCommandInstructions.setText(R.string.capture_instructions);
-                imgCommand.setImageResource(R.drawable.button_capture);
-            }
-            break;
-
-            case LIBERATE:
-            {
-                txtCommandTitle.setText(R.string.title_set_target);
-                txtCommandInstructions.setText(R.string.liberate_instructions);
-                imgCommand.setImageResource(R.drawable.button_infantry_liberate);
-            }
-            break;
         }
 
         btnCommand.setOnClickListener(new OnClickListener()

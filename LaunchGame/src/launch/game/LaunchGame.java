@@ -2545,7 +2545,7 @@ public abstract class LaunchGame implements LaunchEntityListener
     
     public int GetAircraftSlotUpgradeCost(int airbaseCapacity, int startingCapacity)
     {
-        long oCost = Defs.AIRBASE_CAPACITY_UPGRADE_COST.get(Defs.AIRBASE_CAPACITY_UPGRADE_TYPE);
+        long oCost = Defs.AIRBASE_CAPACITY_UPGRADE_COST.get(ResourceType.WEALTH);
 
         return (int)oCost;
     }
@@ -4889,8 +4889,6 @@ public abstract class LaunchGame implements LaunchEntityListener
         if(owner != null)
             owner.AddOwnedEntity(shipyard);
         
-        AddCargoSystem(shipyard.GetCargoSystem(), shipyard.GetPointer());
-        
         EntityAdded(shipyard);
     }
     
@@ -5194,45 +5192,6 @@ public abstract class LaunchGame implements LaunchEntityListener
         return null;
     }
     
-    public Collection<ScannerInterface> GetActiveRadars()
-    {
-        List<ScannerInterface> Result = new ArrayList<>();
-        
-        for(Airplane aircraft : GetAirplanes())
-        {
-            if(aircraft.GetRadarActive())
-            {
-                Result.add(aircraft);
-            }
-        }
-        
-        for(RadarStation radar : GetRadarStations())
-        {
-            if(radar.GetRadarActive())
-            {
-                Result.add(radar);
-            }
-        }
-        
-        for(Ship ship : GetShips())
-        {
-            if(ship.GetRadarActive())
-            {
-                Result.add(ship);
-            }
-        }
-        
-        /*for(Satellite sat : GetSatellites())
-        {
-            if(sat.RadarActive())
-            {
-                Result.add(sat);
-            }
-        }*/
-        
-        return Result;
-    }
-    
     public Collection<SentryGun> GetNormalSentryGuns() 
     { 
         List<SentryGun> Result = new ArrayList<>();
@@ -5282,9 +5241,6 @@ public abstract class LaunchGame implements LaunchEntityListener
             if(ship.HasCargo())
                 Result.add(ship);
         }
-        
-        for(Shipyard yard : GetShipyards())
-            Result.add(yard);
         
         for(Warehouse warehouse : GetWarehouses())
             Result.add(warehouse);

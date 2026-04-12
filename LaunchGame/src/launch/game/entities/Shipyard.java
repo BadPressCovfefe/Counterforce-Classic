@@ -14,7 +14,6 @@ import launch.game.Defs;
 import launch.game.GeoCoord;
 import launch.game.EntityPointer.EntityType;
 import launch.game.entities.conceptuals.ShipProductionOrder;
-import launch.game.systems.CargoSystem;
 import launch.game.systems.LaunchSystem;
 import launch.game.systems.LaunchSystemListener;
 
@@ -23,39 +22,29 @@ import launch.game.systems.LaunchSystemListener;
  *
  * @author Corbin
  */
-public class Shipyard extends Capturable implements HaulerInterface, LaunchSystemListener
+public class Shipyard extends Capturable implements LaunchSystemListener
 {
-    public static final int DATA_SIZE_SHIPYARD = 10;
-    public static final int DATA_SIZE_PORT = 1;
-    
-    private final boolean bPortOnly;
+    public static final int DATA_SIZE = 9;
     
     private GeoCoord geoOutput;
     
     private List<ShipProductionOrder> Queue = new ArrayList<>();
     private byte cProductionCapacity;
     
-    private CargoSystem cargo;
-    
     
     /** New. */
-    public Shipyard(int lID, GeoCoord geoPosition, String strName, GeoCoord geoOutput, short nHP, short nMaxHP, boolean bPortOnly)
+    public Shipyard(int lID, GeoCoord geoPosition, String strName, GeoCoord geoOutput, short nHP, short nMaxHP)
     {
         super(lID, geoPosition, strName, nHP, nMaxHP, LaunchEntity.ID_NONE, false);
-        this.bPortOnly = bPortOnly;
         this.geoOutput = geoOutput;
-        this.cargo = new CargoSystem(this, Defs.SHIPYARD_MAX_STORAGE_KG);
         this.cProductionCapacity = 1;
     }
     
     /** From save. */
-    public Shipyard(int lID, String strName, GeoCoord geoPosition, GeoCoord geoOutput, int lOwnerID, short nHP, short nMaxHP, boolean bContested, CargoSystem cargo, boolean bPortOnly, byte cCapacity, List<ShipProductionOrder> Queue)
+    public Shipyard(int lID, String strName, GeoCoord geoPosition, GeoCoord geoOutput, int lOwnerID, short nHP, short nMaxHP, boolean bContested, byte cCapacity, List<ShipProductionOrder> Queue)
     {
         super(lID, geoPosition, strName, nHP, nMaxHP, lOwnerID, bContested);
-        this.bPortOnly = bPortOnly;
         this.geoOutput = geoOutput;
-        this.cargo = cargo;
-        cargo.SetSystemListener(this);
         this.cProductionCapacity = cCapacity;
         this.Queue = Queue;
     }
@@ -64,15 +53,9 @@ public class Shipyard extends Capturable implements HaulerInterface, LaunchSyste
     public Shipyard(ByteBuffer bb, int lReceivingID)
     {
         super(bb);
-        bPortOnly = (bb.get() != 0x00);
-        cargo = new CargoSystem(this, bb);
-        
-        if(!bPortOnly)
-        {
-            geoOutput = new GeoCoord(bb.getFloat(), bb.getFloat());
-            cProductionCapacity = bb.get();
-            Queue = QueueFromData(bb);
-        }
+        geoOutput = new GeoCoord(bb.getFloat(), bb.getFloat());
+        cProductionCapacity = bb.get();
+        Queue = QueueFromData(bb);
     }
 
     @Override
@@ -93,35 +76,17 @@ public class Shipyard extends Capturable implements HaulerInterface, LaunchSyste
     @Override
     public byte[] GetData(int lAskingID)
     {
-        if(bPortOnly)
-        {
-            byte[] cCargoSystemData = cargo.GetData(lAskingID);
-            byte[] cBaseData = super.GetData(lAskingID);
+        byte[] cBaseData = super.GetData(lAskingID);
+        byte[] cQueueData = GetQueueData();
 
-            ByteBuffer bb = ByteBuffer.allocate(cBaseData.length + DATA_SIZE_PORT + cCargoSystemData.length);
-            bb.put(cBaseData);
-            bb.put((byte)(bPortOnly? 0xFF : 0x00));
-            bb.put(cCargoSystemData);
+        ByteBuffer bb = ByteBuffer.allocate(cBaseData.length + DATA_SIZE + cQueueData.length);
+        bb.put(cBaseData);
+        bb.putFloat(geoOutput.GetLatitude());
+        bb.putFloat(geoOutput.GetLongitude());
+        bb.put(cProductionCapacity);
+        bb.put(cQueueData);
 
-            return bb.array();
-        }
-        else
-        {
-            byte[] cCargoSystemData = cargo.GetData(lAskingID);
-            byte[] cBaseData = super.GetData(lAskingID);
-            byte[] cQueueData = GetQueueData();
-
-            ByteBuffer bb = ByteBuffer.allocate(cBaseData.length + DATA_SIZE_SHIPYARD + cQueueData.length + cCargoSystemData.length);
-            bb.put(cBaseData);
-            bb.put((byte)(bPortOnly? 0xFF : 0x00));
-            bb.put(cCargoSystemData);
-            bb.putFloat(geoOutput.GetLatitude());
-            bb.putFloat(geoOutput.GetLongitude());
-            bb.put(cProductionCapacity);
-            bb.put(cQueueData);
-
-            return bb.array();
-        }
+        return bb.array();
     }
     
     public static List<ShipProductionOrder> QueueFromData(ByteBuffer bb)
@@ -183,7 +148,7 @@ public class Shipyard extends Capturable implements HaulerInterface, LaunchSyste
     @Override
     public String GetTypeName()
     {
-        return bPortOnly ? "port" : "shipyard";
+        return "shipyard";
     }
     
     @Override
@@ -204,12 +169,6 @@ public class Shipyard extends Capturable implements HaulerInterface, LaunchSyste
     }
 
     @Override
-    public CargoSystem GetCargoSystem()
-    {
-        return cargo;
-    }
-
-    @Override
     public void SystemChanged(LaunchSystem system)
     {
         Changed(false);
@@ -219,11 +178,6 @@ public class Shipyard extends Capturable implements HaulerInterface, LaunchSyste
     public void Abandon()
     {
         super.Abandon();
-    }
-    
-    public boolean GetPortOnly()
-    {
-        return this.bPortOnly;
     }
     
     public Collection<ShipProductionOrder> GetQueue()
@@ -262,7 +216,6 @@ public class Shipyard extends Capturable implements HaulerInterface, LaunchSyste
     {
         Queue.clear();
         cProductionCapacity = 1;
-        cargo.ClearNonEntities();
     }
     
     public boolean FullyUpgraded()

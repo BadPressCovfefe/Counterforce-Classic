@@ -26,7 +26,7 @@
             android:layout_width="@dimen/PlayerInfoIconSize"
             android:layout_height="@dimen/PlayerInfoIconSize"
             android:id="@+id/imgSubmarineType"
-            android:src="@drawable/marker_submarine_medium"
+            android:src="@drawable/marker_ssbn"
             android:layout_margin="@dimen/ButtonEdgePadding"
             android:layout_gravity="center"/>
     </LinearLayout>

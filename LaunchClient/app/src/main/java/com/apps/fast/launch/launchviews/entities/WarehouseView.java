@@ -44,7 +44,7 @@ public class WarehouseView extends StructureView
             });
         }
 
-        imgLogo.setImageResource(R.drawable.icon_logisticsdepot);
+        imgLogo.setImageResource(R.drawable.marker_bank);
 
         lytConfig.addView(systemView);
         Update();

@@ -232,7 +232,7 @@
                 android:layout_gravity="center"
                 android:clickable="true"
                 android:layout_weight="10"
-                android:src="@drawable/fast_missile"/>
+                android:src="@drawable/icon_fast"/>
 
             <ImageView
                 android:id="@+id/imgSonobuoy"

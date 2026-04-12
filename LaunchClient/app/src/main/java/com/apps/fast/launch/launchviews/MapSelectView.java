@@ -6,7 +6,6 @@ import android.widget.TextView;
 
 import com.apps.fast.launch.R;
 import com.apps.fast.launch.activities.MainActivity;
-import com.apps.fast.launch.launchviews.entities.ArtilleryGunView;
 import com.apps.fast.launch.views.DistancedEntityView;
 import com.apps.fast.launch.views.EntityControls;
 import com.google.android.gms.maps.model.LatLng;
@@ -226,24 +225,6 @@ public class MapSelectView extends LaunchView
                             AllEntities.addAll(OurDistributors);
                         }
 
-                        if(OurCaravans.size() > 0)
-                        {
-                            lytGroups.addView(new CargoTruckMaintenanceView(game, activity, OurCaravans));
-                            AllEntities.addAll(OurCaravans);
-                        }
-
-                        if(OurCargoTrucks.size() > 0)
-                        {
-                            lytGroups.addView(new CargoTruckMaintenanceView(game, activity, OurCargoTrucks));
-                            AllEntities.addAll(OurCargoTrucks);
-                        }
-
-                        if(OurMiningTrucks.size() > 0)
-                        {
-                            lytGroups.addView(new CargoTruckMaintenanceView(game, activity, OurMiningTrucks));
-                            AllEntities.addAll(OurMiningTrucks);
-                        }
-
                         if(OurTanks.size() > 0)
                         {
                             lytGroups.addView(new TankMaintenanceView(game, activity, OurTanks));
@@ -284,12 +265,6 @@ public class MapSelectView extends LaunchView
                         {
                             lytGroups.addView(new AircraftMaintenanceView(game, activity, OurAircrafts));
                             AllEntities.addAll(OurAircrafts);
-                        }
-
-                        if(OurInfantry.size() > 0)
-                        {
-                            lytGroups.addView(new InfantryMaintenanceView(game, activity, OurInfantry));
-                            AllEntities.addAll(OurInfantry);
                         }
 
                         if(OurShips.size() > 0)
@@ -423,19 +398,9 @@ public class MapSelectView extends LaunchView
                 ((AircraftMaintenanceView) view).EntityUpdated(entity);
             }
 
-            if(view instanceof InfantryMaintenanceView)
-            {
-                ((InfantryMaintenanceView) view).EntityUpdated(entity);
-            }
-
             if(view instanceof TankMaintenanceView)
             {
                 ((TankMaintenanceView) view).EntityUpdated(entity);
-            }
-
-            if(view instanceof CargoTruckMaintenanceView)
-            {
-                ((CargoTruckMaintenanceView) view).EntityUpdated(entity);
             }
 
             if(view instanceof ShipMaintenanceView)

@@ -34,11 +34,7 @@ public class BottomNormalView extends LaunchView
     private ImageView btnReports;
     private ImageView btnWarnings;
     private ImageView btnDiplomacy;
-    private ImageView btnSendMessage;
     private ImageView btnOurPlayer;
-    private ImageView btnCallAirdrop;
-    private ImageView btnProspect;
-
     private ButtonFlasher btnFlasherReports;
     private ButtonFlasher btnFlasherWarnings;
     private ButtonFlasher btnFlasherDiplomacy;
@@ -56,9 +52,6 @@ public class BottomNormalView extends LaunchView
         btnReports = findViewById(R.id.btnReports);
         btnWarnings = findViewById(R.id.btnWarnings);
         btnDiplomacy = findViewById(R.id.btnDiplomacy);
-        btnSendMessage = findViewById(R.id.btnSendMessage);
-        btnCallAirdrop = findViewById(R.id.btnCallAirdrop);
-        btnProspect = findViewById(R.id.btnProspect);
 
         btnFlasherReports = new ButtonFlasher(btnReports);
         btnFlasherWarnings = new ButtonFlasher(btnWarnings);
@@ -87,19 +80,6 @@ public class BottomNormalView extends LaunchView
                 btnFlasherWarnings.FlashUpdate(context);
                 btnFlasherReports.FlashUpdate(context);
                 btnFlasherDiplomacy.FlashUpdate(context);
-
-                if(game.GetOurPlayer() != null)
-                {
-                    if(game.GetOurPlayer().GetCanCallAirdrop())
-                        btnCallAirdrop.setAlpha(1.0f);
-                    else
-                        btnCallAirdrop.setAlpha(0.5f);
-
-                    if(game.GetOurPlayer().GetCanProspect())
-                        btnProspect.setAlpha(1.0f);
-                    else
-                        btnProspect.setAlpha(0.5f);
-                }
             }
         });
     }

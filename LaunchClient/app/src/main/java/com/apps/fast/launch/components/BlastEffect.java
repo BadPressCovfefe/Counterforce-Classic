@@ -27,11 +27,10 @@ public class BlastEffect
     private GeoCoord geoTarget;
     private GoogleMap map;
     private MainActivity activity;
-    private Marker blastMarker;
+    private GroundOverlay blastOverlay;
     private BlastEffect me = this;
     private LaunchClientGame game;
     private boolean bAirburst;
-
     private int animFrame;
     private final int FRAMES = 6;
     private final int SECONDS_PER_FRAME = 1;
@@ -39,7 +38,7 @@ public class BlastEffect
 
     public BlastEffect(MainActivity activity, GoogleMap map, LaunchClientGame game, Missile missile)
     {
-        this.fltWidth = Math.max(MissileStats.GetMissileEMPRadius(game.GetConfig().GetMissileType(missile.GetType()), bAirburst), MissileStats.GetBlastRadius(game.GetConfig().GetMissileType(missile.GetType()), bAirburst));
+        this.fltWidth = Math.max(MissileStats.GetMissileEMPRadius(game.GetConfig().GetMissileType(missile.GetType()), bAirburst), MissileStats.GetBlastRadius(game.GetConfig().GetMissileType(missile.GetType()), bAirburst)) * Defs.METRES_PER_KM;
         this.map = map;
         this.activity = activity;
         this.animFrame = 1;
@@ -52,7 +51,7 @@ public class BlastEffect
 
     public BlastEffect(MainActivity activity, GoogleMap map, LaunchClientGame game, Interceptor interceptor)
     {
-        this.fltWidth = game.GetConfig().GetInterceptorType(interceptor.GetType()).GetBlastRadius();
+        this.fltWidth = game.GetConfig().GetInterceptorType(interceptor.GetType()).GetBlastRadius() * Defs.METRES_PER_KM;
         this.geoTarget = interceptor.GetPosition().GetCopy();
         this.map = map;
         this.activity = activity;
@@ -65,7 +64,7 @@ public class BlastEffect
 
     public BlastEffect(MainActivity activity, GoogleMap map, LaunchClientGame game, Torpedo torpedo)
     {
-        this.fltWidth = game.GetConfig().GetTorpedoType(torpedo.GetType()).GetBlastRadius();
+        this.fltWidth = game.GetConfig().GetTorpedoType(torpedo.GetType()).GetBlastRadius() * Defs.METRES_PER_KM;
         this.geoTarget = torpedo.GetPosition().GetCopy();
         this.map = map;
         this.activity = activity;
@@ -83,12 +82,12 @@ public class BlastEffect
             @Override
             public void run()
             {
-                MarkerOptions blastEffect = new MarkerOptions();
-                blastEffect.position(Utilities.GetLatLng(geoTarget));
+                GroundOverlayOptions blastEffect = new GroundOverlayOptions();
+                blastEffect.position(Utilities.GetLatLng(geoTarget), fltWidth);
                 blastEffect.anchor(0.5f, 0.5f);
-                blastEffect.icon(GetStageDrawable());
+                blastEffect.image(GetStageDrawable());
 
-                blastMarker = map.addMarker(blastEffect);
+                blastOverlay = map.addGroundOverlay(blastEffect);
             }
         });
     }
@@ -113,15 +112,15 @@ public class BlastEffect
             {
                 if(animFrame < FRAMES)
                 {
-                    if(blastMarker != null)
+                    if(blastOverlay != null)
                     {
                         animFrame++;
-                        blastMarker.setIcon(GetStageDrawable());
+                        blastOverlay.setImage(GetStageDrawable());
                     }
                 }
                 else
                 {
-                    blastMarker.remove();
+                    blastOverlay.remove();
                     //activity.BlastAnimationFinished(me);
                 }
             }

@@ -39,9 +39,6 @@ import launch.game.systems.AircraftSystem;
 public class AircraftSystemControl extends LaunchView
 {
     private LinearLayout lytAircraftSlots;
-    private LinearLayout btnOpen;
-    private ImageView imgOpen;
-    private ImageView imgMachineryCost;
     private LinearLayout btnUpgradeAircraftSlots;
     private LinearLayout lytAirbaseOptions;
     private LinearLayout lytShipOptions;
@@ -88,9 +85,6 @@ public class AircraftSystemControl extends LaunchView
         txtAircraftSlotUpgrade = (TextView) findViewById(R.id.txtAircraftSlotUpgrade);
         txtAircraftSlotUpgradeCost = (TextView) findViewById(R.id.txtAircraftSlotUpgradeCost);
         txtAirbaseSlots = findViewById(R.id.txtAirbaseSlots);
-        btnOpen = findViewById(R.id.btnOpen);
-        imgOpen = findViewById(R.id.imgOpen);
-        imgMachineryCost = findViewById(R.id.imgMachineryCost);
         lytAirbaseOptions = findViewById(R.id.lytAirbaseOptions);
         lytShipOptions = findViewById(R.id.lytShipOptions);
 
@@ -127,56 +121,6 @@ public class AircraftSystemControl extends LaunchView
                 lytAirbaseOptions.setVisibility(GONE);
                 lytShipOptions.setVisibility(VISIBLE);
             }
-
-            btnOpen.setVisibility(VISIBLE);
-
-            if(system.GetOpen())
-            {
-                imgOpen.setImageResource(R.drawable.marker_airbase);
-            }
-            else
-            {
-                imgOpen.setImageResource(R.drawable.marker_airbase_open);
-            }
-
-            btnOpen.setOnClickListener(new OnClickListener()
-            {
-                @Override
-                public void onClick(View view)
-                {
-                    int lConfirmRes = R.string.open_airbase_confirm;
-
-                    if(system.GetOpen())
-                        lConfirmRes = R.string.close_airbase_confirm;
-
-                    final LaunchDialog launchDialog = new LaunchDialog();
-                    launchDialog.SetHeaderPurchase();
-                    launchDialog.SetMessage(context.getString(lConfirmRes));
-                    launchDialog.SetOnClickYes(new OnClickListener()
-                    {
-                        @Override
-                        public void onClick(View view)
-                        {
-                            launchDialog.dismiss();
-
-                            game.ToggleAirbaseOpen(host.GetPointer());
-                        }
-                    });
-                    launchDialog.SetOnClickNo(new OnClickListener()
-                    {
-                        @Override
-                        public void onClick(View view)
-                        {
-                            launchDialog.dismiss();
-                        }
-                    });
-                    launchDialog.show(activity.getFragmentManager(), "");
-                }
-            });
-        }
-        else
-        {
-            btnOpen.setVisibility(GONE);
         }
 
         if(bOwnedByPlayer || system.HostsPlayerAircraft(game.GetOurPlayerID()))
@@ -216,8 +160,6 @@ public class AircraftSystemControl extends LaunchView
                         txtAircraftSlotUpgradeCost.setText(TextUtilities.GetCurrencyString(lCost));
                         txtAircraftSlotUpgradeCost.setTextColor(Utilities.ColourFromAttr(context, game.GetOurPlayer().GetWealth() >= lCost ? R.attr.GoodColour : R.attr.BadColour));
                         btnUpgradeAircraftSlots.setVisibility(VISIBLE);
-                        imgMachineryCost.setVisibility(VISIBLE);
-                        imgMachineryCost.setImageBitmap(EntityIconBitmaps.GetResourceTypeBitmap(context, Defs.AIRBASE_CAPACITY_UPGRADE_TYPE));
                     }
                     else
                     {
@@ -292,15 +234,6 @@ public class AircraftSystemControl extends LaunchView
 
                         if(bOwnedByPlayer)
                         {
-                            if(system.GetOpen())
-                            {
-                                imgOpen.setImageResource(R.drawable.marker_airbase);
-                            }
-                            else
-                            {
-                                imgOpen.setImageResource(R.drawable.marker_airbase_open);
-                            }
-
                             if(bDisplaySlotUpgrade)
                             {
                                 Config config = game.GetConfig();
@@ -316,8 +249,6 @@ public class AircraftSystemControl extends LaunchView
                                     txtAircraftSlotUpgradeCost.setText(TextUtilities.GetCurrencyString(lCost));
                                     txtAircraftSlotUpgradeCost.setTextColor(Utilities.ColourFromAttr(context, game.GetOurPlayer().GetWealth() >= lCost ? R.attr.GoodColour : R.attr.BadColour));
                                     btnUpgradeAircraftSlots.setVisibility(VISIBLE);
-                                    imgMachineryCost.setVisibility(VISIBLE);
-                                    imgMachineryCost.setImageBitmap(EntityIconBitmaps.GetResourceTypeBitmap(context, Defs.AIRBASE_CAPACITY_UPGRADE_TYPE));
                                 }
                                 else
                                 {

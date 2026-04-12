@@ -25,7 +25,7 @@ import launch.utilities.ShortDelay;
  *
  * @author Corbin
  */
-public class Airplane extends Movable implements LaunchSystemListener, FuelableInterface, NamableInterface, ScannerInterface, AirplaneInterface, HaulerInterface, LauncherInterface
+public class Airplane extends Movable implements LaunchSystemListener, FuelableInterface, NamableInterface, AirplaneInterface, HaulerInterface, LauncherInterface
 {
     public static final int DATA_SIZE = 51;
     
@@ -688,24 +688,6 @@ public class Airplane extends Movable implements LaunchSystemListener, FuelableI
     public int GetTimeAirborne()
     {
         return this.lTimeAirborne;
-    }
-    
-    @Override
-    public boolean GetRadarActive()
-    {
-        return this.bRadarActive;
-    }
-    
-    @Override
-    public void SetRadarActive(boolean bActive)
-    {
-        this.bRadarActive = bActive;
-    }
-    
-    @Override
-    public float GetRadarRange()
-    {
-        return this.type == EntityType.AWACS ? Defs.AWACS_SCANNER_RANGE : -1f;
     }
     
     @Override

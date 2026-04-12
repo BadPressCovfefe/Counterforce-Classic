@@ -48,6 +48,8 @@ public class PurchaseButton extends LinearLayout
     private MainActivity activity;
     private LaunchClientGame game;
     private EntityPointer pointerOrigin;
+    private TextView txtTitle;
+    private TextView txtDescription;
     
     private long oCost = 0;
 
@@ -81,6 +83,8 @@ public class PurchaseButton extends LinearLayout
 
         unitIcon = findViewById(R.id.unitIcon);
         txtCost = findViewById(R.id.txtCost);
+        txtTitle = findViewById(R.id.txtTitle);
+        txtDescription = findViewById(R.id.txtDescription);
 
         super.setOnClickListener(new OnClickListener()
         {
@@ -100,13 +104,16 @@ public class PurchaseButton extends LinearLayout
         this.activity = activity;
         this.pointerOrigin = pointerOrigin;
 
+        txtTitle.setText(TextUtilities.GetEntityTypeTitle(entityType));
+
         switch(entityType)
         {
             case MISSILE_SITE:
             {
                 bRespectStructureSeparation = true;
-                unitIcon.setImageResource(R.drawable.build_missile_launcher);
+                unitIcon.setImageResource(R.drawable.build_missile_site);
                 oCost = Defs.MISSILE_SITE_STRUCTURE_COST.get(ResourceType.WEALTH);
+                txtDescription.setText(context.getString(R.string.desc_missile_launcher));
             }
             break;
 
@@ -115,6 +122,7 @@ public class PurchaseButton extends LinearLayout
                 bRespectStructureSeparation = true;
                 unitIcon.setImageResource(R.drawable.build_icbm_silo);
                 oCost = Defs.ICBM_SILO_STRUCTURE_COST.get(ResourceType.WEALTH);
+                txtDescription.setText(context.getString(R.string.desc_icbm_silo));
             }
             break;
 
@@ -123,22 +131,25 @@ public class PurchaseButton extends LinearLayout
                 bRespectStructureSeparation = true;
                 unitIcon.setImageResource(R.drawable.build_sam_site);
                 oCost = Defs.SAM_SITE_STRUCTURE_COST.get(ResourceType.WEALTH);
+                txtDescription.setText(context.getString(R.string.desc_sam_site));
             }
             break;
 
             case ABM_SILO:
             {
                 bRespectStructureSeparation = true;
-                unitIcon.setImageResource(R.drawable.build_abm_silo);
+                unitIcon.setImageResource(R.drawable.build_abm_site);
                 oCost = Defs.ABM_SILO_STRUCTURE_COST.get(ResourceType.WEALTH);
+                txtDescription.setText(context.getString(R.string.desc_abm_silo));
             }
             break;
 
             case SENTRY_GUN:
             {
                 bRespectStructureSeparation = true;
-                unitIcon.setImageResource(R.drawable.build_sentry);
+                unitIcon.setImageResource(R.drawable.build_sentry_gun);
                 oCost = Defs.SENTRY_GUN_STRUCTURE_COST.get(ResourceType.WEALTH);
+                txtDescription.setText(context.getString(R.string.desc_sentry_gun));
             }
             break;
 
@@ -146,15 +157,13 @@ public class PurchaseButton extends LinearLayout
             {
                 bRespectStructureSeparation = true;
                 unitIcon.setImageResource(R.drawable.build_command_post);
-                oCost = game.GetNextCommandPostCost(game.GetOurPlayer()).get(ResourceType.WEALTH);
-            }
-            break;
 
-            case ORE_MINE:
-            {
-                bRespectStructureSeparation = true;
-                unitIcon.setImageResource(R.drawable.build_oremine);
-                oCost = Defs.ORE_MINE_STRUCTURE_COST.get(ResourceType.WEALTH);
+                if(game.GetNextCommandPostCost(game.GetOurPlayer()).get(ResourceType.WEALTH) != null)
+                {
+                    oCost = game.GetNextCommandPostCost(game.GetOurPlayer()).get(ResourceType.WEALTH);
+                }
+
+                txtDescription.setText(context.getString(R.string.desc_command_post));
             }
             break;
 
@@ -163,21 +172,24 @@ public class PurchaseButton extends LinearLayout
                 bRespectStructureSeparation = true;
                 unitIcon.setImageResource(R.drawable.build_airbase);
                 oCost = Defs.AIRBASE_STRUCTURE_COST.get(ResourceType.WEALTH);
+                txtDescription.setText(context.getString(R.string.airbase_description));
             }
             break;
 
             case WAREHOUSE:
             {
                 bRespectStructureSeparation = true;
-                unitIcon.setImageResource(R.drawable.build_logisticsdepot);
+                unitIcon.setImageResource(R.drawable.build_bank);
                 oCost = Defs.WAREHOUSE_STRUCTURE_COST.get(ResourceType.WEALTH);
+                txtDescription.setText(context.getString(R.string.desc_bank));
             }
             break;
 
             case MBT:
             {
-                unitIcon.setImageResource(R.drawable.build_mbt);
+                unitIcon.setImageResource(R.drawable.build_tank);
                 oCost = Defs.TANK_BUILD_COST.get(ResourceType.WEALTH);
+                txtDescription.setText(context.getString(R.string.desc_mbt));
             }
             break;
 
@@ -186,53 +198,23 @@ public class PurchaseButton extends LinearLayout
                 bRespectStructureSeparation = true;
                 unitIcon.setImageResource(R.drawable.build_armory);
                 oCost = Defs.BARRACKS_STRUCTURE_COST.get(ResourceType.WEALTH);
-            }
-            break;
-
-            case BARRACKS:
-            {
-                bRespectStructureSeparation = true;
-                unitIcon.setImageResource(R.drawable.build_barracks);
-                oCost = Defs.BARRACKS_STRUCTURE_COST.get(ResourceType.WEALTH);
+                txtDescription.setText(context.getString(R.string.armory_description));
             }
             break;
 
             case CARGO_TRUCK:
             {
-                unitIcon.setImageResource(R.drawable.build_truck);
+                unitIcon.setImageResource(R.drawable.todo);
                 oCost = Defs.CARGO_TRUCK_BUILD_COST.get(ResourceType.WEALTH);
-            }
-            break;
-
-            case PROCESSOR:
-            {
-                bRespectStructureSeparation = true;
-                unitIcon.setImageResource(R.drawable.build_processor);
-                oCost = Defs.GetProcessorCost(resourceType).get(ResourceType.WEALTH);
-            }
-            break;
-
-            case DISTRIBUTOR:
-            {
-                bRespectStructureSeparation = true;
-                unitIcon.setImageResource(R.drawable.build_distributor);
-                oCost = Defs.DISTRIBUTOR_STRUCTURE_COST.get(ResourceType.WEALTH);
             }
             break;
 
             case ARTILLERY_GUN:
             {
                 bRespectStructureSeparation = true;
-                unitIcon.setImageResource(R.drawable.build_artillery_shell);
+                unitIcon.setImageResource(R.drawable.build_artillery_gun);
                 oCost = Defs.ARTILLERY_GUN_STRUCTURE_COST.get(ResourceType.WEALTH);
-            }
-            break;
-
-            case SCRAP_YARD:
-            {
-                bRespectStructureSeparation = true;
-                unitIcon.setImageResource(R.drawable.build_scrap_yard);
-                oCost = Defs.SCRAPYARD_STRUCTURE_COST.get(ResourceType.WEALTH);
+                txtDescription.setText(context.getString(R.string.desc_artillery_gun));
             }
             break;
 
@@ -240,6 +222,7 @@ public class PurchaseButton extends LinearLayout
             {
                 unitIcon.setImageResource(R.drawable.build_frigate);
                 oCost = Defs.FRIGATE_BUILD_COST.get(ResourceType.WEALTH);
+                txtDescription.setText(context.getString(R.string.desc_frigate));
             }
             break;
 
@@ -247,13 +230,15 @@ public class PurchaseButton extends LinearLayout
             {
                 unitIcon.setImageResource(R.drawable.build_destroyer);
                 oCost = Defs.DESTROYER_BUILD_COST.get(ResourceType.WEALTH);
+                txtDescription.setText(context.getString(R.string.desc_destroyer));
             }
             break;
 
             case FLEET_OILER:
             {
-                unitIcon.setImageResource(R.drawable.build_fleet_oiler);
+                unitIcon.setImageResource(R.drawable.todo);
                 oCost = Defs.FLEET_OILER_BUILD_COST.get(ResourceType.WEALTH);
+                txtDescription.setText(context.getString(R.string.desc_fleet_oiler));
             }
             break;
 
@@ -261,6 +246,7 @@ public class PurchaseButton extends LinearLayout
             {
                 unitIcon.setImageResource(R.drawable.build_super_carrier);
                 oCost = Defs.SUPER_CARRIER_BUILD_COST.get(ResourceType.WEALTH);
+                txtDescription.setText(context.getString(R.string.desc_super_carrier));
             }
             break;
 
@@ -268,13 +254,15 @@ public class PurchaseButton extends LinearLayout
             {
                 unitIcon.setImageResource(R.drawable.build_attack_sub);
                 oCost = Defs.ATTACK_SUB_BUILD_COST.get(ResourceType.WEALTH);
+                txtDescription.setText(context.getString(R.string.desc_attack_sub));
             }
             break;
 
             case SSBN:
             {
-                unitIcon.setImageResource(R.drawable.build_ssbn);
+                unitIcon.setImageResource(R.drawable.build_ssbn_2);
                 oCost = Defs.SSBN_BUILD_COST.get(ResourceType.WEALTH);
+                txtDescription.setText(context.getString(R.string.desc_ssbn));
             }
             break;
 
@@ -282,6 +270,7 @@ public class PurchaseButton extends LinearLayout
             {
                 unitIcon.setImageResource(R.drawable.build_bomber);
                 oCost = Defs.BOMBER_BUILD_COST.get(ResourceType.WEALTH);
+                txtDescription.setText(context.getString(R.string.desc_bomber));
             }
             break;
 
@@ -289,13 +278,15 @@ public class PurchaseButton extends LinearLayout
             {
                 unitIcon.setImageResource(R.drawable.build_fighter);
                 oCost = Defs.FIGHTER_BUILD_COST.get(ResourceType.WEALTH);
+                txtDescription.setText(context.getString(R.string.desc_fighter));
             }
             break;
 
             case ATTACK_AIRCRAFT:
             {
-                unitIcon.setImageResource(R.drawable.build_attack_aircraft);
+                unitIcon.setImageResource(R.drawable.build_ground_attack);
                 oCost = Defs.ATTACK_AIRCRAFT_BUILD_COST.get(ResourceType.WEALTH);
+                txtDescription.setText(context.getString(R.string.desc_attack_aircraft));
             }
             break;
 
@@ -303,13 +294,15 @@ public class PurchaseButton extends LinearLayout
             {
                 unitIcon.setImageResource(R.drawable.build_refueler);
                 oCost = Defs.REFUELER_BUILD_COST.get(ResourceType.WEALTH);
+                txtDescription.setText(context.getString(R.string.desc_refueler));
             }
             break;
 
             case MULTI_ROLE:
             {
-                unitIcon.setImageResource(R.drawable.build_multi_role);
+                unitIcon.setImageResource(R.drawable.build_refueler);
                 oCost = Defs.MULTI_ROLE_BUILD_COST.get(ResourceType.WEALTH);
+                txtDescription.setText(context.getString(R.string.desc_multi_role));
             }
             break;
 
@@ -317,14 +310,24 @@ public class PurchaseButton extends LinearLayout
             {
                 unitIcon.setImageResource(R.drawable.build_ssb);
                 oCost = Defs.SSB_BUILD_COST.get(ResourceType.WEALTH);
+                txtDescription.setText(context.getString(R.string.desc_ssb));
             }
             break;
 
             default: unitIcon.setImageResource(R.drawable.todo); break;
         }
 
-        txtCost.setText(TextUtilities.GetCurrencyString(oCost));
-        txtCost.setTextColor(Utilities.ColourFromAttr(context, game.GetOurPlayer().GetWealth() >= oCost ? R.attr.GoodColour : R.attr.BadColour));
+        if(oCost > 0)
+        {
+            txtCost.setText(TextUtilities.GetCurrencyString(oCost));
+            txtCost.setTextColor(Utilities.ColourFromAttr(context, game.GetOurPlayer().GetWealth() >= oCost ? R.attr.GoodColour : R.attr.BadColour));
+        }
+        else
+        {
+            txtCost.setText(context.getString(R.string.free));
+            txtCost.setTextColor(Utilities.ColourFromAttr(context, R.attr.GoodColour));
+        }
+
 
         if(pointerOrigin != null)
         {
@@ -386,7 +389,7 @@ public class PurchaseButton extends LinearLayout
                 {
                     final LaunchDialog launchDialog = new LaunchDialog();
                     launchDialog.SetHeaderConstruct();
-                    launchDialog.SetMessage(context.getString(R.string.construct_confirm, TextUtilities.GetEntityTypeName(entityType, resourceType), TextUtilities.GetCurrencyString(oCost)));
+                    launchDialog.SetMessage(context.getString(R.string.construct_confirm, TextUtilities.GetEntityTypeName(entityType), TextUtilities.GetCurrencyString(oCost)));
                     launchDialog.SetOnClickYes(new View.OnClickListener()
                     {
                         @Override

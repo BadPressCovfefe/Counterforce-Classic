@@ -612,24 +612,24 @@ public class MissileSystemControl extends LaunchView implements SlotListener
         {
             int lType = system.GetSlotMissileType(lSlotNumber);
             String strTypeName = "UNSPECIFIED - TELL THE DEV";
-            Map<Resource.ResourceType, Long> Costs = null;
+            long oCost = 0;
 
             if(bIsMissiles)
             {
                 MissileType type = game.GetConfig().GetMissileType(lType);
                 strTypeName = type.GetName();
-                Costs = game.GetSaleValue(type.GetCosts());
+                oCost = type.GetCost();
             }
             else
             {
                 InterceptorType type = game.GetConfig().GetInterceptorType(lType);
                 strTypeName = type.GetName();
-                Costs = game.GetSaleValue(type.GetCosts());
+                oCost = type.GetCost();
             }
 
             final LaunchDialog launchDialog = new LaunchDialog();
             launchDialog.SetHeaderPurchase();
-            launchDialog.SetMessage(context.getString(R.string.sell_confirm, strTypeName, TextUtilities.GetCostStatement(Costs)));
+            launchDialog.SetMessage(context.getString(R.string.sell_confirm, strTypeName, TextUtilities.GetCurrencyString(oCost)));
             launchDialog.SetOnClickYes(new View.OnClickListener()
             {
                 @Override

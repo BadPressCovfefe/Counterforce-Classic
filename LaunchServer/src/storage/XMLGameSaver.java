@@ -481,7 +481,6 @@ public class XMLGameSaver
                 AddNode(doc, eleRadarStation, XMLDefs.OWNER_ID, radarStation.GetOwnerID());
                 AddNode(doc, eleRadarStation, XMLDefs.FLAGS, radarStation.GetFlags());
                 AddNode(doc, eleRadarStation, XMLDefs.STATE_TIME, radarStation.GetStateTimeRemaining());
-                AddNode(doc, eleRadarStation, XMLDefs.RADAR_ACTIVE, radarStation.GetRadarActive());
                 AddNode(doc, eleRadarStation, XMLDefs.VISIBLE, radarStation.GetVisible());
                 AddNode(doc, eleRadarStation, XMLDefs.VISIBLE_TIME, radarStation.GetVisibleTimeRemaining());
                 AddNode(doc, eleRadarStation, XMLDefs.BUILT_BY_ID, radarStation.GetBuiltByID());
@@ -711,7 +710,6 @@ public class XMLGameSaver
                 AddPositionNode(doc, eleShip, XMLDefs.TARGET, ship.GetGeoTarget());
                 AddNode(doc, eleShip, XMLDefs.SONAR_COOLDOWN, ship.GetSonarCooldownRemaining());
                 AddNode(doc, eleShip, XMLDefs.CURRENT_FUEL, ship.GetCurrentFuel());
-                AddNode(doc, eleShip, XMLDefs.RADAR_ACTIVE, ship.GetRadarActive());
                 AddNode(doc, eleShip, XMLDefs.VISIBLE, ship.GetVisible());
                 AddNode(doc, eleShip, XMLDefs.VISIBLE_TIME, ship.GetVisibleTimeRemaining());
                 AddNode(doc, eleShip, XMLDefs.MODE, ship.GetMode());
@@ -798,7 +796,6 @@ public class XMLGameSaver
                 AddNode(doc, eleAircraft, XMLDefs.GROUND_ATTACK, aircraft.GroundAttack());
                 AddNode(doc, eleAircraft, XMLDefs.ELECTRONIC_WARFARE, aircraft.GetElectronicWarfare());
                 AddNode(doc, eleAircraft, XMLDefs.AIRCRAFT_ROLE, aircraft.GetAircraftType().ordinal());
-                AddNode(doc, eleAircraft, XMLDefs.RADAR_ACTIVE, aircraft.GetRadarActive());
                 AddNode(doc, eleAircraft, XMLDefs.RELOAD_REMAINING, aircraft.GetCannonReloadRemaining());
                 AddNode(doc, eleAircraft, XMLDefs.ELECTRONIC_WARFARE_RELOAD, aircraft.GetElecWarfareReload());
                 AddNode(doc, eleAircraft, XMLDefs.VISIBLE, aircraft.GetVisible());
@@ -892,14 +889,12 @@ public class XMLGameSaver
             {
                 Element eleShipyard = AddNode(doc, elements, XMLDefs.SHIPYARD, XMLDefs.ID, shipyard.GetID());
                 AddNode(doc, eleShipyard, XMLDefs.NAME, shipyard.GetName());
-                AddNode(doc, eleShipyard, XMLDefs.PORT, shipyard.GetPortOnly());
                 AddPositionNode(doc, eleShipyard, XMLDefs.POSITION, shipyard.GetPosition());
                 AddPositionNode(doc, eleShipyard, XMLDefs.OUTPUT_COORD, shipyard.GetOutputCoord());
                 AddNode(doc, eleShipyard, XMLDefs.HP, shipyard.GetHP());
                 AddNode(doc, eleShipyard, XMLDefs.OWNER_ID, shipyard.GetOwnerID());
                 AddNode(doc, eleShipyard, XMLDefs.MAX_HP, shipyard.GetMaxHP());
                 AddNode(doc, eleShipyard, XMLDefs.CONTESTED, shipyard.GetContested());
-                AddCargoSystem(doc, eleShipyard, shipyard.GetCargoSystem(), XMLDefs.CARGO_SYSTEM);
                 AddNode(doc, eleShipyard, XMLDefs.PRODUCTION_CAPACITY, shipyard.GetProductionCapacity());
                 AddShipyardQueue(doc, eleShipyard, shipyard, XMLDefs.QUEUE);
             }

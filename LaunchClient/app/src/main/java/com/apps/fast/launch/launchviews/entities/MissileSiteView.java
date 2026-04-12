@@ -33,7 +33,7 @@ public class MissileSiteView extends StructureView
 
         super.Setup();
 
-        imgLogo.setImageResource(R.drawable.icon_missile_site);
+        imgLogo.setImageResource(R.drawable.marker_missilesite);
 
         if(structureShadow.GetOwnerID() == game.GetOurPlayerID())
         {

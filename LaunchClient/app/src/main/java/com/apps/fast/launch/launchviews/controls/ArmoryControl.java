@@ -38,9 +38,6 @@ public class ArmoryControl extends LaunchView
 
     private boolean bOurStructure;
 
-    protected FrameLayout lytCargo;
-    protected LaunchView cargoSystem;
-
     public ArmoryControl(LaunchClientGame game, MainActivity activity, int lArmoryID)
     {
         super(game, activity, true);
@@ -52,11 +49,6 @@ public class ArmoryControl extends LaunchView
         {
             bOurStructure = (armory.GetOwnerID() == game.GetOurPlayerID());
             this.armory = armory;
-
-            if(game.EntityIsFriendly(armory, game.GetOurPlayer()))
-            {
-                cargoSystem = new CargoSystemControl(game, activity, armory);
-            }
         }
         else
         {
@@ -76,7 +68,6 @@ public class ArmoryControl extends LaunchView
         lytProduction = findViewById(R.id.lytProduction);
         txtPrepTime = findViewById(R.id.txtPrepTime);
         imgProduction = findViewById(R.id.imgProduction);
-        lytCargo = findViewById(R.id.lytCargo);
         lytBuildTank = findViewById(R.id.lytBuildTank);
         lytBuildInfantry = findViewById(R.id.lytBuildInfantry);
         btnBuildMissileTank = findViewById(R.id.btnBuildMissileTank);
@@ -157,19 +148,6 @@ public class ArmoryControl extends LaunchView
             lytProduction.setVisibility(GONE);
         }
 
-        if(game.EntityIsFriendly(armory, game.GetOurPlayer()))
-        {
-            if(cargoSystem != null)
-            {
-                lytCargo.addView(cargoSystem);
-                lytCargo.setBackgroundColor(Utilities.ColourFromAttr(context, R.attr.SystemBackgroundColour));
-            }
-            else
-            {
-                lytCargo.setVisibility(GONE);
-            }
-        }
-
         Update();
     }
 
@@ -186,13 +164,6 @@ public class ArmoryControl extends LaunchView
                 if(armory != null)
                 {
                     bOurStructure = armory.GetOwnedBy(game.GetOurPlayerID());
-
-                    if(game.EntityIsFriendly(armory, game.GetOurPlayer()))
-                    {
-                        cargoSystem = new CargoSystemControl(game, activity, armory);
-                        lytCargo.removeAllViews();
-                        lytCargo.addView(cargoSystem);
-                    }
 
                     if(bOurStructure)
                     {

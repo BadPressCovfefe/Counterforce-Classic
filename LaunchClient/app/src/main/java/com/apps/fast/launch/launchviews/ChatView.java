@@ -51,7 +51,7 @@ public class ChatView extends LaunchView
 
         txtChannel.setText(context.getString(bGlobal ? R.string.channel_global : R.string.channel_alliance));
         txtChannel.setTextColor(bGlobal ? Color.WHITE : Color.CYAN);
-        imgChannel.setImageDrawable(context.getDrawable(bGlobal ? R.drawable.button_channel_global : R.drawable.button_channel_allies));
+        imgChannel.setImageDrawable(context.getDrawable(bGlobal ? R.drawable.todo : R.drawable.todo));
 
         btnChangeChannel.setOnClickListener(new OnClickListener()
         {
@@ -63,7 +63,7 @@ public class ChatView extends LaunchView
                     bGlobal = !bGlobal;
                     txtChannel.setText(context.getString(bGlobal ? R.string.channel_global : R.string.channel_alliance));
                     txtChannel.setTextColor(bGlobal ? Color.WHITE : Color.CYAN);
-                    imgChannel.setImageDrawable(context.getDrawable(bGlobal ? R.drawable.button_channel_global : R.drawable.button_channel_allies));
+                    imgChannel.setImageDrawable(context.getDrawable(bGlobal ? R.drawable.todo : R.drawable.todo));
                 }
                 else
                 {

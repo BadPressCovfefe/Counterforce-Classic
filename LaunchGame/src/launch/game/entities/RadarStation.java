@@ -21,7 +21,7 @@ import launch.utilities.ShortDelay;
  *
  * @author Corbin
  */
-public class RadarStation extends Structure implements ScannerInterface
+public class RadarStation extends Structure
 {
     //If the client receiving the data is the client of the player that owns the structure, the data size transmitted will be 10. Otherwise it will be 0.
     private static final int DATA_SIZE = 1;
@@ -97,24 +97,6 @@ public class RadarStation extends Structure implements ScannerInterface
     public int GetSessionCode()
     {
         return LaunchSession.RadarStation;
-    }
-    
-    @Override
-    public boolean GetRadarActive()
-    {
-        return this.bRadarActive;
-    }
-    
-    @Override
-    public void SetRadarActive(boolean bActive)
-    {
-        this.bRadarActive = bActive;
-    }
-    
-    @Override
-    public float GetRadarRange()
-    {
-        return Defs.RADAR_STATION_SCANNER_RANGE;
     }
     
     @Override

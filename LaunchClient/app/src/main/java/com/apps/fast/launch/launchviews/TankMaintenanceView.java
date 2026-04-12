@@ -97,33 +97,7 @@ public class TankMaintenanceView extends LaunchView implements LaunchUICommon.Ta
 
         TankInterface iconControlTank = tankShadow == null ? (TankInterface)TankList.iterator().next() : tankShadow;
         txtType.setText(TextUtilities.GetEntityTypeAndName(iconControlTank.GetTank(), game));
-
-        switch(iconControlTank.GetType())
-        {
-            case MISSILE_TANK:
-            {
-                imgTank.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_missile_tank), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), (LaunchEntity)iconControlTank).ordinal()]));
-            }
-            break;
-
-            case SAM_TANK:
-            {
-                imgTank.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_sam_tank), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), (LaunchEntity)iconControlTank).ordinal()]));
-            }
-            break;
-
-            case MBT:
-            {
-                imgTank.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_tank_east), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), (LaunchEntity)iconControlTank).ordinal()]));
-            }
-            break;
-
-            case SPAAG:
-            {
-                imgTank.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_aa_gun_east), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), (LaunchEntity)iconControlTank).ordinal()]));
-            }
-            break;
-        }
+        imgTank.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_tank_east), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), (LaunchEntity)iconControlTank).ordinal()]));
 
         btnMove.setOnClickListener(new OnClickListener()
         {

@@ -46,10 +46,6 @@ public class AircraftBaseView extends LaunchView
     private ImageView imgInterceptors;
     private LinearLayout lytInterceptors;
     private MissileSystem interceptorSystem;
-    private TextView txtCargo;
-    private ImageView imgCargo;
-    private LinearLayout lytCargo;
-    private CargoSystem cargoSystem;
     private boolean bWeOwnIt = false;
     private boolean bWeOwnHost = false;
     private int lID;
@@ -94,11 +90,6 @@ public class AircraftBaseView extends LaunchView
             interceptorSystem = aircraft.GetInterceptorSystem();
         }
 
-        if(aircraft.HasCargo())
-        {
-            cargoSystem = aircraft.GetCargoSystem();
-        }
-
         Setup();
     }
 
@@ -121,10 +112,6 @@ public class AircraftBaseView extends LaunchView
         imgInterceptors = findViewById(R.id.imgArsenalType2);
         txtInterceptors = findViewById(R.id.txtArmaments2);
         lytInterceptors = findViewById(R.id.lytArsenal2);
-
-        imgCargo = findViewById(R.id.imgArsenalType3);
-        txtCargo = findViewById(R.id.txtArmaments3);
-        lytCargo = findViewById(R.id.lytArsenal3);
 
         txtName = findViewById(R.id.txtName);
         lytMissiles = findViewById(R.id.lytArsenal);
@@ -156,12 +143,6 @@ public class AircraftBaseView extends LaunchView
             else
             {
                 lytInterceptors.setVisibility(GONE);
-            }
-
-            if(aircraft.HasCargo())
-            {
-                imgCargo.setImageResource(R.drawable.icon_cargo);
-                lytCargo.setVisibility(VISIBLE);
             }
 
             /*For setting up the missile/interceptor count readout.*/
@@ -213,30 +194,6 @@ public class AircraftBaseView extends LaunchView
                 lytInterceptors.setVisibility(GONE);
             }
 
-            if(cargoSystem != null)
-            {
-                long lowCapacityThreshold = cargoSystem.GetCapacity()/3;
-
-                txtCargo.setText(context.getString(R.string.aircraft_armaments, cargoSystem.GetUsedCapacity(), cargoSystem.GetCapacity()));
-
-                if(cargoSystem.GetUsedCapacity() == cargoSystem.GetCapacity())
-                {
-                    txtCargo.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
-                }
-                else if(cargoSystem.GetUsedCapacity() < lowCapacityThreshold)
-                {
-                    txtCargo.setTextColor(Utilities.ColourFromAttr(context, R.attr.GoodColour));
-                }
-                else
-                {
-                    txtCargo.setTextColor(Utilities.ColourFromAttr(context, R.attr.WarningColour));
-                }
-            }
-            else
-            {
-                lytCargo.setVisibility(GONE);
-            }
-
             /*For setting up fuel level readout.*/
             txtFuelLevel = findViewById(R.id.txtFuelLevel);
             TextUtilities.AssignFuelPercentageString(txtFuelLevel, aircraft);
@@ -245,7 +202,6 @@ public class AircraftBaseView extends LaunchView
         {
             lytMissiles.setVisibility(GONE);
             lytInterceptors.setVisibility(GONE);
-            lytCargo.setVisibility(GONE);
             lytFuel.setVisibility(GONE);
             txtHP.setVisibility(GONE);
             btnMove.setVisibility(GONE);
@@ -349,7 +305,6 @@ public class AircraftBaseView extends LaunchView
         {
             lytMissiles.setVisibility(GONE);
             lytInterceptors.setVisibility(GONE);
-            lytCargo.setVisibility(GONE);
             lytFuel.setVisibility(GONE);
             txtAircraftStatus.setVisibility(GONE);
             txtHP.setVisibility(GONE);
@@ -390,12 +345,6 @@ public class AircraftBaseView extends LaunchView
                             if(aircraft.HasInterceptors())
                             {
                                 interceptorSystem = aircraft.GetInterceptorSystem();
-                            }
-
-                            if(aircraft.HasCargo())
-                            {
-                                //TODO
-                                //system3 = aircraft.GetCargoSystem();
                             }
 
                             String strName = Utilities.GetEntityName(context, aircraft);

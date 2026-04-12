@@ -15,7 +15,6 @@ import com.apps.fast.launch.components.Utilities;
 import com.apps.fast.launch.launchviews.EmptyShipyardSlotView;
 import com.apps.fast.launch.launchviews.LaunchView;
 import com.apps.fast.launch.launchviews.UnitControls;
-import com.apps.fast.launch.launchviews.controls.CargoSystemControl;
 import com.apps.fast.launch.launchviews.controls.NavalProductionOrderView;
 import com.apps.fast.launch.views.EntityControls;
 import com.apps.fast.launch.views.LaunchDialog;
@@ -27,14 +26,11 @@ import java.util.Map;
 
 import launch.game.Defs;
 import launch.game.EntityPointer.EntityType;
-import launch.game.GeoCoord;
 import launch.game.LaunchClientGame;
-import launch.game.entities.conceptuals.Resource;
 import launch.game.entities.conceptuals.Resource.ResourceType;
 import launch.game.entities.LaunchEntity;
 import launch.game.entities.Shipyard;
 import launch.game.entities.conceptuals.ShipProductionOrder;
-import launch.game.systems.CargoSystem;
 
 /**
  * Created by Corbin.
@@ -51,16 +47,12 @@ public class ShipyardView extends LaunchView implements LaunchUICommon.ShipyardI
     private PurchaseButton btnBuildFleetOiler;
     private PurchaseButton btnBuildSuperCarrier;
     private TextView txtHP;
-    private TextView txtName;
-    private TextView txtOccupied;
-    private TextView txtShipyard;
     private LinearLayout lytBuildOptions;
     private LinearLayout lytQueue;
     private TextView txtQueue;
     private View view3;
     private View view4;
     private FrameLayout lytInputs;
-    private FrameLayout lytCargo;
     private LinearLayout btnRepair;
     private ImageView imgProduction;
     private LinearLayout btnPurchaseUpgrade;
@@ -69,7 +61,6 @@ public class ShipyardView extends LaunchView implements LaunchUICommon.ShipyardI
     private TextView txtSlotUpgrade;
     private boolean bOwnedByPlayer;
     private boolean bDisplayUpgrade;
-    private CargoSystemControl cargoSystemControl;
     private List<LaunchView> ProductionOrders;
 
     public ShipyardView(LaunchClientGame game, MainActivity activity, Shipyard shipyard)
@@ -78,7 +69,7 @@ public class ShipyardView extends LaunchView implements LaunchUICommon.ShipyardI
         this.shipyardShadow = shipyard;
 
         bOwnedByPlayer = game.EntityIsFriendly(shipyard, game.GetOurPlayer());
-        bDisplayUpgrade = (!shipyard.IsCaptured() || game.EntityIsFriendly(game.GetOurPlayer(), game.GetOwner(shipyard))) && shipyard.GetProductionCapacity() < Defs.MAX_SHIPYARD_CAPACITY && !shipyardShadow.GetPortOnly();
+        bDisplayUpgrade = (!shipyard.IsCaptured() || game.EntityIsFriendly(game.GetOurPlayer(), game.GetOwner(shipyard))) && shipyard.GetProductionCapacity() < Defs.MAX_SHIPYARD_CAPACITY;
 
         Setup();
     }
@@ -92,9 +83,7 @@ public class ShipyardView extends LaunchView implements LaunchUICommon.ShipyardI
 
         btnRepair = findViewById(R.id.btnRepair);
         txtHP = findViewById(R.id.txtHP);
-        txtName = findViewById(R.id.txtName);
         imgProduction = findViewById(R.id.imgProduction);
-        txtOccupied = findViewById(R.id.txtOccupied);
         lytQueue = findViewById(R.id.lytQueue);
         lytBuildOptions = findViewById(R.id.lytBuildOptions);
 
@@ -125,19 +114,10 @@ public class ShipyardView extends LaunchView implements LaunchUICommon.ShipyardI
         view3 = findViewById(R.id.view3);
         view4 = findViewById(R.id.view4);
 
-        txtShipyard = findViewById(R.id.txtShipyard);
-
-        lytCargo = findViewById(R.id.lytCargo);
         lytInputs = findViewById(R.id.lytInputs);
 
         TextUtilities.AssignHealthStringAndAppearance(txtHP, shipyardShadow);
-        txtShipyard.setText(context.getString(shipyardShadow.GetPortOnly() ? R.string.port_title : R.string.shipyard_title));
-        txtName.setText(shipyardShadow.GetName());
-        imgProduction.setImageResource(shipyardShadow.GetPortOnly() ? R.drawable.icon_port : R.drawable.marker_shipyard_producing);
-
-        cargoSystemControl = new CargoSystemControl(game, activity, shipyardShadow);
-        lytCargo.removeAllViews();
-        lytCargo.addView(cargoSystemControl);
+        imgProduction.setImageResource(R.drawable.marker_shipyard);
 
         FrameLayout lytUnitControls = findViewById(R.id.lytUnitControls);
 
@@ -202,7 +182,6 @@ public class ShipyardView extends LaunchView implements LaunchUICommon.ShipyardI
         if(shipyardShadow.GetOwnerID() == LaunchEntity.ID_NONE || bOwnedByPlayer || game.EntityIsFriendly(shipyardShadow, game.GetOurPlayer()))
         {
             lytBuildOptions.setVisibility(VISIBLE);
-            txtOccupied.setVisibility(GONE);
 
             btnRepair.setOnClickListener(new OnClickListener()
             {
@@ -223,7 +202,7 @@ public class ShipyardView extends LaunchView implements LaunchUICommon.ShipyardI
                             {
                                 launchDialog.dismiss();
 
-                                if(game.GetOurPlayer().GetCargoSystem().ContainsQuantities(Costs))
+                                if(game.GetOurPlayer().GetWealth() >= Costs.get(ResourceType.WEALTH))
                                 {
                                     game.RepairEntity(shipyardShadow.GetPointer());
                                 }
@@ -262,18 +241,8 @@ public class ShipyardView extends LaunchView implements LaunchUICommon.ShipyardI
         else
         {
             btnRepair.setVisibility(GONE);
-            txtOccupied.setText(TextUtilities.GetShipyardOccupiedString(game, shipyardShadow));
 
             lytBuildOptions.setVisibility(GONE);
-
-            if(shipyardShadow.GetOwnerID() != LaunchEntity.ID_NONE)
-            {
-                txtOccupied.setVisibility(VISIBLE);
-            }
-            else
-            {
-                txtOccupied.setVisibility(GONE);
-            }
         }
 
         if(!shipyardShadow.HasCapacityRemaining())
@@ -288,7 +257,7 @@ public class ShipyardView extends LaunchView implements LaunchUICommon.ShipyardI
             //view4.setVisibility(GONE);
         }
 
-        if(shipyardShadow.GetPortOnly() || shipyardShadow.Destroyed())
+        if(shipyardShadow.Destroyed())
         {
             lytBuildOptions.setVisibility(GONE);
             txtQueue.setVisibility(GONE);
@@ -302,7 +271,6 @@ public class ShipyardView extends LaunchView implements LaunchUICommon.ShipyardI
             view3.setVisibility(GONE);
             txtQueue.setVisibility(GONE);
             view4.setVisibility(GONE);
-            lytCargo.setVisibility(GONE);
             lytInputs.setVisibility(GONE);
         }
     }
@@ -362,26 +330,23 @@ public class ShipyardView extends LaunchView implements LaunchUICommon.ShipyardI
                             btnRepair.setVisibility(VISIBLE);
                         }
 
-                        if(!shipyardShadow.GetPortOnly())
+                        if(shipyardShadow.GetProducing())
                         {
-                            if(shipyardShadow.GetProducing())
-                            {
-                                txtQueue.setVisibility(VISIBLE);
-                                view4.setVisibility(VISIBLE);
+                            txtQueue.setVisibility(VISIBLE);
+                            view4.setVisibility(VISIBLE);
 
-                                if(!shipyardShadow.HasCapacityRemaining())
-                                {
-                                    lytBuildOptions.setVisibility(GONE);
-                                }
-                                else
-                                {
-                                    lytBuildOptions.setVisibility(VISIBLE);
-                                }
+                            if(!shipyardShadow.HasCapacityRemaining())
+                            {
+                                lytBuildOptions.setVisibility(GONE);
                             }
                             else
                             {
                                 lytBuildOptions.setVisibility(VISIBLE);
                             }
+                        }
+                        else
+                        {
+                            lytBuildOptions.setVisibility(VISIBLE);
                         }
                     }
 
@@ -389,20 +354,7 @@ public class ShipyardView extends LaunchView implements LaunchUICommon.ShipyardI
                     {
                         btnRepair.setVisibility(GONE);
                         lytBuildOptions.setVisibility(GONE);
-                        txtOccupied.setText(TextUtilities.GetShipyardOccupiedString(game, shipyardShadow));
-
-                        if(shipyard.GetOwnerID() != LaunchEntity.ID_NONE)
-                        {
-                            txtOccupied.setVisibility(VISIBLE);
-                        }
-                        else
-                        {
-                            txtOccupied.setVisibility(GONE);
-                        }
                     }
-
-                    if(cargoSystemControl != null)
-                        cargoSystemControl.Update();
 
                     if(shipyard.Destroyed())
                     {
@@ -410,7 +362,6 @@ public class ShipyardView extends LaunchView implements LaunchUICommon.ShipyardI
                         view3.setVisibility(GONE);
                         txtQueue.setVisibility(GONE);
                         view4.setVisibility(GONE);
-                        lytCargo.setVisibility(GONE);
                         lytInputs.setVisibility(GONE);
                     }
                 }

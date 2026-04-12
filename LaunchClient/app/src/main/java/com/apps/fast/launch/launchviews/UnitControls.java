@@ -33,23 +33,16 @@ public class UnitControls extends LaunchView
 {
     private LinearLayout lytMovementOptions;
     private LinearLayout lytAttackOptions;
-    private LinearLayout lytLiberateOptions;
     private LinearLayout btnMovePlayer;
     private LinearLayout btnMoveAircraft;
-    private LinearLayout btnMoveInfantry;
     private LinearLayout btnMoveTank;
     private LinearLayout btnMoveTruck;
     private LinearLayout btnMoveShip;
     private LinearLayout btnMoveSubmarine;
     private LinearLayout btnAircraftTarget;
-    private LinearLayout btnArtilleryTarget;
     private LinearLayout btnTankTarget;
-    private LinearLayout btnInfantryCapture;
-    private LinearLayout btnPlayerCapture;
     private LinearLayout btnInterceptorTarget;
     private LinearLayout btnMissileTarget;
-    private LinearLayout btnInfantryTarget;
-    private LinearLayout btnLiberateTarget;
 
     private GeoCoord geoCoord;
     private MapEntity entity;
@@ -81,21 +74,14 @@ public class UnitControls extends LaunchView
         lytAttackOptions = findViewById(R.id.lytAttackOptions);
         btnMovePlayer = findViewById(R.id.btnMovePlayer);
         btnMoveAircraft = findViewById(R.id.btnMoveAircraft);
-        btnMoveInfantry = findViewById(R.id.btnMoveInfantry);
         btnMoveTank = findViewById(R.id.btnMoveTank);
         btnMoveTruck = findViewById(R.id.btnMoveTruck);
         btnAircraftTarget = findViewById(R.id.btnAircraftTarget);
-        btnArtilleryTarget = findViewById(R.id.btnArtilleryTarget);
         btnTankTarget = findViewById(R.id.btnTargetTank);
-        btnInfantryCapture = findViewById(R.id.btnInfantryCapture);
-        btnPlayerCapture = findViewById(R.id.btnPlayerCapture);
         btnInterceptorTarget = findViewById(R.id.btnInterceptorTarget);
         btnMissileTarget = findViewById(R.id.btnMissileTarget);
         btnMoveShip = findViewById(R.id.btnMoveShip);
         btnMoveSubmarine = findViewById(R.id.btnMoveSubmarine);
-        btnInfantryTarget = findViewById(R.id.btnInfantryTarget);
-        lytLiberateOptions = findViewById(R.id.lytLiberateOptions);
-        btnLiberateTarget = findViewById(R.id.btnLiberateTarget);
 
         //Set onclicklisteners.
 
@@ -111,22 +97,6 @@ public class UnitControls extends LaunchView
                 else
                 {
                     activity.SelectForAction(geoCoord, entity, EntityType.AIRPLANE, MoveOrders.MOVE);
-                }
-            }
-        });
-
-        btnMoveInfantry.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                if(!game.GetInteractionReady())
-                {
-                    activity.ShowBasicOKDialog(context.getString(R.string.waiting_for_data));
-                }
-                else
-                {
-                    activity.SelectForAction(geoCoord, entity, EntityType.INFANTRY, MoveOrders.MOVE);
                 }
             }
         });
@@ -179,22 +149,6 @@ public class UnitControls extends LaunchView
             }
         });
 
-        btnArtilleryTarget.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                if(!game.GetInteractionReady())
-                {
-                    activity.ShowBasicOKDialog(context.getString(R.string.waiting_for_data));
-                }
-                else
-                {
-                    activity.SelectForAction(geoCoord, entity, EntityType.ARTILLERY_GUN, MoveOrders.ATTACK);
-                }
-            }
-        });
-
         btnTankTarget.setOnClickListener(new OnClickListener()
         {
             @Override
@@ -210,74 +164,6 @@ public class UnitControls extends LaunchView
                 }
             }
         });
-
-        if(entity instanceof Infantry)
-        {
-            btnInfantryTarget.setOnClickListener(new OnClickListener()
-            {
-                @Override
-                public void onClick(View view)
-                {
-                    if(!game.GetInteractionReady())
-                    {
-                        activity.ShowBasicOKDialog(context.getString(R.string.waiting_for_data));
-                    }
-                    else
-                    {
-                        activity.SelectForAction(geoCoord, entity, EntityType.INFANTRY, MoveOrders.ATTACK);
-                    }
-                }
-            });
-        }
-        else
-        {
-            btnInfantryTarget.setVisibility(GONE);
-        }
-
-        btnInfantryCapture.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                if(!game.GetInteractionReady())
-                {
-                    activity.ShowBasicOKDialog(context.getString(R.string.waiting_for_data));
-                }
-                else
-                {
-                    activity.SelectForAction(geoCoord, entity, EntityType.INFANTRY, MoveOrders.CAPTURE);
-                }
-            }
-        });
-
-        if(entity instanceof Structure)
-        {
-            btnPlayerCapture.setVisibility(VISIBLE);
-
-            btnPlayerCapture.setOnClickListener(new OnClickListener()
-            {
-                @Override
-                public void onClick(View view)
-                {
-                    /*if(game.GetProtectedByCapital(((Structure)entity)))
-                    {
-                        activity.ShowBasicOKDialog(context.getString(R.string.structure_too_close_to_capital));
-                    }
-                    else */if(!game.WouldBeFriendlyFire(game.GetOurPlayer(), game.GetOwner((Structure)entity)) && game.GetOurPlayer().GetPosition().DistanceTo(((Structure)entity).GetPosition()) <= Defs.PLAYER_CAPTURE_RADIUS)
-                    {
-                        game.CaptureEntity(((Structure)entity).GetPointer());
-                    }
-                    else
-                    {
-                        activity.ShowBasicOKDialog(context.getString(R.string.too_far_cant_capture, TextUtilities.GetDistanceStringFromKM(Defs.PLAYER_CAPTURE_RADIUS)));
-                    }
-                }
-            });
-        }
-        else
-        {
-            btnPlayerCapture.setVisibility(GONE);
-        }
 
         if(entity instanceof Missile || entity instanceof Airplane)
         {
@@ -314,25 +200,6 @@ public class UnitControls extends LaunchView
             }
         });
 
-        if((entity instanceof Player && ((Player)entity).GetPrisoner()) || (entity instanceof Structure && ((Structure)entity).Captured()))
-        {
-            btnLiberateTarget.setOnClickListener(new OnClickListener()
-            {
-                @Override
-                public void onClick(View view)
-                {
-                    if(!game.GetInteractionReady())
-                    {
-                        activity.ShowBasicOKDialog(context.getString(R.string.waiting_for_data));
-                    }
-                    else
-                    {
-                        activity.SelectForAction(geoCoord, entity, EntityType.INFANTRY, MoveOrders.LIBERATE);
-                    }
-                }
-            });
-        }
-
         if(geoCoord != null)
         {
             if(game.GetOurPlayer() != null && game.GetOurPlayer().GetBoss())
@@ -351,10 +218,7 @@ public class UnitControls extends LaunchView
             }
 
             btnTankTarget.setVisibility(GONE);
-            btnInfantryCapture.setVisibility(GONE);
-            btnPlayerCapture.setVisibility(GONE);
             btnInterceptorTarget.setVisibility(GONE);
-            lytLiberateOptions.setVisibility(GONE);
         }
         else if(entity != null)
         {
@@ -368,33 +232,7 @@ public class UnitControls extends LaunchView
                 {
                     lytMovementOptions.setVisibility(GONE);
 
-                    if(game.GetOurPlayer().GetPosition().DistanceTo(entity.GetPosition()) <= Defs.PLAYER_CAPTURE_RADIUS)
-                        btnPlayerCapture.setVisibility(VISIBLE);
-                    else
-                        btnPlayerCapture.setVisibility(GONE);
-
                     btnInterceptorTarget.setVisibility(GONE);
-                }
-
-                boolean bIsCaptured = false;
-
-                if(entity instanceof Structure && ((Structure)entity).Captured())
-                    bIsCaptured = true;
-
-                if(bIsCaptured)
-                {
-                    if(game.WouldBeFriendlyFire(game.GetOurPlayer(), game.GetOwner(entity)))
-                    {
-                        lytLiberateOptions.setVisibility(GONE);
-                    }
-                    else
-                    {
-                        lytLiberateOptions.setVisibility(VISIBLE);
-                    }
-                }
-                else
-                {
-                    lytLiberateOptions.setVisibility(GONE);
                 }
             }
             else if(entity instanceof CargoTruck)
@@ -406,17 +244,8 @@ public class UnitControls extends LaunchView
                 else
                 {
                     lytMovementOptions.setVisibility(GONE);
-                    btnInfantryCapture.setVisibility(VISIBLE);
-                    btnPlayerCapture.setVisibility(GONE);
                     btnInterceptorTarget.setVisibility(GONE);
-
-                    if(entity instanceof Infantry)
-                    {
-                        btnInfantryTarget.setVisibility(VISIBLE);
-                    }
                 }
-
-                lytLiberateOptions.setVisibility(GONE);
             }
             else if(entity instanceof LandUnit)
             {
@@ -427,17 +256,8 @@ public class UnitControls extends LaunchView
                 else
                 {
                     lytMovementOptions.setVisibility(GONE);
-                    btnInfantryCapture.setVisibility(GONE);
-                    btnPlayerCapture.setVisibility(GONE);
                     btnInterceptorTarget.setVisibility(GONE);
-
-                    if(entity instanceof Infantry)
-                    {
-                        btnInfantryTarget.setVisibility(VISIBLE);
-                    }
                 }
-
-                lytLiberateOptions.setVisibility(GONE);
             }
             else if(entity instanceof Shipyard)
             {
@@ -448,32 +268,8 @@ public class UnitControls extends LaunchView
                 else
                 {
                     lytMovementOptions.setVisibility(GONE);
-                    btnInfantryCapture.setVisibility(VISIBLE);
-                    btnPlayerCapture.setVisibility(VISIBLE);
                     btnInterceptorTarget.setVisibility(GONE);
-
-                    btnPlayerCapture.setOnClickListener(new OnClickListener()
-                    {
-                        @Override
-                        public void onClick(View view)
-                        {
-                            if(game.WouldBeFriendlyFire(game.GetOurPlayer(), game.GetOwner(entity)) && game.GetOurPlayer().GetPosition().DistanceTo(entity.GetPosition()) <= Defs.SHIPYARD_LOAD_DISTANCE)
-                            {
-                                activity.ShowBasicOKDialog(context.getString(R.string.deliberate_friendly_fire));
-                            }
-                            else if(game.GetOurPlayer().GetPosition().DistanceTo(entity.GetPosition()) > Defs.SHIPYARD_LOAD_DISTANCE)
-                            {
-                                activity.ShowBasicOKDialog(context.getString(R.string.too_far_cant_capture, TextUtilities.GetDistanceStringFromKM(Defs.SHIPYARD_LOAD_DISTANCE)));
-                            }
-                            else
-                            {
-                                game.CaptureEntity(entity.GetPointer());
-                            }
-                        }
-                    });
                 }
-
-                lytLiberateOptions.setVisibility(GONE);
             }
             else if(entity instanceof NavalVessel)
             {
@@ -482,23 +278,13 @@ public class UnitControls extends LaunchView
                     lytAttackOptions.setVisibility(GONE);
                     btnMoveTank.setVisibility(GONE);
                     btnMoveTruck.setVisibility(GONE);
-                    btnMoveInfantry.setVisibility(GONE);
                 }
                 else
                 {
                     lytMovementOptions.setVisibility(GONE);
-                    btnInfantryCapture.setVisibility(GONE);
-                    btnPlayerCapture.setVisibility(GONE);
                     btnInterceptorTarget.setVisibility(GONE);
                     btnTankTarget.setVisibility(GONE);
                 }
-
-                if(game.GetOurPlayer().GetBoss())
-                {
-                    btnPlayerCapture.setVisibility(VISIBLE);
-                }
-
-                lytLiberateOptions.setVisibility(GONE);
             }
             else if(entity instanceof Airplane)
             {
@@ -510,14 +296,9 @@ public class UnitControls extends LaunchView
                 {
                     lytMovementOptions.setVisibility(GONE);
                     //btnKamikaze.setVisibility(GONE);
-                    btnArtilleryTarget.setVisibility(GONE);
                     btnTankTarget.setVisibility(GONE);
-                    btnInfantryCapture.setVisibility(GONE);
-                    btnPlayerCapture.setVisibility(GONE);
                     btnMissileTarget.setVisibility(GONE);
                 }
-
-                lytLiberateOptions.setVisibility(GONE);
             }
             else if(entity instanceof Player)
             {
@@ -527,25 +308,7 @@ public class UnitControls extends LaunchView
                 }
                 else
                 {
-                    //btnKamikaze.setVisibility(GONE);
-                    btnPlayerCapture.setVisibility(GONE);
                     btnInterceptorTarget.setVisibility(GONE);
-                }
-
-                if(((Player)entity).GetPrisoner())
-                {
-                    if(game.WouldBeFriendlyFire(game.GetOurPlayer(), (Player)entity))
-                    {
-                        lytLiberateOptions.setVisibility(GONE);
-                    }
-                    else
-                    {
-                        lytLiberateOptions.setVisibility(VISIBLE);
-                    }
-                }
-                else
-                {
-                    lytLiberateOptions.setVisibility(GONE);
                 }
             }
         }

@@ -216,11 +216,11 @@ public class ICBMSystemControl extends LaunchView implements SlotListener
             String strTypeName = "UNSPECIFIED - TELL THE DEV";
             MissileType type = game.GetConfig().GetMissileType(lType);
             strTypeName = type.GetName();
-            Map<Resource.ResourceType, Long> Costs = game.GetSaleValue(type.GetCosts());
+            long oCost = type.GetCost();
 
             final LaunchDialog launchDialog = new LaunchDialog();
             launchDialog.SetHeaderPurchase();
-            launchDialog.SetMessage(context.getString(R.string.sell_confirm, strTypeName, TextUtilities.GetCostStatement(Costs)));
+            launchDialog.SetMessage(context.getString(R.string.sell_confirm, strTypeName, TextUtilities.GetCurrencyString(oCost)));
             launchDialog.SetOnClickYes(new View.OnClickListener()
             {
                 @Override

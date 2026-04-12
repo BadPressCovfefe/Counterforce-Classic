@@ -35,7 +35,7 @@
                     android:layout_width="@dimen/PlayerInfoIconSize"
                     android:layout_height="@dimen/PlayerInfoIconSize"
                     android:id="@+id/imgLoot"
-                    android:src="@drawable/marker_container"/>
+                    android:src="@drawable/marker_loot_7"/>
 
                 <TextView
                     android:layout_width="wrap_content"

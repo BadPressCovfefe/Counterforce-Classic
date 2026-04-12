@@ -2,10 +2,8 @@ package com.apps.fast.launch.launchviews;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.LinearLayout;
 
 import com.apps.fast.launch.R;
 import com.apps.fast.launch.activities.MainActivity;
@@ -16,15 +14,13 @@ import java.util.TimerTask;
 
 import launch.game.LaunchClientGame;
 
+/**
+ * Created by tobster on 15/07/16.
+ */
 public class DisclaimerView extends LaunchView
 {
     private static final long TWO_SECONDS = 2000;
-    private byte cPageNumber = 1;
-    private LinearLayout lytPage1;
-    private LinearLayout lytPage2;
-    private LinearLayout lytPage3;
-    private LinearLayout btnBack;
-    private LinearLayout btnNext;
+
     private CheckBox chkAgree;
     private boolean bAgreed = false;
 
@@ -38,56 +34,7 @@ public class DisclaimerView extends LaunchView
     {
         inflate(context, R.layout.main_disclaimer, this);
 
-        chkAgree = findViewById(R.id.chkAgree);
-        lytPage1 = findViewById(R.id.lytPage1);
-        lytPage2 = findViewById(R.id.lytPage2);
-        lytPage3 = findViewById(R.id.lytPage3);
-        btnBack = findViewById(R.id.btnBack);
-        btnNext = findViewById(R.id.btnNext);
-
-        btnBack.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                if(cPageNumber == 3)
-                {
-                    lytPage3.setVisibility(GONE);
-                    lytPage2.setVisibility(VISIBLE);
-                    lytPage1.setVisibility(GONE);
-                    cPageNumber = 2;
-                }
-                else if(cPageNumber == 2)
-                {
-                    lytPage3.setVisibility(GONE);
-                    lytPage2.setVisibility(GONE);
-                    lytPage1.setVisibility(VISIBLE);
-                    cPageNumber = 1;
-                }
-            }
-        });
-
-        btnNext.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                if(cPageNumber == 2)
-                {
-                    lytPage3.setVisibility(VISIBLE);
-                    lytPage2.setVisibility(GONE);
-                    lytPage1.setVisibility(GONE);
-                    cPageNumber = 3;
-                }
-                else if(cPageNumber == 1)
-                {
-                    lytPage3.setVisibility(GONE);
-                    lytPage2.setVisibility(VISIBLE);
-                    lytPage1.setVisibility(GONE);
-                    cPageNumber = 2;
-                }
-            }
-        });
+        chkAgree = (CheckBox)findViewById(R.id.chkAgree);
 
         chkAgree.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
         {
@@ -119,6 +66,5 @@ public class DisclaimerView extends LaunchView
     @Override
     public void Update()
     {
-
     }
 }

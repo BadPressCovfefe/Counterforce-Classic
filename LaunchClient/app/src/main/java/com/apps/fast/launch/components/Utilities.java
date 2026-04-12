@@ -478,47 +478,4 @@ public class Utilities
     {
         return (int)(dp * context.getResources().getDisplayMetrics().density);
     }
-
-    public static void DrawResourceSystem(Context context, ResourceSystem resources, LinearLayout lytResources)
-    {
-        if(resources != null && !resources.GetTypes().isEmpty())
-        {
-            lytResources.removeAllViews();
-
-            for(Map.Entry<Resource.ResourceType, Long> entry : resources.GetTypes().entrySet())
-            {
-                Resource.ResourceType type = entry.getKey();
-                long oAmount = entry.getValue();
-
-                LinearLayout row = new LinearLayout(context);
-                row.setOrientation(HORIZONTAL);
-                row.setBackground(context.getDrawable(R.drawable.text_button_normal));
-                row.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-                ((LinearLayout.LayoutParams)row.getLayoutParams()).setMargins(0, 0,0, Utilities.GetdpToPx(context, 4));
-                row.setPadding(Utilities.GetdpToPx(context, 4), Utilities.GetdpToPx(context, 4), Utilities.GetdpToPx(context, 4), Utilities.GetdpToPx(context, 4));
-                row.setGravity(CENTER_VERTICAL);
-
-                ImageView icon = new ImageView(context);
-
-                icon.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-                icon.setImageBitmap(EntityIconBitmaps.GetResourceTypeBitmap(context, type));
-
-                TextView txt = new TextView(context);
-
-                LinearLayout.LayoutParams txtParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f);
-
-                txtParams.setMargins(Utilities.GetdpToPx(context, 4), 0, Utilities.GetdpToPx(context, 4), 0);
-
-                txt.setLayoutParams(txtParams);
-                txt.setGravity(Gravity.END);
-                txt.setText(TextUtilities.GetResourceQuantityString(type, oAmount));
-                txt.setTextAppearance(context, android.R.style.TextAppearance_Medium);
-                txt.setTextColor(Utilities.ColourFromAttr(context, R.attr.WarningColour));
-
-                row.addView(icon);
-                row.addView(txt);
-                lytResources.addView(row);
-            }
-        }
-    }
 }

@@ -43,14 +43,6 @@
             android:layout_weight="1"
             android:orientation="vertical"></LinearLayout>
 
-        <ImageView
-            android:id="@+id/imgMachineryCost"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/ButtonEdgePadding"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/resource_icon_machinery" />
-
         <TextView
             android:id="@+id/txtAircraftSlotUpgradeCost"
             android:layout_width="wrap_content"
@@ -73,24 +65,6 @@
         android:layout_marginRight="@dimen/MainViewSideMargin"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/MainViewSpacing"
-            android:id="@+id/btnOpen"
-            android:clickable="true">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imgOpen"
-                android:src="@drawable/marker_airbase_open"
-                android:background="@drawable/text_button_normal"
-                android:padding="@dimen/ButtonImagePadding"/>
-        </LinearLayout>
-
         <TextView
             android:id="@+id/txtAirbaseSlots"
             android:layout_width="wrap_content"
@@ -108,85 +82,25 @@
         android:layout_marginTop="@dimen/MainViewSpacing"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/txtDescFighter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/MainViewSideMargin"
-            android:layout_marginTop="@dimen/MainViewSpacing"
-            android:layout_marginRight="@dimen/MainViewSideMargin"
-            android:background="?attr/TextViewBackgroundColour"
-            android:text="@string/desc_fighter"
-            android:textColor="?attr/InfoColour"
-            android:textStyle="bold" />
-
         <com.apps.fast.launch.views.PurchaseButton
             android:id="@+id/btnBuildFighter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/txtDescBomber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/MainViewSideMargin"
-            android:layout_marginTop="@dimen/MainViewSpacing"
-            android:layout_marginRight="@dimen/MainViewSideMargin"
-            android:background="?attr/TextViewBackgroundColour"
-            android:text="@string/desc_bomber"
-            android:textColor="?attr/InfoColour"
-            android:textStyle="bold" />
 
         <com.apps.fast.launch.views.PurchaseButton
             android:id="@+id/btnBuildBomber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/txtDescRefueler"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/MainViewSideMargin"
-            android:layout_marginTop="@dimen/MainViewSpacing"
-            android:layout_marginRight="@dimen/MainViewSideMargin"
-            android:background="?attr/TextViewBackgroundColour"
-            android:text="@string/desc_refueler"
-            android:textColor="?attr/InfoColour"
-            android:textStyle="bold" />
-
         <com.apps.fast.launch.views.PurchaseButton
             android:id="@+id/btnBuildRefueler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/txtDescAttackAircraft"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/MainViewSideMargin"
-            android:layout_marginTop="@dimen/MainViewSpacing"
-            android:layout_marginRight="@dimen/MainViewSideMargin"
-            android:background="?attr/TextViewBackgroundColour"
-            android:text="@string/desc_attack_aircraft"
-            android:textColor="?attr/InfoColour"
-            android:textStyle="bold" />
-
         <com.apps.fast.launch.views.PurchaseButton
             android:id="@+id/btnBuildAttackAircraft"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/txtDescSSB"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/MainViewSideMargin"
-            android:layout_marginTop="@dimen/MainViewSpacing"
-            android:layout_marginRight="@dimen/MainViewSideMargin"
-            android:background="?attr/TextViewBackgroundColour"
-            android:text="@string/desc_ssb"
-            android:textColor="?attr/InfoColour"
-            android:textStyle="bold" />
 
         <com.apps.fast.launch.views.PurchaseButton
             android:id="@+id/btnBuildSSB"
@@ -201,18 +115,6 @@
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/MainViewSpacing"
         android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/txtDescMultiRole"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/MainViewSideMargin"
-            android:layout_marginTop="@dimen/MainViewSpacing"
-            android:layout_marginRight="@dimen/MainViewSideMargin"
-            android:background="?attr/TextViewBackgroundColour"
-            android:text="@string/desc_multi_role"
-            android:textColor="?attr/InfoColour"
-            android:textStyle="bold" />
 
         <com.apps.fast.launch.views.PurchaseButton
             android:id="@+id/btnBuildMultiRole"

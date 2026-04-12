@@ -54,8 +54,6 @@ public class SubmarineView extends LaunchView implements LaunchUICommon.Submarin
     private LinearLayout lytControls; //Should only be visible to the owner.
     private LinearLayout btnMove;
     private LinearLayout btnStop;
-    private LinearLayout btnDive;
-    private ImageView imgDive;
     private LinearLayout btnSonar;
     private LinearLayout btnSeekFuel;
     private LinearLayout btnProvideFuel;
@@ -112,8 +110,6 @@ public class SubmarineView extends LaunchView implements LaunchUICommon.Submarin
         lytControls = findViewById(R.id.lytControls);
         btnMove = findViewById(R.id.btnMove);
         btnStop = findViewById(R.id.btnStop);
-        btnDive = findViewById(R.id.btnDive);
-        imgDive = findViewById(R.id.imgDive);
         btnSonar = findViewById(R.id.btnSonar);
         btnSeekFuel = findViewById(R.id.btnSeekFuel);
         btnProvideFuel = findViewById(R.id.btnProvideFuel);
@@ -226,11 +222,6 @@ public class SubmarineView extends LaunchView implements LaunchUICommon.Submarin
         {
             txtName.setVisibility(GONE);
 
-            if(submarineShadow.Submerged())
-                imgDive.setImageResource(R.drawable.button_surface);
-            else
-                imgDive.setImageResource(R.drawable.button_dive);
-
             if(submarineShadow.HasMissiles())
             {
                 txtMissiles.setOnClickListener(new OnClickListener()
@@ -320,16 +311,6 @@ public class SubmarineView extends LaunchView implements LaunchUICommon.Submarin
                 public void onClick(View view)
                 {
                     game.UnitCommand(Movable.MoveOrders.WAIT, Collections.singletonList(submarineShadow.GetPointer()), null, null, CargoSystem.LootType.NONE, LaunchEntity.ID_NONE, LaunchEntity.ID_NONE);
-                }
-            });
-
-            btnDive.setOnClickListener(new OnClickListener()
-            {
-                @Override
-                public void onClick(View view)
-                {
-                    game.DiveOrSurface(submarineShadow.GetID());
-                    Update();
                 }
             });
 
@@ -514,11 +495,6 @@ public class SubmarineView extends LaunchView implements LaunchUICommon.Submarin
 
                     if(submarine.GetOwnedBy(game.GetOurPlayerID()))
                     {
-                        if(submarine.Submerged())
-                            imgDive.setImageResource(R.drawable.button_surface);
-                        else
-                            imgDive.setImageResource(R.drawable.button_dive);
-
                         txtRange.setText(submarine.GetNuclear() ? context.getString(R.string.infinite) : TextUtilities.GetDistanceStringFromKM(game.GetFuelableRange(submarine.GetCurrentFuel(), Defs.NAVAL_RANGE)));
                         txtFuel.setText(submarine.GetNuclear() ? context.getString(R.string.infinite) : TextUtilities.GetPercentStringFromFraction(submarine.GetCurrentFuel()));
                     }

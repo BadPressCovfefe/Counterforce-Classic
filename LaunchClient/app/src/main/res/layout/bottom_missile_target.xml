@@ -81,7 +81,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="start"
-                    android:src="@drawable/resource_icon_electricity" />
+                    android:src="@drawable/todo" />
 
                 <TextView
                     android:id="@+id/txtElectricityCost"

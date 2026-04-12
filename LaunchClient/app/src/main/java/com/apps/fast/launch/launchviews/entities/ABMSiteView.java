@@ -66,7 +66,7 @@ public class ABMSiteView extends StructureView
         flasherSemi = new ButtonFlasher(btnSemi);
         flasherManual = new ButtonFlasher(btnManual);
 
-        imgLogo.setImageResource(R.drawable.icon_abmsite_offline);
+        imgLogo.setImageResource(R.drawable.marker_abmsite);
         lytMode.setVisibility(VISIBLE);
 
         if(structureShadow.GetOwnerID() == game.GetOurPlayerID())

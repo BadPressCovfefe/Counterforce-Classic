@@ -55,7 +55,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginRight="@dimen/CloseButtonSize"
                     android:gravity="center_vertical"
-                    android:text="@string/getting_terrain_data"
+                    android:text="@string/getting_data"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textColor="?attr/WarningColour" />
 
@@ -74,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/CloseButtonSize"
                     android:gravity="center_vertical"
-                    android:text="@string/terrain_types"
+                    android:text="@string/getting_data"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:visibility="gone" />
 

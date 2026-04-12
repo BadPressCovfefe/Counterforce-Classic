@@ -38,9 +38,7 @@ public class BottomBuildStructure extends LaunchView
     private LinearLayout btnCancel;
     private TextView txtBuildStructure;
     private LinearLayout btnBuildStructure;
-    private TextView txtTooClose;
     private TextView txtTooFar;
-    private TextView txtNoDeposit;
     private EntityType type;
     private ResourceType resourceType;
     private GoogleMap map;
@@ -74,9 +72,7 @@ public class BottomBuildStructure extends LaunchView
         btnCancel = findViewById(R.id.btnCancel);
         txtBuildStructure = findViewById(R.id.txtBuildStructure);
         btnBuildStructure = findViewById(R.id.btnBuildStructure);
-        txtTooClose = findViewById(R.id.txtTooClose);
         txtTooFar = findViewById(R.id.txtTooFar);
-        txtNoDeposit = findViewById(R.id.txtNoDeposit);
 
         btnBuildStructure.setOnClickListener(new OnClickListener()
         {
@@ -85,17 +81,13 @@ public class BottomBuildStructure extends LaunchView
             {
                 if(geoLocation != null)
                 {
-                    if(bTooClose)
-                    {
-                        activity.ShowBasicOKDialog(context.getString(R.string.blueprint_too_close));
-                    }
-                    else if(bTooFar)
+                    if(bTooFar)
                     {
                         activity.ShowBasicOKDialog(context.getString(R.string.too_far_from_post));
                     }
-                    else if(!bDepositNearby && type == EntityType.ORE_MINE)
+                    else if(bTooClose)
                     {
-                        activity.ShowBasicOKDialog(context.getString(R.string.no_nearby_deposit));
+                        activity.ShowBasicOKDialog(context.getString(R.string.too_close_to_structures));
                     }
                     else
                     {
@@ -108,7 +100,7 @@ public class BottomBuildStructure extends LaunchView
 
                         final LaunchDialog launchDialog = new LaunchDialog();
                         launchDialog.SetHeaderConstruct();
-                        launchDialog.SetMessage(context.getString(R.string.construct_confirm, TextUtilities.GetEntityTypeName(type, resourceType), TextUtilities.GetCostStatement(costsToUse)));
+                        launchDialog.SetMessage(context.getString(R.string.construct_confirm, TextUtilities.GetEntityTypeName(type), TextUtilities.GetCostStatement(costsToUse)));
                         launchDialog.SetOnClickYes(new OnClickListener()
                         {
                             @Override
@@ -221,9 +213,7 @@ public class BottomBuildStructure extends LaunchView
                     @Override
                     public void run()
                     {
-                        txtTooClose.setVisibility(bTooClose ? VISIBLE : GONE);
                         txtTooFar.setVisibility(bTooFar ? VISIBLE : GONE);
-                        txtNoDeposit.setVisibility(!bDepositNearby && type == EntityType.ORE_MINE ? VISIBLE : GONE);
                     }
                 });
 

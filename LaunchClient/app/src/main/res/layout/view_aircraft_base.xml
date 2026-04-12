@@ -103,7 +103,7 @@
                     android:id="@+id/imgArsenalType3"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:src="@drawable/icon_cargo" />
+                    android:src="@drawable/todo" />
 
                 <TextView
                     android:id="@+id/txtArmaments3"
@@ -175,7 +175,7 @@
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/text_button_normal"
                     android:padding="@dimen/ButtonImagePadding"
-                    android:src="@drawable/resource_icon_fuel" />
+                    android:src="@drawable/todo" />
             </LinearLayout>
 
             <LinearLayout
@@ -216,7 +216,7 @@
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/text_button_normal"
                     android:padding="@dimen/ButtonImagePadding"
-                    android:src="@drawable/marker_flag" />
+                    android:src="@drawable/todo" />
             </LinearLayout>
 
             <LinearLayout
@@ -237,7 +237,7 @@
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/text_button_normal"
                     android:padding="@dimen/ButtonImagePadding"
-                    android:src="@drawable/button_boot" />
+                    android:src="@drawable/todo" />
             </LinearLayout>
 
         </LinearLayout>
