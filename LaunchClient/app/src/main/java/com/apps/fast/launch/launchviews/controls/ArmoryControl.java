@@ -23,15 +23,10 @@ public class ArmoryControl extends LaunchView
     private int lID;
 
     private PurchaseButton btnBuildMBT;
-    private PurchaseButton btnBuildSPAAG;
     private LinearLayout lytProduction;
     private LinearLayout lytBuildTank;
-    private LinearLayout lytBuildInfantry;
+    private TextView txtQueue;
     private TextView txtPrepTime;
-    private PurchaseButton btnBuildMissileTank;
-    private PurchaseButton btnBuildSAMTank;
-    //private PurchaseButton btnBuildHowitzer;
-    private PurchaseButton btnBuildInfantry;
     private ImageView imgProduction;
 
     private Armory armory;
@@ -64,16 +59,11 @@ public class ArmoryControl extends LaunchView
         inflate(context, R.layout.control_armory, this);
 
         btnBuildMBT = findViewById(R.id.btnBuildMBT);
-        btnBuildSPAAG = findViewById(R.id.btnBuildSPAAG);
         lytProduction = findViewById(R.id.lytProduction);
         txtPrepTime = findViewById(R.id.txtPrepTime);
         imgProduction = findViewById(R.id.imgProduction);
         lytBuildTank = findViewById(R.id.lytBuildTank);
-        lytBuildInfantry = findViewById(R.id.lytBuildInfantry);
-        btnBuildMissileTank = findViewById(R.id.btnBuildMissileTank);
-        btnBuildSAMTank = findViewById(R.id.btnBuildSAMTank);
-        //btnBuildHowitzer = findViewById(R.id.btnBuildHowitzer);
-        btnBuildInfantry = findViewById(R.id.btnBuildInfantry);
+        txtQueue = findViewById(R.id.txtQueue);
 
         Armory armory = game.GetArmory(lID);
 
@@ -91,46 +81,6 @@ public class ArmoryControl extends LaunchView
                 lytProduction.setVisibility(VISIBLE);
                 txtPrepTime.setText(TextUtilities.GetTimeAmount(armory.GetProdTimeRemaining()));
                 lytBuildTank.setVisibility(GONE);
-                lytBuildInfantry.setVisibility(GONE);
-
-                switch(armory.GetProducingType())
-                {
-                    /*case MISSILE_TANK:
-                    {
-                        imgProduction.setImageResource(R.drawable.marker_missile_tank);
-                    }
-                    break;
-
-                    case SAM_TANK:
-                    {
-                        imgProduction.setImageResource(R.drawable.marker_sam_tank);
-                    }
-                    break;
-
-                    case HOWITZER:
-                    {
-                        imgProduction.setImageResource(R.drawable.marker_howitzer);
-                    }
-                    break;*/
-
-                    case MBT:
-                    {
-                        imgProduction.setImageResource(R.drawable.marker_tank_east);
-                    }
-                    break;
-
-                    /*case SPAAG:
-                    {
-                        imgProduction.setImageResource(R.drawable.marker_aa_gun_east);
-                    }
-                    break;
-
-                    case INFANTRY:
-                    {
-                        imgProduction.setImageResource(R.drawable.marker_infantry);
-                    }
-                    break;*/
-                }
             }
             else
             {
@@ -140,12 +90,15 @@ public class ArmoryControl extends LaunchView
                     lytBuildTank.setVisibility(VISIBLE);*/
 
                 lytProduction.setVisibility(GONE);
+                txtQueue.setVisibility(GONE);
                 lytBuildTank.setVisibility(VISIBLE);
             }
         }
         else
         {
             lytProduction.setVisibility(GONE);
+            txtQueue.setVisibility(GONE);
+            lytBuildTank.setVisibility(GONE);
         }
 
         Update();
@@ -173,23 +126,19 @@ public class ArmoryControl extends LaunchView
                             txtPrepTime.setText(TextUtilities.GetTimeAmount(armory.GetProdTimeRemaining()));
 
                             lytBuildTank.setVisibility(GONE);
-                            lytBuildInfantry.setVisibility(GONE);
                         }
                         else
                         {
-                            /*if(armory.GetIsBarracks())
-                                lytBuildInfantry.setVisibility(VISIBLE);
-                            else
-                                lytBuildTank.setVisibility(VISIBLE);*/
-
                             lytProduction.setVisibility(GONE);
                             lytBuildTank.setVisibility(VISIBLE);
+                            txtQueue.setVisibility(GONE);
                         }
                     }
                     else
                     {
                         lytProduction.setVisibility(GONE);
                         lytBuildTank.setVisibility(GONE);
+                        txtQueue.setVisibility(GONE);
                     }
                 }
                 else

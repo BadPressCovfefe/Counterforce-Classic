@@ -130,7 +130,6 @@ public class LaunchableSelectionView extends FrameLayout
         ImageView imgECM = findViewById(R.id.imgECM);
         ImageView imgSonobuoy = findViewById(R.id.imgSonobuoy);
         ImageView imgICBM = findViewById(R.id.imgICBM);
-        ImageView imgStealth = findViewById(R.id.imgStealth);
         ImageView imgAntiShip = findViewById(R.id.imgAntiShip);
         ImageView imgAntiSubmarine = findViewById(R.id.imgAntiSubmarine);
         ImageView imgFast = findViewById(R.id.imgFast);
@@ -147,7 +146,6 @@ public class LaunchableSelectionView extends FrameLayout
         imgECM.setVisibility(type.GetECM() ? VISIBLE : GONE);
         imgSonobuoy.setVisibility(type.GetSonobuoy() ? VISIBLE : GONE);
         imgICBM.setVisibility(type.GetICBM() ? VISIBLE : GONE);
-        imgStealth.setVisibility(type.GetStealth() ? VISIBLE : GONE);
         imgAntiShip.setVisibility(type.GetAntiShip() ? VISIBLE : GONE);
         imgAntiSubmarine.setVisibility(type.GetAntiSubmarine() ? VISIBLE : GONE);
         imgFast.setVisibility(game.GetMissileIsFast(type) ? VISIBLE : GONE);
@@ -163,18 +161,6 @@ public class LaunchableSelectionView extends FrameLayout
             txtAccuracy.setTextColor(Utilities.ColourFromAttr(activity, R.attr.WarningColour));
         else
             txtAccuracy.setTextColor(Utilities.ColourFromAttr(activity, R.attr.BadColour));
-
-        if(type.GetStealth())
-        {
-            imgStealth.setOnClickListener(new OnClickListener()
-            {
-                @Override
-                public void onClick(View view)
-                {
-                    activity.ShowBasicOKDialog(activity.getString(R.string.stealth_description, TextUtilities.GetDistanceStringFromKM(Defs.STEALTH_ENGAGEMENT_DISTANCE)));
-                }
-            });
-        }
 
         if(type.GetAntiShip())
         {

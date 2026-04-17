@@ -84,7 +84,7 @@ public class MapClickView extends LaunchView
                 @Override
                 public void run()
                 {
-                    txtGettingData.setText(context.getString(R.string.cant_get_terrain_data));
+                    txtGettingData.setText(context.getString(R.string.not_connected));
                     txtGettingData.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
                 }
             });

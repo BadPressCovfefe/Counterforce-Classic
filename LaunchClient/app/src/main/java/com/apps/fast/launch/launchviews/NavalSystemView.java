@@ -4,7 +4,6 @@ import android.widget.LinearLayout;
 
 import com.apps.fast.launch.R;
 import com.apps.fast.launch.activities.MainActivity;
-import com.apps.fast.launch.launchviews.controls.ArtillerySystemControl;
 import com.apps.fast.launch.launchviews.controls.MissileSystemControl;
 import com.apps.fast.launch.launchviews.controls.SLBMSystemControl;
 import com.apps.fast.launch.launchviews.controls.TorpedoSystemControl;
@@ -66,12 +65,6 @@ public class NavalSystemView extends LaunchView
             case SHIP_AIRCRAFT:
             {
                 //TODO
-            }
-            break;
-
-            case SHIP_ARTILLERY:
-            {
-                systemControl = new ArtillerySystemControl(game, activity, host.GetID(), (Ship)host);
             }
             break;
 

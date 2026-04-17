@@ -74,19 +74,6 @@ public class UnitQuickSelectView extends LaunchView
         imgTankType.setImageBitmap(LandUnitIconBitmaps.GetLandUnitBitmap(context, game, unit));
         txtTankType.setText(TextUtilities.GetEntityTypeAndName(unit, game));
 
-        if(unit instanceof CargoTruck)
-        {
-            CargoTruck truck = (CargoTruck)unit;
-
-            CargoSystem system = truck.GetCargoSystem();
-
-            if(system != null)
-            {
-                txtTruckCargo.setVisibility(VISIBLE);
-                txtTruckCargo.setText(context.getString(R.string.remaining_of_total_string, TextUtilities.GetWeightStringFromKG(system.GetUsedCapacity()), TextUtilities.GetWeightStringFromKG(system.GetCapacity())));
-            }
-        }
-
         if(unit.GetGeoTarget() != null && unit.GetMoveOrders() == MoveOrders.MOVE)
         {
             if(unit.HasGeoCoordChain())
@@ -132,38 +119,6 @@ public class UnitQuickSelectView extends LaunchView
                 }
             }
         }
-        else if(unit.GetMoveOrders() == MoveOrders.CAPTURE)
-        {
-            if(unit.GetTarget() != null && unit.GetTarget().GetMapEntity(game) != null)
-            {
-                if(targetEntity != null && unit.GetTarget().GetMapEntity(game).ApparentlyEquals(targetEntity))
-                {
-                    txtUnitStatus.setText(context.getString(R.string.status_already_capturing));
-                    txtUnitStatus.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
-                }
-                else
-                {
-                    txtUnitStatus.setText(context.getString(R.string.status_capturing));
-                    txtUnitStatus.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
-                }
-            }
-        }
-        else if(unit.GetMoveOrders() == MoveOrders.LIBERATE)
-        {
-            if(unit.GetTarget() != null && unit.GetTarget().GetMapEntity(game) != null)
-            {
-                if(targetEntity != null && unit.GetTarget().GetMapEntity(game).ApparentlyEquals(targetEntity))
-                {
-                    txtUnitStatus.setText(context.getString(R.string.status_already_liberating));
-                    txtUnitStatus.setTextColor(Color.MAGENTA);
-                }
-                else
-                {
-                    txtUnitStatus.setText(context.getString(R.string.status_liberating));
-                    txtUnitStatus.setTextColor(Color.MAGENTA);
-                }
-            }
-        }
         else if(unit.GetMoveOrders() == MoveOrders.WAIT)
         {
             txtUnitStatus.setText(context.getString(R.string.status_waiting));
@@ -186,14 +141,6 @@ public class UnitQuickSelectView extends LaunchView
                 if(unit instanceof Tank)
                 {
                     updateUnit = game.GetTank(unit.GetID());
-                }
-                else if(unit instanceof Infantry)
-                {
-                    updateUnit = game.GetInfantry(unit.GetID());
-                }
-                else if(unit instanceof CargoTruck)
-                {
-                    updateUnit = game.GetCargoTruck(unit.GetID());
                 }
 
                 if(updateUnit != null)
@@ -243,38 +190,6 @@ public class UnitQuickSelectView extends LaunchView
                             {
                                 txtUnitStatus.setText(context.getString(R.string.status_attacking));
                                 txtUnitStatus.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
-                            }
-                        }
-                    }
-                    else if(updateUnit.GetMoveOrders() == MoveOrders.CAPTURE)
-                    {
-                        if(updateUnit.GetTarget() != null && updateUnit.GetTarget().GetMapEntity(game) != null)
-                        {
-                            if(targetEntity != null && updateUnit.GetTarget().GetMapEntity(game).ApparentlyEquals(targetEntity))
-                            {
-                                txtUnitStatus.setText(context.getString(R.string.status_already_capturing));
-                                txtUnitStatus.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
-                            }
-                            else
-                            {
-                                txtUnitStatus.setText(context.getString(R.string.status_capturing));
-                                txtUnitStatus.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
-                            }
-                        }
-                    }
-                    else if(unit.GetMoveOrders() == MoveOrders.LIBERATE)
-                    {
-                        if(unit.GetTarget() != null && unit.GetTarget().GetMapEntity(game) != null)
-                        {
-                            if(targetEntity != null && unit.GetTarget().GetMapEntity(game).ApparentlyEquals(targetEntity))
-                            {
-                                txtUnitStatus.setText(context.getString(R.string.status_already_liberating));
-                                txtUnitStatus.setTextColor(Color.MAGENTA);
-                            }
-                            else
-                            {
-                                txtUnitStatus.setText(context.getString(R.string.status_liberating));
-                                txtUnitStatus.setTextColor(Color.MAGENTA);
                             }
                         }
                     }

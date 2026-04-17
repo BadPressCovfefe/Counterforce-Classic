@@ -56,24 +56,8 @@ public class NukeSiteView extends StructureView
         flasherSemi = new ButtonFlasher(btnSemi);
         flasherManual = new ButtonFlasher(btnManual);
 
-        imgLogo.setImageResource(R.drawable.icon_nuclear);
+        imgLogo.setImageResource(R.drawable.build_icbm_silo);
         lytEngageRange.setVisibility(GONE);
-
-        if(structureShadow.GetOwnerID() == game.GetOurPlayerID())
-        {
-            btnApplyName.setOnClickListener(new OnClickListener()
-            {
-                @Override
-                public void onClick(View view)
-                {
-                    game.SetEntityName(structureShadow.GetPointer(), txtNameEdit.getText().toString());
-
-                    txtNameButton.setVisibility(VISIBLE);
-                    lytNameEdit.setVisibility(GONE);
-                    Utilities.DismissKeyboard(activity, txtNameEdit);
-                }
-            });
-        }
 
         btnAuto.setOnClickListener(new OnClickListener()
         {

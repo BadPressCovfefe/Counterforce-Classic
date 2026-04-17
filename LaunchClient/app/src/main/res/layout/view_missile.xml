@@ -31,10 +31,10 @@
                 >
 
                 <ImageView
-                    android:layout_width="@dimen/PlayerInfoIconSize"
-                    android:layout_height="@dimen/PlayerInfoIconSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/imgMissile"
-                    android:src="@drawable/marker_missile"/>
+                    android:src="@drawable/image_missile"/>
 
                 <LinearLayout
                     android:orientation="vertical"

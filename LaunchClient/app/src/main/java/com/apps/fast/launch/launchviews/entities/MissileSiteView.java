@@ -33,23 +33,7 @@ public class MissileSiteView extends StructureView
 
         super.Setup();
 
-        imgLogo.setImageResource(R.drawable.marker_missilesite);
-
-        if(structureShadow.GetOwnerID() == game.GetOurPlayerID())
-        {
-            btnApplyName.setOnClickListener(new OnClickListener()
-            {
-                @Override
-                public void onClick(View view)
-                {
-                    game.SetEntityName(structureShadow.GetPointer(), txtNameEdit.getText().toString());
-
-                    txtNameButton.setVisibility(VISIBLE);
-                    lytNameEdit.setVisibility(GONE);
-                    Utilities.DismissKeyboard(activity, txtNameEdit);
-                }
-            });
-        }
+        imgLogo.setImageResource(R.drawable.build_missile_site);
 
         if(game.EntityIsFriendly(structureShadow, game.GetOurPlayer()))
             lytConfig.addView(systemView);

@@ -33,7 +33,6 @@ public class PlayerRankView extends LaunchView
 
     private TextView txtTotal;
     private TextView txtWealthTitle;
-    private TextView txtEconomicValue;
     private TextView txtOffences;
     private TextView txtDefences;
 
@@ -74,7 +73,6 @@ public class PlayerRankView extends LaunchView
         txtMultiplier = findViewById(R.id.txtMultiplier);
         txtTotal = findViewById(R.id.txtTotal);
         txtWealthTitle = findViewById(R.id.txtWealthTitle);
-        txtEconomicValue = findViewById(R.id.txtEconomicValue);
         txtOffences = findViewById(R.id.txtOffences);
         txtDefences = findViewById(R.id.txtDefences);
         imgLeader = findViewById(R.id.imgLeader);
@@ -156,7 +154,6 @@ public class PlayerRankView extends LaunchView
                     txtMultiplier.setTextColor(Utilities.ColourFromAttr(context, R.attr.WarningColour));
 
                 txtTotal.setText(TextUtilities.GetCurrencyString(player.GetTotalValue()));
-                txtEconomicValue.setText(TextUtilities.GetCurrencyString(player.GetNeutralValue()));
                 txtOffences.setText(TextUtilities.GetCurrencyString(player.GetOffenseValue()));
                 txtDefences.setText(TextUtilities.GetCurrencyString(player.GetDefenseValue()));
 

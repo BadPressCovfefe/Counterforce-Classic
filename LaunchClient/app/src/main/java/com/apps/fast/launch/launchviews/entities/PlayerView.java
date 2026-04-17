@@ -14,9 +14,7 @@ import com.apps.fast.launch.UI.AvatarBitmaps;
 import com.apps.fast.launch.activities.MainActivity;
 import com.apps.fast.launch.components.TextUtilities;
 import com.apps.fast.launch.components.Utilities;
-import com.apps.fast.launch.launchviews.GiveWealthView;
 import com.apps.fast.launch.launchviews.LaunchView;
-import com.apps.fast.launch.launchviews.SendMessageView;
 import com.apps.fast.launch.launchviews.UnitControls;
 import com.apps.fast.launch.views.EntityControls;
 import com.apps.fast.launch.views.LaunchDialog;
@@ -53,7 +51,6 @@ public class PlayerView extends LaunchView
 
     private LinearLayout btnPromote;
     private LinearLayout btnKick;
-    private LinearLayout btnSendMessage;
     private LinearLayout btnBlacklist;
     private ImageView imgBlacklist;
     private LinearLayout btnGiveWealth;
@@ -132,7 +129,6 @@ public class PlayerView extends LaunchView
         btnPromote = findViewById(R.id.btnPromote);
         btnKick = findViewById(R.id.btnKick);
         lytMoneyOptions = findViewById(R.id.lytMoneyOptions);
-        btnSendMessage = findViewById(R.id.btnSendMessage);
         btnBlacklist = findViewById(R.id.btnBlacklist);
         imgBlacklist = findViewById(R.id.imgBlacklist);
         btnGiveWealth = findViewById(R.id.btnGiveWealth);
@@ -208,15 +204,6 @@ public class PlayerView extends LaunchView
         {
             lytMoneyOptions.setVisibility(GONE);
         }
-
-        btnSendMessage.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                activity.SetView(new SendMessageView(game, activity, player.GetID()));
-            }
-        });
 
         if(game.GetOurPlayer().Blacklisted(lPlayerID))
         {
@@ -415,15 +402,6 @@ public class PlayerView extends LaunchView
                 public void onClick(View view)
                 {
                     activity.ShowBasicOKDialog(context.getString(R.string.ban_longpress));
-                }
-            });
-
-            btnGiveWealth.setOnClickListener(new OnClickListener()
-            {
-                @Override
-                public void onClick(View view)
-                {
-                    activity.SetView(new GiveWealthView(game, activity, lPlayerID));
                 }
             });
 

@@ -32,10 +32,12 @@
                 >
 
                 <ImageView
-                    android:layout_width="@dimen/PlayerInfoIconSize"
-                    android:layout_height="@dimen/PlayerInfoIconSize"
+                    android:layout_marginTop="@dimen/SeperatorMargins"
+                    android:layout_marginEnd="@dimen/ButtonSpacingNarrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/imgLoot"
-                    android:src="@drawable/marker_rubble"/>
+                    android:src="@drawable/image_rubble"/>
 
                 <TextView
                     android:layout_width="wrap_content"

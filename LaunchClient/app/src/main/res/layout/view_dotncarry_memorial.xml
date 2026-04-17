@@ -44,10 +44,12 @@
                 >
 
                 <ImageView
-                    android:layout_width="@dimen/PlayerInfoIconSize"
-                    android:layout_height="@dimen/PlayerInfoIconSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/SeperatorMargins"
+                    android:layout_marginEnd="@dimen/ButtonSpacingNarrow"
                     android:id="@+id/imgLoot"
-                    android:src="@drawable/marker_texas_obelisk"/>
+                    android:src="@drawable/image_monument"/>
 
                 <LinearLayout
                     android:orientation="vertical"

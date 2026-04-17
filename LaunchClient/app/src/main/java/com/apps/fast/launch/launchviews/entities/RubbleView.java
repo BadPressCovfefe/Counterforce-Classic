@@ -60,13 +60,13 @@ RubbleView extends LaunchView
                     @Override
                     public void onClick(View v)
                     {
-                        Map<Resource.ResourceType, Long> Costs = game.GetRepairCost(rubble);
+                        long oCost = game.GetRepairCost(rubble).get(Resource.ResourceType.WEALTH);
 
-                        if(game.GetOurPlayer().GetWealth() >= Costs.get(Resource.ResourceType.WEALTH))
+                        if(game.GetOurPlayer().GetWealth() >= oCost)
                         {
                             final LaunchDialog launchDialog = new LaunchDialog();
                             launchDialog.SetHeaderPurchase();
-                            launchDialog.SetMessage(context.getString(R.string.rebuild_rubble_confirm, TextUtilities.GetCostStatement(Costs)));
+                            launchDialog.SetMessage(context.getString(R.string.rebuild_rubble_confirm, TextUtilities.GetCurrencyString(oCost)));
                             launchDialog.SetOnClickYes(new View.OnClickListener()
                             {
                                 @Override

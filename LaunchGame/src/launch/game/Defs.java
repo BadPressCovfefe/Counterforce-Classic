@@ -983,7 +983,7 @@ public class Defs
     public static final int AIRBASE_CAPACITY_UPGRADE_AMOUNT = 1;
     public static final ResourceType AIRBASE_CAPACITY_UPGRADE_TYPE = ResourceType.CONSTRUCTION_SUPPLIES;
     public static final ResourceType AIRCRAFT_FACTORY_CAPACITY_UPGRADE_TYPE = ResourceType.MACHINERY;
-    public static final Map<ResourceType, Long> AIRBASE_CAPACITY_UPGRADE_COST = Map.ofEntries(entry(AIRBASE_CAPACITY_UPGRADE_TYPE, 15000L), entry(AIRCRAFT_FACTORY_CAPACITY_UPGRADE_TYPE, 15000L));
+    public static final Map<ResourceType, Long> AIRBASE_CAPACITY_UPGRADE_COST = Map.ofEntries(entry(ResourceType.WEALTH, 7500L));
     public static final int MAX_AIRBASE_CAPACITY = 150;
     public static final short AIRBASE_HP_PER_SLOT_UPGRADE = 150;
     public static final float AIRCRAFT_LANDING_DISTANCE = 0.8f;                 //Distance from an airbase at which a landing aircraft will be "pulled in."

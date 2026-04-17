@@ -19,7 +19,6 @@ import launch.game.systems.*;
 import launch.utilities.ShortDelay;
 import launch.game.EntityPointer.EntityType;
 import launch.game.LaunchGame;
-import launch.game.entities.conceptuals.Resource.ResourceType;
 import launch.utilities.LaunchLog;
 
 /**

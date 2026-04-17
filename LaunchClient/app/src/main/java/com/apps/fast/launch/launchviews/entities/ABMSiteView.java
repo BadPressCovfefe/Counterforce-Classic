@@ -66,24 +66,8 @@ public class ABMSiteView extends StructureView
         flasherSemi = new ButtonFlasher(btnSemi);
         flasherManual = new ButtonFlasher(btnManual);
 
-        imgLogo.setImageResource(R.drawable.marker_abmsite);
+        imgLogo.setImageResource(R.drawable.build_abm_site);
         lytMode.setVisibility(VISIBLE);
-
-        if(structureShadow.GetOwnerID() == game.GetOurPlayerID())
-        {
-            btnApplyName.setOnClickListener(new OnClickListener()
-            {
-                @Override
-                public void onClick(View view)
-                {
-                    game.SetEntityName(structureShadow.GetPointer(), txtNameEdit.getText().toString());
-
-                    txtNameButton.setVisibility(VISIBLE);
-                    lytNameEdit.setVisibility(GONE);
-                    Utilities.DismissKeyboard(activity, txtNameEdit);
-                }
-            });
-        }
 
         if(structureShadow.GetOwnerID() == game.GetOurPlayerID() && !structureShadow.GetSelling())
         {

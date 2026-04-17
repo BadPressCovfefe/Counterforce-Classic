@@ -44,15 +44,8 @@ public class WarningView extends FrameLayout
 
         inflate(activity, R.layout.view_warning, this);
 
-        if(type.GetStealth())
-        {
-            ((TextView)findViewById(R.id.txtWarning)).setText(activity.getString(R.string.threat_missile_stealth, type.GetName()));
-        }
-        else
-        {
-            ((ImageView)findViewById(R.id.imgDoer)).setImageBitmap(AvatarBitmaps.GetPlayerAvatar(activity, game, owner));
-            ((TextView)findViewById(R.id.txtWarning)).setText(activity.getString(R.string.threat_missile, type.GetName(), owner == null ? getContext().getString(R.string.no_owner) : owner.GetName()));
-        }
+        ((ImageView)findViewById(R.id.imgDoer)).setImageBitmap(AvatarBitmaps.GetPlayerAvatar(activity, game, owner));
+        ((TextView)findViewById(R.id.txtWarning)).setText(activity.getString(R.string.threat_missile, type.GetName(), owner == null ? getContext().getString(R.string.no_owner) : owner.GetName()));
 
         ((ImageView)findViewById(R.id.imgType)).setImageResource(R.drawable.marker_missile);
 

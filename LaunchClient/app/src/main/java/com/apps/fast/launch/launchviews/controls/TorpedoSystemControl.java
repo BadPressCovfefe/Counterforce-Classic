@@ -186,33 +186,7 @@ public class TorpedoSystemControl extends LaunchView implements SlotListener
         }
         else
         {
-            switch(systemType)
-            {
-                case SHIP_TORPEDOES:
-                {
-                    if(!game.ShipInPort(game.GetShip(lFittedToID)))
-                    {
-                        activity.ShowBasicOKDialog(context.getString(R.string.not_in_port_cant_rearm, TextUtilities.GetDistanceStringFromKM(Defs.SHIPYARD_REPAIR_DISTANCE)));
-                    }
-                    else
-                        activity.SetView(new PurchaseTorpedoView(game, activity, lSlotNumber, (NavalVessel)host));
-                }
-                break;
-
-                case SUBMARINE_TORPEDO:
-                {
-                    if(game.GetSubmarine(lFittedToID).Submerged())
-                    {
-                        activity.ShowBasicOKDialog(context.getString(R.string.submerged_cant_do_thing));
-                        break;
-                    }
-                    else if(!game.ShipInPort(game.GetSubmarine(lFittedToID)))
-                        activity.ShowBasicOKDialog(context.getString(R.string.not_in_port_prep_extended, TextUtilities.GetDistanceStringFromKM(Defs.SHIPYARD_REPAIR_DISTANCE)));
-
-                    activity.SetView(new PurchaseTorpedoView(game, activity, lSlotNumber, (NavalVessel)host));
-                }
-                break;
-            }
+            activity.SetView(new PurchaseTorpedoView(game, activity, lSlotNumber, (NavalVessel)host));
         }
     }
 

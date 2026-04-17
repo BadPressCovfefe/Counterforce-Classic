@@ -82,13 +82,9 @@ public class ShipView extends LaunchView implements LaunchUICommon.ShipInfoProvi
     private TextView txtMissiles; //Clicking this should open a MissileSystemControl.
     private TextView txtInterceptors;
     private TextView txtTorpedoes;
-    private TextView txtArtillery;
     private TextView txtAircraft;
-    private TextView txtCargo;
-
     private TextView txtToTarget;
     private View viewToTarget;
-
     private boolean bOwnedByPlayer;
     private boolean bInPort;
     private GeoCoord geoPosition;
@@ -225,12 +221,31 @@ public class ShipView extends LaunchView implements LaunchUICommon.ShipInfoProvi
         txtMissiles = findViewById(R.id.txtMissiles);
         txtTorpedoes = findViewById(R.id.txtTorpedoes);
         txtInterceptors = findViewById(R.id.txtInterceptors);
-        txtArtillery = findViewById(R.id.txtArtillery);
         txtAircraft = findViewById(R.id.txtAircraft);
-        txtCargo = findViewById(R.id.txtCargo);
 
         txtShipTitle.setText(TextUtilities.GetOwnedEntityName(shipShadow, game));
-        imgShip.setImageBitmap(EntityIconBitmaps.GetOwnedNavalBitmap(context, game, shipShadow));
+
+        switch(shipShadow.GetEntityType())
+        {
+            case FRIGATE:
+            {
+                imgShip.setImageResource(R.drawable.build_frigate);
+            }
+            break;
+
+            case DESTROYER:
+            {
+                imgShip.setImageResource(R.drawable.build_destroyer);
+            }
+            break;
+
+            case SUPER_CARRIER:
+            {
+                imgShip.setImageResource(R.drawable.build_super_carrier);
+            }
+            break;
+        }
+
         TextUtilities.AssignHealthStringAndAppearance(txtHP, shipShadow);
         String strName = Utilities.GetEntityName(context, shipShadow);
         txtName.setText(strName);
@@ -441,38 +456,6 @@ public class ShipView extends LaunchView implements LaunchUICommon.ShipInfoProvi
                 txtTorpedoes.setVisibility(GONE);
             }
 
-            if(shipShadow.HasArtillery())
-            {
-                txtArtillery.setOnClickListener(new OnClickListener()
-                {
-                    @Override
-                    public void onClick(View view)
-                    {
-                        activity.SetView(new NavalSystemView(game, activity, LaunchSystem.SystemType.SHIP_ARTILLERY, shipShadow));
-                    }
-                });
-            }
-            else
-            {
-                txtArtillery.setVisibility(GONE);
-            }
-
-            if(shipShadow.HasCargo())
-            {
-                txtCargo.setOnClickListener(new OnClickListener()
-                {
-                    @Override
-                    public void onClick(View view)
-                    {
-                        activity.SetView(new NavalSystemView(game, activity, LaunchSystem.SystemType.SHIP_CARGO, shipShadow));
-                    }
-                });
-            }
-            else
-            {
-                txtCargo.setVisibility(GONE);
-            }
-
             if(shipShadow.HasAircraft())
             {
                 txtAircraft.setOnClickListener(new OnClickListener()
@@ -593,6 +576,7 @@ public class ShipView extends LaunchView implements LaunchUICommon.ShipInfoProvi
                     activity.ExpandView();
                     txtNameButton.setVisibility(GONE);
                     lytNameEdit.setVisibility(VISIBLE);
+                    txtHP.setVisibility(GONE);
                 }
             });
 
@@ -606,6 +590,7 @@ public class ShipView extends LaunchView implements LaunchUICommon.ShipInfoProvi
                     txtNameButton.setVisibility(VISIBLE);
                     lytNameEdit.setVisibility(GONE);
                     Utilities.DismissKeyboard(activity, txtNameEdit);
+                    txtHP.setVisibility(VISIBLE);
                 }
             });
 

@@ -1568,7 +1568,7 @@
 	  </Costs>
     </InterceptorType>
 	<InterceptorType ID="1001" Name="Sprint">
-      <AssetID>35</AssetID>
+      <AssetID>8</AssetID>
       <Purchasable>true</Purchasable>
       <HitChance>0.3</HitChance>
       <InterceptorSpeed>35000</InterceptorSpeed>
@@ -1584,7 +1584,7 @@
 	  </Costs>
     </InterceptorType>
 	<InterceptorType ID="1002" Name="A-350R">
-      <AssetID>36</AssetID>
+      <AssetID>8</AssetID>
       <Purchasable>true</Purchasable>
       <HitChance>0.3</HitChance>
       <InterceptorSpeed>4932</InterceptorSpeed>
@@ -1600,7 +1600,7 @@
 	  </Costs>
     </InterceptorType>
 	<InterceptorType ID="1003" Name="LIM-49 Spartan">
-      <AssetID>36</AssetID>
+      <AssetID>8</AssetID>
       <Purchasable>true</Purchasable>
       <HitChance>0.3</HitChance>
       <InterceptorSpeed>4932</InterceptorSpeed>

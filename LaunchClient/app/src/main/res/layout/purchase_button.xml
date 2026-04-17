@@ -5,9 +5,7 @@
         android:id="@+id/purchaseButtonRoot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/MainViewSideMargin"
         android:layout_marginTop="@dimen/MainViewSpacing"
-        android:layout_marginRight="@dimen/MainViewSideMargin"
         android:background="@drawable/text_button_normal"
         android:orientation="horizontal">
 

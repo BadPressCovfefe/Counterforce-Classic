@@ -71,24 +71,8 @@ public class SAMSiteView extends StructureView
         flasherSemi = new ButtonFlasher(btnSemi);
         flasherManual = new ButtonFlasher(btnManual);
 
-        imgLogo.setImageResource(R.drawable.marker_samsite);
+        imgLogo.setImageResource(R.drawable.build_sam_site);
         lytMode.setVisibility(VISIBLE);
-
-        if(structureShadow.GetOwnerID() == game.GetOurPlayerID())
-        {
-            btnApplyName.setOnClickListener(new OnClickListener()
-            {
-                @Override
-                public void onClick(View view)
-                {
-                    game.SetEntityName(structureShadow.GetPointer(), txtNameEdit.getText().toString());
-
-                    txtNameButton.setVisibility(VISIBLE);
-                    lytNameEdit.setVisibility(GONE);
-                    Utilities.DismissKeyboard(activity, txtNameEdit);
-                }
-            });
-        }
 
 
         if(structureShadow.GetOwnerID() == game.GetOurPlayerID() && !structureShadow.GetSelling())
@@ -103,22 +87,6 @@ public class SAMSiteView extends StructureView
                     activity.ExpandView();
                     txtEngageDistanceButton.setVisibility(GONE);
                     lytEngageDistanceEdit.setVisibility(VISIBLE);
-                }
-            });
-
-            btnApplyEngageDistance.setOnClickListener(new OnClickListener()
-            {
-                @Override
-                public void onClick(View view)
-                {
-                    if(!txtEngageDistanceEdit.getText().toString().isEmpty())
-                    {
-                        game.SetSAMEngagementSpeed(structureShadow.GetID(), Float.valueOf(txtEngageDistanceEdit.getText().toString()));
-                    }
-
-                    txtEngageDistanceButton.setVisibility(VISIBLE);
-                    lytEngageDistanceEdit.setVisibility(GONE);
-                    Utilities.DismissKeyboard(activity, txtEngageDistanceEdit);
                 }
             });
 

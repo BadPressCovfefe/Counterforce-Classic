@@ -194,7 +194,7 @@ public class EntityIconBitmaps
 
     public static Bitmap GetLootBitmap(Context context, Loot loot)
     {
-        return BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_loot_7);
+        return BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_loot);
     }
 
     public static Bitmap GetAircraftBitmap(Context context, LaunchClientGame game, AirplaneInterface aircraft)

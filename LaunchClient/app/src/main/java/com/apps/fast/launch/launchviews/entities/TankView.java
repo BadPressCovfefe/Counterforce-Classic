@@ -17,8 +17,6 @@ import com.apps.fast.launch.components.TextUtilities;
 import com.apps.fast.launch.components.Utilities;
 import com.apps.fast.launch.launchviews.LaunchView;
 import com.apps.fast.launch.launchviews.UnitControls;
-import com.apps.fast.launch.launchviews.controls.ArtillerySystemControl;
-import com.apps.fast.launch.launchviews.controls.MissileSystemControl;
 import com.apps.fast.launch.views.ButtonFlasher;
 import com.apps.fast.launch.views.EntityControls;
 import com.apps.fast.launch.views.LaunchDialog;
@@ -45,7 +43,6 @@ import launch.utilities.LaunchUtilities;
 public class TankView extends LaunchView implements LaunchUICommon.TankInfoProvider
 {
     private TextView txtTankTitle;
-    private LinearLayout btnAttack;
     private LinearLayout btnSetTarget;
     private LinearLayout lytReload;
     private TextView txtReloading;
@@ -75,7 +72,6 @@ public class TankView extends LaunchView implements LaunchUICommon.TankInfoProvi
     private ButtonFlasher flasherSemi;
     private ButtonFlasher flasherManual;
     private TextView txtToTarget;
-    private TextView txtLoad;
     private View viewToTarget;
     private LaunchView launchableSystem;
     private boolean bOwnedByPlayer;
@@ -98,7 +94,6 @@ public class TankView extends LaunchView implements LaunchUICommon.TankInfoProvi
         ((EntityControls)findViewById(R.id.entityControls)).SetActivity(activity);
 
         btnMove = findViewById(R.id.btnMove);
-        btnAttack = findViewById(R.id.btnAttack);
         btnSetTarget = findViewById(R.id.btnSetTarget);
         lytControls = findViewById(R.id.lytControls);
         txtHP = findViewById(R.id.txtHP);
@@ -123,7 +118,6 @@ public class TankView extends LaunchView implements LaunchUICommon.TankInfoProvi
         btnManual = findViewById(R.id.btnModeManual);
         viewMode = findViewById(R.id.viewMode);
         btnSell = findViewById(R.id.btnSell);
-        txtLoad = findViewById(R.id.txtLoad);
 
         flasherAuto = new ButtonFlasher(btnAuto);
         flasherSemi = new ButtonFlasher(btnSemi);
@@ -267,15 +261,6 @@ public class TankView extends LaunchView implements LaunchUICommon.TankInfoProvi
                 {
                     btnSetTarget.setVisibility(GONE);
                 }
-
-                txtLoad.setOnClickListener(new OnClickListener()
-                {
-                    @Override
-                    public void onClick(View view)
-                    {
-                        activity.LoadLootMode(tank);
-                    }
-                });
             }
 
             TextUtilities.AssignHealthStringAndAppearance(txtHP, tank);
@@ -385,8 +370,6 @@ public class TankView extends LaunchView implements LaunchUICommon.TankInfoProvi
                 });
             }
 
-            imgTank.setImageBitmap(LandUnitIconBitmaps.GetLandUnitBitmap(context, game, tank));
-
             btnCeaseFire.setOnClickListener(new OnClickListener()
             {
                 @Override
@@ -402,25 +385,40 @@ public class TankView extends LaunchView implements LaunchUICommon.TankInfoProvi
             if(game.EntityIsFriendly(game.GetPlayer(tank.GetOwnerID()), game.GetOurPlayer()))
             {
                 TextUtilities.AssignTankStatusString(txtTankStatus, tankShadow);
-                btnAttack.setVisibility(GONE);
                 txtName.setVisibility(GONE);
                 txtNameButton.setVisibility(VISIBLE);
+
+                if(tank.GetGeoTarget() != null && tank.GetMoveOrders() != Movable.MoveOrders.WAIT && tank.GetMoveOrders() != Movable.MoveOrders.DEFEND && game.GetTravelTime(Defs.LAND_UNIT_SPEED, tank.GetPosition(), game.GetMovableTarget(tank)) > 0)
+                {
+                    viewToTarget.setVisibility(VISIBLE);
+                    txtToTarget.setVisibility(VISIBLE);
+
+                    float fltDistanceToTravel = 0;
+
+                    if(tank.HasGeoCoordChain())
+                    {
+                        fltDistanceToTravel = LaunchUtilities.GetTotalTravelDistance(tank.GetPosition(), tank.GetCoordinates());
+                    }
+                    else
+                    {
+                        fltDistanceToTravel = tank.GetPosition().DistanceTo(tank.GetGeoTarget());
+                    }
+
+                    txtToTarget.setText(context.getString(R.string.travel_time_target, TextUtilities.GetTimeAmount((long)(fltDistanceToTravel/Defs.LAND_UNIT_SPEED * Defs.MS_PER_HOUR))));
+                }
+                else
+                {
+                    viewToTarget.setVisibility(GONE);
+                    txtToTarget.setVisibility(GONE);
+                }
             }
             else
             {
                 txtNameButton.setVisibility(GONE);
                 txtTankStatus.setVisibility(GONE);
                 txtName.setVisibility(VISIBLE);
-                btnAttack.setVisibility(VISIBLE);
-
-                btnAttack.setOnClickListener(new OnClickListener()
-                {
-                    @Override
-                    public void onClick(View view)
-                    {
-                        activity.MissileSelectForTarget(tank.GetPosition(), tank, tank.GetTypeName());
-                    }
-                });
+                viewToTarget.setVisibility(GONE);
+                txtToTarget.setVisibility(GONE);
             }
         }
         else
@@ -443,17 +441,6 @@ public class TankView extends LaunchView implements LaunchUICommon.TankInfoProvi
             }
         });
 
-        if(tankShadow instanceof Tank)
-        {
-            Tank tank = (Tank)tankShadow;
-
-
-        }
-        else
-        {
-
-        }
-
         if(bOwnedByPlayer)
         {
             txtName.setVisibility(GONE);
@@ -474,6 +461,7 @@ public class TankView extends LaunchView implements LaunchUICommon.TankInfoProvi
                     activity.ExpandView();
                     txtNameButton.setVisibility(GONE);
                     lytNameEdit.setVisibility(VISIBLE);
+                    txtHP.setVisibility(GONE);
                 }
             });
 
@@ -496,6 +484,7 @@ public class TankView extends LaunchView implements LaunchUICommon.TankInfoProvi
                     txtNameButton.setVisibility(VISIBLE);
                     lytNameEdit.setVisibility(GONE);
                     Utilities.DismissKeyboard(activity, txtNameEdit);
+                    txtHP.setVisibility(VISIBLE);
                 }
             });
         }

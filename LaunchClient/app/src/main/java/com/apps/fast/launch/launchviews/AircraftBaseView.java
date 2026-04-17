@@ -36,8 +36,6 @@ public class AircraftBaseView extends LaunchView
     private LinearLayout lytFuel;
     private TextView txtName;
     private TextView txtHP;
-    private ImageView imgKick;
-    private LinearLayout btnCapture;
     private TextView txtMissiles;
     private ImageView imgMissiles;
     private LinearLayout lytMissiles;
@@ -106,8 +104,6 @@ public class AircraftBaseView extends LaunchView
         txtAircraftStatus = findViewById(R.id.txtInfantryStatus);
         btnMove = findViewById(R.id.btnMove);
         txtHP = findViewById(R.id.txtHPTitle);
-        imgKick = findViewById(R.id.imgKick);
-        btnCapture = findViewById(R.id.btnCapture);
 
         imgInterceptors = findViewById(R.id.imgArsenalType2);
         txtInterceptors = findViewById(R.id.txtArmaments2);
@@ -119,7 +115,44 @@ public class AircraftBaseView extends LaunchView
 
         TextUtilities.AssignAircraftStatusString(txtAircraftStatus, aircraft);
 
-        imgAircraftType.setImageBitmap(EntityIconBitmaps.GetAircraftBitmap(context, game, aircraft));
+        switch(aircraft.GetAircraftType())
+        {
+            case BOMBER:
+            {
+                imgAircraftType.setImageResource(R.drawable.build_bomber);
+            }
+            break;
+
+            case FIGHTER:
+            {
+                imgAircraftType.setImageResource(R.drawable.build_fighter);
+            }
+            break;
+
+            case ATTACK_AIRCRAFT:
+            {
+                imgAircraftType.setImageResource(R.drawable.build_ground_attack);
+            }
+            break;
+
+            case REFUELER:
+            {
+                imgAircraftType.setImageResource(R.drawable.build_refueler);
+            }
+            break;
+
+            case MULTI_ROLE:
+            {
+                imgAircraftType.setImageResource(R.drawable.build_multi_role);
+            }
+            break;
+
+            case SSB:
+            {
+                imgAircraftType.setImageResource(R.drawable.build_ssb);
+            }
+            break;
+        }
 
         txtAircraftType.setText(TextUtilities.GetEntityTypeAndName((LaunchEntity)aircraft, game));
 
@@ -206,7 +239,6 @@ public class AircraftBaseView extends LaunchView
             txtHP.setVisibility(GONE);
             btnMove.setVisibility(GONE);
             txtName.setVisibility(GONE);
-            imgKick.setVisibility(GONE);
         }
 
         if(bWeOwnIt && !bWeOwnHost)
@@ -221,12 +253,9 @@ public class AircraftBaseView extends LaunchView
                     activity.MoveOrderMode(((LaunchEntity)aircraft).GetPointer(), null);
                 }
             });
-
-            imgKick.setVisibility(GONE);
         }
         else if(bWeOwnIt && bWeOwnHost)
         {
-            imgKick.setVisibility(GONE);
             btnMove.setVisibility(VISIBLE);
             btnMove.setOnClickListener(new OnClickListener()
             {
@@ -234,70 +263,6 @@ public class AircraftBaseView extends LaunchView
                 public void onClick(View view)
                 {
                     activity.MoveOrderMode(((LaunchEntity)aircraft).GetPointer(), null);
-                }
-            });
-        }
-        else if(bWeOwnHost)
-        {
-            btnMove.setVisibility(GONE);
-            imgKick.setVisibility(VISIBLE);
-            btnCapture.setVisibility(VISIBLE);
-
-            imgKick.setOnClickListener(new OnClickListener()
-            {
-                @Override
-                public void onClick(View view)
-                {
-                    final LaunchDialog launchDialog = new LaunchDialog();
-                    launchDialog.SetHeaderLaunch();
-                    launchDialog.SetMessage(context.getString(R.string.kick_aircraft_confirm));
-                    launchDialog.SetOnClickYes(new OnClickListener()
-                    {
-                        @Override
-                        public void onClick(View view)
-                        {
-                            game.KickAircraft(((LaunchEntity)aircraft).GetPointer());
-                            launchDialog.dismiss();
-                        }
-                    });
-                    launchDialog.SetOnClickNo(new OnClickListener()
-                    {
-                        @Override
-                        public void onClick(View view)
-                        {
-                            launchDialog.dismiss();
-                        }
-                    });
-                    launchDialog.show(activity.getFragmentManager(), "");
-                }
-            });
-
-            btnCapture.setOnClickListener(new OnClickListener()
-            {
-                @Override
-                public void onClick(View view)
-                {
-                    final LaunchDialog launchDialog = new LaunchDialog();
-                    launchDialog.SetHeaderLaunch();
-                    launchDialog.SetMessage(context.getString(R.string.capture_aircraft_confirm));
-                    launchDialog.SetOnClickYes(new OnClickListener()
-                    {
-                        @Override
-                        public void onClick(View view)
-                        {
-                            game.CaptureEntity(((LaunchEntity)aircraft).GetPointer());
-                            launchDialog.dismiss();
-                        }
-                    });
-                    launchDialog.SetOnClickNo(new OnClickListener()
-                    {
-                        @Override
-                        public void onClick(View view)
-                        {
-                            launchDialog.dismiss();
-                        }
-                    });
-                    launchDialog.show(activity.getFragmentManager(), "");
                 }
             });
         }
@@ -310,8 +275,6 @@ public class AircraftBaseView extends LaunchView
             txtHP.setVisibility(GONE);
             txtName.setVisibility(GONE);
             btnMove.setVisibility(GONE);
-            imgKick.setVisibility(GONE);
-            btnCapture.setVisibility(GONE);
         }
 
         Update();

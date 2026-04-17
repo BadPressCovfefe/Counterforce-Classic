@@ -62,7 +62,6 @@ import com.apps.fast.launch.launchviews.BottomTorpedoTarget;
 import com.apps.fast.launch.launchviews.BottomTransferAccount;
 import com.apps.fast.launch.launchviews.BottomUnitCommand;
 import com.apps.fast.launch.launchviews.BuildViewNew;
-import com.apps.fast.launch.launchviews.ChatView;
 import com.apps.fast.launch.launchviews.CreateAllianceView;
 import com.apps.fast.launch.launchviews.DiplomacyActionView;
 import com.apps.fast.launch.launchviews.DiplomacyView;
@@ -88,7 +87,6 @@ import com.apps.fast.launch.launchviews.controls.AllianceControl;
 import com.apps.fast.launch.launchviews.entities.ABMSiteView;
 import com.apps.fast.launch.launchviews.entities.AirbaseView;
 import com.apps.fast.launch.launchviews.entities.AirplaneView;
-import com.apps.fast.launch.launchviews.entities.AirdropView;
 import com.apps.fast.launch.launchviews.entities.ArmoryView;
 import com.apps.fast.launch.launchviews.entities.CommandPostView;
 import com.apps.fast.launch.launchviews.entities.DotncarryMemorialView;
@@ -2927,10 +2925,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             {
                 mainView.BottomLayoutShowView(new RubbleView(game, this, selectedEntity.GetID()));
             }
-            else if(selectedEntity instanceof Airdrop)
-            {
-                mainView.BottomLayoutShowView(new AirdropView(game, this, selectedEntity.GetID()));
-            }
             else if(selectedEntity instanceof Airbase)
             {
                 mainView.BottomLayoutShowView(new AirbaseView(game, this, selectedEntity));
@@ -3758,19 +3752,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     {
         SetTargetMode(targeter.GetPointer(), MovableEntities);
         SetTarget(movableEntity, null, null, target);
-    }
-
-    public void DesignateArtilleryTarget(MapEntity targeter, GeoCoord geoTarget, MapEntity targetEntity)
-    {
-        SystemType type = SystemType.ARTILLERY_GUN;
-
-        if(targeter instanceof Ship)
-            type = SystemType.SHIP_ARTILLERY;
-        else if(targeter instanceof Tank)
-            type = SystemType.TANK_ARTILLERY;
-
-        SetArtilleryTargetMode(targeter.GetID(), type);
-        TargetArtillery(geoTarget, targetEntity);
     }
 
     public void DesignateCaptureTarget(InfantryInterface capturer)
@@ -4844,12 +4825,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             }
             break;
 
-            case SET_ARTILLERY_TARGET:
-            {
-                TargetArtillery(new GeoCoord(latLng.latitude, latLng.longitude, true), null);
-            }
-            break;
-
             case SET_TARGET:
             {
                 SetTarget(movableEntity, new GeoCoord(latLng.latitude, latLng.longitude, true), MovableEntities, null);
@@ -5113,12 +5088,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             }
             break;
 
-            case SET_ARTILLERY_TARGET:
-            {
-                TargetArtillery(entity.GetPosition(), entity);
-            }
-            break;
-
             case TARGET_TORPEDO:
             {
                 TargetTorpedo(entity.GetPosition(), entity);
@@ -5231,18 +5200,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             case ELECTRONIC_WARFARE:
             {
                 SetElectronicWarfareTarget(entity);
-            }
-            break;
-
-            case TRANSFER_CARGO:
-            {
-                SetTransferCargoTarget(entity);
-            }
-            break;
-
-            case LOAD_LOOT:
-            {
-                SetLoadLootTarget(entity);
             }
             break;
         }

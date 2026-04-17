@@ -515,8 +515,6 @@ public class MissileSystemControl extends LaunchView implements SlotListener
                         activity.ShowBasicOKDialog(context.getString(R.string.aircraft_grounded_cant_fire));
                     else if(bTank && host instanceof Tank && ((Tank)host).GetOnWater())
                         activity.ShowBasicOKDialog(context.getString(R.string.cant_fire_in_water));
-                    else if(bStoredTank)
-                        activity.ShowBasicOKDialog(context.getString(R.string.stored_tank_cant_fire));
                     else
                         activity.ShowBasicOKDialog(context.getString(R.string.offline_cant_fire));
                 }
@@ -580,25 +578,14 @@ public class MissileSystemControl extends LaunchView implements SlotListener
                 case SHIP_INTERCEPTORS:
                 case SHIP_MISSILES:
                 {
-                    if(!game.ShipInPort(game.GetShip(lFittedToID)))
-                        activity.ShowBasicOKDialog(context.getString(R.string.not_in_port_prep_extended, TextUtilities.GetDistanceStringFromKM(Defs.SHIPYARD_REPAIR_DISTANCE)));
-
-                    activity.SetView(new PurchaseLaunchableView(game, activity, ((LaunchEntity)host), systemType, lSlotNumber));
+                    activity.SetView(new PurchaseLaunchableView(game, activity, host, systemType, lSlotNumber));
                 }
                 break;
 
                 case SUBMARINE_MISSILES:
                 case SUBMARINE_ICBM:
                 {
-                    if(game.GetSubmarine(lFittedToID).Submerged())
-                    {
-                        activity.ShowBasicOKDialog(context.getString(R.string.submerged_cant_do_thing));
-                        break;
-                    }
-                    else if(!game.ShipInPort(game.GetSubmarine(lFittedToID)))
-                        activity.ShowBasicOKDialog(context.getString(R.string.not_in_port_prep_extended, TextUtilities.GetDistanceStringFromKM(Defs.SHIPYARD_REPAIR_DISTANCE)));
-
-                    activity.SetView(new PurchaseLaunchableView(game, activity, ((LaunchEntity)host), systemType, lSlotNumber));
+                    activity.SetView(new PurchaseLaunchableView(game, activity, host, systemType, lSlotNumber));
                 }
                 break;
             }

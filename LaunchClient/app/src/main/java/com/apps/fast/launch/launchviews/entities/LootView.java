@@ -50,33 +50,6 @@ public class LootView extends LaunchView
             lytContents = findViewById(R.id.lytContents);
             imgLoot = findViewById(R.id.imgLoot);
 
-            Haulable haulable = null;
-
-            switch(loot.GetLootType())
-            {
-                case RESOURCES:
-                {
-                    haulable = new Resource(Resource.ResourceType.values()[loot.GetCargoID()], loot.GetQuantity());
-                    txtLootTitle.setText(TextUtilities.GetResourceTypeTitleString(Resource.ResourceType.values()[loot.GetCargoID()]));
-                    imgLoot.setImageBitmap(EntityIconBitmaps.GetLootBitmap(context, loot));
-                }
-                break;
-
-                case MISSILES:
-                {
-                    haulable = new StoredLaunchable(loot.GetCargoID(), loot.GetQuantity(), true);
-                    txtLootTitle.setText(context.getString(R.string.missiles));
-                }
-                break;
-
-                case INTERCEPTORS:
-                {
-                    haulable = new StoredLaunchable(loot.GetCargoID(), loot.GetQuantity(), false);
-                    txtLootTitle.setText(context.getString(R.string.interceptors));
-                }
-                break;
-            }
-
             Update();
         }
         else

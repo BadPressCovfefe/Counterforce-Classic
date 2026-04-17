@@ -1,0 +1,3915 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Game>
+    <GameStats>
+        <NextPlayerID>1</NextPlayerID>
+    </GameStats>
+    <Users>
+        <User Name="Biscuit">
+            <GoogleID>103690468106158765549</GoogleID>
+            <IMEI>4A4082D52A9557D702D52A61E10B25B630A17DFD775473DDD6752E4312315F59</IMEI>
+            <PlayerID>0</PlayerID>
+            <BanState>0</BanState>
+            <NextBanTime>3600000</NextBanTime>
+            <BanDurationRemaining>0</BanDurationRemaining>
+            <BanReason/>
+            <LastIP>192.168.1.215</LastIP>
+            <LastConnectionMobile>false</LastConnectionMobile>
+            <LastChecked>1776171327202</LastChecked>
+            <LastCheckFailed>false</LastCheckFailed>
+            <CheckAPIFailed>true</CheckAPIFailed>
+            <Proscribed>false</Proscribed>
+            <CheckFailCode>17</CheckFailCode>
+            <ProfileMatch>false</ProfileMatch>
+            <BasicIntegrity>false</BasicIntegrity>
+            <Approved>false</Approved>
+            <Expired>0</Expired>
+            <DeviceHash>samsung/a15xsq/a15x:16/BP2A.250605.031.A3/A156USQSADZB3:user/release-keys|SM-A156U|samsung|samsung|a15x|a15xsq</DeviceHash>
+            <AppListHash>6036935D</AppListHash>
+            <FirebaseToken>fokn2HjVRUOrmcPRdJw1GQ:APA91bHUn8IT50c6YWH2LijTakA_mFyFa5opUpwM62E5YJ3LWDjKB0as42CsNLuO-8n2k3bF724N4HAaqSPoWfDwf0FkHyBVr2HNzTfG_m9wWq2nK3OMi3g</FirebaseToken>
+        </User>
+    </Users>
+    <Alliances/>
+    <Treaties/>
+    <Players>
+        <Player ID="0" Name="Biscuit">
+            <Position>
+                <Latitude>41.43001</Latitude>
+                <Longitude>-84.06461</Longitude>
+            </Position>
+            <Avatar>-1</Avatar>
+            <LastSeen>1776171347136</LastSeen>
+            <StateChange>0</StateChange>
+            <AllianceID>-1</AllianceID>
+            <Flags1>0</Flags1>
+            <Flags2>4</Flags2>
+            <AllianceCooloffTime>0</AllianceCooloffTime>
+            <Kills>0</Kills>
+            <Deaths>0</Deaths>
+            <OffenceSpending>0</OffenceSpending>
+            <DefenceSpending>0</DefenceSpending>
+            <DamageInflicted>5000</DamageInflicted>
+            <DamageReceived>5000</DamageReceived>
+            <Rank>2</Rank>
+            <Experience>2210</Experience>
+            <TotalKills>0</TotalKills>
+            <TotalDeaths>0</TotalDeaths>
+            <IsAMember>false</IsAMember>
+            <JoinTimeMS>1775669228365</JoinTimeMS>
+            <DefenseValue>270420</DefenseValue>
+            <OffenseValue>255420</OffenseValue>
+            <NeutralValue>1322500</NeutralValue>
+            <DistanceTraveled>76.76665</DistanceTraveled>
+            <DistanceTraveledToday>0.0</DistanceTraveledToday>
+            <AirdropCooldown>0</AirdropCooldown>
+            <ProspectCooldown>0</ProspectCooldown>
+            <CityCountLastWeek>0</CityCountLastWeek>
+            <ChampCount>0</ChampCount>
+            <AdminMember>false</AdminMember>
+            <Blacklist>AAA=</Blacklist>
+            <Wealth>1259650</Wealth>
+        </Player>
+    </Players>
+    <Missiles>
+        <Missile ID="448">
+            <Position>
+                <Latitude>24.060715</Latitude>
+                <Longitude>-198.24535</Longitude>
+            </Position>
+            <Type>1140</Type>
+            <OwnerID>0</OwnerID>
+            <Target>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Target>
+            <Origin>
+                <Latitude>41.588593</Latitude>
+                <Longitude>-83.79328</Longitude>
+            </Origin>
+            <Airburst>false</Airburst>
+            <Speed>185.0</Speed>
+        </Missile>
+        <Missile ID="194">
+            <Position>
+                <Latitude>24.060715</Latitude>
+                <Longitude>-198.24535</Longitude>
+            </Position>
+            <Type>1140</Type>
+            <OwnerID>0</OwnerID>
+            <Target>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Target>
+            <Origin>
+                <Latitude>41.588593</Latitude>
+                <Longitude>-83.79328</Longitude>
+            </Origin>
+            <Airburst>false</Airburst>
+            <Speed>185.0</Speed>
+        </Missile>
+        <Missile ID="323">
+            <Position>
+                <Latitude>24.060715</Latitude>
+                <Longitude>-198.24535</Longitude>
+            </Position>
+            <Type>1140</Type>
+            <OwnerID>0</OwnerID>
+            <Target>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Target>
+            <Origin>
+                <Latitude>41.588593</Latitude>
+                <Longitude>-83.79328</Longitude>
+            </Origin>
+            <Airburst>false</Airburst>
+            <Speed>185.0</Speed>
+        </Missile>
+        <Missile ID="484">
+            <Position>
+                <Latitude>24.060715</Latitude>
+                <Longitude>-198.24535</Longitude>
+            </Position>
+            <Type>1140</Type>
+            <OwnerID>0</OwnerID>
+            <Target>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Target>
+            <Origin>
+                <Latitude>41.588593</Latitude>
+                <Longitude>-83.79328</Longitude>
+            </Origin>
+            <Airburst>false</Airburst>
+            <Speed>185.0</Speed>
+        </Missile>
+        <Missile ID="454">
+            <Position>
+                <Latitude>24.060715</Latitude>
+                <Longitude>-198.24535</Longitude>
+            </Position>
+            <Type>1140</Type>
+            <OwnerID>0</OwnerID>
+            <Target>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Target>
+            <Origin>
+                <Latitude>41.588593</Latitude>
+                <Longitude>-83.79328</Longitude>
+            </Origin>
+            <Airburst>false</Airburst>
+            <Speed>185.0</Speed>
+        </Missile>
+        <Missile ID="588">
+            <Position>
+                <Latitude>24.060715</Latitude>
+                <Longitude>-198.24535</Longitude>
+            </Position>
+            <Type>1140</Type>
+            <OwnerID>0</OwnerID>
+            <Target>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Target>
+            <Origin>
+                <Latitude>41.588593</Latitude>
+                <Longitude>-83.79328</Longitude>
+            </Origin>
+            <Airburst>false</Airburst>
+            <Speed>185.0</Speed>
+        </Missile>
+        <Missile ID="79">
+            <Position>
+                <Latitude>40.83392</Latitude>
+                <Longitude>-97.953384</Longitude>
+            </Position>
+            <Type>1140</Type>
+            <OwnerID>0</OwnerID>
+            <Target>
+                <Latitude>41.588554</Latitude>
+                <Longitude>-83.79326</Longitude>
+            </Target>
+            <Origin>
+                <Latitude>-4.019338</Latitude>
+                <Longitude>-179.30783</Longitude>
+            </Origin>
+            <Airburst>false</Airburst>
+            <Speed>185.0</Speed>
+        </Missile>
+        <Missile ID="207">
+            <Position>
+                <Latitude>24.060715</Latitude>
+                <Longitude>-198.24535</Longitude>
+            </Position>
+            <Type>1140</Type>
+            <OwnerID>0</OwnerID>
+            <Target>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Target>
+            <Origin>
+                <Latitude>41.588593</Latitude>
+                <Longitude>-83.79328</Longitude>
+            </Origin>
+            <Airburst>false</Airburst>
+            <Speed>185.0</Speed>
+        </Missile>
+        <Missile ID="369">
+            <Position>
+                <Latitude>24.060715</Latitude>
+                <Longitude>-198.24535</Longitude>
+            </Position>
+            <Type>1140</Type>
+            <OwnerID>0</OwnerID>
+            <Target>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Target>
+            <Origin>
+                <Latitude>41.588593</Latitude>
+                <Longitude>-83.79328</Longitude>
+            </Origin>
+            <Airburst>false</Airburst>
+            <Speed>185.0</Speed>
+        </Missile>
+        <Missile ID="401">
+            <Position>
+                <Latitude>24.060715</Latitude>
+                <Longitude>-198.24535</Longitude>
+            </Position>
+            <Type>1140</Type>
+            <OwnerID>0</OwnerID>
+            <Target>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Target>
+            <Origin>
+                <Latitude>41.588593</Latitude>
+                <Longitude>-83.79328</Longitude>
+            </Origin>
+            <Airburst>false</Airburst>
+            <Speed>185.0</Speed>
+        </Missile>
+        <Missile ID="54">
+            <Position>
+                <Latitude>40.831345</Latitude>
+                <Longitude>-97.94318</Longitude>
+            </Position>
+            <Type>1140</Type>
+            <OwnerID>0</OwnerID>
+            <Target>
+                <Latitude>41.588554</Latitude>
+                <Longitude>-83.79326</Longitude>
+            </Target>
+            <Origin>
+                <Latitude>-4.029493</Latitude>
+                <Longitude>-179.28917</Longitude>
+            </Origin>
+            <Airburst>false</Airburst>
+            <Speed>185.0</Speed>
+        </Missile>
+        <Missile ID="408">
+            <Position>
+                <Latitude>24.060715</Latitude>
+                <Longitude>-198.24535</Longitude>
+            </Position>
+            <Type>1140</Type>
+            <OwnerID>0</OwnerID>
+            <Target>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Target>
+            <Origin>
+                <Latitude>41.588593</Latitude>
+                <Longitude>-83.79328</Longitude>
+            </Origin>
+            <Airburst>false</Airburst>
+            <Speed>185.0</Speed>
+        </Missile>
+        <Missile ID="537">
+            <Position>
+                <Latitude>24.060715</Latitude>
+                <Longitude>-198.24535</Longitude>
+            </Position>
+            <Type>1140</Type>
+            <OwnerID>0</OwnerID>
+            <Target>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Target>
+            <Origin>
+                <Latitude>41.588593</Latitude>
+                <Longitude>-83.79328</Longitude>
+            </Origin>
+            <Airburst>false</Airburst>
+            <Speed>185.0</Speed>
+        </Missile>
+        <Missile ID="350">
+            <Position>
+                <Latitude>24.060715</Latitude>
+                <Longitude>-198.24535</Longitude>
+            </Position>
+            <Type>1140</Type>
+            <OwnerID>0</OwnerID>
+            <Target>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Target>
+            <Origin>
+                <Latitude>41.588593</Latitude>
+                <Longitude>-83.79328</Longitude>
+            </Origin>
+            <Airburst>false</Airburst>
+            <Speed>185.0</Speed>
+        </Missile>
+        <Missile ID="382">
+            <Position>
+                <Latitude>24.060715</Latitude>
+                <Longitude>-198.24535</Longitude>
+            </Position>
+            <Type>1140</Type>
+            <OwnerID>0</OwnerID>
+            <Target>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Target>
+            <Origin>
+                <Latitude>41.588593</Latitude>
+                <Longitude>-83.79328</Longitude>
+            </Origin>
+            <Airburst>false</Airburst>
+            <Speed>185.0</Speed>
+        </Missile>
+        <Missile ID="127">
+            <Position>
+                <Latitude>24.060715</Latitude>
+                <Longitude>-198.24535</Longitude>
+            </Position>
+            <Type>1140</Type>
+            <OwnerID>0</OwnerID>
+            <Target>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Target>
+            <Origin>
+                <Latitude>41.588593</Latitude>
+                <Longitude>-83.79328</Longitude>
+            </Origin>
+            <Airburst>false</Airburst>
+            <Speed>185.0</Speed>
+        </Missile>
+    </Missiles>
+    <Interceptors/>
+    <Torpedoes/>
+    <MissileSites>
+        <MissileSite ID="0" Name="">
+            <Position>
+                <Latitude>41.36434</Latitude>
+                <Longitude>-84.02832</Longitude>
+            </Position>
+            <HP>1500</HP>
+            <MaxHP>1500</MaxHP>
+            <OwnerID>0</OwnerID>
+            <Flags>-128</Flags>
+            <StateTime>0</StateTime>
+            <ICBMSilo>false</ICBMSilo>
+            <MissileSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>90000</ReloadTime>
+                <SlotCount>3</SlotCount>
+                <Slots/>
+            </MissileSystem>
+            <Mode>2</Mode>
+            <Retaliating>false</Retaliating>
+            <RetaliateTime>0</RetaliateTime>
+            <TargetID>0</TargetID>
+            <Visible>false</Visible>
+            <VisibleTime>0</VisibleTime>
+            <BuiltByID>0</BuiltByID>
+            <ResourceContainer>
+                <Capacity>500000</Capacity>
+                <Resources>
+                    <Resource Quantity="0" Type="ELECTRICITY"/>
+                    <Resource Quantity="0" Type="CONSTRUCTION_SUPPLIES"/>
+                    <Resource Quantity="0" Type="MACHINERY"/>
+                </Resources>
+            </ResourceContainer>
+        </MissileSite>
+        <MissileSite ID="1" Name="">
+            <Position>
+                <Latitude>41.352657</Latitude>
+                <Longitude>-84.02764</Longitude>
+            </Position>
+            <HP>5000</HP>
+            <MaxHP>5000</MaxHP>
+            <OwnerID>0</OwnerID>
+            <Flags>-128</Flags>
+            <StateTime>0</StateTime>
+            <ICBMSilo>true</ICBMSilo>
+            <MissileSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>90000</ReloadTime>
+                <SlotCount>1</SlotCount>
+                <Slots/>
+            </MissileSystem>
+            <Mode>2</Mode>
+            <Retaliating>false</Retaliating>
+            <RetaliateTime>0</RetaliateTime>
+            <TargetID>0</TargetID>
+            <Visible>false</Visible>
+            <VisibleTime>0</VisibleTime>
+            <BuiltByID>0</BuiltByID>
+            <ResourceContainer>
+                <Capacity>500000</Capacity>
+                <Resources>
+                    <Resource Quantity="0" Type="ELECTRICITY"/>
+                    <Resource Quantity="0" Type="CONSTRUCTION_SUPPLIES"/>
+                    <Resource Quantity="0" Type="MACHINERY"/>
+                </Resources>
+            </ResourceContainer>
+        </MissileSite>
+    </MissileSites>
+    <ArtilleryGuns/>
+    <SAMSites>
+        <SAMSite ID="0" Name="">
+            <Position>
+                <Latitude>41.36135</Latitude>
+                <Longitude>-84.03487</Longitude>
+            </Position>
+            <HP>1500</HP>
+            <MaxHP>1500</MaxHP>
+            <OwnerID>0</OwnerID>
+            <Flags>-128</Flags>
+            <StateTime>0</StateTime>
+            <Mode>0</Mode>
+            <InterceptorSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>90000</ReloadTime>
+                <SlotCount>3</SlotCount>
+                <Slots/>
+            </InterceptorSystem>
+            <IsABM>false</IsABM>
+            <EngageSpeed>0.0</EngageSpeed>
+            <Visible>false</Visible>
+            <VisibleTime>0</VisibleTime>
+            <BuiltByID>0</BuiltByID>
+            <ResourceContainer>
+                <Capacity>500000</Capacity>
+                <Resources>
+                    <Resource Quantity="0" Type="ELECTRICITY"/>
+                    <Resource Quantity="0" Type="CONSTRUCTION_SUPPLIES"/>
+                    <Resource Quantity="0" Type="MACHINERY"/>
+                </Resources>
+            </ResourceContainer>
+        </SAMSite>
+        <SAMSite ID="1" Name="">
+            <Position>
+                <Latitude>41.351547</Latitude>
+                <Longitude>-84.024284</Longitude>
+            </Position>
+            <HP>5000</HP>
+            <MaxHP>5000</MaxHP>
+            <OwnerID>0</OwnerID>
+            <Flags>-128</Flags>
+            <StateTime>0</StateTime>
+            <Mode>0</Mode>
+            <InterceptorSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>90000</ReloadTime>
+                <SlotCount>1</SlotCount>
+                <Slots/>
+            </InterceptorSystem>
+            <IsABM>true</IsABM>
+            <EngageSpeed>0.0</EngageSpeed>
+            <Visible>false</Visible>
+            <VisibleTime>0</VisibleTime>
+            <BuiltByID>0</BuiltByID>
+            <ResourceContainer>
+                <Capacity>500000</Capacity>
+                <Resources>
+                    <Resource Quantity="0" Type="ELECTRICITY"/>
+                    <Resource Quantity="0" Type="CONSTRUCTION_SUPPLIES"/>
+                    <Resource Quantity="0" Type="MACHINERY"/>
+                </Resources>
+            </ResourceContainer>
+        </SAMSite>
+    </SAMSites>
+    <SentryGuns>
+        <SentryGun ID="0" Name="">
+            <Position>
+                <Latitude>41.359726</Latitude>
+                <Longitude>-84.01657</Longitude>
+            </Position>
+            <HP>500</HP>
+            <MaxHP>500</MaxHP>
+            <OwnerID>0</OwnerID>
+            <Flags>-128</Flags>
+            <StateTime>0</StateTime>
+            <ReloadRemaining>0</ReloadRemaining>
+            <Visible>false</Visible>
+            <VisibleTime>0</VisibleTime>
+            <BuiltByID>0</BuiltByID>
+            <IsWatchTower>true</IsWatchTower>
+            <ResourceContainer>
+                <Capacity>500000</Capacity>
+                <Resources>
+                    <Resource Quantity="0" Type="ELECTRICITY"/>
+                    <Resource Quantity="0" Type="CONSTRUCTION_SUPPLIES"/>
+                    <Resource Quantity="0" Type="OIL"/>
+                    <Resource Quantity="0" Type="MACHINERY"/>
+                </Resources>
+            </ResourceContainer>
+        </SentryGun>
+        <SentryGun ID="1" Name="">
+            <Position>
+                <Latitude>41.35537</Latitude>
+                <Longitude>-84.02445</Longitude>
+            </Position>
+            <HP>300</HP>
+            <MaxHP>300</MaxHP>
+            <OwnerID>0</OwnerID>
+            <Flags>-128</Flags>
+            <StateTime>0</StateTime>
+            <ReloadRemaining>0</ReloadRemaining>
+            <Visible>false</Visible>
+            <VisibleTime>0</VisibleTime>
+            <BuiltByID>0</BuiltByID>
+            <IsWatchTower>false</IsWatchTower>
+            <ResourceContainer>
+                <Capacity>500000</Capacity>
+                <Resources>
+                    <Resource Quantity="0" Type="ELECTRICITY"/>
+                    <Resource Quantity="0" Type="CONSTRUCTION_SUPPLIES"/>
+                    <Resource Quantity="0" Type="OIL"/>
+                    <Resource Quantity="0" Type="MACHINERY"/>
+                </Resources>
+            </ResourceContainer>
+        </SentryGun>
+    </SentryGuns>
+    <ScrapYards/>
+    <OreMines/>
+    <RadarStations/>
+    <Processors/>
+    <Distributors/>
+    <CommandPosts>
+        <CommandPost ID="0" Name="">
+            <Position>
+                <Latitude>41.38017</Latitude>
+                <Longitude>-84.12618</Longitude>
+            </Position>
+            <HP>5000</HP>
+            <MaxHP>5000</MaxHP>
+            <OwnerID>0</OwnerID>
+            <Flags>-128</Flags>
+            <StateTime>0</StateTime>
+            <Visible>true</Visible>
+            <VisibleTime>0</VisibleTime>
+            <BuiltByID>0</BuiltByID>
+            <ResourceContainer>
+                <Capacity>500000</Capacity>
+                <Resources>
+                    <Resource Quantity="0" Type="ELECTRICITY"/>
+                    <Resource Quantity="0" Type="CONSTRUCTION_SUPPLIES"/>
+                    <Resource Quantity="0" Type="MACHINERY"/>
+                </Resources>
+            </ResourceContainer>
+        </CommandPost>
+        <CommandPost ID="1" Name="">
+            <Position>
+                <Latitude>41.35885</Latitude>
+                <Longitude>-84.025055</Longitude>
+            </Position>
+            <HP>5000</HP>
+            <MaxHP>5000</MaxHP>
+            <OwnerID>0</OwnerID>
+            <Flags>-128</Flags>
+            <StateTime>0</StateTime>
+            <Visible>true</Visible>
+            <VisibleTime>0</VisibleTime>
+            <BuiltByID>0</BuiltByID>
+            <ResourceContainer>
+                <Capacity>500000</Capacity>
+                <Resources>
+                    <Resource Quantity="0" Type="ELECTRICITY"/>
+                    <Resource Quantity="0" Type="CONSTRUCTION_SUPPLIES"/>
+                    <Resource Quantity="0" Type="MACHINERY"/>
+                </Resources>
+            </ResourceContainer>
+        </CommandPost>
+    </CommandPosts>
+    <Banks/>
+    <Warehouses>
+        <Warehouse ID="0" Name="">
+            <Position>
+                <Latitude>41.359642</Latitude>
+                <Longitude>-84.0304</Longitude>
+            </Position>
+            <HP>2500</HP>
+            <MaxHP>2500</MaxHP>
+            <OwnerID>0</OwnerID>
+            <Flags>-128</Flags>
+            <StateTime>0</StateTime>
+            <Producing>false</Producing>
+            <PrepTime>0</PrepTime>
+            <Visible>false</Visible>
+            <VisibleTime>0</VisibleTime>
+            <BuiltByID>0</BuiltByID>
+            <ResourceContainer>
+                <Capacity>500000</Capacity>
+                <Resources>
+                    <Resource Quantity="0" Type="ELECTRICITY"/>
+                    <Resource Quantity="0" Type="CONSTRUCTION_SUPPLIES"/>
+                    <Resource Quantity="0" Type="MACHINERY"/>
+                </Resources>
+            </ResourceContainer>
+            <CargoSystem>
+                <Capacity>10000000</Capacity>
+                <Resources/>
+                <StoredInfantries/>
+                <StoredTanks/>
+                <StoredCargoTrucks/>
+            </CargoSystem>
+        </Warehouse>
+    </Warehouses>
+    <Airbases>
+        <Airbase ID="0" Name="">
+            <Position>
+                <Latitude>41.355732</Latitude>
+                <Longitude>-84.03276</Longitude>
+            </Position>
+            <HP>3000</HP>
+            <MaxHP>3000</MaxHP>
+            <OwnerID>0</OwnerID>
+            <Flags>-128</Flags>
+            <StateTime>0</StateTime>
+            <AircraftSystem>
+                <Open>false</Open>
+                <ReloadRemaining>0</ReloadRemaining>
+                <SlotCount>3</SlotCount>
+                <StoredAircrafts/>
+            </AircraftSystem>
+            <Visible>false</Visible>
+            <VisibleTime>0</VisibleTime>
+            <BuiltByID>0</BuiltByID>
+            <ResourceContainer>
+                <Capacity>500000</Capacity>
+                <Resources>
+                    <Resource Quantity="0" Type="ELECTRICITY"/>
+                    <Resource Quantity="0" Type="CONSTRUCTION_SUPPLIES"/>
+                    <Resource Quantity="0" Type="FUEL"/>
+                    <Resource Quantity="0" Type="MACHINERY"/>
+                    <Resource Quantity="0" Type="STEEL"/>
+                    <Resource Quantity="0" Type="ELECTRONICS"/>
+                </Resources>
+            </ResourceContainer>
+        </Airbase>
+    </Airbases>
+    <Armories>
+        <Armory ID="0" Name="">
+            <Position>
+                <Latitude>41.354195</Latitude>
+                <Longitude>-84.01907</Longitude>
+            </Position>
+            <HP>1500</HP>
+            <MaxHP>1500</MaxHP>
+            <OwnerID>0</OwnerID>
+            <Flags>-128</Flags>
+            <StateTime>0</StateTime>
+            <Producing>false</Producing>
+            <PrepTime>0</PrepTime>
+            <StructureTankType>46</StructureTankType>
+            <Visible>false</Visible>
+            <VisibleTime>0</VisibleTime>
+            <CargoSystem>
+                <Capacity>1500000</Capacity>
+                <Resources/>
+                <StoredInfantries/>
+                <StoredTanks/>
+                <StoredCargoTrucks/>
+            </CargoSystem>
+            <BuiltByID>0</BuiltByID>
+            <Barracks>false</Barracks>
+            <ResourceContainer>
+                <Capacity>500000</Capacity>
+                <Resources>
+                    <Resource Quantity="0" Type="ELECTRICITY"/>
+                    <Resource Quantity="0" Type="CONSTRUCTION_SUPPLIES"/>
+                    <Resource Quantity="0" Type="MACHINERY"/>
+                </Resources>
+            </ResourceContainer>
+        </Armory>
+    </Armories>
+    <Infantries/>
+    <Tanks>
+        <Tank ID="0" Name="">
+            <Position>
+                <Latitude>41.354347</Latitude>
+                <Longitude>-84.01789</Longitude>
+            </Position>
+            <Target>
+                <Latitude>-5.729578E7</Latitude>
+                <Longitude>-5.729578E7</Longitude>
+            </Target>
+            <HP>3000</HP>
+            <MaxHP>3000</MaxHP>
+            <OwnerID>0</OwnerID>
+            <Detected>false</Detected>
+            <MoveOrders>11</MoveOrders>
+            <ReloadRemaining>0</ReloadRemaining>
+            <Visible>false</Visible>
+            <VisibleTime>0</VisibleTime>
+            <UnderAttackTime>0</UnderAttackTime>
+            <TankType>46</TankType>
+            <Mode>0</Mode>
+            <CurrentFuel>1.0</CurrentFuel>
+            <ResourceContainer>
+                <Capacity>150000</Capacity>
+                <Resources>
+                    <Resource Quantity="0" Type="FUEL"/>
+                    <Resource Quantity="0" Type="STEEL"/>
+                </Resources>
+            </ResourceContainer>
+            <MissileSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>0</ReloadTime>
+                <SlotCount>0</SlotCount>
+                <Slots/>
+            </MissileSystem>
+        </Tank>
+    </Tanks>
+    <CargoTrucks/>
+    <Ships/>
+    <Submarines/>
+    <Aircrafts/>
+    <Blueprints/>
+    <Loots>
+        <Loot ID="0">
+            <Position>
+                <Latitude>41.588623</Latitude>
+                <Longitude>-83.792946</Longitude>
+            </Position>
+            <LootType>2</LootType>
+            <Type>6</Type>
+            <Quantity>30000</Quantity>
+            <Expiry>243247088</Expiry>
+        </Loot>
+    </Loots>
+    <Rubbles/>
+    <Airdrops/>
+    <Deposits/>
+    <Radiations>
+        <Radiation ID="513">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>9.365666</Radius>
+            <Expiry>9506920</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="3">
+            <Position>
+                <Latitude>27.878553</Latitude>
+                <Longitude>-98.04628</Longitude>
+            </Position>
+            <Radius>4.619544</Radius>
+            <Expiry>48637896</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="4">
+            <Position>
+                <Latitude>57.611427</Latitude>
+                <Longitude>-96.620346</Longitude>
+            </Position>
+            <Radius>7.4335346</Radius>
+            <Expiry>47195616</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="516">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>9.365666</Radius>
+            <Expiry>31046584</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="6">
+            <Position>
+                <Latitude>57.611427</Latitude>
+                <Longitude>-96.620346</Longitude>
+            </Position>
+            <Radius>7.4335346</Radius>
+            <Expiry>8277472</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="518">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>9.365666</Radius>
+            <Expiry>37295704</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="519">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>9.365666</Radius>
+            <Expiry>37911912</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="8">
+            <Position>
+                <Latitude>57.611427</Latitude>
+                <Longitude>-96.620346</Longitude>
+            </Position>
+            <Radius>4.619544</Radius>
+            <Expiry>8919152</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="521">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>9.365666</Radius>
+            <Expiry>6020824</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="522">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>9.365666</Radius>
+            <Expiry>52006120</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="11">
+            <Position>
+                <Latitude>57.611427</Latitude>
+                <Longitude>-96.620346</Longitude>
+            </Position>
+            <Radius>4.619544</Radius>
+            <Expiry>8512848</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="523">
+            <Position>
+                <Latitude>41.588554</Latitude>
+                <Longitude>-83.79326</Longitude>
+            </Position>
+            <Radius>2.9101303</Radius>
+            <Expiry>68451440</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="524">
+            <Position>
+                <Latitude>41.588554</Latitude>
+                <Longitude>-83.79326</Longitude>
+            </Position>
+            <Radius>2.9101303</Radius>
+            <Expiry>885224</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="525">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>18.731333</Radius>
+            <Expiry>23740960</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="14">
+            <Position>
+                <Latitude>57.611427</Latitude>
+                <Longitude>-96.620346</Longitude>
+            </Position>
+            <Radius>6.900682</Radius>
+            <Expiry>8450560</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="529">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>18.731333</Radius>
+            <Expiry>84483856</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="18">
+            <Position>
+                <Latitude>27.878553</Latitude>
+                <Longitude>-98.04628</Longitude>
+            </Position>
+            <Radius>11.392776</Radius>
+            <Expiry>4343480</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="531">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>18.731333</Radius>
+            <Expiry>40724576</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="20">
+            <Position>
+                <Latitude>27.878553</Latitude>
+                <Longitude>-98.04628</Longitude>
+            </Position>
+            <Radius>11.392776</Radius>
+            <Expiry>4879096</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="533">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>9.042452</Radius>
+            <Expiry>87787992</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="536">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>9.042452</Radius>
+            <Expiry>63201304</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="537">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>9.042452</Radius>
+            <Expiry>18705256</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="26">
+            <Position>
+                <Latitude>57.611427</Latitude>
+                <Longitude>-96.620346</Longitude>
+            </Position>
+            <Radius>3.8598583</Radius>
+            <Expiry>27698208</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="538">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>9.042452</Radius>
+            <Expiry>15991176</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="27">
+            <Position>
+                <Latitude>57.611427</Latitude>
+                <Longitude>-96.620346</Longitude>
+            </Position>
+            <Radius>3.8598583</Radius>
+            <Expiry>53060224</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="539">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>9.042452</Radius>
+            <Expiry>17462584</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="30">
+            <Position>
+                <Latitude>57.611427</Latitude>
+                <Longitude>-96.620346</Longitude>
+            </Position>
+            <Radius>11.392776</Radius>
+            <Expiry>51374832</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="31">
+            <Position>
+                <Latitude>27.878553</Latitude>
+                <Longitude>-98.04628</Longitude>
+            </Position>
+            <Radius>5.084466</Radius>
+            <Expiry>40966832</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="543">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>9.042452</Radius>
+            <Expiry>12635736</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="544">
+            <Position>
+                <Latitude>41.588554</Latitude>
+                <Longitude>-83.79326</Longitude>
+            </Position>
+            <Radius>18.731333</Radius>
+            <Expiry>15412704</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="33">
+            <Position>
+                <Latitude>27.878553</Latitude>
+                <Longitude>-98.04628</Longitude>
+            </Position>
+            <Radius>5.084466</Radius>
+            <Expiry>29641584</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="545">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>98065056</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="547">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>106825584</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="548">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>93723472</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="38">
+            <Position>
+                <Latitude>57.611427</Latitude>
+                <Longitude>-96.620346</Longitude>
+            </Position>
+            <Radius>9.365666</Radius>
+            <Expiry>36903584</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="550">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>17088128</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="39">
+            <Position>
+                <Latitude>57.611427</Latitude>
+                <Longitude>-96.620346</Longitude>
+            </Position>
+            <Radius>5.084466</Radius>
+            <Expiry>30472360</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="551">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>108438320</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="40">
+            <Position>
+                <Latitude>27.878553</Latitude>
+                <Longitude>-98.04628</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>46131720</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="43">
+            <Position>
+                <Latitude>27.878553</Latitude>
+                <Longitude>-98.04628</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>29959480</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="555">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>2107632</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="44">
+            <Position>
+                <Latitude>27.878553</Latitude>
+                <Longitude>-98.04628</Longitude>
+            </Position>
+            <Radius>8.315813</Radius>
+            <Expiry>28656976</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="556">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>4952960</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="45">
+            <Position>
+                <Latitude>27.878553</Latitude>
+                <Longitude>-98.04628</Longitude>
+            </Position>
+            <Radius>8.315813</Radius>
+            <Expiry>5062032</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="557">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>57233104</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="558">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>32653376</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="559">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>37240792</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="561">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>1748504</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="50">
+            <Position>
+                <Latitude>27.878553</Latitude>
+                <Longitude>-98.04628</Longitude>
+            </Position>
+            <Radius>6.900682</Radius>
+            <Expiry>26596672</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="563">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>43966056</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="564">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>98244680</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="565">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>73087464</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="54">
+            <Position>
+                <Latitude>57.611427</Latitude>
+                <Longitude>-96.620346</Longitude>
+            </Position>
+            <Radius>11.8</Radius>
+            <Expiry>1180312</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="55">
+            <Position>
+                <Latitude>23.942516</Latitude>
+                <Longitude>-79.645966</Longitude>
+            </Position>
+            <Radius>7.4335346</Radius>
+            <Expiry>37925832</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="567">
+            <Position>
+                <Latitude>41.588554</Latitude>
+                <Longitude>-83.79326</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>52695792</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="568">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>2.542233</Radius>
+            <Expiry>30503304</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="57">
+            <Position>
+                <Latitude>23.942516</Latitude>
+                <Longitude>-79.645966</Longitude>
+            </Position>
+            <Radius>4.619544</Radius>
+            <Expiry>39686104</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="569">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>2.542233</Radius>
+            <Expiry>119676232</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="58">
+            <Position>
+                <Latitude>23.942516</Latitude>
+                <Longitude>-79.645966</Longitude>
+            </Position>
+            <Radius>4.619544</Radius>
+            <Expiry>13950232</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="571">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>2.542233</Radius>
+            <Expiry>125641528</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="60">
+            <Position>
+                <Latitude>23.942516</Latitude>
+                <Longitude>-79.645966</Longitude>
+            </Position>
+            <Radius>4.619544</Radius>
+            <Expiry>42328136</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="572">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>2.542233</Radius>
+            <Expiry>56977816</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="61">
+            <Position>
+                <Latitude>23.942516</Latitude>
+                <Longitude>-79.645966</Longitude>
+            </Position>
+            <Radius>4.619544</Radius>
+            <Expiry>13463720</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="573">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>2.542233</Radius>
+            <Expiry>35126728</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="574">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>2.542233</Radius>
+            <Expiry>74144408</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="575">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>2.542233</Radius>
+            <Expiry>99640520</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="64">
+            <Position>
+                <Latitude>23.942516</Latitude>
+                <Longitude>-79.645966</Longitude>
+            </Position>
+            <Radius>4.619544</Radius>
+            <Expiry>1343256</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="576">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>2.542233</Radius>
+            <Expiry>71684712</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="66">
+            <Position>
+                <Latitude>23.942516</Latitude>
+                <Longitude>-79.645966</Longitude>
+            </Position>
+            <Radius>6.900682</Radius>
+            <Expiry>46013720</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="578">
+            <Position>
+                <Latitude>41.588554</Latitude>
+                <Longitude>-83.79326</Longitude>
+            </Position>
+            <Radius>2.542233</Radius>
+            <Expiry>54559512</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="68">
+            <Position>
+                <Latitude>27.878553</Latitude>
+                <Longitude>-98.04628</Longitude>
+            </Position>
+            <Radius>2.9101303</Radius>
+            <Expiry>47476056</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="69">
+            <Position>
+                <Latitude>27.878553</Latitude>
+                <Longitude>-98.04628</Longitude>
+            </Position>
+            <Radius>2.9101303</Radius>
+            <Expiry>24248632</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="73">
+            <Position>
+                <Latitude>57.611427</Latitude>
+                <Longitude>-96.620346</Longitude>
+            </Position>
+            <Radius>2.9101303</Radius>
+            <Expiry>15690832</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="75">
+            <Position>
+                <Latitude>23.942516</Latitude>
+                <Longitude>-79.645966</Longitude>
+            </Position>
+            <Radius>11.392776</Radius>
+            <Expiry>27551688</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="81">
+            <Position>
+                <Latitude>23.942516</Latitude>
+                <Longitude>-79.645966</Longitude>
+            </Position>
+            <Radius>11.392776</Radius>
+            <Expiry>54608088</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="89">
+            <Position>
+                <Latitude>23.942516</Latitude>
+                <Longitude>-79.645966</Longitude>
+            </Position>
+            <Radius>5.084466</Radius>
+            <Expiry>5526480</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="91">
+            <Position>
+                <Latitude>23.942516</Latitude>
+                <Longitude>-79.645966</Longitude>
+            </Position>
+            <Radius>5.084466</Radius>
+            <Expiry>9866192</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="92">
+            <Position>
+                <Latitude>23.942516</Latitude>
+                <Longitude>-79.645966</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>27822584</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="93">
+            <Position>
+                <Latitude>23.942516</Latitude>
+                <Longitude>-79.645966</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>54588344</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="98">
+            <Position>
+                <Latitude>23.942516</Latitude>
+                <Longitude>-79.645966</Longitude>
+            </Position>
+            <Radius>8.315813</Radius>
+            <Expiry>9032288</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="102">
+            <Position>
+                <Latitude>23.942516</Latitude>
+                <Longitude>-79.645966</Longitude>
+            </Position>
+            <Radius>8.315813</Radius>
+            <Expiry>1885376</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="106">
+            <Position>
+                <Latitude>23.942516</Latitude>
+                <Longitude>-79.645966</Longitude>
+            </Position>
+            <Radius>6.900682</Radius>
+            <Expiry>11561104</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="108">
+            <Position>
+                <Latitude>57.611427</Latitude>
+                <Longitude>-96.620346</Longitude>
+            </Position>
+            <Radius>9.365666</Radius>
+            <Expiry>34601944</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="109">
+            <Position>
+                <Latitude>23.942516</Latitude>
+                <Longitude>-79.645966</Longitude>
+            </Position>
+            <Radius>2.9101303</Radius>
+            <Expiry>59234312</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="112">
+            <Position>
+                <Latitude>23.942516</Latitude>
+                <Longitude>-79.645966</Longitude>
+            </Position>
+            <Radius>2.9101303</Radius>
+            <Expiry>55373400</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="113">
+            <Position>
+                <Latitude>23.942516</Latitude>
+                <Longitude>-79.645966</Longitude>
+            </Position>
+            <Radius>2.9101303</Radius>
+            <Expiry>55683768</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="117">
+            <Position>
+                <Latitude>23.942516</Latitude>
+                <Longitude>-79.645966</Longitude>
+            </Position>
+            <Radius>9.365666</Radius>
+            <Expiry>23589600</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="119">
+            <Position>
+                <Latitude>23.942516</Latitude>
+                <Longitude>-79.645966</Longitude>
+            </Position>
+            <Radius>9.365666</Radius>
+            <Expiry>9564416</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="121">
+            <Position>
+                <Latitude>27.878553</Latitude>
+                <Longitude>-98.04628</Longitude>
+            </Position>
+            <Radius>18.731333</Radius>
+            <Expiry>8638848</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="126">
+            <Position>
+                <Latitude>57.611427</Latitude>
+                <Longitude>-96.620346</Longitude>
+            </Position>
+            <Radius>9.042452</Radius>
+            <Expiry>12212352</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="130">
+            <Position>
+                <Latitude>27.878553</Latitude>
+                <Longitude>-98.04628</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>11759840</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="131">
+            <Position>
+                <Latitude>27.878553</Latitude>
+                <Longitude>-98.04628</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>9231344</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="133">
+            <Position>
+                <Latitude>27.878553</Latitude>
+                <Longitude>-98.04628</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>19679152</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="134">
+            <Position>
+                <Latitude>27.878553</Latitude>
+                <Longitude>-98.04628</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>62199792</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="136">
+            <Position>
+                <Latitude>57.611427</Latitude>
+                <Longitude>-96.620346</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>32697640</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="139">
+            <Position>
+                <Latitude>23.942516</Latitude>
+                <Longitude>-79.645966</Longitude>
+            </Position>
+            <Radius>18.731333</Radius>
+            <Expiry>16576624</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="144">
+            <Position>
+                <Latitude>23.942516</Latitude>
+                <Longitude>-79.645966</Longitude>
+            </Position>
+            <Radius>9.042452</Radius>
+            <Expiry>37578520</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="145">
+            <Position>
+                <Latitude>23.942516</Latitude>
+                <Longitude>-79.645966</Longitude>
+            </Position>
+            <Radius>9.042452</Radius>
+            <Expiry>22691352</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="146">
+            <Position>
+                <Latitude>23.942516</Latitude>
+                <Longitude>-79.645966</Longitude>
+            </Position>
+            <Radius>9.042452</Radius>
+            <Expiry>15956040</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="147">
+            <Position>
+                <Latitude>23.942516</Latitude>
+                <Longitude>-79.645966</Longitude>
+            </Position>
+            <Radius>9.042452</Radius>
+            <Expiry>46958952</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="156">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>7.4335346</Radius>
+            <Expiry>23527784</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="157">
+            <Position>
+                <Latitude>23.942516</Latitude>
+                <Longitude>-79.645966</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>44639152</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="159">
+            <Position>
+                <Latitude>23.942516</Latitude>
+                <Longitude>-79.645966</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>5293200</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="161">
+            <Position>
+                <Latitude>23.942516</Latitude>
+                <Longitude>-79.645966</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>64482592</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="163">
+            <Position>
+                <Latitude>23.942516</Latitude>
+                <Longitude>-79.645966</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>60740624</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="165">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>4.619544</Radius>
+            <Expiry>16475272</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="167">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>4.619544</Radius>
+            <Expiry>44609128</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="171">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>4.619544</Radius>
+            <Expiry>23086184</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="173">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>4.619544</Radius>
+            <Expiry>4963528</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="177">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>4.619544</Radius>
+            <Expiry>1766120</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="183">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>6.900682</Radius>
+            <Expiry>27872240</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="186">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>3.8598583</Radius>
+            <Expiry>54191400</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="190">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>3.8598583</Radius>
+            <Expiry>51600424</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="195">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>3.8598583</Radius>
+            <Expiry>27331736</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="197">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>3.8598583</Radius>
+            <Expiry>16400696</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="203">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>11.392776</Radius>
+            <Expiry>64875640</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="207">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>11.392776</Radius>
+            <Expiry>49657352</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="208">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>11.392776</Radius>
+            <Expiry>7800888</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="209">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>11.392776</Radius>
+            <Expiry>30990760</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="215">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>7.4335346</Radius>
+            <Expiry>53203160</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="216">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>7.4335346</Radius>
+            <Expiry>31480328</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="219">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>7.4335346</Radius>
+            <Expiry>32350568</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="220">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>7.4335346</Radius>
+            <Expiry>35127032</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="222">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>7.4335346</Radius>
+            <Expiry>36742072</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="223">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>7.4335346</Radius>
+            <Expiry>16631144</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="226">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>7.4335346</Radius>
+            <Expiry>37358616</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="228">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>7.4335346</Radius>
+            <Expiry>19011128</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="231">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>7.4335346</Radius>
+            <Expiry>1145224</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="232">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>9.365666</Radius>
+            <Expiry>33943680</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="235">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>9.365666</Radius>
+            <Expiry>64749936</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="236">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>9.365666</Radius>
+            <Expiry>29455760</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="237">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>9.365666</Radius>
+            <Expiry>1155856</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="238">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>9.365666</Radius>
+            <Expiry>5048496</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="246">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>4.619544</Radius>
+            <Expiry>56194184</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="250">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>4.619544</Radius>
+            <Expiry>29509368</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="251">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>4.619544</Radius>
+            <Expiry>14320536</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="254">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>4.619544</Radius>
+            <Expiry>25670296</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="259">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>6.900682</Radius>
+            <Expiry>59690984</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="260">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>6.900682</Radius>
+            <Expiry>4817192</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="261">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>6.900682</Radius>
+            <Expiry>62293976</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="263">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>6.900682</Radius>
+            <Expiry>28230056</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="265">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>6.900682</Radius>
+            <Expiry>53542408</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="269">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>6.900682</Radius>
+            <Expiry>49217080</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="273">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>3.8598583</Radius>
+            <Expiry>70371016</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="275">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>3.8598583</Radius>
+            <Expiry>70558168</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="278">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>5.084466</Radius>
+            <Expiry>24322384</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="284">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>5.084466</Radius>
+            <Expiry>6287184</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="286">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>5.084466</Radius>
+            <Expiry>56840096</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="287">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>5.084466</Radius>
+            <Expiry>10715056</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="288">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>5.084466</Radius>
+            <Expiry>44989824</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="290">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>5.084466</Radius>
+            <Expiry>54597904</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="293">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>5.084466</Radius>
+            <Expiry>2311312</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="295">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>5.084466</Radius>
+            <Expiry>42230544</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="296">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>5.084466</Radius>
+            <Expiry>36391344</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="298">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>11.392776</Radius>
+            <Expiry>14298776</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="300">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>11.392776</Radius>
+            <Expiry>3764952</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="301">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>11.392776</Radius>
+            <Expiry>22802072</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="306">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>9.365666</Radius>
+            <Expiry>32124088</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="307">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>9.365666</Radius>
+            <Expiry>59068424</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="313">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>9.365666</Radius>
+            <Expiry>15296936</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="315">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>9.365666</Radius>
+            <Expiry>47678776</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="316">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>9.365666</Radius>
+            <Expiry>62221400</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="325">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>5.084466</Radius>
+            <Expiry>32810720</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="328">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>60485880</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="330">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>20732664</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="332">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>70986616</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="333">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>34226680</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="336">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>11.8</Radius>
+            <Expiry>11283088</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="337">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>8.315813</Radius>
+            <Expiry>21561264</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="338">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>11.8</Radius>
+            <Expiry>43892592</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="339">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>8.315813</Radius>
+            <Expiry>56711824</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="342">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>11.8</Radius>
+            <Expiry>10804048</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="348">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>11.8</Radius>
+            <Expiry>11301152</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="349">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>11.8</Radius>
+            <Expiry>1400368</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="350">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>8.315813</Radius>
+            <Expiry>41823664</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="353">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>8.315813</Radius>
+            <Expiry>15455664</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="356">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>11.8</Radius>
+            <Expiry>35725840</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="359">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>6.900682</Radius>
+            <Expiry>40749744</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="362">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>6.900682</Radius>
+            <Expiry>62189456</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="366">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>6.900682</Radius>
+            <Expiry>50028784</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="370">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>2.9101303</Radius>
+            <Expiry>26595736</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="371">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>2.9101303</Radius>
+            <Expiry>1205560</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="372">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>2.9101303</Radius>
+            <Expiry>43711160</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="376">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>2.9101303</Radius>
+            <Expiry>54934568</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="380">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>2.9101303</Radius>
+            <Expiry>3934744</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="381">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>2.9101303</Radius>
+            <Expiry>72329256</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="386">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>73954528</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="389">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>24323616</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="391">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>57290432</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="393">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>72411584</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="396">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>9.365666</Radius>
+            <Expiry>45627648</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="397">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>9.365666</Radius>
+            <Expiry>47423760</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="400">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>9.365666</Radius>
+            <Expiry>19221504</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="404">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>9.365666</Radius>
+            <Expiry>17627264</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="406">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>11.8</Radius>
+            <Expiry>56374248</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="409">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>11.8</Radius>
+            <Expiry>72637944</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="410">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>8.315813</Radius>
+            <Expiry>17902856</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="411">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>11.8</Radius>
+            <Expiry>20007256</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="417">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>11.8</Radius>
+            <Expiry>20172536</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="418">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>11.8</Radius>
+            <Expiry>61476120</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="420">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>6.900682</Radius>
+            <Expiry>33295096</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="423">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>6.900682</Radius>
+            <Expiry>16587032</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="424">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>6.900682</Radius>
+            <Expiry>29023000</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="425">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>6.900682</Radius>
+            <Expiry>16072248</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="430">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>6.900682</Radius>
+            <Expiry>67590264</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="435">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>18.731333</Radius>
+            <Expiry>30782064</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="437">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>18.731333</Radius>
+            <Expiry>365264</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="438">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>18.731333</Radius>
+            <Expiry>38228016</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="440">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>18.731333</Radius>
+            <Expiry>18471328</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="445">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>18.731333</Radius>
+            <Expiry>28695408</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="446">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>18.731333</Radius>
+            <Expiry>36407904</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="447">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>18.731333</Radius>
+            <Expiry>59250464</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="449">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>18.731333</Radius>
+            <Expiry>68314912</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="452">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>9.042452</Radius>
+            <Expiry>942296</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="453">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>9.042452</Radius>
+            <Expiry>17741080</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="458">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>9.042452</Radius>
+            <Expiry>65940328</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="461">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>9.042452</Radius>
+            <Expiry>70070600</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="466">
+            <Position>
+                <Latitude>41.588554</Latitude>
+                <Longitude>-83.79326</Longitude>
+            </Position>
+            <Radius>11.392776</Radius>
+            <Expiry>21559256</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="469">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>17708480</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="470">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>64057344</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="472">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>39936576</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="474">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>29483824</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="479">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>75610688</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="482">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>75461888</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="483">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>60480960</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="485">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>28292416</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="489">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>2.9101303</Radius>
+            <Expiry>1698664</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="493">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>2.9101303</Radius>
+            <Expiry>17886504</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="495">
+            <Position>
+                <Latitude>41.588554</Latitude>
+                <Longitude>-83.79326</Longitude>
+            </Position>
+            <Radius>11.392776</Radius>
+            <Expiry>76732192</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="496">
+            <Position>
+                <Latitude>41.588554</Latitude>
+                <Longitude>-83.79326</Longitude>
+            </Position>
+            <Radius>9.365666</Radius>
+            <Expiry>51474264</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="502">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>2.542233</Radius>
+            <Expiry>40683608</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="503">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>2.542233</Radius>
+            <Expiry>27127384</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="506">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>2.542233</Radius>
+            <Expiry>79879544</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="507">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>2.542233</Radius>
+            <Expiry>23524216</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+    </Radiations>
+    <Shipyards>
+        <Shipyard ID="0">
+            <Name>Puget Sound Naval Shipyard</Name>
+            <Position>
+                <Latitude>47.56034</Latitude>
+                <Longitude>-122.64344</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>47.862774</Latitude>
+                <Longitude>-122.42771</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="1">
+            <Name>Bath Iron Works</Name>
+            <Position>
+                <Latitude>43.907455</Latitude>
+                <Longitude>-69.81514</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>43.755993</Latitude>
+                <Longitude>-69.69111</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="2">
+            <Name>Norfolk Naval Shipyard</Name>
+            <Position>
+                <Latitude>36.809834</Latitude>
+                <Longitude>-76.30072</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>36.960594</Latitude>
+                <Longitude>-76.36098</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="3">
+            <Name>Shkval Shipyard</Name>
+            <Position>
+                <Latitude>69.21415</Latitude>
+                <Longitude>33.31128</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>69.36493</Latitude>
+                <Longitude>33.650784</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="4">
+            <Name>Амурский судостроительный завод</Name>
+            <Position>
+                <Latitude>50.541676</Latitude>
+                <Longitude>137.04866</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>52.93291</Latitude>
+                <Longitude>141.34561</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="5">
+            <Name>Fincantieri S.p.A.</Name>
+            <Position>
+                <Latitude>44.091213</Latitude>
+                <Longitude>9.878075</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>43.875957</Latitude>
+                <Longitude>9.939969</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="6">
+            <Name>Blohm + Voss Shipyard</Name>
+            <Position>
+                <Latitude>53.53955</Latitude>
+                <Longitude>9.961251</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>54.020515</Latitude>
+                <Longitude>8.66583</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="7">
+            <Name>BAE Shipbuilding</Name>
+            <Position>
+                <Latitude>54.110107</Latitude>
+                <Longitude>-3.23703</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>53.98322</Latitude>
+                <Longitude>-3.139072</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="8">
+            <Name>Alexandria Shipyard</Name>
+            <Position>
+                <Latitude>31.171999</Latitude>
+                <Longitude>29.867804</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>31.252813</Latitude>
+                <Longitude>29.784363</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="9">
+            <Name>Mazagon Dock Shipyard</Name>
+            <Position>
+                <Latitude>18.967005</Latitude>
+                <Longitude>72.84748</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>18.84222</Latitude>
+                <Longitude>72.81918</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="10">
+            <Name>COTECMAR Naval Shipyard</Name>
+            <Position>
+                <Latitude>10.327258</Latitude>
+                <Longitude>-75.50452</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>10.35065</Latitude>
+                <Longitude>-75.662636</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="11">
+            <Name>EMGEPRON Naval Shipyard</Name>
+            <Position>
+                <Latitude>-22.89577</Latitude>
+                <Longitude>-43.171886</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>-23.031654</Latitude>
+                <Longitude>-43.107914</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="12">
+            <Name>Osborne Naval Shipyard</Name>
+            <Position>
+                <Latitude>-34.787388</Latitude>
+                <Longitude>138.50558</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>-34.799763</Latitude>
+                <Longitude>138.18076</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="13">
+            <Name>Sumitomo Heavy Industries</Name>
+            <Position>
+                <Latitude>35.32494</Latitude>
+                <Longitude>139.65392</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>35.02834</Latitude>
+                <Longitude>139.6651</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="14">
+            <Name>Boustead Naval Shipyard</Name>
+            <Position>
+                <Latitude>4.232307</Latitude>
+                <Longitude>100.60688</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>4.317561</Latitude>
+                <Longitude>100.51039</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="15">
+            <Name>Fincantieri Bay Shipbuilding</Name>
+            <Position>
+                <Latitude>44.840992</Latitude>
+                <Longitude>-87.381096</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>44.83419</Latitude>
+                <Longitude>-87.38662</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="16">
+            <Name>Severnaya Verf</Name>
+            <Position>
+                <Latitude>59.869892</Latitude>
+                <Longitude>30.234175</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>59.940487</Latitude>
+                <Longitude>29.997732</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="17">
+            <Name>Mykolaiv Shipyard</Name>
+            <Position>
+                <Latitude>46.975574</Latitude>
+                <Longitude>32.00752</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>46.51683</Latitude>
+                <Longitude>31.314852</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="18">
+            <Name>Agila Subic Shipyard</Name>
+            <Position>
+                <Latitude>14.816467</Latitude>
+                <Longitude>120.21287</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>14.676341</Latitude>
+                <Longitude>120.18033</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="19">
+            <Name>Irving Shipbuilding</Name>
+            <Position>
+                <Latitude>44.665028</Latitude>
+                <Longitude>-63.59355</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>44.45083</Latitude>
+                <Longitude>-63.38122</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="20">
+            <Name>BAE Systems Australia</Name>
+            <Position>
+                <Latitude>-37.86406</Latitude>
+                <Longitude>144.90828</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>-38.881634</Latitude>
+                <Longitude>144.48346</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="21">
+            <Name>Euskalduna Shipyard</Name>
+            <Position>
+                <Latitude>43.347107</Latitude>
+                <Longitude>-3.039133</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>43.522694</Latitude>
+                <Longitude>-3.079721</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="22">
+            <Name>Balmain Shipyard</Name>
+            <Position>
+                <Latitude>-33.855785</Latitude>
+                <Longitude>151.18735</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>-33.84718</Latitude>
+                <Longitude>151.43254</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="23">
+            <Name>Pearl Harbor Naval Shipyard</Name>
+            <Position>
+                <Latitude>21.352638</Latitude>
+                <Longitude>-157.95016</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>21.260456</Latitude>
+                <Longitude>-157.96571</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="24">
+            <Name>Bangor Submarine Base</Name>
+            <Position>
+                <Latitude>47.742874</Latitude>
+                <Longitude>-122.73137</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>47.794262</Latitude>
+                <Longitude>-122.7147</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="25">
+            <Name>BAE Systems Australia</Name>
+            <Position>
+                <Latitude>-37.86406</Latitude>
+                <Longitude>144.90828</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>-38.881634</Latitude>
+                <Longitude>144.48346</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="26">
+            <Name>Defoe Shipbuilding Co.</Name>
+            <Position>
+                <Latitude>43.61581</Latitude>
+                <Longitude>-83.86805</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>43.698708</Latitude>
+                <Longitude>-83.83327</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="27">
+            <Name>Canadian Maritime Engineering</Name>
+            <Position>
+                <Latitude>46.207775</Latitude>
+                <Longitude>-60.249523</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>46.275055</Latitude>
+                <Longitude>-60.16811</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="28">
+            <Name>Garden Reach Shipbuilding</Name>
+            <Position>
+                <Latitude>22.551613</Latitude>
+                <Longitude>88.28224</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>21.865734</Latitude>
+                <Longitude>88.051865</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="29">
+            <Name>CME Pictou Shipyard</Name>
+            <Position>
+                <Latitude>45.678177</Latitude>
+                <Longitude>-62.699085</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>45.7511</Latitude>
+                <Longitude>-62.469387</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="30">
+            <Name>Aalborg Portland Shipyard</Name>
+            <Position>
+                <Latitude>57.047047</Latitude>
+                <Longitude>10.060266</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>56.96058</Latitude>
+                <Longitude>10.544181</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="31">
+            <Name>PT Industri Kapal</Name>
+            <Position>
+                <Latitude>-5.108573</Latitude>
+                <Longitude>119.43122</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>-5.084335</Latitude>
+                <Longitude>119.35751</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="32">
+            <Name>Newport Shipyard</Name>
+            <Position>
+                <Latitude>33.61255</Latitude>
+                <Longitude>-117.925934</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>33.5408</Latitude>
+                <Longitude>-118.028244</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="33">
+            <Name>Rotterdam Shipyard</Name>
+            <Position>
+                <Latitude>51.95511</Latitude>
+                <Longitude>4.057946</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>52.155964</Latitude>
+                <Longitude>3.464909</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="34">
+            <Name>Veracruz Shipyard</Name>
+            <Position>
+                <Latitude>19.210375</Latitude>
+                <Longitude>-96.12634</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>19.250444</Latitude>
+                <Longitude>-96.0787</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="35">
+            <Name>Port Everglades</Name>
+            <Position>
+                <Latitude>26.09</Latitude>
+                <Longitude>-80.12</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>0.0</Latitude>
+                <Longitude>0.0</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="36">
+            <Name>Port of Ponta Delgada</Name>
+            <Position>
+                <Latitude>37.74</Latitude>
+                <Longitude>-25.67</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>0.0</Latitude>
+                <Longitude>0.0</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="37">
+            <Name>Port of Constanta</Name>
+            <Position>
+                <Latitude>44.17</Latitude>
+                <Longitude>28.65</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>0.0</Latitude>
+                <Longitude>0.0</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="38">
+            <Name>Port of Darwin</Name>
+            <Position>
+                <Latitude>-12.46</Latitude>
+                <Longitude>130.84</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>0.0</Latitude>
+                <Longitude>0.0</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="39">
+            <Name>Port of Auckland</Name>
+            <Position>
+                <Latitude>-36.85</Latitude>
+                <Longitude>174.76</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>0.0</Latitude>
+                <Longitude>0.0</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="40">
+            <Name>Port of Durban</Name>
+            <Position>
+                <Latitude>-29.86</Latitude>
+                <Longitude>31.03</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>0.0</Latitude>
+                <Longitude>0.0</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="41">
+            <Name>Port of Houston</Name>
+            <Position>
+                <Latitude>29.374063</Latitude>
+                <Longitude>-94.89206</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>0.0</Latitude>
+                <Longitude>0.0</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="42">
+            <Name>Port of Balboa</Name>
+            <Position>
+                <Latitude>8.92</Latitude>
+                <Longitude>-79.55</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>0.0</Latitude>
+                <Longitude>0.0</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="43">
+            <Name>Port of Valencia</Name>
+            <Position>
+                <Latitude>39.47</Latitude>
+                <Longitude>-0.37</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>0.0</Latitude>
+                <Longitude>0.0</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="44">
+            <Name>Port of Sevastopol</Name>
+            <Position>
+                <Latitude>44.62</Latitude>
+                <Longitude>33.53</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>0.0</Latitude>
+                <Longitude>0.0</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="45">
+            <Name>Port of Mombasa</Name>
+            <Position>
+                <Latitude>-4.04</Latitude>
+                <Longitude>39.66</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>0.0</Latitude>
+                <Longitude>0.0</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="46">
+            <Name>Port of Cleveland</Name>
+            <Position>
+                <Latitude>41.5</Latitude>
+                <Longitude>-81.7</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>0.0</Latitude>
+                <Longitude>0.0</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="47">
+            <Name>Port of Los Angeles</Name>
+            <Position>
+                <Latitude>33.74</Latitude>
+                <Longitude>-118.27</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>0.0</Latitude>
+                <Longitude>0.0</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="48">
+            <Name>Port of Ho Chi Minh City</Name>
+            <Position>
+                <Latitude>10.78</Latitude>
+                <Longitude>106.7</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>0.0</Latitude>
+                <Longitude>0.0</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="49">
+            <Name>Port of Hong Kong</Name>
+            <Position>
+                <Latitude>22.28</Latitude>
+                <Longitude>114.16</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>0.0</Latitude>
+                <Longitude>0.0</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="50">
+            <Name>Port of Busan</Name>
+            <Position>
+                <Latitude>35.1</Latitude>
+                <Longitude>129.04</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>0.0</Latitude>
+                <Longitude>0.0</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="51">
+            <Name>Port of Kaohsiung</Name>
+            <Position>
+                <Latitude>22.62</Latitude>
+                <Longitude>120.31</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>0.0</Latitude>
+                <Longitude>0.0</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="52">
+            <Name>Pearl Harbor</Name>
+            <Position>
+                <Latitude>21.351864</Latitude>
+                <Longitude>-157.95375</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>0.0</Latitude>
+                <Longitude>0.0</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="53">
+            <Name>Port of Philadelphia</Name>
+            <Position>
+                <Latitude>39.888645</Latitude>
+                <Longitude>-75.18126</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>0.0</Latitude>
+                <Longitude>0.0</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="54">
+            <Name>Port of Olympia</Name>
+            <Position>
+                <Latitude>47.05337</Latitude>
+                <Longitude>-122.90232</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>0.0</Latitude>
+                <Longitude>0.0</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>0</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+    </Shipyards>
+</Game>

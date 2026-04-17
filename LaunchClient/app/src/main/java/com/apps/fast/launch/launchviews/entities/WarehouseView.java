@@ -28,23 +28,7 @@ public class WarehouseView extends StructureView
 
         super.Setup();
 
-        if(structureShadow.GetOwnerID() == game.GetOurPlayerID())
-        {
-            btnApplyName.setOnClickListener(new OnClickListener()
-            {
-                @Override
-                public void onClick(View view)
-                {
-                    game.SetEntityName(structureShadow.GetPointer(), txtNameEdit.getText().toString());
-
-                    txtNameButton.setVisibility(VISIBLE);
-                    lytNameEdit.setVisibility(GONE);
-                    Utilities.DismissKeyboard(activity, txtNameEdit);
-                }
-            });
-        }
-
-        imgLogo.setImageResource(R.drawable.marker_bank);
+        imgLogo.setImageResource(R.drawable.build_bank);
 
         lytConfig.addView(systemView);
         Update();

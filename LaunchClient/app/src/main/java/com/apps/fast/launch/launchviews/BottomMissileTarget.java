@@ -171,11 +171,6 @@ public class BottomMissileTarget extends LaunchView
         lytElectricityCost = findViewById(R.id.lytElectricityCost);
         txtElectricityCost = findViewById(R.id.txtElectricityCost);
 
-        if(systemType == SystemType.ARTILLERY_GUN)
-        {
-            txtHeading.setText(context.getString(R.string.heading_artillery_target));
-        }
-
         if(missileType != null)
         {
             txtMissileName.setText(missileType.GetName());

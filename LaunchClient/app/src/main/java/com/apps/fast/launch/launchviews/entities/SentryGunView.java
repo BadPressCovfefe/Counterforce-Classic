@@ -31,30 +31,14 @@ public class SentryGunView extends StructureView
 
         super.Setup();
 
-        if(structureShadow.GetOwnerID() == game.GetOurPlayerID())
-        {
-            btnApplyName.setOnClickListener(new OnClickListener()
-            {
-                @Override
-                public void onClick(View view)
-                {
-                    game.SetEntityName(structureShadow.GetPointer(), txtNameEdit.getText().toString());
-
-                    txtNameButton.setVisibility(VISIBLE);
-                    lytNameEdit.setVisibility(GONE);
-                    Utilities.DismissKeyboard(activity, txtNameEdit);
-                }
-            });
-        }
-
         if(structureShadow instanceof SentryGun)
         {
             SentryGun sentry = (SentryGun)structureShadow;
 
             if(sentry.GetIsWatchTower())
-                imgLogo.setImageResource(R.drawable.marker_artillery_gun);
+                imgLogo.setImageResource(R.drawable.build_artillery_gun);
             else
-                imgLogo.setImageResource(R.drawable.marker_sentry);
+                imgLogo.setImageResource(R.drawable.build_sentry_gun);
         }
 
         lytConfig.addView(systemView);

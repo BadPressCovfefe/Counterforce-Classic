@@ -49,7 +49,6 @@ public abstract class StructureView extends LaunchView implements LaunchUICommon
     private TextView txtOffline;
     private TextView txtBooting;
     private TextView txtOnline;
-    private TextView txtLoad;
     private TextView txtDecommissioning;
     private LinearLayout btnPower;
     private ImageView imgPower;
@@ -77,7 +76,7 @@ public abstract class StructureView extends LaunchView implements LaunchUICommon
         ((TextView)findViewById(R.id.txtPlayerJoins)).setText(TextUtilities.GetOwnedEntityName(structureShadow, game));
 
         imgLogo = findViewById(R.id.imgLogo);
-        txtHP = findViewById(R.id.txtHPTitle);
+        txtHP = findViewById(R.id.txtHP);
 
         txtName = findViewById(R.id.txtName);
         txtNameButton = findViewById(R.id.txtNameButton);
@@ -95,7 +94,6 @@ public abstract class StructureView extends LaunchView implements LaunchUICommon
         btnRepair = findViewById(R.id.btnRepair);
         lytConfig = findViewById(R.id.lytConfig);
         btnCancelSale = findViewById(R.id.btnCancelSale);
-        txtLoad = findViewById(R.id.txtLoad);
 
         FrameLayout lytUnitControls = findViewById(R.id.lytUnitControls);
 
@@ -162,6 +160,21 @@ public abstract class StructureView extends LaunchView implements LaunchUICommon
                         activity.ExpandView();
                         txtNameButton.setVisibility(GONE);
                         lytNameEdit.setVisibility(VISIBLE);
+                        txtHP.setVisibility(GONE);
+                    }
+                });
+
+                btnApplyName.setOnClickListener(new OnClickListener()
+                {
+                    @Override
+                    public void onClick(View view)
+                    {
+                        game.SetEntityName(structureShadow.GetPointer(), txtNameEdit.getText().toString());
+
+                        txtNameButton.setVisibility(VISIBLE);
+                        lytNameEdit.setVisibility(GONE);
+                        Utilities.DismissKeyboard(activity, txtNameEdit);
+                        txtHP.setVisibility(VISIBLE);
                     }
                 });
 
@@ -281,15 +294,6 @@ public abstract class StructureView extends LaunchView implements LaunchUICommon
             {
                 lytConfig.setVisibility(GONE);
             }
-
-            txtLoad.setOnClickListener(new OnClickListener()
-            {
-                @Override
-                public void onClick(View view)
-                {
-                    activity.LoadLootMode(structureShadow);
-                }
-            });
         }
         else
         {

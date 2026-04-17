@@ -3,8 +3,8 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              android:foreground="@drawable/view_frame">
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
+    <ScrollView
+        android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="?attr/PanelTransparency"
                 android:fadeScrollbars="false"
@@ -28,47 +28,37 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
 
                 <ImageView
-                    android:layout_width="@dimen/PlayerInfoIconSize"
-                    android:layout_height="@dimen/PlayerInfoIconSize"
-                    android:id="@+id/imgLoot"
-                    android:src="@drawable/marker_loot_7"/>
-
-                <TextView
+                    android:layout_marginTop="@dimen/SeperatorMargins"
+                    android:layout_marginEnd="@dimen/ButtonSpacingNarrow"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Loot Title"
-                    android:id="@+id/txtLootTitle"
-                    android:layout_marginRight="@dimen/CloseButtonSize"
-                    android:gravity="center_vertical"/>
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imgLoot"
+                    android:src="@drawable/image_loot"/>
 
-            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/SeparatorThickness"
-                android:background="?attr/ButtonEdgeColour"
-                android:layout_marginTop="@dimen/SeperatorMargins"
-                android:layout_marginBottom="@dimen/SeperatorMargins"/>
+                    <TextView
+                        android:id="@+id/txtLootTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/CloseButtonSize"
+                        android:text="Loot Title"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/SeperatorMargins"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/expires_in"
-                android:id="@+id/txtExpiresIn"/>
-
-            <LinearLayout
-                android:id="@+id/lytContents"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/MainViewSpacing"
-                android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/txtExpiresIn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/SeperatorMargins"
+                        android:text="@string/expires_in"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                </LinearLayout>
 
             </LinearLayout>
 

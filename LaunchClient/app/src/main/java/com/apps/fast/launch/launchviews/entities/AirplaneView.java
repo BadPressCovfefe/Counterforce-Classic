@@ -232,7 +232,45 @@ public class AirplaneView extends LaunchView implements LaunchUICommon.AircraftI
         }
 
         txtAircraftTitle.setText(TextUtilities.GetOwnedEntityName(aircraftShadow.GetAirplane(), game));
-        imgAircraft.setImageBitmap(EntityIconBitmaps.GetAircraftBitmap(context, game, aircraftShadow));
+
+        switch(aircraftShadow.GetAircraftType())
+        {
+            case BOMBER:
+            {
+                imgAircraft.setImageResource(R.drawable.build_bomber);
+            }
+            break;
+
+            case FIGHTER:
+            {
+                imgAircraft.setImageResource(R.drawable.build_fighter);
+            }
+            break;
+
+            case ATTACK_AIRCRAFT:
+            {
+                imgAircraft.setImageResource(R.drawable.build_ground_attack);
+            }
+            break;
+
+            case REFUELER:
+            {
+                imgAircraft.setImageResource(R.drawable.build_refueler);
+            }
+            break;
+
+            case MULTI_ROLE:
+            {
+                imgAircraft.setImageResource(R.drawable.build_multi_role);
+            }
+            break;
+
+            case SSB:
+            {
+                imgAircraft.setImageResource(R.drawable.build_ssb);
+            }
+            break;
+        }
 
         /*For setting up fuel level readout.*/
         txtFuelLevel = findViewById(R.id.txtFuelLevel);

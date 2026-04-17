@@ -41,13 +41,9 @@ public class MissileView extends LaunchView
     private TextView txtBlastRadiusTitle;
     private TextView txtMaxDamageTitle;
     private TextView txtEMPRadiusTitle;
-    private TextView txtECMDescription;
-    private TextView txtStealthDescription;
     private TextView txtWarhead;
     private TextView txtWarheadTitle;
     private TextView txtAccuracy;
-
-    private TextView txtNoRadarCoverage;
 
     private ImageView imgMissile;
 
@@ -90,17 +86,6 @@ public class MissileView extends LaunchView
                 txtWarhead = findViewById(R.id.txtWarhead);
                 txtWarheadTitle = findViewById(R.id.txtWarheadTitle);
                 txtAccuracy = findViewById(R.id.txtAccuracy);
-
-                txtECMDescription = findViewById(R.id.txtECMDescription);
-                txtStealthDescription = findViewById(R.id.txtStealthDescription);
-
-                txtNoRadarCoverage = findViewById(R.id.txtNoRadarCoverage);
-
-                txtECMDescription.setText(context.getString(R.string.ecm_information, TextUtilities.GetAccuracyPercentage(game.GetConfig().GetECMInterceptorChanceReduction())));
-                txtStealthDescription.setText(context.getString(R.string.stealth_description, TextUtilities.GetDistanceStringFromKM(Defs.STEALTH_ENGAGEMENT_DISTANCE)));
-
-                txtECMDescription.setVisibility(missileType.GetECM() ? VISIBLE : GONE);
-                txtStealthDescription.setVisibility(missileType.GetStealth() ? VISIBLE : GONE);
 
                 btnLaunchInterceptor.setOnClickListener(new OnClickListener()
                 {
@@ -180,11 +165,8 @@ public class MissileView extends LaunchView
 
                     if(missileType != null)
                     {
-                        txtECMDescription.setVisibility(missileType.GetECM() ? VISIBLE : GONE);
-
                         txtToTarget.setText(context.getString(R.string.missile_to_target, TextUtilities.GetTimeAmount(game.GetTimeToTarget(missile))));
 
-                        txtNoRadarCoverage.setVisibility(GONE);
                         //Create list of potential targets.
                         List<Player> Targets = game.GetAffectedPlayers(game.GetMissileTarget(missile), MissileStats.GetBlastRadius(missileType, missile.GetAirburst()));
 

@@ -44,7 +44,7 @@ public class CommandPostView extends StructureView
             });
         }
 
-        imgLogo.setImageResource(R.drawable.marker_command_post);
+        imgLogo.setImageResource(R.drawable.build_command_post);
 
         lytConfig.addView(systemView);
         Update();

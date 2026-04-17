@@ -36,7 +36,6 @@ public class PlayersView extends LaunchView
         Worth,
         Wealth,
         Offences,
-        Economy,
         Defences,
         DamageInflicted,
         DamageReceived,
@@ -55,7 +54,6 @@ public class PlayersView extends LaunchView
                 context.getString(R.string.sort_name_worth),
                 context.getString(R.string.sort_name_wealth),
                 context.getString(R.string.sort_name_offences),
-                context.getString(R.string.sort_name_economy),
                 context.getString(R.string.sort_name_defences),
                 context.getString(R.string.damage_inflicted),
                 context.getString(R.string.damage_received),
@@ -437,13 +435,6 @@ public class PlayersView extends LaunchView
                     {
                         Collections.sort(PlayersFiltered, offencesComparator);
                         btnSortBy.setText(context.getString(R.string.sort_offences));
-                    }
-                    break;
-
-                    case Economy:
-                    {
-                        Collections.sort(PlayersFiltered, economyComparator);
-                        btnSortBy.setText(context.getString(R.string.sort_economy));
                     }
                     break;
 

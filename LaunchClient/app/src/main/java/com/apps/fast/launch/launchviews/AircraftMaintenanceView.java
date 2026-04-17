@@ -20,6 +20,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import launch.game.Defs;
 import launch.game.EntityPointer;
 import launch.game.LaunchClientGame;
 import launch.game.entities.AirplaneInterface;
@@ -32,6 +33,7 @@ import launch.game.entities.Movable;
 import launch.game.entities.SAMSite;
 import launch.game.entities.Ship;
 import launch.game.entities.Structure;
+import launch.game.entities.conceptuals.Resource;
 
 public class AircraftMaintenanceView extends LaunchView implements LaunchUICommon.AircraftInfoProvider
 {
@@ -111,7 +113,44 @@ public class AircraftMaintenanceView extends LaunchView implements LaunchUICommo
 
             try
             {
-                imgType.setImageBitmap(EntityIconBitmaps.GetAircraftBitmap(context, game, aircraftShadow));
+                switch(aircraftShadow.GetAircraftType())
+                {
+                    case BOMBER:
+                    {
+                        imgType.setImageResource(R.drawable.build_bomber);
+                    }
+                    break;
+
+                    case FIGHTER:
+                    {
+                        imgType.setImageResource(R.drawable.build_fighter);
+                    }
+                    break;
+
+                    case ATTACK_AIRCRAFT:
+                    {
+                        imgType.setImageResource(R.drawable.build_ground_attack);
+                    }
+                    break;
+
+                    case REFUELER:
+                    {
+                        imgType.setImageResource(R.drawable.build_refueler);
+                    }
+                    break;
+
+                    case MULTI_ROLE:
+                    {
+                        imgType.setImageResource(R.drawable.build_multi_role);
+                    }
+                    break;
+
+                    case SSB:
+                    {
+                        imgType.setImageResource(R.drawable.build_ssb);
+                    }
+                    break;
+                }
             }
             catch(Exception ex) { /* Don't care.*/ }
 

@@ -21,3 +21,6 @@ CURRENT WORK:
 				-Players can transfer wealth using trucks. If destroyed, the wealth in the truck goes to the player that destroyed it at a reduced amount. (Rubble amount.)
 				-Remove submarine surfacing. They are always submerged.
 				-Turn all ports into shipyards.
+				-Fix loot titles and whatnot.
+				-Fix odd location of structure icons when selecting units.
+				-Make memorials look like the rest of the markers. (All white outline.)

@@ -782,7 +782,8 @@
     <string name="shipyard_title">Shipyard</string>
     <string name="shipyard">Shipyard</string>
     <string name="shipyard_lowercase">shipyard</string>
-    <string name="antiship_information">This missile will track ships and surfaced submarines and deal extra damage.</string>
+    <string name="antiship_information">Tracks naval targets and deals extra damage.</string>
+    <string name="antisubmarine_information">Capable of striking submarines.</string>
     <string name="aircraft">Aircraft</string>
     <string name="ship">Ship</string>
     <string name="submarine">Submarine</string>
@@ -943,4 +944,5 @@
     <string name="warning_notifications_text">Tap here to turn on app notifications to receive early warning of inbound attacks.</string>
     <string name="purchase_unit">Purchase %1$s</string>
     <string name="tap_structure_button">Tap a structure to build.</string>
+    <string name="rebuild_rubble_confirm">Rebuild this rubble for %s?</string>
 </resources>

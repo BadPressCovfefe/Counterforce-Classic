@@ -300,7 +300,7 @@ public class PurchaseButton extends LinearLayout
 
             case MULTI_ROLE:
             {
-                unitIcon.setImageResource(R.drawable.build_refueler);
+                unitIcon.setImageResource(R.drawable.build_multi_role);
                 oCost = Defs.MULTI_ROLE_BUILD_COST.get(ResourceType.WEALTH);
                 txtDescription.setText(context.getString(R.string.desc_multi_role));
             }

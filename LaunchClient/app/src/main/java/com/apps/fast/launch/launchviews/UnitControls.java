@@ -35,12 +35,7 @@ public class UnitControls extends LaunchView
     private LinearLayout lytAttackOptions;
     private LinearLayout btnMovePlayer;
     private LinearLayout btnMoveAircraft;
-    private LinearLayout btnMoveTank;
-    private LinearLayout btnMoveTruck;
-    private LinearLayout btnMoveShip;
-    private LinearLayout btnMoveSubmarine;
     private LinearLayout btnAircraftTarget;
-    private LinearLayout btnTankTarget;
     private LinearLayout btnInterceptorTarget;
     private LinearLayout btnMissileTarget;
 
@@ -74,14 +69,9 @@ public class UnitControls extends LaunchView
         lytAttackOptions = findViewById(R.id.lytAttackOptions);
         btnMovePlayer = findViewById(R.id.btnMovePlayer);
         btnMoveAircraft = findViewById(R.id.btnMoveAircraft);
-        btnMoveTank = findViewById(R.id.btnMoveTank);
-        btnMoveTruck = findViewById(R.id.btnMoveTruck);
         btnAircraftTarget = findViewById(R.id.btnAircraftTarget);
-        btnTankTarget = findViewById(R.id.btnTargetTank);
         btnInterceptorTarget = findViewById(R.id.btnInterceptorTarget);
         btnMissileTarget = findViewById(R.id.btnMissileTarget);
-        btnMoveShip = findViewById(R.id.btnMoveShip);
-        btnMoveSubmarine = findViewById(R.id.btnMoveSubmarine);
 
         //Set onclicklisteners.
 
@@ -101,38 +91,6 @@ public class UnitControls extends LaunchView
             }
         });
 
-        btnMoveTank.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                if(!game.GetInteractionReady())
-                {
-                    activity.ShowBasicOKDialog(context.getString(R.string.waiting_for_data));
-                }
-                else
-                {
-                    activity.SelectForAction(geoCoord, entity, EntityType.TANK, MoveOrders.MOVE);
-                }
-            }
-        });
-
-        btnMoveTruck.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                if(!game.GetInteractionReady())
-                {
-                    activity.ShowBasicOKDialog(context.getString(R.string.waiting_for_data));
-                }
-                else
-                {
-                    activity.SelectForAction(geoCoord, entity, EntityType.CARGO_TRUCK, MoveOrders.MOVE);
-                }
-            }
-        });
-
         btnAircraftTarget.setOnClickListener(new OnClickListener()
         {
             @Override
@@ -145,22 +103,6 @@ public class UnitControls extends LaunchView
                 else
                 {
                     activity.SelectForAction(geoCoord, entity, EntityType.AIRPLANE, MoveOrders.ATTACK);
-                }
-            }
-        });
-
-        btnTankTarget.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                if(!game.GetInteractionReady())
-                {
-                    activity.ShowBasicOKDialog(context.getString(R.string.waiting_for_data));
-                }
-                else
-                {
-                    activity.SelectForAction(geoCoord, entity, EntityType.TANK, MoveOrders.ATTACK);
                 }
             }
         });
@@ -217,7 +159,6 @@ public class UnitControls extends LaunchView
                 });
             }
 
-            btnTankTarget.setVisibility(GONE);
             btnInterceptorTarget.setVisibility(GONE);
         }
         else if(entity != null)
@@ -276,14 +217,11 @@ public class UnitControls extends LaunchView
                 if(game.WouldBeFriendlyFire(game.GetOurPlayer(), game.GetOwner(entity)))
                 {
                     lytAttackOptions.setVisibility(GONE);
-                    btnMoveTank.setVisibility(GONE);
-                    btnMoveTruck.setVisibility(GONE);
                 }
                 else
                 {
                     lytMovementOptions.setVisibility(GONE);
                     btnInterceptorTarget.setVisibility(GONE);
-                    btnTankTarget.setVisibility(GONE);
                 }
             }
             else if(entity instanceof Airplane)
@@ -295,8 +233,6 @@ public class UnitControls extends LaunchView
                 else
                 {
                     lytMovementOptions.setVisibility(GONE);
-                    //btnKamikaze.setVisibility(GONE);
-                    btnTankTarget.setVisibility(GONE);
                     btnMissileTarget.setVisibility(GONE);
                 }
             }

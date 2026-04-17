@@ -37,7 +37,6 @@ public class DiplomacyView extends LaunchView
         Members,
         Worth,
         Offences,
-        Economy,
         Defences,
         Wealth,
         Age,
@@ -260,7 +259,6 @@ public class DiplomacyView extends LaunchView
                                 context.getString(R.string.sort_name_members),
                                 context.getString(R.string.sort_name_worth),
                                 context.getString(R.string.sort_name_offences),
-                                context.getString(R.string.sort_name_economy),
                                 context.getString(R.string.sort_name_defences),
                                 context.getString(R.string.sort_name_wealth),
                                 context.getString(R.string.sort_name_age),
@@ -393,13 +391,6 @@ public class DiplomacyView extends LaunchView
                     {
                         Collections.sort(AlliancesFiltered, offencesComparator);
                         btnSortBy.setText(context.getString(R.string.sort_offences));
-                    }
-                    break;
-
-                    case Economy:
-                    {
-                        Collections.sort(AlliancesFiltered, economyComparator);
-                        btnSortBy.setText(context.getString(R.string.sort_economy));
                     }
                     break;
 

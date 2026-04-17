@@ -43,9 +43,6 @@ public class SLBMSystemControl extends LaunchView implements SlotListener
     private LinearLayout lytMissileSlots;
     private LinearLayout btnUpgradeSlots;
     private LinearLayout btnUpgradeReload;
-    private TextView txtRetaliating;
-    private TextView txtLaunching;
-    private LinearLayout btnCancelFire;
     private LinearLayout btnSell;
     private int lFittedToID;
     private boolean bOwnedByPlayer;
@@ -70,18 +67,15 @@ public class SLBMSystemControl extends LaunchView implements SlotListener
     {
         inflate(context, R.layout.control_missile_system, this);
 
-        lytReload = (LinearLayout)findViewById(R.id.lytReload);
-        txtReloading = (TextView)findViewById(R.id.txtReloading);
-        lytMissileSlots = (LinearLayout)findViewById(R.id.lytMissileSlots);
-        txtRetaliating = findViewById(R.id.txtRetaliating);
-        txtLaunching = findViewById(R.id.txtLaunching);
-        btnCancelFire = findViewById(R.id.btnCancelFire);
+        lytReload = findViewById(R.id.lytReload);
+        txtReloading = findViewById(R.id.txtReloading);
+        lytMissileSlots = findViewById(R.id.lytMissileSlots);
 
-        btnUpgradeSlots = (LinearLayout) findViewById(R.id.btnUpgradeSlots);
+        btnUpgradeSlots = findViewById(R.id.btnUpgradeSlots);
 
-        btnUpgradeReload = (LinearLayout) findViewById(R.id.btnUpgradeReload);
+        btnUpgradeReload = findViewById(R.id.btnUpgradeReload);
 
-        btnSell = (LinearLayout) findViewById(R.id.btnSell);
+        btnSell = findViewById(R.id.btnSell);
 
         final MissileSystem system = GetMissileSystem();
 
@@ -147,26 +141,8 @@ public class SLBMSystemControl extends LaunchView implements SlotListener
             }
             else
             {
-                if(!GetOnline())
-                {
-                    activity.ShowBasicOKDialog(context.getString(R.string.submerged_cant_do_thing));
-                }
-                else
-                {
-                    activity.MissileTargetMode(lFittedToID, lSlotNumber, LaunchSystem.SystemType.SUBMARINE_ICBM, false);
-                }
+                activity.MissileTargetMode(lFittedToID, lSlotNumber, LaunchSystem.SystemType.SUBMARINE_ICBM, false);
             }
-        }
-        else if(game.GetSubmarine(lFittedToID).Submerged())
-        {
-            activity.ShowBasicOKDialog(context.getString(R.string.submerged_cant_do_thing));
-            return;
-        }
-        else if(!game.ShipInPort(game.GetSubmarine(lFittedToID)))
-        {
-            activity.ShowBasicOKDialog(context.getString(R.string.not_in_port_prep_extended, TextUtilities.GetDistanceStringFromKM(Defs.SHIPYARD_REPAIR_DISTANCE)));
-
-            activity.SetView(new PurchaseLaunchableView(game, activity, game.GetSubmarine(lFittedToID), LaunchSystem.SystemType.SUBMARINE_ICBM, lSlotNumber));
         }
         else
         {

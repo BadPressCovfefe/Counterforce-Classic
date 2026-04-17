@@ -30,12 +30,6 @@
                 android:layout_height="wrap_content"
                 >
 
-                <ImageView
-                    android:id="@+id/imgMissile"
-                    android:layout_width="@dimen/PlayerInfoIconSize"
-                    android:layout_height="@dimen/PlayerInfoIconSize"
-                    android:src="@drawable/marker_torpedo" />
-
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="wrap_content"

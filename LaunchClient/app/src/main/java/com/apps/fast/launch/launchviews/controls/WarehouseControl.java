@@ -29,12 +29,6 @@ public class WarehouseControl extends LaunchView
     private int lID;
     private boolean bOurStructure;
     private Warehouse warehouse;
-    private PurchaseButton btnBuildCargoTruck;
-    private LinearLayout lytBuildTrucks;
-    private LinearLayout lytProduction;
-    private TextView txtPrepTime;
-    private TextView txtDescCargoTruck;
-    private ImageView imgProduction;
 
     private static boolean bUpgradeConfirmHasBeenShown = false;
 
@@ -61,42 +55,6 @@ public class WarehouseControl extends LaunchView
     {
         inflate(context, R.layout.control_warehouse, this);
 
-        btnBuildCargoTruck = findViewById(R.id.btnBuildCargoTruck);
-        lytProduction = findViewById(R.id.lytProduction);
-        txtPrepTime = findViewById(R.id.txtPrepTime);
-        txtDescCargoTruck = findViewById(R.id.txtDescCargoTruck);
-        imgProduction = findViewById(R.id.imgProduction);
-        lytBuildTrucks = findViewById(R.id.lytBuildTrucks);
-
-        if(bOurStructure)
-        {
-
-            btnBuildCargoTruck.SetUnit(game, activity, warehouse.GetPointer(), EntityPointer.EntityType.CARGO_TRUCK, null, Defs.CARGO_TRUCK_BUILD_COST);
-
-            if(warehouse.GetProducing())
-            {
-                lytBuildTrucks.setVisibility(GONE);
-                lytProduction.setVisibility(VISIBLE);
-                txtPrepTime.setText(TextUtilities.GetTimeAmount(warehouse.GetProdTimeRemaining()));
-
-                imgProduction.setImageResource(R.drawable.marker_truck);
-            }
-            else
-            {
-                lytBuildTrucks.setVisibility(VISIBLE);
-                lytProduction.setVisibility(GONE);
-            }
-
-            txtDescCargoTruck.setVisibility(VISIBLE);
-            btnBuildCargoTruck.setVisibility(VISIBLE);
-        }
-        else
-        {
-            txtDescCargoTruck.setVisibility(GONE);
-            btnBuildCargoTruck.setVisibility(GONE);
-            lytProduction.setVisibility(GONE);
-        }
-
         Update();
     }
 
@@ -113,32 +71,6 @@ public class WarehouseControl extends LaunchView
                 if(warehouse != null)
                 {
                     bOurStructure = warehouse.GetOwnedBy(game.GetOurPlayerID());
-
-                    if(bOurStructure)
-                    {
-                        if(warehouse.GetProducing())
-                        {
-                            lytBuildTrucks.setVisibility(GONE);
-                            lytProduction.setVisibility(VISIBLE);
-                            txtPrepTime.setText(TextUtilities.GetTimeAmount(warehouse.GetProdTimeRemaining()));
-
-                            imgProduction.setImageResource(R.drawable.marker_truck);
-                        }
-                        else
-                        {
-                            lytBuildTrucks.setVisibility(VISIBLE);
-                            lytProduction.setVisibility(GONE);
-                        }
-
-                        txtDescCargoTruck.setVisibility(VISIBLE);
-                        btnBuildCargoTruck.setVisibility(VISIBLE);
-                    }
-                    else
-                    {
-                        txtDescCargoTruck.setVisibility(GONE);
-                        btnBuildCargoTruck.setVisibility(GONE);
-                        lytProduction.setVisibility(GONE);
-                    }
                 }
                 else
                 {

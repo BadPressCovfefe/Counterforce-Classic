@@ -126,11 +126,11 @@
                     android:text="@string/total"/>
 
                 <TextView
-                    android:id="@+id/txtWorthTitle"
+                    android:id="@+id/txtDefencesTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/SeperatorMargins"
-                    android:text="@string/worth"/>
+                    android:text="@string/defences" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -148,11 +148,12 @@
                     android:textColor="?attr/WarningColour" />
 
                 <TextView
-                    android:id="@+id/txtEconomicValue"
+                    android:id="@+id/txtDefences"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="£xxx"
-                    android:textColor="?attr/WarningColour"/>
+                    android:textColor="?attr/WarningColour" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -169,11 +170,6 @@
                     android:layout_height="wrap_content"
                     android:text="@string/offences" />
 
-                <TextView
-                    android:id="@+id/txtDefencesTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/defences" />
             </LinearLayout>
 
             <LinearLayout
@@ -191,12 +187,6 @@
                     android:text="£xxx"
                     android:textColor="?attr/WarningColour" />
 
-                <TextView
-                    android:id="@+id/txtDefences"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="£xxx"
-                    android:textColor="?attr/WarningColour" />
             </LinearLayout>
 
         </LinearLayout>

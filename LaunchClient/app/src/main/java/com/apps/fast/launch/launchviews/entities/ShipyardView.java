@@ -117,7 +117,7 @@ public class ShipyardView extends LaunchView implements LaunchUICommon.ShipyardI
         lytInputs = findViewById(R.id.lytInputs);
 
         TextUtilities.AssignHealthStringAndAppearance(txtHP, shipyardShadow);
-        imgProduction.setImageResource(R.drawable.marker_shipyard);
+        imgProduction.setImageResource(R.drawable.image_shipyard);
 
         FrameLayout lytUnitControls = findViewById(R.id.lytUnitControls);
 

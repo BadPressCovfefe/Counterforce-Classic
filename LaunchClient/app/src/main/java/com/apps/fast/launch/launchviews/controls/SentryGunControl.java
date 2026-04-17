@@ -23,25 +23,10 @@ public class SentryGunControl extends LaunchView
     private LinearLayout lytReload;
     private TextView txtReloading;
 
-    private TextView txtRange;
-
-    private boolean bOurStructure;
-
-    private static boolean bUpgradeConfirmHasBeenShown = false;
-
     public SentryGunControl(LaunchClientGame game, MainActivity activity, int lSentryGunID)
     {
         super(game, activity, true);
         lID = lSentryGunID;
-
-        if(game.GetSentryGun(lID) != null)
-        {
-            bOurStructure = (game.GetSentryGun(lID).GetOwnerID() == game.GetOurPlayerID());
-        }
-        else
-        {
-            bOurStructure = false;
-        }
 
         Setup();
     }
@@ -51,14 +36,8 @@ public class SentryGunControl extends LaunchView
     {
         inflate(context, R.layout.control_sentry_gun, this);
 
-        lytReload = (LinearLayout) findViewById(R.id.lytReload);
-        txtReloading = (TextView) findViewById(R.id.txtReloading);
-        txtRange = findViewById(R.id.txtRange);
-
-        SentryGun gun = game.GetSentryGun(lID);
-
-        if(gun != null)
-            txtRange.setText(TextUtilities.GetDistanceStringFromKM(Defs.SENTRY_RANGE));
+        lytReload = findViewById(R.id.lytReload);
+        txtReloading = findViewById(R.id.txtReloading);
 
         Update();
     }
@@ -75,8 +54,6 @@ public class SentryGunControl extends LaunchView
 
                 if(sentryGun != null)
                 {
-                    txtRange.setText(TextUtilities.GetDistanceStringFromKM(Defs.SENTRY_RANGE));
-
                     //Reload.
                     long oReloadTimeRemaining = sentryGun.GetReloadTimeRemaining();
 

@@ -67,10 +67,6 @@ public class BottomNewHomebase extends LaunchView
                     {
                         activity.ShowBasicOKDialog(context.getString(R.string.must_be_carrier));
                     }
-                    else if(newHomebase instanceof Ship && !aircraft.GetCarrierCompliant())
-                    {
-                        activity.ShowBasicOKDialog(context.getString(R.string.not_carrier_capable));
-                    }
                     else if(newHomebase.GetOwnedBy(game.GetOurPlayerID()) || (newHomebase instanceof Ship && ((Ship)newHomebase).HasAircraft() && ((Ship)newHomebase).GetAircraftSystem().GetOpen()) || (newHomebase instanceof Airbase && ((Airbase)newHomebase).GetAircraftSystem().GetOpen()))
                     {
                         SetNewHomebase();

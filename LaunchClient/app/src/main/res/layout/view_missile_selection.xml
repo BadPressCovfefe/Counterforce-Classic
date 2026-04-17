@@ -214,7 +214,8 @@
                 android:layout_gravity="center"
                 android:layout_weight="10"
                 android:clickable="true"
-                android:src="@drawable/button_show" />
+                android:src="@drawable/button_show"
+                android:visibility="gone" />
 
             <ImageView
                 android:layout_width="@dimen/SmallButtonSize"

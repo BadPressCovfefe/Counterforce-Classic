@@ -279,12 +279,6 @@ public class BottomUnitCommand extends LaunchView
                         {
                             bFriendlyFire = true;
                         }
-
-                        if(!((Player)targetEntity).GetPrisoner())
-                        {
-                            activity.ShowBasicOKDialog(context.getString(R.string.player_not_prisoner_cant_liberate));
-                            bIssueCommand = false;
-                        }
                     }
                     else if(targetEntity instanceof Structure)
                     {
@@ -300,26 +294,6 @@ public class BottomUnitCommand extends LaunchView
                         {
                             bBullyingOrNuisance = true;
                         }
-
-                        if(builder != null)
-                        {
-                            if(builder.GetAWOL())
-                            {
-                                activity.ShowBasicOKDialog(context.getString(R.string.builder_awol_cant_liberate));
-                                bIssueCommand = false;
-                            }
-
-                            if(bNotCaptured)
-                            {
-                                activity.ShowBasicOKDialog(context.getString(R.string.not_captured_cant_liberate));
-                                bIssueCommand = false;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        activity.ShowBasicOKDialog(context.getString(R.string.liberate_instructions));
-                        bIssueCommand = false;
                     }
                 }
             }

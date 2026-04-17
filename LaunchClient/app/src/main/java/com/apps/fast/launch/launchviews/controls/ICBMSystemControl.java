@@ -42,10 +42,6 @@ public class ICBMSystemControl extends LaunchView implements SlotListener
     private LinearLayout btnUpgradeSlots;
 
     private LinearLayout btnUpgradeReload;
-
-    private TextView txtRetaliating;
-    private TextView txtLaunching;
-    private LinearLayout btnCancelFire;
     private LinearLayout btnSell;
 
     private int lFittedToID;
@@ -78,18 +74,15 @@ public class ICBMSystemControl extends LaunchView implements SlotListener
     {
         inflate(context, R.layout.control_missile_system, this);
 
-        lytReload = (LinearLayout)findViewById(R.id.lytReload);
-        txtReloading = (TextView)findViewById(R.id.txtReloading);
-        lytMissileSlots = (LinearLayout)findViewById(R.id.lytMissileSlots);
-        txtRetaliating = findViewById(R.id.txtRetaliating);
-        txtLaunching = findViewById(R.id.txtLaunching);
-        btnCancelFire = findViewById(R.id.btnCancelFire);
+        lytReload = findViewById(R.id.lytReload);
+        txtReloading = findViewById(R.id.txtReloading);
+        lytMissileSlots =findViewById(R.id.lytMissileSlots);
 
-        btnUpgradeSlots = (LinearLayout) findViewById(R.id.btnUpgradeSlots);
+        btnUpgradeSlots = findViewById(R.id.btnUpgradeSlots);
 
-        btnUpgradeReload = (LinearLayout) findViewById(R.id.btnUpgradeReload);
+        btnUpgradeReload = findViewById(R.id.btnUpgradeReload);
 
-        btnSell = (LinearLayout) findViewById(R.id.btnSell);
+        btnSell = findViewById(R.id.btnSell);
 
         final MissileSystem system = GetMissileSystem();
 

@@ -9,7 +9,9 @@ import com.apps.fast.launch.activities.MainActivity;
 import com.apps.fast.launch.components.TextUtilities;
 import com.apps.fast.launch.launchviews.LaunchView;
 
+import launch.game.Defs;
 import launch.game.LaunchClientGame;
+import launch.game.entities.conceptuals.Resource;
 import launch.game.entities.conceptuals.ShipProductionOrder;
 
 /**
@@ -39,7 +41,38 @@ public class NavalProductionOrderView extends LaunchView
 
         txtBuildTime.setText(TextUtilities.GetTimeAmount(order.GetConstructionTimeRemaining()));
 
-        imgType.setImageBitmap(EntityIconBitmaps.GetNavalBitmap(context, order.GetTypeUnderConstruction()));
+        switch(order.GetTypeUnderConstruction())
+        {
+            case FRIGATE:
+            {
+                imgType.setImageResource(R.drawable.build_frigate);
+            }
+            break;
+
+            case DESTROYER:
+            {
+                imgType.setImageResource(R.drawable.build_destroyer);
+            }
+            break;
+
+            case SUPER_CARRIER:
+            {
+                imgType.setImageResource(R.drawable.build_super_carrier);
+            }
+            break;
+
+            case ATTACK_SUB:
+            {
+                imgType.setImageResource(R.drawable.build_attack_sub);
+            }
+            break;
+
+            case SSBN:
+            {
+                imgType.setImageResource(R.drawable.build_ssbn_2);
+            }
+            break;
+        }
 
         Update();
     }

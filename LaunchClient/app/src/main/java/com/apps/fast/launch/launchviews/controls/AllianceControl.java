@@ -51,7 +51,6 @@ public class AllianceControl extends LaunchView
     private TextView txtAtWar;
     private TextView txtAffiliated;
     private TextView txtAffiliationOffered;
-    private TextView txtPrisoner;
     private TextView txtMembers;
     private TextView txtWealth;
     private TextView txtTaxRate;
@@ -148,7 +147,6 @@ public class AllianceControl extends LaunchView
         txtWealth = findViewById(R.id.txtWealth);
         txtTaxRate = findViewById(R.id.txtTaxRate);
         txtMembers = findViewById(R.id.txtMembers);
-        txtPrisoner = findViewById(R.id.txtPrisoner);
 
         txtWealth.setText(TextUtilities.GetCurrencyString(allianceShadow.GetWealth()));
         TextUtilities.AssignPercentageString(txtTaxRate, allianceShadow.GetTaxRate(), game);
@@ -160,15 +158,6 @@ public class AllianceControl extends LaunchView
         txtAffiliationsBroken.setText(String.valueOf(allianceShadow.GetAffiliationsBroken()));
         txtICBMCount.setText(String.valueOf(allianceShadow.GetICBMCount()));
         txtABMCount.setText(String.valueOf(allianceShadow.GetABMCount()));
-
-        if(game.GetOurPlayer().GetAllianceMemberID() == allianceShadow.GetID() && game.GetOurPlayer().GetPrisoner())
-        {
-            txtPrisoner.setVisibility(VISIBLE);
-        }
-        else
-        {
-            txtPrisoner.setVisibility(GONE);
-        }
 
         if(game.GetOurPlayer().GetIsAnMP() && game.GetOurPlayer().GetAllianceMemberID() == allianceShadow.GetID())
         {
@@ -418,10 +407,6 @@ public class AllianceControl extends LaunchView
                 if(game.InBattle(game.GetOurPlayer()))
                 {
                     activity.ShowBasicOKDialog(context.getString(R.string.alliance_leave_engaged));
-                }
-                else if(game.GetOurPlayer().GetPrisoner())
-                {
-                    activity.ShowBasicOKDialog(context.getString(R.string.cant_leave_alliance_prisoner));
                 }
                 else
                 {
@@ -711,15 +696,6 @@ public class AllianceControl extends LaunchView
                     btnCancelOffer.setVisibility(bShowCancelOffer ? VISIBLE : GONE);
 
                     txtJoining.setVisibility(game.GetOurPlayer().GetAllianceJoiningID() == allianceShadow.GetID() ? VISIBLE : GONE);
-
-                    if(game.GetOurPlayer().GetAllianceMemberID() == alliance.GetID() && game.GetOurPlayer().GetPrisoner())
-                    {
-                        txtPrisoner.setVisibility(VISIBLE);
-                    }
-                    else
-                    {
-                        txtPrisoner.setVisibility(GONE);
-                    }
 
                     switch(game.GetAllegiance(alliance))
                     {

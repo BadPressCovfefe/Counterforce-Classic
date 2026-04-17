@@ -58,11 +58,11 @@
 
             <ImageView
                 android:id="@+id/imgProduction"
-                android:layout_width="@dimen/PlayerInfoIconSize"
-                android:layout_height="@dimen/PlayerInfoIconSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:padding="@dimen/ButtonImagePadding"
                 android:layout_gravity="center"
-                android:src="@drawable/todo" />
+                android:src="@drawable/build_tank" />
 
             <TextView
                 android:id="@+id/txtPrepTime"

@@ -32,11 +32,8 @@ public class ABMSystemControl extends LaunchView implements SlotListener
     private LinearLayout lytReload;
     private TextView txtReloading;
     private LinearLayout lytMissileSlots;
-
     private LinearLayout btnUpgradeSlots;
-
     private LinearLayout btnUpgradeReload;
-
     private int lFittedToID;
     private boolean bIsMissiles;
     private boolean bOwnedByPlayer;

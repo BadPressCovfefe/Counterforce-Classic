@@ -23,8 +23,8 @@
             android:textAppearance="?android:attr/textAppearanceLarge"/>
 
         <ImageView
-            android:layout_width="@dimen/PlayerInfoIconSize"
-            android:layout_height="@dimen/PlayerInfoIconSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/imgAircraftType"
             android:layout_margin="@dimen/ButtonEdgePadding"
             android:layout_gravity="center"/>

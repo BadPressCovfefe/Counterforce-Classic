@@ -197,7 +197,16 @@ public class SubmarineView extends LaunchView implements LaunchUICommon.Submarin
         }
 
         txtSubmarineTitle.setText(TextUtilities.GetOwnedEntityName(submarineShadow, game));
-        imgSubmarine.setImageBitmap(EntityIconBitmaps.GetOwnedNavalBitmap(context, game, submarineShadow));
+
+        if(submarineShadow.GetEntityType() == EntityPointer.EntityType.ATTACK_SUB)
+        {
+            imgSubmarine.setImageResource(R.drawable.build_attack_sub);
+        }
+        else
+        {
+            imgSubmarine.setImageResource(R.drawable.build_ssbn);
+        }
+
         TextUtilities.AssignHealthStringAndAppearance(txtHP, submarineShadow);
         String strName = Utilities.GetEntityName(context, submarineShadow);
         txtName.setText(strName);
@@ -365,6 +374,7 @@ public class SubmarineView extends LaunchView implements LaunchUICommon.Submarin
                     activity.ExpandView();
                     txtNameButton.setVisibility(GONE);
                     lytNameEdit.setVisibility(VISIBLE);
+                    txtHP.setVisibility(GONE);
                 }
             });
 
@@ -378,6 +388,7 @@ public class SubmarineView extends LaunchView implements LaunchUICommon.Submarin
                     txtNameButton.setVisibility(VISIBLE);
                     lytNameEdit.setVisibility(GONE);
                     Utilities.DismissKeyboard(activity, txtNameEdit);
+                    txtHP.setVisibility(VISIBLE);
                 }
             });
 

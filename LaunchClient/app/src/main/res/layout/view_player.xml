@@ -656,7 +656,7 @@
                             android:layout_marginTop="@dimen/SeperatorMargins"
                             android:background="@drawable/text_button_normal"
                             android:padding="@dimen/ButtonImagePadding"
-                            android:src="@drawable/button_givewealth" />
+                            android:src="@drawable/marker_loot" />
                     </LinearLayout>
 
                     <LinearLayout

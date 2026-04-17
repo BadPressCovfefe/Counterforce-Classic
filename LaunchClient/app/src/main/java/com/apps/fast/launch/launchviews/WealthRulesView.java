@@ -845,26 +845,6 @@ public class WealthRulesView extends LaunchView
             }
         }
 
-        for(final InfantryInterface infantry : OurInfantry)
-        {
-            if(ShouldBeVisible(infantry.GetInfantry()))
-            {
-                InfantryMaintenanceView mev = new InfantryMaintenanceView(game, activity, infantry);
-                EntityViews.add(mev);
-
-                mev.setOnClickListener(new OnClickListener()
-                {
-                    @Override
-                    public void onClick(View view)
-                    {
-                        activity.SelectLaunchEntity(infantry.GetInfantry());
-                    }
-                });
-
-                lytHourlyCosts.addView(mev);
-            }
-        }
-
         for(final TankInterface tank : OurTanks)
         {
             if(ShouldBeVisible(tank.GetTank()))
@@ -878,26 +858,6 @@ public class WealthRulesView extends LaunchView
                     public void onClick(View view)
                     {
                         activity.SelectLaunchEntity(tank.GetTank());
-                    }
-                });
-
-                lytHourlyCosts.addView(mev);
-            }
-        }
-
-        for(final CargoTruckInterface truck : OurCargoTrucks)
-        {
-            if(ShouldBeVisible(truck.GetCargoTruck()))
-            {
-                CargoTruckMaintenanceView mev = new CargoTruckMaintenanceView(game, activity, truck);
-                EntityViews.add(mev);
-
-                mev.setOnClickListener(new OnClickListener()
-                {
-                    @Override
-                    public void onClick(View view)
-                    {
-                        activity.SelectLaunchEntity(truck.GetCargoTruck());
                     }
                 });
 
@@ -1153,31 +1113,6 @@ public class WealthRulesView extends LaunchView
             }
         }
 
-        if(entity instanceof CargoTruckInterface)
-        {
-            if(((CargoTruckInterface)entity).GetOwnerID() == game.GetOurPlayerID())
-            {
-                for(final CargoTruckMaintenanceView cargoTruckMaintenanceView : GetCargoTruckViews())
-                {
-                    if(entity.ApparentlyEquals((LaunchEntity)cargoTruckMaintenanceView.GetCurrentCargoTruck()))
-                    {
-                        if(!ShouldBeVisible(entity))
-                        {
-                            activity.runOnUiThread(new Runnable()
-                            {
-                                @Override
-                                public void run()
-                                {
-                                    EntityViews.remove(cargoTruckMaintenanceView);
-                                    lytHourlyCosts.removeView(cargoTruckMaintenanceView);
-                                }
-                            });
-                        }
-                    }
-                }
-            }
-        }
-
         if(entity instanceof Ship)
         {
             if(((Ship)entity).GetOwnerID() == game.GetOurPlayerID())
@@ -1298,28 +1233,6 @@ public class WealthRulesView extends LaunchView
             }
         }
 
-        if(entity instanceof CargoTruckInterface)
-        {
-            if(((CargoTruckInterface)entity).GetOwnerID() == game.GetOurPlayerID())
-            {
-                for(final CargoTruckMaintenanceView cargoTruckMaintenanceView : GetCargoTruckViews())
-                {
-                    if(entity.ApparentlyEquals((LaunchEntity)cargoTruckMaintenanceView.GetCurrentCargoTruck()))
-                    {
-                        activity.runOnUiThread(new Runnable()
-                        {
-                            @Override
-                            public void run()
-                            {
-                                EntityViews.remove(cargoTruckMaintenanceView);
-                                lytHourlyCosts.removeView(cargoTruckMaintenanceView);
-                            }
-                        });
-                    }
-                }
-            }
-        }
-
         if(entity instanceof Ship)
         {
             if(((Ship)entity).GetOwnerID() == game.GetOurPlayerID())
@@ -1399,19 +1312,6 @@ public class WealthRulesView extends LaunchView
         {
             if(view instanceof TankMaintenanceView)
                 Result.add((TankMaintenanceView)view);
-        }
-
-        return Result;
-    }
-
-    public List<CargoTruckMaintenanceView> GetCargoTruckViews()
-    {
-        List<CargoTruckMaintenanceView> Result = new ArrayList<>();
-
-        for(LaunchView view : new ArrayList<>(EntityViews))
-        {
-            if(view instanceof CargoTruckMaintenanceView)
-                Result.add((CargoTruckMaintenanceView)view);
         }
 
         return Result;

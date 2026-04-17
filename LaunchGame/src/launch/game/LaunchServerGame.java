@@ -12965,6 +12965,11 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                     {
                         int lDecomTime = config.GetDecommissionTime(structure);
                         
+                        if(player.GetBoss())
+                        {
+                            lDecomTime = 0;
+                        }
+                        
                         structure.Sell(lDecomTime);
                         CreateEventForPlayer(new LaunchEvent(String.format("%s decommissioning...", structure.GetTypeName()), SoundEffect.MONEY), lPlayerID);
                         CreateEvent(new LaunchEvent(String.format("%s is decommissioning a %s.", player.GetName(), structure.GetTypeName())));

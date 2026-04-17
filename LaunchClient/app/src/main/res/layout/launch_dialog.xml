@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/MainViewSideMargin"
-        android:src="@drawable/button_givewealth"
+        android:src="@drawable/marker_loot"
         android:visibility="gone" />
 
     <ImageView
