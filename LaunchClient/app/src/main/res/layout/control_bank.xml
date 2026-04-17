@@ -4,55 +4,6 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/btnUpgradeBankCapacity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/MainViewSpacing"
-        android:layout_marginLeft="@dimen/MainViewSideMargin"
-        android:layout_marginRight="@dimen/MainViewSideMargin"
-        android:layout_marginBottom="@dimen/MainViewSpacing"
-        android:background="@drawable/text_button_normal"
-        android:clickable="true"
-        android:orientation="horizontal"
-        android:visibility="visible">
-
-        <ImageView
-            android:id="@+id/imageView52"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/ButtonImagePadding"/>
-
-        <TextView
-            android:id="@+id/txtBankCapacityUpgrade"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="@dimen/ButtonInset"
-            android:layout_weight="0"
-            android:text="@string/upgrade"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
-        <LinearLayout
-            android:id="@+id/lytMoreish1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:orientation="vertical"></LinearLayout>
-
-        <TextView
-            android:id="@+id/txtBankCapacityUpgradeCost"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="@dimen/ButtonInset"
-            android:layout_weight="0"
-            android:text="£yay"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-    </LinearLayout>
-
     <TextView
         android:id="@+id/txtMoneyStats"
         android:layout_marginLeft="@dimen/MainViewSideMargin"

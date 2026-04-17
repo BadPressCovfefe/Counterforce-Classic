@@ -568,13 +568,10 @@ public class XMLGameSaver
                 AddNode(doc, eleWarehouse, XMLDefs.OWNER_ID, warehouse.GetOwnerID());
                 AddNode(doc, eleWarehouse, XMLDefs.FLAGS, warehouse.GetFlags());
                 AddNode(doc, eleWarehouse, XMLDefs.STATE_TIME, warehouse.GetStateTimeRemaining());
-                AddNode(doc, eleWarehouse, XMLDefs.PRODUCING, warehouse.GetProducing());
-                AddNode(doc, eleWarehouse, XMLDefs.PREP_TIME, warehouse.GetProdTimeRemaining());
                 AddNode(doc, eleWarehouse, XMLDefs.VISIBLE, warehouse.GetVisible());
                 AddNode(doc, eleWarehouse, XMLDefs.VISIBLE_TIME, warehouse.GetVisibleTimeRemaining());
                 AddNode(doc, eleWarehouse, XMLDefs.BUILT_BY_ID, warehouse.GetBuiltByID());
-                AddResourceSystem(doc, eleWarehouse, warehouse.GetResourceSystem(), XMLDefs.RESOURCE_CONTAINER);
-                AddCargoSystem(doc, eleWarehouse, warehouse.GetCargoSystem(), XMLDefs.CARGO_SYSTEM);
+                AddNode(doc, eleWarehouse, XMLDefs.WEALTH, warehouse.GetWealth());
             }
             
             elements = AddNode(doc, eleGame, XMLDefs.AIRBASES);

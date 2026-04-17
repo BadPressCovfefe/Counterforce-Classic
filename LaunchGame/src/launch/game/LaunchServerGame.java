@@ -719,15 +719,6 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                     Warehouses.remove(warehouse.GetID());
                     EntityRemoved(warehouse, false);
                 }
-                else if(warehouse.ProductionFinished())
-                {
-                    GeoCoord geoSpawn = warehouse.GetPosition().GetCopy();
-                    geoSpawn.Move(random.nextDouble() * (2.0 * Math.PI), 0.1);
-
-                    CargoTruck truck = new CargoTruck(GetAtomicID(lCargoTruckIndex, CargoTrucks), geoSpawn, Defs.CARGO_TRUCK_HP, Defs.CARGO_TRUCK_HP, warehouse.GetOwnerID(), new ResourceSystem(Defs.LAND_UNIT_RESOURCE_CAPACITY, Defs.CARGO_TRUCK_TYPES));
-                    AddCargoTruck(truck);
-                    warehouse.TruckProduced();
-                }
             }
 
             LaunchPerf.Measure(LaunchPerf.Metric.WarehouseTick);
@@ -753,16 +744,8 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                     GeoCoord geoSpawn = armory.GetPosition().GetCopy();
                     geoSpawn.Move(random.nextDouble() * (2.0 * Math.PI), 0.1);
                     
-                    if(armory.GetProducingType() == EntityType.INFANTRY)
-                    {
-                        Infantry infantry = new Infantry(GetAtomicID(lInfantryIndex, Infantries), geoSpawn, Defs.INFANTRY_HP, Defs.INFANTRY_HP, armory.GetOwnerID(), MoveOrders.WAIT, new ResourceSystem(Defs.LAND_UNIT_RESOURCE_CAPACITY, Defs.INFANTRY_TYPES));
-                        AddInfantry(infantry);
-                    }
-                    else
-                    {
-                        Tank tank = new Tank(GetAtomicID(lTankIndex, Tanks), geoSpawn, Defs.TANK_MAX_HP, Defs.TANK_MAX_HP, armory.GetOwnerID(), armory.GetProducingType(), new ResourceSystem(Defs.LAND_UNIT_RESOURCE_CAPACITY, Defs.GetTankResourceTypes(armory.GetProducingType())));
-                        AddTank(tank);
-                    }
+                    Tank tank = new Tank(GetAtomicID(lTankIndex, Tanks), geoSpawn, Defs.TANK_MAX_HP, Defs.TANK_MAX_HP, armory.GetOwnerID(), armory.GetProducingType(), new ResourceSystem(Defs.LAND_UNIT_RESOURCE_CAPACITY, Defs.GetTankResourceTypes(armory.GetProducingType())));
+                    AddTank(tank);
                 }
             }
 
@@ -1537,508 +1520,6 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
     {
         ProcessHourlyMaintenance();
         
-        for(Distributor distributor : GetDistributors())
-        {
-            if(distributor.GetOnline())
-            {
-                Player owner = GetOwner(distributor);
-                
-                if(owner != null && !GetRadioactive(distributor, true))
-                {
-                    for(Structure structure : owner.GetStructures())
-                    {
-                        if(structure.GetOnline() && !structure.ApparentlyEquals(distributor))
-                        {
-                            if(structure instanceof Warehouse warehouse)
-                            {
-                                CargoSystem system = warehouse.GetCargoSystem();
-                                long oAmountPresent = warehouse.GetCargoSystem().GetAmountOfType(distributor.GetType());
-
-                                if(!distributor.GetResourceSystem().Full() && oAmountPresent > 0)
-                                {
-                                    if(warehouse.GetPosition().DistanceTo(distributor.GetPosition()) <= Defs.DISTRIBUTOR_ACTION_DISTANCE)
-                                    {
-                                        long oAmountToTake = oAmountPresent >= Defs.DISTRIBUTOR_ACTION_PER_HOUR ? Defs.DISTRIBUTOR_ACTION_PER_HOUR : oAmountPresent;
-
-                                        system.ChargeQuantity(distributor.GetType(), oAmountToTake);
-                                        long oLeftover = distributor.GetResourceSystem().AddQuantity(distributor.GetType(), oAmountToTake);
-                                        
-                                        if(oLeftover > 0)
-                                        {
-                                            system.AddResource(distributor.GetType(), oLeftover);
-                                        }
-                                        
-                                        EntityUpdated(warehouse, true);
-                                    }  
-                                }
-                            }
-
-                            if(!structure.GetResourceSystem().Full() && structure.GetResourceSystem().CanHoldType(distributor.GetType()))
-                            {
-                                long oAmountToAdd = distributor.GetResourceSystem().GetAmountOfType(distributor.GetType()) >= Defs.DISTRIBUTOR_ACTION_PER_HOUR ? Defs.DISTRIBUTOR_ACTION_PER_HOUR : distributor.GetResourceSystem().GetAmountOfType(distributor.GetType());
-                                
-                                distributor.GetResourceSystem().ChargeQuantity(distributor.GetType(), oAmountToAdd);
-                                long oLeftover = structure.GetResourceSystem().AddQuantity(distributor.GetType(), oAmountToAdd);
-                                        
-                                if(oLeftover > 0)
-                                {
-                                    distributor.GetResourceSystem().AddQuantity(distributor.GetType(), oLeftover);
-                                }
-                                
-                                EntityUpdated(structure, true);
-                            }
-                        } 
-                    }
-                    
-                    for(EntityPointer pointer : new ArrayList<>(quadtree.GetAffectedLandUnits(distributor.GetPosition(), Defs.DISTRIBUTOR_ACTION_DISTANCE)))
-                    {
-                        LandUnit unit = pointer.GetLandUnit(game);
-                        
-                        if(unit != null)
-                        {
-                            if(EntityIsFriendly(unit, owner) && unit.GetPosition().DistanceTo(distributor.GetPosition()) <= Defs.DISTRIBUTOR_ACTION_DISTANCE)
-                            {
-                                if(!unit.GetResourceSystem().Full() && unit.GetResourceSystem().CanHoldType(distributor.GetType()))
-                                {
-                                    long oAmountToAdd = distributor.GetResourceSystem().GetAmountOfType(distributor.GetType()) >= Defs.DISTRIBUTOR_ACTION_PER_HOUR ? Defs.DISTRIBUTOR_ACTION_PER_HOUR : distributor.GetResourceSystem().GetAmountOfType(distributor.GetType());
-
-                                    distributor.GetResourceSystem().ChargeQuantity(distributor.GetType(), oAmountToAdd);
-                                    long oLeftover = unit.GetResourceSystem().AddQuantity(distributor.GetType(), oAmountToAdd);
-
-                                    if(oLeftover > 0)
-                                    {
-                                        distributor.GetResourceSystem().AddQuantity(distributor.GetType(), oLeftover);
-                                    }
-                                    
-                                    EntityUpdated(unit, true);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            quadtree.RemoveEntity(pointer);
-                        }
-                        
-                        EntityUpdated(distributor, true);
-                    }
-                }
-                else if(owner != null)
-                {
-                    CreateReport(owner, new LaunchReport(String.format("[ECONOMY] Your %s is irradiated and could not transport resources.", distributor.GetTypeName()), true, owner.GetID()));
-                    CreateEventForPlayer(new LaunchEvent(String.format("[ECONOMY] Your %s is irradiated and could not transport resources.", distributor.GetTypeName())), owner.GetID());
-                }
-            }
-        }
-        
-        for(OreMine oreMine : GetOreMines())
-        {
-            if(oreMine.GetOnline())
-            {
-                Player owner = GetOwner(oreMine);
-                ResourceDeposit deposit = GetResourceDeposit(oreMine.GetDepositID());
-
-                if(!GetRadioactive(oreMine, true) && deposit != null)
-                {
-                    long oAmountToExtract = deposit.Extract(random.nextLong(Defs.EXTRACTOR_OUTPUT_MIN, Defs.EXTRACTOR_OUTPUT_MAX));
-
-                    GeoCoord geoDrop = oreMine.GetPosition().GetCopy();
-                    geoDrop.Move(random.nextDouble() * (2.0 * Math.PI), random.nextFloat() * 0.3f);
-                    int lTypeOrdinal = oreMine.GetType().ordinal();
-                    CreateLoot(geoDrop, LootType.RESOURCES, lTypeOrdinal, oAmountToExtract, Defs.LOOT_EXPIRY);
-                }
-                else if(owner != null)
-                {
-                    CreateReport(owner, new LaunchReport(String.format("[ECONOMY] Your %s is irradiated and could not produce.", oreMine.GetTypeName()), true, owner.GetID()));
-                    CreateEventForPlayer(new LaunchEvent(String.format("[ECONOMY] Your %s is irradiated and could not produce.", oreMine.GetTypeName())), owner.GetID());
-                }  
-                
-                if(deposit == null)
-                {
-                    oreMine.Sell(config.GetDecommissionTime(oreMine));
-                    
-                    if(owner != null)
-                    {
-                        CreateReport(owner, new LaunchReport(String.format("[ECONOMY] Your %s finished extraction and is selling automatically.", oreMine.GetTypeName()), true, owner.GetID()));
-                        CreateEventForPlayer(new LaunchEvent(String.format("[ECONOMY] Your %s finished extraction and is selling automatically.", oreMine.GetTypeName())), owner.GetID());
-                    }
-                }
-            }
-        }
-        
-        for(Processor processor : GetProcessors())
-        {
-            if(processor.GetOnline())
-            {
-                Player owner = GetOwner(processor);
-                
-                if(!GetRadioactive(processor, true))
-                {
-                    ResourceSystem system = processor.GetResourceSystem();
-
-                    if(system != null)
-                    {
-                        Map<ResourceType, Long> Inputs = Defs.GetProcessorInput(processor.GetType());
-                        Map<ResourceType, Long> Outputs = Defs.GetProcessorOutput(processor.GetType());
-
-                        if(Inputs != null && Outputs != null)
-                        {
-                            //Charge and produce
-                            if(system.HasNecessaryResources(Inputs))
-                            {
-                                system.ChargeQuantities(Inputs);
-
-                                for(Entry<ResourceType, Long> output : Outputs.entrySet())
-                                {
-                                    GeoCoord geoDrop = processor.GetPosition().GetCopy();
-                                    geoDrop.Move(random.nextDouble() * (2.0 * Math.PI), random.nextFloat() * 0.3f);
-                                    CreateLoot(geoDrop, LootType.RESOURCES, output.getKey().ordinal(), output.getValue(), Defs.LOOT_EXPIRY);
-                                }
-
-                                EntityUpdated(processor, false);
-                            }
-                        }
-                    }
-                }
-                else if(owner != null)
-                {
-                    CreateReport(owner, new LaunchReport(String.format("[ECONOMY] Your %s is irradiated and could not produce.", processor.GetTypeName()), true, owner.GetID()));
-                    CreateEventForPlayer(new LaunchEvent(String.format("[ECONOMY] Your %s is irradiated and could not produce.", processor.GetTypeName())), owner.GetID());
-                }
-            }
-        }
-        
-        for(ScrapYard yard : GetScrapYards())
-        {
-            if(yard.GetOnline())
-            {
-                Player owner = GetOwner(yard);
-                
-                if(!GetRadioactive(yard, true))
-                {
-                    ResourceSystem system = yard.GetResourceSystem();
-
-                    if(system != null)
-                    {
-                        Map<ResourceType, Long> scrappedTypes = new ConcurrentHashMap<>();
-                        long oScrapped = 0;
-                        
-                        for(Entry<ResourceType, Long> resource : system.GetTypes().entrySet())
-                        {
-                            if(resource.getValue() > 0 && oScrapped < Defs.SCRAPYARD_RATE_PER_HOUR)
-                            {
-                                long oRemainingCapacity = Defs.SCRAPYARD_RATE_PER_HOUR - oScrapped;
-                                long oAmountScrapped = 0;
-                                
-                                if(resource.getValue() <= oRemainingCapacity)
-                                {
-                                    oScrapped += resource.getValue();
-                                    oAmountScrapped = resource.getValue();
-                                }
-                                else
-                                {
-                                    oScrapped += oRemainingCapacity;
-                                    oAmountScrapped = oRemainingCapacity;
-                                }
-                                
-                                scrappedTypes.put(resource.getKey(), oAmountScrapped);
-                                system.ChargeQuantity(resource.getKey(), oAmountScrapped);
-                            }
-                        }
-
-                        if(!scrappedTypes.isEmpty())
-                        {
-                            long oValueToProduce = 0;
-                            
-                            for(Entry<ResourceType, Long> typeToScrap : scrappedTypes.entrySet())
-                            {
-                                oValueToProduce += (typeToScrap.getValue() * Defs.GetResourceScrapValuePerKG(typeToScrap.getKey()));
-                            }
-                            
-                            if(oValueToProduce > 0)
-                            {
-                                GeoCoord geoDrop = yard.GetPosition().GetCopy();
-                                geoDrop.Move(random.nextDouble() * (2.0 * Math.PI), random.nextFloat() * 0.3f);
-                                CreateLoot(geoDrop, LootType.RESOURCES, ResourceType.WEALTH.ordinal(), oValueToProduce, Defs.LOOT_EXPIRY);
-                            }
-                            
-                            EntityUpdated(yard, true);
-                        }
-                    }
-                }
-                else if(owner != null)
-                {
-                    CreateReport(owner, new LaunchReport(String.format("[ECONOMY] Your %s is irradiated and could not produce.", yard.GetTypeName()), true, owner.GetID()));
-                    CreateEventForPlayer(new LaunchEvent(String.format("[ECONOMY] Your %s is irradiated and could not produce.", yard.GetTypeName())), owner.GetID());
-                }
-            }
-        }
-        
-        //Resource Production End
-        
-        //Unit Repair/Refuel Start
-        
-        for(Tank tank : GetTanks())
-        {
-            Player owner = GetPlayer(tank.GetOwnerID());
-            
-            if(owner != null)
-            {
-                //Recharge X amount per hour if the truck is not irradiated.
-                //If the truck contains fuel, recharge fuel at a rate of 10000 fuel/tank.
-                if(tank.GetCurrentFuel() < 1.0f && !GetRadioactive(tank, false) && (tank.GetMoveOrders() == MoveOrders.DEFEND || tank.GetMoveOrders() == MoveOrders.WAIT))
-                {
-                    float fltAmountToRefuel = 1.0f/Defs.HOURS_TO_FULL;
-                    
-                    ResourceSystem system = tank.GetResourceSystem();
-                    
-                    if(system.ContainsType(ResourceType.FUEL))
-                    {
-                        float fltFuelDeficit = tank.GetFuelDeficit();
-                        
-                        //See how much fuel it would take to totally recharge the deficit.
-                        if(fltFuelDeficit > fltAmountToRefuel)
-                        {
-                            float fltDifference = fltFuelDeficit - fltAmountToRefuel;
-                            
-                            int lFuelNeeded = (int)(fltDifference/Defs.TANK_REFUEL_PER_KG);
-                            
-                            if(system.GetAmountOfType(ResourceType.FUEL) > lFuelNeeded)
-                            {
-                                //Take all the fuel necessary.
-                                system.ChargeQuantity(ResourceType.FUEL, lFuelNeeded);
-                                fltAmountToRefuel = tank.GetFuelDeficit();
-                            }
-                            else
-                            {
-                                //Not enough fuel. Take the amount that is present.
-                                int lFuelPresent = (int)system.GetAmountOfType(ResourceType.FUEL);
-                                system.ChargeQuantity(ResourceType.FUEL, system.GetAmountOfType(ResourceType.FUEL));
-                                fltAmountToRefuel += Defs.TANK_REFUEL_PER_KG * lFuelPresent;
-                            }
-                        }
-                    }
-                    
-                    tank.Refuel(fltAmountToRefuel);
-                    EntityUpdated(tank, false);
-                }
-                
-                if(tank.GetHP() < tank.GetMaxHP() && !GetRadioactive(tank, false))
-                {
-                    short nHPToHeal = (short)(tank.GetMaxHP()/Defs.HOURS_TO_FULL);
-                    
-                    ResourceSystem system = tank.GetResourceSystem();
-                    
-                    if(system.ContainsType(ResourceType.STEEL))
-                    {
-                        short nHPDeficit = tank.GetHPDeficit();
-                        
-                        if(nHPDeficit > nHPToHeal)
-                        {
-                            short nDifference = (short)(nHPDeficit - nHPToHeal);
-                            
-                            int lTypeNeeded = (int)(nDifference/Defs.TANK_REPAIR_PER_KG);
-                            
-                            if(system.GetAmountOfType(ResourceType.STEEL) > lTypeNeeded)
-                            {
-                                system.ChargeQuantity(ResourceType.STEEL, lTypeNeeded);
-                                nHPToHeal = tank.GetHPDeficit();
-                            }
-                            else
-                            {
-                                int lTypePresent = (int)system.GetAmountOfType(ResourceType.STEEL);
-                                system.ChargeQuantity(ResourceType.STEEL, system.GetAmountOfType(ResourceType.STEEL));
-                                nHPToHeal += Defs.TANK_REPAIR_PER_KG * lTypePresent;
-                            }
-                        }
-                    }
-                    
-                    tank.SetHP((short)(tank.GetHP() + nHPToHeal));
-                    EntityUpdated(tank, false);
-                }
-            }
-        }
-        
-        for(CargoTruck truck : GetCargoTrucks())
-        {
-            Player owner = GetPlayer(truck.GetOwnerID());
-            
-            if(owner != null)
-            {
-                //Recharge X amount per hour if the truck is not irradiated.
-                //If the truck contains fuel, recharge fuel at a rate of 10000 fuel/tank.
-                if(truck.GetCurrentFuel() < 1.0f && !GetRadioactive(truck, false) && (truck.GetMoveOrders() == MoveOrders.DEFEND || truck.GetMoveOrders() == MoveOrders.WAIT))
-                {
-                    float fltAmountToRefuel = 1.0f/Defs.HOURS_TO_FULL;
-                    
-                    ResourceSystem system = truck.GetResourceSystem();
-                    
-                    if(system.ContainsType(ResourceType.FUEL))
-                    {
-                        float fltFuelDeficit = truck.GetFuelDeficit();
-                        
-                        //See how much fuel it would take to totally recharge the deficit.
-                        if(fltFuelDeficit > fltAmountToRefuel)
-                        {
-                            float fltDifference = fltFuelDeficit - fltAmountToRefuel;
-                            
-                            int lFuelNeeded = (int)(fltDifference/Defs.CARGO_TRUCK_REFUEL_PER_KG);
-                            
-                            if(system.GetAmountOfType(ResourceType.FUEL) > lFuelNeeded)
-                            {
-                                //Take all the fuel necessary.
-                                system.ChargeQuantity(ResourceType.FUEL, lFuelNeeded);
-                                fltAmountToRefuel = truck.GetFuelDeficit();
-                            }
-                            else
-                            {
-                                //Not enough fuel. Take the amount that is present.
-                                int lFuelPresent = (int)system.GetAmountOfType(ResourceType.FUEL);
-                                system.ChargeQuantity(ResourceType.FUEL, system.GetAmountOfType(ResourceType.FUEL));
-                                fltAmountToRefuel += Defs.CARGO_TRUCK_REFUEL_PER_KG * lFuelPresent;
-                            }
-                        }
-                    }
-                    
-                    truck.Refuel(fltAmountToRefuel);
-                    EntityUpdated(truck, false);
-                }
-                
-                if(truck.GetHP() < truck.GetMaxHP() && !GetRadioactive(truck, false))
-                {
-                    short nHPToHeal = (short)(truck.GetMaxHP()/Defs.HOURS_TO_FULL);
-                    
-                    ResourceSystem system = truck.GetResourceSystem();
-                    
-                    if(system.ContainsType(ResourceType.STEEL))
-                    {
-                        short nHPDeficit = truck.GetHPDeficit();
-                        
-                        if(nHPDeficit > nHPToHeal)
-                        {
-                            short nDifference = (short)(nHPDeficit - nHPToHeal);
-                            
-                            int lTypeNeeded = (int)(nDifference/Defs.CARGO_TRUCK_REPAIR_PER_KG);
-                            
-                            if(system.GetAmountOfType(ResourceType.STEEL) > lTypeNeeded)
-                            {
-                                system.ChargeQuantity(ResourceType.STEEL, lTypeNeeded);
-                                nHPToHeal = truck.GetHPDeficit();
-                            }
-                            else
-                            {
-                                int lTypePresent = (int)system.GetAmountOfType(ResourceType.STEEL);
-                                system.ChargeQuantity(ResourceType.STEEL, system.GetAmountOfType(ResourceType.STEEL));
-                                nHPToHeal += Defs.CARGO_TRUCK_REPAIR_PER_KG * lTypePresent;
-                            }
-                        }
-                    }
-                    
-                    truck.SetHP((short)(truck.GetHP() + nHPToHeal));
-                    EntityUpdated(truck, false);
-                }
-            }
-        }
-        
-        for(Infantry infantry : GetInfantries())
-        {
-            Player owner = GetPlayer(infantry.GetOwnerID());
-            
-            if(owner != null)
-            {
-                boolean bRadioactive = GetRadioactive(infantry, true);
-                     
-                if(bRadioactive)
-                {
-                    for(Radiation radiation : GetRadiations())
-                    {
-                        if(!GetInfantryIsSheltered(infantry) && infantry.GetPosition().DistanceTo(radiation.GetPosition()) <= radiation.GetRadius())
-                        {
-                            infantry.InflictDamage(Defs.RADIATION_DMG_HOUR);
-                        }
-                    }
-                    
-                    //Send out event if they are dead.
-                    if(infantry.Destroyed())
-                    {
-                        CreateEvent(new LaunchEvent(String.format("%s's infantry died of radiation poisoning.", infantry.GetName()), SoundEffect.DEATH)); //TODO: get a custom sound for this.
-                        CreateReport(owner, new LaunchReport("Your infantry died of radiation poisoning!", true, infantry.GetOwnerID()));
-                    }
-                }
-                //Recharge X amount per hour if the truck is not irradiated.
-                //If the truck contains fuel, recharge fuel at a rate of 10000 fuel/tank.
-                if(infantry.GetCurrentFuel() < 1.0f && !bRadioactive && (infantry.GetMoveOrders() == MoveOrders.DEFEND || infantry.GetMoveOrders() == MoveOrders.WAIT))
-                {
-                    float fltAmountToRefuel = 1.0f/Defs.HOURS_TO_FULL;
-                    
-                    ResourceSystem system = infantry.GetResourceSystem();
-                    ResourceType type = ResourceType.FOOD;
-                    
-                    if(system.ContainsType(type))
-                    {
-                        float fltFuelDeficit = infantry.GetFuelDeficit();
-                        
-                        if(fltFuelDeficit > fltAmountToRefuel)
-                        {
-                            float fltDifference = fltFuelDeficit - fltAmountToRefuel;
-                            
-                            int lFuelNeeded = (int)(fltDifference/10000);
-                            
-                            if(system.GetAmountOfType(type) > lFuelNeeded)
-                            {
-                                //Take all the fuel necessary.
-                                system.ChargeQuantity(type, lFuelNeeded);
-                                fltAmountToRefuel = infantry.GetFuelDeficit();
-                            }
-                            else
-                            {
-                                //Not enough fuel. Take the amount that is present.
-                                int lFoodPresent = (int)system.GetAmountOfType(type);
-                                system.ChargeQuantity(type, system.GetAmountOfType(type));
-                                fltAmountToRefuel += 10000 * lFoodPresent;
-                            }
-                        }
-                    }
-                    
-                    infantry.Refuel(fltAmountToRefuel);
-                    EntityUpdated(infantry, false);
-                }
-                
-                if(infantry.GetHP() < infantry.GetMaxHP() && !bRadioactive)
-                {
-                    short nHPToHeal = (short)(infantry.GetMaxHP()/Defs.HOURS_TO_FULL);
-                    
-                    ResourceSystem system = infantry.GetResourceSystem();
-                    
-                    if(system.ContainsType(ResourceType.MEDICINE))
-                    {
-                        short nHPDeficit = infantry.GetHPDeficit();
-                        
-                        if(nHPDeficit > nHPToHeal)
-                        {
-                            short nDifference = (short)(nHPDeficit - nHPToHeal);
-                            
-                            int lTypeNeeded = (int)(nDifference/10000);
-                            
-                            if(system.GetAmountOfType(ResourceType.MEDICINE) > lTypeNeeded)
-                            {
-                                system.ChargeQuantity(ResourceType.MEDICINE, lTypeNeeded);
-                                nHPToHeal = infantry.GetHPDeficit();
-                            }
-                            else
-                            {
-                                int lMedicinePresent = (int)system.GetAmountOfType(ResourceType.MEDICINE);
-                                system.ChargeQuantity(ResourceType.MEDICINE, system.GetAmountOfType(ResourceType.MEDICINE));
-                                nHPToHeal += 10000 * lMedicinePresent;
-                            }
-                        }
-                    }
-                    
-                    infantry.SetHP((short)(infantry.GetHP() + nHPToHeal));
-                    EntityUpdated(infantry, false);
-                }
-            }
-        }
-        
         for(NavalVessel vessel : GetNavalVessels())
         {
             Player owner = GetPlayer(vessel.GetOwnerID());
@@ -2060,81 +1541,6 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                     }
                 }
             }   
-        }
-        
-        for(Airbase airbase : GetAirbases())
-        {
-            if(airbase.GetOnline() && !GetRadioactive(airbase, true))
-            {
-                for(StoredAirplane airplane : GetStoredAirplanes())
-                {
-                    Player aircraftOwner = GetOwner(airplane);
-                    
-                    if(!airplane.AtFullHealth())
-                    {
-                        if(aircraftOwner != null)
-                        {
-                            airplane.AddHP((short)(airplane.GetMaxHP()/Defs.HOURS_TO_FULL));
-                            EntityUpdated(airplane, false);
-                        }
-                    }
-
-                    if(airplane.GetFuelDeficit() > 0)
-                    {
-                        if(aircraftOwner != null)
-                        {
-                            airplane.Refuel((int)(airplane.GetMaxFuel()/Defs.HOURS_TO_FULL));
-                            EntityUpdated(airplane, false);
-                        }
-                    }
-                }
-            }
-        }
-        
-        for(Structure structure : GetAllStructures())
-        {
-            //If the structure is not at full HP, the owner is not null, and not in battle, give it some HP.
-            if(!GetRadioactive(structure, true) && !structure.AtFullHealth())
-            {
-                Player owner = GetPlayer(structure.GetOwnerID());
-                
-                if(owner != null)
-                {
-                    if(structure.GetHP() < structure.GetMaxHP() && !GetRadioactive(structure, false))
-                    {
-                        short nHPToHeal = (short)(structure.GetMaxHP()/Defs.HOURS_TO_FULL);
-
-                        ResourceSystem system = structure.GetResourceSystem();
-
-                        if(system.ContainsType(ResourceType.CONSTRUCTION_SUPPLIES))
-                        {
-                            short nHPDeficit = structure.GetHPDeficit();
-
-                            if(nHPDeficit > nHPToHeal)
-                            {
-                                short nDifference = (short)(nHPDeficit - nHPToHeal);
-
-                                int lTypeNeeded = (int)(nDifference/Defs.STRUCTURE_REPAIR_PER_KG);
-
-                                if(system.GetAmountOfType(ResourceType.CONSTRUCTION_SUPPLIES) > lTypeNeeded)
-                                {
-                                    system.ChargeQuantity(ResourceType.CONSTRUCTION_SUPPLIES, lTypeNeeded);
-                                    nHPToHeal = structure.GetHPDeficit();
-                                }
-                                else
-                                {
-                                    int lTypePresent = (int)system.GetAmountOfType(ResourceType.CONSTRUCTION_SUPPLIES);
-                                    system.ChargeQuantity(ResourceType.CONSTRUCTION_SUPPLIES, system.GetAmountOfType(ResourceType.CONSTRUCTION_SUPPLIES));
-                                    nHPToHeal += Defs.STRUCTURE_REPAIR_PER_KG * lTypePresent;
-                                }
-                            }
-                        }
-
-                        structure.AddHP(nHPToHeal);
-                        EntityUpdated(structure, false);
-                    }
-                }
-            }
         }
         
         //Unit Repair/Refuel End
@@ -7163,6 +6569,32 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
         float fltBlastRadius = MissileStats.GetBlastRadius(type, missile.GetAirburst());
         String strCause;
         
+        if(type != null && type.GetName().contains("Wealth Balloon"))
+        {
+            long oWealthToGive = (long)(type.GetCost() * config.GetResaleValue());
+            
+            for(EntityPointer pointer : quadtree.GetAffectedStructures(missile.GetPosition(), 0.1f))
+            {
+                if(pointer != null)
+                {
+                    Structure structure = pointer.GetStructure(this);
+
+                    if(structure != null)
+                    {
+                        if(structure.GetPosition().DistanceTo(missile.GetPosition()) <= 0.1f)
+                        {
+                            ProcessPlayerIncome(GetOwner(structure), String.format("$%d from %s's Wealth Balloon.", oWealthToGive, owner.GetName()), Map.ofEntries(entry(ResourceType.WEALTH, oWealthToGive)), true);
+                            return;
+                        }
+                    }
+                }   
+            }
+            
+            //Did not find a nearby structure.
+            CreateLoot(missile.GetPosition().GetCopy(), LootType.RESOURCES, ResourceType.WEALTH.ordinal(), oWealthToGive, Defs.LOOT_EXPIRY);
+            return;
+        }
+        
         int lYield = type.GetYield();
         
         Explosion explosion = new Explosion(lYield, type.GetNuclear(), type.GetICBM(), type.GetBunkerBuster(), type.GetAntiShip(), type.GetAntiSubmarine(), type.GetArtillery(), missile.GetAirburst(), type.GetAccuracy());
@@ -8701,7 +8133,7 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
 
                 case WAREHOUSE:
                 {
-                    Warehouse warehouse = new Warehouse(GetAtomicID(lWarehouseIndex, Warehouses), geoPosition, StructureStats.GetMaxHPByType(structureType, this), StructureStats.GetMaxHPByType(structureType, this), player.GetID(), player.GetRespawnProtected(), config.GetStructureBootTime(player), new ResourceSystem(Defs.STRUCTURE_RESOURCE_CAPACITY, Defs.WAREHOUSE_TYPES));
+                    Warehouse warehouse = new Warehouse(GetAtomicID(lWarehouseIndex, Warehouses), geoPosition, StructureStats.GetMaxHPByType(structureType, this), StructureStats.GetMaxHPByType(structureType, this), player.GetID(), player.GetRespawnProtected(), config.GetStructureBootTime(player));
                     AddWarehouse(warehouse);
                     EstablishStructureThreats(warehouse);
 
@@ -9449,6 +8881,82 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
         
         return false;
     }
+	
+    @Override
+    public boolean BankAction(int lPlayerID, int lBankID, long oAmount, boolean bWithdraw)
+    {
+        Warehouse bank = Warehouses.get(lBankID);
+        Player owner = Players.get(lPlayerID);
+
+        if(bank != null && owner != null && bank.GetOwnedBy(lPlayerID))
+        {
+            if(bWithdraw)
+            {
+                return Withdraw(bank, oAmount, owner);
+            }
+            else
+            {
+                return Deposit(bank, oAmount, owner);
+            }
+        }
+
+        return false;
+    }
+
+    public boolean Withdraw(Warehouse bank, long oAmount, Player owner)
+    {
+            if(bank.GetOnline())
+            {
+                    if(bank.GetWealth() >= oAmount)
+                    {
+                        bank.Withdraw(oAmount);
+                        owner.AddWealth(oAmount);
+                        ProcessPlayerIncome(owner, null, Map.ofEntries(entry(ResourceType.WEALTH, oAmount)), false);
+                        return true;
+                    }
+                    else if(bank.GetWealth() > 0)
+                    {
+                        long oAmountWithdrawn = bank.GetWealth();
+                        bank.Withdraw(oAmountWithdrawn);
+                        ProcessPlayerIncome(owner, null, Map.ofEntries(entry(ResourceType.WEALTH, oAmount)), false);
+                        return true;
+                    }
+            }
+
+            return false;
+    }
+
+    public boolean Deposit(Warehouse bank, long oAmount, Player owner)
+    {
+        if(bank.GetOnline())
+        {
+            if(owner.GetWealth() >= oAmount)
+            {
+                if(bank.GetRemainingCapacity() >= oAmount)
+                {
+                    owner.SubtractWealth(oAmount);
+                    bank.Deposit(oAmount);
+                    return true;
+                }
+                else if(bank.GetRemainingCapacity() > 0)
+                {
+                    long oAmountDeposited = bank.GetRemainingCapacity();
+                    owner.SubtractWealth(oAmountDeposited);
+                    bank.Deposit(oAmountDeposited);
+                    return true;
+                }
+            }
+            else if(owner.GetWealth() > 0)
+            {
+                long oAmountDeposited = owner.GetWealth();
+                owner.SubtractWealth(oAmountDeposited);
+                bank.Deposit(oAmountDeposited);
+                return true;
+            }
+        }
+
+        return false;
+    }
     
     @Override
     public boolean SonarPing(int lPlayerID, EntityPointer pinger)
@@ -9812,43 +9320,7 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
     @Override
     public boolean PurchaseCargoTruck(int lPlayerID, int lWarehouseID, boolean bUseSubstitutes)
     {
-        Player player = GetPlayer(lPlayerID);
-        Warehouse warehouse = GetWarehouse(lWarehouseID);
-        
-        if(player != null && warehouse != null && !warehouse.GetProducing() && warehouse.GetOnline())
-        {            
-            if(EntityIsFriendly(warehouse, player))
-            {
-                Map<ResourceType, Long> Costs = Defs.CARGO_TRUCK_BUILD_COST;
-                
-                if(bUseSubstitutes)
-                    Costs = GetSubstitutionCost(Costs);
-                else
-                    Costs = GetRequiredCost(Costs);
-                
-                if(player.SubtractWealth(Costs.get(ResourceType.WEALTH)))
-                {
-                    if(player.Functioning())
-                    {
-                        int lBuildTime = Defs.CARGO_TRUCK_BUILD_TIME;
-
-                        if(player.GetBoss())
-                        {
-                            lBuildTime = 0;
-                        }
-
-                        ProcessPlayerXPGain(lPlayerID, Defs.CARGO_TRUCK_PURCHASED_XP, String.format("You built a cargo truck."));
-                        warehouse.SetProducing(lBuildTime); //When this timer runs out, produce a truck.
-                        EntityUpdated(warehouse, true);
-                        
-                        CreateEvent(new LaunchEvent(String.format("%s purchased a cargo truck.", player.GetName()), SoundEffect.EQUIP));
-
-                        return true;
-                    }
-                } 
-            }
-        }
-        
+        //TODO
         return false;
     }
     
@@ -16218,10 +15690,12 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
             }
         }
         
-        String strIncomeStatement = String.format("[ECONOMY] Income from %s: %s", strSource, LaunchUtilities.GetCostStatement(Incomes));
-        
-        if(!strSource.isEmpty())
+        if(strSource != null && !strSource.isEmpty())
+        {
+            String strIncomeStatement = String.format("[ECONOMY] Income from %s: %s", strSource, LaunchUtilities.GetCostStatement(Incomes));
+            
             CreateReport(payee, new LaunchReport(strIncomeStatement, false));
+        }
     }
     
     @Override

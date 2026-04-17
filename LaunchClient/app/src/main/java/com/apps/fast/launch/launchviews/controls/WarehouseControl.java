@@ -29,9 +29,6 @@ public class WarehouseControl extends LaunchView
     private int lID;
     private boolean bOurStructure;
     private Warehouse warehouse;
-
-    private static boolean bUpgradeConfirmHasBeenShown = false;
-
     public WarehouseControl(LaunchClientGame game, MainActivity activity, int lWarehouseID)
     {
         super(game, activity, true);

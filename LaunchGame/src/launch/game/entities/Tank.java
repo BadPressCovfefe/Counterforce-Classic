@@ -42,22 +42,6 @@ public class Tank extends LandUnit implements LaunchSystemListener, NamableInter
         this.type = type;
         dlyReload = new ShortDelay();
         
-        switch(type)
-        {
-            case MISSILE_TANK:
-            case SAM_TANK:
-            {
-                launchables = new MissileSystem(this, Defs.MISSILE_TANK_RELOAD, Defs.MISSILE_TANK_SLOT_COUNT);
-            }
-            break;
-            
-            case HOWITZER:
-            {
-                launchables = new MissileSystem(this, Defs.HOWITZER_RELOAD, Defs.HOWITZER_SLOT_COUNT);
-            }
-            break;
-        }
-        
         this.cMode = SAMSite.MODE_AUTO;
         SetPointer();
     }

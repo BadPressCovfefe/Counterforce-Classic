@@ -2170,6 +2170,9 @@ public abstract class LaunchGame implements LaunchEntityListener
     {
         Player player = GetPlayer(lPlayerID);
         
+        if(type != null && type.GetName().contains("Wealth Balloon"))
+            return false;
+        
         if(player.GetAllianceMemberID() == Alliance.ALLIANCE_ID_UNAFFILIATED)
         {
             //Player is not in an alliance. Just see if it threatens them.
@@ -2203,6 +2206,9 @@ public abstract class LaunchGame implements LaunchEntityListener
     {
         Player inflictor = GetPlayer(lPlayerID);
         
+        if(type != null && type.GetName().contains("Wealth Balloon"))
+            return false;
+        
         if(inflictor != null)
         {
             boolean bPlayersThreatened = false;
@@ -2235,6 +2241,9 @@ public abstract class LaunchGame implements LaunchEntityListener
     public boolean ThreatensAllies(int lPlayerID, GeoCoord geoTarget, MissileType type, boolean bConsiderEMP, boolean bConsiderRespawnProtection, boolean bAirburst)
     {
         Player player = GetPlayer(lPlayerID);
+        
+        if(type != null && type.GetName().contains("Wealth Balloon"))
+            return false;
         
         if(player.GetAllianceMemberID() == Alliance.ALLIANCE_ID_UNAFFILIATED)
         {
@@ -2272,6 +2281,9 @@ public abstract class LaunchGame implements LaunchEntityListener
      */
     public boolean ThreatensPlayer(int lPlayerID, GeoCoord geoTarget, MissileType type, boolean bConsiderEMP, boolean bConsiderRespawnProtection, boolean bAirburst)
     {
+        if(type != null && type.GetName().contains("Wealth Balloon"))
+            return false;
+        
         float a = MissileStats.GetBlastRadius(type, bAirburst);
         float b = MissileStats.GetMissileEMPRadius(type, bAirburst);
         float fltThreatRadius;
@@ -2506,6 +2518,11 @@ public abstract class LaunchGame implements LaunchEntityListener
     {
         for(Missile missile : Missiles.values())
         {
+            MissileType type = config.GetMissileType(missile.GetType());
+            
+            if(type != null && type.GetName().contains("Wealth Balloon"))
+                return false;
+            
             //If the player owns any in-flight missiles, they are in battle.
             if(missile.GetOwnerID() == player.GetID())
                 return true;
@@ -2777,11 +2794,6 @@ public abstract class LaunchGame implements LaunchEntityListener
         else if(structure instanceof Warehouse)
         {
             LaunchUtilities.AddResourceMapsTogether(Values, Defs.WAREHOUSE_STRUCTURE_COST);
-            
-            Warehouse warehouse = ((Warehouse)structure);
-            
-            if(warehouse.GetProducing())
-                LaunchUtilities.AddResourceMapsTogether(Values, Defs.CARGO_TRUCK_BUILD_COST);
         }
         else if(structure instanceof Distributor)
         {
@@ -5241,12 +5253,6 @@ public abstract class LaunchGame implements LaunchEntityListener
             if(ship.HasCargo())
                 Result.add(ship);
         }
-        
-        for(Warehouse warehouse : GetWarehouses())
-            Result.add(warehouse);
-        
-        //TODO: Trains
-        //TODO: Rail yards
         
         return Result;
     }

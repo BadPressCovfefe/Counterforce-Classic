@@ -593,6 +593,19 @@ public class LaunchServerSession extends LaunchSession
                                     "Player couldn't purchase launchables.");
                         }
                         break;
+						
+                        case BankAction:
+                        {
+                            int lBankID = bb.getInt();
+                            int lAmount = bb.getInt();
+                            boolean bWithdraw = (bb.get() != 0x00);
+
+                            HandleSimpleResult(tobComm, lInstanceNumber,
+                                gameInterface.BankAction(AuthenticatedUser.GetPlayerID(), lBankID, lAmount, bWithdraw),
+                                "Bank action performed.",
+                                "Could not perform banking action.");
+                        }
+                        break;
                         
                         case ElectronicWarfare:
                         {

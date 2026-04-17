@@ -10,73 +10,53 @@ import launch.comm.LaunchSession;
 import launch.game.Defs;
 import launch.game.GeoCoord;
 import launch.game.EntityPointer.EntityType;
-import launch.game.systems.CargoSystem;
-import launch.game.systems.LaunchSystem;
-import launch.game.systems.LaunchSystemListener;
-import launch.game.systems.ResourceSystem;
-
-import launch.utilities.ShortDelay;
 
 /**
  *
  * @author Corbin
  */
-public class Warehouse extends Structure implements HaulerInterface, LaunchSystemListener
+public class Warehouse extends Structure
 {
-    private static final int DATA_SIZE = 5;
+    private static final int DATA_SIZE = 8;
     
-    private boolean bProducing;
-    private ShortDelay dlyBuild;
-    private CargoSystem storage;
+    private long oWealth;
     
     /** New. */
-    public Warehouse(int lID, GeoCoord geoPosition, short nHP, short nMaxHP, int lOwnerID, boolean bRespawnProtected, int lBootTime, ResourceSystem resources)
+    public Warehouse(int lID, GeoCoord geoPosition, short nHP, short nMaxHP, int lOwnerID, boolean bRespawnProtected, int lBootTime)
     {
-        super(lID, geoPosition, nHP, nMaxHP, lOwnerID, bRespawnProtected, lBootTime, resources);
-        this.bProducing = false;
-        this.dlyBuild = new ShortDelay();
-        this.storage = new CargoSystem(this, Defs.WAREHOUSE_MAX_STORAGE_KG);
+        super(lID, geoPosition, nHP, nMaxHP, lOwnerID, bRespawnProtected, lBootTime, null);
+        this.oWealth = 0;
     }
     
     /** From save. */
-    public Warehouse(int lID, GeoCoord geoPosition, short nHP, short nMaxHP, String strName, int lOwnerID, byte cFlags, int lStateTime, boolean bProducing, int lBuildTime, boolean bVisible, int lVisibleTime, int lBuiltByID, CargoSystem storage, ResourceSystem resources)
+    public Warehouse(int lID, GeoCoord geoPosition, short nHP, short nMaxHP, String strName, int lOwnerID, byte cFlags, int lStateTime, int lBuildTime, boolean bVisible, int lVisibleTime, int lBuiltByID, long oWealth)
     {
-        super(lID, geoPosition, nHP, nMaxHP, strName, lOwnerID, cFlags, lStateTime, bVisible, lVisibleTime, lBuiltByID, resources);
+        super(lID, geoPosition, nHP, nMaxHP, strName, lOwnerID, cFlags, lStateTime, bVisible, lVisibleTime, lBuiltByID, null);
         this.bVisible = bVisible;
-        this.bProducing = bProducing;
-        this.dlyBuild = new ShortDelay(lBuildTime);
-        this.storage = storage;
-        storage.SetSystemListener(this);
+        this.oWealth = oWealth;
     }
     
     /** From comms. */
     public Warehouse(ByteBuffer bb, int lReceivingID)
     {
         super(bb, lReceivingID);
-        this.bProducing = (bb.get() != 0x00);
-        this.dlyBuild = new ShortDelay(bb.getInt());
-        storage = new CargoSystem(this, bb);
+        this.oWealth = bb.getLong();
     }
 
     @Override
     public void Tick(int lMS)
     {
         super.Tick(lMS);
-        
-        dlyBuild.Tick(lMS);
     }
     
     @Override
     public byte[] GetData(int lAskingID)
     {
-        byte[] cCargoSystemData = storage.GetData(lAskingID);
         byte[] cBaseData = super.GetData(lAskingID);
         
-        ByteBuffer bb = ByteBuffer.allocate(cBaseData.length + DATA_SIZE + cCargoSystemData.length);
+        ByteBuffer bb = ByteBuffer.allocate(cBaseData.length + DATA_SIZE);
         bb.put(cBaseData);
-        bb.put((byte)(bProducing? 0xFF : 0x00));
-        bb.putInt(dlyBuild.GetRemaining());
-        bb.put(cCargoSystemData);
+        bb.putLong(oWealth);
         
         return bb.array();
     }
@@ -90,7 +70,7 @@ public class Warehouse extends Structure implements HaulerInterface, LaunchSyste
     @Override
     public String GetTypeName()
     {
-        return "warehouse";
+        return "bank";
     }
 
     @Override
@@ -113,43 +93,35 @@ public class Warehouse extends Structure implements HaulerInterface, LaunchSyste
         return LaunchSession.Warehouse;
     }
     
-    @Override
-    public CargoSystem GetCargoSystem()
+    public void Deposit(long oAmount)
     {
-        return storage;
-    }
-
-    @Override
-    public void SystemChanged(LaunchSystem system) 
-    {
+        this.oWealth += oAmount;
         Changed(false);
     }
     
-    public void TruckProduced()
+    public void Withdraw(long oAmount)
     {
-        bProducing = false;
-        Changed(true);
+        this.oWealth -= oAmount;
+        Changed(false);
     }
     
-    public boolean GetProducing()
+    public long GetRemainingCapacity()
     {
-        return this.bProducing;
+        return GetMaxCapacity() - oWealth;
     }
     
-    public int GetProdTimeRemaining()
+    public boolean Full()
     {
-        return dlyBuild.GetRemaining();
+        return GetRemainingCapacity() >= 0;
     }
     
-    public void SetProducing(int lBuildTime)
+    public long GetWealth()
     {
-        bProducing = true;
-        dlyBuild.Set(lBuildTime);
-        Changed(true);
+        return oWealth;
     }
     
-    public boolean ProductionFinished()
+    public long GetMaxCapacity()
     {
-        return bProducing && dlyBuild.Expired();
+        return Defs.BANK_CAPACITY;
     }
 }

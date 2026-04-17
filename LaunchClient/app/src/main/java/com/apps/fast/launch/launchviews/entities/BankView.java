@@ -1,10 +1,8 @@
 package com.apps.fast.launch.launchviews.entities;
 
-import android.view.View;
-
 import com.apps.fast.launch.R;
 import com.apps.fast.launch.activities.MainActivity;
-import com.apps.fast.launch.components.Utilities;
+import com.apps.fast.launch.launchviews.controls.BankControl;
 import com.apps.fast.launch.launchviews.controls.WarehouseControl;
 
 import java.util.List;
@@ -14,9 +12,9 @@ import launch.game.entities.LaunchEntity;
 import launch.game.entities.Structure;
 import launch.game.EntityPointer.EntityType;
 
-public class WarehouseView extends StructureView
+public class BankView extends StructureView
 {
-    public WarehouseView(LaunchClientGame game, MainActivity activity, LaunchEntity structure)
+    public BankView(LaunchClientGame game, MainActivity activity, LaunchEntity structure)
     {
         super(game, activity, structure);
     }
@@ -24,7 +22,7 @@ public class WarehouseView extends StructureView
     @Override
     protected void Setup()
     {
-        systemView = new WarehouseControl(game, activity, structureShadow.GetID());
+        systemView = new BankControl(game, activity, structureShadow.GetID());
 
         super.Setup();
 

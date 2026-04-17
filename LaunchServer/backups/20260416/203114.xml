@@ -66,7 +66,7 @@
             <ChampCount>0</ChampCount>
             <AdminMember>false</AdminMember>
             <Blacklist>AAA=</Blacklist>
-            <Wealth>1302175</Wealth>
+            <Wealth>1300150</Wealth>
         </Player>
     </Players>
     <Missiles/>
@@ -462,7 +462,7 @@
             <LootType>2</LootType>
             <Type>6</Type>
             <Quantity>30000</Quantity>
-            <Expiry>160447088</Expiry>
+            <Expiry>164047088</Expiry>
         </Loot>
     </Loots>
     <Rubbles/>
@@ -475,7 +475,7 @@
                 <Longitude>-210.08159</Longitude>
             </Position>
             <Radius>18.731333</Radius>
-            <Expiry>1683856</Expiry>
+            <Expiry>5283856</Expiry>
             <OwnerID>0</OwnerID>
         </Radiation>
         <Radiation ID="533">
@@ -484,7 +484,7 @@
                 <Longitude>-210.08159</Longitude>
             </Position>
             <Radius>9.042452</Radius>
-            <Expiry>4987992</Expiry>
+            <Expiry>8587992</Expiry>
             <OwnerID>0</OwnerID>
         </Radiation>
         <Radiation ID="545">
@@ -493,7 +493,7 @@
                 <Longitude>-210.08159</Longitude>
             </Position>
             <Radius>6.2696857</Radius>
-            <Expiry>15265056</Expiry>
+            <Expiry>18865056</Expiry>
             <OwnerID>0</OwnerID>
         </Radiation>
         <Radiation ID="547">
@@ -502,7 +502,7 @@
                 <Longitude>-210.08159</Longitude>
             </Position>
             <Radius>6.2696857</Radius>
-            <Expiry>24025584</Expiry>
+            <Expiry>27625584</Expiry>
             <OwnerID>0</OwnerID>
         </Radiation>
         <Radiation ID="548">
@@ -511,7 +511,7 @@
                 <Longitude>-210.08159</Longitude>
             </Position>
             <Radius>6.2696857</Radius>
-            <Expiry>10923472</Expiry>
+            <Expiry>14523472</Expiry>
             <OwnerID>0</OwnerID>
         </Radiation>
         <Radiation ID="551">
@@ -520,7 +520,7 @@
                 <Longitude>-210.08159</Longitude>
             </Position>
             <Radius>6.2696857</Radius>
-            <Expiry>25638320</Expiry>
+            <Expiry>29238320</Expiry>
             <OwnerID>0</OwnerID>
         </Radiation>
         <Radiation ID="564">
@@ -529,7 +529,7 @@
                 <Longitude>-210.08159</Longitude>
             </Position>
             <Radius>6.2696857</Radius>
-            <Expiry>15444680</Expiry>
+            <Expiry>19044680</Expiry>
             <OwnerID>0</OwnerID>
         </Radiation>
         <Radiation ID="569">
@@ -538,7 +538,7 @@
                 <Longitude>-210.08159</Longitude>
             </Position>
             <Radius>2.542233</Radius>
-            <Expiry>36876232</Expiry>
+            <Expiry>40476232</Expiry>
             <OwnerID>0</OwnerID>
         </Radiation>
         <Radiation ID="571">
@@ -547,7 +547,7 @@
                 <Longitude>-210.08159</Longitude>
             </Position>
             <Radius>2.542233</Radius>
-            <Expiry>42841528</Expiry>
+            <Expiry>46441528</Expiry>
             <OwnerID>0</OwnerID>
         </Radiation>
         <Radiation ID="575">
@@ -556,7 +556,16 @@
                 <Longitude>-210.08159</Longitude>
             </Position>
             <Radius>2.542233</Radius>
-            <Expiry>16840520</Expiry>
+            <Expiry>20440520</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="506">
+            <Position>
+                <Latitude>34.964275</Latitude>
+                <Longitude>-105.169815</Longitude>
+            </Position>
+            <Radius>2.542233</Radius>
+            <Expiry>679544</Expiry>
             <OwnerID>0</OwnerID>
         </Radiation>
     </Radiations>

@@ -1365,20 +1365,12 @@ public class XMLGameLoader
                             byte cFlags = GetByteElement(eleWarehouse, XMLDefs.FLAGS);
                             int lStateTime = GetIntElement(eleWarehouse, XMLDefs.STATE_TIME);
                             int lBuildTime = GetIntElement(eleWarehouse, XMLDefs.PREP_TIME);
-                            boolean bProducing = GetBooleanElement(eleWarehouse, XMLDefs.PRODUCING);
                             boolean bVisible = GetBooleanElement(eleWarehouse, XMLDefs.VISIBLE);
                             int lVisibleTime = GetIntElement(eleWarehouse, XMLDefs.VISIBLE_TIME);
                             int lBuiltByID = lOwnerID;
-                            
-                            CargoSystem cargo = GetCargoSystem(eleWarehouse, XMLDefs.CARGO_SYSTEM, game, new EntityPointer(lID, EntityType.WAREHOUSE));
-                            ResourceSystem resources = GetResourceSystem(eleWarehouse, XMLDefs.RESOURCE_CONTAINER);
-                            
-                            if(GetHasNode(eleWarehouse, XMLDefs.BUILT_BY_ID))
-                            {
-                                lBuiltByID = GetIntElement(eleWarehouse, XMLDefs.BUILT_BY_ID);
-                            }
+                            long oWealth = GetLongElement(eleWarehouse, XMLDefs.WEALTH);
 
-                            game.AddWarehouse(new Warehouse(lID, geoPosition, nHP, nMaxHP, strName, lOwnerID, cFlags, lStateTime, bProducing, lBuildTime, bVisible, lVisibleTime, lBuiltByID, cargo, resources));
+                            game.AddWarehouse(new Warehouse(lID, geoPosition, nHP, nMaxHP, strName, lOwnerID, cFlags, lStateTime, lBuildTime, bVisible, lVisibleTime, lBuiltByID, oWealth));
                         }
                         catch(Exception ex)
                         {

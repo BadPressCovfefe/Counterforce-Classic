@@ -96,7 +96,7 @@ import com.apps.fast.launch.launchviews.entities.ShipyardView;
 import com.apps.fast.launch.launchviews.entities.SubmarineView;
 import com.apps.fast.launch.launchviews.entities.Thomas99MemorialView;
 import com.apps.fast.launch.launchviews.entities.TorpedoView;
-import com.apps.fast.launch.launchviews.entities.WarehouseView;
+import com.apps.fast.launch.launchviews.entities.BankView;
 import com.apps.fast.launch.launchviews.entities.LootView;
 import com.apps.fast.launch.launchviews.entities.RubbleView;
 import com.apps.fast.launch.launchviews.entities.MissileSiteView;
@@ -2915,7 +2915,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             }
             else if(selectedEntity instanceof Warehouse)
             {
-                mainView.BottomLayoutShowView(new WarehouseView(game, this, selectedEntity));
+                mainView.BottomLayoutShowView(new BankView(game, this, selectedEntity));
             }
             else if(selectedEntity instanceof Loot)
             {

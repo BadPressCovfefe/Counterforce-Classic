@@ -651,9 +651,9 @@
     <string name="bank_title">bank</string>
     <string name="construct_name_bank">bank</string>
     <string name="bank_offline">You cannot do this while the bank is offline.</string>
-    <string name="bank_full">The bank does not have enough storage capacity to deposit this amount.</string>
+    <string name="bank_full">The bank does not have room to deposit this amount.</string>
     <string name="bank_money_stats">Wealth: %1$s\/%2$s</string>
-    <string name="desc_bank">Store and send wealth.</string>
+    <string name="desc_bank">Store wealth.</string>
     <string name="must_specify_new_airbase">You must select a new homebase for the aircraft.</string>
     <string name="homebase_must_be_open">You may only send your aircraft to airbases that are open or owned by you.</string>
     <string name="too_far_from_post">Too far from the selected command post.</string>
@@ -945,4 +945,5 @@
     <string name="purchase_unit">Purchase %1$s</string>
     <string name="tap_structure_button">Tap a structure to build.</string>
     <string name="rebuild_rubble_confirm">Rebuild this rubble for %s?</string>
+    <string name="send_money">Send Wealth</string>
 </resources>

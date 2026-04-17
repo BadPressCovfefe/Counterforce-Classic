@@ -48,6 +48,7 @@ public interface LaunchServerGameInterface
     boolean InterceptorReloadUpgrade(int lPlayerID, int lSAMSiteID);
     boolean SentryRangeUpgrade(int lPlayerID, int lSentryGunID);
     boolean CommandPostHPUpgrade(int lPlayerID, int lCommandPostID);
+    boolean BankAction(int lPlayerID, int lBankID, long oAmount, boolean bWithdraw);
     boolean CeaseFire(int lPlayerID, List<EntityPointer> Pointers);
     boolean RefuelEntity(int lPlayerID, EntityPointer entity);
     boolean KickAircraft(int lPlayerID, EntityPointer aircraft);

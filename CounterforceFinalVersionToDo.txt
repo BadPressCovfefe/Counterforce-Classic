@@ -24,3 +24,80 @@ CURRENT WORK:
 				-Fix loot titles and whatnot.
 				-Fix odd location of structure icons when selecting units.
 				-Make memorials look like the rest of the markers. (All white outline.)
+				-Banks fire money missiles.
+				-Re-implement hourly wealth limit.@Override    
+    
+	public boolean BankAction(int lPlayerID, int lBankID, int lAmount, boolean bWithdraw)
+    {
+        /*Bank bank = Banks.get(lBankID);
+        Player owner = Players.get(lPlayerID);
+        
+        if(bank != null && owner != null && bank.GetOwnedBy(lPlayerID))
+        {
+            if(bWithdraw)
+            {
+                return Withdraw(bank, lAmount, owner);
+            }
+            else
+            {
+                return Deposit(bank, lAmount, owner);
+            }
+        }*/
+        
+        return false;
+    }
+	
+	public boolean Withdraw(Bank bank, int lAmount, Player owner)
+    {
+        if(bank.GetOnline())
+        {
+            if(bank.GetWealth() >= lAmount)
+            {
+                bank.Withdraw(lAmount);
+                //owner.AddWealth(lAmount);
+                ProcessPlayerIncome(owner, lAmount, false);
+                return true;
+            }
+            else if(bank.GetWealth() > 0)
+            {
+                int lAmountWithdrawn = bank.GetWealth();
+                bank.Withdraw(lAmountWithdrawn);
+                ProcessPlayerIncome(owner, lAmountWithdrawn, false);
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    public boolean Deposit(Bank bank, int lAmount, Player owner)
+    {
+        if(bank.GetOnline())
+        {
+            if(owner.GetWealth() >= lAmount)
+            {
+                if(bank.GetRemainingCapacity() >= lAmount)
+                {
+                    owner.SubtractWealth(lAmount);
+                    bank.Deposit(lAmount);
+                    return true;
+                }
+                else if(bank.GetRemainingCapacity() > 0)
+                {
+                    int lAmountDeposited = bank.GetRemainingCapacity();
+                    owner.SubtractWealth(lAmountDeposited);
+                    bank.Deposit(lAmountDeposited);
+                    return true;
+                }
+            }
+            else if(owner.GetWealth() > 0)
+            {
+                int lAmountDeposited = owner.GetWealth();
+                owner.SubtractWealth(lAmountDeposited);
+                bank.Deposit(lAmountDeposited);
+                return true;
+            }
+        }
+        
+        return false;
+    }
