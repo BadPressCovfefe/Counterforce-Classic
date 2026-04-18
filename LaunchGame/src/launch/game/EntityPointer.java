@@ -98,6 +98,7 @@ public class EntityPointer
         MULTI_ROLE,
         SSB,
         WATCH_TOWER,
+        KOTH,
     }
     
     public static final int DATA_SIZE = 5;

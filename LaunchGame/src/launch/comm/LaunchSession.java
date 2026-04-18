@@ -135,7 +135,7 @@ public abstract class LaunchSession implements TobCommInterface, ConnectionLogge
     public static final int SaveShipType = 108;                  //A new type of ship the player wishes to save on the server.
     public static final int SaveSubmarineType = 109;             //A new type of submarine the player wishes to save.
     public static final int PurchaseInfantry = 110;              //A request to purchase a infantry unit.
-    //111 is reserved.
+    public static final int KOTH = 111;                          //The king of the hill object.
     public static final int PurchaseShip = 112;                  //A request to purchase an existing ship type.
     public static final int PurchaseSubmarine = 113;             //A request to purchase an existing submarine type.
     public static final int NavalVesselSpeedChange = 114;        //A request to change ship/submarine speed.
