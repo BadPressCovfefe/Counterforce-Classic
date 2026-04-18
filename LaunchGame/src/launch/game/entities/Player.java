@@ -1244,7 +1244,7 @@ public final class Player extends MapEntity implements LaunchSystemListener
     
     public boolean GetPlayerIsNoob()
     {
-        return lRank <= Defs.NOOB_RANK_THRESHOLD;
+        return false;
     }
     
     public void SetCityCountLastWeek(int lCount)

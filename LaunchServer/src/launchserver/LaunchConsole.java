@@ -182,7 +182,6 @@ public class LaunchConsole
                             int lKillCount = player.GetTotalKills();
                             int lStructureCount = player.GetStructures().size();
                             
-                            player.AddExperience(Defs.PLAYER_KILLED_XP * lKillCount);
                             player.AddExperience(Defs.STRUCTURE_BUILT_XP * lStructureCount);
                             player.AddExperience((int)(player.GetDistanceTraveled()/Defs.KM_TRAVELED_PER_XP));
                         }

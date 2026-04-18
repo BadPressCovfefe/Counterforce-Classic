@@ -210,13 +210,6 @@
                 android:layout_marginTop="@dimen/SeperatorMargins"
                 android:layout_marginBottom="@dimen/SeperatorMargins"/>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/SeparatorThickness"
-                android:background="?attr/ButtonEdgeColour"
-                android:layout_marginTop="@dimen/SeperatorMargins"
-                android:layout_marginBottom="@dimen/SeperatorMargins"/>
-
             <FrameLayout
                 android:id="@+id/lytUnitControls"
                 android:layout_width="match_parent"

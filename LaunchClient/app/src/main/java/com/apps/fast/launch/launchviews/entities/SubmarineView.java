@@ -399,7 +399,7 @@ public class SubmarineView extends LaunchView implements LaunchUICommon.Submarin
                 {
                     if(!bInPort)
                     {
-                        activity.ShowBasicOKDialog(context.getString(R.string.not_in_port_cant_sell, TextUtilities.GetDistanceStringFromKM(Defs.SHIPYARD_REPAIR_DISTANCE)));
+                        activity.ShowBasicOKDialog(context.getString(R.string.not_in_port_cant_sell, TextUtilities.GetDistanceStringFromKM(Defs.IN_PORT_RADIUS)));
                     }
                     else if(game.InBattle(game.GetOurPlayer()))
                     {

@@ -287,7 +287,6 @@ public class AircraftSystemControl extends LaunchView
     {
         Config config = game.GetConfig();
 
-        Resource.ResourceType type = Defs.AIRBASE_CAPACITY_UPGRADE_TYPE;
         int lSlots = system.GetSlotCount();
         int lSlotUpgrade = lSlots + config.GetAircraftSlotUpgradeCount();
         final int lCost = game.GetAircraftSlotUpgradeCost(system.GetSlotCount(), config.GetAirbaseBaseCapacity());
@@ -300,7 +299,7 @@ public class AircraftSystemControl extends LaunchView
 
                 final LaunchDialog launchDialog = new LaunchDialog();
                 launchDialog.SetHeaderPurchase();
-                launchDialog.SetMessage(context.getString(R.string.upgrade_airbase_capacity_confirm, lSlots, lSlotUpgrade, TextUtilities.GetResourceQuantityString(type, lCost)));
+                launchDialog.SetMessage(context.getString(R.string.upgrade_airbase_capacity_confirm, lSlots, lSlotUpgrade, TextUtilities.GetCurrencyString(lCost)));
                 launchDialog.SetOnClickYes(new OnClickListener()
                 {
                     @Override

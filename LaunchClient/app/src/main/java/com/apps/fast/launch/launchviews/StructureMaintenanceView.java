@@ -55,8 +55,6 @@ public class StructureMaintenanceView extends LaunchView implements LaunchUIComm
     private TextView txtCost;
     //private TextView txtTime;
     private ImageView imgPower;
-    private LinearLayout btnCeaseFire;
-    private LinearLayout btnAttack;
     private ImageButton btnAuto;
     private ImageButton btnSemi;
     private ImageButton btnManual;
@@ -111,8 +109,6 @@ public class StructureMaintenanceView extends LaunchView implements LaunchUIComm
         txtCost = findViewById(R.id.txtCost);
         //txtTime = findViewById(R.id.txtTime);
         imgPower = findViewById(R.id.imgPower);
-        btnAttack = findViewById(R.id.btnAttack);
-        btnCeaseFire = findViewById(R.id.btnCeaseFire);
 
         LaunchUICommon.SetPowerButtonOnClickListener(activity, btnPower, this, game);
 
@@ -128,18 +124,6 @@ public class StructureMaintenanceView extends LaunchView implements LaunchUIComm
                 txtName.setVisibility(GONE);
 
             txtCount.setVisibility(GONE);
-
-            if(structureShadow instanceof ArtilleryGun)
-            {
-                if(((ArtilleryGun)structureShadow).HasFireOrder())
-                {
-                    btnCeaseFire.setVisibility(VISIBLE);
-                }
-                else
-                {
-                    btnCeaseFire.setVisibility(GONE);
-                }
-            }
         }
 
         if(StructureList != null)
@@ -149,109 +133,6 @@ public class StructureMaintenanceView extends LaunchView implements LaunchUIComm
             txtState.setVisibility(GONE);
             //txtTime.setVisibility(GONE);
             txtCount.setText(Integer.toString(StructureList.size()));
-
-            boolean bShowCeaseFire = false;
-
-            for(Object objStructure : StructureList.toArray())
-            {
-                Structure structure = (Structure)objStructure;
-
-                if(structure instanceof ArtilleryGun)
-                {
-                    if(((ArtilleryGun)structure).HasFireOrder())
-                    {
-                        bShowCeaseFire = true;
-                        break;
-                    }
-                }
-            }
-
-            if(bShowCeaseFire)
-            {
-                btnCeaseFire.setVisibility(VISIBLE);
-            }
-            else
-            {
-                btnCeaseFire.setVisibility(GONE);
-            }
-        }
-
-        btnCeaseFire.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                final LaunchDialog launchDialog = new LaunchDialog();
-                launchDialog.SetHeaderLaunch();
-                launchDialog.SetMessage(context.getString(R.string.cease_fire_confirm));
-                launchDialog.SetOnClickYes(new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View view)
-                    {
-                        launchDialog.dismiss();
-
-                        if(structureShadow != null)
-                        {
-                            game.CeaseFire(Collections.singletonList(structureShadow.GetPointer()));
-                        }
-                        else if(StructureList != null)
-                        {
-                            List<EntityPointer> SitePointers = new ArrayList<>();
-
-                            for(Object objStructure : StructureList.toArray())
-                            {
-                                Structure structure = (Structure)objStructure;
-                                SitePointers.add(structure.GetPointer());
-                            }
-
-                            game.CeaseFire(SitePointers);
-                        }
-                    }
-                });
-                launchDialog.SetOnClickNo(new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View view)
-                    {
-                        launchDialog.dismiss();
-                    }
-                });
-                launchDialog.show(activity.getFragmentManager(), "");
-            }
-        });
-
-        if(StructureList == null && iconControlStructure instanceof ArtilleryGun)
-        {
-            btnAttack.setVisibility(VISIBLE);
-
-            btnAttack.setOnClickListener(new OnClickListener()
-            {
-                @Override
-                public void onClick(View view)
-                {
-                    if(structureShadow != null)
-                    {
-                        activity.SetTargetMode(((LaunchEntity)structureShadow).GetPointer(), null);
-                    }
-                    else if(StructureList != null)
-                    {
-                        List<EntityPointer> SitePointers = new ArrayList<>();
-
-                        for(Object objStructure : StructureList.toArray())
-                        {
-                            Structure structure = (Structure)objStructure;
-                            SitePointers.add(structure.GetPointer());
-                        }
-
-                        activity.SetTargetMode(null, SitePointers);
-                    }
-                }
-            });
-        }
-        else
-        {
-            btnAttack.setVisibility(GONE);
         }
 
         if(iconControlStructure instanceof MissileSite)
@@ -689,15 +570,6 @@ public class StructureMaintenanceView extends LaunchView implements LaunchUIComm
                     {
                         ArtilleryGun artillery = (ArtilleryGun)structureShadow;
 
-                        if(artillery.HasFireOrder())
-                        {
-                            btnCeaseFire.setVisibility(VISIBLE);
-                        }
-                        else
-                        {
-                            btnCeaseFire.setVisibility(GONE);
-                        }
-
                         if(artillery.GetAuto())
                         {
                             flasherAuto.TurnGreen(context);
@@ -781,15 +653,6 @@ public class StructureMaintenanceView extends LaunchView implements LaunchUIComm
                         break;
                     }
                 }
-            }
-
-            if(bShowCeaseFire)
-            {
-                btnCeaseFire.setVisibility(VISIBLE);
-            }
-            else
-            {
-                btnCeaseFire.setVisibility(GONE);
             }
 
             TextUtilities.AssignHealthStringAndAppearance(txtHealth, CurrentStructures);

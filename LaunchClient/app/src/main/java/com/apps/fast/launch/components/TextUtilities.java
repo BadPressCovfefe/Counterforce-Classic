@@ -1569,14 +1569,10 @@ public class TextUtilities
         GeoCoord geoStart = game.GetPosition((LaunchEntity)fuelable);
         float fltDistanceTravelled = geoStart.DistanceTo(geoTarget);
 
-        float fltMaxRange = Defs.CARGO_TRUCK_RANGE;
+        float fltMaxRange = Defs.NAVAL_RANGE;
 
-        if(fuelable instanceof NavalVessel)
-            fltMaxRange = Defs.NAVAL_RANGE;
-        else if(fuelable instanceof AirplaneInterface)
+        if(fuelable instanceof AirplaneInterface)
             fltMaxRange = Defs.GetAircraftRange(((AirplaneInterface)fuelable).GetAircraftType());
-        else if(fuelable instanceof Tank)
-            fltMaxRange = Defs.TANK_RANGE;
 
         float fuelPercent = fltDistanceTravelled/game.GetFuelableRange(fuelable.GetMaxFuel(), fltMaxRange);
 
@@ -1585,14 +1581,10 @@ public class TextUtilities
 
     public static String GetFuelUsageString(LaunchGame game, FuelableInterface fuelable, float fltDistance)
     {
-        float fltMaxRange = Defs.CARGO_TRUCK_RANGE;
+        float fltMaxRange = Defs.NAVAL_RANGE;
 
-        if(fuelable instanceof NavalVessel)
-            fltMaxRange = Defs.NAVAL_RANGE;
-        else if(fuelable instanceof AirplaneInterface)
+        if(fuelable instanceof AirplaneInterface)
             fltMaxRange = Defs.GetAircraftRange(((AirplaneInterface)fuelable).GetAircraftType());
-        else if(fuelable instanceof Tank)
-            fltMaxRange = Defs.TANK_RANGE;
 
         GeoCoord geoStart = game.GetPosition((LaunchEntity)fuelable);
         float fuelPercent = fltDistance/game.GetFuelableRange(fuelable.GetMaxFuel(), fltMaxRange);

@@ -37,7 +37,7 @@ public class CargoTruck extends LandUnit implements LaunchSystemListener, Namabl
     { 
         super(lID, geoPosition, nHP, nMaxHP, lOwnerID, resources);
         this.typeToDeliver = LootType.RESOURCES; //Just to give it a value so there is no null stuff later.
-        cargo = new CargoSystem(this, Defs.TRUCK_CARGO_CAPACITY_KG);
+        cargo = new CargoSystem(this, 0);
     }
     
     /** From save. */
@@ -54,7 +54,7 @@ public class CargoTruck extends LandUnit implements LaunchSystemListener, Namabl
     /** From stored cargo truck. */
     public CargoTruck(int lNewID, StoredCargoTruck truck, GeoCoord geoPosition)
     {
-        super(lNewID, geoPosition, truck.GetHP(), Defs.TRUCK_MAX_HP, truck.GetName(), truck.GetOwnerID(), 0, MoveOrders.WAIT, new GeoCoord(), null, false, 0, truck.GetResourceSystem(), truck.GetCurrentFuel(), null);
+        super(lNewID, geoPosition, truck.GetHP(), (short)69, truck.GetName(), truck.GetOwnerID(), 0, MoveOrders.WAIT, new GeoCoord(), null, false, 0, truck.GetResourceSystem(), truck.GetCurrentFuel(), null);
         cargo = truck.GetCargoSystem();
         cargo.SetSystemListener(this);
         this.typeToDeliver = LootType.RESOURCES;
@@ -229,7 +229,7 @@ public class CargoTruck extends LandUnit implements LaunchSystemListener, Namabl
     @Override
     public long GetWeight()
     {
-        return Defs.CARGO_TRUCK_WEIGHT_KG;
+        return 1;
     }
 
     @Override

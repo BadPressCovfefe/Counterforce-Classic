@@ -62,7 +62,7 @@ public class RadarStation extends Structure
         
         ByteBuffer bb = ByteBuffer.allocate(DATA_SIZE + cBaseData.length);
         bb.put(cBaseData);        
-        bb.put((byte)(bRadarActive? 0xFF : 0x00));
+        bb.put((byte)(bRadarActive ? 0xFF : 0x00));
         
         return bb.array();
     }

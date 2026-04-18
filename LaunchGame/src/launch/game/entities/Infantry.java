@@ -53,14 +53,14 @@ public class Infantry extends LandUnit implements InfantryInterface, Haulable, N
     {
         super(lID, geoPosition, nHP, nMaxHP, strName, lOwnerID, lUnderAttack, moveOrder, geoTarget, target, bVisible, lVisibleTime, resources, fltFuel, Coordinates);
         this.geoPosition.SetLastBearing(fltLastBearing);
-        this.dlyReload = new ShortDelay(Defs.INFANTRY_RELOAD_TIME);
+        this.dlyReload = new ShortDelay(2);
     }
     
     //Convert storedinfantry to infantry.
     public Infantry(int lNewID, StoredInfantry storedInfantry, GeoCoord geoDeploy)
     {
         super(lNewID, geoDeploy, storedInfantry.GetHP(), storedInfantry.GetMaxHP(), storedInfantry.GetName(), storedInfantry.GetOwnerID(), 0, MoveOrders.WAIT, geoDeploy, null, false, 0, storedInfantry.GetResourceSystem(), storedInfantry.GetCurrentFuel(), null);
-        this.dlyReload = new ShortDelay(Defs.INFANTRY_RELOAD_TIME);
+        this.dlyReload = new ShortDelay(2);
     }
     
     public Infantry(ByteBuffer bb, int lReceivingID)
@@ -212,7 +212,7 @@ public class Infantry extends LandUnit implements InfantryInterface, Haulable, N
     @Override
     public long GetWeight()
     {
-        return Defs.WEIGHT_STORED_INFANTRY;
+        return 1;
     }
     
     @Override

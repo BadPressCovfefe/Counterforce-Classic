@@ -10,6 +10,7 @@ import launch.comm.LaunchSession;
 import launch.game.Defs;
 import launch.game.GeoCoord;
 import launch.game.EntityPointer.EntityType;
+import launch.game.systems.ResourceSystem;
 
 /**
  *
@@ -24,7 +25,7 @@ public class Warehouse extends Structure
     /** New. */
     public Warehouse(int lID, GeoCoord geoPosition, short nHP, short nMaxHP, int lOwnerID, boolean bRespawnProtected, int lBootTime)
     {
-        super(lID, geoPosition, nHP, nMaxHP, lOwnerID, bRespawnProtected, lBootTime, null);
+        super(lID, geoPosition, nHP, nMaxHP, lOwnerID, bRespawnProtected, lBootTime, new ResourceSystem());
         this.oWealth = 0;
     }
     

@@ -1687,17 +1687,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
                 for(MapEntity entity : selectedEntities)
                 {
-                    if(entity instanceof Infantry)
-                    {
-                        Infantry infantry = (Infantry)entity;
-
-                        multiCircleOverlays.add(map.addCircle(new CircleOptions()
-                                .center(Utilities.GetLatLng(entity.GetPosition()))
-                                .radius(Defs.INFANTRY_COMBAT_RANGE * Defs.METRES_PER_KM)
-                                .strokeColor(Utilities.ColourFromAttr(context, infantry.GetMoveOrders() == MoveOrders.ATTACK ? R.attr.MissilePathColour : R.attr.InterceptorPathColour))
-                                .strokeWidth(3.0f)));
-                    }
-
                     if(entity instanceof Structure && ZoomedIn())
                     {
                         multiCircleOverlays.add(map.addCircle(new CircleOptions()
@@ -1714,21 +1703,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                 .radius(game.GetConfig().GetStructureSeparation(((Rubble)entity).GetStructureType()) * Defs.METRES_PER_KM)
                                 .strokeColor(Utilities.ColourFromAttr(context, R.attr.StructureSeparationRadiusColour))
                                 .strokeWidth(1.0f)));
-                    }
-
-                    if(entity instanceof Blueprint && ZoomedIn())
-                    {
-                        multiCircleOverlays.add(map.addCircle(new CircleOptions()
-                                .center(Utilities.GetLatLng(entity.GetPosition()))
-                                .radius(game.GetConfig().GetStructureSeparation(((Blueprint)entity).GetType()) * Defs.METRES_PER_KM)
-                                .strokeColor(Utilities.ColourFromAttr(context, R.attr.StructureSeparationRadiusColour))
-                                .strokeWidth(1.0f)));
-
-                        multiCircleOverlays.add(map.addCircle(new CircleOptions()
-                                .center(Utilities.GetLatLng(entity.GetPosition()))
-                                .radius(Defs.BLUEPRINT_CONSTRUCT_DISTANCE * Defs.METRES_PER_KM)
-                                .fillColor(Utilities.ColourFromAttr(context, R.attr.LootRadiusColour))
-                                .strokeWidth(0.0f)));
                     }
 
                     if(entity instanceof Loot && ZoomedIn())
@@ -1758,17 +1732,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                     .radius(game.GetConfig().GetCommandPostShelterRadius() * Defs.METRES_PER_KM)
                                     .strokeColor(Utilities.ColourFromAttr(context, R.attr.InterceptorPathColour))
                                     .strokeWidth(5.0f)));
-                        }
-
-                        if(entity instanceof RadarStation)
-                        {
-                            RadarStation radarStation = game.GetRadarStation(entity.GetID());
-
-                            multiCircleOverlays.add(map.addCircle(new CircleOptions()
-                                    .center(Utilities.GetLatLng(entity.GetPosition()))
-                                    .radius(Defs.RADAR_STATION_SCANNER_RANGE * Defs.METRES_PER_KM)
-                                    .strokeColor(Utilities.ColourFromAttr(context, R.attr.RadarColor))
-                                    .strokeWidth(3.0f)));
                         }
 
                         if(entity instanceof SAMSite)
@@ -1927,7 +1890,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                     {
                         CircleOverlays.add(map.addCircle(new CircleOptions()
                                 .center(Utilities.GetLatLng(entity.GetPosition()))
-                                .radius(Defs.SHIPYARD_REPAIR_DISTANCE * Defs.METRES_PER_KM)
+                                .radius(Defs.IN_PORT_RADIUS * Defs.METRES_PER_KM)
                                 .strokeColor(Utilities.ColourFromAttr(context, R.attr.MissilePathTrackingColour))
                                 .strokeWidth(5.0f)));
                     }
@@ -2031,15 +1994,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                         .strokeWidth(fltRangeRadius)));
                             }
                         }
-
-                        if(entity instanceof RadarStation)
-                        {
-                            CircleOverlays.add(map.addCircle(new CircleOptions()
-                                    .center(Utilities.GetLatLng(entity.GetPosition()))
-                                    .radius(Defs.RADAR_STATION_SCANNER_RANGE * Defs.METRES_PER_KM)
-                                    .strokeColor(Utilities.ColourFromAttr(context, R.attr.RadarColor))
-                                    .strokeWidth(3.0f)));
-                        }
                     }
 
                     if(entity instanceof Structure)
@@ -2049,21 +2003,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                 .radius(game.GetConfig().GetStructureSeparation(entity.GetEntityType()) * Defs.METRES_PER_KM)
                                 .strokeColor(Utilities.ColourFromAttr(context, R.attr.StructureSeparationRadiusColour))
                                 .strokeWidth(3.0f)));
-                    }
-
-                    if(entity instanceof Blueprint)
-                    {
-                        CircleOverlays.add(map.addCircle(new CircleOptions()
-                                .center(Utilities.GetLatLng(entity.GetPosition()))
-                                .radius(game.GetConfig().GetStructureSeparation(((Blueprint)entity).GetType()) * Defs.METRES_PER_KM)
-                                .strokeColor(Utilities.ColourFromAttr(context, R.attr.StructureSeparationRadiusColour))
-                                .strokeWidth(3.0f)));
-
-                        CircleOverlays.add(map.addCircle(new CircleOptions()
-                                .center(Utilities.GetLatLng(entity.GetPosition()))
-                                .radius(Defs.BLUEPRINT_CONSTRUCT_DISTANCE * Defs.METRES_PER_KM)
-                                .fillColor(Utilities.ColourFromAttr(context, R.attr.LootRadiusColour))
-                                .strokeWidth(0.0f)));
                     }
 
                     if(entity instanceof Rubble)
@@ -2158,165 +2097,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                         }
                     }
 
-                    if(entity instanceof Infantry)
-                    {
-                        Infantry infantry = (Infantry)entity;
-
-                        CircleOverlays.add(map.addCircle(new CircleOptions()
-                                .center(Utilities.GetLatLng(entity.GetPosition()))
-                                .radius(Defs.INFANTRY_COMBAT_RANGE * Defs.METRES_PER_KM)
-                                .strokeColor(Utilities.ColourFromAttr(context, infantry.GetMoveOrders() == MoveOrders.ATTACK ? R.attr.MissilePathColour : R.attr.InterceptorPathColour))
-                                .strokeWidth(3.0f)));
-
-                        if(game.EntityIsFriendly(infantry, game.GetOurPlayer()))
-                        {
-                            PatternItem dash = new Dash(10);
-                            PatternItem gap = new Gap(20);
-
-                            List<PatternItem> trajectoryPattern = Arrays.asList(gap, dash);
-
-                            if(infantry.GetMoveOrders() == Movable.MoveOrders.MOVE)
-                            {
-                                movableTrajectory = map.addPolyline(new PolylineOptions()
-                                        .add(Utilities.GetLatLng(infantry.GetPosition()))
-                                        .add(Utilities.GetLatLng(infantry.GetGeoTarget()))
-                                        .pattern(trajectoryPattern)
-                                        .geodesic(true)
-                                        .width(3.0f)
-                                        .color(Utilities.ColourFromAttr(me, R.attr.GoodColour)));
-
-                                MarkerOptions options = new MarkerOptions()
-                                        .position(Utilities.GetLatLng(infantry.GetGeoTarget()))
-                                        .anchor(0.5f, 0.5f)
-                                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_movement_waypoint));
-
-                                if(infantry.HasGeoCoordChain())
-                                {
-                                    Map<Integer, GeoCoord> Coordinates = infantry.GetCoordinates();
-                                    List<LatLng> points = new ArrayList<LatLng>();
-
-                                    points.add(Utilities.GetLatLng(infantry.GetPosition()));
-
-                                    for(int i = LaunchUtilities.GetSmallestIntInSet(Coordinates.keySet()); i <= LaunchUtilities.GetLargestIntInSet(Coordinates.keySet()); i++)
-                                    {
-                                        GeoCoord geoCoord = Coordinates.get(i);
-
-                                        if(geoCoord != null)
-                                        {
-                                            points.add(Utilities.GetLatLng(geoCoord));
-                                        }
-                                    }
-
-                                    if(movableTrajectory != null)
-                                    {
-                                        movableTrajectory.setPoints(points);
-                                    }
-
-                                    options.position(Utilities.GetLatLng(infantry.GetLastCoordinate()));
-                                }
-
-                                movableTarget = map.addMarker(options);
-                            }
-                            else if(infantry.GetMoveOrders() == Movable.MoveOrders.CAPTURE)
-                            {
-                                if(infantry.GetTarget() != null || infantry.GetGeoTarget() != null)
-                                {
-                                    GeoCoord geoTarget = null;
-
-                                    if(infantry.GetTarget() != null)
-                                    {
-                                        MapEntity target = infantry.GetTarget().GetMapEntity(game);
-
-                                        if(target != null)
-                                        {
-                                            geoTarget = target.GetPosition();
-                                        }
-                                    }
-
-                                    if(geoTarget != null)
-                                    {
-                                        movableTrajectory = map.addPolyline(new PolylineOptions()
-                                                .add(Utilities.GetLatLng(infantry.GetPosition()))
-                                                .add(Utilities.GetLatLng(geoTarget))
-                                                .pattern(trajectoryPattern)
-                                                .geodesic(true)
-                                                .width(3.0f)
-                                                .color(Utilities.ColourFromAttr(me, R.attr.MissilePathColour)));
-
-                                        movableTarget = map.addMarker(new MarkerOptions()
-                                                .position(Utilities.GetLatLng(geoTarget))
-                                                .anchor(0.5f, 0.5f)
-                                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_attack_waypoint)));
-                                    }
-                                }
-                            }
-                            else if(infantry.GetMoveOrders() == Movable.MoveOrders.LIBERATE)
-                            {
-                                if(infantry.GetTarget() != null || infantry.GetGeoTarget() != null)
-                                {
-                                    GeoCoord geoTarget = null;
-
-                                    if(infantry.GetTarget() != null)
-                                    {
-                                        MapEntity target = infantry.GetTarget().GetMapEntity(game);
-
-                                        if(target != null)
-                                        {
-                                            geoTarget = target.GetPosition();
-                                        }
-                                    }
-
-                                    if(geoTarget != null)
-                                    {
-                                        movableTrajectory = map.addPolyline(new PolylineOptions()
-                                                .add(Utilities.GetLatLng(infantry.GetPosition()))
-                                                .add(Utilities.GetLatLng(geoTarget))
-                                                .pattern(trajectoryPattern)
-                                                .geodesic(true)
-                                                .width(3.0f)
-                                                .color(Color.MAGENTA));
-
-                                        movableTarget = map.addMarker(new MarkerOptions()
-                                                .position(Utilities.GetLatLng(geoTarget))
-                                                .anchor(0.5f, 0.5f)
-                                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_liberate_waypoint)));
-                                    }
-                                }
-                            }
-                            else if(infantry.GetMoveOrders() == MoveOrders.ATTACK)
-                            {
-                                if(infantry.GetTarget() != null)
-                                {
-                                    if(infantry.GetTarget() != null)
-                                    {
-                                        MapEntity target = infantry.GetTarget().GetMapEntity(game);
-
-                                        if(target != null)
-                                        {
-                                            geoTarget = target.GetPosition();
-                                        }
-                                    }
-
-                                    if(geoTarget != null)
-                                    {
-                                        movableTrajectory = map.addPolyline(new PolylineOptions()
-                                                .add(Utilities.GetLatLng(infantry.GetPosition()))
-                                                .add(Utilities.GetLatLng(geoTarget))
-                                                .pattern(trajectoryPattern)
-                                                .geodesic(true)
-                                                .width(3.0f)
-                                                .color(Utilities.ColourFromAttr(me, R.attr.MissilePathColour)));
-
-                                        movableTarget = map.addMarker(new MarkerOptions()
-                                                .position(Utilities.GetLatLng(geoTarget))
-                                                .anchor(0.5f, 0.5f)
-                                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_attack_waypoint)));
-                                    }
-                                }
-                            }
-                        }
-                    }
-
                     if(entity instanceof Tank)
                     {
                         Tank tank = (Tank)entity;
@@ -2334,14 +2114,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                         .center(Utilities.GetLatLng(entity.GetPosition()))
                                         .radius(Defs.BATTLE_TANK_FIRING_RANGE * Defs.METRES_PER_KM)
                                         .strokeColor(Utilities.ColourFromAttr(context, R.attr.MissilePathColour))
-                                        .strokeWidth(5.0f)));
-                            }
-                            else if(tank.IsASPAAG())
-                            {
-                                CircleOverlays.add(map.addCircle(new CircleOptions()
-                                        .center(Utilities.GetLatLng(entity.GetPosition()))
-                                        .radius(Defs.SPAAG_FIRING_RANGE * Defs.METRES_PER_KM)
-                                        .strokeColor(Utilities.ColourFromAttr(context, R.attr.InterceptorPathColour))
                                         .strokeWidth(5.0f)));
                             }
 
@@ -2413,62 +2185,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                         }
                     }
 
-                    if(entity instanceof CargoTruck)
-                    {
-                        CargoTruck truck = (CargoTruck)entity;
-
-                        if(game.EntityIsFriendly(truck, game.GetOurPlayer()))
-                        {
-                            PatternItem dash = new Dash(10);
-                            PatternItem gap = new Gap(20);
-
-                            List<PatternItem> trajectoryPattern = Arrays.asList(gap, dash);
-
-                            if(truck.GetMoveOrders() == Movable.MoveOrders.MOVE)
-                            {
-                                movableTrajectory = map.addPolyline(new PolylineOptions()
-                                        .add(Utilities.GetLatLng(truck.GetPosition()))
-                                        .add(Utilities.GetLatLng(truck.GetGeoTarget()))
-                                        .pattern(trajectoryPattern)
-                                        .geodesic(true)
-                                        .width(3.0f)
-                                        .color(Utilities.ColourFromAttr(me, R.attr.GoodColour)));
-
-                                MarkerOptions options = new MarkerOptions()
-                                        .position(Utilities.GetLatLng(truck.GetGeoTarget()))
-                                        .anchor(0.5f, 0.5f)
-                                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_movement_waypoint));
-
-                                if(truck.HasGeoCoordChain())
-                                {
-                                    Map<Integer, GeoCoord> Coordinates = truck.GetCoordinates();
-                                    List<LatLng> points = new ArrayList<LatLng>();
-
-                                    points.add(Utilities.GetLatLng(truck.GetPosition()));
-
-                                    for(int i = LaunchUtilities.GetSmallestIntInSet(Coordinates.keySet()); i <= LaunchUtilities.GetLargestIntInSet(Coordinates.keySet()); i++)
-                                    {
-                                        GeoCoord geoCoord = Coordinates.get(i);
-
-                                        if(geoCoord != null)
-                                        {
-                                            points.add(Utilities.GetLatLng(geoCoord));
-                                        }
-                                    }
-
-                                    if(movableTrajectory != null)
-                                    {
-                                        movableTrajectory.setPoints(points);
-                                    }
-
-                                    options.position(Utilities.GetLatLng(truck.GetLastCoordinate()));
-                                }
-
-                                movableTarget = map.addMarker(options);
-                            }
-                        }
-                    }
-
                     if(entity instanceof NavalVessel)
                     {
                         NavalVessel vessel = (NavalVessel)entity;
@@ -2492,15 +2208,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                         .center(Utilities.GetLatLng(entity.GetPosition()))
                                         .radius(Defs.CIWS_RANGE * Defs.METRES_PER_KM)
                                         .strokeColor(Utilities.ColourFromAttr(context, R.attr.InterceptorPathColour))
-                                        .strokeWidth(5.0f)));
-                            }
-
-                            if(ship.HasSupport())
-                            {
-                                CircleOverlays.add(map.addCircle(new CircleOptions()
-                                        .center(Utilities.GetLatLng(entity.GetPosition()))
-                                        .radius(Defs.SHIPYARD_REPAIR_DISTANCE * Defs.METRES_PER_KM)
-                                        .strokeColor(Utilities.ColourFromAttr(context, R.attr.InfoColour))
                                         .strokeWidth(5.0f)));
                             }
 
@@ -2837,24 +2544,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                 }
                             }
                         }
-                    }
-
-                    if((entity instanceof Haulable || entity instanceof HaulerInterface) && !(entity instanceof Shipyard))
-                    {
-                        CircleOverlays.add(map.addCircle(new CircleOptions()
-                                .center(Utilities.GetLatLng(entity.GetPosition()))
-                                .radius(Defs.LOAD_DISTANCE * Defs.METRES_PER_KM)
-                                .strokeColor(Utilities.ColourFromAttr(context, R.attr.InfoColour))
-                                .strokeWidth(5.0f)));
-                    }
-
-                    if(entity instanceof Distributor)
-                    {
-                        CircleOverlays.add(map.addCircle(new CircleOptions()
-                                .center(Utilities.GetLatLng(entity.GetPosition()))
-                                .radius(Defs.DISTRIBUTOR_ACTION_DISTANCE * Defs.METRES_PER_KM)
-                                .strokeColor(Utilities.ColourFromAttr(context, R.attr.InfoColour))
-                                .strokeWidth(5.0f)));
                     }
                 }
             }
@@ -6118,7 +5807,11 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                     if(marker != null && marker.isVisible())
                                     {
                                         marker.setPosition(Utilities.GetLatLng(missile.GetPosition()));
-                                        marker.setRotation((float) GeoCoord.ToDegrees(missile.GetPosition().GetLastBearing()));
+
+                                        MissileType type = game.GetConfig().GetMissileType(missile.GetID());
+
+                                        if(type == null || !type.GetName().contains("Wealth Balloon"))
+                                            marker.setRotation((float) GeoCoord.ToDegrees(missile.GetPosition().GetLastBearing()));
                                     }
 
                                     Marker threatMarker = ThreatMarkers.get(missile.GetID());
@@ -8073,7 +7766,10 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                     Missile missile = (Missile) entity;
                                     MissileType type = game.GetConfig().GetMissileType(missile.GetType());
                                     options.icon(BitmapDescriptorFactory.fromBitmap(EntityIconBitmaps.GetMissileBitmap(self, game, type, game.GetAllegiance(game.GetOurPlayer(), missile), type.GetAssetID())));
-                                    options.rotation((float) GeoCoord.ToDegrees(entity.GetPosition().GetLastBearing()));
+
+                                    if(type == null || !type.GetName().contains("Wealth Balloon"))
+                                        options.rotation((float) GeoCoord.ToDegrees(entity.GetPosition().GetLastBearing()));
+
                                     GeoCoord geoTarget;
 
                                     if(missile.GetTracking())

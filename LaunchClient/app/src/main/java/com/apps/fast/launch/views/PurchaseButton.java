@@ -202,13 +202,6 @@ public class PurchaseButton extends LinearLayout
             }
             break;
 
-            case CARGO_TRUCK:
-            {
-                unitIcon.setImageResource(R.drawable.todo);
-                oCost = Defs.CARGO_TRUCK_BUILD_COST.get(ResourceType.WEALTH);
-            }
-            break;
-
             case ARTILLERY_GUN:
             {
                 bRespectStructureSeparation = true;

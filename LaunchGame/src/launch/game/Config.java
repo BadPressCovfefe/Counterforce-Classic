@@ -1093,14 +1093,7 @@ public class Config
     
     public int GetDecommissionTime(Structure structure) 
     { 
-        if(structure.Captured())
-        {
-            return bDebugMode ? 3000 : Defs.CAPTURED_STRUCTURE_DECOM_TIME; 
-        }
-        else
-        {
-            return bDebugMode ? 3000 : lDecommissionTime; 
-        }
+        return bDebugMode ? 3000 : lDecommissionTime;
     }
 
     public int GetSize() { return lSize; }

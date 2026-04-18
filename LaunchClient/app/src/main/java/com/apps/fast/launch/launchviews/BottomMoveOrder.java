@@ -299,11 +299,7 @@ public class BottomMoveOrder extends LaunchView
                             {
                                 float fltMaxRange = 0.0f;
 
-                                if(movableEntity instanceof CargoTruck)
-                                    fltMaxRange = Defs.CARGO_TRUCK_RANGE;
-                                else if(movableEntity instanceof Tank)
-                                    fltMaxRange = Defs.TANK_RANGE;
-                                else if(movableEntity instanceof NavalVessel)
+                                if(movableEntity instanceof NavalVessel)
                                     fltMaxRange = Defs.NAVAL_RANGE;
                                 else if(movableEntity instanceof AirplaneInterface)
                                     fltMaxRange = Defs.GetAircraftRange(((AirplaneInterface)movableEntity).GetAircraftType());

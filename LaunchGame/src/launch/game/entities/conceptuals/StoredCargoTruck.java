@@ -49,7 +49,7 @@ public class StoredCargoTruck extends StoredDamagable implements LaunchSystemLis
     /** From stored cargo truck. */
     public StoredCargoTruck(int lNewID, CargoTruck truck, EntityPointer host)
     {
-        super(lNewID, truck.GetOwnerID(), truck.GetHP(), Defs.TRUCK_MAX_HP, 0, truck.GetName());
+        super(lNewID, truck.GetOwnerID(), truck.GetHP(), (short)69, 0, truck.GetName());
         cargo = truck.GetCargoSystem();
         cargo.SetSystemListener(this);
         this.host = host;
@@ -94,7 +94,7 @@ public class StoredCargoTruck extends StoredDamagable implements LaunchSystemLis
     @Override
     public long GetWeight()
     {
-        return Defs.CARGO_TRUCK_WEIGHT_KG;
+        return 1;
     }
     
     @Override

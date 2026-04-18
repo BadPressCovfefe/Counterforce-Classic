@@ -113,14 +113,7 @@ public class StoredTank extends StoredDamagable implements LaunchSystemListener,
     @Override
     public long GetWeight()
     {
-        long oWeight = Defs.MISSILE_TANK_WEIGHT;
-        
-        if(launchables != null)
-        {
-            oWeight += (launchables.GetOccupiedSlotCount() * Defs.LAUNCHABLE_WEIGHT);
-        }
-        
-        return oWeight;
+        return 1;
     }
     
     @Override

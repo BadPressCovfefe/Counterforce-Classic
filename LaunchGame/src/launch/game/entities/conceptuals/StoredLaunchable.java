@@ -88,7 +88,7 @@ public class StoredLaunchable implements Haulable
     @Override
     public long GetWeight()
     {
-        return oQuantity * Defs.LAUNCHABLE_WEIGHT;
+        return 1;
     }
     
     @Override

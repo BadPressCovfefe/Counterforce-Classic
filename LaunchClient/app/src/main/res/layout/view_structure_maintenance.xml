@@ -159,7 +159,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:clickable="true"
-            android:layout_marginLeft="@dimen/MainViewSpacing"
             android:orientation="horizontal">
 
             <ImageView

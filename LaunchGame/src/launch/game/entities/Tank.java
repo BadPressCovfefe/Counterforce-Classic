@@ -320,7 +320,7 @@ public class Tank extends LandUnit implements LaunchSystemListener, NamableInter
     @Override
     public long GetWeight()
     {
-        return Defs.MISSILE_TANK_WEIGHT/* + (launchables.GetOccupiedSlotCount() * Defs.LAUNCHABLE_WEIGHT)*/;
+        return 1;
     }
     
     @Override

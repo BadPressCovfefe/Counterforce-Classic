@@ -119,7 +119,7 @@ public class StoredInfantry extends StoredDamagable implements InfantryInterface
     @Override
     public long GetWeight()
     {
-        return Defs.WEIGHT_STORED_INFANTRY;
+        return 1;
     }
     
     @Override

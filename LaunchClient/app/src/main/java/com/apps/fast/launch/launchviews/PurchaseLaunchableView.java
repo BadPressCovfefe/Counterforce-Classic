@@ -422,40 +422,43 @@ public class PurchaseLaunchableView extends LaunchView
             }
         };
 
-        btnSortBy.setOnClickListener(new OnClickListener()
+        if(btnSortBy != null)
         {
-            @Override
-            public void onClick(View view)
+            btnSortBy.setOnClickListener(new OnClickListener()
             {
-                //Display dialog with sort by options.
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle(context.getString(R.string.sort_missile_types_by));
-
-                builder.setSingleChoiceItems(SortOrderNames, bMissiles ? missileOrder.ordinal() : interceptorOrder.ordinal(), new DialogInterface.OnClickListener()
+                @Override
+                public void onClick(View view)
                 {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i)
+                    //Display dialog with sort by options.
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setTitle(context.getString(R.string.sort_missile_types_by));
+
+                    builder.setSingleChoiceItems(SortOrderNames, bMissiles ? missileOrder.ordinal() : interceptorOrder.ordinal(), new DialogInterface.OnClickListener()
                     {
-                        if(bMissiles)
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i)
                         {
-                            missileOrder = MissileSortOrder.values()[i];
-                            dialogInterface.dismiss();
+                            if(bMissiles)
+                            {
+                                missileOrder = MissileSortOrder.values()[i];
+                                dialogInterface.dismiss();
 
-                            SetupMissiles();
+                                SetupMissiles();
+                            }
+                            else
+                            {
+                                interceptorOrder = InterceptorSortOrder.values()[i];
+                                dialogInterface.dismiss();
+
+                                SetupInterceptors();
+                            }
                         }
-                        else
-                        {
-                            interceptorOrder = InterceptorSortOrder.values()[i];
-                            dialogInterface.dismiss();
+                    });
 
-                            SetupInterceptors();
-                        }
-                    }
-                });
-
-                builder.show();
-            }
-        });
+                    builder.show();
+                }
+            });
+        }
 
         btnPurchase.setOnClickListener(new OnClickListener()
         {
@@ -773,35 +776,45 @@ public class PurchaseLaunchableView extends LaunchView
                     case BLAST_RADIUS:
                     {
                         Collections.sort(TypesSorted, blastRadiusComparator);
-                        btnSortBy.setText(context.getString(R.string.sort_name_blast_radius));
+
+                        if(btnSortBy != null)
+                            btnSortBy.setText(context.getString(R.string.sort_name_blast_radius));
                     }
                     break;
 
                     case SPEED:
                     {
                         Collections.sort(TypesSorted, speedComparator);
-                        btnSortBy.setText(context.getString(R.string.sort_name_speed));
+
+                        if(btnSortBy != null)
+                            btnSortBy.setText(context.getString(R.string.sort_name_speed));
                     }
                     break;
 
                     case RANGE:
                     {
                         Collections.sort(TypesSorted, rangeComparator);
-                        btnSortBy.setText(context.getString(R.string.sort_name_range));
+
+                        if(btnSortBy != null)
+                            btnSortBy.setText(context.getString(R.string.sort_name_range));
                     }
                     break;
 
                     case BUILD_TIME:
                     {
                         Collections.sort(TypesSorted, buildTimeComparator);
-                        btnSortBy.setText(context.getString(R.string.sort_name_build_time));
+
+                        if(btnSortBy != null)
+                            btnSortBy.setText(context.getString(R.string.sort_name_build_time));
                     }
                     break;
 
                     case DAMAGE:
                     {
                         Collections.sort(TypesSorted, damageComparator);
-                        btnSortBy.setText(context.getString(R.string.sort_name_damage));
+
+                        if(btnSortBy != null)
+                            btnSortBy.setText(context.getString(R.string.sort_name_damage));
                     }
                     break;
 
@@ -814,7 +827,9 @@ public class PurchaseLaunchableView extends LaunchView
                                 TypesSorted.remove(type);
                             }
                         }
-                        btnSortBy.setText(context.getString(R.string.sort_name_nuclear));
+
+                        if(btnSortBy != null)
+                            btnSortBy.setText(context.getString(R.string.sort_name_nuclear));
                     }
                     break;
 
@@ -827,7 +842,9 @@ public class PurchaseLaunchableView extends LaunchView
                                 TypesSorted.remove(type);
                             }
                         }
-                        btnSortBy.setText(context.getString(R.string.sort_name_emp));
+
+                        if(btnSortBy != null)
+                            btnSortBy.setText(context.getString(R.string.sort_name_emp));
                     }
                     break;
 
@@ -840,7 +857,9 @@ public class PurchaseLaunchableView extends LaunchView
                                 TypesSorted.remove(type);
                             }
                         }
-                        btnSortBy.setText(context.getString(R.string.sort_name_ecm));
+
+                        if(btnSortBy != null)
+                            btnSortBy.setText(context.getString(R.string.sort_name_ecm));
                     }
                     break;
 
@@ -853,21 +872,27 @@ public class PurchaseLaunchableView extends LaunchView
                                 TypesSorted.remove(type);
                             }
                         }
-                        btnSortBy.setText(context.getString(R.string.sort_name_stealth));
+
+                        if(btnSortBy != null)
+                            btnSortBy.setText(context.getString(R.string.sort_name_stealth));
                     }
                     break;
 
                     case ACCURACY:
                     {
                         Collections.sort(TypesSorted, cepComparator);
-                        btnSortBy.setText(context.getString(R.string.sort_name_accuracy));
+
+                        if(btnSortBy != null)
+                            btnSortBy.setText(context.getString(R.string.sort_name_accuracy));
                     }
                     break;
 
                     case YIELD:
                     {
                         Collections.sort(TypesSorted, yieldComparator);
-                        btnSortBy.setText(context.getString(R.string.sort_name_yield));
+
+                        if(btnSortBy != null)
+                            btnSortBy.setText(context.getString(R.string.sort_name_yield));
                     }
                     break;
                 }
@@ -965,14 +990,18 @@ public class PurchaseLaunchableView extends LaunchView
                     case SPEED:
                     {
                         Collections.sort(TypesSorted, intSpeedComparator);
-                        btnSortBy.setText(context.getString(R.string.sort_name_speed));
+
+                        if(btnSortBy != null)
+                            btnSortBy.setText(context.getString(R.string.sort_name_speed));
                     }
                     break;
 
                     case RANGE:
                     {
                         Collections.sort(TypesSorted, intRangeComparator);
-                        btnSortBy.setText(context.getString(R.string.sort_name_range));
+
+                        if(btnSortBy != null)
+                            btnSortBy.setText(context.getString(R.string.sort_name_range));
                     }
                     break;
 
@@ -985,7 +1014,9 @@ public class PurchaseLaunchableView extends LaunchView
                                 TypesSorted.remove(type);
                             }
                         }
-                        btnSortBy.setText(context.getString(R.string.sort_name_nuclear));
+
+                        if(btnSortBy != null)
+                            btnSortBy.setText(context.getString(R.string.sort_name_nuclear));
                     }
                     break;
                 }

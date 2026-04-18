@@ -333,8 +333,8 @@
     <string name="allies">Allies</string>
     <string name="insufficient_slots">No more free weapon slots.</string>
     <string name="purchase_confirm">Purchase the selected munitions for %1$s?</string>
-    <string name="nuclear_information">Nuclear missiles create a radioactive area that damages players, and a large EMP pulse that can knock structures offline.</string>
-    <string name="tracking_information">This missile will follow targeted players, trucks, tanks, and infantry, even if they move. This missile CANNOT track ships or submarines.</string>
+    <string name="nuclear_information">Create radiation with a ground-burst or EMP effects with an air-burst.</string>
+    <string name="tracking_information">Will track tanks.</string>
     <string name="admin_longpress">Long-press for admin options.</string>
     <string name="ban_longpress">Long-press to ban this player.</string>
     <string name="ban_confirm">Ban %1$s?</string>
@@ -456,7 +456,7 @@
     <string name="interceptor_accuracy">%s</string>
     <string name="nuke_site_title">ICBM silo</string>
     <string name="desc_sam_site">Defend against airborne hostiles.</string>
-    <string name="ecm_information">This missile has electronic countermeasures that reduce interceptor and sentry gun accuracy by %s.</string>
+    <string name="ecm_information">Electronic Countermeasures reduce interceptor hit chance.</string>
     <string name="give_wealth">Press + to transfer %1$s to %2$s. Current amount to send: %3$s.</string>
     <string name="rank_up_message">You have been promoted to the rank of %s. Your basic income has increased.</string>
     <string name="rank_down_message">You have been demoted to the rank of %s. Your basic income has decreased.</string>

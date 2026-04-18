@@ -48,12 +48,7 @@ public class StructureStats
             case AIRBASE: return Defs.AIRBASE_HP;
             case MISSILE_SITE: return Defs.MISSILE_SITE_HP;
             case SENTRY_GUN: return Defs.SENTRY_GUN_HP;
-            case RADAR_STATION: return Defs.RADAR_STATION_HP;
-            case ORE_MINE: return Defs.ORE_MINE_HP;
-            case MISSILE_FACTORY: return Defs.MISSILE_FACTORY_HP;
             case WAREHOUSE: return Defs.WAREHOUSE_HP;
-            case PROCESSOR: return Defs.PROCESSOR_MAX_HP;
-            case DISTRIBUTOR: return Defs.DISTRIBUTOR_MAX_HP;
             default: return 69;
         }
     }

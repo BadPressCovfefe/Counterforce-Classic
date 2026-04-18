@@ -93,10 +93,7 @@ public class Loot extends MapEntity implements Haulable
     @Override
     public long GetWeight() 
     { 
-        if(lootType == LootType.RESOURCES)
-            return oQuantity;
-        else
-            return oQuantity * Defs.LAUNCHABLE_WEIGHT;
+        return 1;
     }
     
     @Override

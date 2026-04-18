@@ -116,6 +116,7 @@ public abstract class LaunchGame implements LaunchEntityListener
     protected Map<Integer, Ship> Ships = new ConcurrentHashMap<>();
     protected Map<Integer, Submarine> Submarines = new ConcurrentHashMap<>();
     protected Map<Integer, Rubble> Rubbles = new ConcurrentHashMap<>();
+    protected KOTH kingOfTheHill = null;
     
     protected Map<Integer, Blueprint> Blueprints = new ConcurrentHashMap<>();
     protected Map<Integer, Airdrop> Airdrops = new ConcurrentHashMap<>();
@@ -558,218 +559,6 @@ public abstract class LaunchGame implements LaunchEntityListener
             }
         }
         
-        //Process infantry.
-        for(Infantry infantry : GetInfantries())
-        {
-            if(infantry.Destroyed())
-            {
-                Infantries.remove(infantry.GetID());
-                EntityRemoved(infantry, true);
-            }
-            else
-            {
-                infantry.Tick(lMS);
-                
-                switch(infantry.GetMoveOrders())
-                {
-                    case MOVE:
-                    {
-                        if(infantry.HasGeoCoordChain())
-                        {
-                            GeoCoord geoTarget = infantry.GetNextCoordinate();
-                            GeoCoord geoPosition = infantry.GetPosition();
-                            GeoCoord geoFirstPos = infantry.GetPosition().GetCopy();
-
-                            if(geoPosition.MoveToward(geoTarget, Defs.LAND_UNIT_SPEED, lMS))
-                            {
-                                infantry.ReachedFirstCoordinate();
-
-                                if(infantry.GetNextCoordinate() == null)
-                                {
-                                    infantry.Wait();
-                                }
-                            }
-
-                            EntityMoved(infantry);
-                        }
-                        else if(infantry.HasGeoTarget())
-                        {
-                            GeoCoord geoTarget = infantry.GetGeoTarget();
-                            GeoCoord geoPosition = infantry.GetPosition();
-                            GeoCoord geoFirstPos = infantry.GetPosition().GetCopy();
-
-                            if(geoPosition.MoveToward(geoTarget, Defs.LAND_UNIT_SPEED, lMS))
-                            {
-                                infantry.Wait();
-                            }
-
-                            EntityMoved(infantry);
-                        }
-                        else
-                        {
-                            infantry.Wait();
-                        }
-                    }
-                    break;
-
-                    case CAPTURE:
-                    case LIBERATE:
-                    {
-                        MapEntity target = infantry.GetTarget().GetMapEntity(this);
-
-                        if(target != null)
-                        {
-                            if(infantry.GetPosition().MoveToward(target.GetPosition(), Defs.LAND_UNIT_SPEED, lMS))
-                            {
-                                //Reached target.
-                                InfantryReachedTarget(infantry);
-                            }                                
-
-                            EntityMoved(infantry);
-                        }
-                        else
-                        {
-                            infantry.Wait();
-                        } 
-                    }
-                    break;
-
-                    case ATTACK:
-                    {
-                        MapEntity target = infantry.GetTarget().GetMapEntity(this);
-
-                        if(target != null)
-                        {
-                            GeoCoord geoTarget = target.GetPosition().GetCopy();
-                            GeoCoord geoPosition = infantry.GetPosition();
-
-                            if(infantry.GetPosition().DistanceTo(geoTarget) > Defs.INFANTRY_COMBAT_RANGE)
-                            {
-                                geoPosition.MoveToward(geoTarget, Defs.LAND_UNIT_SPEED, lMS);
-                            }
-
-                            EntityMoved(infantry);
-                        }
-                    }
-                    break;
-
-                    case WAIT:
-                    {
-                        infantry.DefendPosition();
-                        EntityUpdated(infantry, false);
-                    }
-                    break;
-                }
-            }
-        }
-        
-        for(CargoTruck truck : GetCargoTrucks())
-        {
-            if(truck.Destroyed() || truck.GetRemove())
-            {
-                CargoTrucks.remove(truck.GetID());
-                EntityRemoved(truck, true);
-            }
-            else
-            {
-                truck.Tick(lMS);
-                
-                switch(truck.GetMoveOrders())
-                {
-                    case MOVE:
-                    {
-                        if(truck.HasGeoCoordChain())
-                        {
-                            GeoCoord geoTarget = truck.GetNextCoordinate();
-                            GeoCoord geoPosition = truck.GetPosition();
-
-                            if(geoPosition.MoveToward(geoTarget, Defs.LAND_UNIT_SPEED, lMS))
-                            {
-                                truck.ReachedFirstCoordinate();
-
-                                if(truck.GetNextCoordinate() == null)
-                                {
-                                    truck.Wait();
-                                }
-                            }
-                            else
-                            {
-                                truck.UseFuel(Defs.GetFuelUsagePerTick(lMS, Defs.CARGO_TRUCK_RANGE, Defs.LAND_UNIT_SPEED));
-                            }
-
-                            EntityMoved(truck);
-                        }
-                        else if(truck.HasGeoTarget())
-                        {
-                            GeoCoord geoTarget = truck.GetGeoTarget();
-                            GeoCoord geoPosition = truck.GetPosition();
-
-                            if(geoPosition.MoveToward(geoTarget, Defs.LAND_UNIT_SPEED, lMS))
-                            {
-                                truck.Wait();
-                            }
-                            else
-                            {
-                                truck.UseFuel(Defs.GetFuelUsagePerTick(lMS, Defs.CARGO_TRUCK_RANGE, Defs.LAND_UNIT_SPEED));
-                            }
-
-                            EntityMoved(truck);
-                        }
-                        else
-                        {
-                            truck.Wait();
-                        }
-                    }
-                    break;
-
-                    case WAIT:
-                    {
-                        //Do nothing.
-                    }
-                    break;
-                }
-            }
-        }
-        
-        for(Processor processor : GetProcessors())
-        {
-            if(!processor.Destroyed())
-            {
-                processor.Tick(lMS);
-            }
-            else
-            {
-                Processors.remove(processor.GetID());
-                EntityRemoved(processor, true);
-            }
-        }
-        
-        for(Distributor distributor : GetDistributors())
-        {
-            if(!distributor.Destroyed())
-            {
-                distributor.Tick(lMS);
-            }
-            else
-            {
-                Distributors.remove(distributor.GetID());
-                EntityRemoved(distributor, true);
-            }
-        }
-        
-        for(ScrapYard scrapyard : GetScrapYards())
-        {
-            if(!scrapyard.Destroyed())
-            {
-                scrapyard.Tick(lMS);
-            }
-            else
-            {
-                ScrapYards.remove(scrapyard.GetID());
-                EntityRemoved(scrapyard, true);
-            }
-        }
-        
         for(Shipyard shipyard : GetShipyards())
         {
             if(!shipyard.Destroyed())
@@ -807,10 +596,6 @@ public abstract class LaunchGame implements LaunchEntityListener
                                     tank.DefendPosition();
                                 }
                             }
-                            else
-                            {
-                                tank.UseFuel(Defs.GetFuelUsagePerTick(lMS, Defs.TANK_RANGE, Defs.LAND_UNIT_SPEED));
-                            }
 
                             EntityMoved(tank);
                         }
@@ -822,10 +607,6 @@ public abstract class LaunchGame implements LaunchEntityListener
                             if(geoPosition.MoveToward(geoTarget, Defs.LAND_UNIT_SPEED, lMS))
                             {
                                 tank.DefendPosition();
-                            }
-                            else
-                            {
-                                tank.UseFuel(Defs.GetFuelUsagePerTick(lMS, Defs.TANK_RANGE, Defs.LAND_UNIT_SPEED));
                             }
 
                             EntityMoved(tank);
@@ -852,7 +633,6 @@ public abstract class LaunchGame implements LaunchEntityListener
                                 if(tank.GetPosition().DistanceTo(geoTarget) > Defs.BATTLE_TANK_FIRING_RANGE)
                                 {
                                     geoPosition.MoveToward(geoTarget, Defs.LAND_UNIT_SPEED, lMS);
-                                    tank.UseFuel(Defs.GetFuelUsagePerTick(lMS, Defs.TANK_RANGE, Defs.LAND_UNIT_SPEED));
                                     EntityMoved(tank);
                                 }
                             }
@@ -914,12 +694,6 @@ public abstract class LaunchGame implements LaunchEntityListener
                                 }
                                 
                                 EntityMoved(ship);
-
-                                if(!ship.GetNuclear())
-                                {
-                                    float fltFuelUsed = Defs.GetFuelUsagePerTick(lMS, Defs.NAVAL_RANGE, Defs.NAVAL_SPEED);
-                                    ship.UseFuel(fltFuelUsed);
-                                }
                             }
                             else if(ship.HasGeoTarget())
                             {
@@ -932,12 +706,6 @@ public abstract class LaunchGame implements LaunchEntityListener
                                 }
                                 
                                 EntityMoved(ship);
-
-                                if(!ship.GetNuclear())
-                                {
-                                    float fltFuelUsed = Defs.GetFuelUsagePerTick(lMS, Defs.NAVAL_RANGE, Defs.NAVAL_SPEED);
-                                    ship.UseFuel(fltFuelUsed);
-                                }
                             }
                             else
                             {
@@ -968,12 +736,6 @@ public abstract class LaunchGame implements LaunchEntityListener
                                 {
                                     geoPosition.MoveToward(geoTarget, Defs.NAVAL_SPEED, lMS);
                                     EntityMoved(ship);
-
-                                    if(!ship.GetNuclear())
-                                    {
-                                        float fltFuelUsed = Defs.GetFuelUsagePerTick(lMS, Defs.NAVAL_RANGE, Defs.NAVAL_SPEED);
-                                        ship.UseFuel(fltFuelUsed);
-                                    }
                                 }
                             }
                             else
@@ -2763,10 +2525,8 @@ public abstract class LaunchGame implements LaunchEntityListener
             
             if(airbase.GetAircraftSystem().GetSlotCount() > Defs.AIRBASE_DEFAULT_SLOTS)
             {
-                ResourceType typeCost = Defs.AIRBASE_CAPACITY_UPGRADE_TYPE;
-            
                 Map<ResourceType, Long> UpgradeValue = new ConcurrentHashMap<>();
-                UpgradeValue.put(typeCost, (long)((airbase.GetAircraftSystem().GetSlotCount() - Defs.AIRBASE_DEFAULT_SLOTS)/Defs.AIRBASE_CAPACITY_UPGRADE_AMOUNT) * Defs.AIRBASE_CAPACITY_UPGRADE_COST.get(typeCost));
+                UpgradeValue.put(ResourceType.WEALTH, (long)((airbase.GetAircraftSystem().GetSlotCount() - Defs.AIRBASE_DEFAULT_SLOTS)/Defs.AIRBASE_CAPACITY_UPGRADE_AMOUNT) * Defs.AIRBASE_CAPACITY_UPGRADE_COST.get(ResourceType.WEALTH));
                 LaunchUtilities.AddResourceMapsTogether(Values, UpgradeValue);
             }
             
@@ -2779,10 +2539,7 @@ public abstract class LaunchGame implements LaunchEntityListener
             
             if(armory.GetProducing())
             {
-                if(armory.GetIsBarracks())
-                    LaunchUtilities.AddResourceMapsTogether(Values, Defs.INFANTRY_UNIT_BUILD_COST);
-                else
-                    LaunchUtilities.AddResourceMapsTogether(Values, Defs.TANK_BUILD_COST);
+                LaunchUtilities.AddResourceMapsTogether(Values, Defs.TANK_BUILD_COST);
             }
             
             LaunchUtilities.AddResourceMapsTogether(Values, GetCargoSystemTotalValue(armory.GetCargoSystem()));
@@ -2875,17 +2632,12 @@ public abstract class LaunchGame implements LaunchEntityListener
     {
         Map<ResourceType, Long> BaseValue = new ConcurrentHashMap<>();
         
-        LaunchUtilities.AddResourceMapsTogether(BaseValue, Defs.INFANTRY_UNIT_BUILD_COST);
-        
         return BaseValue;
     }
     
     public final Map<ResourceType, Long> GetCargoTruckValue(CargoTruckInterface truck)
     {
         Map<ResourceType, Long> BaseValue = new ConcurrentHashMap<>();
-        
-        LaunchUtilities.AddResourceMapsTogether(BaseValue, Defs.CARGO_TRUCK_BUILD_COST);
-        LaunchUtilities.AddResourceMapsTogether(BaseValue, GetCargoSystemTotalValue(truck.GetCargoSystem()));
         
         return BaseValue;
     }
@@ -2894,36 +2646,6 @@ public abstract class LaunchGame implements LaunchEntityListener
     {
         Map<ResourceType, Long> Values = new ConcurrentHashMap<>();
         
-        //Only count money for now, though in the future we can also have it figure out the scrap value of each resource in the cargo system too.
-        /*if(system.ContainsResourceType(ResourceType.WEALTH))
-        {
-            lValue += system.GetAmountOfType(ResourceType.WEALTH);
-        }*/
-        
-        if(!system.GetInfantries().isEmpty())
-        {
-            for(StoredInfantry infantry : system.GetInfantries())
-            {
-                LaunchUtilities.AddResourceMapsTogether(Values, Defs.INFANTRY_UNIT_BUILD_COST);
-            }
-        }
-        
-        if(!system.GetTanks().isEmpty())
-        {
-            for(StoredTank tank : system.GetTanks())
-            {
-                LaunchUtilities.AddResourceMapsTogether(Values, GetTankValue(tank));
-            }
-        }
-        
-        if(!system.GetCargoTrucks().isEmpty())
-        {
-            for(StoredCargoTruck truck : system.GetCargoTrucks())
-            {
-                LaunchUtilities.AddResourceMapsTogether(Values, GetCargoTruckValue(truck));
-            }
-        }
-        
         return Values;
     }
     
@@ -2931,31 +2653,12 @@ public abstract class LaunchGame implements LaunchEntityListener
     {
         Map<ResourceType, Long> Values = new ConcurrentHashMap<>();
         
-        LaunchUtilities.AddResourceMapsTogether(Values, system.GetResourceMap());
-        
-        if(!system.GetCargoTrucks().isEmpty())
-        {
-            for(StoredCargoTruck truck : system.GetCargoTrucks())
-            {
-                LaunchUtilities.AddResourceMapsTogether(Values, Defs.CARGO_TRUCK_BUILD_COST);
-                LaunchUtilities.AddResourceMapsTogether(Values, GetCargoSystemNeutralValue(truck.GetCargoSystem()));
-            }
-        }
-        
         return Values;
     }
     
     public final Map<ResourceType, Long> GetCargoSystemOffenseValue(CargoSystem system)
     {
         Map<ResourceType, Long> Values = new ConcurrentHashMap<>();
-        
-        if(!system.GetInfantries().isEmpty())
-        {
-            for(StoredInfantry infantry : system.GetInfantries())
-            {
-                LaunchUtilities.AddResourceMapsTogether(Values, Defs.INFANTRY_UNIT_BUILD_COST);
-            }
-        }
         
         if(!system.GetTanks().isEmpty())
         {
@@ -2965,14 +2668,6 @@ public abstract class LaunchGame implements LaunchEntityListener
                 {
                     LaunchUtilities.AddResourceMapsTogether(Values, Defs.TANK_BUILD_COST);
                 }
-            }
-        }
-        
-        if(!system.GetCargoTrucks().isEmpty())
-        {
-            for(StoredCargoTruck truck : system.GetCargoTrucks())
-            {
-                LaunchUtilities.AddResourceMapsTogether(Values, GetCargoSystemOffenseValue(truck.GetCargoSystem()));
             }
         }
         
@@ -3233,32 +2928,15 @@ public abstract class LaunchGame implements LaunchEntityListener
         {
             Map<ResourceType, Long> RepairCosts = new ConcurrentHashMap<>();
             
-            if(entity instanceof Shipyard shipyard)
+            if(entity instanceof Damagable damagable)
             {
-                float fltHPProportion = shipyard.GetHPDeficit()/shipyard.GetMaxHP();
-                LaunchUtilities.AddResourceMapsTogether(RepairCosts, LaunchUtilities.ScaleResourceMap(Defs.SHIPYARD_REPAIR_COST, fltHPProportion));
-            }
-            else if(entity instanceof Structure structure)
-            {
-                float fltHPProportion = structure.GetHPDeficit()/structure.GetMaxHP();
-                
-                for(Entry<ResourceType, Long> buildCost : config.GetStructureBuildCost(structure).entrySet())
-                {
-                    RepairCosts.put(buildCost.getKey(), (long)(buildCost.getValue() * fltHPProportion));
-                }
-                
-                RepairCosts.put(ResourceType.CONSTRUCTION_SUPPLIES, (long)(structure.GetHPDeficit() * Defs.CONSUP_PER_HP_REPAIR_KG));
+                LaunchUtilities.AddResourceMapsTogether(RepairCosts, Map.ofEntries(entry(ResourceType.WEALTH, (long)(damagable.GetHPDeficit() * Defs.REPAIR_COST_PER_HP))));
             }
             else if(entity instanceof Rubble rubble)
             {
                 short nHP = StructureStats.GetMaxHPByType(rubble.GetStructureType(), this);
                 
-                for(Entry<ResourceType, Long> buildCost : config.GetStructureBuildCost(rubble.GetStructureType(), rubble.GetResourceType()).entrySet())
-                {
-                    RepairCosts.put(buildCost.getKey(), buildCost.getValue());
-                }
-                
-                LaunchUtilities.AddResourceMapsTogether(RepairCosts, Map.ofEntries(entry(ResourceType.CONSTRUCTION_SUPPLIES, (long)(nHP * Defs.CONSUP_PER_HP_REPAIR_KG))));
+                LaunchUtilities.AddResourceMapsTogether(RepairCosts, Map.ofEntries(entry(ResourceType.WEALTH, (long)(nHP * Defs.REPAIR_COST_PER_HP))));
             }
             
             return GetRequiredCost(RepairCosts);
@@ -3838,21 +3516,6 @@ public abstract class LaunchGame implements LaunchEntityListener
                 }
             }
             
-            //Infantry
-            
-            lValue += (GetInfantryCount(player.GetID()) * Defs.INFANTRY_UNIT_BUILD_COST.get(ResourceType.WEALTH));
-            
-            for(Ship ship : GetShips())
-            {
-                if(ship.GetOwnedBy(player.GetID()))
-                {
-                    if(ship.IsOffensive())
-                    {
-                        lValue += GetNavalVesselValue(ship).get(ResourceType.WEALTH);
-                    }
-                }
-            }
-            
             //Submarines
             
             for(Submarine submarine : GetSubmarines())
@@ -4026,21 +3689,6 @@ public abstract class LaunchGame implements LaunchEntityListener
                         {
                             lValue += airplane.GetCargoSystem().GetAmountOfType(ResourceType.WEALTH);
                         }
-                    }
-                }
-            }
-            
-            //Cargo trucks
-            
-            for(CargoTruckInterface truck : GetAllCargoTrucks())
-            {
-                if(truck.GetOwnedBy(player.GetID()))
-                {
-                    lValue += Defs.CARGO_TRUCK_BUILD_COST.get(ResourceType.WEALTH);
-                    
-                    if(truck.GetCargoSystem().ContainsResourceType(ResourceType.WEALTH))
-                    {
-                        lValue += truck.GetCargoSystem().GetAmountOfType(ResourceType.WEALTH);
                     }
                 }
             }
@@ -5114,6 +4762,16 @@ public abstract class LaunchGame implements LaunchEntityListener
         EntityUpdated(loot, false);
         
         EntityAdded(loot);
+    }
+    
+    public void AddKOTH(KOTH hill)
+    {
+        hill.SetListener(this);
+        kingOfTheHill = hill;
+        
+        EntityUpdated(kingOfTheHill, false);
+        
+        EntityAdded(kingOfTheHill);
     }
     
     public void AddRubble(Rubble rubble)
@@ -6947,148 +6605,7 @@ public abstract class LaunchGame implements LaunchEntityListener
     }
     
     public boolean LoadUnitBoardLegal(EntityPointer receiver, EntityPointer sender, EntityPointer unit)
-    {
-        if(receiver != null && (receiver.GetEntity(this) instanceof Warehouse || receiver.GetEntity(this) instanceof Airplane))
-        {
-            return false;
-        }
-        
-        if(sender != null && sender.GetEntity(this) instanceof Armory && !((Armory)sender.GetEntity(this)).GetOnline())
-        {
-            return false;
-        }
-        
-        if(receiver != null && receiver.GetEntity(this) instanceof Armory && !((Armory)receiver.GetEntity(this)).GetOnline())
-        {
-            return false;
-        }
-        
-        if(sender == null && receiver != null)
-        {
-            if(receiver.GetEntity(this) instanceof HaulerInterface)
-            {
-                //Sender is null, so the land unit is loading into a shipyard or storedaircraft.
-                HaulerInterface entityReceiver = (HaulerInterface)receiver.GetEntity(this);
-                Haulable haulable = (Haulable)unit.GetEntity(this);
-                CargoSystem system = entityReceiver.GetCargoSystem();
-                
-                float fltLoadDistance = Defs.LOAD_DISTANCE;
-                MapEntity mapSender = null;
-                MapEntity mapReceiver = null;
-                
-                if(haulable instanceof MapEntity)
-                {
-                    mapSender = ((MapEntity)haulable);
-                }
-                
-                if(entityReceiver instanceof StoredAirplane)
-                {
-                    mapReceiver = ((StoredAirplane)entityReceiver).GetHomeBase().GetMapEntity(this);
-                }
-                else if(entityReceiver instanceof MapEntity)
-                {
-                    mapReceiver = ((MapEntity)entityReceiver);
-                    
-                    if(entityReceiver instanceof Shipyard)
-                    {
-                        fltLoadDistance = Defs.SHIPYARD_REPAIR_DISTANCE;
-                    }
-                }
-
-                if(mapSender != null && mapReceiver != null && haulable != null)
-                {
-                    if(mapSender.GetPosition().DistanceTo(mapReceiver.GetPosition()) <= fltLoadDistance)
-                    {
-                        return system != null && system.WeightCanFit(haulable.GetWeight()) && haulable instanceof LandUnit && (entityReceiver instanceof Shipyard || entityReceiver instanceof StoredAirplane || entityReceiver instanceof Armory || (entityReceiver instanceof Ship && ((Ship)entityReceiver).HasAmphibious()));
-                    }
-                }
-            }
-        }
-        else if(receiver == null)
-        {
-            //Receiver null, so this should be a storedinfantry attempting an airdrop from an Aircraft or a stored land unit of any type disembarking from a shipyard or stored aircraft or warehouse.
-            LaunchEntity entitySender = sender.GetEntity(this);
-
-            if(entitySender instanceof Airplane)
-            {
-                return true;
-            }
-            else if(entitySender instanceof Shipyard)
-            {
-                return true;
-            }
-            else if(entitySender instanceof Warehouse)
-            {
-                return true;
-            }
-            else if(entitySender instanceof Armory)
-            {
-                return true;
-            }
-            else if(entitySender instanceof Ship && ((Ship)entitySender).HasAmphibious())
-            {
-                return true;
-            }
-            else if(entitySender instanceof StoredAirplane || entitySender instanceof Airbase)
-            {
-                return true;
-            }
-        }
-        else if(unit != null)
-        {
-            if(receiver.GetEntity(this) instanceof HaulerInterface)
-            {
-                //None are null, so a ship is transferring directly to a shipyard or vice-versa.
-                LaunchEntity entitySender = sender.GetEntity(this);
-                HaulerInterface entityReceiver = (HaulerInterface)receiver.GetEntity(this);
-                Haulable haulable = (Haulable)unit.GetEntity(this);
-                CargoSystem system = entityReceiver.GetCargoSystem();
-                
-                float fltLoadDistance = Defs.LOAD_DISTANCE;
-                MapEntity mapSender = null;
-                MapEntity mapReceiver = null;
-                
-                if(entitySender instanceof Shipyard || entityReceiver instanceof Shipyard)
-                {
-                    fltLoadDistance = Defs.SHIPYARD_REPAIR_DISTANCE;
-                }
-                
-                if(entitySender instanceof StoredAirplane)
-                {
-                    mapSender = ((StoredAirplane)entitySender).GetHomeBase().GetMapEntity(this);
-                }
-                /*else if(sender instanceof StoredTrain)
-                {
-                    TODO
-                }*/
-                else if(entitySender instanceof MapEntity)
-                {
-                    mapSender = ((MapEntity)entitySender);
-                }
-                
-                if(entityReceiver instanceof StoredAirplane)
-                {
-                    mapReceiver = ((StoredAirplane)entityReceiver).GetHomeBase().GetMapEntity(this);
-                }
-                /*else if(sender instanceof StoredTrain)
-                {
-                    TODO
-                }*/
-                else if(entityReceiver instanceof MapEntity)
-                {
-                    mapReceiver = ((MapEntity)entityReceiver);
-                }
-                
-                if(mapSender != null && mapReceiver != null)
-                {
-                    if(mapSender.GetPosition().DistanceTo(mapReceiver.GetPosition()) <= fltLoadDistance)
-                    {
-                        return system != null && system.WeightCanFit(haulable.GetWeight()) && (haulable instanceof StoredInfantry || haulable instanceof StoredTank || haulable instanceof StoredCargoTruck) && (entitySender instanceof Ship || entitySender instanceof Shipyard) && (entityReceiver instanceof Ship || entityReceiver instanceof Shipyard);
-                    }
-                }
-            }  
-        }
-            
+    {  
         return false;
     }
     
@@ -7191,7 +6708,7 @@ public abstract class LaunchGame implements LaunchEntityListener
                 {
                     if(EntityIsFriendly(shipyard, owner))
                     {
-                        if(vessel.GetPosition().DistanceTo(shipyard.GetPosition()) <= Defs.SHIPYARD_REPAIR_DISTANCE)
+                        if(vessel.GetPosition().DistanceTo(shipyard.GetPosition()) <= Defs.IN_PORT_RADIUS)
                         {
                             return true;
                         }
@@ -7206,36 +6723,12 @@ public abstract class LaunchGame implements LaunchEntityListener
                         {
                             if(ship.HasSupport())
                             {
-                                if(vessel.GetPosition().DistanceTo(ship.GetPosition()) <= Defs.SHIPYARD_REPAIR_DISTANCE)
+                                if(vessel.GetPosition().DistanceTo(ship.GetPosition()) <= Defs.IN_PORT_RADIUS)
                                     return true;
                             }
                         }
                     }
                 }  
-            }
-        }
-        
-        return false;
-    }
-    
-    public boolean LandUnitNearScrapYard(LandUnit unit)
-    {
-        Player owner = GetOwner(unit);
-        
-        if(owner != null && owner.Functioning())
-        {
-            for(ScrapYard yard : GetScrapYards())
-            {
-                if(yard.GetOnline())
-                {
-                    if(EntityIsFriendly(yard, owner))
-                    {
-                        if(unit.GetPosition().DistanceTo(yard.GetPosition()) <= Defs.LOAD_DISTANCE)
-                        {
-                            return true;
-                        }
-                    }
-                }
             }
         }
         

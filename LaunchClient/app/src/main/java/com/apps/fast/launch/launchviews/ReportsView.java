@@ -24,9 +24,6 @@ public class ReportsView extends LaunchView
     {
         ALL,
         REPORTS,
-        PRIVATE,
-        ALLIANCE,
-        GLOBAL,
         ECONOMY,
         COMBAT,
     }
@@ -39,9 +36,6 @@ public class ReportsView extends LaunchView
                 {
                         context.getString(R.string.reports_channel_all),
                         context.getString(R.string.reports_channel_reports),
-                        context.getString(R.string.reports_channel_private),
-                        context.getString(R.string.reports_channel_alliance),
-                        context.getString(R.string.reports_channel_global),
                         context.getString(R.string.reports_channel_economy),
                         context.getString(R.string.reports_channel_combat),
                 };
@@ -115,24 +109,6 @@ public class ReportsView extends LaunchView
             }
             break;
 
-            case GLOBAL:
-            {
-                btnSortBy.setText(context.getString(R.string.sorted_by_format, context.getString(R.string.reports_channel_global)));
-            }
-            break;
-
-            case PRIVATE:
-            {
-                btnSortBy.setText(context.getString(R.string.sorted_by_format, context.getString(R.string.reports_channel_private)));
-            }
-            break;
-
-            case ALLIANCE:
-            {
-                btnSortBy.setText(context.getString(R.string.sorted_by_format, context.getString(R.string.reports_channel_alliance)));
-            }
-            break;
-
             case ECONOMY:
             {
                 btnSortBy.setText(context.getString(R.string.sorted_by_format, context.getString(R.string.reports_channel_economy)));
@@ -160,18 +136,6 @@ public class ReportsView extends LaunchView
             //Filter reports based on selected sort option
             switch (reportsPage)
             {
-                case PRIVATE:
-                    if (!msg.contains(Defs.MESSAGE_PREFIX_PRIVATE)) continue;
-                    break;
-                case ALLIANCE:
-                    if (!msg.contains(Defs.MESSAGE_PREFIX_ALLIANCE)) continue;
-                    break;
-                case GLOBAL:
-                    if (!msg.contains(Defs.MESSAGE_PREFIX_GLOBAL)) continue;
-                    break;
-                case REPORTS:
-                    if(msg.contains(Defs.MESSAGE_PREFIX_PRIVATE) || msg.contains(Defs.MESSAGE_PREFIX_ALLIANCE) || msg.contains(Defs.MESSAGE_PREFIX_GLOBAL)) continue;
-                    break;
                 case ECONOMY:
                     if (!msg.contains("[ECONOMY]")) continue;
                     break;
@@ -179,6 +143,7 @@ public class ReportsView extends LaunchView
                     if (!msg.contains("[COMBAT]")) continue;
                     break;
                 case ALL:
+
                 default:
                     break;
             }

@@ -394,9 +394,6 @@ public class MissileStats
         
         int lPrep = ((int)fltLaunchVehicleWeight + (int)fltWarheadWeight) * TORPEDO_PREP_PER_WEIGHT < MIN_MISSILE_PREP ? MIN_MISSILE_PREP : ((int)fltLaunchVehicleWeight + (int)fltWarheadWeight) * TORPEDO_PREP_PER_WEIGHT;
         
-        if(bHostIsUnderWay)
-            lPrep *= Defs.UNDER_WAY_PREP_PENALTY;
-        
         return lPrep;
     }
     
@@ -421,10 +418,7 @@ public class MissileStats
         
         int lPrep = (int)((fltWeight * SAM_PREP_PER_WEIGHT) * 2.5f);
         
-        if(bHostIsUnderWay)
-            lPrep *= Defs.UNDER_WAY_PREP_PENALTY;
-        
-        return Math.max(lPrep, Defs.INTERCEPTOR_MIN_PREP);
+        return Math.max(lPrep, Defs.MS_PER_MIN * 9);
     }
     
     public static short GetDamageToLandUnit(LandUnit unit, GeoCoord geoImpact, Explosion explosion)

@@ -50,7 +50,7 @@ public class WarehouseControl extends LaunchView
     @Override
     protected void Setup()
     {
-        inflate(context, R.layout.control_warehouse, this);
+        inflate(context, R.layout.control_bank, this);
 
         Update();
     }

@@ -5,12 +5,12 @@
   <ServerName>Counterforce Classic</ServerName>
   <ServerDescription>Counterforce classic server.</ServerDescription>
   <DebugMode>false</DebugMode>
-  <StartingWealth>2000000</StartingWealth>
+  <StartingWealth>100000</StartingWealth>
   <RespawnWealth>0</RespawnWealth>
   <RespawnTime>3600000</RespawnTime>
   <RespawnProtectionTime>86400000</RespawnProtectionTime>
   <NoobProtectionTime>1209600000</NoobProtectionTime>
-  <HourlyWealth>2000</HourlyWealth>
+  <HourlyWealth>1000</HourlyWealth>
   <CMSSystemCost>3500</CMSSystemCost>
   <SAMSystemCost>3500</SAMSystemCost>
   <CMSStructureCost>7500</CMSStructureCost>
@@ -156,16 +156,16 @@
   <BlueprintExpiry>259200000</BlueprintExpiry>
   <BlueprintBuildDistance>0.05</BlueprintBuildDistance>
   <MissileTypes>
-    <MissileType ID="1141" Name="Delivery Balloon">
+    <MissileType ID="1141" Name="Wealth Balloon">
       <AssetID>7</AssetID>
-      <Purchasable>true</Purchasable>
+      <Purchasable>false</Purchasable>
       <MissileSpeed>100</MissileSpeed>
       <Range>20038</Range>
 	  <Yield>50</Yield>
 	  <Accuracy>1.0</Accuracy>
 	  <Costs>
-		<Resource Quantity="25000" Type="WEALTH"/>
-	</Costs>
+		<Resource Quantity="2500" Type="WEALTH"/>
+	  </Costs>
     </MissileType>
     <MissileType ID="1140" Name="Shahed">
       <AssetID>9</AssetID>
@@ -178,9 +178,7 @@
 	  <Accuracy>0.7</Accuracy>
 	  <Costs>
 		<Resource Quantity="200" Type="WEALTH"/>
-		<Resource Quantity="100" Type="FUEL"/>
-		<Resource Quantity="100" Type="STEEL"/>
-	</Costs>
+	  </Costs>
     </MissileType>
     <MissileType ID="1" Name="Tomahawk">
       <AssetID>15</AssetID>
@@ -195,11 +193,8 @@
 	  <Yield>750</Yield>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="1000" Type="WEALTH"/>
-		<Resource Quantity="450" Type="FUEL"/>
-		<Resource Quantity="450" Type="STEEL"/>
-		<Resource Quantity="100" Type="ELECTRONICS"/>
-	</Costs>
+		<Resource Quantity="200" Type="WEALTH"/>
+	  </Costs>
     </MissileType>
     <MissileType ID="3" Name="BrahMos-II">
       <AssetID>52</AssetID>
@@ -215,10 +210,7 @@
 	  <Yield>440</Yield>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="3000" Type="WEALTH"/>
-		<Resource Quantity="1400" Type="FUEL"/>
-		<Resource Quantity="1400" Type="STEEL"/>
-		<Resource Quantity="200" Type="ELECTRONICS"/>
+		<Resource Quantity="300" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
     <MissileType ID="5" Name="DF-ZF">
@@ -233,10 +225,7 @@
 	  <Yield>500</Yield>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="4200" Type="WEALTH"/>
-		<Resource Quantity="3500" Type="FUEL"/>
-		<Resource Quantity="3500" Type="STEEL"/>
-		<Resource Quantity="200" Type="ELECTRONICS"/>
+		<Resource Quantity="420" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
     <MissileType ID="7" Name="SM-62 Snark">
@@ -249,10 +238,7 @@
 	  <Yield>4000</Yield>
 	  <Accuracy>2.4</Accuracy>
 	  <Costs>
-		<Resource Quantity="6200" Type="WEALTH"/>
-		<Resource Quantity="1600" Type="FUEL"/>
-		<Resource Quantity="1600" Type="STEEL"/>
-		<Resource Quantity="100" Type="ENRICHED_URANIUM"/>
+		<Resource Quantity="3620" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="15" Name="Scud">
@@ -265,9 +251,7 @@
 	  <Yield>1000</Yield>
 	  <Accuracy>0.45</Accuracy>
 	  <Costs>
-		<Resource Quantity="2100" Type="WEALTH"/>
-		<Resource Quantity="1050" Type="FUEL"/>
-		<Resource Quantity="1050" Type="STEEL"/>
+		<Resource Quantity="210" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
       <MissileType ID="16" Name="Scud">
@@ -281,10 +265,7 @@
 	  <Yield>80</Yield>
 	  <Accuracy>0.45</Accuracy>
 	  <Costs>
-		<Resource Quantity="7100" Type="WEALTH"/>
-		<Resource Quantity="1050" Type="FUEL"/>
-		<Resource Quantity="1050" Type="STEEL"/>
-		<Resource Quantity="20" Type="ENRICHED_URANIUM"/>
+		<Resource Quantity="6710" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
     <MissileType ID="17" Name="Tomahawk">
@@ -302,11 +283,7 @@
 	  <Yield>150</Yield>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="7900" Type="WEALTH"/>
-		<Resource Quantity="2375" Type="FUEL"/>
-		<Resource Quantity="2375" Type="STEEL"/>
-		<Resource Quantity="100" Type="ELECTRONICS"/>
-		<Resource Quantity="50" Type="ENRICHED_URANIUM"/>
+		<Resource Quantity="4790" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="20" Name="CHAMP">
@@ -321,10 +298,7 @@
 	  <TankLaunched>true</TankLaunched>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="1700" Type="WEALTH"/>
-		<Resource Quantity="800" Type="FUEL"/>
-		<Resource Quantity="800" Type="STEEL"/>
-		<Resource Quantity="100" Type="ELECTRONICS"/>
+		<Resource Quantity="170" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="23" Name="SLAM">
@@ -337,10 +311,7 @@
 	  <Yield>500</Yield>
 	  <Accuracy>0.9</Accuracy>
 	  <Costs>
-		<Resource Quantity="8900" Type="WEALTH"/>
-		<Resource Quantity="2400" Type="FUEL"/>
-		<Resource Quantity="2400" Type="STEEL"/>
-		<Resource Quantity="180" Type="ENRICHED_URANIUM"/>
+		<Resource Quantity="5890" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="24" Name="Burevestnik">
@@ -354,120 +325,90 @@
 	  <Yield>900</Yield>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="11700" Type="WEALTH"/>
-		<Resource Quantity="2700" Type="FUEL"/>
-		<Resource Quantity="2700" Type="STEEL"/>
-		<Resource Quantity="100" Type="ELECTRONICS"/>
-		<Resource Quantity="250" Type="ENRICHED_URANIUM"/>
+		<Resource Quantity="7170" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1055" Name="ACM-B">
-      <AssetID>55</AssetID>
+      <AssetID>79</AssetID>
       <Purchasable>true</Purchasable>
       <MissileSpeed>1000</MissileSpeed>
       <Range>3700</Range>
       <Tracking>true</Tracking>
-	  <Stealth>true</Stealth>
 	  <AirLaunched>true</AirLaunched>
 	  <Yield>130</Yield>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="2900" Type="WEALTH"/>
-		<Resource Quantity="1350" Type="FUEL"/>
-		<Resource Quantity="1350" Type="STEEL"/>
-		<Resource Quantity="200" Type="ELECTRONICS"/>
+		<Resource Quantity="290" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1056" Name="ACM">
-      <AssetID>55</AssetID>
+      <AssetID>79</AssetID>
       <Purchasable>true</Purchasable>
       <MissileSpeed>1000</MissileSpeed>
       <Range>3700</Range>
       <Nuclear>true</Nuclear>
       <Tracking>true</Tracking>
-	  <Stealth>true</Stealth>
 	  <AirLaunched>true</AirLaunched>
 	  <Yield>100</Yield>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="8500" Type="WEALTH"/>
-		<Resource Quantity="1350" Type="FUEL"/>
-		<Resource Quantity="1350" Type="STEEL"/>
-		<Resource Quantity="200" Type="ELECTRONICS"/>
-		<Resource Quantity="30" Type="ENRICHED_URANIUM"/>
+		<Resource Quantity="6400" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1057" Name="JASSM-XR">
-      <AssetID>55</AssetID>
+      <AssetID>79</AssetID>
       <Purchasable>true</Purchasable>
       <MissileSpeed>1200</MissileSpeed>
       <Range>1200</Range>
       <Tracking>true</Tracking>
-	  <Stealth>true</Stealth>
 	  <AirLaunched>true</AirLaunched>
 	  <Yield>500</Yield>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="2100" Type="WEALTH"/>
-		<Resource Quantity="950" Type="FUEL"/>
-		<Resource Quantity="950" Type="STEEL"/>
-		<Resource Quantity="200" Type="ELECTRONICS"/>
+		<Resource Quantity="210" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1058" Name="Iskander-M">
-      <AssetID>56</AssetID>
+      <AssetID>25</AssetID>
       <Purchasable>true</Purchasable>
       <MissileSpeed>8500</MissileSpeed>
       <Range>500</Range>
       <Tracking>true</Tracking>
-	  <Stealth>true</Stealth>
 	  <GroundLaunched>true</GroundLaunched>
 	  <TankLaunched>true</TankLaunched>
 	  <Yield>750</Yield>
 	  <Accuracy>0.9</Accuracy>
 	  <Costs>
-		<Resource Quantity="3600" Type="WEALTH"/>
-		<Resource Quantity="1700" Type="FUEL"/>
-		<Resource Quantity="1700" Type="STEEL"/>
-		<Resource Quantity="200" Type="ELECTRONICS"/>
+		<Resource Quantity="360" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1059" Name="Iskander-M">
-      <AssetID>56</AssetID>
+      <AssetID>25</AssetID>
       <Purchasable>true</Purchasable>
       <MissileSpeed>8500</MissileSpeed>
       <Range>500</Range>
       <Nuclear>true</Nuclear>
       <Tracking>true</Tracking>
-	  <Stealth>true</Stealth>
 	  <GroundLaunched>true</GroundLaunched>
 	  <TankLaunched>true</TankLaunched>
 	  <Yield>100</Yield>
 	  <Accuracy>0.9</Accuracy>
 	  <Costs>
-		<Resource Quantity="14900" Type="WEALTH"/>
-		<Resource Quantity="2700" Type="FUEL"/>
-		<Resource Quantity="2700" Type="STEEL"/>
-		<Resource Quantity="200" Type="ELECTRONICS"/>
-		<Resource Quantity="100" Type="ENRICHED_URANIUM"/>
+		<Resource Quantity="9490" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1079" Name="Iskander-M">
-      <AssetID>56</AssetID>
+      <AssetID>25</AssetID>
       <Purchasable>true</Purchasable>
       <MissileSpeed>8500</MissileSpeed>
       <Range>500</Range>
       <Tracking>true</Tracking>
 	  <EMPRadius>1.3</EMPRadius>
-	  <Stealth>true</Stealth>
 	  <GroundLaunched>true</GroundLaunched>
 	  <TankLaunched>true</TankLaunched>
 	  <Accuracy>0.9</Accuracy>
 	  <Costs>
-		<Resource Quantity="4700" Type="WEALTH"/>
-		<Resource Quantity="2200" Type="FUEL"/>
-		<Resource Quantity="2200" Type="STEEL"/>
-		<Resource Quantity="200" Type="ELECTRONICS"/>
+		<Resource Quantity="470" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="36" Name="Zircon">
@@ -483,10 +424,7 @@
 	  <Yield>300</Yield>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="4500" Type="WEALTH"/>
-		<Resource Quantity="2150" Type="FUEL"/>
-		<Resource Quantity="2150" Type="STEEL"/>
-		<Resource Quantity="200" Type="ELECTRONICS"/>
+		<Resource Quantity="450" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="61" Name="9M729">
@@ -501,10 +439,7 @@
 	  <Yield>500</Yield>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="2500" Type="WEALTH"/>
-		<Resource Quantity="1200" Type="FUEL"/>
-		<Resource Quantity="1200" Type="STEEL"/>
-		<Resource Quantity="150" Type="ELECTRONICS"/>
+		<Resource Quantity="250" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="62" Name="9M729">
@@ -520,11 +455,7 @@
 	  <Yield>150</Yield>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="9700" Type="WEALTH"/>
-		<Resource Quantity="1200" Type="FUEL"/>
-		<Resource Quantity="1200" Type="STEEL"/>
-		<Resource Quantity="150" Type="ELECTRONICS"/>
-		<Resource Quantity="70" Type="ENRICHED_URANIUM"/>
+		<Resource Quantity="5970" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="64" Name="Avangard">
@@ -538,11 +469,7 @@
 	  <Yield>250</Yield>
 	  <Accuracy>0.85</Accuracy>
 	  <Costs>
-		<Resource Quantity="18700" Type="WEALTH"/>
-		<Resource Quantity="4000" Type="FUEL"/>
-		<Resource Quantity="4000" Type="STEEL"/>
-		<Resource Quantity="100" Type="ELECTRONICS"/>
-		<Resource Quantity="200" Type="ENRICHED_URANIUM"/>
+		<Resource Quantity="13870" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1060" Name="MOAB">
@@ -555,8 +482,7 @@
 	  <Bomb>true</Bomb>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="1000" Type="WEALTH"/>
-		<Resource Quantity="1000" Type="STEEL"/>
+		<Resource Quantity="100" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1061" Name="500lb Bomb">
@@ -569,8 +495,7 @@
 	  <Bomb>true</Bomb>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="100" Type="WEALTH"/>
-		<Resource Quantity="100" Type="STEEL"/>
+		<Resource Quantity="10" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1062" Name="JDAM">
@@ -583,8 +508,7 @@
 	  <Yield>1000</Yield>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="200" Type="WEALTH"/>
-		<Resource Quantity="200" Type="STEEL"/>
+		<Resource Quantity="20" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1063" Name="B61 Bomb">
@@ -598,9 +522,7 @@
 	  <Yield>340</Yield>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="3000" Type="WEALTH"/>
-		<Resource Quantity="1000" Type="STEEL"/>
-		<Resource Quantity="50" Type="ENRICHED_URANIUM"/>
+		<Resource Quantity="1300" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1064" Name="B53 Bomb">
@@ -614,9 +536,7 @@
 	  <Yield>9000</Yield>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="5000" Type="WEALTH"/>
-		<Resource Quantity="1500" Type="STEEL"/>
-		<Resource Quantity="300" Type="ENRICHED_URANIUM"/>
+		<Resource Quantity="2500" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1065" Name="B83 Bomb">
@@ -630,9 +550,7 @@
 	  <Yield>1200</Yield>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="3500" Type="WEALTH"/>
-		<Resource Quantity="1100" Type="STEEL"/>
-		<Resource Quantity="110" Type="ENRICHED_URANIUM"/>
+		<Resource Quantity="1700" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1068" Name="AGM-86">
@@ -646,14 +564,11 @@
 	  <Yield>1000</Yield>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="800" Type="WEALTH"/>
-		<Resource Quantity="400" Type="FUEL"/>
-		<Resource Quantity="400" Type="STEEL"/>
-		<Resource Quantity="100" Type="ELECTRONICS"/>
+		<Resource Quantity="80" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1069" Name="AGM-86">
-      <AssetID>15</AssetID>
+      <AssetID>79</AssetID>
       <Purchasable>true</Purchasable>
       <MissileSpeed>890</MissileSpeed>
       <Range>2400</Range>
@@ -664,11 +579,7 @@
 	  <Yield>150</Yield>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="5300" Type="WEALTH"/>
-		<Resource Quantity="400" Type="FUEL"/>
-		<Resource Quantity="400" Type="STEEL"/>
-		<Resource Quantity="100" Type="ELECTRONICS"/>
-		<Resource Quantity="30" Type="ENRICHED_URANIUM"/>
+		<Resource Quantity="3530" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1070" Name="X-101">
@@ -682,10 +593,7 @@
 	  <Yield>500</Yield>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="1100" Type="WEALTH"/>
-		<Resource Quantity="500" Type="FUEL"/>
-		<Resource Quantity="500" Type="STEEL"/>
-		<Resource Quantity="100" Type="ELECTRONICS"/>
+		<Resource Quantity="110" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1071" Name="X-101">
@@ -700,11 +608,7 @@
 	  <Yield>450</Yield>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="6100" Type="WEALTH"/>
-		<Resource Quantity="500" Type="FUEL"/>
-		<Resource Quantity="500" Type="STEEL"/>
-		<Resource Quantity="100" Type="ELECTRONICS"/>
-		<Resource Quantity="80" Type="ENRICHED_URANIUM"/>
+		<Resource Quantity="4610" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1073" Name="BrahMos">
@@ -721,10 +625,7 @@
 	  <Yield>300</Yield>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="2100" Type="WEALTH"/>
-		<Resource Quantity="1000" Type="FUEL"/>
-		<Resource Quantity="1000" Type="STEEL"/>
-		<Resource Quantity="100" Type="ELECTRONICS"/>
+		<Resource Quantity="210" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1074" Name="GBU-57 MOP">
@@ -738,8 +639,7 @@
 	  <Bomb>true</Bomb>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="1200" Type="WEALTH"/>
-		<Resource Quantity="1200" Type="STEEL"/>
+		<Resource Quantity="120" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1075" Name="Tsar Bomba">
@@ -753,9 +653,7 @@
 	  <Bomb>true</Bomb>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="11000" Type="WEALTH"/>
-		<Resource Quantity="11000" Type="STEEL"/>
-		<Resource Quantity="500" Type="ENRICHED_URANIUM"/>
+		<Resource Quantity="5100" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1076" Name="Tsar Bomba">
@@ -769,55 +667,7 @@
 	  <Bomb>true</Bomb>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="15000" Type="WEALTH"/>
-		<Resource Quantity="15000" Type="STEEL"/>
-		<Resource Quantity="1000" Type="ENRICHED_URANIUM"/>
-	  </Costs>
-    </MissileType>
-	<MissileType ID="1085" Name="Pershing">
-      <AssetID>25</AssetID>
-      <Purchasable>true</Purchasable>
-      <MissileSpeed>9878</MissileSpeed>
-      <Range>740</Range>
-      <Nuclear>true</Nuclear>
-	  <TankLaunched>true</TankLaunched>
-	  <Yield>60</Yield>
-	  <Accuracy>0.4</Accuracy>
-	  <Costs>
-		<Resource Quantity="5200" Type="WEALTH"/>
-		<Resource Quantity="3600" Type="FUEL"/>
-		<Resource Quantity="3600" Type="STEEL"/>
-		<Resource Quantity="20" Type="ENRICHED_URANIUM"/>
-	  </Costs>
-    </MissileType>
-	<MissileType ID="1086" Name="ATACMS">
-      <AssetID>25</AssetID>
-      <Purchasable>true</Purchasable>
-      <MissileSpeed>3600</MissileSpeed>
-      <Range>300</Range>
-      <Tracking>true</Tracking>
-	  <TankLaunched>true</TankLaunched>
-	  <GroundLaunched>true</GroundLaunched>
-	  <Yield>500</Yield>
-	  <Accuracy>0.99</Accuracy>
-	  <Costs>
-		<Resource Quantity="700" Type="WEALTH"/>
-		<Resource Quantity="300" Type="FUEL"/>
-		<Resource Quantity="300" Type="STEEL"/>
-	  </Costs>
-    </MissileType>
-	<MissileType ID="1087" Name="MLRS">
-      <AssetID>25</AssetID>
-      <Purchasable>true</Purchasable>
-      <MissileSpeed>3600</MissileSpeed>
-      <Range>93</Range>
-	  <TankLaunched>true</TankLaunched>
-	  <Yield>500</Yield>
-	  <Accuracy>0.99</Accuracy>
-	  <Costs>
-		<Resource Quantity="400" Type="WEALTH"/>
-		<Resource Quantity="200" Type="FUEL"/>
-		<Resource Quantity="200" Type="STEEL"/>
+		<Resource Quantity="7500" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1088" Name="Sea Lance">
@@ -830,10 +680,7 @@
 	  <ShipLaunched>true</ShipLaunched>
 	  <TorpedoDeployType>0</TorpedoDeployType>
 	  <Costs>
-		<Resource Quantity="3200" Type="WEALTH"/>
-		<Resource Quantity="1400" Type="FUEL"/>
-		<Resource Quantity="1400" Type="STEEL"/>
-		<Resource Quantity="400" Type="MACHINERY"/>
+		<Resource Quantity="320" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1089" Name="ASROC">
@@ -846,10 +693,7 @@
 	  <ShipLaunched>true</ShipLaunched>
 	  <TorpedoDeployType>1</TorpedoDeployType>
 	  <Costs>
-		<Resource Quantity="1900" Type="WEALTH"/>
-		<Resource Quantity="800" Type="FUEL"/>
-		<Resource Quantity="800" Type="STEEL"/>
-		<Resource Quantity="300" Type="MACHINERY"/>
+		<Resource Quantity="190" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1090" Name="ASROC">
@@ -864,11 +708,7 @@
 	  <TorpedoDeployType>-1</TorpedoDeployType>
 	  <Yield>10</Yield>
 	  <Costs>
-		<Resource Quantity="4900" Type="WEALTH"/>
-		<Resource Quantity="2300" Type="FUEL"/>
-		<Resource Quantity="2300" Type="STEEL"/>
-		<Resource Quantity="300" Type="MACHINERY"/>
-		<Resource Quantity="20" Type="ENRICHED_URANIUM"/>
+		<Resource Quantity="2990" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1091" Name="P-700 Granit">
@@ -883,10 +723,7 @@
 	  <Yield>750</Yield>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="2500" Type="WEALTH"/>
-		<Resource Quantity="1200" Type="FUEL"/>
-		<Resource Quantity="1200" Type="STEEL"/>
-		<Resource Quantity="100" Type="ELECTRONICS"/>
+		<Resource Quantity="250" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1092" Name="P-700 Granit">
@@ -902,41 +739,7 @@
 	  <Yield>500</Yield>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="8500" Type="WEALTH"/>
-		<Resource Quantity="3000" Type="FUEL"/>
-		<Resource Quantity="3000" Type="STEEL"/>
-		<Resource Quantity="100" Type="ELECTRONICS"/>
-		<Resource Quantity="120" Type="ENRICHED_URANIUM"/>
-	  </Costs>
-    </MissileType>
-	<MissileType ID="1095" Name="Atomic Annie">
-      <AssetID>57</AssetID>
-      <Purchasable>true</Purchasable>
-      <MissileSpeed>2743</MissileSpeed>
-      <Range>30</Range>
-      <Nuclear>true</Nuclear>
-	  <GroundLaunched>true</GroundLaunched>
-	  <IsArtillery>true</IsArtillery>
-	  <Yield>15</Yield>
-	  <Accuracy>0.99</Accuracy>
-	  <Costs>
-		<Resource Quantity="4100" Type="WEALTH"/>
-		<Resource Quantity="4100" Type="STEEL"/>
-		<Resource Quantity="20" Type="ENRICHED_URANIUM"/>
-	  </Costs>
-    </MissileType>
-	<MissileType ID="1096" Name="155 mm">
-      <AssetID>57</AssetID>
-      <Purchasable>true</Purchasable>
-      <MissileSpeed>2743</MissileSpeed>
-      <Range>30</Range>
-	  <IsArtillery>true</IsArtillery>
-	  <GroundLaunched>true</GroundLaunched>
-	  <Yield>50</Yield>
-	  <Accuracy>0.99</Accuracy>
-	  <Costs>
-		<Resource Quantity="100" Type="WEALTH"/>
-		<Resource Quantity="100" Type="STEEL"/>
+		<Resource Quantity="3850" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1104" Name="Mk 54 Torpedo">
@@ -948,10 +751,7 @@
 	  <AntiSubmarine>true</AntiSubmarine>
 	  <TorpedoDeployType>4</TorpedoDeployType>
 	  <Costs>
-		<Resource Quantity="2900" Type="WEALTH"/>
-		<Resource Quantity="1300" Type="FUEL"/>
-		<Resource Quantity="1300" Type="STEEL"/>
-		<Resource Quantity="300" Type="MACHINERY"/>
+		<Resource Quantity="290" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1105" Name="BrahMos-II">
@@ -969,11 +769,7 @@
 	  <Yield>200</Yield>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="17000" Type="WEALTH"/>
-		<Resource Quantity="3400" Type="FUEL"/>
-		<Resource Quantity="3400" Type="STEEL"/>
-		<Resource Quantity="200" Type="ELECTRONICS"/>
-		<Resource Quantity="50" Type="ENRICHED_URANIUM"/>
+		<Resource Quantity="8700" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
     <MissileType ID="1108" Name="Kalibr-M">
@@ -988,10 +784,7 @@
 	  <Yield>500</Yield>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="2300" Type="WEALTH"/>
-		<Resource Quantity="1100" Type="FUEL"/>
-		<Resource Quantity="1100" Type="STEEL"/>
-		<Resource Quantity="100" Type="ELECTRONICS"/>
+		<Resource Quantity="230" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1111" Name="DF-27">
@@ -1004,10 +797,7 @@
 	  <Yield>500</Yield>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="6500" Type="WEALTH"/>
-		<Resource Quantity="3100" Type="FUEL"/>
-		<Resource Quantity="3100" Type="STEEL"/>
-		<Resource Quantity="300" Type="ELECTRONICS"/>
+		<Resource Quantity="650" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1112" Name="Sonobuoy">
@@ -1018,8 +808,7 @@
 	  <AirLaunched>true</AirLaunched>
 	  <Sonobuoy>true</Sonobuoy>
 	  <Costs>
-		<Resource Quantity="300" Type="WEALTH"/>
-		<Resource Quantity="100" Type="ELECTRONICS"/>
+		<Resource Quantity="50" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1113" Name="Shaheen-II">
@@ -1031,9 +820,7 @@
 	  <Yield>1000</Yield>
 	  <Accuracy>0.8</Accuracy>
 	  <Costs>
-		<Resource Quantity="3100" Type="WEALTH"/>
-		<Resource Quantity="1550" Type="FUEL"/>
-		<Resource Quantity="1550" Type="STEEL"/>
+		<Resource Quantity="310" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1114" Name="Shaheen-II">
@@ -1046,10 +833,7 @@
 	  <Yield>35</Yield>
 	  <Accuracy>0.8</Accuracy>
 	  <Costs>
-		<Resource Quantity="13000" Type="WEALTH"/>
-		<Resource Quantity="3550" Type="FUEL"/>
-		<Resource Quantity="3550" Type="STEEL"/>
-		<Resource Quantity="20" Type="ENRICHED_URANIUM"/>
+		<Resource Quantity="4200" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1118" Name="Hyunmoo-3">
@@ -1063,9 +847,7 @@
 	  <Yield>500</Yield>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="1100" Type="WEALTH"/>
-		<Resource Quantity="550" Type="FUEL"/>
-		<Resource Quantity="550" Type="STEEL"/>
+		<Resource Quantity="110" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1119" Name="P-1000 Vulkan">
@@ -1080,29 +862,22 @@
 	  <Yield>1000</Yield>
 	  <Accuracy>0.95</Accuracy>
 	  <Costs>
-		<Resource Quantity="2500" Type="WEALTH"/>
-		<Resource Quantity="1200" Type="FUEL"/>
-		<Resource Quantity="1200" Type="STEEL"/>
-		<Resource Quantity="100" Type="ELECTRONICS"/>
+		<Resource Quantity="250" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1126" Name="Storm Shadow">
-      <AssetID>55</AssetID>
+      <AssetID>79</AssetID>
       <Purchasable>true</Purchasable>
       <MissileSpeed>1173</MissileSpeed>
       <Range>550</Range>
 	  <GroundLaunched>true</GroundLaunched>
 	  <AirLaunched>true</AirLaunched>
-	  <Stealth>true</Stealth>
 	  <Tracking>true</Tracking>
 	  <ECM>true</ECM>
 	  <Yield>450</Yield>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="2200" Type="WEALTH"/>
-		<Resource Quantity="1000" Type="FUEL"/>
-		<Resource Quantity="1000" Type="STEEL"/>
-		<Resource Quantity="200" Type="ELECTRONICS"/>
+		<Resource Quantity="220" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1127" Name="Kh-80">
@@ -1118,10 +893,7 @@
 	  <Yield>1000</Yield>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="3400" Type="WEALTH"/>
-		<Resource Quantity="1650" Type="FUEL"/>
-		<Resource Quantity="1650" Type="STEEL"/>
-		<Resource Quantity="100" Type="ELECTRONICS"/>
+		<Resource Quantity="340" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1128" Name="Kh-80">
@@ -1138,11 +910,7 @@
 	  <Yield>1000</Yield>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="13200" Type="WEALTH"/>
-		<Resource Quantity="2650" Type="FUEL"/>
-		<Resource Quantity="2650" Type="STEEL"/>
-		<Resource Quantity="100" Type="ELECTRONICS"/>
-		<Resource Quantity="100" Type="ENRICHED_URANIUM"/>
+		<Resource Quantity="7320" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1131" Name="P-1000 Vulkan">
@@ -1157,11 +925,7 @@
 	  <Yield>350</Yield>
 	  <Accuracy>0.95</Accuracy>
 	  <Costs>
-		<Resource Quantity="12500" Type="WEALTH"/>
-		<Resource Quantity="2200" Type="FUEL"/>
-		<Resource Quantity="2200" Type="STEEL"/>
-		<Resource Quantity="100" Type="ELECTRONICS"/>
-		<Resource Quantity="75" Type="ENRICHED_URANIUM"/>
+		<Resource Quantity="6850" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1132" Name="Kalibr-M">
@@ -1177,64 +941,7 @@
 	  <Yield>200</Yield>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="13300" Type="WEALTH"/>
-		<Resource Quantity="2100" Type="FUEL"/>
-		<Resource Quantity="2100" Type="STEEL"/>
-		<Resource Quantity="100" Type="ELECTRONICS"/>
-		<Resource Quantity="50" Type="ENRICHED_URANIUM"/>
-	  </Costs>
-    </MissileType>
-	<MissileType ID="1137" Name="Scud">
-      <AssetID>25</AssetID>
-      <Purchasable>true</Purchasable>
-      <MissileSpeed>4939</MissileSpeed>
-      <Range>700</Range>
-      <Chemical>true</Chemical>
-	  <GroundLaunched>true</GroundLaunched>
-	  <TankLaunched>true</TankLaunched>
-	  <Yield>1000</Yield>
-	  <Accuracy>0.45</Accuracy>
-	  <Costs>
-		<Resource Quantity="2100" Type="WEALTH"/>
-		<Resource Quantity="1050" Type="FUEL"/>
-		<Resource Quantity="1050" Type="STEEL"/>
-		<Resource Quantity="1000" Type="NERVE_AGENT"/>
-	  </Costs>
-    </MissileType>
-	<MissileType ID="1138" Name="Kalibr-M">
-      <AssetID>15</AssetID>
-      <Purchasable>true</Purchasable>
-      <MissileSpeed>3580</MissileSpeed>
-      <Range>2500</Range>
-	  <Chemical>true</Chemical>
-	  <AirLaunched>true</AirLaunched>
-	  <GroundLaunched>true</GroundLaunched>
-	  <ShipLaunched>true</ShipLaunched>
-	  <SubmarineLaunched>true</SubmarineLaunched>
-	  <Yield>500</Yield>
-	  <Accuracy>0.99</Accuracy>
-	  <Costs>
-		<Resource Quantity="3500" Type="WEALTH"/>
-		<Resource Quantity="1100" Type="FUEL"/>
-		<Resource Quantity="1100" Type="STEEL"/>
-		<Resource Quantity="500" Type="NERVE_AGENT"/>
-		<Resource Quantity="100" Type="ELECTRONICS"/>
-	  </Costs>
-    </MissileType>
-	<MissileType ID="1139" Name="155 mm">
-      <AssetID>57</AssetID>
-      <Purchasable>true</Purchasable>
-      <MissileSpeed>2743</MissileSpeed>
-      <Range>30</Range>
-	  <Chemical>true</Chemical>
-	  <IsArtillery>true</IsArtillery>
-	  <GroundLaunched>true</GroundLaunched>
-	  <Yield>50</Yield>
-	  <Accuracy>0.99</Accuracy>
-	  <Costs>
-		<Resource Quantity="150" Type="WEALTH"/>
-		<Resource Quantity="150" Type="STEEL"/>
-		<Resource Quantity="50" Type="NERVE_AGENT"/>
+		<Resource Quantity="7690" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
     <MissileType ID="8" Name="Minuteman">
@@ -1247,10 +954,7 @@
 	  <Nuclear>true</Nuclear>
 	  <Accuracy>0.95</Accuracy>
 	  <Costs>
-		<Resource Quantity="90500" Type="WEALTH"/>
-		<Resource Quantity="45000" Type="FUEL"/>
-		<Resource Quantity="45000" Type="STEEL"/>
-		<Resource Quantity="90" Type="ENRICHED_URANIUM"/>
+		<Resource Quantity="90050" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
     <MissileType ID="9" Name="Topol">
@@ -1264,9 +968,6 @@
 	  <Accuracy>0.85</Accuracy>
 	  <Costs>
 		<Resource Quantity="85000" Type="WEALTH"/>
-		<Resource Quantity="42500" Type="FUEL"/>
-		<Resource Quantity="42500" Type="STEEL"/>
-		<Resource Quantity="180" Type="ENRICHED_URANIUM"/>
 	  </Costs>
     </MissileType>
     <MissileType ID="10" Name="DF-5">
@@ -1279,10 +980,7 @@
 	  <Nuclear>true</Nuclear>
 	  <Accuracy>0.7</Accuracy>
 	  <Costs>
-		<Resource Quantity="135000" Type="WEALTH"/>
-		<Resource Quantity="65000" Type="FUEL"/>
-		<Resource Quantity="65000" Type="STEEL"/>
-		<Resource Quantity="500" Type="ENRICHED_URANIUM"/>
+		<Resource Quantity="105000" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="14" Name="Jupiter">
@@ -1295,10 +993,7 @@
 	  <Nuclear>true</Nuclear>
 	  <Accuracy>0.55</Accuracy>
 	  <Costs>
-		<Resource Quantity="35000" Type="WEALTH"/>
-		<Resource Quantity="17500" Type="FUEL"/>
-		<Resource Quantity="17500" Type="STEEL"/>
-		<Resource Quantity="200" Type="ENRICHED_URANIUM"/>
+		<Resource Quantity="45000" Type="WEALTH"/>
       </Costs>
     </MissileType>
     <MissileType ID="51" Name="Peacekeeper">
@@ -1311,10 +1006,7 @@
 	  <Nuclear>true</Nuclear>
 	  <Accuracy>0.98</Accuracy>
 	  <Costs>
-		<Resource Quantity="77000" Type="WEALTH"/>
-		<Resource Quantity="38000" Type="FUEL"/>
-		<Resource Quantity="38000" Type="STEEL"/>
-		<Resource Quantity="90" Type="ENRICHED_URANIUM"/>
+		<Resource Quantity="86000" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="53" Name="Sarmat">
@@ -1327,10 +1019,7 @@
 	  <Nuclear>true</Nuclear>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="145000" Type="WEALTH"/>
-		<Resource Quantity="75000" Type="FUEL"/>
-		<Resource Quantity="75000" Type="STEEL"/>
-		<Resource Quantity="170" Type="ENRICHED_URANIUM"/>
+		<Resource Quantity="96000" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="54" Name="Jericho">
@@ -1344,9 +1033,6 @@
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
 		<Resource Quantity="67000" Type="WEALTH"/>
-		<Resource Quantity="32000" Type="FUEL"/>
-		<Resource Quantity="32000" Type="STEEL"/>
-		<Resource Quantity="20" Type="ENRICHED_URANIUM"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="55" Name="High-Altitude EMP">
@@ -1359,10 +1045,7 @@
 	  <Nuclear>true</Nuclear>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="176000" Type="WEALTH"/>
-		<Resource Quantity="85000" Type="FUEL"/>
-		<Resource Quantity="85000" Type="STEEL"/>
-		<Resource Quantity="1000" Type="ENRICHED_URANIUM"/>
+		<Resource Quantity="126000" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1089" Name="Trident">
@@ -1376,10 +1059,7 @@
 	  <Nuclear>true</Nuclear>
 	  <Accuracy>0.97</Accuracy>
 	  <Costs>
-		<Resource Quantity="105000" Type="WEALTH"/>
-		<Resource Quantity="50000" Type="FUEL"/>
-		<Resource Quantity="50000" Type="STEEL"/>
-		<Resource Quantity="120" Type="ENRICHED_URANIUM"/>
+		<Resource Quantity="89000" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1101" Name="Bulava">
@@ -1394,9 +1074,6 @@
 	  <Accuracy>0.9</Accuracy>
 	  <Costs>
 		<Resource Quantity="79000" Type="WEALTH"/>
-		<Resource Quantity="39000" Type="FUEL"/>
-		<Resource Quantity="39000" Type="STEEL"/>
-		<Resource Quantity="35" Type="ENRICHED_URANIUM"/>
 	  </Costs>
     </MissileType>
   </MissileTypes>
@@ -1409,10 +1086,7 @@
 	  <ShipLaunched>true</ShipLaunched>
       <Range>1000</Range>
 	  <Costs>
-		<Resource Quantity="4600" Type="WEALTH"/>
-		<Resource Quantity="2100" Type="FUEL"/>
-		<Resource Quantity="2100" Type="STEEL"/>
-		<Resource Quantity="400" Type="ELECTRONICS"/>
+		<Resource Quantity="460" Type="WEALTH"/>
 	  </Costs>
     </InterceptorType>
     <InterceptorType ID="32" Name="S-400 40N6E">
@@ -1423,10 +1097,7 @@
 	  <TankLaunched>true</TankLaunched>
       <Range>400</Range>
 	  <Costs>
-		<Resource Quantity="3700" Type="WEALTH"/>
-		<Resource Quantity="1700" Type="FUEL"/>
-		<Resource Quantity="1700" Type="STEEL"/>
-		<Resource Quantity="300" Type="ELECTRONICS"/>
+		<Resource Quantity="370" Type="WEALTH"/>
 	  </Costs>
     </InterceptorType>
     <InterceptorType ID="33" Name="Akash">
@@ -1437,9 +1108,7 @@
 	  <TankLaunched>true</TankLaunched>
       <Range>35</Range>
 	  <Costs>
-		<Resource Quantity="900" Type="WEALTH"/>
-		<Resource Quantity="450" Type="FUEL"/>
-		<Resource Quantity="450" Type="STEEL"/>
+		<Resource Quantity="90" Type="WEALTH"/>
 	  </Costs>
     </InterceptorType>
     <InterceptorType ID="34" Name="David's Sling">
@@ -1450,10 +1119,7 @@
 	  <TankLaunched>true</TankLaunched>
       <Range>200</Range>
 	  <Costs>
-		<Resource Quantity="2700" Type="WEALTH"/>
-		<Resource Quantity="1300" Type="FUEL"/>
-		<Resource Quantity="1300" Type="STEEL"/>
-		<Resource Quantity="100" Type="ELECTRONICS"/>
+		<Resource Quantity="270" Type="WEALTH"/>
 	  </Costs>
     </InterceptorType>
 	<InterceptorType ID="36" Name="Patriot">
@@ -1464,9 +1130,7 @@
 	  <TankLaunched>true</TankLaunched>
       <Range>160</Range>
 	  <Costs>
-		<Resource Quantity="1600" Type="WEALTH"/>
-		<Resource Quantity="800" Type="FUEL"/>
-		<Resource Quantity="800" Type="STEEL"/>
+		<Resource Quantity="160" Type="WEALTH"/>
 	  </Costs>
     </InterceptorType>
     <InterceptorType ID="37" Name="THAAD">
@@ -1477,10 +1141,7 @@
 	  <TankLaunched>true</TankLaunched>
       <Range>200</Range>
 	  <Costs>
-		<Resource Quantity="4300" Type="WEALTH"/>
-		<Resource Quantity="2050" Type="FUEL"/>
-		<Resource Quantity="2050" Type="STEEL"/>
-		<Resource Quantity="200" Type="ELECTRONICS"/>
+		<Resource Quantity="430" Type="WEALTH"/>
 	  </Costs>
     </InterceptorType>
 	<InterceptorType ID="1037" Name="S-500 77N6 N">
@@ -1491,10 +1152,7 @@
 	  <TankLaunched>true</TankLaunched>
       <Range>600</Range>
 	  <Costs>
-		<Resource Quantity="4900" Type="WEALTH"/>
-		<Resource Quantity="2250" Type="FUEL"/>
-		<Resource Quantity="2250" Type="STEEL"/>
-		<Resource Quantity="400" Type="ELECTRONICS"/>
+		<Resource Quantity="490" Type="WEALTH"/>
 	  </Costs>
     </InterceptorType>
 	<InterceptorType ID="38" Name="S-350 9M96">
@@ -1506,10 +1164,7 @@
 	  <ShipLaunched>true</ShipLaunched>
       <Range>120</Range>
 	  <Costs>
-		<Resource Quantity="2200" Type="WEALTH"/>
-		<Resource Quantity="1050" Type="FUEL"/>
-		<Resource Quantity="1050" Type="STEEL"/>
-		<Resource Quantity="100" Type="ELECTRONICS"/>
+		<Resource Quantity="220" Type="WEALTH"/>
 	  </Costs>
     </InterceptorType>
     <InterceptorType ID="40" Name="Nasams 2">
@@ -1520,10 +1175,7 @@
 	  <TankLaunched>true</TankLaunched>
       <Range>35</Range>
 	  <Costs>
-		<Resource Quantity="3900" Type="WEALTH"/>
-		<Resource Quantity="1850" Type="FUEL"/>
-		<Resource Quantity="1850" Type="STEEL"/>
-		<Resource Quantity="200" Type="ELECTRONICS"/>
+		<Resource Quantity="390" Type="WEALTH"/>
 	  </Costs>
     </InterceptorType>
     <InterceptorType ID="41" Name="BUK-M3">
@@ -1534,10 +1186,7 @@
 	  <TankLaunched>true</TankLaunched>
       <Range>140</Range>
 	  <Costs>
-		<Resource Quantity="1800" Type="WEALTH"/>
-		<Resource Quantity="850" Type="FUEL"/>
-		<Resource Quantity="850" Type="STEEL"/>
-		<Resource Quantity="100" Type="ELECTRONICS"/>
+		<Resource Quantity="180" Type="WEALTH"/>
 	  </Costs>
     </InterceptorType>
     <InterceptorType ID="42" Name="HQ-9">
@@ -1549,10 +1198,7 @@
 	  <ShipLaunched>true</ShipLaunched>
       <Range>250</Range>
 	  <Costs>
-		<Resource Quantity="2800" Type="WEALTH"/>
-		<Resource Quantity="1300" Type="FUEL"/>
-		<Resource Quantity="1300" Type="STEEL"/>
-		<Resource Quantity="200" Type="ELECTRONICS"/>
+		<Resource Quantity="280" Type="WEALTH"/>
 	  </Costs>
     </InterceptorType>
 	<InterceptorType ID="45" Name="Aster 30">
@@ -1562,9 +1208,7 @@
 	  <ShipLaunched>true</ShipLaunched>
       <Range>150</Range>
 	  <Costs>
-		<Resource Quantity="1500" Type="WEALTH"/>
-		<Resource Quantity="750" Type="FUEL"/>
-		<Resource Quantity="750" Type="STEEL"/>
+		<Resource Quantity="150" Type="WEALTH"/>
 	  </Costs>
     </InterceptorType>
 	<InterceptorType ID="1001" Name="Sprint">
@@ -1578,9 +1222,6 @@
 	  <Yield>2</Yield>
 	  <Costs>
 		<Resource Quantity="48000" Type="WEALTH"/>
-		<Resource Quantity="24000" Type="FUEL"/>
-		<Resource Quantity="24000" Type="STEEL"/>
-		<Resource Quantity="20" Type="ENRICHED_URANIUM"/>
 	  </Costs>
     </InterceptorType>
 	<InterceptorType ID="1002" Name="A-350R">
@@ -1594,9 +1235,6 @@
 	  <Yield>3000</Yield>
 	  <Costs>
 		<Resource Quantity="65000" Type="WEALTH"/>
-		<Resource Quantity="32500" Type="FUEL"/>
-		<Resource Quantity="32500" Type="STEEL"/>
-		<Resource Quantity="200" Type="ENRICHED_URANIUM"/>
 	  </Costs>
     </InterceptorType>
 	<InterceptorType ID="1003" Name="LIM-49 Spartan">
@@ -1610,9 +1248,6 @@
 	  <Yield>5000</Yield>
 	  <Costs>
 		<Resource Quantity="75000" Type="WEALTH"/>
-		<Resource Quantity="37500" Type="FUEL"/>
-		<Resource Quantity="37500" Type="STEEL"/>
-		<Resource Quantity="300" Type="ENRICHED_URANIUM"/>
 	  </Costs>
     </InterceptorType>
 	<InterceptorType ID="1004" Name="PL-15">
@@ -1623,10 +1258,7 @@
       <Range>300</Range>
 	  <AirLaunched>true</AirLaunched>
 	  <Costs>
-		<Resource Quantity="1800" Type="WEALTH"/>
-		<Resource Quantity="850" Type="FUEL"/>
-		<Resource Quantity="850" Type="STEEL"/>
-		<Resource Quantity="100" Type="ELECTRONICS"/>
+		<Resource Quantity="180" Type="WEALTH"/>
 	  </Costs>
     </InterceptorType>
 	<InterceptorType ID="1005" Name="AIM-7M">
@@ -1637,10 +1269,7 @@
       <Range>85</Range>
 	  <AirLaunched>true</AirLaunched>
 	  <Costs>
-		<Resource Quantity="1100" Type="WEALTH"/>
-		<Resource Quantity="500" Type="FUEL"/>
-		<Resource Quantity="500" Type="STEEL"/>
-		<Resource Quantity="100" Type="ELECTRONICS"/>
+		<Resource Quantity="110" Type="WEALTH"/>
 	  </Costs>
     </InterceptorType>
 	<InterceptorType ID="1006" Name="Meteor">
@@ -1651,10 +1280,7 @@
       <Range>200</Range>
 	  <AirLaunched>true</AirLaunched>
 	  <Costs>
-		<Resource Quantity="800" Type="WEALTH"/>
-		<Resource Quantity="375" Type="FUEL"/>
-		<Resource Quantity="375" Type="STEEL"/>
-		<Resource Quantity="50" Type="ELECTRONICS"/>
+		<Resource Quantity="80" Type="WEALTH"/>
 	  </Costs>
     </InterceptorType>
 	<InterceptorType ID="1007" Name="AIM-120">
@@ -1665,10 +1291,7 @@
       <Range>105</Range>
 	  <AirLaunched>true</AirLaunched>
 	  <Costs>
-		<Resource Quantity="700" Type="WEALTH"/>
-		<Resource Quantity="325" Type="FUEL"/>
-		<Resource Quantity="325" Type="STEEL"/>
-		<Resource Quantity="50" Type="ELECTRONICS"/>
+		<Resource Quantity="70" Type="WEALTH"/>
 	  </Costs>
     </InterceptorType>
 	<InterceptorType ID="1008" Name="CIM-10 BOMARC">
@@ -1680,10 +1303,7 @@
 	  <BlastRadius>1.5</BlastRadius>
 	  <Yield>10</Yield>
 	  <Costs>
-		<Resource Quantity="1500" Type="WEALTH"/>
-		<Resource Quantity="750" Type="FUEL"/>
-		<Resource Quantity="750" Type="STEEL"/>
-		<Resource Quantity="20" Type="ENRICHED_URANIUM"/>
+		<Resource Quantity="150" Type="WEALTH"/>
 	  </Costs>
     </InterceptorType>
 	<InterceptorType ID="1009" Name="AIR-2 Genie">
@@ -1696,10 +1316,7 @@
 	  <AirLaunched>true</AirLaunched>
 	  <Yield>2</Yield>
 	  <Costs>
-		<Resource Quantity="400" Type="WEALTH"/>
-		<Resource Quantity="200" Type="FUEL"/>
-		<Resource Quantity="200" Type="STEEL"/>
-		<Resource Quantity="20" Type="ENRICHED_URANIUM"/>
+		<Resource Quantity="40" Type="WEALTH"/>
 	  </Costs>
     </InterceptorType>
 	<InterceptorType ID="1010" Name="AAM-N-10 Eagle">
@@ -1712,9 +1329,17 @@
 	  <AirLaunched>true</AirLaunched>
 	  <Yield>10</Yield>
 	  <Costs>
-		<Resource Quantity="600" Type="WEALTH"/>
-		<Resource Quantity="300" Type="FUEL"/>
-		<Resource Quantity="300" Type="STEEL"/>
+		<Resource Quantity="60" Type="WEALTH"/>
+	  </Costs>
+    </InterceptorType>
+	<InterceptorType ID="1011" Name="GBMD">
+      <AssetID>36</AssetID>
+      <Purchasable>true</Purchasable>
+      <HitChance>0.35</HitChance>
+      <InterceptorSpeed>40748</InterceptorSpeed>
+      <Range>3000</Range>
+	  <Costs>
+		<Resource Quantity="60" Type="WEALTH"/>
 	  </Costs>
     </InterceptorType>
   </InterceptorTypes>
@@ -1729,11 +1354,7 @@
 	  <Homing>true</Homing>
 	  <NavalLaunched>true</NavalLaunched>
 	  <Costs>
-		<Resource Quantity="3500" Type="WEALTH"/>
-		<Resource Quantity="1650" Type="FUEL"/>
-		<Resource Quantity="1650" Type="STEEL"/>
-		<Resource Quantity="100" Type="MACHINERY"/>
-		<Resource Quantity="100" Type="ELECTRONICS"/>
+		<Resource Quantity="350" Type="WEALTH"/>
 	  </Costs>
     </TorpedoType>
 	<TorpedoType ID="1" Name="Mk 46">
@@ -1747,12 +1368,7 @@
 	  <Homing>true</Homing>
 	  <NavalLaunched>true</NavalLaunched>
 	  <Costs>
-		<Resource Quantity="10500" Type="WEALTH"/>
-		<Resource Quantity="1650" Type="FUEL"/>
-		<Resource Quantity="1650" Type="STEEL"/>
-		<Resource Quantity="100" Type="MACHINERY"/>
-		<Resource Quantity="100" Type="ELECTRONICS"/>
-		<Resource Quantity="25" Type="ENRICHED_URANIUM"/>
+		<Resource Quantity="1050" Type="WEALTH"/>
 	  </Costs>
     </TorpedoType>
 	<TorpedoType ID="2" Name="VA-111 Shkval">
@@ -1764,10 +1380,7 @@
 	  <Yield>45</Yield>
 	  <NavalLaunched>true</NavalLaunched>
 	  <Costs>
-		<Resource Quantity="4100" Type="WEALTH"/>
-		<Resource Quantity="1950" Type="FUEL"/>
-		<Resource Quantity="1950" Type="STEEL"/>
-		<Resource Quantity="200" Type="MACHINERY"/>
+		<Resource Quantity="410" Type="WEALTH"/>
 	  </Costs>
     </TorpedoType>
 	<TorpedoType ID="3" Name="VA-111 Shkval">
@@ -1780,11 +1393,7 @@
 	  <Nuclear>true</Nuclear>
 	  <NavalLaunched>true</NavalLaunched>
 	  <Costs>
-		<Resource Quantity="11800" Type="WEALTH"/>
-		<Resource Quantity="1950" Type="FUEL"/>
-		<Resource Quantity="1950" Type="STEEL"/>
-		<Resource Quantity="200" Type="MACHINERY"/>
-		<Resource Quantity="25" Type="ENRICHED_URANIUM"/>
+		<Resource Quantity="1180" Type="WEALTH"/>
 	  </Costs>
     </TorpedoType>
 	<TorpedoType ID="4" Name="Mk 54">
@@ -1797,12 +1406,7 @@
 	  <Homing>true</Homing>
 	  <NavalLaunched>true</NavalLaunched>
 	  <Costs>
-		<Resource Quantity="10500" Type="WEALTH"/>
-		<Resource Quantity="1650" Type="FUEL"/>
-		<Resource Quantity="1650" Type="STEEL"/>
-		<Resource Quantity="100" Type="MACHINERY"/>
-		<Resource Quantity="100" Type="ELECTRONICS"/>
-		<Resource Quantity="25" Type="ENRICHED_URANIUM"/>
+		<Resource Quantity="1050" Type="WEALTH"/>
 	  </Costs>
     </TorpedoType>
   </TorpedoTypes>

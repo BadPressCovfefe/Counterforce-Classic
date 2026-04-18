@@ -39,7 +39,7 @@ public class Armory extends Structure implements HaulerInterface, LaunchSystemLi
         this.dlyBuild = new ShortDelay();
         this.bVisible = false;
         this.type = EntityType.MBT;
-        this.cargo = new CargoSystem(this, Defs.ARMORY_MAX_STORAGE_KG);
+        this.cargo = new CargoSystem(this, 0);
     }
     
     /** From save. */
@@ -54,7 +54,7 @@ public class Armory extends Structure implements HaulerInterface, LaunchSystemLi
         this.cargo = cargo;
         
         if(this.cargo == null)
-            this.cargo = new CargoSystem(this, Defs.ARMORY_MAX_STORAGE_KG);
+            this.cargo = new CargoSystem(this, 0);
         
         this.cargo.SetSystemListener(this);
     }

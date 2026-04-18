@@ -315,8 +315,8 @@ public class XMLGameLoader
                     int lAssetID = GetIntElement(ndeMissileType, XMLDefs.ASSET_ID);
                     boolean bPurchasable = GetBooleanElement(ndeMissileType, XMLDefs.PURCHASABLE);
                     boolean bArtillery = GetBooleanElement(ndeMissileType, XMLDefs.ARTILLERY);
-                    float fMissileSpeed = bArtillery ? (int)Defs.ARTILLERY_SHELL_SPEED : GetFloatElement(ndeMissileType, XMLDefs.MISSILE_SPEED, 0.0f);
-                    float fMissileRange = bArtillery ? Defs.ARTILLERY_RANGE : GetFloatElement(ndeMissileType, XMLDefs.RANGE, 0);
+                    float fMissileSpeed = GetFloatElement(ndeMissileType, XMLDefs.MISSILE_SPEED, 0.0f);
+                    float fMissileRange = GetFloatElement(ndeMissileType, XMLDefs.RANGE, 0);
                     boolean bNuclear = GetBooleanElement(ndeMissileType, XMLDefs.NUCLEAR);
                     boolean bTracking = GetBooleanElement(ndeMissileType, XMLDefs.TRACKING);
                     boolean bECM = GetBooleanElement(ndeMissileType, XMLDefs.ECM);
@@ -1863,12 +1863,6 @@ public class XMLGameLoader
                                     Coordinates);
                             
                             game.AddShip(ship);
-
-                            if(missiles != null)
-                                missiles.SetReloadTime(Defs.SHIP_MISSILE_RELOAD);
-
-                            if(interceptors != null)
-                                interceptors.SetReloadTime(Defs.SHIP_MISSILE_RELOAD);
                         }
                         catch(Exception ex)
                         {

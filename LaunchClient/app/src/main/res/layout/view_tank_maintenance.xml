@@ -137,41 +137,6 @@
                 android:src="@drawable/button_move"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/btnCeaseFire"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:clickable="true"
-            android:layout_marginRight="@dimen/ButtonSpacingNarrow"
-            android:orientation="horizontal"
-            android:visibility="gone">
-
-            <ImageView
-                android:layout_width="@dimen/MediumButtonSize"
-                android:layout_height="@dimen/MediumButtonSize"
-                android:background="@drawable/text_button_normal"
-                android:padding="@dimen/ButtonImagePadding"
-                android:src="@drawable/button_stop" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/btnAttack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:clickable="true"
-            android:orientation="horizontal"
-            android:visibility="gone">
-
-            <ImageView
-                android:layout_width="@dimen/MediumButtonSize"
-                android:layout_height="@dimen/MediumButtonSize"
-                android:background="@drawable/text_button_normal"
-                android:padding="@dimen/ButtonImagePadding"
-                android:src="@drawable/button_attack" />
-        </LinearLayout>
-
     </LinearLayout>
 
 </LinearLayout>
