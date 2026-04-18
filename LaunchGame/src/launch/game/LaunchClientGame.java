@@ -66,6 +66,7 @@ public class LaunchClientGame extends LaunchGame implements LaunchClientGameInte
     private final LinkedHashMap<String, LaunchReport> NewReports = new LinkedHashMap<>();
     private final LinkedHashMap<String, LaunchReport> OldReports = new LinkedHashMap<>();
     
+    private KOTH newKingOfTheHill;
     private Map<Integer, Player> NewPlayers;
     private Map<Integer, Missile> NewMissiles;
     private Map<Integer, Interceptor> NewInterceptors;
@@ -1779,6 +1780,20 @@ public class LaunchClientGame extends LaunchGame implements LaunchClientGameInte
     }
     
     @Override
+    public void ReceiveKOTH(KOTH koth)
+    {
+        if(bReceivingSnapshot)
+        {
+            koth.SetListener(this);
+            newKingOfTheHill = koth;
+        }
+        else
+        {
+            AddKOTH(koth);
+        }
+    }
+    
+    @Override
     public void ReceiveRadiation(Radiation radiation)
     {
         if(bReceivingSnapshot)
@@ -2394,6 +2409,7 @@ public class LaunchClientGame extends LaunchGame implements LaunchClientGameInte
     public void SnapshotFinish()
     {
         //Commit newly populated containers.
+        kingOfTheHill = newKingOfTheHill;
         Players = NewPlayers;
         Missiles = NewMissiles;
         Interceptors = NewInterceptors;

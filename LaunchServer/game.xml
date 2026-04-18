@@ -3,6 +3,15 @@
     <GameStats>
         <NextPlayerID>1</NextPlayerID>
     </GameStats>
+    <KOTH>
+        <Position>
+            <Latitude>48.45659</Latitude>
+            <Longitude>-47.286102</Longitude>
+        </Position>
+        <Radius>463.6491</Radius>
+        <KingID>-2</KingID>
+        <AllianceControl>false</AllianceControl>
+    </KOTH>
     <Users>
         <User Name="Biscuit">
             <GoogleID>103690468106158765549</GoogleID>
@@ -14,7 +23,7 @@
             <BanReason/>
             <LastIP>192.168.1.215</LastIP>
             <LastConnectionMobile>false</LastConnectionMobile>
-            <LastChecked>1776340969943</LastChecked>
+            <LastChecked>1776530194832</LastChecked>
             <LastCheckFailed>false</LastCheckFailed>
             <CheckAPIFailed>true</CheckAPIFailed>
             <Proscribed>false</Proscribed>
@@ -37,7 +46,7 @@
                 <Longitude>-84.06461</Longitude>
             </Position>
             <Avatar>-1</Avatar>
-            <LastSeen>1776341109790</LastSeen>
+            <LastSeen>1776530182849</LastSeen>
             <StateChange>0</StateChange>
             <AllianceID>-1</AllianceID>
             <Flags1>0</Flags1>
@@ -100,8 +109,8 @@
             <ResourceContainer>
                 <Capacity>500000</Capacity>
                 <Resources>
-                    <Resource Quantity="0" Type="ELECTRICITY"/>
                     <Resource Quantity="0" Type="CONSTRUCTION_SUPPLIES"/>
+                    <Resource Quantity="0" Type="ELECTRICITY"/>
                     <Resource Quantity="0" Type="MACHINERY"/>
                 </Resources>
             </ResourceContainer>
@@ -133,8 +142,8 @@
             <ResourceContainer>
                 <Capacity>500000</Capacity>
                 <Resources>
-                    <Resource Quantity="0" Type="ELECTRICITY"/>
                     <Resource Quantity="0" Type="CONSTRUCTION_SUPPLIES"/>
+                    <Resource Quantity="0" Type="ELECTRICITY"/>
                     <Resource Quantity="0" Type="MACHINERY"/>
                 </Resources>
             </ResourceContainer>
@@ -167,8 +176,8 @@
             <ResourceContainer>
                 <Capacity>500000</Capacity>
                 <Resources>
-                    <Resource Quantity="0" Type="ELECTRICITY"/>
                     <Resource Quantity="0" Type="CONSTRUCTION_SUPPLIES"/>
+                    <Resource Quantity="0" Type="ELECTRICITY"/>
                     <Resource Quantity="0" Type="MACHINERY"/>
                 </Resources>
             </ResourceContainer>
@@ -198,8 +207,8 @@
             <ResourceContainer>
                 <Capacity>500000</Capacity>
                 <Resources>
-                    <Resource Quantity="0" Type="ELECTRICITY"/>
                     <Resource Quantity="0" Type="CONSTRUCTION_SUPPLIES"/>
+                    <Resource Quantity="0" Type="ELECTRICITY"/>
                     <Resource Quantity="0" Type="MACHINERY"/>
                 </Resources>
             </ResourceContainer>
@@ -224,10 +233,10 @@
             <ResourceContainer>
                 <Capacity>500000</Capacity>
                 <Resources>
-                    <Resource Quantity="0" Type="ELECTRICITY"/>
                     <Resource Quantity="0" Type="CONSTRUCTION_SUPPLIES"/>
-                    <Resource Quantity="0" Type="MACHINERY"/>
+                    <Resource Quantity="0" Type="ELECTRICITY"/>
                     <Resource Quantity="0" Type="OIL"/>
+                    <Resource Quantity="0" Type="MACHINERY"/>
                 </Resources>
             </ResourceContainer>
         </SentryGun>
@@ -249,10 +258,10 @@
             <ResourceContainer>
                 <Capacity>500000</Capacity>
                 <Resources>
-                    <Resource Quantity="0" Type="ELECTRICITY"/>
                     <Resource Quantity="0" Type="CONSTRUCTION_SUPPLIES"/>
-                    <Resource Quantity="0" Type="MACHINERY"/>
+                    <Resource Quantity="0" Type="ELECTRICITY"/>
                     <Resource Quantity="0" Type="OIL"/>
+                    <Resource Quantity="0" Type="MACHINERY"/>
                 </Resources>
             </ResourceContainer>
         </SentryGun>
@@ -279,8 +288,8 @@
             <ResourceContainer>
                 <Capacity>500000</Capacity>
                 <Resources>
-                    <Resource Quantity="0" Type="ELECTRICITY"/>
                     <Resource Quantity="0" Type="CONSTRUCTION_SUPPLIES"/>
+                    <Resource Quantity="0" Type="ELECTRICITY"/>
                     <Resource Quantity="0" Type="MACHINERY"/>
                 </Resources>
             </ResourceContainer>
@@ -301,8 +310,8 @@
             <ResourceContainer>
                 <Capacity>500000</Capacity>
                 <Resources>
-                    <Resource Quantity="0" Type="ELECTRICITY"/>
                     <Resource Quantity="0" Type="CONSTRUCTION_SUPPLIES"/>
+                    <Resource Quantity="0" Type="ELECTRICITY"/>
                     <Resource Quantity="0" Type="MACHINERY"/>
                 </Resources>
             </ResourceContainer>
@@ -320,26 +329,10 @@
             <OwnerID>0</OwnerID>
             <Flags>-128</Flags>
             <StateTime>0</StateTime>
-            <Producing>false</Producing>
-            <PrepTime>0</PrepTime>
             <Visible>false</Visible>
             <VisibleTime>0</VisibleTime>
             <BuiltByID>0</BuiltByID>
-            <ResourceContainer>
-                <Capacity>500000</Capacity>
-                <Resources>
-                    <Resource Quantity="0" Type="ELECTRICITY"/>
-                    <Resource Quantity="0" Type="CONSTRUCTION_SUPPLIES"/>
-                    <Resource Quantity="0" Type="MACHINERY"/>
-                </Resources>
-            </ResourceContainer>
-            <CargoSystem>
-                <Capacity>10000000</Capacity>
-                <Resources/>
-                <StoredInfantries/>
-                <StoredTanks/>
-                <StoredCargoTrucks/>
-            </CargoSystem>
+            <Wealth>0</Wealth>
         </Warehouse>
     </Warehouses>
     <Airbases>
@@ -365,12 +358,12 @@
             <ResourceContainer>
                 <Capacity>500000</Capacity>
                 <Resources>
-                    <Resource Quantity="0" Type="ELECTRONICS"/>
-                    <Resource Quantity="0" Type="ELECTRICITY"/>
                     <Resource Quantity="0" Type="CONSTRUCTION_SUPPLIES"/>
-                    <Resource Quantity="0" Type="MACHINERY"/>
+                    <Resource Quantity="0" Type="ELECTRICITY"/>
                     <Resource Quantity="0" Type="FUEL"/>
+                    <Resource Quantity="0" Type="MACHINERY"/>
                     <Resource Quantity="0" Type="STEEL"/>
+                    <Resource Quantity="0" Type="ELECTRONICS"/>
                 </Resources>
             </ResourceContainer>
         </Airbase>
@@ -403,8 +396,8 @@
             <ResourceContainer>
                 <Capacity>500000</Capacity>
                 <Resources>
-                    <Resource Quantity="0" Type="ELECTRICITY"/>
                     <Resource Quantity="0" Type="CONSTRUCTION_SUPPLIES"/>
+                    <Resource Quantity="0" Type="ELECTRICITY"/>
                     <Resource Quantity="0" Type="MACHINERY"/>
                 </Resources>
             </ResourceContainer>
@@ -462,7 +455,7 @@
             <LootType>2</LootType>
             <Type>6</Type>
             <Quantity>30000</Quantity>
-            <Expiry>160447088</Expiry>
+            <Expiry>160018088</Expiry>
         </Loot>
     </Loots>
     <Rubbles/>
@@ -475,16 +468,7 @@
                 <Longitude>-210.08159</Longitude>
             </Position>
             <Radius>18.731333</Radius>
-            <Expiry>1683856</Expiry>
-            <OwnerID>0</OwnerID>
-        </Radiation>
-        <Radiation ID="533">
-            <Position>
-                <Latitude>11.055628</Latitude>
-                <Longitude>-210.08159</Longitude>
-            </Position>
-            <Radius>9.042452</Radius>
-            <Expiry>4987992</Expiry>
+            <Expiry>1254856</Expiry>
             <OwnerID>0</OwnerID>
         </Radiation>
         <Radiation ID="545">
@@ -493,7 +477,7 @@
                 <Longitude>-210.08159</Longitude>
             </Position>
             <Radius>6.2696857</Radius>
-            <Expiry>15265056</Expiry>
+            <Expiry>14836056</Expiry>
             <OwnerID>0</OwnerID>
         </Radiation>
         <Radiation ID="547">
@@ -502,7 +486,7 @@
                 <Longitude>-210.08159</Longitude>
             </Position>
             <Radius>6.2696857</Radius>
-            <Expiry>24025584</Expiry>
+            <Expiry>23596584</Expiry>
             <OwnerID>0</OwnerID>
         </Radiation>
         <Radiation ID="548">
@@ -511,16 +495,7 @@
                 <Longitude>-210.08159</Longitude>
             </Position>
             <Radius>6.2696857</Radius>
-            <Expiry>10923472</Expiry>
-            <OwnerID>0</OwnerID>
-        </Radiation>
-        <Radiation ID="551">
-            <Position>
-                <Latitude>11.055628</Latitude>
-                <Longitude>-210.08159</Longitude>
-            </Position>
-            <Radius>6.2696857</Radius>
-            <Expiry>25638320</Expiry>
+            <Expiry>10494472</Expiry>
             <OwnerID>0</OwnerID>
         </Radiation>
         <Radiation ID="564">
@@ -529,7 +504,25 @@
                 <Longitude>-210.08159</Longitude>
             </Position>
             <Radius>6.2696857</Radius>
-            <Expiry>15444680</Expiry>
+            <Expiry>15015680</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="533">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>9.042452</Radius>
+            <Expiry>4558992</Expiry>
+            <OwnerID>0</OwnerID>
+        </Radiation>
+        <Radiation ID="551">
+            <Position>
+                <Latitude>11.055628</Latitude>
+                <Longitude>-210.08159</Longitude>
+            </Position>
+            <Radius>6.2696857</Radius>
+            <Expiry>25209320</Expiry>
             <OwnerID>0</OwnerID>
         </Radiation>
         <Radiation ID="569">
@@ -538,7 +531,7 @@
                 <Longitude>-210.08159</Longitude>
             </Position>
             <Radius>2.542233</Radius>
-            <Expiry>36876232</Expiry>
+            <Expiry>36447232</Expiry>
             <OwnerID>0</OwnerID>
         </Radiation>
         <Radiation ID="571">
@@ -547,7 +540,7 @@
                 <Longitude>-210.08159</Longitude>
             </Position>
             <Radius>2.542233</Radius>
-            <Expiry>42841528</Expiry>
+            <Expiry>42412528</Expiry>
             <OwnerID>0</OwnerID>
         </Radiation>
         <Radiation ID="575">
@@ -556,7 +549,7 @@
                 <Longitude>-210.08159</Longitude>
             </Position>
             <Radius>2.542233</Radius>
-            <Expiry>16840520</Expiry>
+            <Expiry>16411520</Expiry>
             <OwnerID>0</OwnerID>
         </Radiation>
     </Radiations>

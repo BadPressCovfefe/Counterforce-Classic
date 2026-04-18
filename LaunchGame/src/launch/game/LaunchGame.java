@@ -5287,7 +5287,7 @@ public abstract class LaunchGame implements LaunchEntityListener
         return Result;
     }
             
-    
+    public KOTH GetKOTH() { return kingOfTheHill; }
     public Alliance GetAlliance(int lID) { return Alliances.get(lID); }
     public Treaty GetTreaty(int lID) { return Treaties.get(lID); }
     public Player GetPlayer(int lID) { return Players.get(lID); }

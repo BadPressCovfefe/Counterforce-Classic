@@ -779,4 +779,9 @@ public class XMLDefs
     public static final String BUILT_BY_ID = "BuiltByID";
     public static final String BARRACKS = "Barracks";
     public static final String WATCH_TOWER = "IsWatchTower";
+    
+    public static final String KOTH = "KOTH";
+    public static final String KING_ID = "KingID";
+    public static final String CONTROLLED_BY_ALLIANCE = "AllianceControl";
+    public static final String KOTH_WINS = "KOTHWins";
 }

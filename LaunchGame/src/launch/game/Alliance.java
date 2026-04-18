@@ -19,7 +19,7 @@ import launch.game.treaties.Treaty;
  */
 public class Alliance
 {
-    private static final int DATA_SIZE = 48;
+    private static final int DATA_SIZE = 52;
     
     public static final int ALLIANCE_ID_UNAFFILIATED = Defs.THE_GREAT_BIG_NOTHING;
     public static final int ALLIANCE_AVATAR_DEFAULT = Defs.THE_GREAT_BIG_NOTHING;
@@ -41,6 +41,7 @@ public class Alliance
     private int lICBMCount;
     private int lABMCount;
     private long oFoundedTime;
+    private int lKOTHWins;
     
     private List<Integer> OurTreaties = new ArrayList<>();
     
@@ -64,7 +65,7 @@ public class Alliance
     }
     
     //From save.
-    public Alliance(int lID, String strName, String strDescription, int lAvatarID, int lWealth, float fltTaxRate, int lWarsWon, int lWarsLost, int lEnemyAllianceDisbands, String strFounderName, int lAffiliationsBroken, int lICBMCount, int lABMCount, long oFoundedTime)
+    public Alliance(int lID, String strName, String strDescription, int lAvatarID, int lWealth, float fltTaxRate, int lWarsWon, int lWarsLost, int lEnemyAllianceDisbands, String strFounderName, int lAffiliationsBroken, int lICBMCount, int lABMCount, int lKOTHWins, long oFoundedTime)
     {
         this.lID = lID;
         this.strName = strName;
@@ -81,6 +82,7 @@ public class Alliance
         this.lICBMCount = lICBMCount;
         this.lABMCount = lABMCount;
         this.oFoundedTime = oFoundedTime;
+        this.lKOTHWins = lKOTHWins;
     }
     
     //Communicated.
@@ -101,6 +103,7 @@ public class Alliance
         lICBMCount = bb.getInt();
         lABMCount = bb.getInt();
         oFoundedTime = bb.getLong();
+        lKOTHWins = bb.getInt();
     }
     
     public void SetAvatarID(int lAvatarID)
@@ -157,6 +160,7 @@ public class Alliance
         bb.putInt(lICBMCount);
         bb.putInt(lABMCount);
         bb.putLong(oFoundedTime);
+        bb.putInt(lKOTHWins);
         
         return bb.array();
     }
@@ -293,5 +297,15 @@ public class Alliance
     public void ResetTrackableStats()
     {
         
+    }
+    
+    public int GetKOTHWins()
+    {
+        return this.lKOTHWins;
+    }
+    
+    public void WonKOTH()
+    {
+        this.lKOTHWins++;
     }
 }

@@ -654,6 +654,12 @@ public class LaunchClientSession extends LaunchSession
                     gameInterface.ReceiveRubble(new Rubble(bb));
                 }
                 break;
+                
+                case KOTH:
+                {
+                    gameInterface.ReceiveKOTH(new KOTH(bb));
+                }
+                break;
 
                 case Radiation:
                 {
@@ -703,30 +709,6 @@ public class LaunchClientSession extends LaunchSession
                     bDownloadingImage = false;
                 }
                 break;
-
-                /*case UpdateHP:
-                {
-                    //TODO:
-                }
-                break;
-
-                case UpdateSpeed:
-                {
-                    //TODO:
-                }
-                break;
-
-                case UpdatePosition:
-                {
-                    //TODO:
-                }
-                break;
-
-                case NewContactBearing:
-                {
-                    gameInterface.ReceiveContactBearing(new EntityPointer(bb), bb.getFloat());
-                }
-                break;*/
 
                 default:
                 {

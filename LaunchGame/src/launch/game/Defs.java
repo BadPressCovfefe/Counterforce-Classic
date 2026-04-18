@@ -522,6 +522,7 @@ public class Defs
     public static final int STRUCTURE_KILLED_XP = STRUCTURE_BUILT_XP;
     public static final int STRUCTURE_LOST_XP = (int)(STRUCTURE_KILLED_XP * XP_LOSS_VS_GAIN_MULTIPLIER);
     public static final int TANK_PURCHASED_XP = 50;
+    public static final int KOTH_WIN_XP = 500;
     
     public static final int CARGO_TRUCK_PURCHASED_XP = 50;
     
@@ -924,5 +925,7 @@ public class Defs
     }
     
     public static final float KOTH_MIN_SIZE = 50f;
-    public static final float KOTH_MAX_SIZE = 150f;
+    public static final float KOTH_MAX_SIZE = 500f;
+    public static final long KOTH_PRIZE = 100000;
+    public static final long KOTH_MIN_PRIZE = 25000;
 }   

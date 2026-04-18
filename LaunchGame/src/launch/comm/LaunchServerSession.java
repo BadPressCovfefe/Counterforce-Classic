@@ -1708,6 +1708,13 @@ public class LaunchServerSession extends LaunchSession
                     
                     try
                     {
+                        if(game.GetKOTH() != null)
+                        {
+                            KOTH hill = game.GetKOTH();
+                            
+                            tobComm.SendObject(KOTH, hill.GetData(lTheirPlayerID));
+                        }
+                        
                         //Send all alliances.
                         for(Alliance alliance : game.GetAlliances())
                         {
@@ -2186,6 +2193,8 @@ public class LaunchServerSession extends LaunchSession
                 tobComm.SendCommand(RemoveCargoTruck, entity.GetID());
             else if(entity instanceof Blueprint)
                 tobComm.SendCommand(RemoveBlueprint, entity.GetID());
+            else if(entity instanceof KOTH)
+                tobComm.SendCommand(RemoveKOTH, entity.GetID());
         }
     }
     

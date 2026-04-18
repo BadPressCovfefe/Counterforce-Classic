@@ -92,13 +92,13 @@ public class KOTH extends MapEntity
     @Override
     public EntityType GetEntityType()
     {
-        return EntityType.RADIATION;
+        return EntityType.KOTH;
     }
     
     @Override
     public int GetSessionCode()
     {
-        return LaunchSession.Radiation;
+        return LaunchSession.KOTH;
     }
     
     @Override
@@ -147,6 +147,6 @@ public class KOTH extends MapEntity
     
     public boolean GetOccupiedByAlliance()
     {
-        return this.bControlledByAlliance;
+        return this.bControlledByAlliance && lKingID != ID_EMPTY && lKingID != ID_CONTESTED;
     }
 }

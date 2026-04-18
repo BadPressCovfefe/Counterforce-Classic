@@ -383,6 +383,8 @@ public class LaunchUtilities
             else 
                 bEntityTypeVisible = DEAD_PLAYERS_VISIBLE;
         }
+        else if(entity instanceof KOTH)
+            return true;
         else if(entity instanceof MissileSite)
             bEntityTypeVisible = MISSILE_SITES_VISIBLE;
         else if(entity instanceof SAMSite)

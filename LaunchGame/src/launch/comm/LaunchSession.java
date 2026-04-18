@@ -263,14 +263,14 @@ public abstract class LaunchSession implements TobCommInterface, ConnectionLogge
     public static final int RemoveBank = 85;                     //A bank has been removed from the game.
     public static final int RemoveWarehouse = 86;                //A logistics warehouse has been removed from the game.
     public static final int UnlinkDepot = 87;                    //An instruction to unlink a logistics warehouse.
-    public static final int RemoveMissileFactory = 88;               //A comms factory has been removed from the game.
+    public static final int RemoveMissileFactory = 88;           //A comms factory has been removed from the game.
     public static final int RemoveBlueprint = 89;                //A blueprint has been removed from the game.
     public static final int AllianceWithdraw = 90;               //A request to withdraw money from an alliance coffer.
     public static final int AlliancePanic = 91;                  //A request to issue an alliance panic alert.
     public static final int CallAirdrop = 92;                    //A request to call an airdrop.
     public static final int RemoveAirdrop = 93;                  //An airdrop has been removed from the game.
     public static final int RemoveArmory = 94;                   //A armory has been removed from the game.
-    //95 is reserved.
+    public static final int RemoveKOTH = 95;                     //The hill has been removed from the game.
     public static final int RemoveInfantry = 96;                 //An Infantry has been removed from the game.
     public static final int RemoveTank = 97;                     //A tank has been removed from the game.
     public static final int RemoveRubble = 98;                   //A rubble has been removed from the game.

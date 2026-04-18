@@ -28,7 +28,7 @@ import launch.utilities.LaunchLog;
 public final class Player extends MapEntity implements LaunchSystemListener
 {
     private static final int DATA_SIZE = 71;
-    private static final int STATS_DATA_SIZE = 44;
+    private static final int STATS_DATA_SIZE = 48;
    
     private static final int FLAG1_BANNED = 0x01;        //Banned. NOTE: NOT SAVED (well, it is, but the server ignores it), but determined at run time when getting player data.
     private static final int FLAG1_PRISONER = 0x02;       //Unused.
@@ -92,6 +92,7 @@ public final class Player extends MapEntity implements LaunchSystemListener
     private int lCityCountLastWeek;
     private int lChampionCount;
     private long oWealth;
+    private int lKOTHWins;
     
     //Server only.
     private User user = null;
@@ -155,6 +156,7 @@ public final class Player extends MapEntity implements LaunchSystemListener
         this.fltDistanceTraveledToday = 0.0f;
         this.lCityCountLastWeek = 0;
         this.lChampionCount = 0;
+        this.lKOTHWins = 0;
         
         this.lRank = 0;
         this.lExperience = 0;
@@ -171,7 +173,7 @@ public final class Player extends MapEntity implements LaunchSystemListener
     }
     
     //From save.
-    public Player(int lID, GeoCoord geoPosition, String strName, int lAvatarID, long oLastSeen, int lStateChange, int lAllianceID, byte cFlags1, byte cFlags2, int lAllianceCooloff, short nKills, short nDeaths, int lOffenceSpending, int lDefenceSpending, int lDamageInflicted, int lDamageReceived, int lRank, int lExperience, int lTotalKills, int lTotalDeaths, boolean bMember, long oJoinTime, int lDefenseValue, int lOffenseValue, int lNeutralValue, float fltDistanceTraveled, float fltDistanceTraveledToday, int lAirdropCooldown, int lProspectCooldown, int lCityCountLastWeek, int lChampionCount, boolean bAdminMember, long oWealth, List<Integer> Blacklist)
+    public Player(int lID, GeoCoord geoPosition, String strName, int lAvatarID, long oLastSeen, int lStateChange, int lAllianceID, byte cFlags1, byte cFlags2, int lAllianceCooloff, short nKills, short nDeaths, int lOffenceSpending, int lDefenceSpending, int lDamageInflicted, int lDamageReceived, int lRank, int lExperience, int lTotalKills, int lTotalDeaths, boolean bMember, long oJoinTime, int lDefenseValue, int lOffenseValue, int lNeutralValue, float fltDistanceTraveled, float fltDistanceTraveledToday, int lAirdropCooldown, int lProspectCooldown, int lCityCountLastWeek, int lChampionCount, boolean bAdminMember, long oWealth, int lKOTHWins, List<Integer> Blacklist)
     {
         super(lID, geoPosition, true, 0);
         this.strName = strName;
@@ -215,6 +217,7 @@ public final class Player extends MapEntity implements LaunchSystemListener
         this.lTotalKills = lTotalKills;
         this.lTotalDeaths = lTotalDeaths;
         this.oWealth = oWealth;
+        this.lKOTHWins = lKOTHWins;
         
         //For old config transfer only.
         if(lAllianceID == Alliance.ALLIANCE_ID_UNAFFILIATED)
@@ -275,6 +278,7 @@ public final class Player extends MapEntity implements LaunchSystemListener
             fltDistanceTraveled = bb.getFloat();
             lCityCountLastWeek = bb.getInt();
             lChampionCount = bb.getInt();
+            lKOTHWins = bb.getInt();
             bHasFullStats = true;
         }
         else
@@ -354,6 +358,7 @@ public final class Player extends MapEntity implements LaunchSystemListener
         bb.putFloat(fltDistanceTraveled);
         bb.putInt(lCityCountLastWeek);
         bb.putInt(lChampionCount);
+        bb.putInt(lKOTHWins);
         
         return bb.array();
     }
@@ -1336,5 +1341,15 @@ public final class Player extends MapEntity implements LaunchSystemListener
     public void SetGame(LaunchGame game)
     {
         this.game = game;
+    }
+    
+    public int GetKOTHWins()
+    {
+        return this.lKOTHWins;
+    }
+    
+    public void WonKOTH()
+    {
+        this.lKOTHWins++;
     }
 }

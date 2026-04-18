@@ -91,6 +91,7 @@ import com.apps.fast.launch.launchviews.entities.ArmoryView;
 import com.apps.fast.launch.launchviews.entities.CommandPostView;
 import com.apps.fast.launch.launchviews.entities.DotncarryMemorialView;
 import com.apps.fast.launch.launchviews.entities.InterceptorView;
+import com.apps.fast.launch.launchviews.entities.KOTHView;
 import com.apps.fast.launch.launchviews.entities.ShipView;
 import com.apps.fast.launch.launchviews.entities.ShipyardView;
 import com.apps.fast.launch.launchviews.entities.SubmarineView;
@@ -275,6 +276,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     private boolean bShowFirstLocation = true;
     private boolean bRebuildMap = false;
 
+    private Circle kothCircle = null;
     private Map<Marker, PrivacyZone> PrivacyZoneMarkers = new ConcurrentHashMap<>();
     public Map<Integer, Polyline> MissileTrails = new ConcurrentHashMap<>();
     private Map<Integer, Polyline> TorpedoTrajectories = new ConcurrentHashMap<>();
@@ -2563,6 +2565,10 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             else if(selectedEntity instanceof Missile)
             {
                 mainView.BottomLayoutShowView(new MissileView(game, this, selectedEntity.GetID()));
+            }
+            else if(selectedEntity instanceof KOTH)
+            {
+                mainView.BottomLayoutShowView(new KOTHView(game, this));
             }
             else if(selectedEntity instanceof Interceptor)
             {
@@ -5416,6 +5422,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                 map.clear();
                             }
 
+                            kothCircle = null;
                             AllMarkers = new ConcurrentHashMap<>();
                             AllOverlays = new ConcurrentHashMap<>();
                             MarkerChunks = new ConcurrentHashMap<>();
@@ -5608,6 +5615,11 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                     optionThomas99.anchor(0.5f, 0.5f);
                                     optionThomas99.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_texas_obelisk));
                                     Thomas99Memorial = map.addMarker(optionThomas99);
+
+                                    if(game.GetKOTH() != null)
+                                    {
+                                        CreateEntityUI(game.GetKOTH());
+                                    }
 
                                     for(Shipyard shipyard : game.GetShipyards())
                                     {
@@ -6355,6 +6367,10 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         else
         {
             if(entity instanceof Radiation)
+            {
+                CreateEntityUI((MapEntity)entity);
+            }
+            else if(entity instanceof KOTH)
             {
                 CreateEntityUI((MapEntity)entity);
             }
@@ -7521,6 +7537,29 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                     .fillColor(Utilities.ColourFromAttr(context, R.attr.RadiationColour))
                                     .strokeWidth(0.0f)));
                         }
+                        else if(entity instanceof KOTH)
+                        {
+                            KOTH kingOfTheHill = (KOTH)entity;
+
+                            if(kothCircle != null)
+                            {
+                                kothCircle.remove();
+
+                                if(kothCircle != null)
+                                    kothCircle.remove();
+
+                                kothCircle = null;
+                            }
+
+                            kothCircle = map.addCircle(new CircleOptions()
+                                    .center(Utilities.GetLatLng(kingOfTheHill.GetPosition()))
+                                    .radius(kingOfTheHill.GetRadius() * Defs.METRES_PER_KM)
+                                    .clickable(true)
+                                    .fillColor(Utilities.ColourFromAttr(context, R.attr.LootRadiusColour))
+                                    .strokeWidth(0.0f));
+
+                            kothCircle.setTag(kingOfTheHill);
+                        }
                         else if(entity instanceof Interceptor)
                         {
                             Interceptor interceptor = (Interceptor) entity;
@@ -8116,6 +8155,14 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                     {
                         RadiationMarkers.remove(entity.GetID());
                         circle.remove();
+                    }
+                }
+                else if(entity instanceof KOTH)
+                {
+                    if(kothCircle != null)
+                    {
+                        kothCircle.remove();
+                        kothCircle = null;
                     }
                 }
                 else if(entity instanceof ResourceDeposit)

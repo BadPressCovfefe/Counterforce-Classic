@@ -946,4 +946,8 @@
     <string name="tap_structure_button">Tap a structure to build.</string>
     <string name="rebuild_rubble_confirm">Rebuild this rubble for %s?</string>
     <string name="send_money">Send Wealth</string>
+    <string name="koth">King of the Hill Zone</string>
+    <string name="koth_occupied">Current king: %1$s</string>
+    <string name="koth_contested">Contested</string>
+    <string name="koth_empty">Presently Empty</string>
 </resources>

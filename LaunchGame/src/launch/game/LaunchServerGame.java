@@ -1689,11 +1689,11 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                     
                     if(alliance != null)
                     {
-                        int lPrizeAmount = Defs.KOTH_PRIZE/GetAllianceMemberCount(alliance);
+                        int lPrizeAmount = (int)(Defs.KOTH_PRIZE/GetAllianceMemberCount(alliance));
                         
                         if(lPrizeAmount < Defs.KOTH_MIN_PRIZE)
                         {
-                            lPrizeAmount = Defs.KOTH_MIN_PRIZE;
+                            lPrizeAmount = (int)Defs.KOTH_MIN_PRIZE;
                         }
                         
                         //Give prizes. Split $100k among the members. If each member would get less than 25k, give them each 25k.
@@ -1704,7 +1704,7 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                         {
                             if(player.GetAllianceMemberID() == alliance.GetID())
                             {
-                                ProcessPlayerIncome(player, "You won king of the hill.", lPrizeAmount, true);
+                                ProcessPlayerIncome(player, "You won king of the hill.", Map.ofEntries(entry(ResourceType.WEALTH, (long)lPrizeAmount)), true);
                                 ProcessPlayerXPGain(player.GetID(), Defs.KOTH_WIN_XP, String.format("Your alliance won KOTH!"));
                                 EntityUpdated(player, false);
                             }
@@ -1721,7 +1721,7 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                     
                     if(player != null)
                     {
-                        ProcessPlayerIncome(player, "You won king of the hill.", Defs.KOTH_PRIZE, true);
+                        ProcessPlayerIncome(player, "You won king of the hill.", Map.ofEntries(entry(ResourceType.WEALTH, Defs.KOTH_PRIZE)), true);
                         CreateEvent(new LaunchEvent(String.format("The player %s is this week's king of the hill victor! They win $%d and %d xp.", player.GetName(), Defs.KOTH_PRIZE, Defs.KOTH_WIN_XP), SoundEffect.RESPAWN));
                         CreateReport(new LaunchReport(String.format("The player %s is this week's king of the hill victor! They win $%d and %d xp.", player.GetName(), Defs.KOTH_PRIZE, Defs.KOTH_WIN_XP), true));
                         player.WonKOTH();
@@ -1732,7 +1732,7 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
         }
         
         //Generate a new hill.
-        GenerateHill();
+        GenerateKOTH();
         
         //Conclude all wars.
         for(Treaty treaty : Treaties.values())

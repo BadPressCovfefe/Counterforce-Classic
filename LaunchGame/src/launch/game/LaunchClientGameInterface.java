@@ -10,7 +10,6 @@ import launch.game.entities.*;
 import launch.game.entities.conceptuals.StoredInfantry;
 import launch.game.entities.conceptuals.TerrainData;
 import launch.game.treaties.*;
-import launch.game.types.LaunchType;
 import launch.utilities.LaunchEvent;
 import launch.utilities.LaunchClientLocation;
 import launch.utilities.LaunchReport;
@@ -47,6 +46,7 @@ public interface LaunchClientGameInterface
     void ReceiveLoot(Loot loot);
     void ReceiveRubble(Rubble rubble);
     void ReceiveRadiation(Radiation radiation);
+    void ReceiveKOTH(KOTH koth);
     void ReceiveAlliance(Alliance alliance, boolean bMajor);
     void ReceiveTreaty(Treaty treaty);
     void ReceiveUser(User user);

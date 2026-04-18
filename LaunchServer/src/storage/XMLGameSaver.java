@@ -145,6 +145,18 @@ public class XMLGameSaver
 
             AddNode(doc, eleGameStats, XMLDefs.NEXT_PLAYER_ID, game.GetPlayerIndex());
             
+            //Save KOTH
+            if(game.GetKOTH() != null)
+            {
+                KOTH kingOfTheHill = game.GetKOTH();
+                
+                Element eleKOTH = AddNode(doc, eleGame, XMLDefs.KOTH);
+                AddPositionNode(doc, eleKOTH, XMLDefs.POSITION, kingOfTheHill.GetPosition());
+                AddNode(doc, eleKOTH, XMLDefs.RADIUS, kingOfTheHill.GetRadius());
+                AddNode(doc, eleKOTH, XMLDefs.KING_ID, kingOfTheHill.GetKingID());
+                AddNode(doc, eleKOTH, XMLDefs.CONTROLLED_BY_ALLIANCE, kingOfTheHill.GetOccupiedByAlliance());
+            }
+            
             //Save users.
             Element elements = AddNode(doc, eleGame, XMLDefs.USERS);
 

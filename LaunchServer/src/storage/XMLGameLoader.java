@@ -50,6 +50,7 @@ import launch.game.entities.Armory;
 import launch.game.entities.ArtilleryGun;
 import launch.game.entities.CargoTruck;
 import launch.game.entities.Infantry;
+import launch.game.entities.KOTH;
 import launch.game.entities.LaunchEntity;
 import launch.game.entities.Movable.MoveOrders;
 import launch.game.entities.Processor;
@@ -89,6 +90,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import launch.game.systems.ResourceSystem;
 import launch.utilities.LaunchUtilities;
+import org.w3c.dom.Node;
 
 /**
  *
@@ -534,8 +536,24 @@ public class XMLGameLoader
                     game.SetPlayerIndex(lNextPlayerID);
                 }
             }
+            
+            LaunchLog.Log(APPLICATION, LOG_NAME, "Loading KOTH...");
+            Element eleKOTH = doc.getElementById(XMLDefs.KOTH);
+
+            if(eleKOTH != null)
+            {
+                int lID = 0;
+                GeoCoord geoPosition = GetPositionElement(eleKOTH, XMLDefs.POSITION);
+                float fltRadius = GetFloatElement(eleKOTH, XMLDefs.RADIUS, Defs.KOTH_MIN_SIZE);
+                int lKingID = GetIntElement(eleKOTH, XMLDefs.KING_ID);
+                boolean bControlledByAlliance = GetBooleanElement(eleKOTH, XMLDefs.CONTROLLED_BY_ALLIANCE);
+
+                game.AddKOTH(new KOTH(lID, geoPosition, fltRadius, lKingID, bControlledByAlliance));
+            }
 
             //Load users.
+            LaunchLog.Log(APPLICATION, LOG_NAME, "Loading users...");
+            
             NodeList ndeUsers = doc.getElementsByTagName(XMLDefs.USER);
 
             for(int i = 0; i < ndeUsers.getLength(); i++)
@@ -599,6 +617,8 @@ public class XMLGameLoader
             }
             
             //Load alliances.
+            LaunchLog.Log(APPLICATION, LOG_NAME, "Loading alliances...");
+            
             NodeList nodeAlliances = doc.getElementsByTagName(XMLDefs.ALLIANCE);
             
             for(int i = 0; i < nodeAlliances.getLength(); i++)
@@ -620,8 +640,9 @@ public class XMLGameLoader
                     int lICBMCount = GetIntElement(eleAlliance, XMLDefs.ICBM_COUNT);
                     int lABMCount = GetIntElement(eleAlliance, XMLDefs.ABM_COUNT);
                     long oFoundedTime = GetLongElement(eleAlliance, XMLDefs.FOUNDED_TIME);
+                    int lKOTHWins = GetIntElement(eleAlliance, XMLDefs.KOTH_WINS);
                     
-                    game.AddAlliance(new Alliance(lID, strName, strDescription, lAvatarID, lWealth, fltTaxRate, lWarsWon, lWarsLost, lEnemyAllianceDisbands, strFounderName, lAffiliationsBroken, lICBMCount, lABMCount, oFoundedTime), false);
+                    game.AddAlliance(new Alliance(lID, strName, strDescription, lAvatarID, lWealth, fltTaxRate, lWarsWon, lWarsLost, lEnemyAllianceDisbands, strFounderName, lAffiliationsBroken, lICBMCount, lABMCount, lKOTHWins, oFoundedTime), false);
                 }
                 catch(Exception ex)
                 {
@@ -630,6 +651,8 @@ public class XMLGameLoader
             }
             
             //Load treaties.
+            LaunchLog.Log(APPLICATION, LOG_NAME, "Loading treaties...");
+            
             NodeList nodeTreaties = doc.getElementsByTagName(XMLDefs.TREATY);
             
             for(int i = 0; i < nodeTreaties.getLength(); i++)
@@ -678,6 +701,8 @@ public class XMLGameLoader
             }
             
             //Load players.
+            LaunchLog.Log(APPLICATION, LOG_NAME, "Loading players...");
+            
             NodeList nodes = doc.getElementsByTagName(XMLDefs.PLAYER);
 
             for(int i = 0; i < nodes.getLength(); i++)
@@ -718,6 +743,7 @@ public class XMLGameLoader
                     int lChampCount = GetIntElement(elePlayer, XMLDefs.CHAMP_COUNT);
                     float fltDistanceTraveled = GetFloatElement(elePlayer, XMLDefs.DISTANCE_TRAVELED, 0);
                     float fltDistanceTraveledToday = GetFloatElement(elePlayer, XMLDefs.DISTANCE_TRAVELED_TODAY, 0);
+                    int lKOTHWins = GetIntElement(elePlayer, XMLDefs.KOTH_WINS);
                     List<Integer> Blacklist = new ArrayList<>();
                     
                     if(GetHasNode(elePlayer, XMLDefs.BLACKLIST))
@@ -740,7 +766,7 @@ public class XMLGameLoader
                         oWealth = GetLongElement(elePlayer, XMLDefs.WEALTH);
                     }
                     
-                    game.AddPlayer(new Player(lID, geoPosition, strName, lAvatarID, oLastSeen, lStateChange, lAllianceID, cFlags1, cFlags2, lAllianceCooloffTime, nKills, nDeaths, lOffenceSpending, lDefenceSpending, lDamageInflicted, lDamageReceived, lRank, lExperience, lTotalKills, lTotalDeaths, bMember, oJoinTime, lDefenseValue, lOffenseValue, lNeutralValue, fltDistanceTraveled, fltDistanceTraveledToday, lAirdropCooldown, lProspectCooldown, lCityCountLastWeek, lChampCount, bAdminMember, oWealth, Blacklist));
+                    game.AddPlayer(new Player(lID, geoPosition, strName, lAvatarID, oLastSeen, lStateChange, lAllianceID, cFlags1, cFlags2, lAllianceCooloffTime, nKills, nDeaths, lOffenceSpending, lDefenceSpending, lDamageInflicted, lDamageReceived, lRank, lExperience, lTotalKills, lTotalDeaths, bMember, oJoinTime, lDefenseValue, lOffenseValue, lNeutralValue, fltDistanceTraveled, fltDistanceTraveledToday, lAirdropCooldown, lProspectCooldown, lCityCountLastWeek, lChampCount, bAdminMember, oWealth, lKOTHWins, Blacklist));
                 }
                 catch(Exception ex)
                 {
