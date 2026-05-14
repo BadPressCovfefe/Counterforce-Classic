@@ -54,9 +54,7 @@ public class StoredTank extends StoredDamagable implements LaunchSystemListener,
     public StoredTank(int lNewID, Tank tank, EntityPointer host)
     {
         super(lNewID, tank.GetOwnerID(), tank.GetHP(), Defs.TANK_MAX_HP, 0, tank.GetName());
-        this.type = tank.GetType();
         this.host = host;
-        this.launchables = tank.GetMissileSystem();
         this.fltFuel = tank.GetCurrentFuel();
         this.resources = tank.GetResourceSystem();
         SetPointer();

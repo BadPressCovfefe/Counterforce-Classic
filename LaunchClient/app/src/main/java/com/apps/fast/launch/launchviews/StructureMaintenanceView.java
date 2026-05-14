@@ -33,7 +33,7 @@ import launch.game.entities.MissileFactory;
 import launch.game.entities.Distributor;
 import launch.game.entities.LaunchEntity;
 import launch.game.entities.Processor;
-import launch.game.entities.ScrapYard;
+import launch.game.entities.LogisticsDepot;
 import launch.game.entities.Warehouse;
 import launch.game.entities.MapEntity;
 import launch.game.entities.MissileSite;
@@ -628,7 +628,7 @@ public class StructureMaintenanceView extends LaunchView implements LaunchUIComm
                 }
                 else
                 {
-                    txtCost.setText(TextUtilities.GetCurrencyString(game.GetConfig().GetMaintenanceCost(structure)));
+                    txtCost.setText(TextUtilities.GetCurrencyString(game.GetConfig().GetMaintenanceCost()));
                     //txtTime.setText(TextUtilities.GetTimeAmount(structure.GetChargeOwnerTimeRemaining()));
                     //txtTime.setVisibility(VISIBLE);
                 }
@@ -861,7 +861,7 @@ public class StructureMaintenanceView extends LaunchView implements LaunchUIComm
             else
                 imgPower.setImageResource(R.drawable.button_offline);
 
-            txtCost.setText(TextUtilities.GetCurrencyString(game.GetConfig().GetMaintenanceCost(controlStructure) * lNumberRunning));
+            txtCost.setText(TextUtilities.GetCurrencyString(game.GetConfig().GetMaintenanceCost() * lNumberRunning));
         }
     }
 

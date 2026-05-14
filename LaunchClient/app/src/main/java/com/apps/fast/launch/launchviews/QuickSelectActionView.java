@@ -232,23 +232,15 @@ public class QuickSelectActionView extends LaunchView
                         {
                             if(tank.GetOwnerID() == ourPlayer.GetID() && !tank.ApparentlyEquals(targetEntity))
                             {
-                                //If the order is ATTACK, SPAAGS and tanks already attacking this target should be excluded.
                                 if(order == MoveOrders.ATTACK)
                                 {
-                                    if(!tank.IsASPAAG())
+                                    if(tank.GetMoveOrders() == MoveOrders.ATTACK)
                                     {
-                                        if(tank.GetMoveOrders() == MoveOrders.ATTACK)
+                                        if(tank.GetTarget() != null)
                                         {
-                                            if(tank.GetTarget() != null)
-                                            {
-                                                MapEntity target = tank.GetTarget().GetMapEntity(game);
+                                            MapEntity target = tank.GetTarget().GetMapEntity(game);
 
-                                                if(targetEntity != null && (target == null || !targetEntity.ApparentlyEquals(target)))
-                                                {
-                                                    Tanks.add(tank);
-                                                }
-                                            }
-                                            else
+                                            if(targetEntity != null && (target == null || !targetEntity.ApparentlyEquals(target)))
                                             {
                                                 Tanks.add(tank);
                                             }
@@ -257,6 +249,10 @@ public class QuickSelectActionView extends LaunchView
                                         {
                                             Tanks.add(tank);
                                         }
+                                    }
+                                    else
+                                    {
+                                        Tanks.add(tank);
                                     }
                                 }
                                 else if(order == MoveOrders.MOVE && tank.GetGeoTarget() != null && tank.GetMoveOrders() == Tank.MoveOrders.MOVE)

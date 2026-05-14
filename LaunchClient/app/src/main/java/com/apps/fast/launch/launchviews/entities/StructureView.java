@@ -25,6 +25,7 @@ import com.apps.fast.launch.views.LaunchDialog;
 
 import java.util.Map;
 
+import launch.game.Defs;
 import launch.game.LaunchClientGame;
 import launch.game.entities.LaunchEntity;
 import launch.game.entities.Structure;
@@ -148,6 +149,8 @@ public abstract class StructureView extends LaunchView implements LaunchUICommon
 
         if(structureShadow.GetOwnerID() == game.GetOurPlayerID())
         {
+            controls.setVisibility(GONE);
+
             if(!structureShadow.Destroyed())
             {
                 txtName.setVisibility(GONE);
@@ -191,7 +194,7 @@ public abstract class StructureView extends LaunchView implements LaunchUICommon
 
                         final LaunchDialog launchDialog = new LaunchDialog();
                         launchDialog.SetHeaderPurchase();
-                        launchDialog.SetMessage(context.getString(R.string.decommission_confirm, structure.GetTypeName(), TextUtilities.GetCostStatement(game.GetSaleValue(structure)), TextUtilities.GetTimeAmount(game.GetConfig().GetDecommissionTime(structure))));
+                        launchDialog.SetMessage(context.getString(R.string.decommission_confirm, structure.GetTypeName(), TextUtilities.GetCurrencyString(game.GetSaleValue(structure).get(Resource.ResourceType.WEALTH)), TextUtilities.GetTimeAmount(Defs.DECOMMISSION_TIME)));
                         launchDialog.SetOnClickYes(new View.OnClickListener()
                         {
                             @Override
@@ -247,46 +250,39 @@ public abstract class StructureView extends LaunchView implements LaunchUICommon
                     @Override
                     public void onClick(View view)
                     {
-                        if(!game.InBattle(game.GetOurPlayer()))
+                        Structure structure = GetCurrentStructure();
+
+                        Map<Resource.ResourceType, Long> Costs = game.GetRepairCost(structure);
+
+                        final LaunchDialog launchDialog = new LaunchDialog();
+                        launchDialog.SetHeaderHealth();
+                        launchDialog.SetMessage(context.getString(R.string.repair_confirm, structure.GetTypeName(), TextUtilities.GetCurrencyString(Costs.get(Resource.ResourceType.WEALTH))));
+                        launchDialog.SetOnClickYes(new View.OnClickListener()
                         {
-                            Structure structure = GetCurrentStructure();
-
-                            Map<Resource.ResourceType, Long> Costs = game.GetRepairCost(structure);
-
-                            final LaunchDialog launchDialog = new LaunchDialog();
-                            launchDialog.SetHeaderHealth();
-                            launchDialog.SetMessage(context.getString(R.string.repair_confirm, structure.GetTypeName(), TextUtilities.GetCostStatement(Costs)));
-                            launchDialog.SetOnClickYes(new View.OnClickListener()
+                            @Override
+                            public void onClick(View view)
                             {
-                                @Override
-                                public void onClick(View view)
-                                {
-                                    launchDialog.dismiss();
+                                launchDialog.dismiss();
 
-                                    if(game.GetOurPlayer().GetWealth() >= Costs.get(Resource.ResourceType.WEALTH))
-                                    {
-                                        game.RepairEntity(structureShadow.GetPointer());
-                                    }
-                                    else
-                                    {
-                                        activity.ShowBasicOKDialog(context.getString(R.string.insufficient_funds));
-                                    }
-                                }
-                            });
-                            launchDialog.SetOnClickNo(new View.OnClickListener()
-                            {
-                                @Override
-                                public void onClick(View view)
+                                if(game.GetOurPlayer().GetWealth() >= Costs.get(Resource.ResourceType.WEALTH))
                                 {
-                                    launchDialog.dismiss();
+                                    game.RepairEntity(structureShadow.GetPointer());
                                 }
-                            });
-                            launchDialog.show(activity.getFragmentManager(), "");
-                        }
-                        else
+                                else
+                                {
+                                    activity.ShowBasicOKDialog(context.getString(R.string.insufficient_funds));
+                                }
+                            }
+                        });
+                        launchDialog.SetOnClickNo(new View.OnClickListener()
                         {
-                            activity.ShowBasicOKDialog(context.getString(R.string.in_battle_cant_repair));
-                        }
+                            @Override
+                            public void onClick(View view)
+                            {
+                                launchDialog.dismiss();
+                            }
+                        });
+                        launchDialog.show(activity.getFragmentManager(), "");
                     }
                 });
             }

@@ -35,7 +35,7 @@ public interface LaunchClientGameInterface
     void ReceiveArmory(Armory armory);
     void ReceiveAirdrop(Airdrop airdrop);
     void ReceiveBank(Bank bank);
-    void ReceiveScrapYard(ScrapYard yard);
+    void ReceiveLogisticsDepot(LogisticsDepot depot);
     void ReceiveWarehouse(Warehouse warehouse);
     void ReceiveAircraft(Airplane aircraft);
     void ReceiveBlueprint(Blueprint blueprint);
@@ -89,7 +89,7 @@ public interface LaunchClientGameInterface
     void RemoveShip(int lID);
     void RemoveSubmarine(int lID);
     void RemoveArtilleryGun(int lID);
-    void RemoveScrapYard(int lID);
+    void RemoveLogisticsDepot(int lID);
     void RemoveDistributor(int lID);
     
     void RemoveAlliance(int lID);

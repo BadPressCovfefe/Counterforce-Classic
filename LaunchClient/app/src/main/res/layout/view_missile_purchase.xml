@@ -3,6 +3,7 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
+              android:background="@drawable/detail_button"
               android:layout_marginBottom="@dimen/SelectListSpacing"
               android:id="@+id/lytMain">
 
@@ -11,8 +12,6 @@
         android:layout_width="fill_parent"
         android:layout_height="@dimen/ButtonHeight"
         android:gravity="center"
-        android:background="@drawable/text_button_normal"
-        android:padding="@dimen/ButtonEdgePadding"
         android:orientation="horizontal">
 
         <TextView
@@ -122,21 +121,19 @@
             android:clickable="true"
             android:src="@drawable/marker_missile" />
 
-        <TextView
-            android:id="@+id/txtCost"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/ButtonEdgePadding"
-            android:text="$100000"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/ButtonEdgeColour"
+        android:layout_marginEnd="@dimen/ButtonEdgePadding"
+        android:layout_marginStart="@dimen/ButtonEdgePadding"/>
 
     <LinearLayout
         android:id="@+id/lytSpecs"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/detail_button"
         android:orientation="vertical"
         android:padding="@dimen/ButtonEdgePadding"
         android:visibility="visible">
@@ -294,15 +291,32 @@
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/txtNumber"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="@dimen/MainViewSpacing"
-                android:text=""
-                android:textColor="?attr/WarningColour"
-                android:textSize="@dimen/ReallyBigText" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text=""
+                    android:textColor="?attr/WarningColour"
+                    android:textSize="@dimen/ReallyBigText" />
+
+                <TextView
+                    android:id="@+id/txtCost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="$100000"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+            </LinearLayout>
+
 
         </LinearLayout>
 

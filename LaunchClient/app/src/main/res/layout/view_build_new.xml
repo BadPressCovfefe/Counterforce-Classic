@@ -19,6 +19,16 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/tap_structure_button" />
 
+        <TextView
+            android:id="@+id/txtBuildHQ"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/MainViewSpacing"
+            android:textColor="?attr/BadColour"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/must_build_hq" />
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -153,14 +163,60 @@
                         android:layout_height="wrap_content" />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:id="@+id/lytBuildSolarPanel"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <com.apps.fast.launch.views.PurchaseButton
+                        android:id="@+id/btnBuildSolarPanel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lytBuildFarm"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <com.apps.fast.launch.views.PurchaseButton
+                        android:id="@+id/btnBuildFarm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lytBuildOreMine"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <com.apps.fast.launch.views.PurchaseButton
+                        android:id="@+id/btnBuildOreMine"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lytBuildLogisticsDepot"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <com.apps.fast.launch.views.PurchaseButton
+                        android:id="@+id/btnBuildLogisticsDepot"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
                 <TextView
                     android:id="@+id/textView8"
                     android:layout_width="fill_parent"
                     android:layout_height="@dimen/ButtonHeight"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="@dimen/MainViewSideMargin"
                     android:layout_marginTop="@dimen/MainViewSpacing"
-                    android:layout_marginRight="@dimen/MainViewSideMargin"
                     android:layout_marginBottom="@dimen/MainViewSpacing"
                     android:background="@drawable/text_button_normal"
                     android:clickable="true"

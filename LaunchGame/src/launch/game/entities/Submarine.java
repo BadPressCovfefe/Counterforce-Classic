@@ -62,9 +62,11 @@ public class Submarine extends NavalVessel implements FuelableInterface
             MissileSystem icbms, 
             boolean bVisible, 
             int lVisibleTime, 
+            boolean bSelling, 
+            int lSelling,
             Map<Integer, GeoCoord> Coordinates)
     {
-        super(lID, geoPosition, lOwnerID, nHP, nMaxHP, type, strName, moveOrders, geoTarget, target, lSonarCooldown, fltCurrentFuel, missiles, torpedoes, bVisible, lVisibleTime, Coordinates);
+        super(lID, geoPosition, lOwnerID, nHP, nMaxHP, type, strName, moveOrders, geoTarget, target, lSonarCooldown, fltCurrentFuel, missiles, torpedoes, bVisible, lVisibleTime, bSelling, lSelling, Coordinates);
         this.bSubmerged = bSubmerged;
         this.bDiving = bDiving;
         this.dlySubmerge = new ShortDelay(lSubmergeTime);

@@ -91,7 +91,7 @@ public class PurchaseTorpedoView extends LaunchView
     private SystemType systemType;
     private MissileSystem system;
     private NavalVessel host;
-    private TextView btnSortBy;
+    //private TextView btnSortBy;
 
     private Map<Integer, LaunchablePurchaseSelectionView> LaunchableSelectionViews = new HashMap<>();
 
@@ -133,7 +133,7 @@ public class PurchaseTorpedoView extends LaunchView
         lytTypes = findViewById(R.id.lytTypes);
         txtTotalCost = findViewById(R.id.txtTotalCost);
         btnPurchase = findViewById(R.id.btnPurchase);       txtCount = findViewById(R.id.txtCount);
-        btnSortBy = findViewById(R.id.btnSortBy);
+        //btnSortBy = findViewById(R.id.btnSortBy);
         imgTorpedo = findViewById(R.id.imgTorpedo);
 
         torpedoOrder = TorpedoSortOrder.RANGE;
@@ -223,7 +223,7 @@ public class PurchaseTorpedoView extends LaunchView
             }
         };
 
-        btnSortBy.setOnClickListener(new OnClickListener()
+        /*btnSortBy.setOnClickListener(new OnClickListener()
         {
             @Override
             public void onClick(View view)
@@ -246,7 +246,7 @@ public class PurchaseTorpedoView extends LaunchView
 
                 builder.show();
             }
-        });
+        });*/
 
         btnPurchase.setOnClickListener(new OnClickListener()
         {
@@ -255,7 +255,7 @@ public class PurchaseTorpedoView extends LaunchView
             {
                 final LaunchDialog launchDialog = new LaunchDialog();
                 launchDialog.SetHeaderPurchase();
-                launchDialog.SetMessage(context.getString(R.string.purchase_confirm, TextUtilities.GetCostStatement(Costs)));
+                launchDialog.SetMessage(context.getString(R.string.purchase_confirm, TextUtilities.GetCurrencyString(Costs.get(Resource.ResourceType.WEALTH))));
                 launchDialog.SetOnClickYes(new OnClickListener()
                 {
                     @Override
@@ -353,7 +353,7 @@ public class PurchaseTorpedoView extends LaunchView
                     {
                         view.SetDisabled();
                     }
-                    else if(game.GetOurPlayer().GetWealth() >= type.GetCost())
+                    else if(game.GetOurPlayer().GetWealth() < type.GetCost())
                     {
                         view.SetDisabled();
                     }
@@ -428,7 +428,7 @@ public class PurchaseTorpedoView extends LaunchView
                     TypesSorted.add(type);
                 }
 
-                switch(torpedoOrder)
+                /*switch(torpedoOrder)
                 {
                     case BLAST_RADIUS:
                     {
@@ -497,7 +497,7 @@ public class PurchaseTorpedoView extends LaunchView
                         btnSortBy.setText(context.getString(R.string.sort_name_yield));
                     }
                     break;
-                }
+                }*/
 
                 for(final TorpedoType type : TypesSorted)
                 {

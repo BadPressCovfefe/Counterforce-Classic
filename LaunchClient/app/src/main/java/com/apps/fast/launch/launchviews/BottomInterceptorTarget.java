@@ -78,14 +78,6 @@ public class BottomInterceptorTarget extends LaunchView
             }
             break;
 
-            case TANK_INTERCEPTORS:
-            {
-                geoSource = game.GetTank(lSiteID).GetPosition();
-                system = game.GetTank(lSiteID).GetMissileSystem();
-                interceptorType = game.GetConfig().GetInterceptorType(game.GetTank(lSiteID).GetMissileSystem().GetSlotMissileType(lSlotNo));
-            }
-            break;
-
             case SHIP_INTERCEPTORS:
             {
                 geoSource = game.GetShip(lSiteID).GetPosition();

@@ -637,9 +637,9 @@ public class LaunchClientSession extends LaunchSession
                 }
                 break;
 
-                case ScrapYard:
+                case LogisticsDepot:
                 {
-                    gameInterface.ReceiveScrapYard(new ScrapYard(bb, lOurPlayerID));
+                    gameInterface.ReceiveLogisticsDepot(new LogisticsDepot(bb, lOurPlayerID));
                 }
                 break;
 
@@ -842,9 +842,9 @@ public class LaunchClientSession extends LaunchSession
             }
             break;
             
-            case RemoveScrapYard:
+            case RemoveLogisticsDepot:
             {
-                gameInterface.RemoveScrapYard(lInstanceNumber);
+                gameInterface.RemoveLogisticsDepot(lInstanceNumber);
             }
             break;
             

@@ -30,34 +30,26 @@ import launch.game.LaunchServerGame;
 import launch.game.User;
 import launch.game.entities.Airbase;
 import launch.game.entities.Airplane;
-import launch.game.entities.Blueprint;
 import launch.game.entities.CommandPost;
 import launch.game.entities.Interceptor;
 import launch.game.entities.Warehouse;
 import launch.game.entities.Loot;
 import launch.game.entities.Missile;
 import launch.game.entities.MissileSite;
-import launch.game.entities.OreMine;
 import launch.game.entities.Player;
 import launch.game.entities.Radiation;
 import launch.game.entities.SAMSite;
 import launch.game.entities.SentryGun;
 import launch.game.EntityPointer.EntityType;
-import launch.game.entities.Airdrop;
 import launch.game.entities.Ship;
 import launch.game.entities.Submarine;
 import launch.game.entities.Armory;
-import launch.game.entities.ArtilleryGun;
-import launch.game.entities.CargoTruck;
-import launch.game.entities.Infantry;
 import launch.game.entities.KOTH;
 import launch.game.entities.LaunchEntity;
+import launch.game.entities.LogisticsDepot;
 import launch.game.entities.Movable.MoveOrders;
-import launch.game.entities.Processor;
-import launch.game.entities.RadarStation;
-import launch.game.entities.ResourceDeposit;
+import launch.game.entities.OreMine;
 import launch.game.entities.Rubble;
-import launch.game.entities.ScrapYard;
 import launch.game.entities.Shipyard;
 import launch.game.entities.Tank;
 import launch.game.entities.Torpedo;
@@ -90,7 +82,6 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import launch.game.systems.ResourceSystem;
 import launch.utilities.LaunchUtilities;
-import org.w3c.dom.Node;
 
 /**
  *
@@ -108,29 +99,21 @@ public class XMLGameLoader
     private static boolean bInterceptorsLoaded;
     private static boolean bTorpedoesLoaded;
     private static boolean bMissileSitesLoaded;
-    //private static boolean bArtilleryGunsLoaded;
     private static boolean bSAMsLoaded;
     private static boolean bSentryGunsLoaded;
-    private static boolean bScrapyardsLoaded;
-    private static boolean bOreMinesLoaded;
-    private static boolean bRadarStationsLoaded;
-    private static boolean bProcessorsLoaded;
     private static boolean bCommandPostsLoaded;
     private static boolean bWarehousesLoaded;
     private static boolean bAirbasesLoaded;
     private static boolean bArmoriesLoaded;
     private static boolean bAircraftsLoaded;
-    private static boolean bInfantriesLoaded;
     private static boolean bTanksLoaded;
-    private static boolean bTrucksLoaded;
     private static boolean bShipsLoaded;
     private static boolean bSubmarinesLoaded;
-    private static boolean bBlueprintsLoaded;
     private static boolean bLootsLoaded;
     private static boolean bRubblesLoaded;
-    private static boolean bAirdropsLoaded;
-    private static boolean bDepositsLoaded;
     private static boolean bRadiationsLoaded;
+    private static boolean bLogisticsDepotsLoaded;
+    private static boolean bOreMinesLoaded;
     private static boolean bShipyardsLoaded;
     private static boolean bNewGame;
     
@@ -538,10 +521,13 @@ public class XMLGameLoader
             }
             
             LaunchLog.Log(APPLICATION, LOG_NAME, "Loading KOTH...");
-            Element eleKOTH = doc.getElementById(XMLDefs.KOTH);
+            
+            NodeList nodes = doc.getElementsByTagName(XMLDefs.KOTH);
 
-            if(eleKOTH != null)
+            if(nodes.getLength() > 0)
             {
+                Element eleKOTH = (Element) nodes.item(0);
+
                 int lID = 0;
                 GeoCoord geoPosition = GetPositionElement(eleKOTH, XMLDefs.POSITION);
                 float fltRadius = GetFloatElement(eleKOTH, XMLDefs.RADIUS, Defs.KOTH_MIN_SIZE);
@@ -641,8 +627,9 @@ public class XMLGameLoader
                     int lABMCount = GetIntElement(eleAlliance, XMLDefs.ABM_COUNT);
                     long oFoundedTime = GetLongElement(eleAlliance, XMLDefs.FOUNDED_TIME);
                     int lKOTHWins = GetIntElement(eleAlliance, XMLDefs.KOTH_WINS);
+                    int lBounty = GetIntElement(eleAlliance, XMLDefs.BOUNTY);
                     
-                    game.AddAlliance(new Alliance(lID, strName, strDescription, lAvatarID, lWealth, fltTaxRate, lWarsWon, lWarsLost, lEnemyAllianceDisbands, strFounderName, lAffiliationsBroken, lICBMCount, lABMCount, lKOTHWins, oFoundedTime), false);
+                    game.AddAlliance(new Alliance(lID, strName, strDescription, lAvatarID, lWealth, fltTaxRate, lWarsWon, lWarsLost, lEnemyAllianceDisbands, strFounderName, lAffiliationsBroken, lICBMCount, lABMCount, lKOTHWins, oFoundedTime, lBounty), false);
                 }
                 catch(Exception ex)
                 {
@@ -703,13 +690,13 @@ public class XMLGameLoader
             //Load players.
             LaunchLog.Log(APPLICATION, LOG_NAME, "Loading players...");
             
-            NodeList nodes = doc.getElementsByTagName(XMLDefs.PLAYER);
+            NodeList nodePlayers = doc.getElementsByTagName(XMLDefs.PLAYER);
 
-            for(int i = 0; i < nodes.getLength(); i++)
+            for(int i = 0; i < nodePlayers.getLength(); i++)
             {
                 try
                 {
-                    Element elePlayer = (Element)nodes.item(i);
+                    Element elePlayer = (Element)nodePlayers.item(i);
                     int lID = GetIntAttribute(elePlayer, XMLDefs.ID);
                     GeoCoord geoPosition = GetPositionElement(elePlayer, XMLDefs.POSITION);
                     String strName = GetStringAttribute(elePlayer, XMLDefs.NAME);
@@ -731,19 +718,14 @@ public class XMLGameLoader
                     int lExperience = GetIntElement(elePlayer, XMLDefs.EXPERIENCE);
                     int lTotalKills = GetIntElement(elePlayer, XMLDefs.TOTAL_KILLS);
                     int lTotalDeaths = GetIntElement(elePlayer, XMLDefs.TOTAL_DEATHS);
-                    boolean bMember = GetBooleanElement(elePlayer, XMLDefs.IS_A_MEMBER);
-                    boolean bAdminMember = GetBooleanElement(elePlayer, XMLDefs.ADMIN_MEMBER);
                     long oJoinTime = GetLongElement(elePlayer, XMLDefs.JOIN_TIME);
                     int lDefenseValue = GetIntElement(elePlayer, XMLDefs.DEFENSE_VALUE);
                     int lOffenseValue = GetIntElement(elePlayer, XMLDefs.OFFENSE_VALUE);
                     int lNeutralValue = GetIntElement(elePlayer, XMLDefs.NEUTRAL_VALUE);
-                    int lAirdropCooldown = GetIntElement(elePlayer, XMLDefs.AIRDROP_COOLDOWN);
-                    int lProspectCooldown = GetIntElement(elePlayer, XMLDefs.PROSPECT_COOLDOWN);
-                    int lCityCountLastWeek = GetIntElement(elePlayer, XMLDefs.CITY_COUNT_LAST_WEEK);
-                    int lChampCount = GetIntElement(elePlayer, XMLDefs.CHAMP_COUNT);
                     float fltDistanceTraveled = GetFloatElement(elePlayer, XMLDefs.DISTANCE_TRAVELED, 0);
                     float fltDistanceTraveledToday = GetFloatElement(elePlayer, XMLDefs.DISTANCE_TRAVELED_TODAY, 0);
                     int lKOTHWins = GetIntElement(elePlayer, XMLDefs.KOTH_WINS);
+                    int lBounty = GetIntElement(elePlayer, XMLDefs.BOUNTY);
                     List<Integer> Blacklist = new ArrayList<>();
                     
                     if(GetHasNode(elePlayer, XMLDefs.BLACKLIST))
@@ -766,7 +748,7 @@ public class XMLGameLoader
                         oWealth = GetLongElement(elePlayer, XMLDefs.WEALTH);
                     }
                     
-                    game.AddPlayer(new Player(lID, geoPosition, strName, lAvatarID, oLastSeen, lStateChange, lAllianceID, cFlags1, cFlags2, lAllianceCooloffTime, nKills, nDeaths, lOffenceSpending, lDefenceSpending, lDamageInflicted, lDamageReceived, lRank, lExperience, lTotalKills, lTotalDeaths, bMember, oJoinTime, lDefenseValue, lOffenseValue, lNeutralValue, fltDistanceTraveled, fltDistanceTraveledToday, lAirdropCooldown, lProspectCooldown, lCityCountLastWeek, lChampCount, bAdminMember, oWealth, lKOTHWins, Blacklist));
+                    game.AddPlayer(new Player(lID, geoPosition, strName, lAvatarID, oLastSeen, lStateChange, lAllianceID, cFlags1, cFlags2, lAllianceCooloffTime, nKills, nDeaths, lOffenceSpending, lDefenceSpending, lDamageInflicted, lDamageReceived, lRank, lExperience, lTotalKills, lTotalDeaths, oJoinTime, lDefenseValue, lOffenseValue, lNeutralValue, fltDistanceTraveled, fltDistanceTraveledToday, oWealth, lKOTHWins, lBounty, Blacklist));
                 }
                 catch(Exception ex)
                 {
@@ -1133,198 +1115,6 @@ public class XMLGameLoader
                 @Override
                 public void run()
                 {
-                    LaunchLog.Log(APPLICATION, LOG_NAME, "Loading scrap yards...");
-
-                    //Load sentry guns.
-                    NodeList nodes = doc.getElementsByTagName(XMLDefs.SCRAP_YARD);
-
-                    for(int i = 0; i < nodes.getLength(); i++)
-                    {
-                        try
-                        {
-                            Element eleScrapYard = (Element)nodes.item(i);
-                            int lID = GetIntAttribute(eleScrapYard, XMLDefs.ID);
-                            String strName = GetStringAttribute(eleScrapYard, XMLDefs.NAME);
-                            GeoCoord geoPosition = GetPositionElement(eleScrapYard, XMLDefs.POSITION);
-                            short nHP = GetShortElement(eleScrapYard, XMLDefs.HP);
-                            short nMaxHP = GetShortElement(eleScrapYard, XMLDefs.MAX_HP);
-                            int lOwnerID = GetIntElement(eleScrapYard, XMLDefs.OWNER_ID);
-                            byte cFlags = GetByteElement(eleScrapYard, XMLDefs.FLAGS);
-                            int lStateTime = GetIntElement(eleScrapYard, XMLDefs.STATE_TIME);
-                            boolean bVisible = GetBooleanElement(eleScrapYard, XMLDefs.VISIBLE);
-                            int lVisibleTime = GetIntElement(eleScrapYard, XMLDefs.VISIBLE_TIME);
-                            int lBuiltByID = lOwnerID;
-                            ResourceSystem resources = GetResourceSystem(eleScrapYard, XMLDefs.RESOURCE_CONTAINER);
-                            
-                            if(GetHasNode(eleScrapYard, XMLDefs.BUILT_BY_ID))
-                            {
-                                lBuiltByID = GetIntElement(eleScrapYard, XMLDefs.BUILT_BY_ID);
-                            }
-
-                            game.AddScrapYard(new ScrapYard(lID, geoPosition, nHP, nMaxHP, strName, lOwnerID, cFlags, lStateTime, bVisible, lVisibleTime, lBuiltByID, resources));
-                        }
-                        catch(Exception ex)
-                        {
-                            listener.LoadError(String.format("Error loading scrap yard at index %d: %s.", i, ex.getMessage()));
-                        }
-                    }
-                    
-                    LaunchLog.Log(APPLICATION, LOG_NAME, "Scrapyards loaded.");
-                    bScrapyardsLoaded = true;
-                    AttemptFinalizeLoading(game, listener);
-                }
-            }).start();
-            
-            new Thread(new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    LaunchLog.Log(APPLICATION, LOG_NAME, "Loading ore mines...");
-
-                    //Load ore mines.
-                    NodeList nodes = doc.getElementsByTagName(XMLDefs.ORE_MINE);
-
-                    for(int i = 0; i < nodes.getLength(); i++)
-                    {
-                        try
-                        {
-                            Element eleOreMine = (Element)nodes.item(i);
-                            int lID = GetIntAttribute(eleOreMine, XMLDefs.ID);
-                            String strName = GetStringAttribute(eleOreMine, XMLDefs.NAME);
-                            GeoCoord geoPosition = GetPositionElement(eleOreMine, XMLDefs.POSITION);
-                            short nHP = GetShortElement(eleOreMine, XMLDefs.HP);
-                            short nMaxHP = GetShortElement(eleOreMine, XMLDefs.MAX_HP);
-                            int lOwnerID = GetIntElement(eleOreMine, XMLDefs.OWNER_ID);
-                            byte cFlags = GetByteElement(eleOreMine, XMLDefs.FLAGS);
-                            int lStateTime = GetIntElement(eleOreMine, XMLDefs.STATE_TIME);
-                            ResourceType type = ResourceType.values()[GetIntElement(eleOreMine, XMLDefs.TYPE)];
-                            boolean bVisible = GetBooleanElement(eleOreMine, XMLDefs.VISIBLE);
-                            int lVisibleTime = GetIntElement(eleOreMine, XMLDefs.VISIBLE_TIME);
-                            int lDepositID = GetIntElement(eleOreMine, XMLDefs.DEPOSIT_ID);
-                            int lBuiltByID = lOwnerID;
-                            ResourceSystem resources = GetResourceSystem(eleOreMine, XMLDefs.RESOURCE_CONTAINER);
-                            
-                            if(GetHasNode(eleOreMine, XMLDefs.BUILT_BY_ID))
-                            {
-                                lBuiltByID = GetIntElement(eleOreMine, XMLDefs.BUILT_BY_ID);
-                            }
-
-                            game.AddOreMine(new OreMine(lID, geoPosition, nHP, nMaxHP, strName, lOwnerID, cFlags, lStateTime, lDepositID, bVisible, lVisibleTime, lBuiltByID, type, resources));
-                        }
-                        catch(Exception ex)
-                        {
-                            listener.LoadError(String.format("Error loading ore mine at index %d: %s.", i, ex.getMessage()));
-                        }
-                    }
-                    
-                    LaunchLog.Log(APPLICATION, LOG_NAME, "Ore mines loaded.");
-                    bOreMinesLoaded = true;
-                    AttemptFinalizeLoading(game, listener);
-                }
-            }).start();
-            
-            new Thread(new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    LaunchLog.Log(APPLICATION, LOG_NAME, "Loading radar stations...");
-
-                    //Load radar stations.
-                    NodeList nodes = doc.getElementsByTagName(XMLDefs.RADAR_STATION);
-
-                    for(int i = 0; i < nodes.getLength(); i++)
-                    {
-                        try
-                        {
-                            Element eleRadarStation = (Element)nodes.item(i);
-                            int lID = GetIntAttribute(eleRadarStation, XMLDefs.ID);
-                            String strName = GetStringAttribute(eleRadarStation, XMLDefs.NAME);
-                            GeoCoord geoPosition = GetPositionElement(eleRadarStation, XMLDefs.POSITION);
-                            short nHP = GetShortElement(eleRadarStation, XMLDefs.HP);
-                            short nMaxHP = GetShortElement(eleRadarStation, XMLDefs.MAX_HP);
-                            int lOwnerID = GetIntElement(eleRadarStation, XMLDefs.OWNER_ID);
-                            byte cFlags = GetByteElement(eleRadarStation, XMLDefs.FLAGS);
-                            int lStateTime = GetIntElement(eleRadarStation, XMLDefs.STATE_TIME);
-                            boolean bRadarActive = GetBooleanElement(eleRadarStation, XMLDefs.RADAR_ACTIVE);
-                            boolean bVisible = GetBooleanElement(eleRadarStation, XMLDefs.VISIBLE);
-                            int lVisibleTime = GetIntElement(eleRadarStation, XMLDefs.VISIBLE_TIME);
-                            int lBuiltByID = lOwnerID;
-                            ResourceSystem resources = GetResourceSystem(eleRadarStation, XMLDefs.RESOURCE_CONTAINER);
-                            
-                            if(GetHasNode(eleRadarStation, XMLDefs.BUILT_BY_ID))
-                            {
-                                lBuiltByID = GetIntElement(eleRadarStation, XMLDefs.BUILT_BY_ID);
-                            }
-
-                            game.AddRadarStation(new RadarStation(lID, geoPosition, nHP, nMaxHP, strName, lOwnerID, cFlags, lStateTime, bRadarActive, bVisible, lVisibleTime, lBuiltByID, resources));
-                        }
-                        catch(Exception ex)
-                        {
-                            listener.LoadError(String.format("Error loading radar station at index %d: %s.", i, ex.getMessage()));
-                        }
-                    }
-                    
-                    LaunchLog.Log(APPLICATION, LOG_NAME, "Radar stations loaded.");
-                    bRadarStationsLoaded = true;
-                    AttemptFinalizeLoading(game, listener);
-                }
-            }).start();
-            
-            new Thread(new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    LaunchLog.Log(APPLICATION, LOG_NAME, "Loading processors...");
-
-                    //Load ore mines.
-                    NodeList nodes = doc.getElementsByTagName(XMLDefs.PROCESSOR);
-
-                    for(int i = 0; i < nodes.getLength(); i++)
-                    {
-                        try
-                        {
-                            Element eleProcessor = (Element)nodes.item(i);
-                            int lID = GetIntAttribute(eleProcessor, XMLDefs.ID);
-                            String strName = GetStringAttribute(eleProcessor, XMLDefs.NAME);
-                            GeoCoord geoPosition = GetPositionElement(eleProcessor, XMLDefs.POSITION);
-                            short nHP = GetShortElement(eleProcessor, XMLDefs.HP);
-                            short nMaxHP = GetShortElement(eleProcessor, XMLDefs.MAX_HP);
-                            int lOwnerID = GetIntElement(eleProcessor, XMLDefs.OWNER_ID);
-                            byte cFlags = GetByteElement(eleProcessor, XMLDefs.FLAGS);
-                            int lStateTime = GetIntElement(eleProcessor, XMLDefs.STATE_TIME);
-                            ResourceType resourceType = ResourceType.values()[GetIntElement(eleProcessor, XMLDefs.TYPE)];
-                            boolean bVisible = GetBooleanElement(eleProcessor, XMLDefs.VISIBLE);
-                            int lVisibleTime = GetIntElement(eleProcessor, XMLDefs.VISIBLE_TIME);
-                            int lBuiltByID = lOwnerID;
-                            ResourceSystem resources = GetResourceSystem(eleProcessor, XMLDefs.RESOURCE_CONTAINER);
-                            
-                            if(GetHasNode(eleProcessor, XMLDefs.BUILT_BY_ID))
-                            {
-                                lBuiltByID = GetIntElement(eleProcessor, XMLDefs.BUILT_BY_ID);
-                            }
-
-                            game.AddProcessor(new Processor(lID, geoPosition, nHP, nMaxHP, strName, lOwnerID, cFlags, lStateTime, resourceType, bVisible, lVisibleTime, lBuiltByID, resources));
-                        }
-                        catch(Exception ex)
-                        {
-                            listener.LoadError(String.format("Error loading processor at index %d: %s.", i, ex.getMessage()));
-                        }
-                    }
-                    
-                    LaunchLog.Log(APPLICATION, LOG_NAME, "Processors loaded.");
-                    bProcessorsLoaded = true;
-                    AttemptFinalizeLoading(game, listener);
-                }
-            }).start();
-            
-            new Thread(new Runnable()
-            {
-                @Override
-                public void run()
-                {
                     LaunchLog.Log(APPLICATION, LOG_NAME, "Loading command posts...");
 
                     //Load radar stations.
@@ -1346,14 +1136,14 @@ public class XMLGameLoader
                             boolean bVisible = GetBooleanElement(eleCommandPost, XMLDefs.VISIBLE);
                             int lVisibleTime = GetIntElement(eleCommandPost, XMLDefs.VISIBLE_TIME);
                             int lBuiltByID = lOwnerID;
-                            ResourceSystem resources = GetResourceSystem(eleCommandPost, XMLDefs.RESOURCE_CONTAINER);
+                            boolean bIsHQ = GetBooleanElement(eleCommandPost, XMLDefs.HEADQUARTERS);
                             
                             if(GetHasNode(eleCommandPost, XMLDefs.BUILT_BY_ID))
                             {
                                 lBuiltByID = GetIntElement(eleCommandPost, XMLDefs.BUILT_BY_ID);
                             }
 
-                            game.AddCommandPost(new CommandPost(lID, geoPosition, nHP, nMaxHP, strName, lOwnerID, cFlags, lStateTime, bVisible, lVisibleTime, lBuiltByID, resources));
+                            game.AddCommandPost(new CommandPost(lID, geoPosition, nHP, nMaxHP, strName, lOwnerID, cFlags, lStateTime, bVisible, lVisibleTime, lBuiltByID, bIsHQ));
                         }
                         catch(Exception ex)
                         {
@@ -1406,6 +1196,92 @@ public class XMLGameLoader
                     
                     LaunchLog.Log(APPLICATION, LOG_NAME, "Warehouses loaded.");
                     bWarehousesLoaded = true;
+                    AttemptFinalizeLoading(game, listener);
+                }
+            }).start();
+            
+            new Thread(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    LaunchLog.Log(APPLICATION, LOG_NAME, "Loading logistics depots...");
+
+                    //Load banks.
+                    NodeList nodes = doc.getElementsByTagName(XMLDefs.LOGISTICS_DEPOT);
+
+                    for(int i = 0; i < nodes.getLength(); i++)
+                    {
+                        try
+                        {
+                            Element eleDepot = (Element)nodes.item(i);
+                            int lID = GetIntAttribute(eleDepot, XMLDefs.ID);
+                            String strName = GetStringAttribute(eleDepot, XMLDefs.NAME);
+                            GeoCoord geoPosition = GetPositionElement(eleDepot, XMLDefs.POSITION);
+                            short nHP = GetShortElement(eleDepot, XMLDefs.HP);
+                            short nMaxHP = GetShortElement(eleDepot, XMLDefs.MAX_HP);
+                            int lOwnerID = GetIntElement(eleDepot, XMLDefs.OWNER_ID);
+                            byte cFlags = GetByteElement(eleDepot, XMLDefs.FLAGS);
+                            int lStateTime = GetIntElement(eleDepot, XMLDefs.STATE_TIME);
+                            boolean bVisible = GetBooleanElement(eleDepot, XMLDefs.VISIBLE);
+                            int lVisibleTime = GetIntElement(eleDepot, XMLDefs.VISIBLE_TIME);
+                            int lBuiltByID = lOwnerID;
+                            int lWealth = GetIntElement(eleDepot, XMLDefs.WEALTH);
+                            int lCooldown = GetIntElement(eleDepot, XMLDefs.RELOAD_REMAINING);
+
+                            game.AddLogisticsDepot(new LogisticsDepot(lID, geoPosition, nHP, nMaxHP, strName, lOwnerID, cFlags, lStateTime, bVisible, lVisibleTime, lBuiltByID, lWealth, lCooldown));
+                        }
+                        catch(Exception ex)
+                        {
+                            listener.LoadError(String.format("Error loading warehouse at index %d: %s.", i, ex.getMessage()));
+                        }
+                    }
+                    
+                    LaunchLog.Log(APPLICATION, LOG_NAME, "Logistics depots loaded.");
+                    bLogisticsDepotsLoaded = true;
+                    AttemptFinalizeLoading(game, listener);
+                }
+            }).start();
+            
+            new Thread(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    LaunchLog.Log(APPLICATION, LOG_NAME, "Loading ore mines...");
+
+                    //Load banks.
+                    NodeList nodes = doc.getElementsByTagName(XMLDefs.ORE_MINE);
+
+                    for(int i = 0; i < nodes.getLength(); i++)
+                    {
+                        try
+                        {
+                            Element eleDepot = (Element)nodes.item(i);
+                            int lID = GetIntAttribute(eleDepot, XMLDefs.ID);
+                            String strName = GetStringAttribute(eleDepot, XMLDefs.NAME);
+                            GeoCoord geoPosition = GetPositionElement(eleDepot, XMLDefs.POSITION);
+                            short nHP = GetShortElement(eleDepot, XMLDefs.HP);
+                            short nMaxHP = GetShortElement(eleDepot, XMLDefs.MAX_HP);
+                            int lOwnerID = GetIntElement(eleDepot, XMLDefs.OWNER_ID);
+                            byte cFlags = GetByteElement(eleDepot, XMLDefs.FLAGS);
+                            int lStateTime = GetIntElement(eleDepot, XMLDefs.STATE_TIME);
+                            boolean bVisible = GetBooleanElement(eleDepot, XMLDefs.VISIBLE);
+                            int lVisibleTime = GetIntElement(eleDepot, XMLDefs.VISIBLE_TIME);
+                            int lBuiltByID = lOwnerID;
+                            EntityType type = EntityType.valueOf(GetStringElement(eleDepot, XMLDefs.TYPE));
+                            int lGenerate = GetIntElement(eleDepot, XMLDefs.GENERATE_TIME);
+
+                            game.AddOreMine(new OreMine(lID, geoPosition, nHP, nMaxHP, strName, lOwnerID, cFlags, lStateTime, bVisible, lVisibleTime, lBuiltByID, type, lGenerate));
+                        }
+                        catch(Exception ex)
+                        {
+                            listener.LoadError(String.format("Error loading warehouse at index %d: %s.", i, ex.getMessage()));
+                        }
+                    }
+                    
+                    LaunchLog.Log(APPLICATION, LOG_NAME, "Ore mines loaded.");
+                    bOreMinesLoaded = true;
                     AttemptFinalizeLoading(game, listener);
                 }
             }).start();
@@ -1699,29 +1575,18 @@ public class XMLGameLoader
                             short nMaxHP = GetShortElement(eleTank, XMLDefs.MAX_HP); 
                             int lOwnerID = GetIntElement(eleTank, XMLDefs.OWNER_ID);
                             MoveOrders orders = MoveOrders.values()[GetByteElement(eleTank, XMLDefs.MOVE_ORDERS)];
-                            byte cMode = GetByteElement(eleTank, XMLDefs.MODE);
-                            EntityType type = EntityType.values()[GetIntElement(eleTank, XMLDefs.TANK_TYPE)];
-                            
-                            if(type != EntityType.MBT)
-                                continue;
-                            
                             boolean bVisible = GetBooleanElement(eleTank, XMLDefs.VISIBLE);
                             int lVisibleTime = GetIntElement(eleTank, XMLDefs.VISIBLE_TIME);
                             int lReloadRemaining = GetIntElement(eleTank, XMLDefs.RELOAD_REMAINING);
                             int lUnderAttack = GetIntElement(eleTank, XMLDefs.UNDER_ATTACK_TIME);
-                            float fltFuel = GetFloatElement(eleTank, XMLDefs.CURRENT_FUEL, 1.0f);
-                            ResourceSystem resources = GetResourceSystem(eleTank, XMLDefs.RESOURCE_CONTAINER);
+                            boolean bSelling = GetBooleanElement(eleTank, XMLDefs.SELLING);
+                            int lSellTime = GetIntElement(eleTank, XMLDefs.SELL_TIME);
                             Map<Integer, GeoCoord> Coordinates = null;
-                            
-                            MissileSystem launchables = new MissileSystem();
-            
-                            if(GetHasNode(eleTank, XMLDefs.MISSILE_SYSTEM))
-                                launchables = GetMissileSystem(eleTank, XMLDefs.MISSILE_SYSTEM);
 
                             if(GetHasNode(eleTank, XMLDefs.COORDINATE_CHAIN))
                                 Coordinates = GetGeoCoordMap(eleTank, XMLDefs.COORDINATE_CHAIN);
 
-                            game.AddTank(new Tank(lID, geoPosition, nHP, nMaxHP, cMode, strName, lOwnerID, lUnderAttack, orders, geoTarget, lReloadRemaining, launchables, type, bVisible, lVisibleTime, resources, fltFuel, Coordinates));
+                            game.AddTank(new Tank(lID, geoPosition, nHP, nMaxHP, strName, lOwnerID, lUnderAttack, orders, geoTarget, lReloadRemaining, bVisible, lVisibleTime, bSelling, lSellTime, Coordinates));
                         }
                         catch(Exception ex)
                         {
@@ -1731,57 +1596,6 @@ public class XMLGameLoader
                     
                     LaunchLog.Log(APPLICATION, LOG_NAME, "Tanks loaded.");
                     bTanksLoaded = true;
-                    AttemptFinalizeLoading(game, listener);
-                }
-            }).start();
-            
-            new Thread(new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    LaunchLog.Log(APPLICATION, LOG_NAME, "Loading trucks...");
-
-                    //Load cargo trucks.
-                    NodeList nodes = doc.getElementsByTagName(XMLDefs.CARGO_TRUCK);
-
-                    for(int i = 0; i < nodes.getLength(); i++)
-                    {
-                        try
-                        {
-                            Element eleCargoTruck = (Element)nodes.item(i);
-                            int lID = GetIntAttribute(eleCargoTruck, XMLDefs.ID);
-                            String strName = GetStringAttribute(eleCargoTruck, XMLDefs.NAME);
-                            GeoCoord geoPosition = GetPositionElement(eleCargoTruck, XMLDefs.POSITION);
-                            GeoCoord geoTarget = GetPositionElement(eleCargoTruck, XMLDefs.TARGET);
-                            short nHP = GetShortElement(eleCargoTruck, XMLDefs.HP); 
-                            short nMaxHP = GetShortElement(eleCargoTruck, XMLDefs.MAX_HP); 
-                            int lOwnerID = GetIntElement(eleCargoTruck, XMLDefs.OWNER_ID);
-                            CargoSystem cargo = GetCargoSystem(eleCargoTruck, XMLDefs.CARGO_SYSTEM, game, new EntityPointer(lID, EntityType.CARGO_TRUCK));
-                            LootType typeToDeliver = LootType.values()[GetIntElement(eleCargoTruck, XMLDefs.DELIVER_TYPE)];
-                            int lCargoID = GetIntElement(eleCargoTruck, XMLDefs.CARGO_ID);
-                            int lQuantityToDeliver = GetIntElement(eleCargoTruck, XMLDefs.QUANTITY_TO_DELIVER);
-                            boolean bVisible = GetBooleanElement(eleCargoTruck, XMLDefs.VISIBLE);
-                            int lVisibleTime = GetIntElement(eleCargoTruck, XMLDefs.VISIBLE_TIME);
-                            int lUnderAttack = GetIntElement(eleCargoTruck, XMLDefs.UNDER_ATTACK_TIME);
-                            MoveOrders orders = MoveOrders.values()[GetByteElement(eleCargoTruck, XMLDefs.MOVE_ORDERS)];
-                            float fltFuel = GetFloatElement(eleCargoTruck, XMLDefs.CURRENT_FUEL, 1.0f);
-                            ResourceSystem resources = GetResourceSystem(eleCargoTruck, XMLDefs.RESOURCE_CONTAINER);
-                            Map<Integer, GeoCoord> Coordinates = null;
-
-                            if(GetHasNode(eleCargoTruck, XMLDefs.COORDINATE_CHAIN))
-                                Coordinates = GetGeoCoordMap(eleCargoTruck, XMLDefs.COORDINATE_CHAIN);
-
-                            game.AddCargoTruck(new CargoTruck(lID, geoPosition, nHP, nMaxHP, strName, lOwnerID, lUnderAttack, orders, geoTarget, cargo, typeToDeliver, lCargoID, lQuantityToDeliver, bVisible, lVisibleTime, resources, fltFuel, Coordinates));
-                        }
-                        catch(Exception ex)
-                        {
-                            listener.LoadError(String.format("Error loading cargo truck at index %d: %s.", i, ex.getMessage()));
-                        }
-                    }
-                    
-                    LaunchLog.Log(APPLICATION, LOG_NAME, "Trucks loaded.");
-                    bTrucksLoaded = true;
                     AttemptFinalizeLoading(game, listener);
                 }
             }).start();
@@ -1814,6 +1628,8 @@ public class XMLGameLoader
                             int lVisibleTime = GetIntElement(eleShip, XMLDefs.VISIBLE_TIME);
                             byte cMode = GetByteElement(eleShip, XMLDefs.MODE);
                             boolean bRadarActive = GetBooleanElement(eleShip, XMLDefs.RADAR_ACTIVE);
+                            boolean bSelling = GetBooleanElement(eleShip, XMLDefs.SELLING);
+                            int lSellTime = GetIntElement(eleShip, XMLDefs.SELL_TIME);
                             Map<Integer, GeoCoord> Coordinates = null;
 
                             if(GetHasNode(eleShip, XMLDefs.COORDINATE_CHAIN))
@@ -1885,7 +1701,9 @@ public class XMLGameLoader
                                     bVisible, 
                                     lVisibleTime, 
                                     order, 
-                                    bRadarActive, 
+                                    bRadarActive,
+                                    bSelling, 
+                                    lSellTime,
                                     Coordinates);
                             
                             game.AddShip(ship);
@@ -1932,6 +1750,8 @@ public class XMLGameLoader
                             boolean bVisible = GetBooleanElement(eleSubmarine, XMLDefs.VISIBLE);
                             int lVisibleTime = GetIntElement(eleSubmarine, XMLDefs.VISIBLE_TIME);
                             EntityType type = EntityType.values()[GetByteElement(eleSubmarine, XMLDefs.SUBMARINE_TYPE)];
+                            boolean bSelling = GetBooleanElement(eleSubmarine, XMLDefs.SELLING);
+                            int lSellTime = GetIntElement(eleSubmarine, XMLDefs.SELL_TIME);
 
                             Map<Integer, GeoCoord> Coordinates = null;
 
@@ -1976,6 +1796,8 @@ public class XMLGameLoader
                                     icbms, 
                                     bVisible, 
                                     lVisibleTime, 
+                                    bSelling,
+                                    lSellTime,
                                     Coordinates);
                             
                             game.AddSubmarine(submarine);
@@ -1997,42 +1819,6 @@ public class XMLGameLoader
                 @Override
                 public void run()
                 {
-                    LaunchLog.Log(APPLICATION, LOG_NAME, "Loading blueprints...");
-
-                    //Load loots.
-                    NodeList nodes = doc.getElementsByTagName(XMLDefs.BLUEPRINT);
-
-                    for(int i = 0; i < nodes.getLength(); i++)
-                    {
-                        try
-                        {
-                            Element eleBlueprint = (Element)nodes.item(i);
-                            int lID = GetIntAttribute(eleBlueprint, XMLDefs.ID);
-                            GeoCoord geoPosition = GetPositionElement(eleBlueprint, XMLDefs.POSITION);
-                            int lExpiry = GetIntElement(eleBlueprint, XMLDefs.EXPIRY);
-                            int lCreatedByID = GetIntElement(eleBlueprint, XMLDefs.CREATED_BY_ID);
-                            int lType = GetIntElement(eleBlueprint, XMLDefs.TYPE);
-                            int lResourceType = GetIntElement(eleBlueprint, XMLDefs.RESOURCE_TYPE);
-
-                            game.AddBlueprint(new Blueprint(lID, geoPosition, lExpiry, lCreatedByID, EntityType.values()[lType], ResourceType.values()[lResourceType]));
-                        }
-                        catch(Exception ex)
-                        {
-                            listener.LoadError(String.format("Error loading blueprint at index %d: %s.", i, ex.getMessage()));
-                        }
-                    }
-                    
-                    LaunchLog.Log(APPLICATION, LOG_NAME, "Blueprints loaded.");
-                    bBlueprintsLoaded = true;
-                    AttemptFinalizeLoading(game, listener);
-                }
-            }).start();
-            
-            new Thread(new Runnable()
-            {
-                @Override
-                public void run()
-                {
                     LaunchLog.Log(APPLICATION, LOG_NAME, "Loading loots...");
 
                     //Load loots.
@@ -2044,13 +1830,12 @@ public class XMLGameLoader
                         {
                             Element eleLoot = (Element)nodes.item(i);
                             int lID = GetIntAttribute(eleLoot, XMLDefs.ID);
+                            String strTitle = GetStringElement(eleLoot, XMLDefs.NAME);
                             GeoCoord geoPosition = GetPositionElement(eleLoot, XMLDefs.POSITION);
-                            int lLootType = GetIntElement(eleLoot, XMLDefs.LOOT_TYPE);
-                            int lType = GetIntElement(eleLoot, XMLDefs.TYPE);
                             long oQuantity = GetLongElement(eleLoot, XMLDefs.QUANTITY);
                             int lExpiry = GetIntElement(eleLoot, XMLDefs.EXPIRY);
 
-                            game.AddLoot(new Loot(lID, geoPosition, LootType.values()[lLootType], lType, oQuantity, lExpiry));
+                            game.AddLoot(new Loot(lID, geoPosition, strTitle, oQuantity, lExpiry));
                         }
                         catch(Exception ex)
                         {
@@ -2096,74 +1881,6 @@ public class XMLGameLoader
                     
                     LaunchLog.Log(APPLICATION, LOG_NAME, "Rubbles loaded.");
                     bRubblesLoaded = true;
-                    AttemptFinalizeLoading(game, listener);
-                }
-            }).start();
-            
-            new Thread(new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    LaunchLog.Log(APPLICATION, LOG_NAME, "Loading airdrops...");
-
-                    //Load airdrops.
-                    NodeList nodes = doc.getElementsByTagName(XMLDefs.AIRDROP);
-
-                    for(int i = 0; i < nodes.getLength(); i++)
-                    {
-                        try
-                        {
-                            Element eleAirdrop = (Element)nodes.item(i);
-                            int lID = GetIntAttribute(eleAirdrop, XMLDefs.ID);
-                            GeoCoord geoPosition = GetPositionElement(eleAirdrop, XMLDefs.POSITION);
-                            int lExpiry = GetIntElement(eleAirdrop, XMLDefs.EXPIRY);
-                            int lOwnerID = GetIntElement(eleAirdrop, XMLDefs.OWNER_ID);
-
-                            game.AddAirdrop(new Airdrop(lID, lOwnerID, geoPosition, lExpiry));
-                        }
-                        catch(Exception ex)
-                        {
-                            listener.LoadError(String.format("Error loading airdrop at index %d: %s.", i, ex.getMessage()));
-                        }
-                    }
-                    
-                    LaunchLog.Log(APPLICATION, LOG_NAME, "Airdrops loaded.");
-                    bAirdropsLoaded = true;
-                    AttemptFinalizeLoading(game, listener);
-                }
-            }).start();
-            
-            new Thread(new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    LaunchLog.Log(APPLICATION, LOG_NAME, "Loading resource deposits...");
-
-                    //Load resource deposits.
-                    NodeList nodes = doc.getElementsByTagName(XMLDefs.RESOURCE_DEPOSIT);
-
-                    for(int i = 0; i < nodes.getLength(); i++)
-                    {
-                        try
-                        {
-                            Element eleDeposit = (Element)nodes.item(i);
-                            int lID = GetIntAttribute(eleDeposit, XMLDefs.ID);
-                            GeoCoord geoPosition = GetPositionElement(eleDeposit, XMLDefs.POSITION);
-                            ResourceType type = ResourceType.values()[GetIntElement(eleDeposit, XMLDefs.TYPE)];
-                            long oReserves = GetLongElement(eleDeposit, XMLDefs.RESOURCES);
-
-                            game.AddResourceDeposit(new ResourceDeposit(lID, geoPosition, type, oReserves));
-                        }
-                        catch(Exception ex)
-                        {
-                            listener.LoadError(String.format("Error loading resource deposit at index %d: %s.", i, ex.getMessage()));
-                        }
-                    }
-                    
-                    LaunchLog.Log(APPLICATION, LOG_NAME, "Deposits loaded.");
-                    bDepositsLoaded = true;
                     AttemptFinalizeLoading(game, listener);
                 }
             }).start();
@@ -2272,29 +1989,21 @@ public class XMLGameLoader
         && bInterceptorsLoaded
         && bTorpedoesLoaded
         && bMissileSitesLoaded
-        /*&& bArtilleryGunsLoaded*/
         && bSAMsLoaded
         && bSentryGunsLoaded
-        && bScrapyardsLoaded
-        && bOreMinesLoaded
-        && bRadarStationsLoaded
-        && bProcessorsLoaded
         && bCommandPostsLoaded
         && bWarehousesLoaded
         && bAirbasesLoaded
         && bArmoriesLoaded
         && bAircraftsLoaded
-        /*&& bInfantriesLoaded*/
         && bTanksLoaded
-        && bTrucksLoaded
         && bShipsLoaded
         && bSubmarinesLoaded
-        && bBlueprintsLoaded
         && bLootsLoaded
         && bRubblesLoaded
-        && bAirdropsLoaded
-        && bDepositsLoaded
         && bRadiationsLoaded
+        && bLogisticsDepotsLoaded
+        && bOreMinesLoaded
         && bShipyardsLoaded)
         || bNewGame)
         {

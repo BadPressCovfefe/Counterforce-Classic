@@ -196,7 +196,7 @@ public class PlayerRankView extends LaunchView
                 txtTotalKillsTotal.setText(Integer.toString(player.GetTotalKills()));
                 txtTotalDeathsTotal.setText(Integer.toString(player.GetTotalDeaths()));
                 txtRankName.setText(String.valueOf(player.GetRank()));
-                txtWinsName.setText(String.valueOf(player.GetChampionCount()));
+                txtWinsName.setText(String.valueOf(player.GetKOTHWins()));
                 txtKDRTotal.setText(String.format("%.2f", player.GetKDR()));
                 txtExperience.setText(Integer.toString(player.GetExperience()));
 

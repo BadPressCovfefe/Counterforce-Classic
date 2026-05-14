@@ -10,10 +10,6 @@ import launch.comm.LaunchSession;
 import launch.game.GeoCoord;
 import launch.game.EntityPointer.EntityType;
 
-/**
- *
- * @author tobster
- */
 public class KOTH extends MapEntity
 {
     private static final int DATA_SIZE = 9;

@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.util.Log;
 
 import com.apps.fast.launch.R;
 import com.apps.fast.launch.components.Utilities;
@@ -18,7 +19,7 @@ import launch.game.entities.CommandPost;
 import launch.game.entities.MissileFactory;
 import launch.game.entities.Distributor;
 import launch.game.entities.Processor;
-import launch.game.entities.ScrapYard;
+import launch.game.entities.LogisticsDepot;
 import launch.game.entities.Warehouse;
 import launch.game.entities.MissileSite;
 import launch.game.entities.OreMine;
@@ -47,15 +48,16 @@ public class StructureIconBitmaps
     private static final Bitmap[] NuclearMissileSiteBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
     private static final Bitmap[] SAMSiteBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
     private static final Bitmap[] SentryGunBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
-    private static final Bitmap[] WatchTowerBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
     private static final Bitmap[] ABMSiteBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
     private static final Bitmap[] CommandPostBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
     private static final Bitmap[] AirbaseBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
-    private static final Bitmap[] OpenAirbaseBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
     private static final Bitmap[] ArmoryBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
-    private static final Bitmap[] BankBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
     private static final Bitmap[] WarehouseBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
     private static final Bitmap[] ArtilleryGunBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
+    private static final Bitmap[] LogisticsDepotBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
+    private static final Bitmap[] OreMineBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
+    private static final Bitmap[] FarmBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
+    private static final Bitmap[] SolarPanelBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
 
     private static void GenerateStructureBitmap(Context context, Bitmap[] Container, int lIndex, Allegiance allegiance, StructureIndexRunStatus runStatus, int lRes)
     {
@@ -202,6 +204,52 @@ public class StructureIconBitmaps
             return WarehouseBitmaps[lIndex];
         }
 
+        if(structure instanceof LogisticsDepot)
+        {
+            if(LogisticsDepotBitmaps[lIndex] == null)
+            {
+                GenerateStructureBitmap(context, LogisticsDepotBitmaps, lIndex, allegiance, runStatus, R.drawable.marker_logistics_depot);
+            }
+
+            return LogisticsDepotBitmaps[lIndex];
+        }
+
+        if(structure instanceof OreMine)
+        {
+            switch(structure.GetEntityType())
+            {
+                case ORE_MINE:
+                {
+                    if(OreMineBitmaps[lIndex] == null)
+                    {
+                        GenerateStructureBitmap(context, OreMineBitmaps, lIndex, allegiance, runStatus, R.drawable.marker_ore_mine);
+                    }
+
+                    return OreMineBitmaps[lIndex];
+                }
+
+                case FARM:
+                {
+                    if(FarmBitmaps[lIndex] == null)
+                    {
+                        GenerateStructureBitmap(context, FarmBitmaps, lIndex, allegiance, runStatus, R.drawable.marker_farm);
+                    }
+
+                    return FarmBitmaps[lIndex];
+                }
+
+                case SOLAR_PANEL:
+                {
+                    if(SolarPanelBitmaps[lIndex] == null)
+                    {
+                        GenerateStructureBitmap(context, SolarPanelBitmaps, lIndex, allegiance, runStatus, R.drawable.marker_solar_panel);
+                    }
+
+                    return SolarPanelBitmaps[lIndex];
+                }
+            }
+        }
+
         return null;
     }
 
@@ -218,8 +266,11 @@ public class StructureIconBitmaps
             case WATCH_TOWER: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_artillery_gun), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
             case WAREHOUSE: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_bank), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
             case NUCLEAR_MISSILE_SITE: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_icbm_silo), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
-            case ARTILLERY_GUN: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_artillery_gun), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
             case ARMORY: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_armory), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
+            case LOGISTICS_DEPOT: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_logistics_depot), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
+            case ORE_MINE: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_ore_mine), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
+            case FARM: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_farm), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
+            case SOLAR_PANEL: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_solar_panel), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
             default: return BitmapFactory.decodeResource(context.getResources(), R.drawable.todo);
         }
     }

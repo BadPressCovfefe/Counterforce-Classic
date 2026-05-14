@@ -28,39 +28,46 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                >
 
                 <ImageView
-                    android:layout_marginTop="@dimen/SeperatorMargins"
-                    android:layout_marginEnd="@dimen/ButtonSpacingNarrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/imgLoot"
                     android:src="@drawable/image_loot"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/txtLootTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/CloseButtonSize"
-                        android:text="Loot Title"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-                    <TextView
-                        android:id="@+id/txtExpiresIn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/SeperatorMargins"
-                        android:text="@string/expires_in"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Loot Title"
+                    android:id="@+id/txtLootTitle"
+                    android:layout_marginRight="@dimen/CloseButtonSize"
+                    android:gravity="center_vertical"/>
 
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/SeparatorThickness"
+                android:background="?attr/ButtonEdgeColour"
+                android:layout_marginTop="@dimen/SeperatorMargins"
+                android:layout_marginBottom="@dimen/SeperatorMargins"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/loot_value"
+                android:id="@+id/txtValue"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/expires_in"
+                android:id="@+id/txtExpiresIn"/>
 
             <View
                 android:layout_width="match_parent"

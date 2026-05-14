@@ -45,6 +45,24 @@ public abstract class Damagable extends MapEntity
         return bb.array();
     }
     
+    /*
+        For feeding dummy coordinates for players.
+    */
+    @Override
+    public byte[] GetData(int lAskingID, GeoCoord geoPosition)
+    {
+        byte[] cBaseData = super.GetData(lAskingID, geoPosition);
+        
+        ByteBuffer bb = ByteBuffer.allocate(DATA_SIZE + cBaseData.length);
+        bb.put(cBaseData);
+        bb.putFloat(geoPosition.GetLatitude());
+        bb.putFloat(geoPosition.GetLongitude());
+        bb.put((byte)(bVisible? 0xFF : 0x00));
+        bb.putInt(dlyVisible.GetRemaining());
+        
+        return bb.array();
+    }
+    
     /**
      * Inflict damage. Return the amount actually inflicted.
      * @param nDamage The damage to inflict.

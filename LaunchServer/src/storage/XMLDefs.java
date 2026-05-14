@@ -736,8 +736,8 @@ public class XMLDefs
     public static final String STAMINA = "Stamina";
     public static final String HOST = "Host";
     
-    public static final String SCRAP_YARDS = "ScrapYards";
-    public static final String SCRAP_YARD = "ScrapYard";
+    public static final String LOGISTICS_DEPOTS = "LogisticsDepots";
+    public static final String LOGISTICS_DEPOT = "LogisticsDepot";
     
     public static final String STORED_CARGO_TRUCKS = "StoredCargoTrucks";
     public static final String STORED_CARGO_TRUCK = "StoredCargoTruck";
@@ -752,7 +752,7 @@ public class XMLDefs
     public static final String SLOT_TO_LAUNCH = "SlotToLaunch";
     
     public static final String HAPPINESS = "Happiness";
-    public static final String CAPITAL = "IsCapital";
+    public static final String HEADQUARTERS = "IsHQ";
     
     public static final String TIME_AIRBORNE = "TimeAirborne";
     public static final String LASER_DEFENSE = "LaserDefense";
@@ -784,4 +784,6 @@ public class XMLDefs
     public static final String KING_ID = "KingID";
     public static final String CONTROLLED_BY_ALLIANCE = "AllianceControl";
     public static final String KOTH_WINS = "KOTHWins";
+    public static final String SELLING = "Selling";
+    public static final String SELL_TIME = "SellTime";
 }

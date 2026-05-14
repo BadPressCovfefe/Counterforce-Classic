@@ -23,10 +23,7 @@ import launch.game.entities.MissileFactory.ChatChannel;
 import launch.game.entities.Movable.MoveOrders;
 import launch.game.entities.conceptuals.StoredInfantry;
 import launch.game.entities.conceptuals.Resource.ResourceType;
-import launch.game.entities.conceptuals.StoredCargoTruck;
-import launch.game.entities.conceptuals.StoredTank;
 import launch.game.entities.conceptuals.TerrainData;
-import launch.game.systems.CargoSystem;
 import launch.game.systems.CargoSystem.LootType;
 import launch.game.systems.MissileSystem;
 import launch.game.systems.LaunchSystem.SystemType;
@@ -83,12 +80,12 @@ public class LaunchClientGame extends LaunchGame implements LaunchClientGameInte
     private Map<Integer, Airbase> NewAirbases;
     private Map<Integer, Armory> NewArmories;
     private Map<Integer, Bank> NewBanks;
-    private Map<Integer, ScrapYard> NewScrapYards;
+    private Map<Integer, LogisticsDepot> NewLogisticsDepots;
     private Map<Integer, Warehouse> NewWarehouses;
     private Map<Integer, AirplaneInterface> NewAircrafts;
     private Map<Integer, InfantryInterface> NewInfantries;
     private Map<Integer, CargoTruckInterface> NewCargoTrucks;
-    private Map<Integer, TankInterface> NewTanks;
+    private Map<Integer, Tank> NewTanks;
     private Map<Integer, Ship> NewShips;
     private Map<Integer, Submarine> NewSubmarines;
     private Map<Integer, Loot> NewLoots;
@@ -329,7 +326,7 @@ public class LaunchClientGame extends LaunchGame implements LaunchClientGameInte
                 {
                     if(structure.GetOnline() || structure.GetBooting())
                     {
-                        lIncome -= config.GetMaintenanceCost(structure);
+                        lIncome -= config.GetMaintenanceCost();
                     }
                 }
             }
@@ -454,11 +451,11 @@ public class LaunchClientGame extends LaunchGame implements LaunchClientGameInte
         return OurInfantries;
     }
     
-    public List<TankInterface> GetOurTanks()
+    public List<Tank> GetOurTanks()
     {
-        List<TankInterface> OurTanks = new ArrayList<>();
+        List<Tank> OurTanks = new ArrayList<>();
 
-        for(TankInterface tank : GetAllTanks())
+        for(Tank tank : GetTanks())
         {
             if(tank.GetOwnerID() == lOurPlayerID)
             {
@@ -1722,18 +1719,18 @@ public class LaunchClientGame extends LaunchGame implements LaunchClientGameInte
     }
     
     @Override
-    public void ReceiveScrapYard(ScrapYard yard)
+    public void ReceiveLogisticsDepot(LogisticsDepot depot)
     {
         if(bReceivingSnapshot)
         {
-            yard.SetListener(this);
-            NewScrapYards.put(yard.GetID(), yard);
-            NewAllStructures.add(yard);
+            depot.SetListener(this);
+            NewLogisticsDepots.put(depot.GetID(), depot);
+            NewAllStructures.add(depot);
         }
         else
         {
-            AddScrapYard(yard);
-            EstablishStructureThreats(yard);
+            AddLogisticsDepot(depot);
+            EstablishStructureThreats(depot);
         }
     }
     
@@ -1951,11 +1948,11 @@ public class LaunchClientGame extends LaunchGame implements LaunchClientGameInte
     }
     
     @Override
-    public void RemoveScrapYard(int lID)
+    public void RemoveLogisticsDepot(int lID)
     {
-        ScrapYard yard = ScrapYards.get(lID);
-        ScrapYards.remove(lID);
-        application.EntityRemoved(yard);
+        LogisticsDepot depot = LogisticsDepots.get(lID);
+        LogisticsDepots.remove(lID);
+        application.EntityRemoved(depot);
 
         //TO DO: Very expensive operation that should be optimised.
         EstablishAllStructureThreats(lOurPlayerID);
@@ -2387,7 +2384,7 @@ public class LaunchClientGame extends LaunchGame implements LaunchClientGameInte
         NewCommandPosts = new ConcurrentHashMap<>();
         NewSentryGuns = new ConcurrentHashMap<>();
         NewArtilleryGuns = new ConcurrentHashMap<>();
-        NewScrapYards = new ConcurrentHashMap<>();
+        NewLogisticsDepots = new ConcurrentHashMap<>();
         NewLoots = new ConcurrentHashMap<>();
         NewRubbles = new ConcurrentHashMap<>();
         NewResourceDeposits = new ConcurrentHashMap<>();
@@ -2417,7 +2414,7 @@ public class LaunchClientGame extends LaunchGame implements LaunchClientGameInte
         SAMSites = NewSAMSites;
         SentryGuns = NewSentryGuns;
         ArtilleryGuns = NewArtilleryGuns;
-        ScrapYards = NewScrapYards;
+        LogisticsDepots = NewLogisticsDepots;
         OreMines = NewOreMines;
         Processors = NewProcessors;
         Distributors = NewDistributors;
@@ -2451,32 +2448,6 @@ public class LaunchClientGame extends LaunchGame implements LaunchClientGameInte
         
         EstablishAllStructureThreats(lOurPlayerID);
         AssignEntityRelations();
-        
-        for(HaulerInterface hauler : GetAllCargoInterfaces())
-        {
-            CargoSystem system = hauler.GetCargoSystem();
-            
-            if(system != null)
-            {
-                if(system.ContainsTanks())
-                {
-                    for(StoredTank tank : system.GetTanks())
-                        Tanks.put(tank.GetID(), tank);
-                }
-
-                if(system.ContainsCargoTrucks())
-                {
-                    for(StoredCargoTruck truck : system.GetCargoTrucks())
-                        CargoTrucks.put(truck.GetID(), truck);
-                }
-
-                if(system.ContainsInfantry())
-                {
-                    for(StoredInfantry infantry : system.GetInfantries())
-                        Infantries.put(infantry.GetID(), infantry);
-                }
-            }   
-        }
         
         for(Treaty treaty : Treaties.values())
         {
@@ -2890,5 +2861,15 @@ public class LaunchClientGame extends LaunchGame implements LaunchClientGameInte
     public void Blacklist(int lPlayerID)
     {
         comms.Blacklist(lPlayerID);
+    }
+    
+    public void DepotCollect(int lDepotID)
+    {
+        comms.DepotCollect(lDepotID);
+    }
+    
+    public void AddBounty(int lPlayerID, int lAmount, boolean bPlayer)
+    {
+        comms.AddBounty(lPlayerID, lAmount, bPlayer);
     }
 }

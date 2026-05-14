@@ -225,7 +225,6 @@ public class Defs
     public static final float FISSILE_SCRAP_VALUE_KG = 1500f;
     public static final float GOLD_SCRAP_VALUE_KG = 1000f;
     public static final float SCRAP_PROPORTION = 0.5f;
-    public static final long SCRAPYARD_RATE_PER_HOUR = 10000;
     
     public static final float GetResourceScrapValuePerKG(ResourceType type)
     {
@@ -290,16 +289,12 @@ public class Defs
     public static final float STORED_UNIT_MAINTENANCE_MULTIPLIER = 0.0f;
     public static final int OFFLINE_MAINTENANCE_COST = 0;
     public static final int ONLINE_MAINTENANCE_COST = 25;
-    public static final int EXTRACTOR_MAINTENANCE_COST = 25;
-    public static final int MIN_MAINT_COST_AIRCRAFT = 150;
-    public static final int WEIGHT_PER_MAINTENANCE_AIRCRAFT = 300;
-    public static final float STEALTH_MAINT_MULT = 1.5f;
     public static final int MISSILE_MAINTENANCE = 0;
     public static final int TORPEDO_MAINTENANCE = 0;
-    public static final int MISSILE_ICBM_MAINTENANCE = 250;
-    public static final int INTERCEPTOR_ABM_MAINTENANCE = 200;
+    public static final int MISSILE_ICBM_MAINTENANCE = 50;
+    public static final int INTERCEPTOR_ABM_MAINTENANCE = 30;
     public static final int INTERCEPTOR_MAINTENANCE = 0;
-    public static final int TANK_MAINTENANCE_COST = 45;
+    public static final int TANK_MAINTENANCE_COST = 25;
     public static final int CARGO_TRUCK_MAINTENANCE_COST = 45;
     public static final int INFANTRY_MAINTENANCE_COST = 45;
     public static final short AIRCRAFT_NEGLECT_HP = 50;
@@ -399,21 +394,6 @@ public class Defs
     public static final short SHIPYARD_MAX_HP = 15000;
     public static final short TANK_MAX_HP = 3000;
     
-    //TODO
-    public static final List<ResourceType> GetTankResourceTypes(EntityType type)
-    {
-        switch(type)
-        {
-            case SPAAG:
-            case MBT: return Arrays.asList(ResourceType.STEEL, ResourceType.FUEL);
-            case HOWITZER: return Arrays.asList(ResourceType.STEEL, ResourceType.FUEL);
-            case MISSILE_TANK: return Arrays.asList(ResourceType.STEEL, ResourceType.FUEL);
-            case SAM_TANK: return Arrays.asList(ResourceType.STEEL, ResourceType.FUEL);
-        }
-        
-        return null;
-    }
-    
     public static final short LANDING_CRAFT_HP = 100;
     public static final short MISSILE_SITE_HP = 1500;
     public static final short ICBM_SILO_HP = 5000;
@@ -426,14 +406,17 @@ public class Defs
     public static final short BANK_HP = 1500;
     public static final short ARTILLERY_GUN_HP = 1500;
     public static final short ARMORY_HP = 1500;
+    public static final short ORE_MINE_HP = 1500;
+    public static final short FARM_HP = 3000;
+    public static final short SOLAR_PANEL_HP = 250;
     
-    public static final int MISSILE_SLOT_UPGRADE_COST = 10000;
+    public static final int MISSILE_SLOT_UPGRADE_COST = 500;
     public static final int RELOAD_TIME_BASE = MS_PER_SEC * 120;
     public static final int RELOAD_TIME_STAGE_1 = MS_PER_SEC * 60;
     public static final int RELOAD_TIME_STAGE_2 = MS_PER_SEC * 30;
     public static final int RELOAD_TIME_STAGE_3 = MS_PER_SEC * 15;
     
-    public static final int REPAIR_COST_PER_HP = 10;
+    public static final int REPAIR_COST_PER_HP = 5;
     public static final float IN_PORT_RADIUS = 15f;
     public static final float ON_WATER_DAMAGE_MULTIPLIER = 5f;
     
@@ -456,7 +439,6 @@ public class Defs
     public static final List<ResourceType> WAREHOUSE_TYPES = Arrays.asList(ResourceType.ELECTRICITY, ResourceType.CONSTRUCTION_SUPPLIES, ResourceType.MACHINERY);
     public static final List<ResourceType> ARMORY_TYPES = Arrays.asList(ResourceType.ELECTRICITY, ResourceType.CONSTRUCTION_SUPPLIES, ResourceType.MACHINERY);
     public static final List<ResourceType> BARRACKS_TYPES = Arrays.asList(ResourceType.ELECTRICITY, ResourceType.CONSTRUCTION_SUPPLIES, ResourceType.MACHINERY);
-    public static final List<ResourceType> SCRAPYARD_TYPES = Arrays.asList(ResourceType.ELECTRICITY, ResourceType.CONSTRUCTION_SUPPLIES);
     public static final List<ResourceType> BASIC_STRUCTURE_TYPES = Arrays.asList(ResourceType.ELECTRICITY, ResourceType.CONSTRUCTION_SUPPLIES);
     public static final List<ResourceType> INFANTRY_TYPES = Arrays.asList(ResourceType.MEDICINE, ResourceType.FOOD);
     
@@ -466,7 +448,10 @@ public class Defs
     public static final Map<ResourceType, Long> SAM_SITE_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)3000), entry(ResourceType.STEEL, (long)(30000/T2_SUBSTITUTION_VALUE_KG)));
     public static final Map<ResourceType, Long> ICBM_SILO_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)10000), entry(ResourceType.CONCRETE, (long)(75000/T1_SUBSTITUTION_VALUE_KG)), entry(ResourceType.MACHINERY, (long)(25000/T3_SUBSTITUTION_VALUE_KG)));
     public static final Map<ResourceType, Long> ABM_SILO_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)10000), entry(ResourceType.CONCRETE, (long)(75000/T1_SUBSTITUTION_VALUE_KG)), entry(ResourceType.MACHINERY, (long)(25000/T3_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> ORE_MINE_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)5000), entry(ResourceType.STEEL, (long)(50000/T2_SUBSTITUTION_VALUE_KG)));
+    public static final Map<ResourceType, Long> ORE_MINE_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)7500), entry(ResourceType.STEEL, (long)(50000/T2_SUBSTITUTION_VALUE_KG)));
+    public static final Map<ResourceType, Long> SOLAR_PANEL_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)1500), entry(ResourceType.STEEL, (long)(50000/T2_SUBSTITUTION_VALUE_KG)));
+    public static final Map<ResourceType, Long> FARM_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)30000), entry(ResourceType.STEEL, (long)(50000/T2_SUBSTITUTION_VALUE_KG)));
+    public static final Map<ResourceType, Long> LOGISTICS_DEPOT_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)105000), entry(ResourceType.STEEL, (long)(50000/T2_SUBSTITUTION_VALUE_KG)));
     public static final Map<ResourceType, Long> SENTRY_GUN_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)750), entry(ResourceType.STEEL, (long)(5000/T2_SUBSTITUTION_VALUE_KG)), entry(ResourceType.OIL, (long)(2500/T1_SUBSTITUTION_VALUE_KG)));
     public static final Map<ResourceType, Long> WATCH_TOWER_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)750), entry(ResourceType.CONSTRUCTION_SUPPLIES, (long)(7500/T2_SUBSTITUTION_VALUE_KG)));
     public static final Map<ResourceType, Long> AIRBASE_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)10000), entry(ResourceType.CONSTRUCTION_SUPPLIES, (long)(75000/T2_SUBSTITUTION_VALUE_KG)), entry(ResourceType.STEEL, (long)(25000/T2_SUBSTITUTION_VALUE_KG)));
@@ -475,7 +460,6 @@ public class Defs
     public static final Map<ResourceType, Long> WAREHOUSE_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)7500), entry(ResourceType.CONSTRUCTION_SUPPLIES, (long)(75000/T2_SUBSTITUTION_VALUE_KG)));
     public static final Map<ResourceType, Long> ARMORY_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)5000), entry(ResourceType.STEEL, (long)(25000/T2_SUBSTITUTION_VALUE_KG)), entry(ResourceType.CONCRETE, (long)(25000/T1_SUBSTITUTION_VALUE_KG)));
     public static final Map<ResourceType, Long> BARRACKS_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)5000), entry(ResourceType.CONSTRUCTION_SUPPLIES, (long)(50000/T2_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> SCRAPYARD_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)7500), entry(ResourceType.CONCRETE, (long)(50000/T1_SUBSTITUTION_VALUE_KG)), entry(ResourceType.MACHINERY, (long)(25000/T3_SUBSTITUTION_VALUE_KG)));
     public static final Map<ResourceType, Long> DISTRIBUTOR_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)5000), entry(ResourceType.MACHINERY, (long)5000), entry(ResourceType.CONSTRUCTION_SUPPLIES, (long)(45000/T2_SUBSTITUTION_VALUE_KG)));
     
     public static final Map<ResourceType, Long> RESOURCE_COST_GRANARY = Map.ofEntries(entry(ResourceType.WEALTH, (long)30000), entry(ResourceType.LUMBER, (long)(150000/T1_SUBSTITUTION_VALUE_KG)), entry(ResourceType.CONCRETE, (long)(150000/T1_SUBSTITUTION_VALUE_KG)));
@@ -509,28 +493,25 @@ public class Defs
     }
     
     //Experience
-    public static final float XP_LOSS_VS_GAIN_MULTIPLIER = 0.5f;                
-    public static final int CHAMPION_XP_GAIN = 10000;
-    public static final int INFANTRY_KILLED_XP = 75;                            //The amount of XP a player gains when they kill an infantry unit.
-    public static final int INFANTRY_LOST_XP = (int)(INFANTRY_KILLED_XP * XP_LOSS_VS_GAIN_MULTIPLIER);
+    public static final float XP_LOSS_VS_GAIN_MULTIPLIER = 0.5f;
     public static final int AIRCRAFT_KILLED_XP = 150;
     public static final int AIRCRAFT_LOST_XP = (int)(AIRCRAFT_KILLED_XP * XP_LOSS_VS_GAIN_MULTIPLIER);
     public static final int TANK_KILLED_XP = 50;
     public static final int TANK_LOST_XP = (int)(TANK_KILLED_XP * XP_LOSS_VS_GAIN_MULTIPLIER);
-    public static final int ICBM_SHOOTDOWN_XP = 125;
+    public static final int ICBM_SHOOTDOWN_XP = 100;
     public static final int STRUCTURE_BUILT_XP = 50;
     public static final int STRUCTURE_KILLED_XP = STRUCTURE_BUILT_XP;
     public static final int STRUCTURE_LOST_XP = (int)(STRUCTURE_KILLED_XP * XP_LOSS_VS_GAIN_MULTIPLIER);
     public static final int TANK_PURCHASED_XP = 50;
     public static final int KOTH_WIN_XP = 500;
-    
-    public static final int CARGO_TRUCK_PURCHASED_XP = 50;
+    public static final int COMMAND_POST_KILLED_XP = 100;
+    public static final int COMMAND_POST_LOST_XP = (int)(COMMAND_POST_KILLED_XP * XP_LOSS_VS_GAIN_MULTIPLIER);
     
     public static final int WAR_WON_XP = 300;
     public static final int WAR_LOST_XP = (int)(WAR_WON_XP * XP_LOSS_VS_GAIN_MULTIPLIER);
-    public static final int SHIPYARD_KILLED_XP = 1000;
+    public static final int SHIPYARD_KILLED_XP = 100;
     public static final int SHIPYARD_LOST_XP = (int)(SHIPYARD_KILLED_XP * XP_LOSS_VS_GAIN_MULTIPLIER);
-    public static final int SHIPYARD_UPGRADE_XP = 1000;
+    public static final int SHIPYARD_UPGRADE_XP = 100;
     public static final float KM_TRAVELED_PER_XP = 0.05f;
     public static final int FRIGATE_KILLED_XP = 75;
     public static final int DESTROYER_KILLED_XP = 125;
@@ -556,8 +537,6 @@ public class Defs
             return STRUCTURE_KILLED_XP;
         else if(entity instanceof Airplane)
             return AIRCRAFT_KILLED_XP;
-        else if(entity instanceof Infantry)
-            return INFANTRY_KILLED_XP;
         else if(entity instanceof NavalVessel vessel)
         {
             switch(vessel.GetEntityType())
@@ -587,8 +566,6 @@ public class Defs
             return STRUCTURE_LOST_XP;
         else if(entity instanceof Airplane)
             return AIRCRAFT_LOST_XP;
-        else if(entity instanceof Infantry)
-            return INFANTRY_LOST_XP;
         else if(entity instanceof NavalVessel vessel)
         {
             switch(vessel.GetEntityType())
@@ -611,11 +588,11 @@ public class Defs
         return -1;
     }
     
-    public static final int SHIPYARD_UPGRADE_WEALTH_COST = 300000;
+    public static final int SHIPYARD_UPGRADE_WEALTH_COST = 30000;
     public static final byte MAX_SHIPYARD_CAPACITY = 6;
     
     public static final int TANK_BUILD_TIME = MS_PER_HOUR * 1;
-    public static final float BATTLE_TANK_FIRING_RANGE = 3.5f;
+    public static final float BATTLE_TANK_FIRING_RANGE = 1.0f;
     public static final int BATTLE_TANK_RELOAD_TIME = GROUND_UNIT_RELOAD_TIME;
     public static final short EFFECTIVE_MIN_DMG = 15;
     public static final short EFFECTIVE_MAX_DMG = 50;
@@ -675,9 +652,9 @@ public class Defs
     public static final float SHIP_MIN_FUEL_EFFICIENCY_BUFFER = 0.5f;           //Ships are speed-limited to prevent them from going faster than the minimum fuel efficiency would allow. This is a cheap way to make sure no such accelerate to get lower than the minimum efficiency.
     public static final float SHIP_FUEL_EFFICIENCY_SLOPE = -0.056f;
     public static final float BASELINE_SPEED_FUEL_EFFICIENCY = 37.04f;          //In KPH.
-    public static final float SONAR_RANGE = 25f;
+    public static final float SONAR_RANGE = 75f;
     public static final float CONTACT_BEARING_MAX_RANGE = 200.0f;
-    public static final float CONTACT_BEARING_CHANCE = 0.3f;                    //A 50% chance of getting a contact bearing each minute.
+    public static final float CONTACT_BEARING_CHANCE = 0.5f;                    //A 50% chance of getting a contact bearing each minute.
     public static final int RADAR_SCAN_COOLDOWN = MS_PER_MIN * 30;
     public static final float CIWS_HIT_CHANCE = 0.2f;
     public static final float CIWS_RANGE = 2.2f;
@@ -717,7 +694,7 @@ public class Defs
         
     public static final float LOOT_DROP_CHANCE = 0.25f;
     public static final int WEAKLING_VALUE_THRESHOLD = 1000;
-    public static final float COMMAND_POST_RADIUS = 1.0f;
+    public static final float COMMAND_POST_RADIUS = 0.7f;
     
     public static final float ATTACK_ICBM_SILO_MAD_CHANCE = 0.04f;
     public static final float NUKE_ICBM_SILO_MAD_CHANCE = 0.1f;
@@ -928,4 +905,23 @@ public class Defs
     public static final float KOTH_MAX_SIZE = 500f;
     public static final long KOTH_PRIZE = 100000;
     public static final long KOTH_MIN_PRIZE = 25000;
+    
+    public static final float COMMAND_POST_WEALTH_LOST = 0.1f;
+    public static final float HQ_VARIANCE_DISTANCE = 0.1f;
+    public static final float SHIPYARD_OUTPUT_DISTANCE = 30.0f;
+    public static final int DECOMMISSION_TIME = MS_PER_MIN * 30;
+    
+    //Bot stuff.
+    
+    public static final float FARM_SEPARATION_DISTANCE = 1.1f;
+    public static final float FARM_GENERATE_DISTANCE = 0.7f;
+    public static final float FARM_WORK_RADIUS = 15f;                           //The radius around a farm which the owner must be inside of for the farm to function.
+    public static final float ORE_MINE_COMPETITION_DISTANCE = 15f;
+    public static final float ORE_MINE_GENERATION_DISTANCE = 15f;
+    public static final int ORE_MINE_GENERATE_TIME = MS_PER_MIN * 60;
+    public static final int SOLAR_PANEL_GENERATE_TIME = MS_PER_MIN * 60;
+    public static final int FARM_GENERATE_TIME = MS_PER_DAY * 3;
+    public static final int LOGISTICS_DEPOT_WEALTH_CAPACITY = 10000;
+    public static final float LOGISTICS_DEPOT_COLLECT_RADIUS = 1.0f;
+    public static final int LOGISTICS_DEPOT_COLLECT_COOLDOWN = MS_PER_HOUR * 3;
 }   

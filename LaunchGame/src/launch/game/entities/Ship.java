@@ -84,10 +84,12 @@ public class Ship extends NavalVessel implements AirbaseInterface, FuelableInter
             boolean bVisible, 
             int lVisibleTime, 
             FireOrder fireOrder, 
-            boolean bRadarActive, 
+            boolean bRadarActive,
+            boolean bSelling, 
+            int lSelling, 
             Map<Integer, GeoCoord> Coordinates)
     {
-        super(lID, geoPosition, lOwnerID, nHP, nMaxHP, type, strName, moveOrders, geoTarget, target, lSonarCooldown, fltCurrentFuel, missiles, torpedoes, bVisible, lVisibleTime, Coordinates);
+        super(lID, geoPosition, lOwnerID, nHP, nMaxHP, type, strName, moveOrders, geoTarget, target, lSonarCooldown, fltCurrentFuel, missiles, torpedoes, bVisible, lVisibleTime, bSelling, lSelling, Coordinates);
         this.cMode = cMode;
         this.Sentries = Sentries == null ? new ArrayList<>() : Sentries;
         this.cargo = cargo;

@@ -502,9 +502,33 @@ public class TextUtilities
         {
             return GetLootContentString(((Loot)entity), game);
         }
-        else if(entity instanceof TankInterface)
+        else if(entity instanceof Tank)
         {
             return context.getString(R.string.mbt);
+        }
+        else if(entity instanceof LogisticsDepot)
+        {
+            return context.getString(R.string.logistics_depot);
+        }
+        else if(entity instanceof OreMine)
+        {
+            switch(entity.GetEntityType())
+            {
+                case ORE_MINE:
+                {
+                    return context.getString(R.string.ore_mine);
+                }
+
+                case FARM:
+                {
+                    return context.getString(R.string.farm);
+                }
+
+                case SOLAR_PANEL:
+                {
+                    return context.getString(R.string.solar_panel);
+                }
+            }
         }
 
         return "NOT IMPLEMENTED! (GetEntityTypeAndName)";
@@ -649,9 +673,33 @@ public class TextUtilities
                 Shipyard shipyard = ((Shipyard)entity);
                 return shipyard.GetName();
             }
-            else if(entity instanceof TankInterface)
+            else if(entity instanceof Tank)
             {
                 return context.getString(R.string.owners_entity, ownerName, context.getString(R.string.title_mbt));
+            }
+            else if(entity instanceof LogisticsDepot)
+            {
+                return context.getString(R.string.owners_entity, ownerName, context.getString(R.string.logistics_depot_title));
+            }
+            else if(entity instanceof OreMine)
+            {
+                switch(entity.GetEntityType())
+                {
+                    case ORE_MINE:
+                    {
+                        return context.getString(R.string.owners_entity, ownerName, context.getString(R.string.ore_mine_title));
+                    }
+
+                    case FARM:
+                    {
+                        return context.getString(R.string.owners_entity, ownerName, context.getString(R.string.farm_title));
+                    }
+
+                    case SOLAR_PANEL:
+                    {
+                        return context.getString(R.string.owners_entity, ownerName, context.getString(R.string.solar_panel_title));
+                    }
+                }
             }
         }
         else
@@ -801,6 +849,26 @@ public class TextUtilities
                 return context.getString(R.string.ssb_name);
             }
 
+            case ORE_MINE:
+            {
+                return context.getString(R.string.ore_mine_title);
+            }
+
+            case FARM:
+            {
+                return context.getString(R.string.farm_title);
+            }
+
+            case SOLAR_PANEL:
+            {
+                return context.getString(R.string.solar_panel_title);
+            }
+
+            case LOGISTICS_DEPOT:
+            {
+                return context.getString(R.string.logistics_depot_title);
+            }
+
             default: return "NOT IMPLEMENTED! (GetEntityTypeName)";
         }
     }
@@ -843,6 +911,11 @@ public class TextUtilities
             case COMMAND_POST:
             {
                 return context.getString(R.string.command_post);
+            }
+
+            case HEADQUARTERS:
+            {
+                return context.getString(R.string.headquarters);
             }
 
             case AIRBASE:
@@ -934,6 +1007,26 @@ public class TextUtilities
             case SSB:
             {
                 return context.getString(R.string.ssb_title);
+            }
+
+            case ORE_MINE:
+            {
+                return context.getString(R.string.ore_mine_title);
+            }
+
+            case FARM:
+            {
+                return context.getString(R.string.farm_title);
+            }
+
+            case SOLAR_PANEL:
+            {
+                return context.getString(R.string.solar_panel_title);
+            }
+
+            case LOGISTICS_DEPOT:
+            {
+                return context.getString(R.string.logistics_depot_title);
             }
 
             default: return "NOT IMPLEMENTED! (GetEntityTypeName)";
@@ -1423,20 +1516,6 @@ public class TextUtilities
             textView.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
     }
 
-    public static String GetMachFromKPH(float KPH)
-    {
-        float fltMach = KPH/Defs.KPH_PER_MACH;
-
-        return String.format("%.1f", fltMach);
-    }
-
-    public static String GetMetricTonsFromKG(float lKG)
-    {
-        float fltTons = lKG/Defs.KG_PER_TON;
-
-        return String.format("%.0f", fltTons);
-    }
-
     public static void AssignAircraftStatusString(TextView textView, AirplaneInterface aircraft)
     {
         if(aircraft.Flying())
@@ -1496,71 +1575,46 @@ public class TextUtilities
         }
     }
 
-    public static void AssignTankStatusString(TextView textView, TankInterface tankInterface)
+    public static void AssignTankStatusString(TextView textView, Tank tank)
     {
-        if(tankInterface instanceof Tank)
+        if(tank.GetSelling())
         {
-            Tank tank = (Tank)tankInterface;
-
-            if(tank.GetMoveOrders() == MoveOrders.MOVE)
-            {
-                textView.setText(context.getString(R.string.status_moving));
-                textView.setTextColor(Utilities.ColourFromAttr(context, R.attr.GoodColour));
-            }
-            else if(tank.GetMoveOrders() == MoveOrders.WAIT)
-            {
-                textView.setText(context.getString(tank.IsASPAAG() ? R.string.status_defending : R.string.status_waiting));
-                textView.setTextColor(Utilities.ColourFromAttr(context, R.attr.GoodColour));
-            }
+            textView.setText(context.getString(R.string.state_decommissioning, GetTimeAmount(tank.GetSellTimeRemaining())));
+            textView.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
         }
-        else if(tankInterface instanceof StoredTank)
+        else if(tank.GetMoveOrders() == MoveOrders.MOVE)
         {
-            StoredTank tank = (StoredTank)tankInterface;
-
-            if(tank.GetHP() < tank.GetMaxHP()/1.5f) //HP is less than 2/3.
-            {
-                textView.setText(context.getString(R.string.status_damaged));
-                textView.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
-            }
-            else
-            {
-                textView.setText(context.getString(R.string.status_ready));
-                textView.setTextColor(Utilities.ColourFromAttr(context, R.attr.GoodColour));
-            }
+            textView.setText(context.getString(R.string.status_moving));
+            textView.setTextColor(Utilities.ColourFromAttr(context, R.attr.GoodColour));
+        }
+        else if(tank.GetMoveOrders() == MoveOrders.ATTACK)
+        {
+            textView.setText(context.getString(R.string.status_attacking));
+            textView.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
+        }
+        else if(tank.GetMoveOrders() == MoveOrders.WAIT)
+        {
+            textView.setText(context.getString(R.string.status_waiting));
+            textView.setTextColor(Utilities.ColourFromAttr(context, R.attr.WarningColour));
         }
     }
 
-    public static void AssignCargoTruckStatusString(TextView textView, CargoTruckInterface truckInterface)
+    public static void AssignNavalStatusString(TextView textView, NavalVessel vessel)
     {
-        if(truckInterface instanceof CargoTruck)
+        if(vessel.GetSelling())
         {
-            CargoTruck truck = (CargoTruck)truckInterface;
-
-            if(truck.GetMoveOrders() == MoveOrders.MOVE)
-            {
-                textView.setText(context.getString(R.string.status_moving));
-                textView.setTextColor(Utilities.ColourFromAttr(context, R.attr.GoodColour));
-            }
-            else if(truck.GetMoveOrders() == MoveOrders.WAIT)
-            {
-                textView.setText(context.getString(R.string.status_waiting));
-                textView.setTextColor(Utilities.ColourFromAttr(context, R.attr.InfoColour));
-            }
+            textView.setText(context.getString(R.string.state_decommissioning, GetTimeAmount(vessel.GetSellTimeRemaining())));
+            textView.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
         }
-        else if(truckInterface instanceof StoredCargoTruck)
+        else if(vessel.GetMoveOrders() == MoveOrders.MOVE)
         {
-            StoredCargoTruck truck = (StoredCargoTruck)truckInterface;
-
-            if(truck.GetHP() < truck.GetMaxHP()/1.5f) //HP is less than 2/3.
-            {
-                textView.setText(context.getString(R.string.status_damaged));
-                textView.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
-            }
-            else
-            {
-                textView.setText(context.getString(R.string.status_ready));
-                textView.setTextColor(Utilities.ColourFromAttr(context, R.attr.GoodColour));
-            }
+            textView.setText(context.getString(R.string.status_moving));
+            textView.setTextColor(Utilities.ColourFromAttr(context, R.attr.GoodColour));
+        }
+        else if(vessel.GetMoveOrders() == MoveOrders.WAIT)
+        {
+            textView.setText(context.getString(R.string.status_waiting));
+            textView.setTextColor(Utilities.ColourFromAttr(context, R.attr.WarningColour));
         }
     }
 
@@ -1648,5 +1702,10 @@ public class TextUtilities
     public static String GetLootContentString(Loot loot, LaunchGame game)
     {
         return "[NOT IMPLEMENTED! (GetLootContentString)]";
+    }
+
+    public static String GetOreMineCompetitionString(int lTotal, int lCompeting, int lMaxValue)
+    {
+        return context.getString(R.string.ore_mine_competing, lCompeting, lTotal, GetCurrencyString(lMaxValue));
     }
 }

@@ -107,44 +107,11 @@ public class SelectMissileView extends LaunchView
                     }
                 }
 
-                for(ArtilleryGun artillery : game.GetArtilleryGuns())
-                {
-                    if((artillery.GetOwnerID() == ourPlayer.GetID()) && artillery.GetOnline() && artillery.GetMissileSystem().ReadyToFire())
-                    {
-                        if(AddUIForSystem(artillery.GetPosition(), artillery.GetID(), SystemType.ARTILLERY_GUN))
-                        {
-                            bMissilesAvailable = true;
-                        }
-                    }
-                }
-
                 for(Airplane aircraft : game.GetAirplanes())
                 {
                     if(aircraft.GetOwnerID() == ourPlayer.GetID() && aircraft.HasMissiles() && aircraft.GetMissileSystem().ReadyToFire())
                     {
                         if(AddUIForSystem(aircraft.GetPosition(), aircraft.GetID(), SystemType.AIRCRAFT_MISSILES))
-                        {
-                            bMissilesAvailable = true;
-                        }
-                    }
-                }
-
-                for(Tank tank : game.GetTanks())
-                {
-                    if(tank.GetOwnerID() == ourPlayer.GetID() && tank.HasMissiles() && tank.GetMissileSystem().ReadyToFire() && !tank.GetOnWater())
-                    {
-                        if(AddUIForSystem(tank.GetPosition(), tank.GetID(), SystemType.TANK_MISSILES))
-                        {
-                            bMissilesAvailable = true;
-                        }
-                    }
-                }
-
-                for(Tank tank : game.GetTanks())
-                {
-                    if(tank.GetOwnerID() == ourPlayer.GetID() && tank.HasArtillery() && tank.GetMissileSystem().ReadyToFire() && !tank.GetOnWater())
-                    {
-                        if(AddUIForSystem(tank.GetPosition(), tank.GetID(), SystemType.TANK_ARTILLERY))
                         {
                             bMissilesAvailable = true;
                         }
@@ -164,7 +131,7 @@ public class SelectMissileView extends LaunchView
 
                 for(Submarine submarine : game.GetSubmarines())
                 {
-                    if(submarine.GetOwnerID() == ourPlayer.GetID() && submarine.HasMissiles() && submarine.GetMissileSystem().ReadyToFire() && !submarine.Submerged())
+                    if(submarine.GetOwnerID() == ourPlayer.GetID() && submarine.HasMissiles() && submarine.GetMissileSystem().ReadyToFire())
                     {
                         if(AddUIForSystem(submarine.GetPosition(), submarine.GetID(), SystemType.SUBMARINE_MISSILES))
                         {
@@ -172,7 +139,7 @@ public class SelectMissileView extends LaunchView
                         }
                     }
 
-                    if(submarine.GetOwnerID() == ourPlayer.GetID() && submarine.HasICBMs() && submarine.GetICBMSystem().ReadyToFire() && !submarine.Submerged())
+                    if(submarine.GetOwnerID() == ourPlayer.GetID() && submarine.HasICBMs() && submarine.GetICBMSystem().ReadyToFire())
                     {
                         if(AddUIForSystem(submarine.GetPosition(), submarine.GetID(), SystemType.SUBMARINE_ICBM))
                         {
@@ -227,21 +194,6 @@ public class SelectMissileView extends LaunchView
             {
                 txtSiteName.setText(Utilities.GetEntityName(context, game.GetMissileSite(lSiteID)));
                 system = game.GetMissileSite(lSiteID).GetMissileSystem();
-            }
-            break;
-
-            case ARTILLERY_GUN:
-            {
-                txtSiteName.setText(Utilities.GetEntityName(context, game.GetArtilleryGun(lSiteID)));
-                system = game.GetArtilleryGun(lSiteID).GetMissileSystem();
-            }
-            break;
-
-            case TANK_MISSILES:
-            case TANK_ARTILLERY:
-            {
-                txtSiteName.setText(Utilities.GetEntityName(context, game.GetTank(lSiteID)));
-                system = game.GetTank(lSiteID).GetMissileSystem();
             }
             break;
 
@@ -348,7 +300,7 @@ public class SelectMissileView extends LaunchView
                             MissileType type = game.GetConfig().GetMissileType(system.GetSlotMissileType(c));
                             boolean bRequireAntiSub = false;
 
-                            if(entityTarget != null && entityTarget instanceof Submarine && ((Submarine)entityTarget).Submerged())
+                            if(entityTarget != null && entityTarget instanceof Submarine)
                             {
                                 bRequireAntiSub = true;
                             }

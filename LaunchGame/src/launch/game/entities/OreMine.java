@@ -11,6 +11,7 @@ import launch.game.GeoCoord;
 import launch.game.EntityPointer.EntityType;
 import launch.game.entities.conceptuals.Resource.ResourceType;
 import launch.game.systems.ResourceSystem;
+import launch.utilities.ShortDelay;
 
 
 /**
@@ -21,39 +22,47 @@ public class OreMine extends Structure
 {
     private static final int DATA_SIZE = 5;
     
-    private int lDepositID;
-    private ResourceType type;
+    private EntityType type;
+    private ShortDelay dlyGenerate;
     
     /** New. */
-    public OreMine(int lID, GeoCoord geoPosition, short nHP, short nMaxHP, int lOwnerID, boolean bRespawnProtected, int lBootTime, int lDepositID, ResourceType type, ResourceSystem resources)
+    public OreMine(int lID, GeoCoord geoPosition, short nHP, short nMaxHP, int lOwnerID, boolean bRespawnProtected, int lBootTime, EntityType type, int lGenerateTime)
     {
-        super(lID, geoPosition, nHP, nMaxHP, lOwnerID, bRespawnProtected, lBootTime, resources);
-        this.lDepositID = lDepositID;
+        super(lID, geoPosition, nHP, nMaxHP, lOwnerID, bRespawnProtected, lBootTime, new ResourceSystem());
         this.type = type;
+        this.dlyGenerate = new ShortDelay(lGenerateTime);
     }
     
     /** From save. */
-    public OreMine(int lID, GeoCoord geoPosition, short nHP, short nMaxHP, String strName, int lOwnerID, byte cFlags, int lStateTime, int lDepositID, boolean bVisible, int lVisibleTime, int lBuiltByID, ResourceType type, ResourceSystem resources)
+    public OreMine(int lID, GeoCoord geoPosition, short nHP, short nMaxHP, String strName, int lOwnerID, byte cFlags, int lStateTime, boolean bVisible, int lVisibleTime, int lBuiltByID, EntityType type, int lGenerateTime)
     {
-        super(lID, geoPosition, nHP, nMaxHP, strName, lOwnerID, cFlags, lStateTime, bVisible, lVisibleTime, lBuiltByID, resources);
-        this.lDepositID = lDepositID;
+        super(lID, geoPosition, nHP, nMaxHP, strName, lOwnerID, cFlags, lStateTime, bVisible, lVisibleTime, lBuiltByID, new ResourceSystem());
         this.type = type;
+        this.dlyGenerate = new ShortDelay(lGenerateTime);
     }
     
     /** From comms. */
     public OreMine(ByteBuffer bb, int lReceivingID)
     {
         super(bb, lReceivingID);
-        this.lDepositID = bb.getInt();
-        this.type = ResourceType.values()[bb.get()];
-        
+        this.type = EntityType.values()[bb.get()];
+        this.dlyGenerate = new ShortDelay(bb);
     }
 
     @Override
     public void Tick(int lMS)
     {
         super.Tick(lMS);
+    }
+    
+    public void Tick(int lMS, boolean bGenerate)
+    {
+        Tick(lMS);
         
+        if(bGenerate)
+        {
+            dlyGenerate.Tick(lMS);
+        }
     }
     
     @Override
@@ -63,8 +72,8 @@ public class OreMine extends Structure
         
         ByteBuffer bb = ByteBuffer.allocate(DATA_SIZE + cBaseData.length);
         bb.put(cBaseData);
-        bb.putInt(lDepositID);
         bb.put((byte)type.ordinal());
+        dlyGenerate.GetData(bb);
         
         return bb.array();
     }
@@ -80,22 +89,9 @@ public class OreMine extends Structure
     {
         switch(type)
         {
-            case COAL: return "coal mine";
-            case IRON: return "iron mine";
-            case OIL: return "oil well";
-            case CROPS: return "farm";
-            case LUMBER: return "lumber mill";
-            case CONCRETE: return "quarry";
-            case URANIUM: return "uranium mine";
-            case GOLD: return "gold mine";
-            case STEEL: return "metal recycling team";
-            case MACHINERY: return "industrial salvage unit";
-            case ELECTRICITY: return "power recovery unit";
-            case FUEL: return "fuel recovery team";
-            case FOOD: return "ration recovery unit";
-            case ELECTRONICS: return "tech salvage unit";
-            case MEDICINE: return "medical recovery unit";
-            case ENRICHED_URANIUM: return "nuclear recovery unit";
+            case SOLAR_PANEL: return "solar array";
+            case FARM: return "farm";
+            case ORE_MINE: return "ore mine";
             default: return "ORE MINE TYPE UNKNOWN";
         }
     }
@@ -112,7 +108,7 @@ public class OreMine extends Structure
     @Override
     public EntityType GetEntityType()
     {
-        return EntityType.ORE_MINE;
+        return type;
     }
     
     @Override
@@ -121,18 +117,18 @@ public class OreMine extends Structure
         return LaunchSession.OreMine;
     }
     
-    public void SetDeposit(int lDepositID)
+    public int GetGenerateTimeRemaining()
     {
-        this.lDepositID = lDepositID;
+        return dlyGenerate.GetRemaining();
     }
     
-    public int GetDepositID()
+    public boolean GetGenerate()
     {
-        return this.lDepositID;
+        return dlyGenerate.Expired();
     }
     
-    public ResourceType GetType()
+    public void SetGenerateTime(int lGenerateTime)
     {
-        return this.type;
+        this.dlyGenerate.Set(lGenerateTime);
     }
 }

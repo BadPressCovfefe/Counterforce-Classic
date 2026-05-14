@@ -156,6 +156,31 @@
   <BlueprintExpiry>259200000</BlueprintExpiry>
   <BlueprintBuildDistance>0.05</BlueprintBuildDistance>
   <MissileTypes>
+    <MissileType ID="1143" Name="Prompt Strike">
+      <AssetID>19</AssetID>
+      <Purchasable>true</Purchasable>
+      <MissileSpeed>24000</MissileSpeed>
+      <Range>7000</Range>
+      <ICBM>true</ICBM>
+	  <SubmarineLaunched>true</SubmarineLaunched>
+	  <Yield>2500</Yield>
+	  <Accuracy>0.7</Accuracy>
+	  <Costs>
+		<Resource Quantity="53000" Type="WEALTH"/>
+	  </Costs>
+    </MissileType>
+    <MissileType ID="1142" Name="Prompt Strike">
+      <AssetID>19</AssetID>
+      <Purchasable>true</Purchasable>
+      <MissileSpeed>24000</MissileSpeed>
+      <Range>13000</Range>
+      <ICBM>true</ICBM>
+	  <Yield>2500</Yield>
+	  <Accuracy>0.7</Accuracy>
+	  <Costs>
+		<Resource Quantity="53000" Type="WEALTH"/>
+	  </Costs>
+    </MissileType>
     <MissileType ID="1141" Name="Wealth Balloon">
       <AssetID>7</AssetID>
       <Purchasable>false</Purchasable>
@@ -693,7 +718,7 @@
 	  <ShipLaunched>true</ShipLaunched>
 	  <TorpedoDeployType>1</TorpedoDeployType>
 	  <Costs>
-		<Resource Quantity="190" Type="WEALTH"/>
+		<Resource Quantity="4600" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="1090" Name="ASROC">
@@ -1032,7 +1057,7 @@
 	  <Nuclear>true</Nuclear>
 	  <Accuracy>0.99</Accuracy>
 	  <Costs>
-		<Resource Quantity="67000" Type="WEALTH"/>
+		<Resource Quantity="62000" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
 	<MissileType ID="55" Name="High-Altitude EMP">
@@ -1049,7 +1074,7 @@
 	  </Costs>
     </MissileType>
 	<MissileType ID="1089" Name="Trident">
-      <AssetID>19</AssetID>
+      <AssetID>26</AssetID>
       <Purchasable>true</Purchasable>
       <MissileSpeed>29020</MissileSpeed>
       <Range>12000</Range>
@@ -1063,7 +1088,7 @@
 	  </Costs>
     </MissileType>
 	<MissileType ID="1101" Name="Bulava">
-      <AssetID>19</AssetID>
+      <AssetID>26</AssetID>
       <Purchasable>true</Purchasable>
       <MissileSpeed>22224</MissileSpeed>
       <Range>8300</Range>
@@ -1338,8 +1363,9 @@
       <HitChance>0.35</HitChance>
       <InterceptorSpeed>40748</InterceptorSpeed>
       <Range>3000</Range>
+	  <IsABM>true</IsABM>
 	  <Costs>
-		<Resource Quantity="60" Type="WEALTH"/>
+		<Resource Quantity="67000" Type="WEALTH"/>
 	  </Costs>
     </InterceptorType>
   </InterceptorTypes>
@@ -1368,7 +1394,7 @@
 	  <Homing>true</Homing>
 	  <NavalLaunched>true</NavalLaunched>
 	  <Costs>
-		<Resource Quantity="1050" Type="WEALTH"/>
+		<Resource Quantity="3600" Type="WEALTH"/>
 	  </Costs>
     </TorpedoType>
 	<TorpedoType ID="2" Name="VA-111 Shkval">
@@ -1380,7 +1406,7 @@
 	  <Yield>45</Yield>
 	  <NavalLaunched>true</NavalLaunched>
 	  <Costs>
-		<Resource Quantity="410" Type="WEALTH"/>
+		<Resource Quantity="310" Type="WEALTH"/>
 	  </Costs>
     </TorpedoType>
 	<TorpedoType ID="3" Name="VA-111 Shkval">
@@ -1393,7 +1419,7 @@
 	  <Nuclear>true</Nuclear>
 	  <NavalLaunched>true</NavalLaunched>
 	  <Costs>
-		<Resource Quantity="1180" Type="WEALTH"/>
+		<Resource Quantity="4800" Type="WEALTH"/>
 	  </Costs>
     </TorpedoType>
 	<TorpedoType ID="4" Name="Mk 54">
@@ -1406,7 +1432,7 @@
 	  <Homing>true</Homing>
 	  <NavalLaunched>true</NavalLaunched>
 	  <Costs>
-		<Resource Quantity="1050" Type="WEALTH"/>
+		<Resource Quantity="510" Type="WEALTH"/>
 	  </Costs>
     </TorpedoType>
   </TorpedoTypes>

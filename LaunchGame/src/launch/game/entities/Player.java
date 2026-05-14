@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import launch.comm.LaunchSession;
 import launch.game.Alliance;
-import launch.game.Defs;
 import launch.game.User;
 import launch.game.systems.*;
 import launch.utilities.ShortDelay;
@@ -25,10 +24,10 @@ import launch.utilities.LaunchLog;
  *
  * @author tobster
  */
-public final class Player extends MapEntity implements LaunchSystemListener
+public class Player extends MapEntity implements LaunchSystemListener
 {
-    private static final int DATA_SIZE = 71;
-    private static final int STATS_DATA_SIZE = 48;
+    private static final int DATA_SIZE = 66;
+    private static final int STATS_DATA_SIZE = 40;
    
     private static final int FLAG1_BANNED = 0x01;        //Banned. NOTE: NOT SAVED (well, it is, but the server ignores it), but determined at run time when getting player data.
     private static final int FLAG1_PRISONER = 0x02;       //Unused.
@@ -43,7 +42,7 @@ public final class Player extends MapEntity implements LaunchSystemListener
     private static final int FLAG2_ADMIN = 0x02;                //Player is an administrator.
     private static final int FLAG2_BOSS = 0x04;                 //Unused.
     private static final int FLAG2_MUTED = 0x08;                //Unused.
-    private static final int FLAG2_CHAMPION = 0x10;             //Won the city contest last week.
+    private static final int FLAG2_RES4 = 0x10;                 //Unused.
     private static final int FLAG2_VET = 0x20;                  //Unused.
     private static final int FLAG2_RES6 = 0x40;                 //Unused.
     private static final int FLAG2_RES7 = 0x80;                 //Unused.
@@ -52,11 +51,10 @@ public final class Player extends MapEntity implements LaunchSystemListener
     private String strName;                             //Player's name.
     private int lAvatarID;                              //Avatar ID.
     private long oLastSeen;                             //When they were last seen (UNIX epoch).
-    private ShortDelay dlyStateChange;                  //Time before the player may respawn if dead, or respawn protection will cease.
+    protected ShortDelay dlyStateChange;                //Time before the player may respawn if dead, or respawn protection will cease. (For NPCs, the time between they perform new actions.)
     private int lAllianceID;                            //Alliance ID.
     private ShortDelay dlyAllianceCooloff;              //Time before the player may join another alliance after leaving one.
-    private ShortDelay dlyAirdrop;
-    private ShortDelay dlyProspect;
+    private int lBounty;
     private List<Integer> Blacklist = new ArrayList<>();
     
     //Normal data, condensed into flags.
@@ -68,10 +66,8 @@ public final class Player extends MapEntity implements LaunchSystemListener
     private boolean bAdmin;
     private boolean bBoss;
     private boolean bMuted;
-    private boolean bChampion;
     private boolean bVeteran;
     private boolean bPrisoner;
-    private boolean bMember;                            //The user has payed for membership.
     
     //Stats data.
     private short nWeeklyKills;
@@ -89,8 +85,6 @@ public final class Player extends MapEntity implements LaunchSystemListener
     private int lNeutralValue;
     private int lWealthYesterday;
     private float fltDistanceTraveled;
-    private int lCityCountLastWeek;
-    private int lChampionCount;
     private long oWealth;
     private int lKOTHWins;
     
@@ -115,9 +109,6 @@ public final class Player extends MapEntity implements LaunchSystemListener
     private List<Integer> OurShips = new ArrayList<>();
     private List<Integer> OurTanks = new ArrayList<>();
     
-    //Server only. Exists to allow admins to give membership without the membership check in LaunchServerGame removing it automatically.
-    public boolean bAdminMember = false;
-    
     private LaunchGame game;
     
     //New player.
@@ -137,12 +128,8 @@ public final class Player extends MapEntity implements LaunchSystemListener
         bAdmin = false;
         bBoss = false;
         bMuted = false;
-        bMember = false;
-        bChampion = false;
         bVeteran = false;
         bPrisoner = false;
-        this.dlyAirdrop = new ShortDelay();
-        this.dlyProspect = new ShortDelay();
         
         this.nWeeklyKills = 0;
         this.nWeeklyDeaths = 0;
@@ -154,9 +141,8 @@ public final class Player extends MapEntity implements LaunchSystemListener
         this.lTotalDeaths = 0;
         this.fltDistanceTraveled = 0.0f;
         this.fltDistanceTraveledToday = 0.0f;
-        this.lCityCountLastWeek = 0;
-        this.lChampionCount = 0;
         this.lKOTHWins = 0;
+        this.lBounty = 0;
         
         this.lRank = 0;
         this.lExperience = 0;
@@ -173,15 +159,13 @@ public final class Player extends MapEntity implements LaunchSystemListener
     }
     
     //From save.
-    public Player(int lID, GeoCoord geoPosition, String strName, int lAvatarID, long oLastSeen, int lStateChange, int lAllianceID, byte cFlags1, byte cFlags2, int lAllianceCooloff, short nKills, short nDeaths, int lOffenceSpending, int lDefenceSpending, int lDamageInflicted, int lDamageReceived, int lRank, int lExperience, int lTotalKills, int lTotalDeaths, boolean bMember, long oJoinTime, int lDefenseValue, int lOffenseValue, int lNeutralValue, float fltDistanceTraveled, float fltDistanceTraveledToday, int lAirdropCooldown, int lProspectCooldown, int lCityCountLastWeek, int lChampionCount, boolean bAdminMember, long oWealth, int lKOTHWins, List<Integer> Blacklist)
+    public Player(int lID, GeoCoord geoPosition, String strName, int lAvatarID, long oLastSeen, int lStateChange, int lAllianceID, byte cFlags1, byte cFlags2, int lAllianceCooloff, short nKills, short nDeaths, int lOffenceSpending, int lDefenceSpending, int lDamageInflicted, int lDamageReceived, int lRank, int lExperience, int lTotalKills, int lTotalDeaths, long oJoinTime, int lDefenseValue, int lOffenseValue, int lNeutralValue, float fltDistanceTraveled, float fltDistanceTraveledToday, long oWealth, int lKOTHWins, int lBounty, List<Integer> Blacklist)
     {
         super(lID, geoPosition, true, 0);
         this.strName = strName;
         this.lAvatarID = lAvatarID;
         this.oLastSeen = oLastSeen;
         this.dlyStateChange = new ShortDelay(lStateChange);
-        this.dlyAirdrop = new ShortDelay(lAirdropCooldown);
-        this.dlyProspect = new ShortDelay(lProspectCooldown);
         this.lAllianceID = lAllianceID;
         this.dlyAllianceCooloff = new ShortDelay(lAllianceCooloff);
         this.Blacklist = Blacklist;
@@ -193,18 +177,13 @@ public final class Player extends MapEntity implements LaunchSystemListener
         bAdmin = (cFlags2 & FLAG2_ADMIN) != 0x00;
         bBoss = (cFlags2 & FLAG2_BOSS) != 0x00;
         bMuted = (cFlags2 & FLAG2_MUTED) != 0x00;
-        bChampion = (cFlags2 & FLAG2_CHAMPION) != 0x00;
         bVeteran = (cFlags2 & FLAG2_VET) != 0x00;
-        this.bMember = bMember;
         this.oJoinTime = oJoinTime;
         this.lDefenseValue = lDefenseValue;
         this.lOffenseValue = lOffenseValue;
         this.lNeutralValue = lNeutralValue;
         this.fltDistanceTraveled = fltDistanceTraveled;
         this.fltDistanceTraveledToday = fltDistanceTraveledToday;
-        this.lCityCountLastWeek = lCityCountLastWeek;
-        this.lChampionCount = lChampionCount;
-        this.bAdminMember = bAdminMember;
 
         this.nWeeklyKills = nKills;
         this.nWeeklyDeaths = nDeaths;
@@ -218,6 +197,7 @@ public final class Player extends MapEntity implements LaunchSystemListener
         this.lTotalDeaths = lTotalDeaths;
         this.oWealth = oWealth;
         this.lKOTHWins = lKOTHWins;
+        this.lBounty = lBounty;
         
         //For old config transfer only.
         if(lAllianceID == Alliance.ALLIANCE_ID_UNAFFILIATED)
@@ -235,20 +215,18 @@ public final class Player extends MapEntity implements LaunchSystemListener
         lAvatarID = bb.getInt();
         oLastSeen = bb.getLong();
         dlyStateChange = new ShortDelay(bb);
-        dlyAirdrop = new ShortDelay(bb);
-        dlyProspect = new ShortDelay(bb);
         lAllianceID = bb.getInt();
         byte cFlags1 = bb.get();
         byte cFlags2 = bb.get();
         dlyAllianceCooloff = new ShortDelay(bb);
         lRank = bb.getInt();
         lExperience = bb.getInt();
-        bMember = (bb.get() != 0x00);
         lDefenseValue = bb.getInt();
         lOffenseValue = bb.getInt();
         lNeutralValue = bb.getInt();
         oJoinTime = bb.getLong();
         oWealth = bb.getLong();
+        lBounty = bb.getInt();
         Blacklist = LaunchUtilities.IntListFromData(bb);
 
         bBanned = (cFlags1 & FLAG1_BANNED) != 0x00;
@@ -260,7 +238,6 @@ public final class Player extends MapEntity implements LaunchSystemListener
         bAdmin = (cFlags2 & FLAG2_ADMIN) != 0x00;
         bBoss = (cFlags2 & FLAG2_BOSS) != 0x00;
         bMuted = (cFlags2 & FLAG2_MUTED) != 0x00;
-        bChampion = (cFlags2 & FLAG2_CHAMPION) != 0x00;
         bVeteran = (cFlags2 & FLAG2_VET) != 0x00;
         
         //If there are bytes remaining, this is a "full" image complete with stats.
@@ -276,8 +253,6 @@ public final class Player extends MapEntity implements LaunchSystemListener
             lTotalDeaths = bb.getInt();
             lWealthYesterday = bb.getInt();
             fltDistanceTraveled = bb.getFloat();
-            lCityCountLastWeek = bb.getInt();
-            lChampionCount = bb.getInt();
             lKOTHWins = bb.getInt();
             bHasFullStats = true;
         }
@@ -297,8 +272,6 @@ public final class Player extends MapEntity implements LaunchSystemListener
     {
         dlyStateChange.Tick(lMS);
         dlyAllianceCooloff.Tick(lMS);
-        dlyAirdrop.Tick(lMS);
-        dlyProspect.Tick(lMS);
     }
 
     @Override
@@ -321,20 +294,18 @@ public final class Player extends MapEntity implements LaunchSystemListener
         bb.putInt(lAvatarID);
         bb.putLong(oLastSeen);
         dlyStateChange.GetData(bb);
-        dlyAirdrop.GetData(bb);
-        dlyProspect.GetData(bb);
         bb.putInt(lAllianceID);
         bb.put(GetFlags1());
         bb.put(GetFlags2());
         dlyAllianceCooloff.GetData(bb);
         bb.putInt(lRank);
         bb.putInt(lExperience);
-        bb.put((byte)(bMember? 0xFF : 0x00));
         bb.putInt(lDefenseValue);
         bb.putInt(lOffenseValue);
         bb.putInt(lNeutralValue);
         bb.putLong(oJoinTime);
         bb.putLong(oWealth);
+        bb.putInt(lBounty);
         bb.put(cBlacklistData);
         
         return bb.array();
@@ -356,8 +327,6 @@ public final class Player extends MapEntity implements LaunchSystemListener
         bb.putInt(lTotalDeaths);
         bb.putInt(lWealthYesterday);
         bb.putFloat(fltDistanceTraveled);
-        bb.putInt(lCityCountLastWeek);
-        bb.putInt(lChampionCount);
         bb.putInt(lKOTHWins);
         
         return bb.array();
@@ -486,8 +455,8 @@ public final class Player extends MapEntity implements LaunchSystemListener
         cFlags2 |= bAdmin ? FLAG2_ADMIN : 0x00;
         cFlags2 |= bBoss ? FLAG2_BOSS : 0x00;
         cFlags2 |= bMuted ? FLAG2_MUTED : 0x00;
-        cFlags2 |= bChampion ? FLAG2_CHAMPION : 0x00;
         cFlags2 |= bVeteran ? FLAG2_VET : 0x00;
+        
         return cFlags2;
     }
     
@@ -1207,77 +1176,9 @@ public final class Player extends MapEntity implements LaunchSystemListener
         return "player";
     }
     
-    public boolean IsAMember()
-    {
-        return this.bMember;
-    }
-    
-    public void SetMemberStatus(boolean bMember)
-    {
-        this.bMember = bMember;
-    }
-    
-    public boolean GetCanCallAirdrop()
-    {
-        return dlyAirdrop.Expired();
-    }
-    
-    public boolean GetCanProspect()
-    {
-        return dlyProspect.Expired();
-    }
-    
-    public int GetAirdropCooldownRemaining()
-    {
-        return dlyAirdrop.GetRemaining();
-    }
-    
-    public int GetProspectCooldownRemaining()
-    {
-        return dlyProspect.GetRemaining();
-    }
-    
-    public void CalledAirdrop(int lCooldown)
-    {
-        dlyAirdrop.Set(lCooldown);
-    }
-    
-    public void Prospected(int lCooldown)
-    {
-        dlyProspect.Set(lCooldown);
-    }
-    
     public boolean GetPlayerIsNoob()
     {
         return false;
-    }
-    
-    public void SetCityCountLastWeek(int lCount)
-    {
-        this.lCityCountLastWeek = lCount;
-    }
-    
-    public int GetCityCountLastWeek()
-    {
-        return this.lCityCountLastWeek;
-    }
-    
-    public boolean GetChampion()
-    {
-        return this.bChampion;
-    }
-    
-    public void SetChampion(boolean bChampion)
-    {
-        if(bChampion)
-            this.lChampionCount++;
-        
-        this.bChampion = bChampion;
-    }
-    
-    public int GetChampionCount()
-    {
-        return this.lChampionCount;
     }
     
     public boolean GetVeteran()
@@ -1288,16 +1189,6 @@ public final class Player extends MapEntity implements LaunchSystemListener
     public void SetVeteran(boolean bVeteran)
     {
         this.bVeteran = bVeteran;
-    }
-    
-    public void SetAdminMember(boolean bAdminMember)
-    {
-        this.bAdminMember = bMember;
-    }
-    
-    public boolean GetAdminMember()
-    {
-        return this.bAdminMember;
     }
     
     public boolean Blacklisted(int lPlayerID)
@@ -1351,5 +1242,15 @@ public final class Player extends MapEntity implements LaunchSystemListener
     public void WonKOTH()
     {
         this.lKOTHWins++;
+    }
+    
+    public int GetBounty()
+    {
+        return this.lBounty;
+    }
+    
+    public void SetBounty(int lBounty)
+    {
+        this.lBounty = lBounty;
     }
 }

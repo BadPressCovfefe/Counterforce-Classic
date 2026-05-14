@@ -202,48 +202,6 @@ public class MissileSystemControl extends LaunchView implements SlotListener
                 }
             }
         }
-        else if(host instanceof Tank)
-        {
-            bTank = true;
-            Tank tank = (Tank)host;
-
-            if(tank.GetOwnerID() == game.GetOurPlayerID())
-            {
-                bOwnedByPlayer = true;
-            }
-
-            if(tank.HasMissiles())
-            {
-                systemType = SystemType.TANK_MISSILES;
-            }
-            else
-            {
-                systemType = SystemType.TANK_INTERCEPTORS;
-            }
-
-            system = tank.GetMissileSystem();
-        }
-        else if(host instanceof StoredTank)
-        {
-            bStoredTank = true;
-            StoredTank tank = (StoredTank)host;
-
-            if(tank.GetOwnerID() == game.GetOurPlayerID())
-            {
-                bOwnedByPlayer = true;
-            }
-
-            if(tank.HasMissiles())
-            {
-                systemType = SystemType.STORED_TANK_MISSILES;
-            }
-            else
-            {
-                systemType = SystemType.STORED_TANK_INTERCEPTORS;
-            }
-
-            system = tank.GetMissileSystem();
-        }
 
         Setup();
     }
@@ -279,7 +237,7 @@ public class MissileSystemControl extends LaunchView implements SlotListener
                 {
                     final LaunchDialog launchDialog = new LaunchDialog();
                     launchDialog.SetHeaderPurchase();
-                    launchDialog.SetMessage(context.getString(R.string.sell_confirm, bIsMissiles ? context.getString(R.string.missile_system) : context.getString(R.string.air_defence_system), TextUtilities.GetCostStatement(game.GetSaleValue(GetMissileSystem(), bIsMissiles))));
+                    launchDialog.SetMessage(context.getString(R.string.sell_confirm, bIsMissiles ? context.getString(R.string.missile_system) : context.getString(R.string.air_defence_system), TextUtilities.GetCurrencyString(game.GetSaleValue(GetMissileSystem(), bIsMissiles).get(Resource.ResourceType.WEALTH))));
                     launchDialog.SetOnClickYes(new View.OnClickListener()
                     {
                         @Override
@@ -389,16 +347,11 @@ public class MissileSystemControl extends LaunchView implements SlotListener
         switch(systemType)
         {
             case MISSILE_SITE: host = game.GetMissileSite(lFittedToID); break;
-            case ARTILLERY_GUN: host = game.GetArtilleryGun(lFittedToID); break;
             case SAM_SITE: host = game.GetSAMSite(lFittedToID); break;
             case AIRCRAFT_MISSILES:
             case AIRCRAFT_INTERCEPTORS: host = game.GetAirplane(lFittedToID); break;
             case STORED_AIRCRAFT_MISSILES:
             case STORED_AIRCRAFT_INTERCEPTORS: host = game.GetStoredAirplane(lFittedToID); break;
-            case TANK_MISSILES:
-            case TANK_INTERCEPTORS: host = game.GetTank(lFittedToID); break;
-            case STORED_TANK_MISSILES:
-            case STORED_TANK_INTERCEPTORS: host = game.GetStoredTank(lFittedToID); break;
             case SHIP_INTERCEPTORS:
             case SHIP_MISSILES: host = game.GetShip(lFittedToID); break;
             case SUBMARINE_MISSILES: host = game.GetSubmarine(lFittedToID); break;
@@ -970,8 +923,6 @@ public class MissileSystemControl extends LaunchView implements SlotListener
             return game.GetMissileSite(host.GetID()).GetMissileSystem();
         else if(host instanceof SAMSite)
             return game.GetSAMSite(host.GetID()).GetInterceptorSystem();
-        else if(host instanceof ArtilleryGun)
-            return game.GetArtilleryGun(host.GetID()).GetMissileSystem();
         else if(host instanceof AirplaneInterface)
         {
             if(((AirplaneInterface) host).Flying())
@@ -983,8 +934,6 @@ public class MissileSystemControl extends LaunchView implements SlotListener
                 return bIsMissiles ? game.GetStoredAirplane(host.GetID()).GetMissileSystem() : game.GetStoredAirplane(host.GetID()).GetInterceptorSystem();
             }
         }
-        else if(host instanceof TankInterface)
-            return game.GetTank(host.GetID()).GetMissileSystem();
         else if(host instanceof Ship && bIsMissiles)
             return game.GetShip(host.GetID()).GetMissileSystem();
         else if(host instanceof Ship)

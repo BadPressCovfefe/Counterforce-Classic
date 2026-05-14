@@ -174,12 +174,6 @@ public class Shipyard extends Capturable implements LaunchSystemListener
         Changed(false);
     }
     
-    @Override
-    public void Abandon()
-    {
-        super.Abandon();
-    }
-    
     public Collection<ShipProductionOrder> GetQueue()
     {
         return new ArrayList<>(Queue);

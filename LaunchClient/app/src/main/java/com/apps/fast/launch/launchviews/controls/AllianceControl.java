@@ -17,6 +17,7 @@ import com.apps.fast.launch.launchviews.ChangeTaxRateView;
 import com.apps.fast.launch.launchviews.DiplomacyView;
 import com.apps.fast.launch.launchviews.LaunchView;
 import com.apps.fast.launch.launchviews.PlayerRankView;
+import com.apps.fast.launch.launchviews.RaiseBountyView;
 import com.apps.fast.launch.launchviews.RelationshipView;
 import com.apps.fast.launch.launchviews.UploadAvatarView;
 import com.apps.fast.launch.launchviews.WarView;
@@ -66,6 +67,9 @@ public class AllianceControl extends LaunchView
     private LinearLayout lytAtWarWith;
     private LinearLayout lytAffiliatedWith;
     private LinearLayout lytMembers;
+
+    private TextView txtBounty;
+    private ImageView btnAddBounty;
 
     //Alliance leader controls.
     private LinearLayout btnJoinAlliance;
@@ -147,6 +151,20 @@ public class AllianceControl extends LaunchView
         txtWealth = findViewById(R.id.txtWealth);
         txtTaxRate = findViewById(R.id.txtTaxRate);
         txtMembers = findViewById(R.id.txtMembers);
+
+        txtBounty = findViewById(R.id.txtBounty);
+        btnAddBounty = findViewById(R.id.btnAddBounty);
+
+        txtBounty.setText(TextUtilities.GetCurrencyString(allianceShadow.GetBounty()));
+
+        btnAddBounty.setOnClickListener(new OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                activity.SetView(new RaiseBountyView(game, activity, allianceShadow.GetID(), true));
+            }
+        });
 
         txtWealth.setText(TextUtilities.GetCurrencyString(allianceShadow.GetWealth()));
         TextUtilities.AssignPercentageString(txtTaxRate, allianceShadow.GetTaxRate(), game);

@@ -1,10 +1,14 @@
 package com.apps.fast.launch.components;
 
+import android.graphics.Color;
+
 import com.apps.fast.launch.R;
 import com.apps.fast.launch.activities.MainActivity;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
@@ -27,23 +31,19 @@ public class BlastEffect
     private GeoCoord geoTarget;
     private GoogleMap map;
     private MainActivity activity;
-    private GroundOverlay blastOverlay;
+    private Circle circleBlast;
     private BlastEffect me = this;
-    private LaunchClientGame game;
-    private boolean bAirburst;
     private int animFrame;
-    private final int FRAMES = 6;
+    private final int MAX_FRAMES = 7;
     private final int SECONDS_PER_FRAME = 1;
     private int SECONDS_SINCE_LAST_FRAME = 0;
 
     public BlastEffect(MainActivity activity, GoogleMap map, LaunchClientGame game, Missile missile)
     {
-        this.fltWidth = Math.max(MissileStats.GetMissileEMPRadius(game.GetConfig().GetMissileType(missile.GetType()), bAirburst), MissileStats.GetBlastRadius(game.GetConfig().GetMissileType(missile.GetType()), bAirburst)) * Defs.METRES_PER_KM;
+        this.fltWidth = Math.max(MissileStats.GetMissileEMPRadius(game.GetConfig().GetMissileType(missile.GetType()), missile.GetAirburst()), MissileStats.GetBlastRadius(game.GetConfig().GetMissileType(missile.GetType()), missile.GetAirburst()));
         this.map = map;
         this.activity = activity;
-        this.animFrame = 1;
-        this.game = game;
-        this.bAirburst = missile.GetAirburst();
+        this.animFrame = 0;
         this.geoTarget = game.GetMissileTarget(missile);
 
         Begin();
@@ -51,26 +51,22 @@ public class BlastEffect
 
     public BlastEffect(MainActivity activity, GoogleMap map, LaunchClientGame game, Interceptor interceptor)
     {
-        this.fltWidth = game.GetConfig().GetInterceptorType(interceptor.GetType()).GetBlastRadius() * Defs.METRES_PER_KM;
+        this.fltWidth = game.GetConfig().GetInterceptorType(interceptor.GetType()).GetBlastRadius();
         this.geoTarget = interceptor.GetPosition().GetCopy();
         this.map = map;
         this.activity = activity;
-        this.animFrame = 1;
-        this.game = game;
-        this.bAirburst = false;
+        this.animFrame = 0;
 
         Begin();
     }
 
     public BlastEffect(MainActivity activity, GoogleMap map, LaunchClientGame game, Torpedo torpedo)
     {
-        this.fltWidth = game.GetConfig().GetTorpedoType(torpedo.GetType()).GetBlastRadius() * Defs.METRES_PER_KM;
+        this.fltWidth = game.GetConfig().GetTorpedoType(torpedo.GetType()).GetBlastRadius();
         this.geoTarget = torpedo.GetPosition().GetCopy();
         this.map = map;
         this.activity = activity;
-        this.animFrame = 1;
-        this.game = game;
-        this.bAirburst = false;
+        this.animFrame = 0;
 
         Begin();
     }
@@ -82,12 +78,14 @@ public class BlastEffect
             @Override
             public void run()
             {
-                GroundOverlayOptions blastEffect = new GroundOverlayOptions();
-                blastEffect.position(Utilities.GetLatLng(geoTarget), fltWidth);
-                blastEffect.anchor(0.5f, 0.5f);
-                blastEffect.image(GetStageDrawable());
+                CircleOptions optionsBlast = new CircleOptions();
+                optionsBlast.center(Utilities.GetLatLng(geoTarget));
+                optionsBlast.radius(fltWidth * Defs.METRES_PER_KM);
+                optionsBlast.fillColor(Color.argb(0, 255, 255, 255));
+                optionsBlast.strokeWidth(0.0f);
+                optionsBlast.zIndex(1000f);
 
-                blastOverlay = map.addGroundOverlay(blastEffect);
+                circleBlast = map.addCircle(optionsBlast);
             }
         });
     }
@@ -110,26 +108,32 @@ public class BlastEffect
             @Override
             public void run()
             {
-                if(animFrame < FRAMES)
+                if(animFrame < MAX_FRAMES)
                 {
-                    if(blastOverlay != null)
+                    if(circleBlast != null)
                     {
                         animFrame++;
-                        blastOverlay.setImage(GetStageDrawable());
+                        circleBlast.setFillColor(GetStageColor());
                     }
                 }
                 else
                 {
-                    blastOverlay.remove();
-                    //activity.BlastAnimationFinished(me);
+                    circleBlast.remove();
+                    activity.BlastAnimationFinished(me);
                 }
             }
         });
     }
 
-    public BitmapDescriptor GetStageDrawable()
+    public int GetStageColor()
     {
-        return BitmapDescriptorFactory.fromResource(R.drawable.todo);
+        // Clamp frame
+        int frame = Math.max(1, Math.min(animFrame, MAX_FRAMES));
+
+        // Fade OUT: 255 → 0
+        int alpha = 255 - (int)((frame - 1) * (255.0 / (MAX_FRAMES - 1)));
+
+        return Color.argb(alpha, 255, 255, 255);
     }
 
     public GeoCoord GetPosition()

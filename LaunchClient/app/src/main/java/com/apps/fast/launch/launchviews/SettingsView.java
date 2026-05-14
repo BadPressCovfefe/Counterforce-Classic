@@ -36,7 +36,6 @@ import launch.utilities.LaunchUtilities;
  */
 public class SettingsView extends LaunchView
 {
-
     private ImageView imgShowMap;
     private ImageView imgShowSatellite;
     private ImageView imgShowOnline;
@@ -89,6 +88,7 @@ public class SettingsView extends LaunchView
     private CheckBox chkDisableAudio;
     private CheckBox chkInitialZoom;
     private CheckBox chkHints;
+    private CheckBox chkBlastRadiiClickable;
 
     private TextView txtClustering;
     private TextView txtDefaultZoom;
@@ -183,6 +183,7 @@ public class SettingsView extends LaunchView
         chkDisableAudio = findViewById(R.id.chkDisableAudio);
         chkInitialZoom = findViewById(R.id.chkInitialZoom);
         chkHints = findViewById(R.id.chkHints);
+        chkBlastRadiiClickable = findViewById(R.id.chkBlastRadiiClickable);
 
         txtClustering = findViewById(R.id.txtClustering);
         txtDefaultZoom = findViewById(R.id.txtDefaultZoom);
@@ -755,6 +756,20 @@ public class SettingsView extends LaunchView
                 SharedPreferences.Editor editor = context.getSharedPreferences(ClientDefs.SETTINGS, Context.MODE_PRIVATE).edit();
                 editor.putBoolean(ClientDefs.SETTINGS_SHOW_HINTS, b);
                 editor.commit();
+            }
+        });
+
+        chkBlastRadiiClickable.setChecked(sharedPreferences.getBoolean(ClientDefs.SETTINGS_BLAST_RADII_CLICKABLE, ClientDefs.SETTINGS_BLAST_RADII_CLICKABLE_DEFAULT));
+
+        chkBlastRadiiClickable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b)
+            {
+                SharedPreferences.Editor editor = context.getSharedPreferences(ClientDefs.SETTINGS, Context.MODE_PRIVATE).edit();
+                editor.putBoolean(ClientDefs.SETTINGS_BLAST_RADII_CLICKABLE, b);
+                editor.commit();
+                activity.ToggleBlastRadiiClickable(b);
             }
         });
 

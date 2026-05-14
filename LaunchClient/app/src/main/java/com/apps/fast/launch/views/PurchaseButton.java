@@ -19,6 +19,7 @@ import launch.game.entities.Armory;
 import launch.game.entities.CommandPost;
 import launch.game.entities.LandUnit;
 import launch.game.entities.LaunchEntity;
+import launch.game.entities.OreMine;
 import launch.game.entities.Shipyard;
 import launch.game.entities.Structure;
 import launch.game.entities.Warehouse;
@@ -167,6 +168,20 @@ public class PurchaseButton extends LinearLayout
             }
             break;
 
+            case HEADQUARTERS:
+            {
+                bRespectStructureSeparation = true;
+                unitIcon.setImageResource(R.drawable.build_headquarters);
+
+                if(game.GetNextCommandPostCost(game.GetOurPlayer()).get(ResourceType.WEALTH) != null)
+                {
+                    oCost = game.GetNextCommandPostCost(game.GetOurPlayer()).get(ResourceType.WEALTH);
+                }
+
+                txtDescription.setText(context.getString(R.string.desc_command_post));
+            }
+            break;
+
             case AIRBASE:
             {
                 bRespectStructureSeparation = true;
@@ -182,6 +197,42 @@ public class PurchaseButton extends LinearLayout
                 unitIcon.setImageResource(R.drawable.build_bank);
                 oCost = Defs.WAREHOUSE_STRUCTURE_COST.get(ResourceType.WEALTH);
                 txtDescription.setText(context.getString(R.string.desc_bank));
+            }
+            break;
+
+            case SOLAR_PANEL:
+            {
+                bRespectStructureSeparation = true;
+                unitIcon.setImageResource(R.drawable.build_solar_panel);
+                oCost = Defs.SOLAR_PANEL_STRUCTURE_COST.get(ResourceType.WEALTH);
+                txtDescription.setText(context.getString(R.string.desc_solar_panel));
+            }
+            break;
+
+            case FARM:
+            {
+                bRespectStructureSeparation = true;
+                unitIcon.setImageResource(R.drawable.build_farm);
+                oCost = Defs.FARM_STRUCTURE_COST.get(ResourceType.WEALTH);
+                txtDescription.setText(context.getString(R.string.desc_farm));
+            }
+            break;
+
+            case ORE_MINE:
+            {
+                bRespectStructureSeparation = true;
+                unitIcon.setImageResource(R.drawable.build_ore_mine);
+                oCost = Defs.ORE_MINE_STRUCTURE_COST.get(ResourceType.WEALTH);
+                txtDescription.setText(context.getString(R.string.desc_ore_mine));
+            }
+            break;
+
+            case LOGISTICS_DEPOT:
+            {
+                bRespectStructureSeparation = true;
+                unitIcon.setImageResource(R.drawable.build_logistics_depot);
+                oCost = Defs.LOGISTICS_DEPOT_STRUCTURE_COST.get(ResourceType.WEALTH);
+                txtDescription.setText(context.getString(R.string.desc_logistics_depot));
             }
             break;
 
@@ -361,9 +412,34 @@ public class PurchaseButton extends LinearLayout
 
     private void HandlePurchase()
     {
+        boolean bFarmsTooClose = false;
+
+        if(entityType == EntityType.FARM && pointerOrigin.GetType() == EntityType.PLAYER)
+        {
+            for(OreMine oreMine : game.GetOreMines())
+            {
+                if(oreMine.GetEntityType() == EntityType.FARM)
+                {
+                    if(oreMine.GetPosition().DistanceTo(game.GetOurPlayer().GetPosition()) <= Defs.FARM_SEPARATION_DISTANCE)
+                    {
+                        bFarmsTooClose = true;
+                        break;
+                    }
+                }
+            }
+        }
+
         if(bTooCloseToStructures && pointerOrigin.GetType() != EntityType.COMMAND_POST)
         {
             activity.ShowBasicOKDialog(context.getString(R.string.cannot_build));
+        }
+        else if(!game.GetPlayerHasHQ(game.GetOurPlayer()) && entityType != EntityType.HEADQUARTERS)
+        {
+            activity.ShowBasicOKDialog(context.getString(R.string.must_build_hq));
+        }
+        else if(bFarmsTooClose)
+        {
+            activity.ShowBasicOKDialog(context.getString(R.string.cannot_build_farm));
         }
         else if(bHostOffline)
         {
@@ -392,7 +468,15 @@ public class PurchaseButton extends LinearLayout
 
                             switch(pointerOrigin.GetType())
                             {
-                                case PLAYER: game.ConstructStructure(entityType, resourceType, LaunchEntity.ID_NONE, null, false); break;
+                                case PLAYER:
+                                {
+                                    //We don't want HQ passed to the server. It's only used to make the PurchaseButton look different.
+                                    if(entityType == EntityType.HEADQUARTERS)
+                                        entityType = EntityType.COMMAND_POST;
+
+                                    game.ConstructStructure(entityType, resourceType, LaunchEntity.ID_NONE, null, false);
+                                }
+                                break;
 
                                 case ARMORY: game.PurchaseTank(pointerOrigin.GetID(), entityType, false); break;
 

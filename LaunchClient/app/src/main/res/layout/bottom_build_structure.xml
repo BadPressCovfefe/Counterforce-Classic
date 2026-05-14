@@ -50,6 +50,17 @@
                 android:textColor="?attr/BadColour"
                 android:visibility="gone" />
 
+            <TextView
+                android:id="@+id/txtTooClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:text="@string/too_close_to_structures"
+                android:textColor="?attr/BadColour"
+                android:visibility="gone" />
+
             <LinearLayout
                 android:id="@+id/lytControls"
                 android:layout_width="match_parent"

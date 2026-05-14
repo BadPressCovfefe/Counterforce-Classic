@@ -27,7 +27,7 @@ import launch.game.entities.Distributor;
 import launch.game.entities.Infantry;
 import launch.game.entities.LaunchEntity;
 import launch.game.entities.Processor;
-import launch.game.entities.ScrapYard;
+import launch.game.entities.LogisticsDepot;
 import launch.game.entities.Ship;
 import launch.game.entities.Submarine;
 import launch.game.entities.Tank;
@@ -86,27 +86,14 @@ public class MapSelectView extends LaunchView
                 final List<MissileSite> OurMissileSites = new ArrayList<>();
                 final List<SAMSite> OurABMs = new ArrayList<>();
                 final List<MissileSite> OurICBMSilos = new ArrayList<>();
-                final List<OreMine> OurOreMines = new ArrayList<>();
-                final List<RadarStation> OurRadarStations = new ArrayList<>();
                 final List<CommandPost> OurCommandPosts = new ArrayList<>();
                 final List<Airbase> OurAirbases = new ArrayList<>();
                 final List<Armory> OurArmory = new ArrayList<>();
-                final List<Bank> OurBanks = new ArrayList<>();
                 final List<Warehouse> OurWarehouses = new ArrayList<>();
-                final List<ScrapYard> OurScrapYards = new ArrayList<>();
-                final List<Processor> OurProcessors = new ArrayList<>();
-                final List<Distributor> OurDistributors = new ArrayList<>();
                 final List<Airplane> OurAircrafts = new ArrayList<>();
                 final List<Infantry> OurInfantry = new ArrayList<>();
                 final List<Ship> OurShips = new ArrayList<>();
-                final List<CargoTruck> OurCaravans = new ArrayList<>();
-                final List<CargoTruck> OurCargoTrucks = new ArrayList<>();
-                final List<CargoTruck> OurMiningTrucks = new ArrayList<>();
                 final List<Tank> OurTanks = new ArrayList<>();
-                final List<Tank> OurSPAAGs = new ArrayList<>();
-                final List<Tank> OurMissileTanks = new ArrayList<>();
-                final List<Tank> OurSAMTanks = new ArrayList<>();
-                final List<Tank> OurHowitzers = new ArrayList<>();
                 final List<Submarine> OurSubmarines = new ArrayList<>();
                 final List<MapEntity> EverythingElse = new ArrayList<>();
 
@@ -115,26 +102,16 @@ public class MapSelectView extends LaunchView
                 FillPlayerOrEverythingElseContainer(game.GetNormalMissileSites(), OurMissileSites, EverythingElse);
                 FillPlayerOrEverythingElseContainer(game.GetABMSites(), OurABMs, EverythingElse);
                 FillPlayerOrEverythingElseContainer(game.GetICBMSilos(), OurICBMSilos, EverythingElse);
-                FillPlayerOrEverythingElseContainer(game.GetOreMines(), OurOreMines, EverythingElse);
-                FillPlayerOrEverythingElseContainer(game.GetRadarStations(), OurRadarStations, EverythingElse);
                 FillPlayerOrEverythingElseContainer(game.GetCommandPosts(), OurCommandPosts, EverythingElse);
                 FillPlayerOrEverythingElseContainer(game.GetAirbases(), OurAirbases, EverythingElse);
                 FillPlayerOrEverythingElseContainer(game.GetArmories(), OurArmory, EverythingElse);
-                FillPlayerOrEverythingElseContainer(game.GetBanks(), OurBanks, EverythingElse);
                 FillPlayerOrEverythingElseContainer(game.GetWarehouses(), OurWarehouses, EverythingElse);
                 FillPlayerOrEverythingElseContainer(game.GetAirplanes(), OurAircrafts, EverythingElse);
                 FillPlayerOrEverythingElseContainer(game.GetSubmarines(), OurSubmarines, EverythingElse);
                 FillPlayerOrEverythingElseContainer(game.GetShips(), OurShips, EverythingElse);
                 FillPlayerOrEverythingElseContainer(game.GetInfantries(), OurInfantry, EverythingElse);
                 FillPlayerOrEverythingElseContainer(game.GetArtilleryGuns(), OurArtilleryGuns, EverythingElse);
-                FillPlayerOrEverythingElseContainer(game.GetScrapYards(), OurScrapYards, EverythingElse);
-                FillPlayerOrEverythingElseContainer(game.GetProcessors(), OurProcessors, EverythingElse);
-                FillPlayerOrEverythingElseContainer(game.GetDistributors(), OurDistributors, EverythingElse);
-                FillPlayerOrEverythingElseContainer(game.GetMainBattleTanks(), OurTanks, EverythingElse);
-                FillPlayerOrEverythingElseContainer(game.GetSPAAGs(), OurSPAAGs, EverythingElse);
-                FillPlayerOrEverythingElseContainer(game.GetMissileTanks(), OurMissileTanks, EverythingElse);
-                FillPlayerOrEverythingElseContainer(game.GetInterceptorTanks(), OurSAMTanks, EverythingElse);
-                FillPlayerOrEverythingElseContainer(game.GetHowitzers(), OurHowitzers, EverythingElse);
+                FillPlayerOrEverythingElseContainer(game.GetTanks(), OurTanks, EverythingElse);
                 FillEverythingElseContainer(game.GetPlayers(), EverythingElse);
                 FillEverythingElseContainer(game.GetMissiles(), EverythingElse);
                 FillEverythingElseContainer(game.GetInterceptors(), EverythingElse);
@@ -189,52 +166,16 @@ public class MapSelectView extends LaunchView
                             AllEntities.addAll(OurICBMSilos);
                         }
 
-                        if(OurOreMines.size() > 0)
-                        {
-                            lytGroups.addView(new StructureMaintenanceView(game, activity, OurOreMines));
-                            AllEntities.addAll(OurOreMines);
-                        }
-
-                        if(OurRadarStations.size() > 0)
-                        {
-                            lytGroups.addView(new StructureMaintenanceView(game, activity, OurRadarStations));
-                            AllEntities.addAll(OurRadarStations);
-                        }
-
                         if(OurCommandPosts.size() > 0)
                         {
                             lytGroups.addView(new StructureMaintenanceView(game, activity, OurCommandPosts));
                             AllEntities.addAll(OurCommandPosts);
                         }
 
-                        if(OurScrapYards.size() > 0)
-                        {
-                            lytGroups.addView(new StructureMaintenanceView(game, activity, OurScrapYards));
-                            AllEntities.addAll(OurScrapYards);
-                        }
-
-                        if(OurProcessors.size() > 0)
-                        {
-                            lytGroups.addView(new StructureMaintenanceView(game, activity, OurProcessors));
-                            AllEntities.addAll(OurProcessors);
-                        }
-
-                        if(OurDistributors.size() > 0)
-                        {
-                            lytGroups.addView(new StructureMaintenanceView(game, activity, OurDistributors));
-                            AllEntities.addAll(OurDistributors);
-                        }
-
                         if(OurTanks.size() > 0)
                         {
                             lytGroups.addView(new TankMaintenanceView(game, activity, OurTanks));
                             AllEntities.addAll(OurTanks);
-                        }
-
-                        if(OurSPAAGs.size() > 0)
-                        {
-                            lytGroups.addView(new TankMaintenanceView(game, activity, OurSPAAGs));
-                            AllEntities.addAll(OurSPAAGs);
                         }
 
                         if(OurAirbases.size() > 0)
@@ -247,12 +188,6 @@ public class MapSelectView extends LaunchView
                         {
                             lytGroups.addView(new StructureMaintenanceView(game, activity, OurArmory));
                             AllEntities.addAll(OurArmory);
-                        }
-
-                        if(OurBanks.size() > 0)
-                        {
-                            lytGroups.addView(new StructureMaintenanceView(game, activity, OurBanks));
-                            AllEntities.addAll(OurBanks);
                         }
 
                         if(OurWarehouses.size() > 0)
@@ -277,24 +212,6 @@ public class MapSelectView extends LaunchView
                         {
                             lytGroups.addView(new SubmarineMaintenanceView(game, activity, OurSubmarines));
                             AllEntities.addAll(OurSubmarines);
-                        }
-
-                        if(OurMissileTanks.size() > 0)
-                        {
-                            lytGroups.addView(new TankMaintenanceView(game, activity, OurMissileTanks));
-                            AllEntities.addAll(OurMissileTanks);
-                        }
-
-                        if(OurSAMTanks.size() > 0)
-                        {
-                            lytGroups.addView(new TankMaintenanceView(game, activity, OurSAMTanks));
-                            AllEntities.addAll(OurSAMTanks);
-                        }
-
-                        if(OurHowitzers.size() > 0)
-                        {
-                            lytGroups.addView(new TankMaintenanceView(game, activity, OurHowitzers));
-                            AllEntities.addAll(OurHowitzers);
                         }
 
                         for(final MapEntity entity : EverythingElse)

@@ -30,6 +30,7 @@ import launch.game.entities.ResourceDeposit;
 import launch.game.entities.Structure;
 import launch.game.entities.LaunchEntity;
 import launch.game.entities.Structure;
+import launch.game.entities.conceptuals.Resource;
 import launch.game.entities.conceptuals.Resource.ResourceType;
 import launch.game.entities.conceptuals.TerrainData;
 
@@ -39,6 +40,7 @@ public class BottomBuildStructure extends LaunchView
     private TextView txtBuildStructure;
     private LinearLayout btnBuildStructure;
     private TextView txtTooFar;
+    private TextView txtTooClose;
     private EntityType type;
     private ResourceType resourceType;
     private GoogleMap map;
@@ -100,7 +102,7 @@ public class BottomBuildStructure extends LaunchView
 
                         final LaunchDialog launchDialog = new LaunchDialog();
                         launchDialog.SetHeaderConstruct();
-                        launchDialog.SetMessage(context.getString(R.string.construct_confirm, TextUtilities.GetEntityTypeName(type), TextUtilities.GetCostStatement(costsToUse)));
+                        launchDialog.SetMessage(context.getString(R.string.construct_confirm, TextUtilities.GetEntityTypeName(type), TextUtilities.GetCurrencyString(costsToUse.get(Resource.ResourceType.WEALTH))));
                         launchDialog.SetOnClickYes(new OnClickListener()
                         {
                             @Override
@@ -214,6 +216,7 @@ public class BottomBuildStructure extends LaunchView
                     public void run()
                     {
                         txtTooFar.setVisibility(bTooFar ? VISIBLE : GONE);
+                        txtTooClose.setVisibility(bTooClose ? VISIBLE : GONE);
                     }
                 });
 

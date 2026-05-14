@@ -114,7 +114,7 @@ public class AircraftSystemControl extends LaunchView
             if(host instanceof Airbase)
             {
                 lytAirbaseOptions.setVisibility(VISIBLE);
-                lytShipOptions.setVisibility(VISIBLE);
+                lytShipOptions.setVisibility(GONE);
             }
             else
             {
@@ -376,7 +376,7 @@ public class AircraftSystemControl extends LaunchView
                         {
                             final LaunchDialog launchDialog = new LaunchDialog();
                             launchDialog.SetHeaderPurchase();
-                            launchDialog.SetMessage(context.getString(R.string.sell_confirm, TextUtilities.GetEntityTypeAndName(aircraft, game), TextUtilities.GetCostStatement(game.GetSaleValue(game.GetAircraftValue(aircraft)))));
+                            launchDialog.SetMessage(context.getString(R.string.sell_confirm, TextUtilities.GetEntityTypeAndName(aircraft, game), TextUtilities.GetCurrencyString(game.GetSaleValue(game.GetAircraftValue(aircraft)).get(Resource.ResourceType.WEALTH))));
                             launchDialog.SetOnClickYes(new OnClickListener()
                             {
                                 @Override

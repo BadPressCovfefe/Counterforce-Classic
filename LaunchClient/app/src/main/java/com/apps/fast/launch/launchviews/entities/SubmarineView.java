@@ -31,6 +31,7 @@ import launch.game.entities.Airbase;
 import launch.game.entities.LaunchEntity;
 import launch.game.entities.Movable;
 import launch.game.entities.Submarine;
+import launch.game.entities.conceptuals.Resource;
 import launch.game.systems.CargoSystem;
 import launch.game.systems.LaunchSystem;
 import launch.utilities.LaunchUtilities;
@@ -44,13 +45,13 @@ public class SubmarineView extends LaunchView implements LaunchUICommon.Submarin
 
     private TextView txtSubmarineTitle;
     protected ImageView imgSubmarine;
+    protected ImageView imgSell;
     private TextView txtHP;
     private TextView txtName;
     protected TextView txtNameButton;
     protected LinearLayout lytNameEdit;
     protected EditText txtNameEdit;
     protected LinearLayout btnApplyName;
-
     private LinearLayout lytControls; //Should only be visible to the owner.
     private LinearLayout btnMove;
     private LinearLayout btnStop;
@@ -62,17 +63,16 @@ public class SubmarineView extends LaunchView implements LaunchUICommon.Submarin
     private TextView txtFuelTitle;
     private TextView txtRange;
     private TextView txtFuel;
+    private View viewBottom;
     protected LinearLayout lytSystems; //Should only be visible to the owner.
     private TextView txtMissiles; //Clicking this should open a MissileSystemControl.
     private TextView txtTorpedoes;
     private TextView txtICBMs;
-
+    private TextView txtSubmarineStatus;
     private TextView txtToTarget;
+    private TextView txtSystems;
     private View viewToTarget;
-
     private boolean bOwnedByPlayer;
-    private boolean bInPort;
-    private GeoCoord geoPosition;
 
     public SubmarineView(LaunchClientGame game, MainActivity activity, Submarine submarine)
     {
@@ -80,8 +80,6 @@ public class SubmarineView extends LaunchView implements LaunchUICommon.Submarin
         this.submarineShadow = submarine;
 
         bOwnedByPlayer = submarineShadow.GetOwnerID() == game.GetOurPlayerID();
-
-        geoPosition = submarineShadow.GetPosition();
 
         Setup();
     }
@@ -95,6 +93,7 @@ public class SubmarineView extends LaunchView implements LaunchUICommon.Submarin
 
         txtSubmarineTitle = findViewById(R.id.txtSubmarineTitle);
         imgSubmarine = findViewById(R.id.imgSubmarine);
+        imgSell = findViewById(R.id.imgSell);
         txtName = findViewById(R.id.txtName);
         txtNameButton = findViewById(R.id.txtNameButton);
         lytNameEdit = findViewById(R.id.lytNameEdit);
@@ -119,12 +118,24 @@ public class SubmarineView extends LaunchView implements LaunchUICommon.Submarin
         txtMissiles = findViewById(R.id.txtMissiles);
         txtTorpedoes = findViewById(R.id.txtTorpedoes);
         txtICBMs = findViewById(R.id.txtICBMs);
+        txtSubmarineStatus = findViewById(R.id.txtSubmarineStatus);
 
         txtToTarget = findViewById(R.id.txtToTarget);
         viewToTarget = findViewById(R.id.viewToTarget);
+        viewBottom = findViewById(R.id.viewBottom);
+        txtSystems = findViewById(R.id.txtSystems);
 
         View viewAdmin = (View)findViewById(R.id.viewAdmin);
         LinearLayout btnAdminDelete = (LinearLayout)findViewById(R.id.btnAdminDelete);
+
+        if(game.EntityIsFriendly(submarineShadow, game.GetOurPlayer()))
+        {
+            TextUtilities.AssignNavalStatusString(txtSubmarineStatus, submarineShadow);
+        }
+        else
+        {
+            txtSubmarineStatus.setVisibility(GONE);
+        }
 
         if(game.GetOurPlayer().GetIsAnAdmin())
         {
@@ -172,6 +183,8 @@ public class SubmarineView extends LaunchView implements LaunchUICommon.Submarin
         lytUnitControls.removeAllViews();
         lytUnitControls.addView(controls);
 
+        controls.setVisibility(GONE);
+
         if(submarineShadow.GetGeoTarget() != null && game.EntityIsFriendly(submarineShadow, game.GetOurPlayer()) && submarineShadow.GetMoveOrders() != Movable.MoveOrders.WAIT)
         {
             viewToTarget.setVisibility(VISIBLE);
@@ -215,20 +228,17 @@ public class SubmarineView extends LaunchView implements LaunchUICommon.Submarin
         txtRange.setText(submarineShadow.GetNuclear() ? context.getString(R.string.infinite) : TextUtilities.GetDistanceStringFromKM(game.GetFuelableRange(submarineShadow.GetCurrentFuel(), Defs.NAVAL_RANGE)));
         txtFuel.setText(submarineShadow.GetNuclear() ? context.getString(R.string.infinite) : TextUtilities.GetPercentStringFromFraction(submarineShadow.GetCurrentFuel()));
 
-        if(game.EntityIsFriendly(submarineShadow, game.GetOurPlayer()) && game.ShipInPort(submarineShadow))
-        {
-            bInPort = true;
-            txtToTarget.setVisibility(VISIBLE);
-            txtToTarget.setTextColor(Utilities.ColourFromAttr(context, R.attr.InfoColour));
-            txtToTarget.setText(context.getString(R.string.in_port_repairing));
-        }
-        else
-        {
-            txtToTarget.setVisibility(GONE);
-        }
-
         if(bOwnedByPlayer)
         {
+            if(submarineShadow.GetMoveOrders() != Movable.MoveOrders.WAIT)
+            {
+                btnStop.setVisibility(VISIBLE);
+            }
+            else
+            {
+                btnStop.setVisibility(GONE);
+            }
+
             txtName.setVisibility(GONE);
 
             if(submarineShadow.HasMissiles())
@@ -397,40 +407,50 @@ public class SubmarineView extends LaunchView implements LaunchUICommon.Submarin
                 @Override
                 public void onClick(View view)
                 {
-                    if(!bInPort)
+                    final LaunchDialog launchDialog = new LaunchDialog();
+                    launchDialog.SetHeaderLaunch();
+                    launchDialog.SetMessage(context.getString(R.string.decommission_confirm, TextUtilities.GetEntityTypeName(submarineShadow.GetEntityType()), TextUtilities.GetCurrencyString(game.GetSaleValue(Defs.GetNavalBuildCost(submarineShadow.GetEntityType())).get(Resource.ResourceType.WEALTH)), TextUtilities.GetTimeAmount(Defs.DECOMMISSION_TIME)));
+                    launchDialog.SetOnClickYes(new OnClickListener()
                     {
-                        activity.ShowBasicOKDialog(context.getString(R.string.not_in_port_cant_sell, TextUtilities.GetDistanceStringFromKM(Defs.IN_PORT_RADIUS)));
-                    }
-                    else if(game.InBattle(game.GetOurPlayer()))
-                    {
-                        activity.ShowBasicOKDialog(context.getString(R.string.in_battle_cant_sell));
-                    }
-                    else
-                    {
-                        final LaunchDialog launchDialog = new LaunchDialog();
-                        launchDialog.SetHeaderLaunch();
-                        launchDialog.SetMessage(context.getString(R.string.sell_naval_vessel_confirm, TextUtilities.GetCostStatement(game.GetNavalVesselValue(submarineShadow))));
-                        launchDialog.SetOnClickYes(new OnClickListener()
+                        @Override
+                        public void onClick(View view)
                         {
-                            @Override
-                            public void onClick(View view)
-                            {
-                                launchDialog.dismiss();
-                                game.SellEntity(submarineShadow.GetPointer());
-                            }
-                        });
-                        launchDialog.SetOnClickNo(new OnClickListener()
+                            launchDialog.dismiss();
+                            game.SellEntity(submarineShadow.GetPointer());
+                        }
+                    });
+                    launchDialog.SetOnClickNo(new OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View view)
                         {
-                            @Override
-                            public void onClick(View view)
-                            {
-                                launchDialog.dismiss();
-                            }
-                        });
-                        launchDialog.show(activity.getFragmentManager(), "");
-                    }
+                            launchDialog.dismiss();
+                        }
+                    });
+                    launchDialog.show(activity.getFragmentManager(), "");
                 }
             });
+
+            if(submarineShadow.GetSelling())
+            {
+                txtName.setVisibility(GONE);
+                txtNameEdit.setVisibility(GONE);
+                txtNameButton.setVisibility(GONE);
+                viewBottom.setVisibility(GONE);
+                btnMove.setVisibility(GONE);
+                btnSonar.setVisibility(GONE);
+                btnStop.setVisibility(GONE);
+                lytControls.setVisibility(GONE);
+                txtMissiles.setVisibility(GONE);
+                txtTorpedoes.setVisibility(GONE);
+                txtICBMs.setVisibility(GONE);
+                txtSystems.setVisibility(GONE);
+                imgSell.setImageResource(R.drawable.button_cancel_decommission);
+            }
+            else
+            {
+                imgSell.setImageResource(R.drawable.button_decommission);
+            }
         }
         else
         {
@@ -451,8 +471,6 @@ public class SubmarineView extends LaunchView implements LaunchUICommon.Submarin
     {
         super.Update();
 
-        geoPosition = submarineShadow.GetPosition();
-
         activity.runOnUiThread(new Runnable()
         {
             @Override
@@ -466,6 +484,15 @@ public class SubmarineView extends LaunchView implements LaunchUICommon.Submarin
                     String strName = Utilities.GetEntityName(context, submarine);
                     txtName.setText(strName);
                     txtNameButton.setText(strName);
+
+                    if(game.EntityIsFriendly(submarine, game.GetOurPlayer()))
+                    {
+                        TextUtilities.AssignNavalStatusString(txtSubmarineStatus, submarine);
+                    }
+                    else
+                    {
+                        txtSubmarineStatus.setVisibility(GONE);
+                    }
 
                     if(submarine.GetGeoTarget() != null  && game.EntityIsFriendly(submarine, game.GetOurPlayer()) && submarine.GetMoveOrders() != Movable.MoveOrders.WAIT && game.GetTravelTime(Defs.NAVAL_SPEED, submarine.GetPosition(), game.GetMovableTarget(submarine)) > 0)
                     {
@@ -492,22 +519,40 @@ public class SubmarineView extends LaunchView implements LaunchUICommon.Submarin
                         txtToTarget.setVisibility(GONE);
                     }
 
-                    if(!submarineShadow.AtFullHealth() && game.EntityIsFriendly(submarineShadow, game.GetOurPlayer()) && game.ShipInPort(submarineShadow))
-                    {
-                        bInPort = true;
-                        txtToTarget.setVisibility(VISIBLE);
-                        txtToTarget.setTextColor(Utilities.ColourFromAttr(context, R.attr.InfoColour));
-                        txtToTarget.setText(context.getString(R.string.in_port_repairing));
-                    }
-                    else
-                    {
-                        txtToTarget.setVisibility(GONE);
-                    }
-
                     if(submarine.GetOwnedBy(game.GetOurPlayerID()))
                     {
+                        if(submarine.GetMoveOrders() != Movable.MoveOrders.WAIT)
+                        {
+                            btnStop.setVisibility(VISIBLE);
+                        }
+                        else
+                        {
+                            btnStop.setVisibility(GONE);
+                        }
+
                         txtRange.setText(submarine.GetNuclear() ? context.getString(R.string.infinite) : TextUtilities.GetDistanceStringFromKM(game.GetFuelableRange(submarine.GetCurrentFuel(), Defs.NAVAL_RANGE)));
                         txtFuel.setText(submarine.GetNuclear() ? context.getString(R.string.infinite) : TextUtilities.GetPercentStringFromFraction(submarine.GetCurrentFuel()));
+
+                        if(submarine.GetSelling())
+                        {
+                            txtName.setVisibility(GONE);
+                            txtNameEdit.setVisibility(GONE);
+                            txtNameButton.setVisibility(GONE);
+                            viewBottom.setVisibility(GONE);
+                            btnMove.setVisibility(GONE);
+                            btnSonar.setVisibility(GONE);
+                            btnStop.setVisibility(GONE);
+                            lytControls.setVisibility(GONE);
+                            txtMissiles.setVisibility(GONE);
+                            txtTorpedoes.setVisibility(GONE);
+                            txtICBMs.setVisibility(GONE);
+                            txtSystems.setVisibility(GONE);
+                            imgSell.setImageResource(R.drawable.button_cancel_decommission);
+                        }
+                        else
+                        {
+                            imgSell.setImageResource(R.drawable.button_decommission);
+                        }
                     }
                 }
                 else

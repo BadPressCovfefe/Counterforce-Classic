@@ -1023,6 +1023,19 @@ public class LaunchServerSession extends LaunchSession
                         }
                         break;
                             
+                        case AddBounty:
+                        {
+                            int lAmount = bb.getInt();
+                            int lReceiverID = bb.getInt();
+                            boolean bPlayer = (bb.get() != 0x00);
+                            
+                            HandleSimpleResult(tobComm, lInstanceNumber,
+                                    gameInterface.AddBounty(AuthenticatedUser.GetPlayerID(), lReceiverID, lAmount, bPlayer),
+                                    "Resources given.",
+                                    "Could not give resources.");
+                        }
+                        break;
+                            
                         case ToggleAircraftReturn:
                         {
                             EntityPointer aircraft = new EntityPointer(bb);
@@ -1406,30 +1419,21 @@ public class LaunchServerSession extends LaunchSession
                         }
                         break;
                             
-                        /*case RadarRangeUpgrade:
-                        {
-                            HandleSimpleResult(tobComm, lInstanceNumber,
-                                    gameInterface.RadarRangeUpgrade(AuthenticatedUser.GetPlayerID(), lInstanceNumber),
-                                    "Radar range upgraded.",
-                                    "Could not upgrade radar range.");
-                        }
-                        break;
-                            
-                        case RadarBoostUpgrade:
-                        {
-                            HandleSimpleResult(tobComm, lInstanceNumber,
-                                    gameInterface.RadarBoostUpgrade(AuthenticatedUser.GetPlayerID(), lInstanceNumber),
-                                    "Radar accuracy boost upgraded.",
-                                    "Could not upgrade radar accuracy boost.");
-                        }
-                        break;*/
-                            
                         case CommandPostHPUpgrade:
                         {
                             HandleSimpleResult(tobComm, lInstanceNumber,
                                     gameInterface.CommandPostHPUpgrade(AuthenticatedUser.GetPlayerID(), lInstanceNumber),
                                     "CommandPost HP upgraded.",
                                     "Could not upgrade commandPost hp.");
+                        }
+                        break;
+                            
+                        case DepotCollect:
+                        {
+                            HandleSimpleResult(tobComm, lInstanceNumber,
+                                    gameInterface.DepotCollect(AuthenticatedUser.GetPlayerID(), lInstanceNumber),
+                                    "Depot collected",
+                                    "Depot could not collect.");
                         }
                         break;
                             
@@ -1780,48 +1784,6 @@ public class LaunchServerSession extends LaunchSession
                             tobComm.SendObject(SentryGun, entity.GetID(), 0, entity.GetData(lTheirPlayerID));
                         }
 
-                        //Send all sentry guns.
-                        for(ScrapYard entity : game.GetScrapYards())
-                        {
-                            lastHandled = entity;
-                            tobComm.SendObject(ScrapYard, entity.GetID(), 0, entity.GetData(lTheirPlayerID));
-                        }
-
-                        //Send all artillery guns.
-                        for(ArtilleryGun entity : game.GetArtilleryGuns())
-                        {
-                            lastHandled = entity;
-                            tobComm.SendObject(ArtilleryGun, entity.GetID(), 0, entity.GetData(lTheirPlayerID));
-                        }
-
-                        //Send all ore mines.
-                        for(OreMine entity : game.GetOreMines())
-                        {
-                            lastHandled = entity;
-                            tobComm.SendObject(OreMine, entity.GetID(), 0, entity.GetData(lTheirPlayerID));
-                        }
-
-                        //Send all ore mines.
-                        for(Processor entity : game.GetProcessors())
-                        {
-                            lastHandled = entity;
-                            tobComm.SendObject(Processor, entity.GetID(), 0, entity.GetData(lTheirPlayerID));
-                        }
-
-                        //Send all ore mines.
-                        for(MissileFactory entity : game.GetMissileFactorys())
-                        {
-                            lastHandled = entity;
-                            tobComm.SendObject(MissileFactory, entity.GetID(), 0, entity.GetData(lTheirPlayerID));
-                        }
-
-                        //Send all radar stations.
-                        for(RadarStation entity : game.GetRadarStations())
-                        {
-                            lastHandled = entity;
-                            tobComm.SendObject(RadarStation, entity.GetID(), 0, entity.GetData(lTheirPlayerID));
-                        }
-
                         //Send all bunkers.
                         for(CommandPost entity : game.GetCommandPosts())
                         {
@@ -1861,13 +1823,6 @@ public class LaunchServerSession extends LaunchSession
                         {
                             lastHandled = entity;
                             tobComm.SendObject(Armory, entity.GetID(), 0, entity.GetData(lTheirPlayerID));
-                        }
-
-                        //Send all banks.
-                        for(Bank entity : game.GetBanks())
-                        {
-                            lastHandled = entity;
-                            tobComm.SendObject(Bank, entity.GetID(), 0, entity.GetData(lTheirPlayerID));
                         }
 
                         //Send all warehouses.
@@ -2159,8 +2114,8 @@ public class LaunchServerSession extends LaunchSession
                 tobComm.SendCommand(RemoveCommandPost, entity.GetID());
             else if(entity instanceof SentryGun)
                 tobComm.SendCommand(RemoveSentryGun, entity.GetID());
-            else if(entity instanceof ScrapYard)
-                tobComm.SendCommand(RemoveScrapYard, entity.GetID());
+            else if(entity instanceof LogisticsDepot)
+                tobComm.SendCommand(RemoveLogisticsDepot, entity.GetID());
             else if(entity instanceof ArtilleryGun)
                 tobComm.SendCommand(RemoveArtilleryGun, entity.GetID());
             else if(entity instanceof Loot)
@@ -2185,16 +2140,14 @@ public class LaunchServerSession extends LaunchSession
                 tobComm.SendCommand(RemoveDistributor, entity.GetID());
             else if(entity instanceof StoredAirplane)
                 tobComm.SendCommand(RemoveStoredAircraft, entity.GetID());
-            else if(entity instanceof InfantryInterface)
-                tobComm.SendCommand(RemoveInfantry, entity.GetID());
             else if(entity instanceof Tank)
                 tobComm.SendCommand(RemoveTank, entity.GetID());
-            else if(entity instanceof CargoTruck)
-                tobComm.SendCommand(RemoveCargoTruck, entity.GetID());
-            else if(entity instanceof Blueprint)
-                tobComm.SendCommand(RemoveBlueprint, entity.GetID());
             else if(entity instanceof KOTH)
                 tobComm.SendCommand(RemoveKOTH, entity.GetID());
+            else if(entity instanceof Ship)
+                tobComm.SendCommand(RemoveShip, entity.GetID());
+            else if(entity instanceof Submarine)
+                tobComm.SendCommand(RemoveSubmarine, entity.GetID());
         }
     }
     

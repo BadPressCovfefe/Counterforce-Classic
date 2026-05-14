@@ -1235,12 +1235,9 @@ public class Config
         return fltCommandPostShelterRadius * 2; 
     }
 
-    public int GetMaintenanceCost(Structure structure)
+    public int GetMaintenanceCost()
     {
-        if(structure instanceof OreMine)
-            return Defs.EXTRACTOR_MAINTENANCE_COST;
-        else
-            return Defs.ONLINE_MAINTENANCE_COST;
+        return Defs.ONLINE_MAINTENANCE_COST;
     }
 
     public float GetMissileSpeed(MissileType type)
@@ -1379,8 +1376,8 @@ public class Config
             return Defs.BARRACKS_STRUCTURE_COST;
         else if(structure instanceof Warehouse)
             return Defs.WAREHOUSE_STRUCTURE_COST;
-        else if(structure instanceof ScrapYard)
-            return Defs.SCRAPYARD_STRUCTURE_COST;
+        else if(structure instanceof LogisticsDepot)
+            return Defs.LOGISTICS_DEPOT_STRUCTURE_COST;
         else if(structure instanceof Distributor)
             return Defs.DISTRIBUTOR_STRUCTURE_COST;
         else if(structure instanceof Processor)
@@ -1410,7 +1407,7 @@ public class Config
             case ARMORY: return Defs.ARMORY_STRUCTURE_COST;
             case BARRACKS: return Defs.BARRACKS_STRUCTURE_COST;
             case WAREHOUSE: return Defs.WAREHOUSE_STRUCTURE_COST;
-            case SCRAP_YARD: return Defs.SCRAPYARD_STRUCTURE_COST;
+            case LOGISTICS_DEPOT: return Defs.LOGISTICS_DEPOT_STRUCTURE_COST;
             case DISTRIBUTOR: return Defs.DISTRIBUTOR_STRUCTURE_COST;
             case WATCH_TOWER: return Defs.WATCH_TOWER_STRUCTURE_COST;
             case PROCESSOR: return Defs.GetProcessorCost(resourceType);

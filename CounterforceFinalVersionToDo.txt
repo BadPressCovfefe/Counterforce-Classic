@@ -9,95 +9,17 @@ CURRENT WORK:
 			-To test:
 			
 			-To do:
-				-Achievements?
-				-Remove resources.
-				-Remove radar. [Functionally done.]
-				-Refactor warehouse as Bank.
-				-Refactor armory as Tank Factory.
-				-Add KOTH hill.
-				-Add NPCs.
-				-First command post should look different. Make it have the player icon or something.
-				-Make build_artillery have the bullets that build_sentry has.
-				-Players can transfer wealth using trucks. If destroyed, the wealth in the truck goes to the player that destroyed it at a reduced amount. (Rubble amount.)
-				-Remove submarine surfacing. They are always submerged.
-				-Turn all ports into shipyards.
-				-Fix loot titles and whatnot.
-				-Fix odd location of structure icons when selecting units.
-				-Make memorials look like the rest of the markers. (All white outline.)
-				-Banks fire money missiles.
-				-Re-implement hourly wealth limit.@Override    
-    
-	public boolean BankAction(int lPlayerID, int lBankID, int lAmount, boolean bWithdraw)
-    {
-        /*Bank bank = Banks.get(lBankID);
-        Player owner = Players.get(lPlayerID);
-        
-        if(bank != null && owner != null && bank.GetOwnedBy(lPlayerID))
-        {
-            if(bWithdraw)
-            {
-                return Withdraw(bank, lAmount, owner);
-            }
-            else
-            {
-                return Deposit(bank, lAmount, owner);
-            }
-        }*/
-        
-        return false;
-    }
-	
-	public boolean Withdraw(Bank bank, int lAmount, Player owner)
-    {
-        if(bank.GetOnline())
-        {
-            if(bank.GetWealth() >= lAmount)
-            {
-                bank.Withdraw(lAmount);
-                //owner.AddWealth(lAmount);
-                ProcessPlayerIncome(owner, lAmount, false);
-                return true;
-            }
-            else if(bank.GetWealth() > 0)
-            {
-                int lAmountWithdrawn = bank.GetWealth();
-                bank.Withdraw(lAmountWithdrawn);
-                ProcessPlayerIncome(owner, lAmountWithdrawn, false);
-                return true;
-            }
-        }
-        
-        return false;
-    }
-    
-    public boolean Deposit(Bank bank, int lAmount, Player owner)
-    {
-        if(bank.GetOnline())
-        {
-            if(owner.GetWealth() >= lAmount)
-            {
-                if(bank.GetRemainingCapacity() >= lAmount)
-                {
-                    owner.SubtractWealth(lAmount);
-                    bank.Deposit(lAmount);
-                    return true;
-                }
-                else if(bank.GetRemainingCapacity() > 0)
-                {
-                    int lAmountDeposited = bank.GetRemainingCapacity();
-                    owner.SubtractWealth(lAmountDeposited);
-                    bank.Deposit(lAmountDeposited);
-                    return true;
-                }
-            }
-            else if(owner.GetWealth() > 0)
-            {
-                int lAmountDeposited = owner.GetWealth();
-                owner.SubtractWealth(lAmountDeposited);
-                bank.Deposit(lAmountDeposited);
-                return true;
-            }
-        }
-        
-        return false;
-    }
+				-Make sure enemy submarines have target button.
+				-Farms
+					-Require the player to be near (within 1.3 km) and have a large separation distance. (1.1 km.)
+					-Output a large amount of money every 3 days.
+				-Solar panels
+					-Outputs a small amount of money directly on-center hourly.
+					-No other restrictions.
+				-Ore mine
+					-Output money near the center hourly and compete by a huge amount if placed near eachother.
+				-Logistics depot
+					-Button collects wealth in radius but has a cooldown.
+					-Gives money to player if player passes near.
+				-Code in updateplayerlocation that collects money from depots.
+					

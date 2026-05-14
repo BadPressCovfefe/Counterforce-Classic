@@ -87,7 +87,7 @@ public class BankControl extends LaunchView
             txtDeposit10k.setText(TextUtilities.GetCurrencyString(10000));
             txtDeposit100k.setText(TextUtilities.GetCurrencyString(100000));
 
-            txtMoneyStats.setText(context.getString(R.string.bank_money_stats, TextUtilities.GetCurrencyString(bank.GetWealth()), TextUtilities.GetCurrencyString(bank.GetMaxCapacity())));
+            txtMoneyStats.setText(context.getString(R.string.bank_money_stats, TextUtilities.GetCurrencyString((int)bank.GetWealth()), TextUtilities.GetCurrencyString(bank.GetMaxCapacity())));
 
             btnWithdraw1k.setOnClickListener(new OnClickListener()
             {
@@ -229,7 +229,7 @@ public class BankControl extends LaunchView
             txtDeposit10k.setTextColor(Utilities.ColourFromAttr(context, game.GetOurPlayer().GetWealth() >= 10000 ? R.attr.GoodColour : R.attr.BadColour));
             txtDeposit100k.setTextColor(Utilities.ColourFromAttr(context, game.GetOurPlayer().GetWealth() >= 100000 ? R.attr.GoodColour : R.attr.BadColour));
 
-            txtMoneyStats.setText(context.getString(R.string.bank_money_stats, TextUtilities.GetCurrencyString(bank.GetWealth()), TextUtilities.GetCurrencyString(bank.GetMaxCapacity())));
+            txtMoneyStats.setText(context.getString(R.string.bank_money_stats, TextUtilities.GetCurrencyString((int)bank.GetWealth()), TextUtilities.GetCurrencyString(bank.GetMaxCapacity())));
         }
         else
         {

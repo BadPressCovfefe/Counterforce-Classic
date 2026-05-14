@@ -41,8 +41,6 @@ public class MapClickView extends LaunchView
     private LinearLayout lytTerrain;
     private TextView txtGettingData;
     private TextView txtWater;
-    private LinearLayout btnAttack;
-    private LinearLayout btnMoveAircraft;
     boolean bRadioactive = false;
     int lRadExpiry;
 
@@ -62,8 +60,6 @@ public class MapClickView extends LaunchView
         txtRadioactive = findViewById(R.id.txtRadioactive);
         txtCalculating = findViewById(R.id.txtCalculating);
         lytEntities = findViewById(R.id.lytEntities);
-        btnAttack =  findViewById(R.id.btnAttack);
-        btnMoveAircraft = findViewById(R.id.btnMoveAircraft);
         txtNearestEntities = findViewById(R.id.txtNearestEntities);
 
         lytGettingTerrainData = findViewById(R.id.lytGettingTerrainData);

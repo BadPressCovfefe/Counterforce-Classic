@@ -35,6 +35,7 @@ import launch.game.entities.NamableInterface;
 import launch.game.entities.SAMSite;
 import launch.game.entities.Tank;
 import launch.game.entities.TankInterface;
+import launch.game.entities.conceptuals.Resource;
 import launch.game.entities.conceptuals.StoredTank;
 import launch.game.systems.CargoSystem;
 import launch.game.systems.ResourceSystem;
@@ -47,13 +48,14 @@ public class TankView extends LaunchView implements LaunchUICommon.TankInfoProvi
     private LinearLayout lytReload;
     private TextView txtReloading;
 
-    private TankInterface tankShadow;
+    private Tank tankShadow;
     private TextView txtTankStatus;
 
     private LinearLayout btnMove;
     private LinearLayout btnCeaseFire;
-    private LinearLayout lytControls;
     private LinearLayout btnSell;
+    private ImageView imgSell;
+    private View viewBottom;
     private TextView txtHP;
     private TextView txtName;
     protected TextView txtNameButton;
@@ -61,22 +63,11 @@ public class TankView extends LaunchView implements LaunchUICommon.TankInfoProvi
     protected EditText txtNameEdit;
     protected LinearLayout btnApplyName;
     protected ImageView imgTank;
-    private FrameLayout lytLaunchables;
-
-    private LinearLayout lytMode;
-    private ImageButton btnAuto;
-    private ImageButton btnSemi;
-    private ImageButton btnManual;
-    private View viewMode;
-    private ButtonFlasher flasherAuto;
-    private ButtonFlasher flasherSemi;
-    private ButtonFlasher flasherManual;
     private TextView txtToTarget;
     private View viewToTarget;
-    private LaunchView launchableSystem;
     private boolean bOwnedByPlayer;
 
-    public TankView(LaunchClientGame game, MainActivity activity, TankInterface tank)
+    public TankView(LaunchClientGame game, MainActivity activity, Tank tank)
     {
         super(game, activity, true);
         this.tankShadow = tank;
@@ -95,10 +86,8 @@ public class TankView extends LaunchView implements LaunchUICommon.TankInfoProvi
 
         btnMove = findViewById(R.id.btnMove);
         btnSetTarget = findViewById(R.id.btnSetTarget);
-        lytControls = findViewById(R.id.lytControls);
         txtHP = findViewById(R.id.txtHP);
         txtTankStatus = findViewById(R.id.txtTankStatus);
-        lytLaunchables = findViewById(R.id.lytLaunchables);
         btnCeaseFire = findViewById(R.id.btnCeaseFire);
 
         lytReload = (LinearLayout) findViewById(R.id.lytReload);
@@ -112,16 +101,9 @@ public class TankView extends LaunchView implements LaunchUICommon.TankInfoProvi
         txtTankTitle = findViewById(R.id.txtTankTitle);
         imgTank = findViewById(R.id.imgTank);
 
-        lytMode = findViewById(R.id.lytMode);
-        btnAuto = findViewById(R.id.btnModeAuto);
-        btnSemi = findViewById(R.id.btnModeSemi);
-        btnManual = findViewById(R.id.btnModeManual);
-        viewMode = findViewById(R.id.viewMode);
         btnSell = findViewById(R.id.btnSell);
-
-        flasherAuto = new ButtonFlasher(btnAuto);
-        flasherSemi = new ButtonFlasher(btnSemi);
-        flasherManual = new ButtonFlasher(btnManual);
+        imgSell = findViewById(R.id.imgSell);
+        viewBottom = findViewById(R.id.viewBottom);
 
         txtTankTitle.setText(TextUtilities.GetOwnedEntityName((LaunchEntity)tankShadow, game));
 
@@ -171,29 +153,131 @@ public class TankView extends LaunchView implements LaunchUICommon.TankInfoProvi
             btnAdminDelete.setVisibility(GONE);
         }
 
-        if(tankShadow instanceof Tank)
+        FrameLayout lytUnitControls = findViewById(R.id.lytUnitControls);
+
+        UnitControls controls = new UnitControls(game, activity, tankShadow);
+        lytUnitControls.removeAllViews();
+        lytUnitControls.addView(controls);
+
+        if(tankShadow.GetGeoTarget() != null && game.EntityIsFriendly(tankShadow, game.GetOurPlayer()) && tankShadow.GetMoveOrders() != Movable.MoveOrders.WAIT)
         {
-            Tank tank = (Tank)tankShadow;
-            FrameLayout lytUnitControls = findViewById(R.id.lytUnitControls);
+            viewToTarget.setVisibility(VISIBLE);
+            txtToTarget.setVisibility(VISIBLE);
 
-            UnitControls controls = new UnitControls(game, activity, tank);
-            lytUnitControls.removeAllViews();
-            lytUnitControls.addView(controls);
+            float fltDistanceToTravel = 0;
 
-            if(tank.GetGeoTarget() != null && game.EntityIsFriendly(tank, game.GetOurPlayer()) && tank.GetMoveOrders() != Movable.MoveOrders.WAIT)
+            if(tankShadow.HasGeoCoordChain())
+            {
+                fltDistanceToTravel = LaunchUtilities.GetTotalTravelDistance(tankShadow.GetPosition(), tankShadow.GetCoordinates());
+            }
+            else
+            {
+                fltDistanceToTravel = tankShadow.GetPosition().DistanceTo(tankShadow.GetGeoTarget());
+            }
+
+            txtToTarget.setText(context.getString(R.string.travel_time_target, TextUtilities.GetTimeAmount((long)(fltDistanceToTravel/Defs.LAND_UNIT_SPEED * Defs.MS_PER_HOUR))));
+        }
+        else
+        {
+            viewToTarget.setVisibility(GONE);
+            txtToTarget.setVisibility(GONE);
+        }
+
+        if(bOwnedByPlayer)
+        {
+            if(tankShadow.GetSelling())
+            {
+                txtName.setVisibility(GONE);
+                txtNameEdit.setVisibility(GONE);
+                txtNameButton.setVisibility(GONE);
+                viewBottom.setVisibility(GONE);
+                btnMove.setVisibility(GONE);
+                btnSetTarget.setVisibility(GONE);
+                btnCeaseFire.setVisibility(GONE);
+                imgSell.setImageResource(R.drawable.button_cancel_decommission);
+            }
+            else
+            {
+                imgSell.setImageResource(R.drawable.button_decommission);
+            }
+
+            btnSell.setVisibility(VISIBLE);
+
+            btnSell.setOnClickListener(new OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    final LaunchDialog launchDialog = new LaunchDialog();
+                    launchDialog.SetHeaderPurchase();
+                    launchDialog.SetMessage(context.getString(R.string.decommission_confirm, context.getString(R.string.mbt_construct_name), TextUtilities.GetCurrencyString(game.GetSaleValue(Defs.TANK_BUILD_COST).get(Resource.ResourceType.WEALTH)), TextUtilities.GetTimeAmount(Defs.DECOMMISSION_TIME)));
+                    launchDialog.SetOnClickYes(new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View view)
+                        {
+                            launchDialog.dismiss();
+                            game.SellEntity(tankShadow.GetPointer());
+                        }
+                    });
+                    launchDialog.SetOnClickNo(new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View view)
+                        {
+                            launchDialog.dismiss();
+                        }
+                    });
+                    launchDialog.show(activity.getFragmentManager(), "");
+                }
+            });
+
+            btnSetTarget.setVisibility(VISIBLE);
+
+            btnSetTarget.setOnClickListener(new OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    activity.SetTargetMode(new EntityPointer(tankShadow.GetID(), tankShadow.GetEntityType()), null);
+                }
+            });
+        }
+
+        TextUtilities.AssignHealthStringAndAppearance(txtHP, tankShadow);
+
+        btnCeaseFire.setOnClickListener(new OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                game.UnitCommand(Movable.MoveOrders.WAIT, Collections.singletonList(tankShadow.GetPointer()), null, null, CargoSystem.LootType.NONE, LaunchEntity.ID_NONE, LaunchEntity.ID_NONE);
+            }
+        });
+
+        if(tankShadow.GetMoveOrders() != MoveOrders.WAIT && bOwnedByPlayer)
+            btnCeaseFire.setVisibility(VISIBLE);
+
+        if(game.EntityIsFriendly(game.GetPlayer(tankShadow.GetOwnerID()), game.GetOurPlayer()))
+        {
+            TextUtilities.AssignTankStatusString(txtTankStatus, tankShadow);
+            txtName.setVisibility(GONE);
+            txtNameButton.setVisibility(VISIBLE);
+
+            if(tankShadow.GetGeoTarget() != null && tankShadow.GetMoveOrders() != Movable.MoveOrders.WAIT && tankShadow.GetMoveOrders() != Movable.MoveOrders.DEFEND && game.GetTravelTime(Defs.LAND_UNIT_SPEED, tankShadow.GetPosition(), game.GetMovableTarget(tankShadow)) > 0)
             {
                 viewToTarget.setVisibility(VISIBLE);
                 txtToTarget.setVisibility(VISIBLE);
 
                 float fltDistanceToTravel = 0;
 
-                if(tank.HasGeoCoordChain())
+                if(tankShadow.HasGeoCoordChain())
                 {
-                    fltDistanceToTravel = LaunchUtilities.GetTotalTravelDistance(tank.GetPosition(), tank.GetCoordinates());
+                    fltDistanceToTravel = LaunchUtilities.GetTotalTravelDistance(tankShadow.GetPosition(), tankShadow.GetCoordinates());
                 }
                 else
                 {
-                    fltDistanceToTravel = tank.GetPosition().DistanceTo(tank.GetGeoTarget());
+                    fltDistanceToTravel = tankShadow.GetPosition().DistanceTo(tankShadow.GetGeoTarget());
                 }
 
                 txtToTarget.setText(context.getString(R.string.travel_time_target, TextUtilities.GetTimeAmount((long)(fltDistanceToTravel/Defs.LAND_UNIT_SPEED * Defs.MS_PER_HOUR))));
@@ -203,229 +287,14 @@ public class TankView extends LaunchView implements LaunchUICommon.TankInfoProvi
                 viewToTarget.setVisibility(GONE);
                 txtToTarget.setVisibility(GONE);
             }
-
-            if(bOwnedByPlayer)
-            {
-                btnSell.setVisibility(VISIBLE);
-
-                btnSell.setOnClickListener(new OnClickListener()
-                {
-                    @Override
-                    public void onClick(View view)
-                    {
-                        if(!game.InBattle(game.GetOurPlayer()))
-                        {
-                            final LaunchDialog launchDialog = new LaunchDialog();
-                            launchDialog.SetHeaderPurchase();
-                            launchDialog.SetMessage(context.getString(R.string.sell_land_unit_confirm, TextUtilities.GetCostStatement(game.GetSaleValue(game.GetLandUnitValue(tank)))));
-                            launchDialog.SetOnClickYes(new View.OnClickListener()
-                            {
-                                @Override
-                                public void onClick(View view)
-                                {
-                                    launchDialog.dismiss();
-                                    game.SellEntity(tank.GetPointer());
-                                }
-                            });
-                            launchDialog.SetOnClickNo(new View.OnClickListener()
-                            {
-                                @Override
-                                public void onClick(View view)
-                                {
-                                    launchDialog.dismiss();
-                                }
-                            });
-                            launchDialog.show(activity.getFragmentManager(), "");
-                        }
-                        else
-                        {
-                            activity.ShowBasicOKDialog(context.getString(R.string.in_battle_cant_sell));
-                        }
-                    }
-                });
-
-                if(tank.IsAnMBT())
-                {
-                    btnSetTarget.setVisibility(VISIBLE);
-
-                    btnSetTarget.setOnClickListener(new OnClickListener()
-                    {
-                        @Override
-                        public void onClick(View view)
-                        {
-                            activity.SetTargetMode(new EntityPointer(tank.GetID(), tank.GetEntityType()), null);
-                        }
-                    });
-                }
-                else
-                {
-                    btnSetTarget.setVisibility(GONE);
-                }
-            }
-
-            TextUtilities.AssignHealthStringAndAppearance(txtHP, tank);
-
-            if((tank.HasInterceptors() || tank.HasArtillery()) && bOwnedByPlayer)
-            {
-                lytMode.setVisibility(VISIBLE);
-                viewMode.setVisibility(VISIBLE);
-
-                btnAuto.setOnClickListener(new OnClickListener()
-                {
-                    @Override
-                    public void onClick(View view)
-                    {
-                        if(!game.GetTank(tank.GetID()).GetAuto())
-                        {
-                            final LaunchDialog launchDialog = new LaunchDialog();
-                            launchDialog.SetHeaderSAMControl();
-                            launchDialog.SetMessage(context.getString(R.string.confirm_auto));
-                            launchDialog.SetOnClickYes(new View.OnClickListener()
-                            {
-                                @Override
-                                public void onClick(View view)
-                                {
-                                    launchDialog.dismiss();
-
-                                    game.SetSAMSiteMode(tank.GetPointer(), SAMSite.MODE_AUTO);
-                                }
-                            });
-                            launchDialog.SetOnClickNo(new View.OnClickListener()
-                            {
-                                @Override
-                                public void onClick(View view)
-                                {
-                                    launchDialog.dismiss();
-                                }
-                            });
-                            launchDialog.show(activity.getFragmentManager(), "");
-                        }
-                    }
-                });
-
-                btnSemi.setOnClickListener(new OnClickListener()
-                {
-                    @Override
-                    public void onClick(View view)
-                    {
-                        if(!game.GetTank(tank.GetID()).GetSemiAuto())
-                        {
-                            final LaunchDialog launchDialog = new LaunchDialog();
-                            launchDialog.SetHeaderSAMControl();
-                            launchDialog.SetMessage(context.getString(R.string.confirm_semi));
-                            launchDialog.SetOnClickYes(new View.OnClickListener()
-                            {
-                                @Override
-                                public void onClick(View view)
-                                {
-                                    launchDialog.dismiss();
-
-                                    game.SetSAMSiteMode(tank.GetPointer(), SAMSite.MODE_SEMI_AUTO);
-                                }
-                            });
-                            launchDialog.SetOnClickNo(new View.OnClickListener()
-                            {
-                                @Override
-                                public void onClick(View view)
-                                {
-                                    launchDialog.dismiss();
-                                }
-                            });
-                            launchDialog.show(activity.getFragmentManager(), "");
-                        }
-                    }
-                });
-
-                btnManual.setOnClickListener(new OnClickListener()
-                {
-                    @Override
-                    public void onClick(View view)
-                    {
-                        if(!game.GetTank(tank.GetID()).GetManual())
-                        {
-                            final LaunchDialog launchDialog = new LaunchDialog();
-                            launchDialog.SetHeaderSAMControl();
-                            launchDialog.SetMessage(context.getString(R.string.confirm_manual));
-                            launchDialog.SetOnClickYes(new View.OnClickListener()
-                            {
-                                @Override
-                                public void onClick(View view)
-                                {
-                                    launchDialog.dismiss();
-
-                                    game.SetSAMSiteMode(tank.GetPointer(), SAMSite.MODE_MANUAL);
-                                }
-                            });
-                            launchDialog.SetOnClickNo(new View.OnClickListener()
-                            {
-                                @Override
-                                public void onClick(View view)
-                                {
-                                    launchDialog.dismiss();
-                                }
-                            });
-                            launchDialog.show(activity.getFragmentManager(), "");
-                        }
-                    }
-                });
-            }
-
-            btnCeaseFire.setOnClickListener(new OnClickListener()
-            {
-                @Override
-                public void onClick(View view)
-                {
-                    game.UnitCommand(Movable.MoveOrders.WAIT, Collections.singletonList(tank.GetPointer()), null, null, CargoSystem.LootType.NONE, LaunchEntity.ID_NONE, LaunchEntity.ID_NONE);
-                }
-            });
-
-            if(tank.GetMoveOrders() != MoveOrders.WAIT && bOwnedByPlayer)
-                btnCeaseFire.setVisibility(VISIBLE);
-
-            if(game.EntityIsFriendly(game.GetPlayer(tank.GetOwnerID()), game.GetOurPlayer()))
-            {
-                TextUtilities.AssignTankStatusString(txtTankStatus, tankShadow);
-                txtName.setVisibility(GONE);
-                txtNameButton.setVisibility(VISIBLE);
-
-                if(tank.GetGeoTarget() != null && tank.GetMoveOrders() != Movable.MoveOrders.WAIT && tank.GetMoveOrders() != Movable.MoveOrders.DEFEND && game.GetTravelTime(Defs.LAND_UNIT_SPEED, tank.GetPosition(), game.GetMovableTarget(tank)) > 0)
-                {
-                    viewToTarget.setVisibility(VISIBLE);
-                    txtToTarget.setVisibility(VISIBLE);
-
-                    float fltDistanceToTravel = 0;
-
-                    if(tank.HasGeoCoordChain())
-                    {
-                        fltDistanceToTravel = LaunchUtilities.GetTotalTravelDistance(tank.GetPosition(), tank.GetCoordinates());
-                    }
-                    else
-                    {
-                        fltDistanceToTravel = tank.GetPosition().DistanceTo(tank.GetGeoTarget());
-                    }
-
-                    txtToTarget.setText(context.getString(R.string.travel_time_target, TextUtilities.GetTimeAmount((long)(fltDistanceToTravel/Defs.LAND_UNIT_SPEED * Defs.MS_PER_HOUR))));
-                }
-                else
-                {
-                    viewToTarget.setVisibility(GONE);
-                    txtToTarget.setVisibility(GONE);
-                }
-            }
-            else
-            {
-                txtNameButton.setVisibility(GONE);
-                txtTankStatus.setVisibility(GONE);
-                txtName.setVisibility(VISIBLE);
-                viewToTarget.setVisibility(GONE);
-                txtToTarget.setVisibility(GONE);
-            }
         }
         else
         {
-            StoredTank tank = (StoredTank)tankShadow;
-
-            TextUtilities.AssignHealthStringAndAppearance(txtHP, tank);
+            txtNameButton.setVisibility(GONE);
+            txtTankStatus.setVisibility(GONE);
+            txtName.setVisibility(VISIBLE);
+            viewToTarget.setVisibility(GONE);
+            txtToTarget.setVisibility(GONE);
         }
 
         String strName = Utilities.GetEntityName(context, (NamableInterface)tankShadow);
@@ -445,13 +314,6 @@ public class TankView extends LaunchView implements LaunchUICommon.TankInfoProvi
         {
             txtName.setVisibility(GONE);
             txtNameEdit.setText(tankShadow.GetName());
-
-            if(launchableSystem != null)
-            {
-                lytLaunchables.setVisibility(VISIBLE);
-                lytLaunchables.addView(launchableSystem);
-                lytLaunchables.setBackgroundColor(Utilities.ColourFromAttr(context, R.attr.SystemBackgroundColour));
-            }
 
             txtNameButton.setOnClickListener(new OnClickListener()
             {
@@ -491,7 +353,6 @@ public class TankView extends LaunchView implements LaunchUICommon.TankInfoProvi
         else
         {
             btnMove.setVisibility(GONE);
-            lytLaunchables.setVisibility(GONE);
             txtTankStatus.setVisibility(GONE);
         }
     }
@@ -506,122 +367,88 @@ public class TankView extends LaunchView implements LaunchUICommon.TankInfoProvi
             @Override
             public void run()
             {
-                TankInterface tankInterface = game.GetTankInterface(tankShadow.GetID());
+                Tank tank = game.GetTank(tankShadow.GetID());
 
-                if(tankInterface != null)
+                if(tank != null)
                 {
-                    if(launchableSystem != null)
-                        launchableSystem.Update();
-
-                    if(game.EntityIsFriendly((LaunchEntity)tankShadow, game.GetOurPlayer()))
+                    if(game.EntityIsFriendly(tank, game.GetOurPlayer()))
                     {
-                        TextUtilities.AssignTankStatusString(txtTankStatus, tankShadow);
+                        TextUtilities.AssignTankStatusString(txtTankStatus, tank);
                     }
                     else
                     {
                         txtTankStatus.setVisibility(GONE);
                     }
 
-                    if(tankInterface instanceof Tank)
+                    //Reload.
+                    long oReloadTimeRemaining = tank.GetReloadTimeRemaining();
+
+                    if(oReloadTimeRemaining > 0)
                     {
-                        Tank tank = (Tank)tankInterface;
+                        lytReload.setVisibility(VISIBLE);
+                        txtReloading.setText(TextUtilities.GetTimeAmount(oReloadTimeRemaining));
+                    }
+                    else
+                    {
+                        lytReload.setVisibility(GONE);
+                    }
 
-                        //Reload.
-                        long oReloadTimeRemaining = tank.GetReloadTimeRemaining();
+                    TextUtilities.AssignHealthStringAndAppearance(txtHP, tank);
 
-                        if (oReloadTimeRemaining > 0)
+                    if(tank.GetMoveOrders() != MoveOrders.WAIT && bOwnedByPlayer)
+                        btnCeaseFire.setVisibility(VISIBLE);
+                    else
+                        btnCeaseFire.setVisibility(GONE);
+
+                    if(game.EntityIsFriendly(game.GetPlayer(tank.GetOwnerID()), game.GetOurPlayer()))
+                    {
+                        if(tank.GetGeoTarget() != null && tank.GetMoveOrders() != Movable.MoveOrders.WAIT && tank.GetMoveOrders() != Movable.MoveOrders.DEFEND && game.GetTravelTime(Defs.LAND_UNIT_SPEED, tank.GetPosition(), game.GetMovableTarget(tank)) > 0)
                         {
-                            lytReload.setVisibility(VISIBLE);
-                            txtReloading.setText(TextUtilities.GetTimeAmount(oReloadTimeRemaining));
-                        }
-                        else
-                        {
-                            lytReload.setVisibility(GONE);
-                        }
+                            viewToTarget.setVisibility(VISIBLE);
+                            txtToTarget.setVisibility(VISIBLE);
 
-                        TextUtilities.AssignHealthStringAndAppearance(txtHP, tank);
+                            float fltDistanceToTravel = 0;
 
-                        if(tank.GetMoveOrders() != MoveOrders.WAIT && bOwnedByPlayer)
-                            btnCeaseFire.setVisibility(VISIBLE);
-                        else
-                            btnCeaseFire.setVisibility(GONE);
-
-                        if(tank.GetOwnedBy(game.GetOurPlayerID()))
-                        {
-                            if(tankShadow.HasInterceptors() || tankShadow.HasArtillery())
+                            if(tank.HasGeoCoordChain())
                             {
-                                lytMode.setVisibility(VISIBLE);
-                                viewMode.setVisibility(VISIBLE);
-
-                                if(tank.GetAuto())
-                                {
-                                    flasherAuto.TurnGreen(context);
-                                }
-                                else
-                                {
-                                    flasherAuto.TurnOff(context);
-                                }
-
-                                if(tank.GetSemiAuto())
-                                {
-                                    flasherSemi.TurnGreen(context);
-                                }
-                                else
-                                {
-                                    flasherSemi.TurnOff(context);
-                                }
-
-                                if(tank.GetManual())
-                                {
-                                    flasherManual.TurnGreen(context);
-                                }
-                                else
-                                {
-                                    flasherManual.TurnOff(context);
-                                }
-                            }
-                        }
-
-                        if(game.EntityIsFriendly(game.GetPlayer(tank.GetOwnerID()), game.GetOurPlayer()))
-                        {
-                            if(tank.GetGeoTarget() != null && tank.GetMoveOrders() != Movable.MoveOrders.WAIT && tank.GetMoveOrders() != Movable.MoveOrders.DEFEND && game.GetTravelTime(Defs.LAND_UNIT_SPEED, tank.GetPosition(), game.GetMovableTarget(tank)) > 0)
-                            {
-                                viewToTarget.setVisibility(VISIBLE);
-                                txtToTarget.setVisibility(VISIBLE);
-
-                                float fltDistanceToTravel = 0;
-
-                                if(tank.HasGeoCoordChain())
-                                {
-                                    fltDistanceToTravel = LaunchUtilities.GetTotalTravelDistance(tank.GetPosition(), tank.GetCoordinates());
-                                }
-                                else
-                                {
-                                    fltDistanceToTravel = tank.GetPosition().DistanceTo(tank.GetGeoTarget());
-                                }
-
-                                txtToTarget.setText(context.getString(R.string.travel_time_target, TextUtilities.GetTimeAmount((long)(fltDistanceToTravel/Defs.LAND_UNIT_SPEED * Defs.MS_PER_HOUR))));
+                                fltDistanceToTravel = LaunchUtilities.GetTotalTravelDistance(tank.GetPosition(), tank.GetCoordinates());
                             }
                             else
                             {
-                                viewToTarget.setVisibility(GONE);
-                                txtToTarget.setVisibility(GONE);
+                                fltDistanceToTravel = tank.GetPosition().DistanceTo(tank.GetGeoTarget());
                             }
+
+                            txtToTarget.setText(context.getString(R.string.travel_time_target, TextUtilities.GetTimeAmount((long)(fltDistanceToTravel/Defs.LAND_UNIT_SPEED * Defs.MS_PER_HOUR))));
                         }
                         else
                         {
-                            txtToTarget.setVisibility(GONE);
                             viewToTarget.setVisibility(GONE);
+                            txtToTarget.setVisibility(GONE);
+                        }
+
+                        if(tank.GetSelling())
+                        {
+                            txtNameButton.setVisibility(GONE);
+                            viewBottom.setVisibility(GONE);
+                            lytReload.setVisibility(GONE);
+                            btnMove.setVisibility(GONE);
+                            btnSetTarget.setVisibility(GONE);
+                            btnCeaseFire.setVisibility(GONE);
+                            txtToTarget.setVisibility(GONE);
+                            imgSell.setImageResource(R.drawable.button_cancel_decommission);
+                        }
+                        else
+                        {
+                            imgSell.setImageResource(R.drawable.button_decommission);
                         }
                     }
                     else
                     {
-                        StoredTank tank = (StoredTank)tankInterface;
-
-                        TextUtilities.AssignHealthStringAndAppearance(txtHP, tank);
+                        txtToTarget.setVisibility(GONE);
+                        viewToTarget.setVisibility(GONE);
                     }
 
-                    String strName = Utilities.GetEntityName(context, (NamableInterface)tankInterface);
+                    String strName = Utilities.GetEntityName(context, tank);
                     txtName.setText(strName);
                     txtNameButton.setText(strName);
                 }
@@ -647,7 +474,7 @@ public class TankView extends LaunchView implements LaunchUICommon.TankInfoProvi
     }
 
     @Override
-    public List<TankInterface> GetCurrentTanks()
+    public List<Tank> GetCurrentTanks()
     {
         return null;
     }

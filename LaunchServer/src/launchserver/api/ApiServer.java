@@ -57,8 +57,6 @@ public final class ApiServer
 
         // Create any further context down below; wrap 'withAuth()' if you want a secured API header to be required to run this command.
         server.createContext("/api/idof", withAuth(this::idof));
-        server.createContext("/api/give_membership", withAuth(this::giveMembership));
-        server.createContext("/api/remove_membership", withAuth(this::removeMembership));
         server.createContext("/api/quit", withAuth(this::quitServer));
         server.createContext("/api/approve", withAuth(this::approvePlayer));
         server.createContext("/api/reqchecks", withAuth(this::requireChecks));
@@ -226,100 +224,6 @@ public final class ApiServer
             os.write(body);
         }
 
-    }
-
-    private void giveMembership(com.sun.net.httpserver.HttpExchange ex) throws IOException
-    {
-        Map<String, String> q = readParams(ex);
-        String idStr = q.get("id");
-        if(idStr == null || idStr.isBlank())
-        {
-            writeText(ex, 400, "Missing 'id'");
-            return;
-        }
-
-        LaunchServerGame game = launchserver.api.GameAccess.get();
-        if(game == null)
-        {
-            writeText(ex, 503, "Game not ready");
-            return;
-        }
-
-        String out;
-        try
-        {
-            int id = Integer.parseInt(idStr);
-            Player player = game.GetPlayer(id);
-            if(player != null)
-            {
-                player.SetMemberStatus(true);
-                out = String.format("Made %s a member.", player.GetName());
-            }
-            else
-            {
-                out = String.format("Player %d not found.", id);
-            }
-        }
-        catch(NumberFormatException nfe)
-        {
-            out = "Invalid id.";
-        }
-
-        ex.getResponseHeaders().add("Content-Type", "text/plain; charset=utf-8");
-        ex.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
-        byte[] body = out.getBytes(java.nio.charset.StandardCharsets.UTF_8);
-        ex.sendResponseHeaders(200, body.length);
-        try(var os = ex.getResponseBody())
-        {
-            os.write(body);
-        }
-    }
-
-    private void removeMembership(com.sun.net.httpserver.HttpExchange ex) throws IOException
-    {
-        Map<String, String> q = readParams(ex);
-        String idStr = q.get("id");
-        if(idStr == null || idStr.isBlank())
-        {
-            writeText(ex, 400, "Missing 'id'");
-            return;
-        }
-
-        LaunchServerGame game = launchserver.api.GameAccess.get();
-        if(game == null)
-        {
-            writeText(ex, 503, "Game not ready");
-            return;
-        }
-
-        String out;
-        try
-        {
-            int id = Integer.parseInt(idStr);
-            Player player = game.GetPlayer(id);
-            if(player != null)
-            {
-                player.SetMemberStatus(false);
-                out = String.format("Removed %s's membership.", player.GetName());
-            }
-            else
-            {
-                out = String.format("Player %d not found.", id);
-            }
-        }
-        catch(NumberFormatException nfe)
-        {
-            out = "Invalid id.";
-        }
-
-        ex.getResponseHeaders().add("Content-Type", "text/plain; charset=utf-8");
-        ex.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
-        byte[] body = out.getBytes(java.nio.charset.StandardCharsets.UTF_8);
-        ex.sendResponseHeaders(200, body.length);
-        try(var os = ex.getResponseBody())
-        {
-            os.write(body);
-        }
     }
 
     private void quitServer(com.sun.net.httpserver.HttpExchange ex) throws IOException

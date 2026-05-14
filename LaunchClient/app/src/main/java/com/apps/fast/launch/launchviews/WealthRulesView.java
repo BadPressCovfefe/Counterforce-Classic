@@ -35,7 +35,7 @@ import launch.game.entities.Distributor;
 import launch.game.entities.InfantryInterface;
 import launch.game.entities.LaunchEntity;
 import launch.game.entities.Processor;
-import launch.game.entities.ScrapYard;
+import launch.game.entities.LogisticsDepot;
 import launch.game.entities.Ship;
 import launch.game.entities.Submarine;
 import launch.game.entities.Tank;
@@ -761,9 +761,7 @@ public class WealthRulesView extends LaunchView
         //Compute hourly maintenances.
         List<Structure> OurStructures = game.GetOurStructures();
         List<AirplaneInterface> OurAircraft = game.GetOurAircrafts();
-        List<InfantryInterface> OurInfantry = game.GetOurInfantries();
-        List<TankInterface> OurTanks = game.GetOurTanks();
-        List<CargoTruckInterface> OurCargoTrucks = game.GetOurCargoTrucks();
+        List<Tank> OurTanks = game.GetOurTanks();
         List<Ship> OurShips = game.GetOurShips();
         List<Submarine> OurSubmarines = game.GetOurSubmarines();
 
@@ -809,7 +807,7 @@ public class WealthRulesView extends LaunchView
 
             if(structure.GetOnline() || structure.GetBooting())
             {
-                lHourlyCosts += game.GetConfig().GetMaintenanceCost(structure);
+                lHourlyCosts += game.GetConfig().GetMaintenanceCost();
             }
             else if(structure.GetOffline())
             {
@@ -845,9 +843,9 @@ public class WealthRulesView extends LaunchView
             }
         }
 
-        for(final TankInterface tank : OurTanks)
+        for(final Tank tank : OurTanks)
         {
-            if(ShouldBeVisible(tank.GetTank()))
+            if(ShouldBeVisible(tank))
             {
                 TankMaintenanceView mev = new TankMaintenanceView(game, activity, tank);
                 EntityViews.add(mev);
@@ -857,7 +855,7 @@ public class WealthRulesView extends LaunchView
                     @Override
                     public void onClick(View view)
                     {
-                        activity.SelectLaunchEntity(tank.GetTank());
+                        activity.SelectLaunchEntity(tank);
                     }
                 });
 

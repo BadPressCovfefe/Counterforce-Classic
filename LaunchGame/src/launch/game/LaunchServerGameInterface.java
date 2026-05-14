@@ -47,6 +47,7 @@ public interface LaunchServerGameInterface
     boolean MissileReloadUpgrade(int lPlayerID, int lMissileSiteID);
     boolean InterceptorReloadUpgrade(int lPlayerID, int lSAMSiteID);
     boolean SentryRangeUpgrade(int lPlayerID, int lSentryGunID);
+    boolean DepotCollect(int lPlayerID, int lDepotID);
     boolean CommandPostHPUpgrade(int lPlayerID, int lCommandPostID);
     boolean BankAction(int lPlayerID, int lBankID, long oAmount, boolean bWithdraw);
     boolean CeaseFire(int lPlayerID, List<EntityPointer> Pointers);
@@ -75,6 +76,7 @@ public interface LaunchServerGameInterface
     boolean RadarScan(int lPlayerID, EntityPointer scanner);
     boolean SellLaunchable(int lPlayerID, int lMissileSiteID, int lSlotIndex, SystemType systemType);
     boolean GiveWealth(int lGiverID, int lReceiverID, int lAmount, ResourceType type);
+    boolean AddBounty(int lGiverID, int lReceiverID, int lAmount, boolean bPlayer);
     boolean SetStructuresOnOff(int lPlayerID, List<Integer> SiteIDs, boolean bOnline, EntityType structureType);
     boolean RepairEntity(int lPlayerID, EntityPointer pointer);
     boolean HealPlayer(int lPlayerID);

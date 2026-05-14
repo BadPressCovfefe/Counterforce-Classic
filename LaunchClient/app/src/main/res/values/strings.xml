@@ -39,7 +39,7 @@
     <string name="cms_not_fitted">Equip this system to fire missiles from your location.</string>
     <string name="sam_not_fitted">Equip this system to intercept enemy missiles from your location.</string>
     <string name="empty">Empty</string>
-    <string name="desc_missile_launcher">Used to purchase and fire missiles.</string>
+    <string name="desc_missile_launcher">Purchase and fire missiles.</string>
     <string name="main_text_splash">Systems initialising...</string>
     <string name="main_text_help">Need help?</string>
     <string name="main_communications_status">Communications:</string>
@@ -97,7 +97,6 @@
     <string name="sam_site">SAM Battery</string>
     <string name="missile_site">Missile Battery</string>
     <string name="sentry_gun">Sentry Gun</string>
-    <string name="ore_mine">Ore Mine</string>
     <string name="registration">Please register a username and avatar:</string>
     <string name="alliances">Alliances</string>
     <string name="create_alliance">Create Alliance</string>
@@ -117,7 +116,6 @@
     <string name="missile_site_title">missile battery</string>
     <string name="sam_site_title">SAM battery</string>
     <string name="sentry_gun_title">sentry gun</string>
-    <string name="ore_mine_title">ore mine</string>
     <string name="threats">Threats</string>
     <string name="cancel">CANCEL</string>
     <string name="close">CLOSE</string>
@@ -513,6 +511,7 @@
     <string name="confirm_surrender_war">Surrender to %1$s? You will lose experience and they will get a reward.</string>
     <string name="confirm_break_affiliation">Break affiliation with %1$s?</string>
     <string name="command_post">Command Post</string>
+    <string name="headquarters">Headquarters</string>
     <string name="command_post_title">command post</string>
     <string name="confirm_auto_silo">Switch ICBM silo to auto-retaliate? In auto mode, the silo will return fire at the owner of any incoming ICBMs whether you are online or offline.</string>
     <string name="confirm_semi_silo">Switch ICBM silo to semi-auto? In semi-auto mode the silo will retaliate against the owner of incoming ICBMs only if you are offline.</string>
@@ -604,10 +603,10 @@
     <string name="desc_fighter">Engage airborne hostiles.</string>
     <string name="desc_attack_aircraft">Engage ground targets with guns.</string>
     <string name="desc_refueler">Provide aerial refueling.</string>
-    <string name="desc_ssb">Fast and long ranged with medium armament.</string>
+    <string name="desc_ssb">Fast, long-ranged, medium armament.</string>
     <string name="desc_multi_role">Engage aerial and ground hostiles.</string>
     <string name="offensive_structures">Offensive Structures</string>
-    <string name="desc_icbm_silo">Used to purchase and fire ICBMs.</string>
+    <string name="desc_icbm_silo">Purchase and fire ICBMs.</string>
     <string name="flying_cant_purchase">The aircraft must land before it can be re-armed.</string>
     <string name="status_moving">Moving to position</string>
     <string name="status_hold">Holding position</string>
@@ -650,10 +649,26 @@
     <string name="bank">Bank</string>
     <string name="bank_title">bank</string>
     <string name="construct_name_bank">bank</string>
+    <string name="solar_panel">Solar Array</string>
+    <string name="solar_panel_title">solar array</string>
+    <string name="construct_name_solar_panel">solar array</string>
+    <string name="farm">Farm</string>
+    <string name="farm_title">farm</string>
+    <string name="construct_name_farm">farm</string>
+    <string name="ore_mine">Ore Mine</string>
+    <string name="ore_mine_title">ore mine</string>
+    <string name="construct_name_ore_mine">ore mine</string>
+    <string name="logistics_depot">Logistics Depot</string>
+    <string name="logistics_depot_title">logistics depot</string>
+    <string name="construct_name_logistics_depot">logistics depot</string>
     <string name="bank_offline">You cannot do this while the bank is offline.</string>
     <string name="bank_full">The bank does not have room to deposit this amount.</string>
     <string name="bank_money_stats">Wealth: %1$s\/%2$s</string>
     <string name="desc_bank">Store wealth.</string>
+    <string name="desc_solar_panel">Gain small amounts of wealth.</string>
+    <string name="desc_farm">Gain large amounts of wealth.</string>
+    <string name="desc_ore_mine">Gain wealth while traveling.</string>
+    <string name="desc_logistics_depot">Collect wealth easily.</string>
     <string name="must_specify_new_airbase">You must select a new homebase for the aircraft.</string>
     <string name="homebase_must_be_open">You may only send your aircraft to airbases that are open or owned by you.</string>
     <string name="too_far_from_post">Too far from the selected command post.</string>
@@ -827,8 +842,8 @@
     <string name="title_target_artillery">Designate Target</string>
     <string name="in_port_repairing">Vessel in port. Will repair and refuel at top of the hour.</string>
     <string name="cease_fire_confirm">Make this unit cease any ongoing attacks and hold position?</string>
-    <string name="submarine_submerged">SUBMARINE SUBMERGED. Anti-submarine missiles or nuclear weapons required.</string>
-    <string name="attack_submerged_submarine_confirm">This submarine is submerged. The missile you are attacking it with will have no effect. You must use anti-submarine missiles or torpedoes to damage submerged submarines. Fire anyway?</string>
+    <string name="submarine_submerged">Anti-submarine missiles or ground-burst nuclear weapons required.</string>
+    <string name="attack_submerged_submarine_confirm">This missile has no effect on submarines. You must use anti-submarine missiles, ground-burst nukes, or torpedoes to damage submarines. Fire anyway?</string>
     <string name="sell_naval_vessel_confirm">Sell this vessel for %1$s? This action will be completed instantly and cannot be undone.</string>
     <string name="sell_land_unit_confirm">Sell this unit for %1$s? This will be completed instantly and cannot be undone.</string>
     <string name="too_far_cant_capture">You must be within %1$s of the structure to capture it.</string>
@@ -915,6 +930,7 @@
     <string name="sorted_by_format">Sorted by: %1$s</string>
     <string name="show_chats">Show Chats</string>
     <string name="show_hints">Show Hints</string>
+    <string name="blast_radii_clickable">Tapping blast radii selects missiles.</string>
     <string name="warning_chemicals">AREA IS CONTAMINATED. EXPOSURE LETHAL. Expires in: %1$s</string>
     <string name="contaminated">This area is contaminated until %1$s</string>
     <string name="chemical_information">Chemical weapons create contaminated areas that instantly kill players and infantry passing through them as well as preventing any structures inside them from being brought online.</string>
@@ -950,4 +966,11 @@
     <string name="koth_occupied">Current king: %1$s</string>
     <string name="koth_contested">Contested</string>
     <string name="koth_empty">Presently Empty</string>
+    <string name="ore_mine_competing">%1$d\/%2$d (%3$s)</string>
+    <string name="collect">COLLECT</string>
+    <string name="must_build_hq">You must build a headquarters before you can build any other structures.</string>
+    <string name="cannot_build_farm">You cannot build a farm here as it is too close to existing farms.</string>
+    <string name="no_hq_cant_zoom">You cannot locate this player as they have no HQ and no command posts.</string>
+    <string name="depot_not_ready">Cooldown not expired.</string>
+    <string name="depot_full">The depot is full and cannot hold any more wealth.</string>
 </resources>

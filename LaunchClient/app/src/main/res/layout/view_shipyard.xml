@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+             android:layout_width="match_parent"
              android:layout_height="match_parent"
              android:foreground="@drawable/view_frame">
     <ScrollView
@@ -36,6 +34,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/imgProduction"
+                    android:layout_marginTop="@dimen/SeperatorMargins"
                     android:src="@drawable/image_shipyard"/>
 
                 <LinearLayout
@@ -79,13 +78,6 @@
                 android:layout_height="match_parent">
 
             </FrameLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/SeparatorThickness"
-                android:layout_marginTop="@dimen/SeperatorMargins"
-                android:layout_marginBottom="@dimen/SeperatorMargins"
-                android:background="?attr/ButtonEdgeColour" />
 
             <LinearLayout
                 android:id="@+id/lytContents"
@@ -148,9 +140,7 @@
                     android:id="@+id/txtDescUpgradeCapacity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/MainViewSideMargin"
                     android:layout_marginTop="@dimen/SeperatorMargins"
-                    android:layout_marginRight="@dimen/MainViewSideMargin"
                     android:background="?attr/TextViewBackgroundColour"
                     android:text="@string/desc_shipyard_capacity_upgrade"
                     android:textColor="?attr/InfoColour"
@@ -169,9 +159,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="@dimen/MainViewSideMargin"
                         android:layout_marginTop="@dimen/MainViewSpacing"
-                        android:layout_marginRight="@dimen/MainViewSideMargin"
                         android:layout_marginBottom="@dimen/MainViewSpacing"
                         android:background="@drawable/text_button_normal"
                         android:clickable="true"
@@ -223,14 +211,6 @@
                 </LinearLayout>
 
                 <FrameLayout
-                    android:layout_marginTop="@dimen/MainViewSpacing"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/lytInputs">
-
-                </FrameLayout>
-
-                <FrameLayout
                     android:id="@+id/lytCargo"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -249,10 +229,7 @@
                     android:id="@+id/txtQueue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/MainViewSideMargin"
-                    android:layout_marginBottom="@dimen/SeperatorMargins"
                     android:layout_marginTop="@dimen/SeperatorMargins"
-                    android:layout_marginRight="@dimen/MainViewSideMargin"
                     android:text="@string/shipyard_queue"
                     android:textStyle="bold"
                     android:textAppearance="?android:attr/textAppearanceSmall"
@@ -264,8 +241,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/MainViewSpacing"
                     android:id="@+id/lytQueue"
-                    android:layout_marginLeft="@dimen/MainViewSideMargin"
-                    android:layout_marginRight="@dimen/MainViewSideMargin"
                     android:layout_marginBottom="@dimen/MainViewSpacing">
 
                 </LinearLayout>

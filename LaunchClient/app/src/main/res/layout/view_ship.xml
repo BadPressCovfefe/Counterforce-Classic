@@ -115,6 +115,16 @@
                         </LinearLayout>
 
                         <TextView
+                            android:id="@+id/txtShipStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/ButtonSpacingNarrow"
+                            android:gravity="center_horizontal"
+                            android:text="Ready"
+                            android:visibility="visible" />
+
+                        <TextView
                             android:id="@+id/txtHP"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -143,6 +153,7 @@
                 android:text="@string/missile_to_target"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="?attr/InfoColour"
+                android:layout_gravity="center_horizontal"
                 android:visibility="gone" />
 
             <View
@@ -404,7 +415,7 @@
             </LinearLayout>
 
             <View
-                android:id="@+id/view28"
+                android:id="@+id/viewBottom"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/SeparatorThickness"
                 android:layout_marginTop="@dimen/SeperatorMargins"
@@ -488,7 +499,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/imageView19"
+                    android:id="@+id/imgSell"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

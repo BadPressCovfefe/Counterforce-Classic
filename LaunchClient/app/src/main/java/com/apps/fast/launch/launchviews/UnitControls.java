@@ -28,13 +28,13 @@ import launch.game.entities.Shipyard;
 import launch.game.entities.Structure;
 import launch.game.entities.Movable.MoveOrders;
 import launch.game.EntityPointer.EntityType;
+import launch.game.entities.Tank;
 
 public class UnitControls extends LaunchView
 {
     private LinearLayout lytMovementOptions;
     private LinearLayout lytAttackOptions;
     private LinearLayout btnMovePlayer;
-    private LinearLayout btnMoveAircraft;
     private LinearLayout btnAircraftTarget;
     private LinearLayout btnInterceptorTarget;
     private LinearLayout btnMissileTarget;
@@ -55,7 +55,7 @@ public class UnitControls extends LaunchView
     {
         super(game, activity, true);
         this.entity = entity;
-        this.geoCoord = geoCoord;
+        this.geoCoord = null;
 
         Setup();
     }
@@ -68,28 +68,9 @@ public class UnitControls extends LaunchView
         lytMovementOptions = findViewById(R.id.lytMovementOptions);
         lytAttackOptions = findViewById(R.id.lytAttackOptions);
         btnMovePlayer = findViewById(R.id.btnMovePlayer);
-        btnMoveAircraft = findViewById(R.id.btnMoveAircraft);
         btnAircraftTarget = findViewById(R.id.btnAircraftTarget);
         btnInterceptorTarget = findViewById(R.id.btnInterceptorTarget);
         btnMissileTarget = findViewById(R.id.btnMissileTarget);
-
-        //Set onclicklisteners.
-
-        btnMoveAircraft.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                if(!game.GetInteractionReady())
-                {
-                    activity.ShowBasicOKDialog(context.getString(R.string.waiting_for_data));
-                }
-                else
-                {
-                    activity.SelectForAction(geoCoord, entity, EntityType.AIRPLANE, MoveOrders.MOVE);
-                }
-            }
-        });
 
         btnAircraftTarget.setOnClickListener(new OnClickListener()
         {
@@ -160,6 +141,7 @@ public class UnitControls extends LaunchView
             }
 
             btnInterceptorTarget.setVisibility(GONE);
+            btnAircraftTarget.setVisibility(GONE);
         }
         else if(entity != null)
         {
@@ -172,23 +154,10 @@ public class UnitControls extends LaunchView
                 else
                 {
                     lytMovementOptions.setVisibility(GONE);
-
                     btnInterceptorTarget.setVisibility(GONE);
                 }
             }
-            else if(entity instanceof CargoTruck)
-            {
-                if(game.WouldBeFriendlyFire(game.GetOurPlayer(), game.GetOwner(entity)))
-                {
-                    lytAttackOptions.setVisibility(GONE);
-                }
-                else
-                {
-                    lytMovementOptions.setVisibility(GONE);
-                    btnInterceptorTarget.setVisibility(GONE);
-                }
-            }
-            else if(entity instanceof LandUnit)
+            else if(entity instanceof Tank)
             {
                 if(game.WouldBeFriendlyFire(game.GetOurPlayer(), game.GetOwner(entity)))
                 {

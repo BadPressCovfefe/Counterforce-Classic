@@ -92,7 +92,7 @@ public class LaunchUICommon
     {
         boolean IsSingleTank();
         Tank GetCurrentTank();
-        List<TankInterface> GetCurrentTanks();
+        List<Tank> GetCurrentTanks();
     }
 
     public interface ShipyardInfoProvider
@@ -121,7 +121,7 @@ public class LaunchUICommon
                 if(infoProvider.IsSingleStructure())
                 {
                     Structure structure = infoProvider.GetCurrentStructure();
-                    int lMaintenanceCost = game.GetConfig().GetMaintenanceCost(structure);
+                    int lMaintenanceCost = game.GetConfig().GetMaintenanceCost();
 
                     if(structure.GetRunning())
                     {

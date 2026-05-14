@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import launch.comm.LaunchServerComms;
 import launch.game.Alliance;
 import launch.game.Defs;
@@ -19,21 +18,17 @@ import launch.game.LaunchServerGame;
 import launch.game.treaties.Treaty;
 import launch.game.User;
 import launch.game.entities.*;
-import launch.game.entities.conceptuals.Resource.ResourceType;
-import launch.game.systems.CargoSystem;
 import launch.game.systems.MissileSystem;
 
 import launch.game.treaties.War;
 import launch.game.types.InterceptorType;
 import launch.game.types.MissileType;
-import launch.game.types.TorpedoType;
 import launch.utilities.LaunchEvent;
 import launch.utilities.LaunchLog;
 import launch.utilities.LaunchPerf;
 import launch.utilities.LaunchReport;
 import launch.utilities.LaunchUtilities;
 import launch.utilities.MissileStats;
-import launch.utilities.TerrainChecker;
 import storage.GameLoadSaveListener;
 import storage.XMLGameLoader;
 
@@ -208,46 +203,6 @@ public class LaunchConsole
                     }
                     
                     LaunchLog.ConsoleMessage("Deposits cleared.");
-                }
-                break;
-                
-                case "give_membership":
-                {
-                    Integer lID = Integer.parseInt(args[1]);
-                    Player player = game.GetPlayer(lID);
-                    
-                    if(player != null)
-                    {
-                        player.SetMemberStatus(true);
-                        player.SetAdminMember(true);
-                        LaunchLog.ConsoleMessage(String.format("Made %s a member.", player.GetName()));
-                    }
-                }
-                break;
-                
-                case "remove_membership":
-                {
-                    Integer lID = Integer.parseInt(args[1]);
-                    Player player = game.GetPlayer(lID);
-                    
-                    if(player != null)
-                    {
-                        player.SetAdminMember(false);
-                        LaunchLog.ConsoleMessage(String.format("Removed %s's membership.", player.GetName()));
-                    }
-                }
-                break;
-                
-                case "set_champion":
-                {
-                    Integer lID = Integer.parseInt(args[1]);
-                    Player player = game.GetPlayer(lID);
-                    
-                    if(player != null)
-                    {
-                        player.SetChampion(true);
-                        LaunchLog.ConsoleMessage(String.format("Made %s the champion.", player.GetName()));
-                    }
                 }
                 break;
                 

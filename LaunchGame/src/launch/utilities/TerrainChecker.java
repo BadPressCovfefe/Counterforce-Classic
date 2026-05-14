@@ -93,6 +93,16 @@ public final class TerrainChecker
         return newValue == 0 ? newValue : newValue - 1;
     }
     
+    public static GeoCoord PixelToGeoCoord(int x, int y)
+    {
+        float longitude = (x / WATER_PIXELS_PER_COORDINATE_LONG) - 180;
+
+        double mercN = (WATER_MAP_HEIGHT / 2.0 - y) * (2 * Math.PI) / WATER_MAP_HEIGHT;
+        double latitude = Math.toDegrees(Math.atan(Math.sinh(mercN)));
+
+        return new GeoCoord((float)latitude, (float)longitude);
+    }
+    
     //Call this directly in XMLGameLoader.
     public static void LoadHighResMaps(List<WaterMap> newHighResMaps)
     {

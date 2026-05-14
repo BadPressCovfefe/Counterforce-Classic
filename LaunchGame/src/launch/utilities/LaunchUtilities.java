@@ -75,7 +75,7 @@ public class LaunchUtilities
     public static boolean PROCESSORS_VISIBLE = true;
     public static boolean SHIPS_VISIBLE = true;
     public static boolean ARTILLERY_GUNS_VISIBLE = true;
-    public static boolean SCRAP_YARDS_VISIBLE = true;
+    public static boolean LOGISTICS_DEPOTS_VISIBLE = true;
     public static boolean DISTRIBUTORS_VISIBLE = true;
     public static boolean RUBBLES_VISIBLE = true;
     public static boolean ONLINE_VISIBLE = true;
@@ -233,9 +233,12 @@ public class LaunchUtilities
 
         // Write count as unsigned short (validate first)
         int count = StoredAircrafts.size();
-        if (count > 0xFFFF) {
+        
+        if (count > 0xFFFF) 
+        {
             throw new IllegalStateException("Too many airplanes: " + count);
         }
+        
         bb.putShort((short) (count & 0xFFFF));
 
         for (StoredAirplane aircraft : StoredAircrafts)
@@ -244,6 +247,7 @@ public class LaunchUtilities
             byte[] data = aircraft.GetData(aircraft.GetOwnerID());
             bb.put(data);
         }
+        
         return bb.array();
     }
 
@@ -422,18 +426,11 @@ public class LaunchUtilities
         else if(entity instanceof Infantry)
             bEntityTypeVisible = INFANTRIES_VISIBLE;
         else if(entity instanceof Tank)
-        {
-            Tank tank = (Tank)entity;
-            
-            if(tank.IsAnMBT() || tank.IsArtillery() || tank.IsMissiles() || tank.IsInterceptors())
-                bEntityTypeVisible = TANKS_VISIBLE;
-            else if(tank.IsASPAAG())
-                bEntityTypeVisible = SPAAGS_VISIBLE;
-        }
+            bEntityTypeVisible = TANKS_VISIBLE;
         else if(entity instanceof Shipyard)
             bEntityTypeVisible = SHIPYARDS_VISIBLE;
-        else if(entity instanceof ScrapYard)
-            bEntityTypeVisible = SCRAP_YARDS_VISIBLE;
+        else if(entity instanceof LogisticsDepot)
+            bEntityTypeVisible = LOGISTICS_DEPOTS_VISIBLE;
         else if(entity instanceof Ship)
             bEntityTypeVisible = SHIPS_VISIBLE;
         else if(entity instanceof Submarine)
@@ -451,41 +448,7 @@ public class LaunchUtilities
         else if(entity instanceof Rubble)
             return RUBBLES_VISIBLE;
         else if(entity instanceof Loot)
-        {
-            Loot loot = (Loot)entity;
-            
-            if(LOOTS_VISIBLE)
-            {
-                if(loot.GetLootType() == LootType.RESOURCES)
-                {
-                    ResourceType type = ResourceType.values()[loot.GetCargoID()];
-
-                    switch(type)
-                    {
-                        case IRON: return IRON_LOOT_VISIBLE;
-                        case COAL: return COAL_LOOT_VISIBLE;
-                        case OIL: return OIL_LOOT_VISIBLE;
-                        case CROPS: return CROP_LOOT_VISIBLE;
-                        case URANIUM: return URANIUM_LOOT_VISIBLE;
-                        case GOLD: return GOLD_LOOT_VISIBLE;
-                        case LUMBER: return LUMBER_LOOT_VISIBLE;
-                        case WEALTH: return WEALTH_LOOT_VISIBLE;
-                        case NUCLEAR_ELECTRICITY:
-                        case ELECTRICITY: return ELECTRICITY_LOOT_VISIBLE;
-                        case CONCRETE: return CONCRETE_LOOT_VISIBLE;
-                        case FUEL: return FUEL_LOOT_VISIBLE;
-                        case FOOD: return FOOD_LOOT_VISIBLE;
-                        case STEEL: return STEEL_LOOT_VISIBLE;
-                        case CONSTRUCTION_SUPPLIES: return CONSTRUCTION_SUPPLIES_LOOT_VISIBLE;
-                        case MACHINERY: return MACHINERY_LOOT_VISIBLE;
-                        case ELECTRONICS: return ELECTRONICS_LOOT_VISIBLE;
-                        case MEDICINE: return MEDICINE_LOOT_VISIBLE;
-                        case ENRICHED_URANIUM: return FISSILE_LOOT_VISIBLE;
-                        default: return true;
-                    }
-                }
-            }
-        }
+            return LOOTS_VISIBLE;
         else if(entity instanceof Airdrop)
             return true;
 

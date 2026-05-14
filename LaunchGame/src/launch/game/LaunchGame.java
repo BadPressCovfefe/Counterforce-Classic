@@ -108,11 +108,11 @@ public abstract class LaunchGame implements LaunchEntityListener
     protected Map<Integer, Warehouse> Warehouses = new ConcurrentHashMap<>();
     protected Map<Integer, InfantryInterface> Infantries = new ConcurrentHashMap<>();
     protected Map<Integer, CargoTruckInterface> CargoTrucks = new ConcurrentHashMap<>();
-    protected Map<Integer, TankInterface> Tanks = new ConcurrentHashMap<>();
+    protected Map<Integer, Tank> Tanks = new ConcurrentHashMap<>();
     protected Map<Integer, Distributor> Distributors = new ConcurrentHashMap<>();
     protected Map<Integer, Shipyard> Shipyards = new ConcurrentHashMap<>();
     protected Map<Integer, Processor> Processors = new ConcurrentHashMap<>();
-    protected Map<Integer, ScrapYard> ScrapYards = new ConcurrentHashMap<>();
+    protected Map<Integer, LogisticsDepot> LogisticsDepots = new ConcurrentHashMap<>();
     protected Map<Integer, Ship> Ships = new ConcurrentHashMap<>();
     protected Map<Integer, Submarine> Submarines = new ConcurrentHashMap<>();
     protected Map<Integer, Rubble> Rubbles = new ConcurrentHashMap<>();
@@ -417,17 +417,6 @@ public abstract class LaunchGame implements LaunchEntityListener
             }
         }
         
-        for(ArtilleryGun artillery : ArtilleryGuns.values())
-        {
-            artillery.Tick(lMS);
-            
-            if(artillery.Destroyed())
-            {
-                ArtilleryGuns.remove(artillery.GetID());
-                EntityRemoved(artillery, true);
-            }
-        }
-        
         for(SAMSite samSite : SAMSites.values())
         {
             samSite.Tick(lMS);
@@ -461,20 +450,23 @@ public abstract class LaunchGame implements LaunchEntityListener
             }
         }
         
-        for(MissileFactory missileFactory : MissileFactorys.values())
-        {
-            missileFactory.Tick(lMS);
-            
-            if(missileFactory.Destroyed())
-            {
-                MissileFactorys.remove(missileFactory.GetID());
-                EntityRemoved(missileFactory, true);
-            }
-        }
-        
         for(OreMine oreMine : OreMines.values())
         {
-            oreMine.Tick(lMS);
+            switch(oreMine.GetEntityType())
+            {
+                case SOLAR_PANEL:
+                case ORE_MINE:
+                {
+                    oreMine.Tick(lMS, oreMine.GetOnline() && !GetRadioactive(oreMine, true));
+                }
+                break;
+                
+                case FARM:
+                {
+                    oreMine.Tick(lMS, oreMine.GetOnline() && GetFarmIsWorked(oreMine) && !GetRadioactive(oreMine, true));
+                }
+                break;
+            }
             
             if(oreMine.Destroyed())
             {
@@ -567,6 +559,14 @@ public abstract class LaunchGame implements LaunchEntityListener
             }
         }
         
+        for(LogisticsDepot depot : GetLogisticsDepots())
+        {
+            if(!depot.Destroyed())
+            {
+                depot.Tick(lMS);
+            }
+        }
+        
         for(Tank tank : GetTanks())
         {
             if(tank.Destroyed() || tank.GetRemove())
@@ -593,7 +593,7 @@ public abstract class LaunchGame implements LaunchEntityListener
 
                                 if(tank.GetNextCoordinate() == null)
                                 {
-                                    tank.DefendPosition();
+                                    tank.Wait();
                                 }
                             }
 
@@ -606,7 +606,7 @@ public abstract class LaunchGame implements LaunchEntityListener
 
                             if(geoPosition.MoveToward(geoTarget, Defs.LAND_UNIT_SPEED, lMS))
                             {
-                                tank.DefendPosition();
+                                tank.Wait();
                             }
 
                             EntityMoved(tank);
@@ -639,7 +639,7 @@ public abstract class LaunchGame implements LaunchEntityListener
                         }  
                         else
                         {
-                            tank.DefendPosition();
+                            tank.Wait();
                         }
                     }
                     break;
@@ -873,96 +873,6 @@ public abstract class LaunchGame implements LaunchEntityListener
                     }
                     break;
                     
-                    case SEEK_FUEL:
-                    {
-                        if(submarine.GetTarget() != null)
-                        {
-                            NavalVessel tanker = (NavalVessel)submarine.GetTarget().GetMapEntity(this);
-                            
-                            if(tanker != null && tanker.GetMoveOrders() == MoveOrders.PROVIDE_FUEL)
-                            {
-                                GeoCoord geoTarget = tanker.GetPosition().GetCopy();
-                                GeoCoord geoPosition = submarine.GetPosition();
-                                float fltDistance = submarine.GetPosition().DistanceTo(tanker.GetPosition());
-
-                                //If the submarine is outside of refueling distance, move toward the tanker. otherwise do nothing, meaning that when the submarine gets within refueling distance, it will stop.
-                                if(fltDistance > Defs.SHIP_REFUELING_DISTANCE)
-                                {
-                                    geoPosition.MoveToward(geoTarget, Defs.NAVAL_SPEED, lMS);
-                                    EntityMoved(submarine);
-
-                                    if(!submarine.GetNuclear())
-                                    {
-                                        float fltFuelUsed = Defs.GetFuelUsagePerTick(lMS, Defs.NAVAL_RANGE, Defs.NAVAL_SPEED);
-                                        submarine.UseFuel(fltFuelUsed);
-                                    }
-                                }
-                                else
-                                {
-                                    if(submarine.Submerged())
-                                        submarine.DiveOrSurface();
-                                }
-                            }
-                            else
-                            {
-                                submarine.MoveToPosition(submarine.GetGeoTarget());
-                            }
-                        }
-                        else
-                        {
-                            submarine.MoveToPosition(submarine.GetGeoTarget());
-                        } 
-                    }
-                    break;
-                    
-                    case PROVIDE_FUEL:
-                    {
-                        if(submarine.GetTarget() != null && submarine.GetCurrentFuel() > Defs.SHIP_REFUEL_RATE_PER_TICK_TONS)
-                        {
-                            NavalVessel receiver = (NavalVessel)submarine.GetTarget().GetMapEntity(this);
-
-                            if(receiver != null && receiver.GetMoveOrders() == MoveOrders.SEEK_FUEL)
-                            {
-                                if(receiver.GetMoveOrders() == MoveOrders.SEEK_FUEL)
-                                {
-                                    GeoCoord geoTarget = submarine.GetGeoTarget();
-                                    GeoCoord geoPosition = submarine.GetPosition();
-                                    float fltDistance = submarine.GetPosition().DistanceTo(receiver.GetPosition());
-
-                                    if(fltDistance > Defs.SHIP_REFUELING_DISTANCE)
-                                    { 
-                                        geoPosition.MoveToward(geoTarget, Defs.NAVAL_SPEED, lMS);
-                                        EntityMoved(submarine);
-                                        
-                                        if(!submarine.GetNuclear())
-                                        {
-                                            float fltFuelUsed = Defs.GetFuelUsagePerTick(lMS, Defs.NAVAL_RANGE, Defs.NAVAL_SPEED);
-                                            submarine.UseFuel(fltFuelUsed);
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if(submarine.Submerged())
-                                            submarine.DiveOrSurface();
-                                    }
-                                }
-                                else
-                                {
-                                    submarine.MoveToPosition(submarine.GetGeoTarget());
-                                }
-                            }
-                            else
-                            {
-                                submarine.MoveToPosition(submarine.GetGeoTarget());
-                            }
-                        }   
-                        else
-                        {
-                            submarine.MoveToPosition(submarine.GetGeoTarget());
-                        }
-                    }
-                    break;
-                    
                     case ATTACK:
                     {
                         //TODO: Notes in AUTOMATIC_MISSILE_FIRING.txt. Actually, since no movement is performed for submarine/ship attacks, this should only be in LaunchServerGame.
@@ -1130,7 +1040,7 @@ public abstract class LaunchGame implements LaunchEntityListener
                                     }
                                 } 
 
-                                if(target == null || (!(target instanceof Submarine && ((Submarine)target).Submerged())))
+                                if(target == null || !(target instanceof Submarine))
                                 {
                                     if(geoPosition.TurnToward(geoTarget, fltTurnRate, fltSpeed, lMS))
                                     { 
@@ -1692,7 +1602,7 @@ public abstract class LaunchGame implements LaunchEntityListener
 
         for(Capturable capturable : GetAllCapturables())
         {
-            if(capturable.IsCaptured() && !missile.ThreatensPlayersStructures(capturable.GetOwnerID()) && !capturable.Destroyed())
+            if(capturable.GetCaptured() && !missile.ThreatensPlayersStructures(capturable.GetOwnerID()) && !capturable.Destroyed())
             {
                 if(capturable.GetPosition().DistanceTo(geoTarget) <= fltThreatRadius)
                 {
@@ -2506,9 +2416,10 @@ public abstract class LaunchGame implements LaunchEntityListener
         {
             LaunchUtilities.AddResourceMapsTogether(Values, Defs.ORE_MINE_STRUCTURE_COST);
         }
-        else if(structure instanceof ScrapYard)
+        else if(structure instanceof LogisticsDepot depot)
         {
-            LaunchUtilities.AddResourceMapsTogether(Values, Defs.SCRAPYARD_STRUCTURE_COST);
+            LaunchUtilities.AddResourceMapsTogether(Values, Defs.LOGISTICS_DEPOT_STRUCTURE_COST);
+            LaunchUtilities.AddResourceMapsTogether(Values, Map.ofEntries(entry(ResourceType.WEALTH, (long)depot.GetWealth())));
         }
         else if(structure instanceof RadarStation)
         {
@@ -2548,9 +2459,10 @@ public abstract class LaunchGame implements LaunchEntityListener
         {
             LaunchUtilities.AddResourceMapsTogether(Values, Defs.GetProcessorCost(((Processor)structure).GetType()));
         }
-        else if(structure instanceof Warehouse)
+        else if(structure instanceof Warehouse warehouse)
         {
             LaunchUtilities.AddResourceMapsTogether(Values, Defs.WAREHOUSE_STRUCTURE_COST);
+            LaunchUtilities.AddResourceMapsTogether(Values, Map.ofEntries(entry(ResourceType.WEALTH, (long)warehouse.GetWealth())));
         }
         else if(structure instanceof Distributor)
         {
@@ -2608,24 +2520,6 @@ public abstract class LaunchGame implements LaunchEntityListener
         LaunchUtilities.AddResourceMapsTogether(Values, Defs.GetAircraftBuildCost(aircraft.GetAircraftType()));
         
         return Values;
-    }
-    
-    public final Map<ResourceType, Long> GetLandUnitValue(LandUnit unit)
-    {
-        if(unit instanceof TankInterface)
-        {
-            return GetTankValue((TankInterface)unit);
-        }
-        else if(unit instanceof InfantryInterface infantry)
-        {
-            return GetInfantryValue(infantry);
-        }
-        else if(unit instanceof CargoTruckInterface)
-        {
-            return GetCargoTruckValue((CargoTruckInterface)unit);
-        }
-        
-        return null;
     }
     
     public final Map<ResourceType, Long> GetInfantryValue(InfantryInterface infantry)
@@ -2698,25 +2592,6 @@ public abstract class LaunchGame implements LaunchEntityListener
         }
         
         return Values;
-    }
-    
-    public Map<ResourceType, Long> GetTankValue(TankInterface tank)
-    {
-        Map<ResourceType, Long> BaseValue = new ConcurrentHashMap<>();
-        
-        LaunchUtilities.AddResourceMapsTogether(BaseValue, Defs.TANK_BUILD_COST);
-        
-        if(tank.HasMissiles() || tank.HasArtillery())
-        {
-            LaunchUtilities.AddResourceMapsTogether(BaseValue, GetGeneralMissileSystemValue(tank.GetMissileSystem(), true));
-        }
-        
-        if(tank.HasInterceptors())
-        {
-            LaunchUtilities.AddResourceMapsTogether(BaseValue, GetGeneralMissileSystemValue(tank.GetMissileSystem(), false));
-        }
-        
-        return BaseValue;
     }
     
     public Map<ResourceType, Long> GetAircraftSystemValue(AircraftSystem system)
@@ -3488,34 +3363,6 @@ public abstract class LaunchGame implements LaunchEntityListener
                 }
             }
             
-            //Artillery Guns
-            
-            for(ArtilleryGun gun : GetArtilleryGuns())
-            {
-                if(gun.GetOwnedBy(player.GetID()))
-                {
-                    lValue += GetStructureValue(gun).get(ResourceType.WEALTH);
-                }
-            }
-            
-            //Tanks
-            
-            for(TankInterface tank : GetAllTanks())
-            {
-                if(tank.GetOwnedBy(player.GetID()))
-                {
-                    lValue += Defs.TANK_BUILD_COST.get(ResourceType.WEALTH);
-                    
-                    if(tank.GetType() == EntityType.HOWITZER || tank.GetType() == EntityType.MISSILE_TANK)
-                    {
-                        if(GetGeneralMissileSystemValue(tank.GetMissileSystem(), true).get(ResourceType.WEALTH) != null)
-                        {
-                            lValue += GetGeneralMissileSystemValue(tank.GetMissileSystem(), true).get(ResourceType.WEALTH);
-                        }
-                    }
-                }
-            }
-            
             //Submarines
             
             for(Submarine submarine : GetSubmarines())
@@ -3583,24 +3430,6 @@ public abstract class LaunchGame implements LaunchEntityListener
                 if(sentry.GetOwnedBy(player.GetID()))
                 {
                     lValue += GetStructureValue(sentry).get(ResourceType.WEALTH);
-                }
-            }
-            
-            //SPAAGs and SAM tanks
-            
-            for(TankInterface tank : GetAllTanks())
-            {
-                if(tank.GetOwnedBy(player.GetID()))
-                {
-                    lValue += Defs.TANK_BUILD_COST.get(ResourceType.WEALTH);
-                    
-                    if(tank.GetType() == EntityType.SAM_TANK)
-                    {
-                        if(GetGeneralMissileSystemValue(tank.GetMissileSystem(), false).get(ResourceType.WEALTH) != null)
-                        {
-                            lValue += GetGeneralMissileSystemValue(tank.GetMissileSystem(), false).get(ResourceType.WEALTH);
-                        }
-                    }
                 }
             }
             
@@ -4490,7 +4319,7 @@ public abstract class LaunchGame implements LaunchEntityListener
     
     public void AddStoredTank(StoredTank tank)
     {
-        Tanks.put(tank.GetID(), tank);
+        //Tanks.put(tank.GetID(), tank);
         LaunchEntity hostEntity = tank.GetHost().GetEntity(this);
         CargoSystem system = null;
         
@@ -4580,7 +4409,7 @@ public abstract class LaunchGame implements LaunchEntityListener
         EntityAdded(distributor);
     }
     
-    public void AddTank(TankInterface tank)
+    public void AddTank(Tank tank)
     {
         ((LaunchEntity)tank).SetListener(this);
         Tanks.put(tank.GetID(), tank);
@@ -4739,19 +4568,19 @@ public abstract class LaunchGame implements LaunchEntityListener
         EntityAdded(artillery);
     }
     
-    public void AddScrapYard(ScrapYard yard)
+    public void AddLogisticsDepot(LogisticsDepot depot)
     {
-        yard.SetListener(this);
-        ScrapYards.put(yard.GetID(), yard);
+        depot.SetListener(this);
+        LogisticsDepots.put(depot.GetID(), depot);
         
-        EntityUpdated(yard, false);
+        EntityUpdated(depot, false);
         
-        Player owner = GetOwner(yard);
+        Player owner = GetOwner(depot);
         
         if(owner != null)
-            owner.AddOwnedEntity(yard);
+            owner.AddOwnedEntity(depot);
         
-        EntityAdded(yard);
+        EntityAdded(depot);
     }
     
     public void AddLoot(Loot loot)
@@ -4829,7 +4658,6 @@ public abstract class LaunchGame implements LaunchEntityListener
     public Collection<MissileSite> GetMissileSites() { return MissileSites.values(); }
     public Collection<SAMSite> GetSAMSites() { return SAMSites.values(); }
     public Collection<SentryGun> GetSentryGuns() { return SentryGuns.values(); }
-    public Collection<ArtilleryGun> GetArtilleryGuns() { return ArtilleryGuns.values(); }
     public Collection<OreMine> GetOreMines() { return OreMines.values(); }
     public Collection<RadarStation> GetRadarStations() { return RadarStations.values(); }
     public Collection<CommandPost> GetCommandPosts() { return CommandPosts.values(); }
@@ -4846,7 +4674,7 @@ public abstract class LaunchGame implements LaunchEntityListener
     public Collection<Shipyard> GetShipyards() { return Shipyards.values(); }
     public Collection<Processor> GetProcessors() { return Processors.values(); }
     public Collection<Distributor> GetDistributors() { return Distributors.values(); }
-    public Collection<ScrapYard> GetScrapYards() { return ScrapYards.values(); }
+    public Collection<LogisticsDepot> GetLogisticsDepots() { return LogisticsDepots.values(); }
     public Collection<Ship> GetShips() { return Ships.values(); }
     public Collection<Submarine> GetSubmarines() { return Submarines.values(); }
     public Collection<Rubble> GetRubbles() { return Rubbles.values(); }
@@ -4868,7 +4696,21 @@ public abstract class LaunchGame implements LaunchEntityListener
         
         for(SentryGun sentryGun : GetSentryGuns())
         {
-            Result.add(sentryGun);            
+            if(!sentryGun.GetIsWatchTower())
+                Result.add(sentryGun);            
+        }
+        
+        return Result;
+    }
+    
+    public Collection<SentryGun> GetArtilleryGuns() 
+    { 
+        List<SentryGun> Result = new ArrayList<>();
+        
+        for(SentryGun sentryGun : GetSentryGuns())
+        {
+            if(sentryGun.GetIsWatchTower())
+                Result.add(sentryGun);            
         }
         
         return Result;
@@ -4977,35 +4819,7 @@ public abstract class LaunchGame implements LaunchEntityListener
         return Result;
     }
     
-    public Collection<TankInterface> GetAllTanks() { return Tanks.values(); }
-    
-    public Collection<Tank> GetTanks()
-    {
-        List<Tank> Result = new ArrayList<>();
-        
-        for(TankInterface tank : Tanks.values())
-        {
-            if(tank instanceof Tank)
-                Result.add((Tank)tank);
-        }
-        
-        return Result;
-    }
-    
-    public Collection<StoredTank> GetStoredTanks() 
-    { 
-        List<StoredTank> Result = new ArrayList<>();
-        
-        for(TankInterface tank : Tanks.values())
-        {
-            if(tank instanceof StoredTank)
-            {
-                Result.add((StoredTank)tank);
-            }
-        }
-        
-        return Result;
-    }
+    public Collection<Tank> GetTanks() { return Tanks.values(); }
     
     public Collection<CargoTruckInterface> GetAllCargoTrucks() { return CargoTrucks.values(); }
     
@@ -5017,71 +4831,6 @@ public abstract class LaunchGame implements LaunchEntityListener
         {
             if(truck instanceof CargoTruck)
                 Result.add((CargoTruck)truck);
-        }
-        
-        return Result;
-    }
-    
-    public Collection<Tank> GetMainBattleTanks()
-    {
-        List<Tank> Result = new ArrayList<>();
-        
-        for(TankInterface tank : Tanks.values())
-        {
-            if(tank instanceof Tank && tank.IsAnMBT())
-                Result.add((Tank)tank);
-        }
-        
-        return Result;
-    }
-    
-    public Collection<Tank> GetSPAAGs()
-    {
-        List<Tank> Result = new ArrayList<>();
-        
-        for(TankInterface tank : Tanks.values())
-        {
-            if(tank instanceof Tank && tank.IsASPAAG())
-                Result.add((Tank)tank);
-        }
-        
-        return Result;
-    }
-    
-    public Collection<Tank> GetMissileTanks()
-    {
-        List<Tank> Result = new ArrayList<>();
-        
-        for(TankInterface tank : Tanks.values())
-        {
-            if(tank instanceof Tank && tank.IsMissiles())
-                Result.add((Tank)tank);
-        }
-        
-        return Result;
-    }
-    
-    public Collection<Tank> GetInterceptorTanks()
-    {
-        List<Tank> Result = new ArrayList<>();
-        
-        for(TankInterface tank : Tanks.values())
-        {
-            if(tank instanceof Tank && tank.IsInterceptors())
-                Result.add((Tank)tank);
-        }
-        
-        return Result;
-    }
-    
-    public Collection<Tank> GetHowitzers()
-    {
-        List<Tank> Result = new ArrayList<>();
-        
-        for(TankInterface tank : Tanks.values())
-        {
-            if(tank instanceof Tank && tank.IsArtillery())
-                Result.add((Tank)tank);
         }
         
         return Result;
@@ -5176,8 +4925,8 @@ public abstract class LaunchGame implements LaunchEntityListener
         for(Distributor distributor : Distributors.values())
             Result.add(distributor);
         
-        for(ScrapYard yard : ScrapYards.values())
-            Result.add(yard);
+        for(LogisticsDepot depot : LogisticsDepots.values())
+            Result.add(depot);
                 
         return Result;
     }
@@ -5298,7 +5047,7 @@ public abstract class LaunchGame implements LaunchEntityListener
     public SAMSite GetSAMSite(int lID) { return SAMSites.get(lID); }
     public SentryGun GetSentryGun(int lID) { return SentryGuns.get(lID); }
     public ArtilleryGun GetArtilleryGun(int lID) { return ArtilleryGuns.get(lID); }
-    public ScrapYard GetScrapYard(int lID) { return ScrapYards.get(lID); } 
+    public LogisticsDepot GetLogisticsDepot(int lID) { return LogisticsDepots.get(lID); } 
     public OreMine GetOreMine(int lID) { return OreMines.get(lID); }
     public RadarStation GetRadarStation(int lID) { return RadarStations.get(lID); }
     public CommandPost GetCommandPost(int lID) { return CommandPosts.get(lID); }
@@ -5343,20 +5092,10 @@ public abstract class LaunchGame implements LaunchEntityListener
     
     public Tank GetTank(int lID) 
     { 
-        TankInterface tank = Tanks.get(lID);
+        Tank tank = Tanks.get(lID);
         
         if(tank != null && tank instanceof Tank)
             return (Tank)tank;
-        
-        return null;
-    }
-    
-    public StoredTank GetStoredTank(int lID)
-    {
-        TankInterface tank = Tanks.get(lID);
-        
-        if(tank != null && tank instanceof StoredTank)
-            return (StoredTank)tank;
         
         return null;
     }
@@ -5380,8 +5119,6 @@ public abstract class LaunchGame implements LaunchEntityListener
         
         return null;
     }
-    
-    public TankInterface GetTankInterface(int lID) { return Tanks.get(lID); }
     
     public InfantryInterface GetInfantryInterface(int lID) { return Infantries.get(lID); }
     
@@ -5489,11 +5226,6 @@ public abstract class LaunchGame implements LaunchEntityListener
     {
         if(interceptorType != null && missileType != null)
         {
-            if(!interceptorType.GetABM() && missileType.GetICBM())
-            {
-                return Defs.NON_ABM_ACCURACY;
-            }
-            
             if(interceptorType.GetABM() && !interceptorType.GetNuclear())
             {
                 return Defs.ABM_HIT_CHANCE;
@@ -5504,15 +5236,6 @@ public abstract class LaunchGame implements LaunchEntityListener
                 return Defs.NUCLEAR_INTERCEPTOR_HIT_CHANCE;
             }
         }
-        
-        /*float fltHitChance = (100f - ((fltTargetSpeedKPH/fltInterceptorSpeedKPH) * 20f));
-        
-        if(fltHitChance > Defs.MAXIMUM_INTERCEPTOR_ACCURACY)
-            return Defs.MAXIMUM_INTERCEPTOR_ACCURACY;
-        else if(fltHitChance < Defs.MINIMUM_INTERCEPTOR_ACCURACY)
-            return Defs.MINIMUM_INTERCEPTOR_ACCURACY;
-        else
-            return fltHitChance;*/
         
         return Defs.INTERCEPTOR_ACCURACY;
     }
@@ -6137,144 +5860,31 @@ public abstract class LaunchGame implements LaunchEntityListener
                             }
                         }
                     }
-                    else if(entity instanceof Infantry)
+                    else if(entity instanceof Tank tank)
                     {
-                        switch(command)
+                        if(!tank.GetSelling())
                         {
-                            case ATTACK: return targetEntity instanceof Infantry;
-                            case CAPTURE: return targetEntity instanceof CargoTruck || targetEntity instanceof Structure || targetEntity instanceof Shipyard;
-                            case LIBERATE:
+                            switch(command)
                             {
-                                if(targetEntity instanceof MapEntity mapEntity)
-                                    return GetCanBeLiberated(player, mapEntity);
+                                case ATTACK:
+                                {
+                                    return targetEntity instanceof Tank || (targetEntity instanceof Structure && !((Structure)targetEntity).GetRespawnProtected()) || targetEntity instanceof Capturable;
+                                }
                             }
                         }
                     }
-                    else if(entity instanceof Tank)
+                    else if(entity instanceof NavalVessel vessel)
                     {
-                        switch(command)
+                        if(!vessel.GetSelling())
                         {
-                            case ATTACK:
+                            switch(command)
                             {
-                                Tank tank = (Tank)commandable.GetEntity(this);
-
-                                if(tank.IsAnMBT())
+                                case ATTACK:
                                 {
-                                    return targetEntity instanceof LandUnit || (targetEntity instanceof Structure && !((Structure)targetEntity).GetRespawnProtected()) || targetEntity instanceof Capturable || targetEntity instanceof Loot || targetEntity instanceof ResourceDeposit;
+                                    return geoTarget != null || targetEntity instanceof LandUnit || targetEntity instanceof Structure || targetEntity instanceof Capturable || targetEntity instanceof NavalVessel || targetEntity instanceof Loot || targetEntity instanceof ResourceDeposit;
                                 }
-                            }
-                            break;
-                        }
-                    }
-                    else if(entity instanceof CargoTruck)
-                    {
-                        switch(command)
-                        {
-                            case UNLOAD: 
-                            {
-                                if(targetEntity != null)
-                                {
-                                    //Unload to an entity.
-                                    if(targetEntity instanceof HaulerInterface)
-                                    {
-                                        CargoSystem cargo = ((HaulerInterface)commandable.GetEntity(this)).GetCargoSystem();
-                                        boolean bContainsType = cargo != null && cargo.ContainsHaulable(typeToDeliver, lDeliverID, lQuantityToDeliver);
-
-                                        return bContainsType;
-                                    }
-                                }
-                                else
-                                {
-                                    //Unload at a coordinate.
-                                    CargoSystem cargo = ((HaulerInterface)commandable.GetEntity(this)).GetCargoSystem();
-                                    boolean bContainsType = cargo != null && cargo.ContainsHaulable(typeToDeliver, lDeliverID, lQuantityToDeliver);
-
-                                    return bContainsType;
-                                } 
-                            }
-                            break;
-                        }
-                    }
-                    else if(entity instanceof NavalVessel)
-                    {
-                        switch(command)
-                        {
-                            case PROVIDE_FUEL:
-                            {
-                                NavalVessel refuelerVessel = (NavalVessel)commandable.GetMapEntity(this);
-
-                                if(refuelerVessel != null && target != null)
-                                {
-                                    if(refuelerVessel instanceof Ship)
-                                    {
-                                        Ship refuelerShip = (Ship)refuelerVessel;
-
-                                        if(!refuelerShip.GetNuclear() || (refuelerShip.HasCargo() && refuelerShip.GetCargoSystem().ContainsResourceType(ResourceType.FUEL)))
-                                        {
-                                            NavalVessel receiverVessel = (NavalVessel)target.GetMapEntity(this);
-
-                                            if(receiverVessel != null && !receiverVessel.GetNuclear())
-                                                return true;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if(!refuelerVessel.GetNuclear())
-                                        {
-                                            NavalVessel receiverVessel = (NavalVessel)target.GetMapEntity(this);
-
-                                            if(receiverVessel != null && !receiverVessel.GetNuclear())
-                                                return true;
-                                        }
-                                    }  
-                                }
-                            }
-                            break;
-
-                            case SEEK_FUEL:
-                            {
-                                if(target != null)
-                                {
-                                    NavalVessel refuelerVessel = (NavalVessel)target.GetMapEntity(this);
-
-                                    if(refuelerVessel != null)
-                                    {
-                                        if(refuelerVessel instanceof Ship)
-                                        {
-                                            Ship refuelerShip = (Ship)refuelerVessel;
-
-                                            if(!refuelerShip.GetNuclear() || refuelerShip.HasCargo() && refuelerShip.GetCargoSystem().ContainsResourceType(ResourceType.FUEL))
-                                            {
-                                                NavalVessel receiverVessel = (NavalVessel)commandable.GetMapEntity(this);
-
-                                                if(receiverVessel != null && !receiverVessel.GetNuclear())
-                                                    return true;
-                                            }
-                                        }
-                                        else
-                                        {
-                                            if(!refuelerVessel.GetNuclear())
-                                            {
-                                                NavalVessel receiverVessel = (NavalVessel)commandable.GetMapEntity(this);
-
-                                                if(receiverVessel != null && !receiverVessel.GetNuclear())
-                                                    return true;
-                                            }
-                                        }  
-                                    }
-                                }
-                            }
-                            break;
-
-                            case ATTACK:
-                            {
-                                return geoTarget != null || targetEntity instanceof LandUnit || targetEntity instanceof Structure || targetEntity instanceof Capturable || targetEntity instanceof NavalVessel || targetEntity instanceof Loot || targetEntity instanceof ResourceDeposit;
                             }
                         }
-                    }
-                    else if(entity instanceof ArtilleryGun)
-                    {
-                        return geoTarget != null || targetEntity instanceof LandUnit || targetEntity instanceof Structure || targetEntity instanceof Capturable || targetEntity instanceof NavalVessel || targetEntity instanceof Loot || targetEntity instanceof ResourceDeposit;
                     }
                 }
             }
@@ -6293,7 +5903,7 @@ public abstract class LaunchGame implements LaunchEntityListener
 
                 if(target instanceof Shipyard shipyard)
                 {
-                    return shipyard.IsCaptured() && !WouldBeFriendlyFire(player, GetOwner(shipyard));
+                    return shipyard.GetCaptured() && !WouldBeFriendlyFire(player, GetOwner(shipyard));
                 }
                 
                 if(target instanceof Structure structure)
@@ -6691,48 +6301,7 @@ public abstract class LaunchGame implements LaunchEntityListener
     
     public boolean ShipInPort(NavalVessel vessel)
     {
-        if(vessel instanceof Submarine && ((Submarine)vessel).Submerged())
-        {
-            return false;
-        }
-        else
-        {
-            Player owner = GetPlayer(vessel.GetOwnerID());
-                
-            if(owner != null)
-            {
-                if(owner.GetBoss())
-                    return true;
-                
-                for(Shipyard shipyard : GetShipyards())
-                {
-                    if(EntityIsFriendly(shipyard, owner))
-                    {
-                        if(vessel.GetPosition().DistanceTo(shipyard.GetPosition()) <= Defs.IN_PORT_RADIUS)
-                        {
-                            return true;
-                        }
-                    }   
-                }
-                
-                if(!(vessel instanceof Ship) || !((Ship)vessel).HasSupport())
-                {
-                    for(Ship ship : GetShips())
-                    {
-                        if(EntityIsFriendly(owner, GetOwner(ship)))
-                        {
-                            if(ship.HasSupport())
-                            {
-                                if(vessel.GetPosition().DistanceTo(ship.GetPosition()) <= Defs.IN_PORT_RADIUS)
-                                    return true;
-                            }
-                        }
-                    }
-                }  
-            }
-        }
-        
-        return false;
+        return true;
     }
     
     public int GetTankMaintenanceCost(int lPlayerID)
@@ -7366,5 +6935,135 @@ public abstract class LaunchGame implements LaunchEntityListener
         LaunchUtilities.AddResourceMapsTogether(cost, LaunchUtilities.ScaleResourceMap(baseCost, (float)lCurrentCount)); 
         
         return cost;
+    }
+    
+    public boolean GetPlayerHasHQ(Player player)
+    {
+        for(Structure structure : new ArrayList<>(player.GetStructures()))
+        {
+            if(structure instanceof CommandPost post)
+            {
+                if(post.GetIsHQ())
+                {
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+    }
+    
+    /** Get a list of sufficient nearby ore mines to a location such that they could compete, and reduce each other's ore values.
+     * @param geoLocation The proposed location.
+     * @return A list of potentially competing ore mines. */
+    public final List<OreMine> GetNearbyCompetingOreMines(GeoCoord geoLocation)
+    {
+        List<OreMine> Result = new ArrayList<>();
+        
+        for(OreMine oreMine : OreMines.values())
+        {
+            if(oreMine.GetPosition().DistanceTo(geoLocation) < Defs.ORE_MINE_COMPETITION_DISTANCE)
+            {
+                Result.add(oreMine);
+            }
+        }
+        
+        return Result;
+    }
+    
+    /** Get a list of sufficient nearby ore mines to another ore mine such that they could compete, and reduce each other's ore values.
+     * @param oreMine The ore mine to check for competition against.
+     * @return A list of potentially competing ore mines. */
+    public final List<OreMine> GetNearbyCompetingOreMines(OreMine oreMine)
+    {
+        List<OreMine> Result = new ArrayList<>();
+        
+        for(OreMine otherOreMine : OreMines.values())
+        {
+            if(!otherOreMine.GetOffline())
+            {
+                if(otherOreMine != oreMine)
+                {
+                    if(oreMine.GetPosition().DistanceTo(otherOreMine.GetPosition()) <= Defs.ORE_MINE_COMPETITION_DISTANCE)
+                    {
+                        Result.add(otherOreMine);
+                    }
+                }
+            }
+        }
+        
+        return Result;
+    }
+    
+    public boolean GetTooCloseToFarm(GeoCoord geoLocation, Player asker)
+    {
+        for(Structure structure : asker.GetStructures())
+        {
+            if(structure instanceof OreMine farm && farm.GetEntityType() == EntityType.FARM)
+            {
+                if(farm.GetPosition().DistanceTo(geoLocation) < Defs.FARM_SEPARATION_DISTANCE)
+                {
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+    }
+    
+    /** Get maximum ore mine discovered ore value, considering nearby competing ore mines.
+     * @param oreMine The ore mine to query.
+     * @return The maximum value of ore that will be discovered by this ore mine. */
+    public int GetMaxPotentialOreMineReturn(OreMine oreMine)
+    {
+        float fltCompetitionMultiplier = 1.0f;
+        
+        for(OreMine otherOreMine : OreMines.values())
+        {
+            if(oreMine != otherOreMine)
+            {
+                if(otherOreMine.GetOnline())
+                {
+                    float fltDistance = oreMine.GetPosition().DistanceTo(otherOreMine.GetPosition());
+
+                    if(fltDistance < config.GetOreGenerateRadius())
+                    {
+                        //Reduced by 80%. Used to be 50%. -Corbin
+                        fltCompetitionMultiplier *= 0.20f;
+                    }
+                    else if(fltDistance < config.GetOreGenerateRadius())
+                    {
+                        //Reduced by a proportion of radius overlaps.
+                        fltCompetitionMultiplier *= (fltDistance / Defs.ORE_MINE_COMPETITION_DISTANCE);
+                    }
+                }
+            }
+        }
+        
+        return (int)(((float)config.GetMaxOreValue() * fltCompetitionMultiplier) + 0.5f);
+    }
+    
+    public boolean GetFarmIsWorked(OreMine farm)
+    {
+        Player owner = GetPlayer(farm.GetOwnerID());
+        
+        if(owner != null)
+        {
+            if(owner.GetPosition().DistanceTo(farm.GetPosition()) <= Defs.FARM_WORK_RADIUS)
+                return true;
+
+            /*for(Player player : Players.values())
+            {
+                if(GetAllegiance(player, farm) == Allegiance.ALLY)
+                {
+                    if(owner.GetPosition().DistanceTo(farm.GetPosition()) <= Defs.FARM_WORK_RADIUS)
+                    {
+                        return true;
+                    }
+                }
+            }*/
+        }
+        
+        return false;
     }
 }

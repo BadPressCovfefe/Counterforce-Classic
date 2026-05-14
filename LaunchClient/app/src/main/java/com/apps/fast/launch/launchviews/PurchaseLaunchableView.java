@@ -591,20 +591,6 @@ public class PurchaseLaunchableView extends LaunchView
                 system = game.GetShip(lFittedToID).GetArtillerySystem();
             }
             break;
-
-            case TANK_INTERCEPTORS:
-            case TANK_MISSILES:
-            case TANK_ARTILLERY:
-            {
-                system = game.GetTankInterface(lFittedToID).GetMissileSystem();
-            }
-            break;
-
-            case ARTILLERY_GUN:
-            {
-                system = game.GetArtilleryGun(lFittedToID).GetMissileSystem();
-            }
-            break;
         }
 
         final int lFreeSlots = system.GetEmptySlotCount() - Types.size();

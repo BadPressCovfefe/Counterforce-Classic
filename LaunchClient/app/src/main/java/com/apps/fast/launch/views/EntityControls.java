@@ -112,7 +112,6 @@ public class EntityControls extends LinearLayout
 
         if(activity != null && activity.GetSelectedEntity() instanceof Player)
         {
-            btnGoTo.setVisibility(GONE);
             btnZoom.setVisibility(GONE);
         }
     }

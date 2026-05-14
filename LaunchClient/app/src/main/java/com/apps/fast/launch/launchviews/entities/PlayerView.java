@@ -15,6 +15,7 @@ import com.apps.fast.launch.activities.MainActivity;
 import com.apps.fast.launch.components.TextUtilities;
 import com.apps.fast.launch.components.Utilities;
 import com.apps.fast.launch.launchviews.LaunchView;
+import com.apps.fast.launch.launchviews.RaiseBountyView;
 import com.apps.fast.launch.launchviews.UnitControls;
 import com.apps.fast.launch.views.EntityControls;
 import com.apps.fast.launch.views.LaunchDialog;
@@ -68,6 +69,8 @@ public class PlayerView extends LaunchView
     private EditText txtBanReason;
     private TextView btnCommonReasonImage;
     private TextView btnCommonReasonName;
+    private TextView txtBounty;
+    private ImageView btnAddBounty;
 
     private LinearLayout lytRank;
     private TextView txtRankName;
@@ -150,19 +153,30 @@ public class PlayerView extends LaunchView
         btnCommonReasonName = findViewById(R.id.btnCommonReasonName);
         btnUnban = findViewById(R.id.btnUnban);
 
+        txtBounty = findViewById(R.id.txtBounty);
+        btnAddBounty = findViewById(R.id.btnAddBounty);
+
+        txtBounty.setText(TextUtilities.GetCurrencyString(player.GetBounty()));
+
+        btnAddBounty.setOnClickListener(new OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                activity.SetView(new RaiseBountyView(game, activity, lPlayerID, false));
+            }
+        });
+
+        if(game.GetOurPlayerID() == player.GetID())
+        {
+            btnAddBounty.setVisibility(GONE);
+        }
+
         lytMoneyOptions.setVisibility(lPlayerID == game.GetOurPlayerID() || !game.GetOurPlayer().Functioning() || !game.GetPlayer(lPlayerID).Functioning() ? GONE : VISIBLE);
 
         if(player.GetIsAnAdmin())
         {
             txtPlayerStatus.setText(context.getString(R.string.player_status_admin));
-        }
-        else if(player.GetChampion())
-        {
-            txtPlayerStatus.setText(context.getString(R.string.player_status_champion));
-        }
-        else if(player.IsAMember())
-        {
-            txtPlayerStatus.setText(context.getString(R.string.player_status_member));
         }
         else if(player.GetVeteran())
         {
@@ -818,7 +832,7 @@ public class PlayerView extends LaunchView
                                 prgNextRank.setVisibility(GONE);
                             }
 
-                            txtWins.setText(Integer.toString(player.GetChampionCount()));
+                            txtWins.setText(Integer.toString(player.GetKOTHWins()));
                             txtTotalKills.setText(Integer.toString(player.GetTotalKills()));
                             txtDistanceTraveled.setText(TextUtilities.GetDistanceStringFromKM(player.GetDistanceTraveled()));
                             txtTotalDeaths.setText(Integer.toString(player.GetTotalDeaths()));

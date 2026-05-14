@@ -7,44 +7,38 @@ package launch.game.entities;
 
 import java.nio.ByteBuffer;
 import launch.comm.LaunchSession;
-import launch.game.Defs;
 import launch.game.GeoCoord;
 import launch.utilities.ShortDelay;
 import launch.game.EntityPointer.EntityType;
-import launch.game.entities.conceptuals.Resource.ResourceType;
-import launch.game.systems.CargoSystem.LootType;
+import launch.utilities.LaunchUtilities;
 
 /**
  *
  * @author tobster
  */
-public class Loot extends MapEntity implements Haulable
+public class Loot extends MapEntity
 {
-    private static final int DATA_SIZE = 17;
+    private static final int DATA_SIZE = 12;
     
-    private LootType lootType;
-    private int lType;                                                          //This int indicates what sort of thing of the given loottype we are dealing with. For example, if LootType is resources, lTypeID is the ordinal of the ResourceType. If it is missiles, then lTypeID is the MissileType id. 
-    private long oQuantity;                                                      //How many of whatever loot thing is this loot holding? (In tons if resources, in number of missiles if missiles/interceptors.)
+    private String strTitle = "Loot";                                                    
+    private long oQuantity;                                                     
     private ShortDelay dlyExpiry;
     
     //Flags (not transmitted).
-    private boolean bCollected = false;     //Indicates the loot has been collected and may be cleared up.
+    private boolean bCollected = false;                                         //Indicates the loot has been collected and may be cleared up.
     
-    public Loot(int lID, GeoCoord geoPosition, LootType lootType, int lType, long oQuantity, int lExpiry)
+    public Loot(int lID, GeoCoord geoPosition, String strTitle, long oQuantity, int lExpiry)
     {
         super(lID, geoPosition, true, 0);
         this.dlyExpiry = new ShortDelay(lExpiry);
         this.bVisible = true;
-        this.lootType = lootType;
-        this.lType = lType;
         this.oQuantity = oQuantity;
     }
     
     public Loot(ByteBuffer bb)
     {
         super(bb);
-        lootType = LootType.values()[bb.get()];
-        lType = bb.getInt();
+        strTitle = LaunchUtilities.StringFromData(bb);
         oQuantity = bb.getLong();
         dlyExpiry = new ShortDelay(bb);
     }
@@ -60,10 +54,9 @@ public class Loot extends MapEntity implements Haulable
     {
         byte cBaseData[] = super.GetData(lAskingID);
         
-        ByteBuffer bb = ByteBuffer.allocate(DATA_SIZE + cBaseData.length);
+        ByteBuffer bb = ByteBuffer.allocate(DATA_SIZE + cBaseData.length + LaunchUtilities.GetStringDataSize(strTitle));
         bb.put(cBaseData);
-        bb.put((byte)lootType.ordinal());
-        bb.putInt(lType);
+        bb.put(LaunchUtilities.GetStringData(strTitle));
         bb.putLong(oQuantity);
         dlyExpiry.GetData(bb);
         
@@ -89,12 +82,6 @@ public class Loot extends MapEntity implements Haulable
     public void Collect() { bCollected = true; }
     
     public boolean Collected() { return bCollected; }
-    
-    @Override
-    public long GetWeight() 
-    { 
-        return 1;
-    }
     
     @Override
     public boolean GetOwnedBy(int lID)
@@ -140,43 +127,20 @@ public class Loot extends MapEntity implements Haulable
     }
     
     @Override
-    public long GetQuantity()
-    {
-        return this.oQuantity;
-    }
-    
-    @Override
     public int GetOwnerID()
     {
         return LaunchEntity.ID_NONE;
-    }
-    
-    public boolean IsMoney()
-    {
-        return lootType == LootType.RESOURCES && lType == ResourceType.WEALTH.ordinal();
     }
     
     public long GetValue()
     {
         return oQuantity;
     }
-
-    @Override
-    public LootType GetLootType()
-    {
-        return lootType;
-    }
-
-    @Override
-    public int GetCargoID()
-    {
-        return lType;
-    }
     
     @Override
     public String GetTypeName()
     {
-        return "loot";
+        return strTitle != null ? strTitle : "Loot";
     }
     
     /**

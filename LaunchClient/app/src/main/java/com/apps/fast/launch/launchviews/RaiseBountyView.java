@@ -6,36 +6,17 @@ import android.widget.TextView;
 
 import com.apps.fast.launch.R;
 import com.apps.fast.launch.activities.MainActivity;
-import com.apps.fast.launch.components.ClientDefs;
-import com.apps.fast.launch.components.Sounds;
 import com.apps.fast.launch.components.TextUtilities;
 import com.apps.fast.launch.components.Utilities;
-import com.apps.fast.launch.launchviews.entities.PlayerView;
 import com.apps.fast.launch.views.LaunchDialog;
-import com.apps.fast.launch.views.LaunchableSelectionView;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import launch.game.Config;
 import launch.game.LaunchClientGame;
-import launch.game.entities.MissileSite;
-import launch.game.entities.SAMSite;
-import launch.game.systems.MissileSystem;
-import launch.game.types.InterceptorType;
-import launch.game.types.MissileType;
-import launch.utilities.LaunchEvent;
 
-/**
- * Created by tobster on 16/10/15.
- */
 public class RaiseBountyView extends LaunchView
 {
 
     private int lAmountToSend = 0;
     private int ID;
+    private boolean bPlayer;
 
     private LinearLayout btnRaiseBounty;
     private LinearLayout btnAdd1k;
@@ -53,11 +34,12 @@ public class RaiseBountyView extends LaunchView
     private TextView txtSubtract100k;
     private TextView txtAmountToSend;
 
-    public RaiseBountyView(LaunchClientGame game, MainActivity activity, int lPlayerID)
+    public RaiseBountyView(LaunchClientGame game, MainActivity activity, int lPlayerID, boolean bPlayer)
     {
         super(game, activity, true);
 
         this.ID = lPlayerID;
+        this.bPlayer = bPlayer;
 
         Setup();
     }
@@ -244,7 +226,7 @@ public class RaiseBountyView extends LaunchView
                         @Override
                         public void onClick(View view)
                         {
-                            //game.AddBounty(ID, lAmountToSend);
+                            game.AddBounty(ID, lAmountToSend, bPlayer);
                             launchDialog.dismiss();
                             ReturnToParentView();
                         }
@@ -295,6 +277,7 @@ public class RaiseBountyView extends LaunchView
 
     private void ReturnToParentView()
     {
+
         activity.SelectEntity(game.GetPlayer(ID));
     }
 }

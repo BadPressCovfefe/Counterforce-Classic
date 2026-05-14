@@ -19,7 +19,7 @@ import launch.game.treaties.Treaty;
  */
 public class Alliance
 {
-    private static final int DATA_SIZE = 52;
+    private static final int DATA_SIZE = 56;
     
     public static final int ALLIANCE_ID_UNAFFILIATED = Defs.THE_GREAT_BIG_NOTHING;
     public static final int ALLIANCE_AVATAR_DEFAULT = Defs.THE_GREAT_BIG_NOTHING;
@@ -42,6 +42,7 @@ public class Alliance
     private int lABMCount;
     private long oFoundedTime;
     private int lKOTHWins;
+    private int lBounty;
     
     private List<Integer> OurTreaties = new ArrayList<>();
     
@@ -61,11 +62,12 @@ public class Alliance
         this.lAffiliationsBroken = 0;
         this.lICBMCount = 0;
         this.lABMCount = 0;
+        this.lBounty = 0;
         this.oFoundedTime = System.currentTimeMillis();
     }
     
     //From save.
-    public Alliance(int lID, String strName, String strDescription, int lAvatarID, int lWealth, float fltTaxRate, int lWarsWon, int lWarsLost, int lEnemyAllianceDisbands, String strFounderName, int lAffiliationsBroken, int lICBMCount, int lABMCount, int lKOTHWins, long oFoundedTime)
+    public Alliance(int lID, String strName, String strDescription, int lAvatarID, int lWealth, float fltTaxRate, int lWarsWon, int lWarsLost, int lEnemyAllianceDisbands, String strFounderName, int lAffiliationsBroken, int lICBMCount, int lABMCount, int lKOTHWins, long oFoundedTime, int lBounty)
     {
         this.lID = lID;
         this.strName = strName;
@@ -83,6 +85,7 @@ public class Alliance
         this.lABMCount = lABMCount;
         this.oFoundedTime = oFoundedTime;
         this.lKOTHWins = lKOTHWins;
+        this.lBounty = lBounty;
     }
     
     //Communicated.
@@ -104,6 +107,7 @@ public class Alliance
         lABMCount = bb.getInt();
         oFoundedTime = bb.getLong();
         lKOTHWins = bb.getInt();
+        lBounty = bb.getInt();
     }
     
     public void SetAvatarID(int lAvatarID)
@@ -161,6 +165,7 @@ public class Alliance
         bb.putInt(lABMCount);
         bb.putLong(oFoundedTime);
         bb.putInt(lKOTHWins);
+        bb.putInt(lBounty);
         
         return bb.array();
     }
@@ -307,5 +312,15 @@ public class Alliance
     public void WonKOTH()
     {
         this.lKOTHWins++;
+    }
+    
+    public int GetBounty()
+    {
+        return this.lBounty;
+    }
+    
+    public void SetBounty(int lBounty)
+    {
+        this.lBounty = lBounty;
     }
 }

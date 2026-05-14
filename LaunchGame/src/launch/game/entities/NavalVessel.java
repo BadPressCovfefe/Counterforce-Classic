@@ -21,7 +21,7 @@ import launch.utilities.ShortDelay;
 
 public abstract class NavalVessel extends Movable implements LaunchSystemListener, FuelableInterface, NamableInterface
 {
-    private static final int DATA_SIZE = 16;
+    private static final int DATA_SIZE = 21;
     
     protected EntityType type;
     private String strName;
@@ -31,6 +31,8 @@ public abstract class NavalVessel extends Movable implements LaunchSystemListene
     protected MissileSystem missiles; //+1 for the byte indicating whether this is null.
     protected MissileSystem torpedoes; //+1 for the byte indicating whether this is null.
     protected List<Float> ContactBearings = new ArrayList<>();
+    protected boolean bSelling;
+    protected ShortDelay dlySelling;
     
     /** New ship from a shipyard. */
     public NavalVessel(int lID, GeoCoord geoPosition, int lOwnerID, short nHP, short nMaxHP, EntityType type, MissileSystem missiles, MissileSystem torpedoes)
@@ -43,6 +45,7 @@ public abstract class NavalVessel extends Movable implements LaunchSystemListene
         this.fltCurrentFuel = 1.0f;
         this.missiles = missiles;
         this.torpedoes = torpedoes;
+        this.dlySelling = new ShortDelay();
         
         if(missiles != null)
             missiles.SetSystemListener(this);
@@ -52,7 +55,7 @@ public abstract class NavalVessel extends Movable implements LaunchSystemListene
     }
     
     /** From save. */
-    public NavalVessel(int lID, GeoCoord geoPosition, int lOwnerID, short nHP, short nMaxHP, EntityType type, String strName, MoveOrders moveOrders, GeoCoord geoTarget, EntityPointer target, int lSonarCooldown, float fltCurrentFuel, MissileSystem missiles, MissileSystem torpedoes, boolean bVisible, int lVisibleTime, Map<Integer, GeoCoord> Coordinates)
+    public NavalVessel(int lID, GeoCoord geoPosition, int lOwnerID, short nHP, short nMaxHP, EntityType type, String strName, MoveOrders moveOrders, GeoCoord geoTarget, EntityPointer target, int lSonarCooldown, float fltCurrentFuel, MissileSystem missiles, MissileSystem torpedoes, boolean bVisible, int lVisibleTime, boolean bSelling, int lSelling, Map<Integer, GeoCoord> Coordinates)
     {
         super(lID, geoPosition, nHP, nMaxHP, moveOrders, geoTarget, target, bVisible, lVisibleTime, Coordinates);
         this.type = type;
@@ -62,6 +65,8 @@ public abstract class NavalVessel extends Movable implements LaunchSystemListene
         this.fltCurrentFuel = fltCurrentFuel;
         this.missiles = missiles;
         this.torpedoes = torpedoes;
+        this.bSelling = bSelling;
+        this.dlySelling = new ShortDelay(lSelling);
         
         if(this.missiles != null)
             missiles.SetSystemListener(this);
@@ -94,6 +99,8 @@ public abstract class NavalVessel extends Movable implements LaunchSystemListene
         lOwnerID = bb.getInt();
         dlySonar = new ShortDelay(bb);
         fltCurrentFuel = bb.getFloat();
+        bSelling = (bb.get() != 0x00);
+        dlySelling = new ShortDelay(bb);
         
         if((bb.get() != 0x00))
             ContactBearings = ContactBearingsFromData(bb);
@@ -128,6 +135,11 @@ public abstract class NavalVessel extends Movable implements LaunchSystemListene
         {
             dlySonar.Tick(lMS);
         }
+        
+        if(bSelling)
+        {
+            dlySelling.Tick(lMS);
+        }
     }
 
     @Override
@@ -145,6 +157,8 @@ public abstract class NavalVessel extends Movable implements LaunchSystemListene
         bb.putInt(lOwnerID);
         bb.putInt(dlySonar.GetRemaining());
         bb.putFloat(fltCurrentFuel);
+        bb.put((byte)(bSelling ? 0xFF : 0x00));
+        bb.putInt(dlySelling.GetRemaining());
         bb.put((byte)(!ContactBearings.isEmpty() ? 0xFF : 0x00));
         bb.put(cContactBearingData);
         bb.put((byte)(missiles != null? 0xFF : 0x00));
@@ -419,5 +433,31 @@ public abstract class NavalVessel extends Movable implements LaunchSystemListene
     public boolean FuelFull()
     {
         return this.fltCurrentFuel == 1.0f;
+    }
+    
+    public boolean GetSelling()
+    {
+        return this.bSelling;
+    }
+    
+    public boolean GetSellTimeExpired()
+    {
+        return dlySelling.Expired();
+    }
+    
+    public void Sell(int lSellTime)
+    {
+        bSelling = true;
+        dlySelling.Set(lSellTime);
+    }
+    
+    public void CancelSale()
+    {
+        bSelling = false;
+    }
+    
+    public int GetSellTimeRemaining()
+    {
+        return dlySelling.GetRemaining();
     }
 }

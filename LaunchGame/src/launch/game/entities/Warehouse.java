@@ -32,7 +32,7 @@ public class Warehouse extends Structure
     /** From save. */
     public Warehouse(int lID, GeoCoord geoPosition, short nHP, short nMaxHP, String strName, int lOwnerID, byte cFlags, int lStateTime, int lBuildTime, boolean bVisible, int lVisibleTime, int lBuiltByID, long oWealth)
     {
-        super(lID, geoPosition, nHP, nMaxHP, strName, lOwnerID, cFlags, lStateTime, bVisible, lVisibleTime, lBuiltByID, null);
+        super(lID, geoPosition, nHP, nMaxHP, strName, lOwnerID, cFlags, lStateTime, bVisible, lVisibleTime, lBuiltByID, new ResourceSystem());
         this.bVisible = bVisible;
         this.oWealth = oWealth;
     }

@@ -627,31 +627,6 @@ public class StatsManager //TODO: Needs to implement AchievementListener.
             }
         }
         
-        for(ArtilleryGun artillery : game.GetArtilleryGuns())
-        {
-            MissileSystem system = artillery.GetMissileSystem();
-
-            if(system != null)
-            {
-                oMissiles += system.GetOccupiedSlotCount();
-                
-                for(Integer lMissileType : system.GetSlotTypes().values())
-                {
-                    if(game.GetConfig().GetMissileType(lMissileType).GetNuclear())
-                    {
-                        oNukes++;
-                    }
-                }
-                
-                Player owner = game.GetOwner(artillery);
-                    
-                if(owner != null)
-                {
-                    //Map
-                }
-            }
-        }
-        
         for(Player player : game.GetPlayers())
         {
             //Set derivitive stats like number of infantry, total ship tonnage, etc.
@@ -695,16 +670,12 @@ public class StatsManager //TODO: Needs to implement AchievementListener.
             //Map player.SetTotalSubmarineTonnage(lSubmarineTonnage);
             
             lCount = 0;
-            int lSPAAGCount = 0;
             
-            for(TankInterface tank : game.GetAllTanks())
+            for(Tank tank : game.GetTanks())
             {
                 if(tank.GetOwnerID() == player.GetID())
                 {
-                    if(tank.IsAnMBT())
-                        lCount++;
-                    else if(tank.IsASPAAG())
-                        lSPAAGCount++;
+                    lCount++;
                 }
             }
             

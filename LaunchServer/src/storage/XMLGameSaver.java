@@ -233,6 +233,8 @@ public class XMLGameSaver
                 AddNode(doc, eleAlliance, XMLDefs.ICBM_COUNT, alliance.GetICBMCount());
                 AddNode(doc, eleAlliance, XMLDefs.ABM_COUNT, alliance.GetABMCount());
                 AddNode(doc, eleAlliance, XMLDefs.FOUNDED_TIME, alliance.GetFoundedTime());               
+                AddNode(doc, eleAlliance, XMLDefs.BOUNTY, alliance.GetBounty());    
+                AddNode(doc, eleAlliance, XMLDefs.KOTH_WINS, alliance.GetKOTHWins());
             }
             
             //Save treaties.
@@ -292,20 +294,16 @@ public class XMLGameSaver
                 AddNode(doc, elePlayer, XMLDefs.EXPERIENCE, player.GetExperience());
                 AddNode(doc, elePlayer, XMLDefs.TOTAL_KILLS, player.GetTotalKills());
                 AddNode(doc, elePlayer, XMLDefs.TOTAL_DEATHS, player.GetTotalDeaths());
-                AddNode(doc, elePlayer, XMLDefs.IS_A_MEMBER, player.IsAMember());
                 AddNode(doc, elePlayer, XMLDefs.JOIN_TIME, player.GetJoinTime());
                 AddNode(doc, elePlayer, XMLDefs.DEFENSE_VALUE, player.GetDefenseValue());
                 AddNode(doc, elePlayer, XMLDefs.OFFENSE_VALUE, player.GetOffenseValue());
                 AddNode(doc, elePlayer, XMLDefs.NEUTRAL_VALUE, player.GetNeutralValue());
                 AddNode(doc, elePlayer, XMLDefs.DISTANCE_TRAVELED, player.GetDistanceTraveled());
                 AddNode(doc, elePlayer, XMLDefs.DISTANCE_TRAVELED_TODAY, player.GetDistanceTraveledToday());
-                AddNode(doc, elePlayer, XMLDefs.AIRDROP_COOLDOWN, player.GetAirdropCooldownRemaining());
-                AddNode(doc, elePlayer, XMLDefs.PROSPECT_COOLDOWN, player.GetProspectCooldownRemaining());
-                AddNode(doc, elePlayer, XMLDefs.CITY_COUNT_LAST_WEEK, player.GetCityCountLastWeek());
-                AddNode(doc, elePlayer, XMLDefs.CHAMP_COUNT, player.GetChampionCount());
-                AddNode(doc, elePlayer, XMLDefs.ADMIN_MEMBER, player.GetAdminMember());
                 AddNode(doc, elePlayer, XMLDefs.BLACKLIST, LaunchUtilities.GetIntListData(player.GetBlacklist()));
                 AddNode(doc, elePlayer, XMLDefs.WEALTH, player.GetWealth());
+                AddNode(doc, elePlayer, XMLDefs.BOUNTY, player.GetBounty());
+                AddNode(doc, elePlayer, XMLDefs.KOTH_WINS, player.GetKOTHWins());
             }
             
             elements = AddNode(doc, eleGame, XMLDefs.MISSILES);
@@ -381,31 +379,6 @@ public class XMLGameSaver
                 AddResourceSystem(doc, eleMissileSite, missileSite.GetResourceSystem(), XMLDefs.RESOURCE_CONTAINER);
             }
             
-            elements = AddNode(doc, eleGame, XMLDefs.ARTILLERY_GUNS);
-            
-            for(ArtilleryGun artillery : game.GetArtilleryGuns())
-            {
-                Element eleArtilleryGun = AddNode(doc, elements, XMLDefs.ARTILLERY_GUN, XMLDefs.ID, artillery.GetID(), XMLDefs.NAME, artillery.GetName());
-                AddPositionNode(doc, eleArtilleryGun, XMLDefs.POSITION, artillery.GetPosition());
-                AddNode(doc, eleArtilleryGun, XMLDefs.HP, artillery.GetHP());
-                AddNode(doc, eleArtilleryGun, XMLDefs.MAX_HP, artillery.GetMaxHP());
-                AddNode(doc, eleArtilleryGun, XMLDefs.OWNER_ID, artillery.GetOwnerID());
-                AddNode(doc, eleArtilleryGun, XMLDefs.FLAGS, artillery.GetFlags());
-                AddNode(doc, eleArtilleryGun, XMLDefs.STATE_TIME, artillery.GetStateTimeRemaining());
-                AddMissileSystem(doc, eleArtilleryGun, artillery.GetMissileSystem(), XMLDefs.MISSILE_SYSTEM);
-                AddNode(doc, eleArtilleryGun, XMLDefs.VISIBLE, artillery.GetVisible());
-                AddNode(doc, eleArtilleryGun, XMLDefs.VISIBLE_TIME, artillery.GetVisibleTimeRemaining());
-                AddNode(doc, eleArtilleryGun, XMLDefs.MODE, artillery.GetMode());
-                AddNode(doc, eleArtilleryGun, XMLDefs.BUILT_BY_ID, artillery.GetBuiltByID());
-                AddResourceSystem(doc, eleArtilleryGun, artillery.GetResourceSystem(), XMLDefs.RESOURCE_CONTAINER);
-                
-                if(artillery.HasFireOrder())
-                {
-                    AddPositionNode(doc, eleArtilleryGun, XMLDefs.ARTILLERY_TARGET, artillery.GetFireOrder().GetGeoTarget());
-                    AddNode(doc, eleArtilleryGun, XMLDefs.RADIUS, artillery.GetFireOrder().GetRadius());
-                }
-            }
-            
             elements = AddNode(doc, eleGame, XMLDefs.SAM_SITES);
             
             for(SAMSite samSite : game.GetSAMSites())
@@ -446,21 +419,22 @@ public class XMLGameSaver
                 AddResourceSystem(doc, eleSentryGun, sentryGun.GetResourceSystem(), XMLDefs.RESOURCE_CONTAINER);
             }
             
-            elements = AddNode(doc, eleGame, XMLDefs.SCRAP_YARDS);
+            elements = AddNode(doc, eleGame, XMLDefs.LOGISTICS_DEPOTS);
             
-            for(ScrapYard yard : game.GetScrapYards())
+            for(LogisticsDepot depot : game.GetLogisticsDepots())
             {
-                Element eleScrapYard = AddNode(doc, elements, XMLDefs.SCRAP_YARD, XMLDefs.ID, yard.GetID(), XMLDefs.NAME, yard.GetName());
-                AddPositionNode(doc, eleScrapYard, XMLDefs.POSITION, yard.GetPosition());
-                AddNode(doc, eleScrapYard, XMLDefs.HP, yard.GetHP());
-                AddNode(doc, eleScrapYard, XMLDefs.MAX_HP, yard.GetMaxHP());
-                AddNode(doc, eleScrapYard, XMLDefs.OWNER_ID, yard.GetOwnerID());
-                AddNode(doc, eleScrapYard, XMLDefs.FLAGS, yard.GetFlags());
-                AddNode(doc, eleScrapYard, XMLDefs.STATE_TIME, yard.GetStateTimeRemaining());
-                AddNode(doc, eleScrapYard, XMLDefs.VISIBLE, yard.GetVisible());
-                AddNode(doc, eleScrapYard, XMLDefs.VISIBLE_TIME, yard.GetVisibleTimeRemaining());
-                AddNode(doc, eleScrapYard, XMLDefs.BUILT_BY_ID, yard.GetBuiltByID());
-                AddResourceSystem(doc, eleScrapYard, yard.GetResourceSystem(), XMLDefs.RESOURCE_CONTAINER);
+                Element eleLogisticsDepot = AddNode(doc, elements, XMLDefs.LOGISTICS_DEPOT, XMLDefs.ID, depot.GetID(), XMLDefs.NAME, depot.GetName());
+                AddPositionNode(doc, eleLogisticsDepot, XMLDefs.POSITION, depot.GetPosition());
+                AddNode(doc, eleLogisticsDepot, XMLDefs.HP, depot.GetHP());
+                AddNode(doc, eleLogisticsDepot, XMLDefs.MAX_HP, depot.GetMaxHP());
+                AddNode(doc, eleLogisticsDepot, XMLDefs.OWNER_ID, depot.GetOwnerID());
+                AddNode(doc, eleLogisticsDepot, XMLDefs.FLAGS, depot.GetFlags());
+                AddNode(doc, eleLogisticsDepot, XMLDefs.STATE_TIME, depot.GetStateTimeRemaining());
+                AddNode(doc, eleLogisticsDepot, XMLDefs.VISIBLE, depot.GetVisible());
+                AddNode(doc, eleLogisticsDepot, XMLDefs.VISIBLE_TIME, depot.GetVisibleTimeRemaining());
+                AddNode(doc, eleLogisticsDepot, XMLDefs.BUILT_BY_ID, depot.GetBuiltByID());
+                AddNode(doc, eleLogisticsDepot, XMLDefs.WEALTH, depot.GetWealth());
+                AddNode(doc, eleLogisticsDepot, XMLDefs.RELOAD_REMAINING, depot.GetCollectCooldownRemaining());
             }
             
             elements = AddNode(doc, eleGame, XMLDefs.ORE_MINES);
@@ -474,12 +448,12 @@ public class XMLGameSaver
                 AddNode(doc, eleOreMine, XMLDefs.OWNER_ID, oreMine.GetOwnerID());
                 AddNode(doc, eleOreMine, XMLDefs.FLAGS, oreMine.GetFlags());
                 AddNode(doc, eleOreMine, XMLDefs.STATE_TIME, oreMine.GetStateTimeRemaining());
-                AddNode(doc, eleOreMine, XMLDefs.TYPE, oreMine.GetType().ordinal());
+                AddNode(doc, eleOreMine, XMLDefs.TYPE, oreMine.GetEntityType().ordinal());
                 AddNode(doc, eleOreMine, XMLDefs.VISIBLE, oreMine.GetVisible());
                 AddNode(doc, eleOreMine, XMLDefs.VISIBLE_TIME, oreMine.GetVisibleTimeRemaining());
                 AddNode(doc, eleOreMine, XMLDefs.BUILT_BY_ID, oreMine.GetBuiltByID());
-                AddNode(doc, eleOreMine, XMLDefs.DEPOSIT_ID, oreMine.GetDepositID());
-                AddResourceSystem(doc, eleOreMine, oreMine.GetResourceSystem(), XMLDefs.RESOURCE_CONTAINER);
+                AddNode(doc, eleOreMine, XMLDefs.GENERATE_TIME, oreMine.GetGenerateTimeRemaining());
+                AddNode(doc, eleOreMine, XMLDefs.TYPE, oreMine.GetEntityType().name());
             }
             
             elements = AddNode(doc, eleGame, XMLDefs.RADAR_STATIONS);
@@ -549,6 +523,7 @@ public class XMLGameSaver
                 AddNode(doc, eleCommandPost, XMLDefs.VISIBLE, commandPost.GetVisible());
                 AddNode(doc, eleCommandPost, XMLDefs.VISIBLE_TIME, commandPost.GetVisibleTimeRemaining());
                 AddNode(doc, eleCommandPost, XMLDefs.BUILT_BY_ID, commandPost.GetBuiltByID());
+                AddNode(doc, eleCommandPost, XMLDefs.HEADQUARTERS, commandPost.GetIsHQ());
                 AddResourceSystem(doc, eleCommandPost, commandPost.GetResourceSystem(), XMLDefs.RESOURCE_CONTAINER);
             }
             
@@ -668,42 +643,12 @@ public class XMLGameSaver
                 AddNode(doc, eleTank, XMLDefs.VISIBLE, tank.GetVisible());
                 AddNode(doc, eleTank, XMLDefs.VISIBLE_TIME, tank.GetVisibleTimeRemaining());
                 AddNode(doc, eleTank, XMLDefs.UNDER_ATTACK_TIME, tank.GetUnderAttackTimeRemaining());
-                AddNode(doc, eleTank, XMLDefs.TANK_TYPE, tank.GetType().ordinal());
-                AddNode(doc, eleTank, XMLDefs.MODE, tank.GetMode());
                 AddNode(doc, eleTank, XMLDefs.CURRENT_FUEL, tank.GetCurrentFuel());
-                AddResourceSystem(doc, eleTank, tank.GetResourceSystem(), XMLDefs.RESOURCE_CONTAINER);
-                
-                if(tank.GetMissileSystem() != null)
-                    AddMissileSystem(doc, eleTank, tank.GetMissileSystem(), XMLDefs.MISSILE_SYSTEM);
+                AddNode(doc, eleTank, XMLDefs.SELLING, tank.GetSelling());
+                AddNode(doc, eleTank, XMLDefs.SELL_TIME, tank.GetSellTimeRemaining());
                 
                 if(tank.HasGeoCoordChain())
                     AddGeoCoordChainNode(doc, eleTank, XMLDefs.COORDINATE_CHAIN, tank.GetCoordinates());
-            }
-            
-            elements = AddNode(doc, eleGame, XMLDefs.CARGO_TRUCKS);
-            
-            for(CargoTruck truck : game.GetCargoTrucks())
-            {
-                Element eleTruck = AddNode(doc, elements, XMLDefs.CARGO_TRUCK, XMLDefs.ID, truck.GetID(), XMLDefs.NAME, truck.GetName());
-                AddPositionNode(doc, eleTruck, XMLDefs.POSITION, truck.GetPosition());
-                AddPositionNode(doc, eleTruck, XMLDefs.TARGET, truck.GetGeoTarget());
-                AddNode(doc, eleTruck, XMLDefs.HP, truck.GetHP());
-                AddNode(doc, eleTruck, XMLDefs.MAX_HP, truck.GetMaxHP());
-                AddNode(doc, eleTruck, XMLDefs.OWNER_ID, truck.GetOwnerID());
-                AddNode(doc, eleTruck, XMLDefs.DETECTED, truck.GetVisible());
-                AddNode(doc, eleTruck, XMLDefs.MOVE_ORDERS, (byte)truck.GetMoveOrders().ordinal());
-                AddCargoSystem(doc, eleTruck, truck.GetCargoSystem(), XMLDefs.CARGO_SYSTEM);
-                AddNode(doc, eleTruck, XMLDefs.DELIVER_TYPE, truck.GetTypeToDeliver().ordinal());
-                AddNode(doc, eleTruck, XMLDefs.CARGO_ID, truck.GetDeliverTypeID());
-                AddNode(doc, eleTruck, XMLDefs.QUANTITY_TO_DELIVER, truck.GetQuantityToDeliver());
-                AddNode(doc, eleTruck, XMLDefs.VISIBLE, truck.GetVisible());
-                AddNode(doc, eleTruck, XMLDefs.VISIBLE_TIME, truck.GetVisibleTimeRemaining());
-                AddNode(doc, eleTruck, XMLDefs.UNDER_ATTACK_TIME, truck.GetUnderAttackTimeRemaining());
-                AddNode(doc, eleTruck, XMLDefs.CURRENT_FUEL, truck.GetCurrentFuel());
-                AddResourceSystem(doc, eleTruck, truck.GetResourceSystem(), XMLDefs.RESOURCE_CONTAINER);
-                
-                if(truck.HasGeoCoordChain())
-                    AddGeoCoordChainNode(doc, eleTruck, XMLDefs.COORDINATE_CHAIN, truck.GetCoordinates());
             }
             
             elements = AddNode(doc, eleGame, XMLDefs.SHIPS);
@@ -723,6 +668,8 @@ public class XMLGameSaver
                 AddNode(doc, eleShip, XMLDefs.VISIBLE_TIME, ship.GetVisibleTimeRemaining());
                 AddNode(doc, eleShip, XMLDefs.MODE, ship.GetMode());
                 AddNode(doc, eleShip, XMLDefs.SHIP_TYPE, ship.GetEntityType().ordinal());
+                AddNode(doc, eleShip, XMLDefs.SELLING, ship.GetSelling());
+                AddNode(doc, eleShip, XMLDefs.SELL_TIME, ship.GetSellTimeRemaining());
                 
                 if(ship.HasGeoCoordChain())
                     AddGeoCoordChainNode(doc, eleShip, XMLDefs.COORDINATE_CHAIN, ship.GetCoordinates());
@@ -769,6 +716,8 @@ public class XMLGameSaver
                 AddNode(doc, eleSubmarine, XMLDefs.VISIBLE, submarine.GetVisible());
                 AddNode(doc, eleSubmarine, XMLDefs.VISIBLE_TIME, submarine.GetVisibleTimeRemaining());
                 AddNode(doc, eleSubmarine, XMLDefs.SUBMARINE_TYPE, submarine.GetEntityType().ordinal());
+                AddNode(doc, eleSubmarine, XMLDefs.SELLING, submarine.GetSelling());
+                AddNode(doc, eleSubmarine, XMLDefs.SELL_TIME, submarine.GetSellTimeRemaining());
                 
                 if(submarine.HasGeoCoordChain())
                     AddGeoCoordChainNode(doc, eleSubmarine, XMLDefs.COORDINATE_CHAIN, submarine.GetCoordinates());
@@ -841,13 +790,11 @@ public class XMLGameSaver
             for(Loot loot : game.GetLoots())
             {
                 Element eleLoot = AddNode(doc, elements, XMLDefs.LOOT, XMLDefs.ID, loot.GetID());
+                AddNode(doc, eleLoot, XMLDefs.NAME, loot.GetTypeName());
                 AddPositionNode(doc, eleLoot, XMLDefs.POSITION, loot.GetPosition());
-                AddNode(doc, eleLoot, XMLDefs.LOOT_TYPE, loot.GetLootType().ordinal());
-                AddNode(doc, eleLoot, XMLDefs.TYPE, loot.GetCargoID());
-                AddNode(doc, eleLoot, XMLDefs.QUANTITY, loot.GetQuantity());
+                AddNode(doc, eleLoot, XMLDefs.QUANTITY, loot.GetValue());
                 AddNode(doc, eleLoot, XMLDefs.EXPIRY, loot.GetExpiryRemaining());
             }
-            
             
             elements = AddNode(doc, eleGame, XMLDefs.RUBBLES);
             

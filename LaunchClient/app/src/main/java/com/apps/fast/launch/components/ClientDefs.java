@@ -41,6 +41,7 @@ public class ClientDefs
     public static final String SETTINGS_GOOGLE_ID_STORED = "StoredGoogleID0";
     public static final String SETTINGS_DISABLE_AUDIO = "DisableAudio";
     public static final String SETTINGS_SHOW_HINTS = "ShowHints";
+    public static final String SETTINGS_BLAST_RADII_CLICKABLE = "BlastRadiiClickable";
     public static final String SETTINGS_INITIAL_ZOOM = "InitialZoom";
     public static final String SETTINGS_CLUSTERING = "Clustering";
     public static final String SETTINGS_THEME = "Theme";
@@ -138,8 +139,8 @@ public class ClientDefs
     public static final boolean HAS_CLICKED_ARMORY_MARKER_DEFAULT = false;
     public static final String HAS_CLICKED_PROCESSOR_MARKER = "HasClickedProcessorMarker";
     public static final boolean HAS_CLICKED_PROCESSOR_MARKER_DEFAULT = false;
-    public static final String HAS_CLICKED_SCRAPYARD_MARKER = "HasClickedScrapyardMarker";
-    public static final boolean HAS_CLICKED_SCRAPYARD_MARKER_DEFAULT = false;
+    public static final String HAS_CLICKED_LOGISTICSDEPOT_MARKER = "HasClickedLogisticsDepotMarker";
+    public static final boolean HAS_CLICKED_LOGISTICSDEPOT_MARKER_DEFAULT = false;
     public static final String HAS_CLICKED_AIRPLANE_MARKER = "HasClickedAirplaneMarker";
     public static final boolean HAS_CLICKED_AIRPLANE_MARKER_DEFAULT = false;
     public static final String HAS_CLICKED_HELICOPTER_MARKER = "HasClickedHelicopterMarker";
@@ -189,6 +190,7 @@ public class ClientDefs
     public static final String SETTINGS_CURRENCY_DEFAULT = "£";
     public static final boolean SETTINGS_DISCLAIMER_ACCEPTED_DEFAULT = false;
     public static final boolean SETTINGS_SHOW_HINTS_DEFAULT = true;
+    public static final boolean SETTINGS_BLAST_RADII_CLICKABLE_DEFAULT = false;
     public static final boolean SETTINGS_DISABLE_AUDIO_DEFAULT = false;
     public static final boolean SETTINGS_INITIAL_ZOOM_DEFAULT = true;
     public static final int SETTINGS_CLUSTERING_DEFAULT = 8;

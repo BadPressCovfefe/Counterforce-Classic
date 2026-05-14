@@ -91,14 +91,6 @@ public class BottomMissileTarget extends LaunchView
             }
             break;
 
-            case ARTILLERY_GUN:
-            {
-                geoSource = game.GetArtilleryGun(lSiteID).GetPosition();
-                system = game.GetArtilleryGun(lSiteID).GetMissileSystem();
-                missileType = game.GetConfig().GetMissileType(game.GetArtilleryGun(lSiteID).GetMissileSystem().GetSlotMissileType(lSlotNo));
-            }
-            break;
-
             case AIRCRAFT_MISSILES:
             {
                 geoSource = game.GetAirplane(lSiteID).GetPosition();
@@ -107,28 +99,11 @@ public class BottomMissileTarget extends LaunchView
             }
             break;
 
-            case TANK_MISSILES:
-            case TANK_ARTILLERY:
-            {
-                geoSource = game.GetTank(lSiteID).GetPosition();
-                system = game.GetTank(lSiteID).GetMissileSystem();
-                missileType = game.GetConfig().GetMissileType(game.GetTank(lSiteID).GetMissileSystem().GetSlotMissileType(lSlotNo));
-            }
-            break;
-
             case SHIP_MISSILES:
             {
                 geoSource = game.GetShip(lSiteID).GetPosition();
                 system = game.GetShip(lSiteID).GetMissileSystem();
                 missileType = game.GetConfig().GetMissileType(game.GetShip(lSiteID).GetMissileSystem().GetSlotMissileType(lSlotNo));
-            }
-            break;
-
-            case SHIP_ARTILLERY:
-            {
-                geoSource = game.GetShip(lSiteID).GetPosition();
-                system = game.GetShip(lSiteID).GetArtillerySystem();
-                missileType = game.GetConfig().GetMissileType(game.GetShip(lSiteID).GetArtillerySystem().GetSlotMissileType(lSlotNo));
             }
             break;
 
@@ -214,7 +189,7 @@ public class BottomMissileTarget extends LaunchView
                     //Target out of range.
                     activity.ShowBasicOKDialog(context.getString(R.string.target_out_of_range));
                 }
-                else if(target instanceof Submarine && ((Submarine)target).Submerged() && !missileType.GetAntiSubmarine())
+                else if(target instanceof Submarine && !missileType.GetAntiSubmarine())
                 {
                     final LaunchDialog launchDialog = new LaunchDialog();
                     launchDialog.SetHeaderLaunch();
@@ -434,7 +409,7 @@ public class BottomMissileTarget extends LaunchView
                     txtFriendlyFire.setVisibility(VISIBLE);
                     txtFriendlyFire.setText(context.getString(R.string.player_size_difference_warning));
                 }
-                else if(target instanceof Submarine && ((Submarine)target).Submerged() && !missileType.GetAntiSubmarine())
+                else if(target instanceof Submarine && !missileType.GetAntiSubmarine())
                 {
                     txtFriendlyFire.setText(context.getString(R.string.submarine_submerged));
                 }

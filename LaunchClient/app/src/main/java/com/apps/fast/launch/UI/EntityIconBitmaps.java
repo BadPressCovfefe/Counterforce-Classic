@@ -6,6 +6,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 
+import androidx.core.graphics.ColorUtils;
+
 import com.apps.fast.launch.R;
 import com.apps.fast.launch.UI.map.LaunchClusterItem;
 import com.apps.fast.launch.activities.MainActivity;
@@ -20,11 +22,13 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import launch.game.Alliance;
 import launch.game.Defs;
 import launch.game.EntityPointer.EntityType;
 import launch.game.LaunchClientGame;
 import launch.game.entities.AirplaneInterface;
 import launch.game.entities.Airdrop;
+import launch.game.entities.KOTH;
 import launch.game.entities.LaunchEntity;
 import launch.game.entities.Loot;
 import launch.game.entities.NavalVessel;
@@ -258,6 +262,73 @@ public class EntityIconBitmaps
         Allegiance allegiance = game.GetAllegiance(game.GetOurPlayer(), vessel);
 
         return LaunchUICommon.TintBitmap(GetNavalBitmap(context, vessel.GetEntityType()), LaunchUICommon.AllegianceColours[allegiance.ordinal()]);
+    }
+
+    public static Bitmap GetKOTHBitmap(Context context, LaunchClientGame game)
+    {
+        Allegiance allegiance = Allegiance.UNAFFILIATED;
+        KOTH kingOfTheHill = game.GetKOTH();
+
+        if(kingOfTheHill != null)
+        {
+            if(!kingOfTheHill.GetEmpty() && !kingOfTheHill.GetContested())
+            {
+                if(kingOfTheHill.GetOccupiedByAlliance())
+                {
+                    Alliance alliance = game.GetAlliance(kingOfTheHill.GetKingID());
+
+                    if(alliance != null)
+                    {
+                        allegiance = game.GetAllegiance(game.GetOurPlayer(), alliance);
+                    }
+                }
+                else
+                {
+                    Player player = game.GetPlayer(kingOfTheHill.GetKingID());
+
+                    if(player != null)
+                    {
+                        allegiance = game.GetAllegiance(game.GetOurPlayer(), player);
+                    }
+                }
+            }
+        }
+
+        return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_koth), LaunchUICommon.AllegianceColours[allegiance.ordinal()]);
+    }
+
+    public static int GetKOTHCircleColor(Context context, LaunchClientGame game)
+    {
+        Allegiance allegiance = Allegiance.UNAFFILIATED;
+        KOTH kingOfTheHill = game.GetKOTH();
+
+        if(kingOfTheHill != null)
+        {
+            if(!kingOfTheHill.GetEmpty() && !kingOfTheHill.GetContested())
+            {
+                if(kingOfTheHill.GetOccupiedByAlliance())
+                {
+                    Alliance alliance = game.GetAlliance(kingOfTheHill.GetKingID());
+
+                    if(alliance != null)
+                    {
+                        allegiance = game.GetAllegiance(game.GetOurPlayer(), alliance);
+                    }
+                }
+                else
+                {
+                    Player player = game.GetPlayer(kingOfTheHill.GetKingID());
+
+                    if(player != null)
+                    {
+                        allegiance = game.GetAllegiance(game.GetOurPlayer(), player);
+                    }
+                }
+            }
+        }
+
+        int color = LaunchUICommon.AllegianceColours[allegiance.ordinal()];
+        return ColorUtils.setAlphaComponent(color, 96); // 128 = 50% alpha
     }
 
     public static Bitmap GetNavalBitmap(Context context, EntityType type)

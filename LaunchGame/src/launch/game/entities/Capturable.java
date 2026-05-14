@@ -62,7 +62,7 @@ public abstract class Capturable extends Damagable
         
     }
     
-    public boolean IsCaptured()
+    public boolean GetCaptured()
     {
         return this.lOwnerID != LaunchEntity.ID_NONE;
     }

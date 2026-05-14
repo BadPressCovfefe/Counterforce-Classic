@@ -52,7 +52,6 @@ public class ShipyardView extends LaunchView implements LaunchUICommon.ShipyardI
     private TextView txtQueue;
     private View view3;
     private View view4;
-    private FrameLayout lytInputs;
     private LinearLayout btnRepair;
     private ImageView imgProduction;
     private LinearLayout btnPurchaseUpgrade;
@@ -69,7 +68,7 @@ public class ShipyardView extends LaunchView implements LaunchUICommon.ShipyardI
         this.shipyardShadow = shipyard;
 
         bOwnedByPlayer = game.EntityIsFriendly(shipyard, game.GetOurPlayer());
-        bDisplayUpgrade = (!shipyard.IsCaptured() || game.EntityIsFriendly(game.GetOurPlayer(), game.GetOwner(shipyard))) && shipyard.GetProductionCapacity() < Defs.MAX_SHIPYARD_CAPACITY;
+        bDisplayUpgrade = (!shipyard.GetCaptured() || game.EntityIsFriendly(game.GetOurPlayer(), game.GetOwner(shipyard))) && shipyard.GetProductionCapacity() < Defs.MAX_SHIPYARD_CAPACITY;
 
         Setup();
     }
@@ -114,8 +113,6 @@ public class ShipyardView extends LaunchView implements LaunchUICommon.ShipyardI
         view3 = findViewById(R.id.view3);
         view4 = findViewById(R.id.view4);
 
-        lytInputs = findViewById(R.id.lytInputs);
-
         TextUtilities.AssignHealthStringAndAppearance(txtHP, shipyardShadow);
         imgProduction.setImageResource(R.drawable.image_shipyard);
 
@@ -124,6 +121,8 @@ public class ShipyardView extends LaunchView implements LaunchUICommon.ShipyardI
         UnitControls controls = new UnitControls(game, activity, shipyardShadow);
         lytUnitControls.removeAllViews();
         lytUnitControls.addView(controls);
+
+        controls.setVisibility(GONE);
 
         lytQueue.removeAllViews();
         GenerateSlotTable();
@@ -188,44 +187,37 @@ public class ShipyardView extends LaunchView implements LaunchUICommon.ShipyardI
                 @Override
                 public void onClick(View view)
                 {
-                    if(!game.InBattle(game.GetOurPlayer()) && bOwnedByPlayer)
-                    {
-                        Map<ResourceType, Long> Costs = game.GetRepairCost(shipyardShadow);
+                    Map<ResourceType, Long> Costs = game.GetRepairCost(shipyardShadow);
 
-                        final LaunchDialog launchDialog = new LaunchDialog();
-                        launchDialog.SetHeaderHealth();
-                        launchDialog.SetMessage(context.getString(R.string.repair_confirm, shipyardShadow.GetName(), TextUtilities.GetCostStatement(Costs)));
-                        launchDialog.SetOnClickYes(new View.OnClickListener()
-                        {
-                            @Override
-                            public void onClick(View view)
-                            {
-                                launchDialog.dismiss();
-
-                                if(game.GetOurPlayer().GetWealth() >= Costs.get(ResourceType.WEALTH))
-                                {
-                                    game.RepairEntity(shipyardShadow.GetPointer());
-                                }
-                                else
-                                {
-                                    activity.ShowBasicOKDialog(context.getString(R.string.insufficient_wealth));
-                                }
-                            }
-                        });
-                        launchDialog.SetOnClickNo(new View.OnClickListener()
-                        {
-                            @Override
-                            public void onClick(View view)
-                            {
-                                launchDialog.dismiss();
-                            }
-                        });
-                        launchDialog.show(activity.getFragmentManager(), "");
-                    }
-                    else
+                    final LaunchDialog launchDialog = new LaunchDialog();
+                    launchDialog.SetHeaderHealth();
+                    launchDialog.SetMessage(context.getString(R.string.repair_confirm, shipyardShadow.GetName(), TextUtilities.GetCurrencyString(Costs.get(ResourceType.WEALTH))));
+                    launchDialog.SetOnClickYes(new View.OnClickListener()
                     {
-                        activity.ShowBasicOKDialog(context.getString(R.string.in_battle_cant_repair));
-                    }
+                        @Override
+                        public void onClick(View view)
+                        {
+                            launchDialog.dismiss();
+
+                            if(game.GetOurPlayer().GetWealth() >= Costs.get(ResourceType.WEALTH))
+                            {
+                                game.RepairEntity(shipyardShadow.GetPointer());
+                            }
+                            else
+                            {
+                                activity.ShowBasicOKDialog(context.getString(R.string.insufficient_wealth));
+                            }
+                        }
+                    });
+                    launchDialog.SetOnClickNo(new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View view)
+                        {
+                            launchDialog.dismiss();
+                        }
+                    });
+                    launchDialog.show(activity.getFragmentManager(), "");
                 }
             });
 
@@ -251,11 +243,6 @@ public class ShipyardView extends LaunchView implements LaunchUICommon.ShipyardI
             txtQueue.setVisibility(VISIBLE);
             view4.setVisibility(VISIBLE);
         }
-        else
-        {
-            //txtQueue.setVisibility(GONE);
-            //view4.setVisibility(GONE);
-        }
 
         if(shipyardShadow.Destroyed())
         {
@@ -271,7 +258,6 @@ public class ShipyardView extends LaunchView implements LaunchUICommon.ShipyardI
             view3.setVisibility(GONE);
             txtQueue.setVisibility(GONE);
             view4.setVisibility(GONE);
-            lytInputs.setVisibility(GONE);
         }
     }
 
@@ -350,7 +336,7 @@ public class ShipyardView extends LaunchView implements LaunchUICommon.ShipyardI
                         }
                     }
 
-                    if(shipyard.IsCaptured() && !game.EntityIsFriendly(shipyard, game.GetOurPlayer()))
+                    if(shipyard.GetCaptured() && !game.EntityIsFriendly(shipyard, game.GetOurPlayer()))
                     {
                         btnRepair.setVisibility(GONE);
                         lytBuildOptions.setVisibility(GONE);
@@ -362,7 +348,6 @@ public class ShipyardView extends LaunchView implements LaunchUICommon.ShipyardI
                         view3.setVisibility(GONE);
                         txtQueue.setVisibility(GONE);
                         view4.setVisibility(GONE);
-                        lytInputs.setVisibility(GONE);
                     }
                 }
                 else

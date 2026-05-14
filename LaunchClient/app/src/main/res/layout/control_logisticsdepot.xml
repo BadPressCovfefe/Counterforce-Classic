@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/MainViewSideMargin"
+        android:layout_marginRight="@dimen/MainViewSideMargin"
+        android:layout_marginBottom="@dimen/MainViewSpacing"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtDepotMoneyStats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bank_money_stats"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="?attr/InfoColour" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/btnCollect"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/txtCollect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/collect"
+                android:padding="@dimen/ButtonEdgePadding"
+                android:background="@drawable/text_button_normal"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="?attr/InfoColour" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

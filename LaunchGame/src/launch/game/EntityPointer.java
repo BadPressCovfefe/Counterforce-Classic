@@ -65,7 +65,7 @@ public class EntityPointer
         SHIPYARD,
         TORPEDO,
         ARTILLERY_GUN,
-        SCRAP_YARD,
+        LOGISTICS_DEPOT,
         FACTORY,
         LAUNCH_SITE,
         RAIL_TERMINAL,
@@ -99,6 +99,9 @@ public class EntityPointer
         SSB,
         WATCH_TOWER,
         KOTH,
+        HEADQUARTERS, //Not really a structure type. Used to determine the image that appears in PurchaseButton.java on the client.
+        SOLAR_PANEL,
+        FARM,
     }
     
     public static final int DATA_SIZE = 5;
@@ -149,6 +152,8 @@ public class EntityPointer
             case SENTRY_GUN: return game.GetSentryGun(lID);
             case RADAR_STATION: return game.GetRadarStation(lID);
             case COMMAND_POST: return game.GetCommandPost(lID);
+            case FARM:
+            case SOLAR_PANEL:
             case ORE_MINE: return game.GetOreMine(lID);
             case AIRBASE: return game.GetAirbase(lID);
             case MISSILE_FACTORY: return game.GetMissileFactory(lID);
@@ -177,7 +182,6 @@ public class EntityPointer
             case MBT:
             case SPAAG:
             case TANK: return game.GetTank(lID);
-            case STORED_TANK: return game.GetStoredTank(lID);
             case BARRACKS:
             case ARMORY: return game.GetArmory(lID);
             case RESOURCE_DEPOSIT: return game.GetResourceDeposit(lID);
@@ -198,7 +202,7 @@ public class EntityPointer
             case TORPEDO: return game.GetTorpedo(lID);
             case SHIPYARD: return game.GetShipyard(lID);
             case ARTILLERY_GUN: return game.GetArtilleryGun(lID);
-            case SCRAP_YARD: return game.GetScrapYard(lID);
+            case LOGISTICS_DEPOT: return game.GetLogisticsDepot(lID);
             case DISTRIBUTOR: return game.GetDistributor(lID);
             case RUBBLE: return game.GetRubble(lID);
             case BLUEPRINT: return game.GetBlueprint(lID);
@@ -218,6 +222,8 @@ public class EntityPointer
             case SENTRY_GUN: return game.GetSentryGun(lID);
             case RADAR_STATION: return game.GetRadarStation(lID);
             case COMMAND_POST: return game.GetCommandPost(lID);
+            case FARM:
+            case SOLAR_PANEL:
             case ORE_MINE: return game.GetOreMine(lID);
             case AIRBASE: return game.GetAirbase(lID);
             case MISSILE_FACTORY: return game.GetMissileFactory(lID);
@@ -263,7 +269,7 @@ public class EntityPointer
             case LOOT: return game.GetLoot(lID);
             case SHIPYARD: return game.GetShipyard(lID);
             case ARTILLERY_GUN: return game.GetArtilleryGun(lID);
-            case SCRAP_YARD: return game.GetScrapYard(lID);
+            case LOGISTICS_DEPOT: return game.GetLogisticsDepot(lID);
             case DISTRIBUTOR: return game.GetDistributor(lID);
             case RUBBLE: return game.GetRubble(lID);
             case BLUEPRINT: return game.GetBlueprint(lID);
@@ -283,6 +289,8 @@ public class EntityPointer
             case SENTRY_GUN: return game.GetSentryGun(lID);
             case RADAR_STATION: return game.GetRadarStation(lID);
             case COMMAND_POST: return game.GetCommandPost(lID);
+            case FARM:
+            case SOLAR_PANEL:
             case ORE_MINE: return game.GetOreMine(lID);
             case AIRBASE: return game.GetAirbase(lID);
             case MISSILE_FACTORY: return game.GetMissileFactory(lID);
@@ -292,7 +300,7 @@ public class EntityPointer
             case ARMORY: return game.GetArmory(lID);
             case PROCESSOR: return game.GetProcessor(lID);
             case ARTILLERY_GUN: return game.GetArtilleryGun(lID);
-            case SCRAP_YARD: return game.GetScrapYard(lID);
+            case LOGISTICS_DEPOT: return game.GetLogisticsDepot(lID);
             case DISTRIBUTOR: return game.GetDistributor(lID);
             default: return null;
         }
@@ -405,7 +413,7 @@ public class EntityPointer
                 {
                     MapEntities.add(entity);
                 }
-            } 
+            }
         }
         
         return MapEntities;

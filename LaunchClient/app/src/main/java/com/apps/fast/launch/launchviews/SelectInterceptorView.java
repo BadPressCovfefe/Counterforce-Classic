@@ -107,17 +107,6 @@ public class SelectInterceptorView extends LaunchView
                     }
                 }
 
-                for(Tank tank : game.GetTanks())
-                {
-                    if(tank.GetOwnerID() == ourPlayer.GetID() && tank.HasInterceptors() && tank.GetMissileSystem().ReadyToFire() && !tank.GetOnWater())
-                    {
-                        if(AddUIForSystem(tank.GetPosition(), target, tank.GetMissileSystem(), false, tank.GetID(), SystemType.TANK_INTERCEPTORS))
-                        {
-                            bInterceptorsAvailable = true;
-                        }
-                    }
-                }
-
                 for(Ship ship : game.GetShips())
                 {
                     if(ship.GetOwnerID() == ourPlayer.GetID() && ship.HasInterceptors() && ship.GetInterceptorSystem().ReadyToFire())

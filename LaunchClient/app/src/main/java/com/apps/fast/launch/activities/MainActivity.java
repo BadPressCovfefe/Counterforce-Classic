@@ -15,6 +15,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Build;
@@ -40,8 +41,8 @@ import com.apps.fast.launch.R;
 import com.apps.fast.launch.UI.AvatarBitmaps;
 import com.apps.fast.launch.UI.EntityIconBitmaps;
 import com.apps.fast.launch.UI.LandUnitIconBitmaps;
+import com.apps.fast.launch.UI.LaunchUICommon;
 import com.apps.fast.launch.UI.StructureIconBitmaps;
-import com.apps.fast.launch.UI.map.LaunchClusterItem;
 import com.apps.fast.launch.UI.map.SelectableMapFragment;
 import com.apps.fast.launch.components.BlastEffect;
 import com.apps.fast.launch.components.ClientDefs;
@@ -90,10 +91,14 @@ import com.apps.fast.launch.launchviews.entities.AirplaneView;
 import com.apps.fast.launch.launchviews.entities.ArmoryView;
 import com.apps.fast.launch.launchviews.entities.CommandPostView;
 import com.apps.fast.launch.launchviews.entities.DotncarryMemorialView;
+import com.apps.fast.launch.launchviews.entities.FarmView;
 import com.apps.fast.launch.launchviews.entities.InterceptorView;
 import com.apps.fast.launch.launchviews.entities.KOTHView;
+import com.apps.fast.launch.launchviews.entities.LogisticsDepotView;
+import com.apps.fast.launch.launchviews.entities.OreMineView;
 import com.apps.fast.launch.launchviews.entities.ShipView;
 import com.apps.fast.launch.launchviews.entities.ShipyardView;
+import com.apps.fast.launch.launchviews.entities.SolarPanelView;
 import com.apps.fast.launch.launchviews.entities.SubmarineView;
 import com.apps.fast.launch.launchviews.entities.Thomas99MemorialView;
 import com.apps.fast.launch.launchviews.entities.TorpedoView;
@@ -143,10 +148,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.RuntimeExecutionException;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.maps.android.clustering.Cluster;
-import com.google.maps.android.clustering.ClusterItem;
-import com.google.maps.android.clustering.ClusterManager;
-import com.google.maps.android.data.geojson.GeoJsonLayer;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -177,6 +178,7 @@ import launch.game.EntityPointer;
 import launch.game.GeoCoord;
 import launch.game.LaunchClientAppInterface;
 import launch.game.LaunchClientGame;
+import launch.game.LaunchGame;
 import launch.game.User;
 import launch.game.entities.*;
 import launch.game.entities.Movable.MoveOrders;
@@ -197,7 +199,7 @@ import launch.utilities.MissileStats;
 import launch.utilities.PrivacyZone;
 import launch.utilities.Security;
 
-public class MainActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnGroundOverlayClickListener, GoogleMap.OnMapClickListener, ClusterManager.OnClusterClickListener, ClusterManager.OnClusterItemClickListener, GoogleMap.OnMapLongClickListener, LaunchClientAppInterface, SelectableMapFragment.SelectableMapListener, GoogleMap.OnCircleClickListener
+public class MainActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnGroundOverlayClickListener, GoogleMap.OnMapClickListener, GoogleMap.OnMapLongClickListener, LaunchClientAppInterface, SelectableMapFragment.SelectableMapListener, GoogleMap.OnCircleClickListener
 {
     private static final String LOG_NAME = "MainActivity";
     private static final int PLAYER_MAP_ICON_SIZE = 64;
@@ -274,8 +276,11 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     public boolean bShowBlastRadii = true;
     public boolean bShowMissileTrails = true;
     private boolean bShowFirstLocation = true;
+
+    public boolean bBlastRadiiClickable = true;
     private boolean bRebuildMap = false;
 
+    private Marker kothMarker = null;
     private Circle kothCircle = null;
     private Map<Marker, PrivacyZone> PrivacyZoneMarkers = new ConcurrentHashMap<>();
     public Map<Integer, Polyline> MissileTrails = new ConcurrentHashMap<>();
@@ -367,7 +372,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     //Map reference.
     private GoogleMap map;
-    private GeoJsonLayer layer = null;
 
     /** The maximum level the player can zoom to. Max is 21, minimum is 0. 0 is a larger view. **/
     private float fltMaxZoom;
@@ -445,8 +449,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         fltZoomToLevel = sharedPreferences.getFloat(ClientDefs.SETTINGS_ZOOM_LEVEL, ClientDefs.SETTINGS_ZOOM_LEVEL_DEFAULT);
 
         fltMaxZoom = sharedPreferences.getFloat(ClientDefs.SETTINGS_MAX_ZOOM, ClientDefs.SETTINGS_MAX_ZOOM_DEFAULT);
-
-        ClientDefs.CLUSTERING_SIZE = sharedPreferences.getInt(ClientDefs.SETTINGS_CLUSTERING, ClientDefs.SETTINGS_CLUSTERING_DEFAULT);
 
         super.onCreate(savedInstanceState);
 
@@ -736,22 +738,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         });
 
         //layer.addLayerToMap();
-    }
-
-    @Override
-    public boolean onClusterItemClick(ClusterItem clusterItem)
-    {
-        LaunchClusterItem launchClusterItem = (LaunchClusterItem)clusterItem;
-        EntityClicked(launchClusterItem.GetEntity());
-        return false;
-    }
-
-    @Override
-    public boolean onClusterClick(Cluster cluster)
-    {
-        //TO DO: Show cluster information.
-
-        return false;
     }
 
     @Override
@@ -1718,9 +1704,11 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
                     if(entity instanceof SentryGun && ZoomedIn())
                     {
+                        SentryGun gun = (SentryGun)entity;
+
                         multiCircleOverlays.add(map.addCircle(new CircleOptions()
                                 .center(Utilities.GetLatLng(entity.GetPosition()))
-                                .radius(Defs.SENTRY_RANGE * Defs.METRES_PER_KM)
+                                .radius(gun.GetIsWatchTower() ? Defs.ARTILLERY_RANGE : Defs.SENTRY_RANGE * Defs.METRES_PER_KM)
                                 .strokeColor(Utilities.ColourFromAttr(context, R.attr.InterceptorPathColour))
                                 .strokeWidth(5.0f)));
                     }
@@ -1769,6 +1757,60 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                         .radius(game.GetConfig().GetMissileRange(type) * Defs.METRES_PER_KM)
                                         .strokeColor(Utilities.ColourFromAttr(context, R.attr.MissilePathColour))
                                         .strokeWidth(fltRangeRadius)));
+                            }
+                        }
+
+                        if(entity instanceof OreMine)
+                        {
+                            OreMine mine = (OreMine)entity;
+
+                            switch(mine.GetEntityType())
+                            {
+                                case SOLAR_PANEL:
+                                {
+                                    //Nothing needs drawn.
+                                }
+                                break;
+
+                                case FARM:
+                                {
+                                    //Generation radius. Gold circle.
+
+                                    multiCircleOverlays.add(map.addCircle(new CircleOptions()
+                                            .center(Utilities.GetLatLng(entity.GetPosition()))
+                                            .radius(Defs.FARM_GENERATE_DISTANCE * Defs.METRES_PER_KM)
+                                            .fillColor(Utilities.ColourFromAttr(context, R.attr.LootRadiusColour))
+                                            .strokeWidth(0.0f)));
+
+                                    //Separation distance. Grey radius.
+
+                                    multiCircleOverlays.add(map.addCircle(new CircleOptions()
+                                            .center(Utilities.GetLatLng(entity.GetPosition()))
+                                            .radius(Defs.FARM_SEPARATION_DISTANCE * Defs.METRES_PER_KM)
+                                            .strokeColor(Utilities.ColourFromAttr(context, R.attr.StructureSeparationRadiusColour))
+                                            .strokeWidth(5.0f)));
+
+                                    //"Owner close enough" radius. Red radius.
+
+                                    multiCircleOverlays.add(map.addCircle(new CircleOptions()
+                                            .center(Utilities.GetLatLng(entity.GetPosition()))
+                                            .radius(Defs.FARM_WORK_RADIUS * Defs.METRES_PER_KM)
+                                            .strokeColor(Utilities.ColourFromAttr(context, R.attr.MissilePathColour))
+                                            .strokeWidth(5.0f)));
+                                }
+                                break;
+
+                                case ORE_MINE:
+                                {
+                                    //Competition radius. Red radius.
+
+                                    multiCircleOverlays.add(map.addCircle(new CircleOptions()
+                                            .center(Utilities.GetLatLng(entity.GetPosition()))
+                                            .radius(Defs.ORE_MINE_COMPETITION_DISTANCE * Defs.METRES_PER_KM)
+                                            .strokeColor(Utilities.ColourFromAttr(context, R.attr.MissilePathColour))
+                                            .strokeWidth(5.0f)));
+                                }
+                                break;
                             }
                         }
 
@@ -1915,11 +1957,67 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                 .strokeWidth(0.0f)));
                     }
 
+                    if(entity instanceof OreMine)
+                    {
+                        OreMine mine = (OreMine)entity;
+
+                        switch(mine.GetEntityType())
+                        {
+                            case SOLAR_PANEL:
+                            {
+                                //Nothing needs drawn.
+                            }
+                            break;
+
+                            case FARM:
+                            {
+                                //Generation radius. Gold circle.
+
+                                CircleOverlays.add(map.addCircle(new CircleOptions()
+                                        .center(Utilities.GetLatLng(entity.GetPosition()))
+                                        .radius(Defs.FARM_GENERATE_DISTANCE * Defs.METRES_PER_KM)
+                                        .fillColor(Utilities.ColourFromAttr(context, R.attr.LootRadiusColour))
+                                        .strokeWidth(0.0f)));
+
+                                //Separation distance. Grey radius.
+
+                                CircleOverlays.add(map.addCircle(new CircleOptions()
+                                        .center(Utilities.GetLatLng(entity.GetPosition()))
+                                        .radius(Defs.FARM_SEPARATION_DISTANCE * Defs.METRES_PER_KM)
+                                        .strokeColor(Utilities.ColourFromAttr(context, R.attr.StructureSeparationRadiusColour))
+                                        .strokeWidth(5.0f)));
+
+                                //"Owner close enough" radius. Red radius.
+
+                                CircleOverlays.add(map.addCircle(new CircleOptions()
+                                        .center(Utilities.GetLatLng(entity.GetPosition()))
+                                        .radius(Defs.FARM_WORK_RADIUS * Defs.METRES_PER_KM)
+                                        .strokeColor(Utilities.ColourFromAttr(context, R.attr.MissilePathColour))
+                                        .strokeWidth(5.0f)));
+                            }
+                            break;
+
+                            case ORE_MINE:
+                            {
+                                //Competition radius. Red radius.
+
+                                CircleOverlays.add(map.addCircle(new CircleOptions()
+                                        .center(Utilities.GetLatLng(entity.GetPosition()))
+                                        .radius(Defs.ORE_MINE_COMPETITION_DISTANCE * Defs.METRES_PER_KM)
+                                        .strokeColor(Utilities.ColourFromAttr(context, R.attr.MissilePathColour))
+                                        .strokeWidth(5.0f)));
+                            }
+                            break;
+                        }
+                    }
+
                     if(entity instanceof SentryGun)
                     {
+                        SentryGun gun = (SentryGun)entity;
+
                         CircleOverlays.add(map.addCircle(new CircleOptions()
                                 .center(Utilities.GetLatLng(entity.GetPosition()))
-                                .radius(Defs.SENTRY_RANGE * Defs.METRES_PER_KM)
+                                .radius(gun.GetIsWatchTower() ? Defs.ARTILLERY_RANGE : Defs.SENTRY_RANGE * Defs.METRES_PER_KM)
                                 .strokeColor(Utilities.ColourFromAttr(context, R.attr.InterceptorPathColour))
                                 .strokeWidth(5.0f)));
                     }
@@ -2110,14 +2208,11 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
                             List<PatternItem> trajectoryPattern = Arrays.asList(gap, dash);
 
-                            if(tank.IsAnMBT())
-                            {
-                                CircleOverlays.add(map.addCircle(new CircleOptions()
-                                        .center(Utilities.GetLatLng(entity.GetPosition()))
-                                        .radius(Defs.BATTLE_TANK_FIRING_RANGE * Defs.METRES_PER_KM)
-                                        .strokeColor(Utilities.ColourFromAttr(context, R.attr.MissilePathColour))
-                                        .strokeWidth(5.0f)));
-                            }
+                            CircleOverlays.add(map.addCircle(new CircleOptions()
+                                    .center(Utilities.GetLatLng(entity.GetPosition()))
+                                    .radius(Defs.BATTLE_TANK_FIRING_RANGE * Defs.METRES_PER_KM)
+                                    .strokeColor(Utilities.ColourFromAttr(context, R.attr.MissilePathColour))
+                                    .strokeWidth(5.0f)));
 
                             if(tank.GetMoveOrders() == Movable.MoveOrders.MOVE)
                             {
@@ -2604,6 +2699,33 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             {
                 mainView.BottomLayoutShowView(new SentryGunView(game, this, selectedEntity));
             }
+            else if(selectedEntity instanceof LogisticsDepot)
+            {
+                mainView.BottomLayoutShowView(new LogisticsDepotView(game, this, selectedEntity));
+            }
+            else if(selectedEntity instanceof OreMine)
+            {
+                switch(selectedEntity.GetEntityType())
+                {
+                    case ORE_MINE:
+                    {
+                        mainView.BottomLayoutShowView(new OreMineView(game, this, selectedEntity));
+                    }
+                    break;
+
+                    case FARM:
+                    {
+                        mainView.BottomLayoutShowView(new FarmView(game, this, selectedEntity));
+                    }
+                    break;
+
+                    case SOLAR_PANEL:
+                    {
+                        mainView.BottomLayoutShowView(new SolarPanelView(game, this, selectedEntity));
+                    }
+                    break;
+                }
+            }
             else if(selectedEntity instanceof CommandPost)
             {
                 mainView.BottomLayoutShowView(new CommandPostView(game, this, selectedEntity));
@@ -2695,8 +2817,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             selectedEntity = game.GetProcessor(selectedEntity.GetID());
         else if(selectedEntity instanceof Distributor)
             selectedEntity = game.GetDistributor(selectedEntity.GetID());
-        else if(selectedEntity instanceof ScrapYard)
-            selectedEntity = game.GetScrapYard(selectedEntity.GetID());
+        else if(selectedEntity instanceof LogisticsDepot)
+            selectedEntity = game.GetLogisticsDepot(selectedEntity.GetID());
         else if(selectedEntity instanceof Missile)
             selectedEntity = game.GetMissile(selectedEntity.GetID());
         else if(selectedEntity instanceof Interceptor)
@@ -2758,12 +2880,41 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 if(selectedEntity != null)
                 {
                     if((!(selectedEntity instanceof Player) || selectedEntity.GetID() == game.GetOurPlayerID()))
+                    {
                         location = Utilities.GetLatLng(selectedEntity.GetPosition());
+                    }
+                    else if(selectedEntity instanceof Player)
+                    {
+                        Player player = (Player)selectedEntity;
+
+                        for(Structure structure : player.GetStructures())
+                        {
+                            if(structure instanceof CommandPost && ((CommandPost)structure).GetIsHQ())
+                            {
+                                location = Utilities.GetLatLng(structure.GetPosition());
+                                break;
+                            }
+                        }
+
+                        //If location is null, player has no HQ. Pick any command post.
+                        //If player has no command posts, they simply cannot be zoomed to.
+                        if(location == null)
+                        {
+                            for(Structure structure : player.GetStructures())
+                            {
+                                if(structure instanceof CommandPost)
+                                {
+                                    location = Utilities.GetLatLng(structure.GetPosition());
+                                    break;
+                                }
+                            }
+                        }
+                    }
                 }
 
                 if(location != null)
                 {
-                    if (bZoomIn)
+                    if(bZoomIn)
                     {
                         map.animateCamera(CameraUpdateFactory.newLatLngZoom(location, fltZoomToLevel));
                     }
@@ -2771,6 +2922,10 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                     {
                         map.animateCamera(CameraUpdateFactory.newLatLng(location));
                     }
+                }
+                else if(selectedEntity instanceof Player)
+                {
+                    ShowBasicOKDialog(getString(R.string.no_hq_cant_zoom));
                 }
             }
         });
@@ -3229,28 +3384,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             }
             break;
-
-            case TANK_ARTILLERY:
-            case TANK_MISSILES:
-            {
-                Tank tank = game.GetTank(lSiteID);
-                type = game.GetConfig().GetMissileType(tank.GetMissileSystem().GetSlotMissileType(lSlotNo));
-                geoTargetingOrigin = tank.GetPosition();
-                targetingMissileType = type;
-
-                if(type != null)
-                {
-                    if(type.GetMissileRange() < 20038)
-                    {
-                        targetRange = map.addCircle(new CircleOptions()
-                                .center(Utilities.GetLatLng(tank.GetPosition()))
-                                .radius(game.GetConfig().GetMissileRange(type) * Defs.METRES_PER_KM)
-                                .strokeColor(Utilities.ColourFromAttr(this, R.attr.MissilePathColour))
-                                .strokeWidth(5.0f));
-                    }
-                }
-            }
-            break;
         }
 
         if(targetingMissileType != null)
@@ -3505,24 +3638,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 Airplane aircraft = game.GetAirplane(lSiteID);
                 InterceptorType type = game.GetConfig().GetInterceptorType(aircraft.GetInterceptorSystem().GetSlotMissileType(lSlotNo));
                 geoTargetingOrigin = aircraft.GetPosition();
-                targetingInterceptorType = type;
-
-                if(type.GetInterceptorRange() < 20038)
-                {
-                    targetRange = map.addCircle(new CircleOptions()
-                            .center(Utilities.GetLatLng(geoTargetingOrigin))
-                            .radius(game.GetConfig().GetInterceptorRange(type) * Defs.METRES_PER_KM)
-                            .strokeColor(Utilities.ColourFromAttr(this, R.attr.MissilePathColour))
-                            .strokeWidth(5.0f));
-                }
-            }
-            break;
-
-            case TANK_INTERCEPTORS:
-            {
-                Tank tank = game.GetTank(lSiteID);
-                InterceptorType type = game.GetConfig().GetInterceptorType(tank.GetMissileSystem().GetSlotMissileType(lSlotNo));
-                geoTargetingOrigin = tank.GetPosition();
                 targetingInterceptorType = type;
 
                 if(type.GetInterceptorRange() < 20038)
@@ -4592,11 +4707,14 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onCircleClick(@NonNull Circle circle)
     {
-        if(circle.getTag() != null)
+        if(interactionMode == InteractionMode.STANDARD)
         {
-            if(circle.getTag() instanceof MapEntity)
+            if(circle.getTag() != null)
             {
-                EntityClicked((MapEntity)circle.getTag());
+                if(circle.getTag() instanceof MapEntity)
+                {
+                    EntityClicked((MapEntity)circle.getTag());
+                }
             }
         }
     }
@@ -4689,6 +4807,11 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     public MapEntity GetEntityFromMarker(Marker marker)
     {
+        if(marker.getTag() instanceof KOTH)
+        {
+            return game.GetKOTH();
+        }
+
         if(InterceptorMarkers.containsValue(marker))
         {
             Integer lID = Utilities.GetMapKeyByValue(InterceptorMarkers, marker);
@@ -5422,6 +5545,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                 map.clear();
                             }
 
+                            kothMarker = null;
                             kothCircle = null;
                             AllMarkers = new ConcurrentHashMap<>();
                             AllOverlays = new ConcurrentHashMap<>();
@@ -5606,14 +5730,14 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                     MarkerOptions optionDotncarry = new MarkerOptions();
                                     optionDotncarry.position(new LatLng(31.891461, -104.86071));
                                     optionDotncarry.anchor(0.5f, 0.5f);
-                                    optionDotncarry.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_texas_obelisk));
+                                    optionDotncarry.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_monument));
                                     DotncarryMemorial = map.addMarker(optionDotncarry);
 
                                     //Thomas99 memorial.
                                     MarkerOptions optionThomas99 = new MarkerOptions();
                                     optionThomas99.position(new LatLng(33.200087, -97.198009));
                                     optionThomas99.anchor(0.5f, 0.5f);
-                                    optionThomas99.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_texas_obelisk));
+                                    optionThomas99.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_monument));
                                     Thomas99Memorial = map.addMarker(optionThomas99);
 
                                     if(game.GetKOTH() != null)
@@ -5636,16 +5760,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                         AddEntityToChunk(missileSite);
                                     }
 
-                                    for(ArtilleryGun artillery : game.GetArtilleryGuns())
-                                    {
-                                        AddEntityToChunk(artillery);
-                                    }
-
-                                    for(Processor processor : game.GetProcessors())
-                                    {
-                                        AddEntityToChunk(processor);
-                                    }
-
                                     for(SAMSite samSite : game.GetSAMSites())
                                     {
                                         AddEntityToChunk(samSite);
@@ -5654,11 +5768,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                     for(SentryGun sentryGun : game.GetSentryGuns())
                                     {
                                         AddEntityToChunk(sentryGun);
-                                    }
-
-                                    for(OreMine oreMine : game.GetOreMines())
-                                    {
-                                        AddEntityToChunk(oreMine);
                                     }
 
                                     for(CommandPost bunker : game.GetCommandPosts())
@@ -5676,29 +5785,14 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                         AddEntityToChunk(armory);
                                     }
 
-                                    for(Bank bank : game.GetBanks())
-                                    {
-                                        AddEntityToChunk(bank);
-                                    }
-
-                                    for(MissileFactory factory : game.GetMissileFactorys())
-                                    {
-                                        AddEntityToChunk(factory);
-                                    }
-
                                     for(Warehouse warehouse : game.GetWarehouses())
                                     {
                                         AddEntityToChunk(warehouse);
                                     }
 
-                                    for(ScrapYard yard : game.GetScrapYards())
+                                    for(OreMine mine : game.GetOreMines())
                                     {
-                                        AddEntityToChunk(yard);
-                                    }
-
-                                    for(RadarStation radarStation : game.GetRadarStations())
-                                    {
-                                        AddEntityToChunk(radarStation);
+                                        AddEntityToChunk(mine);
                                     }
 
                                     for(Airplane aircraft : game.GetAirplanes())
@@ -5721,29 +5815,9 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                         AddEntityToChunk(submarine);
                                     }
 
-                                    for(CargoTruck truck : game.GetCargoTrucks())
-                                    {
-                                        AddEntityToChunk(truck);
-                                    }
-
-                                    for(Infantry infantry : game.GetInfantries())
-                                    {
-                                        AddEntityToChunk(infantry);
-                                    }
-
-                                    for(Blueprint blueprint : game.GetBlueprints())
-                                    {
-                                        AddEntityToChunk(blueprint);
-                                    }
-
                                     for(Loot loot : game.GetLoots())
                                     {
                                         AddEntityToChunk(loot);
-                                    }
-
-                                    for(Airdrop airdrop : game.GetAirdrops())
-                                    {
-                                        CreateEntityUI(airdrop);
                                     }
 
                                     for(Rubble rubble : game.GetRubbles())
@@ -5802,7 +5876,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
                         //Move entities that can move.
 
-                        for(BlastEffect blastEffect : BlastEffects)
+                        for(BlastEffect blastEffect : new ArrayList<>(BlastEffects))
                         {
                             blastEffect.Tick();
                         }
@@ -6109,10 +6183,17 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             out.write(cData);
             AvatarBitmaps.InvalidateAvatar(lAvatarID);
 
+            int lPlayerID = LaunchEntity.ID_NONE;
+
             //Update UI.
             for(final Map.Entry<Integer, Marker> entry : Objects.requireNonNull(AllMarkers.get(EntityType.PLAYER)).entrySet())
             {
                 final Player player = game.GetPlayer(entry.getKey());
+
+                if(lPlayerID == LaunchEntity.ID_NONE)
+                {
+                    lPlayerID = player.GetID();
+                }
 
                 if(player.GetAvatarID() == lAvatarID)
                 {
@@ -6127,6 +6208,29 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
                                 if(marker != null)
                                     CreateEntityUI(player);
+                            }
+                        });
+                    }
+                }
+            }
+
+            for(final Map.Entry<Integer, Marker> entry : Objects.requireNonNull(AllMarkers.get(EntityType.COMMAND_POST)).entrySet())
+            {
+                final CommandPost post = game.GetCommandPost(entry.getKey());
+
+                if(post.GetIsHQ() && post.GetOwnedBy(lPlayerID))
+                {
+                    if(post.GetPosition().GetValid())
+                    {
+                        runOnUiThread(new Runnable()
+                        {
+                            @Override
+                            public void run()
+                            {
+                                Marker marker = entry.getValue();
+
+                                if(marker != null)
+                                    CreateEntityUI(post);
                             }
                         });
                     }
@@ -6347,8 +6451,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                             if(marker != null)
                             {
                                 marker.setPosition(Utilities.GetLatLng(player.GetPosition()));
-                                marker.setIcon(GetPlayerIcon(player));
-                                marker.setAlpha(player.GetRespawnProtected() ? 0.5f : 1.0f);
+                                //marker.setIcon(GetPlayerIcon(player));
+                                //marker.setAlpha(player.GetRespawnProtected() ? 0.5f : 1.0f);
                             }
                             else
                             {
@@ -6386,6 +6490,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                     typeToCheck = EntityType.SHIP;
                 else if(entity instanceof Submarine)
                     typeToCheck = EntityType.SUBMARINE;
+                else if(entity instanceof OreMine)
+                    typeToCheck = EntityType.ORE_MINE;
 
                 if(EntityShouldAlwaysRender(typeToCheck))
                     CreateEntityUI((MapEntity)entity);
@@ -7028,77 +7134,28 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 {
                     circle.setVisible(bShow);
                 }
+            }
+        });
+    }
 
-                //TODO: This can be made much more efficient by just having this code hide or show the circles in BlastRadii and EMPMarkers, as the polyline code does there. To enable this, we will need to simply always generate the circles, but they will need to be setVisible(bShowBlastRadii) at time of creation.
-                /*if(bShow)
+    public void ToggleBlastRadiiClickable(boolean bClickable)
+    {
+        bBlastRadiiClickable = bClickable;
+
+        runOnUiThread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                for(Circle circle : BlastRadii.values())
                 {
-                    for(Missile missile : game.GetMissiles())
-                    {
-                        if(missile.Flying())
-                        {
-                            MissileType type = game.GetConfig().GetMissileType(missile.GetType());
-                            GeoCoord geoTarget = missile.GetTracking() ? game.GetMissileTarget(missile) : missile.GetTarget();
-
-                            if(type.GetIncendiary())
-                            {
-                                BlastRadii.put(missile.GetID(), map.addCircle(new CircleOptions()
-                                        .center(Utilities.GetLatLng(geoTarget))
-                                        .radius(MissileStats.GetBlastRadius(type, missile.GetAirburst()) * Defs.METRES_PER_KM)
-                                        .fillColor(Utilities.ColourFromAttr(me, R.attr.IncendiaryBlastRadiusColour))
-                                        .strokeWidth(0.0f)));
-                            }
-                            else
-                            {
-                                BlastRadii.put(missile.GetID(), map.addCircle(new CircleOptions()
-                                        .center(Utilities.GetLatLng(geoTarget))
-                                        .radius(MissileStats.GetBlastRadius(type, missile.GetAirburst()) * Defs.METRES_PER_KM)
-                                        .fillColor(Utilities.ColourFromAttr(me, R.attr.BlastRadiusColour))
-                                        .strokeWidth(0.0f)));
-                            }
-
-                            EMPMarkers.put(missile.GetID(), map.addCircle(new CircleOptions()
-                                    .center(Utilities.GetLatLng(geoTarget))
-                                    .radius(game.GetConfig().GetMissileEMPRadius(type, missile.GetAirburst()) * Defs.METRES_PER_KM)
-                                    .fillColor(Utilities.ColourFromAttr(me, R.attr.EMPColour))
-                                    .strokeWidth(0.0f)));
-
-                            if(type.GetSonobuoy())
-                            {
-                                BlastRadii.put(missile.GetID(), map.addCircle(new CircleOptions()
-                                        .center(Utilities.GetLatLng(geoTarget))
-                                        .radius(Defs.SONAR_RANGE * Defs.METRES_PER_KM)
-                                        .strokeColor(Utilities.ColourFromAttr(me, R.attr.SonarColour))
-                                        .strokeWidth(3.0f)));
-                            }
-                        }
-                    }
+                    circle.setClickable(bClickable);
                 }
-                else
+
+                for(Circle circle : EMPMarkers.values())
                 {
-                    if(!BlastRadii.isEmpty())
-                    {
-                        for(Map.Entry<Integer, Circle> entry : BlastRadii.entrySet())
-                        {
-                            Circle circle = entry.getValue();
-
-                            if(circle != null)
-                                circle.remove();
-                        }
-                        BlastRadii.clear();
-                    }
-
-                    if(!EMPMarkers.isEmpty())
-                    {
-                        for(Map.Entry<Integer, Circle> entry : EMPMarkers.entrySet())
-                        {
-                            Circle circle = entry.getValue();
-
-                            if(circle != null)
-                                circle.remove();
-                        }
-                        EMPMarkers.clear();
-                    }
-                }*/
+                    circle.setClickable(bClickable);
+                }
             }
         });
     }
@@ -7165,11 +7222,11 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         });
     }
 
-    /*public void BlastAnimationFinished(BlastEffect effect)
+    public void BlastAnimationFinished(BlastEffect effect)
     {
         if(BlastEffects.contains(effect))
             BlastEffects.remove(effect);
-    }*/
+    }
 
     public void DrawAllMovableUI()
     {
@@ -7350,39 +7407,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                         }
                     }
                 }
-
-                //Artillery Gun lines
-                for(ArtilleryGun gun : game.GetArtilleryGuns())
-                {
-                    if(game.EntityIsFriendly(gun, game.GetOurPlayer()))
-                    {
-                        if(gun.HasFireOrder())
-                        {
-                            FireOrder order = gun.GetFireOrder();
-
-                            if(order != null)
-                            {
-                                geoTarget = order.GetGeoTarget();
-                            }
-
-                            if(geoTarget != null)
-                            {
-                                MovableTrajectories.add(map.addPolyline(new PolylineOptions()
-                                        .add(Utilities.GetLatLng(gun.GetPosition()))
-                                        .add(Utilities.GetLatLng(geoTarget))
-                                        .pattern(trajectoryPattern)
-                                        .geodesic(true)
-                                        .width(3.0f)
-                                        .color(Utilities.ColourFromAttr(me, R.attr.BadColour))));
-
-                                MoveMarkers.add(map.addMarker(new MarkerOptions()
-                                        .position(Utilities.GetLatLng(geoTarget))
-                                        .anchor(0.5f, 0.5f)
-                                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_attack_waypoint))));
-                            }
-                        }
-                    }
-                }
             }
         });
     }
@@ -7418,32 +7442,45 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     private Map<Integer, Marker> GetEntityMarkerMap(MapEntity entity)
     {
-        if(entity instanceof ResourceDeposit)
-            return DepositMarkers;
-        else if(entity instanceof Interceptor)
+        if(entity instanceof Interceptor)
             return InterceptorMarkers;
         else if(entity instanceof Torpedo)
             return TorpedoMarkers;
         else
         {
-            EntityType type = entity.GetEntityType();
+            EntityType typeToCheck = entity.GetEntityType();
 
             if(entity instanceof Airplane)
-                type = EntityType.AIRPLANE;
+                typeToCheck = EntityType.AIRPLANE;
             else if(entity instanceof Tank)
-                type = EntityType.TANK;
+                typeToCheck = EntityType.TANK;
             else if(entity instanceof Ship)
-                type = EntityType.SHIP;
+                typeToCheck = EntityType.SHIP;
             else if(entity instanceof Submarine)
-                type = EntityType.SUBMARINE;
+                typeToCheck = EntityType.SUBMARINE;
+            else if(entity instanceof OreMine)
+                typeToCheck = EntityType.ORE_MINE;
 
-            return AllMarkers.get(type);
+            return AllMarkers.get(typeToCheck);
         }
     }
 
     private Map<Integer, GroundOverlay> GetEntityOverlayMap(MapEntity entity)
     {
-        return AllOverlays.get(entity.GetEntityType());
+        EntityType typeToCheck = entity.GetEntityType();
+
+        if(entity instanceof Airplane)
+            typeToCheck = EntityType.AIRPLANE;
+        else if(entity instanceof Tank)
+            typeToCheck = EntityType.TANK;
+        else if(entity instanceof Ship)
+            typeToCheck = EntityType.SHIP;
+        else if(entity instanceof Submarine)
+            typeToCheck = EntityType.SUBMARINE;
+        else if(entity instanceof OreMine)
+            typeToCheck = EntityType.ORE_MINE;
+
+        return AllOverlays.get(typeToCheck);
     }
 
     private void CheckAndRequestLocationPermission()
@@ -7511,6 +7548,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                             typeToAdd = EntityType.SHIP;
                         else if(entity instanceof Submarine)
                             typeToAdd = EntityType.SUBMARINE;
+                        else if(entity instanceof OreMine)
+                            typeToAdd = EntityType.ORE_MINE;
 
                         if(AllMarkers.get(typeToAdd) == null)
                         {
@@ -7544,21 +7583,27 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                             if(kothCircle != null)
                             {
                                 kothCircle.remove();
-
-                                if(kothCircle != null)
-                                    kothCircle.remove();
-
                                 kothCircle = null;
+                            }
+
+                            if(kothMarker != null)
+                            {
+                                kothMarker.remove();
+                                kothMarker = null;
                             }
 
                             kothCircle = map.addCircle(new CircleOptions()
                                     .center(Utilities.GetLatLng(kingOfTheHill.GetPosition()))
                                     .radius(kingOfTheHill.GetRadius() * Defs.METRES_PER_KM)
-                                    .clickable(true)
-                                    .fillColor(Utilities.ColourFromAttr(context, R.attr.LootRadiusColour))
+                                    .fillColor(EntityIconBitmaps.GetKOTHCircleColor(context, game))
                                     .strokeWidth(0.0f));
 
-                            kothCircle.setTag(kingOfTheHill);
+                            kothMarker = map.addMarker(new MarkerOptions()
+                                    .position(Utilities.GetLatLng(kingOfTheHill.GetPosition()))
+                                    .anchor(0.5f, 0.5f)
+                                    .icon(BitmapDescriptorFactory.fromBitmap(EntityIconBitmaps.GetKOTHBitmap(context, game))));
+
+                            kothMarker.setTag(kingOfTheHill);
                         }
                         else if(entity instanceof Interceptor)
                         {
@@ -7688,7 +7733,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                             if(entity instanceof Player)
                             {
                                 Player player = (Player) entity;
-                                options.icon(GetPlayerIcon(player));
+                                options.icon(BitmapDescriptorFactory.fromBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.button_location), LaunchUICommon.AllegianceColours[0])));
                                 options.alpha(player.GetRespawnProtected() ? 0.5f : 1.0f);
 
                                 if(player.GetID() != game.GetOurPlayerID() && !game.GetOurPlayer().GetIsAnAdmin())
@@ -7714,8 +7759,16 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
                                 if(game.EntityIsFriendly(structure, game.GetOurPlayer()) || structure.GetVisible())
                                 {
-                                    options.icon(BitmapDescriptorFactory.fromBitmap(StructureIconBitmaps.GetStructureBitmap(context, game, (Structure)entity)));
-                                    options.alpha(structure.GetRespawnProtected() ? 0.5f : 1.0f);
+                                    if(entity instanceof CommandPost && ((CommandPost)entity).GetIsHQ())
+                                    {
+                                        options.icon(GetPlayerIcon(game.GetOwner(structure)));
+                                        options.alpha(structure.GetRespawnProtected() ? 0.5f : 1.0f);
+                                    }
+                                    else
+                                    {
+                                        options.icon(BitmapDescriptorFactory.fromBitmap(StructureIconBitmaps.GetStructureBitmap(context, game, (Structure)entity)));
+                                        options.alpha(structure.GetRespawnProtected() ? 0.5f : 1.0f);
+                                    }
                                 }
                                 else
                                 {
@@ -7798,7 +7851,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                 {
                                     Submarine submarine = (Submarine)entity;
                                     options.icon(BitmapDescriptorFactory.fromBitmap(EntityIconBitmaps.GetOwnedNavalBitmap(context, game, submarine)));
-                                    options.alpha(submarine.Submerged() ? 0.5f : 1.0f);
+                                    options.alpha(0.5f);
                                 }
                                 if(entity instanceof Missile)
                                 {
@@ -7806,7 +7859,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                     MissileType type = game.GetConfig().GetMissileType(missile.GetType());
                                     options.icon(BitmapDescriptorFactory.fromBitmap(EntityIconBitmaps.GetMissileBitmap(self, game, type, game.GetAllegiance(game.GetOurPlayer(), missile), type.GetAssetID())));
 
-                                    if(type == null || !type.GetName().contains("Wealth Balloon"))
+                                    if(!type.GetName().contains("Wealth Balloon"))
                                         options.rotation((float) GeoCoord.ToDegrees(entity.GetPosition().GetLastBearing()));
 
                                     GeoCoord geoTarget;
@@ -7831,7 +7884,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                             .radius(MissileStats.GetBlastRadius(type, missile.GetAirburst()) * Defs.METRES_PER_KM)
                                             .fillColor(Utilities.ColourFromAttr(me, R.attr.BlastRadiusColour))
                                             .strokeWidth(0.0f)
-                                            .clickable(true));
+                                            .clickable(bBlastRadiiClickable));
 
                                     blast.setTag(missile);
 
@@ -7843,7 +7896,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                             .radius(MissileStats.GetMissileEMPRadius(type, missile.GetAirburst()) * Defs.METRES_PER_KM)
                                             .fillColor(Utilities.ColourFromAttr(me, R.attr.EMPColour))
                                             .strokeWidth(0.0f)
-                                            .clickable(true));
+                                            .clickable(bBlastRadiiClickable));
 
                                     emp.setTag(missile);
 
@@ -7857,7 +7910,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                                 .radius(Defs.SONAR_RANGE * Defs.METRES_PER_KM)
                                                 .strokeColor(Utilities.ColourFromAttr(me, R.attr.SonarColour))
                                                 .strokeWidth(3.0f)
-                                                .clickable(true));
+                                                .clickable(bBlastRadiiClickable));
 
                                         circle.setTag(missile);
 
@@ -8042,6 +8095,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                     typeToCheck = EntityType.SHIP;
                 else if(entity instanceof Submarine)
                     typeToCheck = EntityType.SUBMARINE;
+                else if(entity instanceof OreMine)
+                    typeToCheck = EntityType.ORE_MINE;
 
                 Map<Integer, Marker> typeMap = AllMarkers.get(typeToCheck);
 
@@ -8053,7 +8108,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
                 Marker m = typeMap.get(entity.GetID());
 
-                float probability = GetGenerationProbability(fltZoom, 3.5f, 10f, typeToCheck);
+                float probability = GetGenerationProbability(fltZoom, 2.0f, 10f, typeToCheck);
 
                 if(zoomIn)
                 {
@@ -8164,15 +8219,11 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                         kothCircle.remove();
                         kothCircle = null;
                     }
-                }
-                else if(entity instanceof ResourceDeposit)
-                {
-                    Marker marker = DepositMarkers.get(entity.GetID());
 
-                    if(marker != null)
+                    if(kothMarker != null)
                     {
-                        DepositMarkers.remove(entity.GetID());
-                        marker.remove();
+                        kothMarker.remove();
+                        kothMarker = null;
                     }
                 }
                 else if(entity instanceof Structure || entity instanceof Loot || entity instanceof LandUnit || entity instanceof NavalVessel || entity instanceof Missile)
@@ -8221,13 +8272,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                             threatMarker.remove();
                             threatMarker = null;
                         }
-
-                        /*if(trajectory != null)
-                        {
-                            MissileTrajectories.remove(entity.GetID());
-                            trajectory.remove();
-                            trajectory = null;
-                        }*/
 
                         if(trail != null)
                         {
@@ -8358,12 +8402,12 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     private boolean EntityShouldAlwaysRender(EntityType type)
     {
         if(type == EntityType.PLAYER ||
-                type == EntityType.AIRDROP ||
-                type == EntityType.AIRPLANE ||
-                type == EntityType.SHIP ||
-                type == EntityType.SUBMARINE ||
-                type == EntityType.MISSILE ||
-                type == EntityType.INTERCEPTOR)
+            type == EntityType.AIRDROP ||
+            type == EntityType.AIRPLANE ||
+            type == EntityType.SHIP ||
+            type == EntityType.SUBMARINE ||
+            type == EntityType.MISSILE ||
+            type == EntityType.INTERCEPTOR)
             return true;
 
         if(interactionMode == InteractionMode.SELECT_NEW_HOMEBASE && (type == EntityType.AIRBASE))

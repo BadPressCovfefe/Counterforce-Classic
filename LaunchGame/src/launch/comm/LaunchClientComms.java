@@ -1031,4 +1031,14 @@ public class LaunchClientComms extends LaunchComms
     {
         currentTask = new BlacklistPlayerTask(gameInterface, lPlayerID);
     }
+    
+    public void AddBounty(int lPlayerID, int lAmount, boolean bPlayer)
+    {
+        currentTask = new AddBountyTask(gameInterface, lPlayerID, lAmount, bPlayer);
+    }
+    
+    public void DepotCollect(int lDepotID)
+    {
+        currentTask = new DepotCollectTask(gameInterface, lDepotID);
+    }
 }
