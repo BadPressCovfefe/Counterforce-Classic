@@ -31,12 +31,13 @@
                 >
 
                 <ImageView
+                    android:id="@+id/imgShip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/SeperatorMargins"
                     android:layout_marginEnd="@dimen/ButtonSpacingNarrow"
-                    android:id="@+id/imgShip"
-                    android:src="@drawable/build_destroyer"/>
+                    android:src="@drawable/build_destroyer"
+                    android:visibility="gone" />
 
                 <LinearLayout
                     android:orientation="vertical"

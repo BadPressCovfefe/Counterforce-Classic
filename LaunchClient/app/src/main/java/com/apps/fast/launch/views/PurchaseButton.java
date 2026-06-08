@@ -157,27 +157,8 @@ public class PurchaseButton extends LinearLayout
             case COMMAND_POST:
             {
                 bRespectStructureSeparation = true;
-                unitIcon.setImageResource(R.drawable.build_command_post);
-
-                if(game.GetNextCommandPostCost(game.GetOurPlayer()).get(ResourceType.WEALTH) != null)
-                {
-                    oCost = game.GetNextCommandPostCost(game.GetOurPlayer()).get(ResourceType.WEALTH);
-                }
-
-                txtDescription.setText(context.getString(R.string.desc_command_post));
-            }
-            break;
-
-            case HEADQUARTERS:
-            {
-                bRespectStructureSeparation = true;
-                unitIcon.setImageResource(R.drawable.build_headquarters);
-
-                if(game.GetNextCommandPostCost(game.GetOurPlayer()).get(ResourceType.WEALTH) != null)
-                {
-                    oCost = game.GetNextCommandPostCost(game.GetOurPlayer()).get(ResourceType.WEALTH);
-                }
-
+                unitIcon.setImageResource(R.drawable.build_bunker);
+                oCost = Defs.COMMAND_POST_STRUCTURE_COST.get(ResourceType.WEALTH);
                 txtDescription.setText(context.getString(R.string.desc_command_post));
             }
             break;
@@ -400,21 +381,11 @@ public class PurchaseButton extends LinearLayout
         }
     }
 
-    private int getInset()
-    {
-        return (int) getResources().getDimension(R.dimen.ButtonInset);
-    }
-
-    private int getSideMargin()
-    {
-        return (int) getResources().getDimension(R.dimen.MainViewSideMargin);
-    }
-
     private void HandlePurchase()
     {
         boolean bFarmsTooClose = false;
 
-        if(entityType == EntityType.FARM && pointerOrigin.GetType() == EntityType.PLAYER)
+        if(entityType == EntityType.FARM)
         {
             for(OreMine oreMine : game.GetOreMines())
             {
@@ -429,13 +400,9 @@ public class PurchaseButton extends LinearLayout
             }
         }
 
-        if(bTooCloseToStructures && pointerOrigin.GetType() != EntityType.COMMAND_POST)
+        if(bTooCloseToStructures)
         {
             activity.ShowBasicOKDialog(context.getString(R.string.cannot_build));
-        }
-        else if(!game.GetPlayerHasHQ(game.GetOurPlayer()) && entityType != EntityType.HEADQUARTERS)
-        {
-            activity.ShowBasicOKDialog(context.getString(R.string.must_build_hq));
         }
         else if(bFarmsTooClose)
         {

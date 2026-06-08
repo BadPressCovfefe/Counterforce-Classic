@@ -96,6 +96,14 @@ public class SelectMissileView extends LaunchView
 
                 Player ourPlayer = game.GetOurPlayer();
 
+                if(ourPlayer.GetHasCruiseMissileSystem())
+                {
+                    if(AddUIForSystem(ourPlayer.GetPosition(), ourPlayer.GetID(), SystemType.PLAYER_MISSILES))
+                    {
+                        bMissilesAvailable = true;
+                    }
+                }
+
                 for(MissileSite missileSite : game.GetMissileSites())
                 {
                     if((missileSite.GetOwnerID() == ourPlayer.GetID()) && missileSite.GetOnline() && missileSite.GetMissileSystem().ReadyToFire())
@@ -190,6 +198,13 @@ public class SelectMissileView extends LaunchView
 
         switch(systemType)
         {
+            case PLAYER_MISSILES:
+            {
+                txtSiteName.setText(game.GetOurPlayer().GetName());
+                system = game.GetOurPlayer().GetMissileSystem();
+            }
+            break;
+
             case MISSILE_SITE:
             {
                 txtSiteName.setText(Utilities.GetEntityName(context, game.GetMissileSite(lSiteID)));
@@ -343,10 +358,6 @@ public class SelectMissileView extends LaunchView
         if(!bMissilesAvailable)
         {
             lytExistingSites.removeView(txtSiteName);
-            /*TextView textNone = new TextView(context);
-            textNone.setText(context.getString(R.string.none));
-            textNone.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
-            lytExistingSites.addView(textNone);*/
         }
 
         return bMissilesAvailable;

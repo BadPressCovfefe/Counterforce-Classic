@@ -248,4 +248,10 @@ public class Tank extends LandUnit implements NamableInterface
     {
         return dlySelling.GetRemaining();
     }
+    
+    @Override
+    public boolean GetVisible()
+    {
+        return true;
+    }
 }

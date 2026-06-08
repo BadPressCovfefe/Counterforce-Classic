@@ -676,126 +676,39 @@ public abstract class LaunchGame implements LaunchEntityListener
                 {
                     case MOVE:
                     {
-                        if(ship.HasFuelRemaining())
+                        if(ship.HasGeoCoordChain())
                         {
-                            if(ship.HasGeoCoordChain())
-                            {
-                                GeoCoord geoTarget = ship.GetNextCoordinate();
-                                GeoCoord geoPosition = ship.GetPosition();
+                            GeoCoord geoTarget = ship.GetNextCoordinate();
+                            GeoCoord geoPosition = ship.GetPosition();
 
-                                if(geoPosition.MoveToward(geoTarget, Defs.NAVAL_SPEED, lMS))
-                                {
-                                    ship.ReachedFirstCoordinate();
-                                    
-                                    if(ship.GetNextCoordinate() == null)
-                                    {
-                                        ship.Wait();
-                                    }
-                                }
-                                
-                                EntityMoved(ship);
-                            }
-                            else if(ship.HasGeoTarget())
+                            if(geoPosition.MoveToward(geoTarget, Defs.NAVAL_SPEED, lMS))
                             {
-                                GeoCoord geoTarget = ship.GetGeoTarget();
-                                GeoCoord geoPosition = ship.GetPosition();
+                                ship.ReachedFirstCoordinate();
 
-                                if(geoPosition.MoveToward(geoTarget, Defs.NAVAL_SPEED, lMS))
+                                if(ship.GetNextCoordinate() == null)
                                 {
                                     ship.Wait();
                                 }
-                                
-                                EntityMoved(ship);
                             }
-                            else
+
+                            EntityMoved(ship);
+                        }
+                        else if(ship.HasGeoTarget())
+                        {
+                            GeoCoord geoTarget = ship.GetGeoTarget();
+                            GeoCoord geoPosition = ship.GetPosition();
+
+                            if(geoPosition.MoveToward(geoTarget, Defs.NAVAL_SPEED, lMS))
                             {
                                 ship.Wait();
-                            }  
+                            }
+
+                            EntityMoved(ship);
                         }
                         else
                         {
                             ship.Wait();
-                        } 
-                    }
-                    break;
-                    
-                    case SEEK_FUEL:
-                    {
-                        if(ship.GetTarget() != null)
-                        {
-                            NavalVessel tanker = (NavalVessel)ship.GetTarget().GetMapEntity(this);
-                            
-                            if(tanker != null && tanker.GetMoveOrders() == MoveOrders.PROVIDE_FUEL)
-                            {
-                                GeoCoord geoTarget = tanker.GetPosition().GetCopy();
-                                GeoCoord geoPosition = ship.GetPosition();
-                                float fltDistance = ship.GetPosition().DistanceTo(tanker.GetPosition());
-
-                                //If the ship is outside of refueling distance, move toward the tanker. otherwise do nothing, meaning that when the ship gets within refueling distance, it will stop.
-                                if(fltDistance > Defs.SHIP_REFUELING_DISTANCE)
-                                {
-                                    geoPosition.MoveToward(geoTarget, Defs.NAVAL_SPEED, lMS);
-                                    EntityMoved(ship);
-                                }
-                            }
-                            else
-                            {
-                                ship.MoveToPosition(ship.GetGeoTarget());
-                            }
                         }
-                        else
-                        {
-                            ship.MoveToPosition(ship.GetGeoTarget());
-                        } 
-                    }
-                    break;
-                    
-                    case PROVIDE_FUEL:
-                    {
-                        if(ship.GetTarget() != null && ship.GetCurrentFuel() > Defs.SHIP_REFUEL_RATE_PER_TICK_TONS)
-                        {
-                            NavalVessel receiver = (NavalVessel)ship.GetTarget().GetMapEntity(this);
-
-                            if(receiver != null && receiver.GetMoveOrders() == MoveOrders.SEEK_FUEL)
-                            {
-                                if(receiver.GetMoveOrders() == MoveOrders.SEEK_FUEL)
-                                {
-                                    GeoCoord geoTarget = ship.GetGeoTarget();
-                                    GeoCoord geoPosition = ship.GetPosition();
-                                    float fltDistance = ship.GetPosition().DistanceTo(receiver.GetPosition());
-
-                                    if(fltDistance > Defs.SHIP_REFUELING_DISTANCE)
-                                    { 
-                                        geoPosition.MoveToward(geoTarget, Defs.NAVAL_SPEED, lMS);
-                                        EntityMoved(ship);
-                                        
-                                        if(!ship.GetNuclear())
-                                        {
-                                            float fltFuelUsed = Defs.GetFuelUsagePerTick(lMS, Defs.NAVAL_RANGE, Defs.NAVAL_SPEED);
-                                            ship.UseFuel(fltFuelUsed);
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    ship.MoveToPosition(ship.GetGeoTarget());
-                                }
-                            }
-                            else
-                            {
-                                ship.MoveToPosition(ship.GetGeoTarget());
-                            }
-                        }   
-                        else
-                        {
-                            ship.MoveToPosition(ship.GetGeoTarget());
-                        }
-                    }
-                    break;
-                    
-                    case ATTACK:
-                    {
-                        //TODO: Notes in AUTOMATIC_MISSILE_FIRING.txt. Actually, since no movement is performed for submarine/ship attacks, this should only be in LaunchServerGame.
                     }
                     break;
                 }
@@ -818,58 +731,39 @@ public abstract class LaunchGame implements LaunchEntityListener
                 {
                     case MOVE:
                     {
-                        if(submarine.HasFuelRemaining())
+                        if(submarine.HasGeoCoordChain())
                         {
-                            if(submarine.HasGeoCoordChain())
+                            GeoCoord geoTarget = submarine.GetNextCoordinate();
+                            GeoCoord geoPosition = submarine.GetPosition();
+
+                            if(geoPosition.MoveToward(geoTarget, Defs.NAVAL_SPEED, lMS))
                             {
-                                GeoCoord geoTarget = submarine.GetNextCoordinate();
-                                GeoCoord geoPosition = submarine.GetPosition();
+                                submarine.ReachedFirstCoordinate();
 
-                                if(geoPosition.MoveToward(geoTarget, Defs.NAVAL_SPEED, lMS))
-                                {
-                                    submarine.ReachedFirstCoordinate();
-
-                                    if(submarine.GetNextCoordinate() == null)
-                                    {
-                                        submarine.Wait();
-                                    }
-                                }
-                                
-                                EntityMoved(submarine);
-
-                                if(!submarine.GetNuclear())
-                                {
-                                    float fltFuelUsed = Defs.GetFuelUsagePerTick(lMS, Defs.NAVAL_RANGE, Defs.NAVAL_SPEED);
-                                    submarine.UseFuel(fltFuelUsed);
-                                }
-                            }
-                            else if(submarine.HasGeoTarget())
-                            {
-                                GeoCoord geoTarget = submarine.GetGeoTarget();
-                                GeoCoord geoPosition = submarine.GetPosition();
-
-                                if(geoPosition.MoveToward(geoTarget, Defs.NAVAL_SPEED, lMS))
+                                if(submarine.GetNextCoordinate() == null)
                                 {
                                     submarine.Wait();
                                 }
-                                
-                                EntityMoved(submarine);
-
-                                if(!submarine.GetNuclear())
-                                {
-                                    float fltFuelUsed = Defs.GetFuelUsagePerTick(lMS, Defs.NAVAL_RANGE, Defs.NAVAL_SPEED);
-                                    submarine.UseFuel(fltFuelUsed);
-                                }
                             }
-                            else
+
+                            EntityMoved(submarine);
+                        }
+                        else if(submarine.HasGeoTarget())
+                        {
+                            GeoCoord geoTarget = submarine.GetGeoTarget();
+                            GeoCoord geoPosition = submarine.GetPosition();
+
+                            if(geoPosition.MoveToward(geoTarget, Defs.NAVAL_SPEED, lMS))
                             {
                                 submarine.Wait();
-                            }  
+                            }
+
+                            EntityMoved(submarine);
                         }
                         else
                         {
                             submarine.Wait();
-                        } 
+                        }
                     }
                     break;
                     
@@ -1792,7 +1686,7 @@ public abstract class LaunchGame implements LaunchEntityListener
         return false;
     }
     
-    public CommandPost GetPlayerCurrentCommandPost(Player player)
+    public CommandPost GetPlayerCurrentBunker(Player player)
     {
         if(GetPlayerIsSheltered(player))
         {
@@ -2414,19 +2308,23 @@ public abstract class LaunchGame implements LaunchEntityListener
         }
         else if(structure instanceof OreMine)
         {
-            LaunchUtilities.AddResourceMapsTogether(Values, Defs.ORE_MINE_STRUCTURE_COST);
+            switch(structure.GetEntityType())
+            {
+                case ORE_MINE: LaunchUtilities.AddResourceMapsTogether(Values, Defs.ORE_MINE_STRUCTURE_COST); break;
+                case FARM: LaunchUtilities.AddResourceMapsTogether(Values, Defs.FARM_STRUCTURE_COST); break;
+                case SOLAR_PANEL: LaunchUtilities.AddResourceMapsTogether(Values, Defs.SOLAR_PANEL_STRUCTURE_COST); break;
+            }
         }
         else if(structure instanceof LogisticsDepot depot)
         {
             LaunchUtilities.AddResourceMapsTogether(Values, Defs.LOGISTICS_DEPOT_STRUCTURE_COST);
             LaunchUtilities.AddResourceMapsTogether(Values, Map.ofEntries(entry(ResourceType.WEALTH, (long)depot.GetWealth())));
         }
-        else if(structure instanceof RadarStation)
+        else if(structure instanceof CommandPost post)
         {
-            LaunchUtilities.AddResourceMapsTogether(Values, Defs.RADAR_STATION_STRUCTURE_COST);
-        }
-        else if(structure instanceof CommandPost)
-        {
+            if(post.GetIsHQ())
+                return new ConcurrentHashMap<>();
+                
             LaunchUtilities.AddResourceMapsTogether(Values, Defs.COMMAND_POST_STRUCTURE_COST);
         }
         else if(structure instanceof Airbase)
@@ -2794,7 +2692,7 @@ public abstract class LaunchGame implements LaunchEntityListener
     
     public Map<ResourceType, Long> GetSaleValue(MissileSystem system, boolean bIsMissiles)
     {
-        return GetSaleValue(GetRequiredCost(GetSystemValue(system, bIsMissiles)));
+        return GetSaleValue(GetSystemValue(system, bIsMissiles));
     }
     
     public Map<ResourceType, Long> GetRepairCost(MapEntity entity)
@@ -3704,6 +3602,69 @@ public abstract class LaunchGame implements LaunchEntityListener
         return 0;
     }
     
+    public int GetHourlyBonusIncome(Player player)
+    {
+        if(!player.GetAWOL())
+        {
+            int lAmountToAdd = 0;
+
+            if(GetDiplomaticPresenceEligible(player))
+                lAmountToAdd += config.GetHourlyBonusDiplomaticPresence();
+            
+            if(GetPoliticalEngagementEligible(player))
+                lAmountToAdd += config.GetHourlyBonusPoliticalEngagement();
+            
+            if(GetDefenderOfTheNationEligible(player))
+                lAmountToAdd += config.GetHourlyBonusDefenderOfTheNation();
+            
+            if(GetNuclearSuperpowerEligible(player))
+                lAmountToAdd += config.GetHourlyBonusNuclearSuperpower();
+            
+            if(GetSurvivorEligible(player))
+                lAmountToAdd += config.GetHourlyBonusSurvivor();
+            
+            if(GetHippyEligible(player))
+                lAmountToAdd += config.GetHourlyBonusHippy();
+            
+            if(GetPeaceMakerEligible(player))
+                lAmountToAdd += config.GetHourlyBonusPeaceMaker();
+            
+            if(GetWarMongerEligible(player))
+                lAmountToAdd += config.GetHourlyBonusWarMonger();
+            
+            if(GetLoneWolfEligible(player))
+                lAmountToAdd += config.GetHourlyBonusLoneWolf();
+            
+            if(GetNuclearTriadEligible(player))
+                lAmountToAdd += Defs.NUCLEAR_TRIAD_BONUS;
+            
+            if(GetBlueWaterEligible(player))
+                lAmountToAdd += Defs.BLUE_WATER_BONUS;
+            
+            if(GetKingOfTheHillEligible(player))
+            {
+                Alliance alliance = GetAlliance(player.GetAllianceMemberID());
+        
+                if(alliance != null)
+                {
+                    if(kingOfTheHill != null && kingOfTheHill.GetOccupiedByAlliance() && kingOfTheHill.GetOwnedBy(alliance.GetID()))
+                    {
+                        lAmountToAdd += Defs.KOTH_BONUS_ALLIANCE;
+                    }
+                }
+
+                if(kingOfTheHill != null && !kingOfTheHill.GetOccupiedByAlliance() && kingOfTheHill.GetOwnedBy(player.GetID()))
+                {
+                    lAmountToAdd += Defs.KOTH_BONUS_PLAYER;
+                }
+            }
+            
+            return lAmountToAdd;
+        }
+        
+        return 0;
+    }
+    
     public boolean GetBasicIncomeEligible(Player player)
     {
         return !player.GetAWOL();
@@ -3763,7 +3724,17 @@ public abstract class LaunchGame implements LaunchEntityListener
                     if(site.GetOwnedBy(player.GetID()))
                         return true;
                 }
-            }    
+            }  
+            
+            for(int lID : player.GetSubmarines())
+            {
+                Submarine submarine = GetSubmarine(lID);
+
+                if(submarine != null && submarine.GetEntityType() == EntityType.SSBN)
+                {
+                    return true;
+                }
+            }
         }
         
         return false;
@@ -3771,7 +3742,7 @@ public abstract class LaunchGame implements LaunchEntityListener
     
     public boolean GetSurvivorEligible(Player player)
     {
-        return player.GetDeaths() == 0;
+        return player.GetDeaths()== 0;
     }
     
     public boolean GetHippyEligible(Player player)
@@ -3843,7 +3814,10 @@ public abstract class LaunchGame implements LaunchEntityListener
     
     public boolean GetLoneWolfEligible(Player player)
     {
-        /*if(!player.Destroyed())
+        if(Players.size() == 1)
+            return true;
+        
+        if(!player.Destroyed())
         {
             for(Player otherPlayer : Players.values())
             {
@@ -3856,9 +3830,146 @@ public abstract class LaunchGame implements LaunchEntityListener
                     }
                 }
             }    
-        }*/
+        }
         
         return false;
+    }
+    
+    public boolean GetNuclearTriadEligible(Player player)
+    {
+        boolean bHasICBM = false;
+        boolean bHasALN = false;
+        boolean bHasSLBM = false;
+        
+        //Player needs to have 1 ICBM, 1 SLBM, and 1 air-launched nuke.
+        for(Structure structure : player.GetStructures())
+        {
+            if(structure instanceof MissileSite site && site.CanTakeICBM())
+            {
+                MissileSystem system = site.GetMissileSystem();
+                
+                if(system.GetOccupiedSlotCount() > 0)
+                {
+                    for(int lType : system.GetSlotTypes().values())
+                    {
+                        MissileType type = config.GetMissileType(lType);
+                        
+                        if(type != null && type.GetICBM() && type.GetNuclear())
+                        {
+                            bHasICBM = true;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        
+        for(int lID : player.GetSubmarines())
+        {
+            Submarine submarine = GetSubmarine(lID);
+            
+            if(submarine != null && submarine.GetEntityType() == EntityType.SSBN)
+            {
+                MissileSystem system = submarine.GetICBMSystem();
+                
+                if(system.GetOccupiedSlotCount() > 0)
+                {
+                    for(int lType : system.GetSlotTypes().values())
+                    {
+                        MissileType type = config.GetMissileType(lType);
+                        
+                        if(type != null && type.GetICBM() && type.GetNuclear())
+                        {
+                            bHasSLBM = true;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        
+        for(int lID : player.GetAircrafts())
+        {
+            Airplane aircraft = GetAirplane(lID);
+            
+            if(aircraft != null && aircraft.HasMissiles())
+            {
+                MissileSystem system = aircraft.GetMissileSystem();
+                
+                if(system.GetOccupiedSlotCount() > 0)
+                {
+                    for(int lType : system.GetSlotTypes().values())
+                    {
+                        MissileType type = config.GetMissileType(lType);
+                        
+                        if(type != null && type.GetNuclear())
+                        {
+                            bHasALN = true;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        
+        if(!bHasALN)
+        {
+            for(int lID : player.GetStoredAircrafts())
+            {
+                StoredAirplane aircraft = GetStoredAirplane(lID);
+
+                if(aircraft != null && aircraft.HasMissiles())
+                {
+                    MissileSystem system = aircraft.GetMissileSystem();
+
+                    if(system.GetOccupiedSlotCount() > 0)
+                    {
+                        for(int lType : system.GetSlotTypes().values())
+                        {
+                            MissileType type = config.GetMissileType(lType);
+
+                            if(type != null && type.GetNuclear())
+                            {
+                                bHasALN = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+            
+        return bHasICBM && bHasALN && bHasSLBM;
+    }
+    
+    public boolean GetBlueWaterEligible(Player player)
+    {
+        for(int lID : player.GetShips())
+        {
+            Ship ship = GetShip(lID);
+            
+            if(ship != null && ship.GetEntityType() == EntityType.SUPER_CARRIER)
+            {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    public boolean GetKingOfTheHillEligible(Player player)
+    {
+        Alliance alliance = GetAlliance(player.GetAllianceMemberID());
+        
+        if(alliance != null)
+        {
+            if(kingOfTheHill != null && kingOfTheHill.GetOccupiedByAlliance() && kingOfTheHill.GetOwnedBy(alliance.GetID()))
+            {
+                return true;
+            }
+        }
+        
+        return kingOfTheHill != null && !kingOfTheHill.GetOccupiedByAlliance() && kingOfTheHill.GetOwnedBy(player.GetID());
     }
 
     public float GetInterceptorAccuracy(InterceptorType type)
@@ -3873,14 +3984,7 @@ public abstract class LaunchGame implements LaunchEntityListener
     
     public int GetTotalPlayerCount()
     {
-        int lPlayerCount = 0;
-        
-        for(Player player : Players.values())
-        {
-            lPlayerCount++;
-        }
-        
-        return lPlayerCount;
+        return Players.size();
     }
     
     public int GetOnlinePlayerCount()
@@ -3991,7 +4095,6 @@ public abstract class LaunchGame implements LaunchEntityListener
     {
         player.SetListener(this);
         Players.put(player.GetID(), player);
-        player.SetGame(this);
         
         if(player.GetAllianceMemberID() != Alliance.ALLIANCE_ID_UNAFFILIATED)
         {
@@ -4631,6 +4734,20 @@ public abstract class LaunchGame implements LaunchEntityListener
         EntityUpdated(radiation, false);
         
         EntityAdded(radiation);
+    }
+    
+    public void AddPlayerMissileSystem(int lPlayerID, MissileSystem missileSystem)
+    {
+        Player player = Players.get(lPlayerID);
+        player.AddMissileSystem(missileSystem);
+        missileSystem.SetSystemListener(player);
+    }
+    
+    public void AddPlayerInterceptorSystem(int lPlayerID, MissileSystem interceptorSystem)
+    {
+        Player player = Players.get(lPlayerID);
+        player.AddInterceptorSystem(interceptorSystem);
+        interceptorSystem.SetSystemListener(player);
     }
     
     public int GetGameTickStarts() { return lGameTickStarts; }
@@ -6864,8 +6981,7 @@ public abstract class LaunchGame implements LaunchEntityListener
         
         for(Entry<ResourceType, Long> cost : costs.entrySet())
         {
-            //Fissile, wealth, and nerve agent are never optional when they appear. Nerve agent for chemical weapons, fissile for SSBNs, super carriers, and nukes, and wealth for everything.
-            if(cost.getKey() == ResourceType.WEALTH || cost.getKey() == ResourceType.ENRICHED_URANIUM)
+            if(cost.getKey() == ResourceType.WEALTH)
             {
                 requirements.put(cost.getKey(), cost.getValue());
             }
@@ -6880,7 +6996,7 @@ public abstract class LaunchGame implements LaunchEntityListener
         
         for(Entry<ResourceType, Long> cost : costs.entrySet())
         {
-            if(cost.getKey() != ResourceType.WEALTH)
+            if(cost.getKey() == ResourceType.WEALTH)
             {
                 substitutes.put(cost.getKey(), cost.getValue());
             }

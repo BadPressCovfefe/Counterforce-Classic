@@ -396,7 +396,14 @@ public class LaunchUtilities
         else if(entity instanceof SentryGun)
             bEntityTypeVisible = SENTRY_GUNS_VISIBLE;
         else if(entity instanceof OreMine)
-            bEntityTypeVisible = ORE_MINES_VISIBLE;
+        {
+            switch(entity.GetEntityType())
+            {
+                case ORE_MINE: bEntityTypeVisible = ORE_MINES_VISIBLE; break;
+                case FARM: bEntityTypeVisible = FARMS_VISIBLE; break;
+                case SOLAR_PANEL: bEntityTypeVisible = SOLAR_PANELS_VISIBLE; break;
+            }
+        }
         else if(entity instanceof RadarStation)
             bEntityTypeVisible = RADAR_STATIONS_VISIBLE;
         else if(entity instanceof CommandPost)

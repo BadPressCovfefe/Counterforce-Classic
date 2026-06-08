@@ -346,15 +346,6 @@
                     android:src="@drawable/marker_samsite"
                     android:tintMode="src_over" />
 
-                <ImageView
-                    android:id="@+id/imgShowSentryGuns"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:focusableInTouchMode="false"
-                    android:src="@drawable/marker_sentry"
-                    android:tintMode="src_over" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -409,6 +400,61 @@
                     android:layout_weight="1"
                     android:focusableInTouchMode="false"
                     android:src="@drawable/marker_artillery_gun"
+                    android:tintMode="src_over" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lytCostsVisButtonsRow3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginRight="@dimen/MainViewSideMargin"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imgShowOreMines"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:focusableInTouchMode="false"
+                    android:src="@drawable/marker_ore_mine"
+                    android:tintMode="src_over" />
+
+                <ImageView
+                    android:id="@+id/imgShowSolarPanels"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:focusableInTouchMode="false"
+                    android:src="@drawable/marker_solar_panel"
+                    android:tintMode="src_over" />
+
+                <ImageView
+                    android:id="@+id/imgShowFarms"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:focusableInTouchMode="false"
+                    android:src="@drawable/marker_farm"
+                    android:tintMode="src_over" />
+
+                <ImageView
+                    android:id="@+id/imgShowLogisticsDepots"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:focusableInTouchMode="false"
+                    android:src="@drawable/marker_logistics_depot"
+                    android:tintMode="src_over" />
+
+                <ImageView
+                    android:id="@+id/imgShowSentryGuns"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:focusableInTouchMode="false"
+                    android:src="@drawable/marker_sentry"
                     android:tintMode="src_over" />
             </LinearLayout>
 

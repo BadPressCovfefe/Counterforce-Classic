@@ -1250,7 +1250,6 @@ public class LaunchClientGame extends LaunchGame implements LaunchClientGameInte
         {
             player.SetListener(this);
             NewPlayers.put(player.GetID(), player);
-            player.SetGame(this);
         }
         else
         {

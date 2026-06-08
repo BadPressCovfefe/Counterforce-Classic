@@ -32,10 +32,11 @@
                 >
 
                 <ImageView
+                    android:id="@+id/imgLoot"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/imgLoot"
-                    android:src="@drawable/image_loot"/>
+                    android:src="@drawable/image_loot"
+                    android:visibility="gone" />
 
                 <TextView
                     android:layout_width="wrap_content"

@@ -37,6 +37,9 @@ public class MainNormalView extends LaunchView
     private FrameLayout lytBottom;
     private ImageView imgSelect;
     private TextView txtMoney;
+    private TextView txtHealth;
+    private TextView txtHealthChange;
+    private TextView btnRespawn;
     private TextView txtGPS;
     private TextView txtSignal;
     private ImageView imgGPS;
@@ -75,6 +78,9 @@ public class MainNormalView extends LaunchView
         imgSelect = findViewById(R.id.imgSelect);
 
         txtMoney = findViewById(R.id.txtMoney);
+        txtHealth = findViewById(R.id.txtHealth);
+        txtHealthChange = findViewById(R.id.txtHealthChange);
+        btnRespawn = findViewById(R.id.btnRespawn);
         txtGPS = findViewById(R.id.txtGPS);
         txtSignal = findViewById(R.id.txtSignal);
         imgGPS = findViewById(R.id.imgGPS);
@@ -361,13 +367,45 @@ public class MainNormalView extends LaunchView
                 if(ourPlayer == null)
                 {
                     txtMoney.setText(activity.getString(R.string.value_unknown));
+                    txtHealth.setText(activity.getString(R.string.value_unknown));
+                    txtHealthChange.setText(activity.getString(R.string.value_unknown));
                 }
                 else
                 {
-                    txtMain.setText("");
-                    txtMain.setVisibility(GONE);
+                    if(ourPlayer.Destroyed())
+                    {
+                        if(ourPlayer.GetCanRespawn())
+                        {
+                            txtMain.setVisibility(VISIBLE);
+                            btnRespawn.setVisibility(VISIBLE);
+
+                            if(ourPlayer.GetFirstSpawn())
+                            {
+                                txtMain.setText(context.getString(R.string.player_first_spawn));
+                                btnRespawn.setText(context.getString(R.string.first_spawn));
+                            }
+                            else
+                            {
+                                txtMain.setText(context.getString(R.string.player_spectating));
+                                btnRespawn.setText(context.getString(R.string.not_first_spawn));
+                            }
+                        }
+                        else
+                        {
+                            txtMain.setText(context.getString(R.string.player_dead, TextUtilities.GetTimeAmount(ourPlayer.GetStateTimeRemaining())));
+                            txtMain.setVisibility(VISIBLE);
+                            btnRespawn.setVisibility(GONE);
+                        }
+                    }
+                    else
+                    {
+                        txtMain.setText("");
+                        txtMain.setVisibility(GONE);
+                        btnRespawn.setVisibility(GONE);
+                    }
 
                     txtMoney.setText(TextUtilities.GetCurrencyString(ourPlayer.GetWealth()));
+                    TextUtilities.AssignHealthStringAndAppearance(txtHealth, ourPlayer);
 
                     //Spawn a thread to check for radioactivity, so as not to hang the UI thread.
                     new Thread(new Runnable()

@@ -26,6 +26,7 @@ import launch.game.entities.ArtilleryGun;
 import launch.game.entities.LaunchEntity;
 import launch.game.entities.MapEntity;
 import launch.game.entities.MissileSite;
+import launch.game.entities.Player;
 import launch.game.entities.SAMSite;
 import launch.game.entities.Ship;
 import launch.game.entities.Submarine;
@@ -68,9 +69,6 @@ public class MissileSystemControl extends LaunchView implements SlotListener
     private boolean bAircraft = false;
     private boolean bHelicopter = false;
     private boolean bTank = false;
-    private boolean bStoredTank = false;
-    private boolean bShip = false;
-    private boolean bSubmarine = false;
 
     private MissileSystem system;
     private LaunchEntity host;
@@ -130,7 +128,6 @@ public class MissileSystemControl extends LaunchView implements SlotListener
         }
         else if(host instanceof Ship)
         {
-            bShip = true;
             Ship ship = (Ship)host;
 
             if(ship.GetOwnedBy(game.GetOurPlayerID()))
@@ -151,7 +148,6 @@ public class MissileSystemControl extends LaunchView implements SlotListener
         }
         else if(host instanceof Submarine)
         {
-            bSubmarine = true;
             Submarine submarine = (Submarine)host;
 
             if(submarine.GetOwnedBy(game.GetOurPlayerID()))
@@ -200,6 +196,24 @@ public class MissileSystemControl extends LaunchView implements SlotListener
                     systemType = SystemType.STORED_AIRCRAFT_INTERCEPTORS;
                     system = aircraft.GetInterceptorSystem();
                 }
+            }
+        }
+        else if(host instanceof Player)
+        {
+            bDisplayUpgrades = true;
+            bDisplaySell = true;
+            bOwnedByPlayer = true;
+            bFittedToPlayer = true;
+
+            if(bMissiles)
+            {
+                systemType = SystemType.PLAYER_MISSILES;
+                system = game.GetOurPlayer().GetMissileSystem();
+            }
+            else
+            {
+                systemType = SystemType.PLAYER_INTERCEPTORS;
+                system = game.GetOurPlayer().GetInterceptorSystem();
             }
         }
 
@@ -350,6 +364,8 @@ public class MissileSystemControl extends LaunchView implements SlotListener
             case SAM_SITE: host = game.GetSAMSite(lFittedToID); break;
             case AIRCRAFT_MISSILES:
             case AIRCRAFT_INTERCEPTORS: host = game.GetAirplane(lFittedToID); break;
+            case PLAYER_MISSILES:
+            case PLAYER_INTERCEPTORS: host = game.GetOurPlayer(); break;
             case STORED_AIRCRAFT_MISSILES:
             case STORED_AIRCRAFT_INTERCEPTORS: host = game.GetStoredAirplane(lFittedToID); break;
             case SHIP_INTERCEPTORS:
@@ -518,6 +534,8 @@ public class MissileSystemControl extends LaunchView implements SlotListener
 
                 case MISSILE_SITE:
                 case ARTILLERY_GUN:
+                case PLAYER_MISSILES:
+                case PLAYER_INTERCEPTORS:
                 case STORED_TANK_MISSILES:
                 case TANK_MISSILES:
                 case SAM_SITE:
@@ -662,6 +680,12 @@ public class MissileSystemControl extends LaunchView implements SlotListener
             case SUBMARINE_MISSILES:
             {
                 return ((Submarine)host).CanFireMissiles();
+            }
+
+            case PLAYER_INTERCEPTORS:
+            case PLAYER_MISSILES:
+            {
+                return true;
             }
         }
 
@@ -919,7 +943,11 @@ public class MissileSystemControl extends LaunchView implements SlotListener
 
     private MissileSystem GetMissileSystem()
     {
-        if(host instanceof MissileSite)
+        if(host instanceof Player)
+        {
+            return bIsMissiles ? game.GetOurPlayer().GetMissileSystem() : game.GetOurPlayer().GetInterceptorSystem();
+        }
+        else if(host instanceof MissileSite)
             return game.GetMissileSite(host.GetID()).GetMissileSystem();
         else if(host instanceof SAMSite)
             return game.GetSAMSite(host.GetID()).GetInterceptorSystem();

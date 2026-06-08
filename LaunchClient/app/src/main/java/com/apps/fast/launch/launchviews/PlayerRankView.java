@@ -148,7 +148,7 @@ public class PlayerRankView extends LaunchView
                 float fltMultiplier = game.GetNetWorthMultiplier(game.GetOurPlayer(), player);
                 txtMultiplier.setText(TextUtilities.GetMultiplierString(fltMultiplier));
 
-                if (fltMultiplier < Defs.NOOB_WARNING)
+                if(fltMultiplier < Defs.NOOB_WARNING)
                     txtMultiplier.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
                 else if (fltMultiplier > Defs.ELITE_WARNING)
                     txtMultiplier.setTextColor(Utilities.ColourFromAttr(context, R.attr.WarningColour));

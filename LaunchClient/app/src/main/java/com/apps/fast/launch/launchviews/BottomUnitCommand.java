@@ -141,22 +141,9 @@ public class BottomUnitCommand extends LaunchView
             {
                 if(movable != null)
                 {
-                    if(movable.GetEntity(game) instanceof AirplaneInterface)
-                    {
-                        txtCommandTitle.setText(R.string.title_seek_fuel_aircraft);
-                        txtCommandInstructions.setText(R.string.seek_fuel_aircraft_instructions);
-                        imgCommand.setImageResource(R.drawable.button_seek_fuel);
-                    }
-                    else if(movable.GetEntity(game) instanceof NavalVessel)
-                    {
-                        txtCommandTitle.setText(R.string.title_seek_fuel_naval);
-                        txtCommandInstructions.setText(R.string.seek_fuel_naval_instructions);
-
-                        if(movable.GetEntity(game) instanceof Ship)
-                            imgCommand.setImageResource(R.drawable.button_seek_fuel_ship);
-                        else if(movable.GetEntity(game) instanceof Submarine)
-                            imgCommand.setImageResource(R.drawable.button_seek_fuel_submarine);
-                    }
+                    txtCommandTitle.setText(R.string.title_seek_fuel_aircraft);
+                    txtCommandInstructions.setText(R.string.seek_fuel_aircraft_instructions);
+                    imgCommand.setImageResource(R.drawable.button_seek_fuel);
                 }
             }
             break;
@@ -165,22 +152,9 @@ public class BottomUnitCommand extends LaunchView
             {
                 if(movable != null)
                 {
-                    if(movable.GetEntity(game) instanceof AirplaneInterface)
-                    {
-                        txtCommandTitle.setText(R.string.title_provide_fuel_aircraft);
-                        txtCommandInstructions.setText(R.string.provide_fuel_aircraft_instructions);
-                        imgCommand.setImageResource(R.drawable.button_provide_fuel);
-                    }
-                    else if(movable.GetEntity(game) instanceof NavalVessel)
-                    {
-                        txtCommandTitle.setText(R.string.title_provide_fuel_naval);
-                        txtCommandInstructions.setText(R.string.provide_fuel_naval_instructions);
-
-                        if(movable.GetEntity(game) instanceof Ship)
-                            imgCommand.setImageResource(R.drawable.button_provide_fuel_ship);
-                        else if(movable.GetEntity(game) instanceof Submarine)
-                            imgCommand.setImageResource(R.drawable.button_provide_fuel_submarine);
-                    }
+                    txtCommandTitle.setText(R.string.title_provide_fuel_aircraft);
+                    txtCommandInstructions.setText(R.string.provide_fuel_aircraft_instructions);
+                    imgCommand.setImageResource(R.drawable.button_provide_fuel);
                 }
             }
             break;
@@ -250,51 +224,6 @@ public class BottomUnitCommand extends LaunchView
                 else if(game.GetAttackIsBullying(game.GetOurPlayer(), game.GetOwner(target.GetMapEntity(game))))
                 {
                     bBullyingOrNuisance = true;
-                }
-            }
-            else if(command == MoveOrders.LIBERATE)
-            {
-                MapEntity targetEntity = target.GetMapEntity(game);
-
-                int lBuilderID = LaunchEntity.ID_NONE;
-                boolean bNotCaptured = false;
-
-                if(targetEntity instanceof Structure)
-                {
-                    lBuilderID = ((Structure)targetEntity).GetBuiltByID();
-                }
-
-                Player builder = game.GetPlayer(lBuilderID);
-                Player owner = game.GetOwner(targetEntity);
-
-                if(targetEntity != null)
-                {
-                    if(lBuilderID == targetEntity.GetOwnerID())
-                        bNotCaptured = true;
-
-                    if(targetEntity instanceof Player)
-                    {
-                        //Liberating a player. Player should be captured and it *should not* be friendly fire between us and them.
-                        if(game.WouldBeFriendlyFire(game.GetOurPlayer(), (Player)targetEntity))
-                        {
-                            bFriendlyFire = true;
-                        }
-                    }
-                    else if(targetEntity instanceof Structure)
-                    {
-                        //Player is a city or structure. It should not be friendly fire between us and the owner of the structure.
-                        //If the builder of the structure is AWOL, show a warning.
-                        //If the structure or city is not captured, show a warning. It cannot be liberated.
-                        if(game.WouldBeFriendlyFire(game.GetOurPlayer(), owner))
-                        {
-                            bFriendlyFire = true;
-                        }
-
-                        if(game.GetAttackIsBullying(game.GetOurPlayer(), game.GetOwner(targetEntity)))
-                        {
-                            bBullyingOrNuisance = true;
-                        }
-                    }
                 }
             }
         }
@@ -386,16 +315,6 @@ public class BottomUnitCommand extends LaunchView
             {
                 txtFriendlyFire.setVisibility(VISIBLE);
             }
-            else if(game.GetAttackIsBullying(game.GetOurPlayer(), game.GetOwner(targetEntity)))
-            {
-                txtFriendlyFire.setVisibility(VISIBLE);
-                txtFriendlyFire.setText(context.getString(R.string.player_size_difference_warning));
-            }
-            /*else if(command == MoveOrders.CAPTURE && targetEntity instanceof Structure && game.GetProtectedByCapital((Structure)targetEntity))
-            {
-                txtFriendlyFire.setVisibility(VISIBLE);
-                txtFriendlyFire.setText(context.getString(R.string.structure_too_close_to_capital));
-            }*/
             else
             {
                 txtFriendlyFire.setVisibility(GONE);
@@ -500,17 +419,9 @@ public class BottomUnitCommand extends LaunchView
                             List<LatLng> points = new ArrayList<LatLng>();
 
                             geoFrom = vessel.GetPosition();
-                            float fltDistance = geoFrom.DistanceTo(geoTarget);
                             txtFlightTime.setText(context.getString(R.string.travel_time_target, TextUtilities.GetTimeAmount(game.GetTravelTime(Defs.NAVAL_SPEED, geoFrom, geoTarget))));
-                            txtOutOfRange.setVisibility(fltDistance > game.GetFuelableRange(vessel.GetCurrentFuel(), Defs.NAVAL_RANGE) ? VISIBLE : GONE);
-
-                            if(!vessel.GetNuclear())
-                            {
-                                txtFuelUsage.setVisibility(VISIBLE);
-                                txtFuelUsage.setText(context.getString(R.string.fuel_percent_for_trip, TextUtilities.GetFuelUsageString(game, vessel, geoTarget)));
-                            }
-                            else
-                                txtFuelUsage.setVisibility(GONE);
+                            txtOutOfRange.setVisibility(GONE);
+                            txtFuelUsage.setVisibility(GONE);
 
                             if(movementMarker != null)
                                 movementMarker.setPosition(Utilities.GetLatLng(geoTarget));

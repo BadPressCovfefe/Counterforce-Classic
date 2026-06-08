@@ -361,8 +361,6 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                 GenerateKOTH();
             }
 
-            LaunchPerf.Measure(LaunchPerf.Metric.NPCTick);
-
             try
             {
                 ProcessAircraft(lMS);
@@ -519,6 +517,7 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                                 geoPosition.Move(random.nextDouble() * (2.0 * Math.PI), config.GetOreGenerateRadius());
                                 int lValue = random.nextInt(config.GetElecMinValue(), config.GetElecMaxValue());
                                 CreateLoot(geoPosition, "Electricity", lValue, false);
+                                lGenerate = Defs.SOLAR_PANEL_GENERATE_TIME;
                             }
                         }
                         break;
@@ -527,12 +526,19 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                         {
                             if(!GetRadioactive(oreMine, true))
                             {
-                                //Process ore generation.
-                                GeoCoord geoPosition = new GeoCoord(oreMine.GetPosition());
-                                geoPosition.Move(random.nextDouble() * (2.0 * Math.PI), random.nextDouble() * config.GetFarmGenerateRadius());
+                                int cropCount = random.nextInt(config.GetMinCropCount(), config.GetMaxCropCount());
+                
+                                for(int i = 0; i < cropCount; i++)
+                                {
+                                    //Process crop generation.
+                                    GeoCoord geoPosition = new GeoCoord(oreMine.GetPosition());
+                                    geoPosition.Move(random.nextDouble() * (2.0 * Math.PI), random.nextDouble() * config.GetFarmGenerateRadius());
 
-                                int lValue = random.nextInt(config.GetCropMaxValue()/10, config.GetCropMaxValue());
-                                CreateLoot(geoPosition, "Crops", lValue, false);
+                                    int lValue = random.nextInt(config.GetCropMaxValue()/10, config.GetCropMaxValue());
+                                    CreateLoot(geoPosition, "Crops", lValue, false);
+                                }
+                                
+                                lGenerate = Defs.FARM_GENERATE_TIME;
                             }
                         }
                         break;
@@ -547,6 +553,7 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                                 //Changed int lValue from random float to random float between .1 and 1. -Corbin
                                 int lValue = (int)((random.nextFloat(0.25f, 1f) * (float)GetMaxPotentialOreMineReturn(oreMine)));
                                 CreateLoot(geoPosition, "Ore", lValue, false);
+                                lGenerate = Defs.ORE_MINE_GENERATE_TIME;
                             }
                         }
                         break;
@@ -771,6 +778,37 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
             }
 
             LaunchPerf.Measure(LaunchPerf.Metric.ShipyardTick);
+            
+            //Process health regeneration.
+            dlyHealthGeneration.Tick(lMS);
+
+            if(dlyHealthGeneration.Expired())
+            {
+                LaunchLog.Log(LaunchLog.LogType.GAME, LOG_NAME, "Processing health regeneration...");
+
+                for(Player player : GetPlayers())
+                {
+                    //Player is alive.
+                    if(player.Functioning())
+                    {
+                        //Player is not in a radioactive area.
+                        if(!GetRadioactive(player, true))
+                        {
+                            //Player is not at full health.
+                            if(player.GetHP() < player.GetMaxHP())
+                            {
+                                //Heal them 1hp.
+                                player.AddHP(HP_PER_INTERVAL);
+                                LaunchLog.Log(LaunchLog.LogType.GAME, LOG_NAME, String.format("%s healed a bit.", player.GetName()));
+                            }
+                        }
+                    }
+                }
+
+                dlyHealthGeneration.Set(config.GetHealthInterval());
+            }
+
+            LaunchPerf.Measure(LaunchPerf.Metric.HealthTick);
 
             for(Tank tank : GetTanks())
             {
@@ -1114,8 +1152,12 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
             lTotalCost += GetHourlyTorpedoMaintenance(player.GetID());
 
             //Structure maintenance
-            for(Structure structure : GetAllStructures())
+            for(Structure structure : player.GetStructures())
             {
+                //HQs are free.
+                if(structure instanceof CommandPost post && post.GetIsHQ())
+                    continue;
+                
                 if(structure.GetOwnedBy(player.GetID()))
                 {
                     if(structure.GetOffline())
@@ -1370,7 +1412,7 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
             //Player is alive.
             if(player.Functioning())
             {
-                int lAmountToAdd = GetHourlyIncome(player) + GetPlayerRankIncome(player);
+                int lAmountToAdd = GetHourlyIncome(player) + GetPlayerRankIncome(player) + GetHourlyBonusIncome(player);
 
                 long oWealth = player.GetWealth();
                 
@@ -1410,6 +1452,48 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                 else
                 {
                     player.ClearHostilePlayers();
+                }
+                
+                //Player is in a radioactive area.                   
+                if(GetRadioactive(player, true))
+                {
+                    Radiation killerRadiation = null;
+                    
+                    for(Radiation radiation : GetRadiations())
+                    {
+                        if(!GetPlayerIsShelteredServer(player) && player.GetPosition().DistanceTo(radiation.GetPosition()) <= radiation.GetRadius())
+                        {
+                            if(!player.GetRadAlertSent())
+                            {
+                                SendUserAlert(player.GetUser(), "Counterforce Alert", "AREA RADIOACTIVE. SEEK SHELTER IMMEDIATELY.", true, false);
+                                player.RadAlertSent();
+                            }
+                            
+                            player.InflictDamage(Defs.RADIATION_DMG_HOUR);
+                            LaunchLog.Log(LaunchLog.LogType.GAME, LOG_NAME, String.format("%s damaged a bit.", player.GetName()));
+                        
+                            if(player.Destroyed())
+                            {
+                                killerRadiation = radiation;
+                            }
+                        }
+                    }
+                    
+                    //Send out event if they are dead.
+                    if(player.Destroyed())
+                    {
+                        ProcessPlayerXPLoss(player.GetID(), Defs.DEATH_XP, "You died.");
+                        CreateEvent(new LaunchEvent(String.format("%s died of radiation.", player.GetName()), SoundEffect.DEATH));
+                        CreateReport(player, new LaunchReport("You died of radiation poisoning!", true, player.GetID()));
+                        Scoring_Death(player);
+                        player.SetDead();
+                        
+                        if(player.GetAllianceMemberID() != Alliance.ALLIANCE_ID_UNAFFILIATED)
+                        {
+                            Alliance alliance = Alliances.get(player.GetAllianceMemberID());
+                            AllianceCleanupCheck(alliance, killerRadiation != null ? killerRadiation.GetCreatedByID() : LaunchEntity.ID_NONE, false, true);
+                        }
+                    }
                 }
             }
         }
@@ -2021,13 +2105,63 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                     //Don't engage if the owner is AWOL or banned.
                     if(!sentryGunOwner.GetAWOL() && !sentryGunOwner.GetBanned_Server())
                     {
+                        for(Player player : GetPlayers())
+                        {
+                            //Don't engage if the owner is AWOL or banned.
+                            if(!player.Destroyed() && !(player.GetBoss() && player.GetIsAnAdmin()) && !player.GetRespawnProtected() && !sentryGunOwner.GetAWOL() && !sentryGunOwner.GetBanned_Server()/* && !GetPlayerIsShelteredServer(player)*/)
+                            {
+                                if(!GetAttackIsBullying(sentryGunOwner, player) && player.GetID() != sentryGunOwner.GetID())
+                                {
+                                    if(sentryGun.GetPosition().EvenBroaderPhaseCollisionTest(player.GetPosition()) && sentryGun.GetPosition().DistanceTo(player.GetPosition()) <= Defs.ARTILLERY_RANGE)
+                                    {
+                                        if(!WouldBeFriendlyFire(sentryGunOwner, player) && !GetPlayerIsShelteredServer(player))
+                                        {
+                                            sentryGun.SetVisible(Defs.FIRE_VISIBILITY_TIME);
+
+                                            short nDamage = (short)LaunchUtilities.GetRandomIntInBounds(Defs.EFFECTIVE_MIN_DMG, Defs.EFFECTIVE_MAX_DMG);
+
+                                            short nDamageInflicted = player.InflictDamage(nDamage);
+                                            Scoring_DamageInflicted(sentryGunOwner, player, nDamageInflicted); 
+
+                                            if(nDamageInflicted > 0)
+                                            {
+                                                if(player.Destroyed())
+                                                {
+                                                    player.SetDead();
+                                                    //ScatterLoot(player.GetPosition(), player.GetCargoSystem());
+                                                    CreateReport(player, new LaunchReport(String.format("%s's artillery gun killed you!", sentryGunOwner.GetName()), true, player.GetID(), sentryGunOwner.GetID()));
+                                                    CreateEvent(new LaunchEvent(String.format("%s's artillery gun shot %s, causing %d HP of damage and killing them.", sentryGunOwner.GetName(), player.GetName(), nDamageInflicted), SoundEffect.ARTILLERY_EXPLOSION));
+                                                    CreateReport(sentryGunOwner, new LaunchReport(String.format("Your artillery gun killed %s!", player.GetName()), true, sentryGunOwner.GetID(), player.GetID()));
+
+                                                    if(player.GetAllianceMemberID() != Alliance.ALLIANCE_ID_UNAFFILIATED)
+                                                    {
+                                                        Alliance alliance = Alliances.get(player.GetAllianceMemberID());
+                                                        AllianceCleanupCheck(alliance, sentryGun.GetOwnerID(), true, true);
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    CreateEvent(new LaunchEvent(String.format("%s's artillery gun attacked %s, causing %d HP of damage.", sentryGunOwner.GetName(), player.GetName(), nDamageInflicted), SoundEffect.ARTILLERY_EXPLOSION));
+                                                    CreateReport(sentryGunOwner, new LaunchReport(String.format("%s's artillery gun injured %s!", sentryGunOwner.GetName(), player.GetName()), true, player.GetID(), sentryGunOwner.GetID()));
+                                                    CreateReport(sentryGunOwner, new LaunchReport(String.format("Your artillery gun injured %s!", player.GetName()), true, sentryGunOwner.GetID(), player.GetID()));
+                                                }
+                                            }
+
+                                            sentryGun.SetReloadTime(Defs.SENTRY_RELOAD_TIME);
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        } 
+                        
                         for(EntityPointer pointer : quadtree.GetAffectedLandUnits(sentryGun.GetPosition(), Defs.ARTILLERY_RANGE))
                         {
                             LandUnit landUnit = pointer.GetLandUnit(game);
 
                             if(landUnit != null)
                             {
-                                if(!landUnit.Destroyed() && sentryGun.GetPosition().RadiusPhaseCollisionTest(landUnit.GetPosition(), Defs.SENTRY_RANGE) && sentryGun.GetPosition().DistanceTo(landUnit.GetPosition()) <= Defs.SENTRY_RANGE)
+                                if(!landUnit.Destroyed() && sentryGun.GetPosition().RadiusPhaseCollisionTest(landUnit.GetPosition(), Defs.ARTILLERY_RANGE) && sentryGun.GetPosition().DistanceTo(landUnit.GetPosition()) <= Defs.ARTILLERY_RANGE)
                                 {
                                     Player bomberOwner = Players.get(landUnit.GetOwnerID());
 
@@ -2053,7 +2187,7 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
 
                                             if(landUnit.Destroyed())
                                             {
-                                                CreateEvent(new LaunchEvent(String.format("%s's %s destroyed %s's %s.", sentryGunOwner.GetName(), sentryGun.GetTypeName(), bomberOwner.GetName(), landUnit.GetTypeName()), SoundEffect.ARTILLERY_FIRE));
+                                                CreateEvent(new LaunchEvent(String.format("%s's %s destroyed %s's %s.", sentryGunOwner.GetName(), sentryGun.GetTypeName(), bomberOwner.GetName(), landUnit.GetTypeName()), SoundEffect.ARTILLERY_EXPLOSION));
                                                 CreateReport(sentryGunOwner, new LaunchReport(String.format("Your %s destroyed %s's %s.", bomberOwner.GetName(), sentryGun.GetTypeName(), landUnit.GetTypeName()), false, sentryGunOwner.GetID(), bomberOwner.GetID()));
                                                 CreateReport(bomberOwner, new LaunchReport(String.format("%s's %s destroyed your %s.", sentryGunOwner.GetName(), sentryGun.GetTypeName(), landUnit.GetTypeName()), false, bomberOwner.GetID(), sentryGunOwner.GetID()));
                                                 
@@ -2063,14 +2197,14 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                                             }
                                             else
                                             {
-                                                CreateEvent(new LaunchEvent(String.format("%s's %s damaged %s's %s.", sentryGunOwner.GetName(), sentryGun.GetTypeName(), bomberOwner.GetName(), landUnit.GetTypeName()), SoundEffect.ARTILLERY_FIRE));
+                                                CreateEvent(new LaunchEvent(String.format("%s's %s damaged %s's %s.", sentryGunOwner.GetName(), sentryGun.GetTypeName(), bomberOwner.GetName(), landUnit.GetTypeName()), SoundEffect.ARTILLERY_EXPLOSION));
                                                 CreateReport(sentryGunOwner, new LaunchReport(String.format("Your %s damaged %s's %s.", bomberOwner.GetName(), sentryGun.GetTypeName(), landUnit.GetTypeName()), false, sentryGunOwner.GetID(), bomberOwner.GetID()));
                                                 CreateReport(bomberOwner, new LaunchReport(String.format("%s's %s damaged your %s.", sentryGunOwner.GetName(), sentryGun.GetTypeName(), landUnit.GetTypeName()), false, bomberOwner.GetID(), sentryGunOwner.GetID()));
                                             } 
                                         }
                                         else
                                         {
-                                            CreateEvent(new LaunchEvent(String.format("%s's %s missed %s's %s.", sentryGunOwner.GetName(), sentryGun.GetTypeName(), bomberOwner.GetName(), landUnit.GetTypeName()), SoundEffect.SENTRY_GUN_MISS));
+                                            CreateEvent(new LaunchEvent(String.format("%s's %s missed %s's %s.", sentryGunOwner.GetName(), sentryGun.GetTypeName(), bomberOwner.GetName(), landUnit.GetTypeName()), SoundEffect.ARTILLERY_FIRE));
                                         }
 
                                         sentryGun.SetReloadTime(Defs.ARTILLERY_GUN_RELOAD_TIME);
@@ -2106,7 +2240,9 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                         GeoCoord geoHome = homebase.GetPosition();
 
                         if(geoPosition.DistanceTo(geoHome) > GetFuelableRange(aircraft.GetCurrentFuel(), Defs.GetAircraftRange(aircraft.GetEntityType())) * 0.9f && geoPosition.DistanceTo(geoHome) < GetFuelableRange(aircraft.GetCurrentFuel(), Defs.GetFuelUsagePerTick(lMS, Defs.GetAircraftRange(aircraft.GetEntityType()), Defs.GetAircraftSpeed(aircraft.GetEntityType()))))
+                        {
                             aircraft.ReturnToBase();
+                        }
                     }
                 }
                 else
@@ -2224,7 +2360,7 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                                                     {
                                                         Structure targetStructure = (Structure)targetDamagable;
 
-                                                        long oLootValue = GetSaleValue(targetStructure).get(ResourceType.WEALTH);
+                                                        long oLootValue = GetSaleValue(targetStructure).get(ResourceType.WEALTH) != null ? GetSaleValue(targetStructure).get(ResourceType.WEALTH) : 0;
                                                         
                                                         CreateLoot(targetStructure.GetPosition().GetCopy(), String.format("Rubble from %s's %s.", targetOwner.GetName(), targetDamagable.GetTypeName()), ProcessBounty(player, targetOwner, oLootValue), true);
                                                         CreateRubble(targetStructure);
@@ -2619,7 +2755,7 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                                                 
                                                 EstablishShipyardOwnership();
 
-                                                long oLootValue = GetSaleValue(targetStructure).get(ResourceType.WEALTH);
+                                                long oLootValue = GetSaleValue(targetStructure).get(ResourceType.WEALTH) != null ? GetSaleValue(targetStructure).get(ResourceType.WEALTH) : 0;
                                                 
                                                 CreateLoot(targetStructure.GetPosition().GetCopy(), String.format("Rubble from %s's %s.", targetOwner.GetName(), targetStructure.GetTypeName()), ProcessBounty(player, targetOwner, oLootValue), true);
                                                 CreateRubble(targetStructure);
@@ -3728,7 +3864,7 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
         return GetNetWorthMultiplier(attacker, defender) < 0.15f && attacker.GetKDR() < 0.1f;
     }
     
-    private void ProcessMAD(Player attacker, Player defender, String strCause)
+    /*private void ProcessMAD(Player attacker, Player defender, String strCause)
     {   
         //Oh sweetie, we're not going to retaliate against our own allies.
         if(!EntityIsFriendly(attacker, defender) && !AttackerIsATroll(attacker, defender))
@@ -3775,7 +3911,7 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                 //TODO: Figure out something other than cities for ICBM silos to target. Clusters of civilian/military stuff?
             }   
         }  
-    }
+    }*/
     
     //Process damage to entities caused by a missile explosion.
     private void ProcessExplosion(Player inflictor, String strCause, GeoCoord geoOrigin, Explosion explosion)
@@ -3792,14 +3928,72 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
         }
         
         //Keep a list of bunkers damaged during the player-damage phase so that bunkers don't get double-damage.
-        List<CommandPost> DamagedCommandPosts = new ArrayList<>();
+        List<CommandPost> DamagedBunkers = new ArrayList<>();
         
         int lTotalDamage = 0;
 
+        //Players.
+        for(Player player : GetPlayers())
+        {
+            if(player.Functioning() && !player.GetRespawnProtected() && player.GetPosition().GetValid())
+            {
+                float fltDistance = player.GetPosition().DistanceTo(geoOrigin);
+
+                if(fltDistance <= fltBlastRadius)
+                {   
+                    nDamage = (short)(LaunchUtilities.GetRandomFloatInBounds(explosion.GetAccuracy(), 1.0f) * MissileStats.GetDamageAtPosition(player, geoOrigin, explosion));
+
+                    CommandPost currentBunker = GetPlayerCurrentBunker(player);
+                
+                    if(currentBunker != null && !currentBunker.Destroyed())
+                    {
+                        DamagedBunkers.add(currentBunker);
+                        nDamage -= currentBunker.InflictDamage(nDamage);
+                        
+                        if(currentBunker.Destroyed())
+                        {
+                            CreateRubble(currentBunker);
+                        }
+                    }
+                
+                    if(nDamage > 0)
+                    {
+                        nDamageInflicted = player.InflictDamage(nDamage);
+                        lTotalDamage += nDamageInflicted;
+
+                        Scoring_DamageInflicted(inflictor, player, nDamageInflicted);
+
+                        if(player.Destroyed())
+                        {
+                            ProcessPlayerXPGain(inflictor.GetID(), Defs.PLAYER_KILLED_XP, "");
+                            ProcessPlayerXPLoss(player.GetID(), Defs.DEATH_XP, "");
+                            
+                            //ScatterLoot(player.GetPosition(), player.GetCargoSystem());
+
+                            bReestablishStructureThreats = true;
+                            Scoring_Kill(inflictor, player);
+                            Scoring_Death(player);
+                            player.SetDead();
+                            CreateEvent(new LaunchEvent(String.format("%s hit %s, causing %d HP of damage, killing them.", strCause, player.GetName(), nDamageInflicted, player.GetName()), SoundEffect.DEATH));
+                            CreateReport(new LaunchReport(String.format("%s killed %s!", inflictor.GetName(), player.GetName()), true, inflictor.GetID(), player.GetID()));                                
+                            CreateReport(inflictor, new LaunchReport(String.format("You killed %s!", player.GetName()), true, inflictor.GetID(), player.GetID()));
+
+                            //Check if the alliance is annihilated.
+                            if(player.GetAllianceMemberID() != Alliance.ALLIANCE_ID_UNAFFILIATED)
+                            {
+                                Alliance alliance = Alliances.get(player.GetAllianceMemberID());
+                                AllianceCleanupCheck(alliance, inflictor.GetID(), true, true);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
         //Structures.
         for(Structure structure : GetAllStructures())
         {
-            if(!(structure instanceof CommandPost) || !DamagedCommandPosts.contains((CommandPost)structure))
+            if(!(structure instanceof CommandPost) || !DamagedBunkers.contains((CommandPost)structure))
             {
                 if(!structure.Destroyed() && !structure.GetRespawnProtected())
                 {
@@ -3813,21 +4007,6 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                         lTotalDamage += nDamageInflicted;
                         Player owner = GetPlayer(structure.GetOwnerID());
                         Scoring_DamageInflicted(inflictor, owner, nDamageInflicted);
-                        
-                        if(structure instanceof MissileSite site && site.CanTakeICBM())
-                        {
-                            if(random.nextFloat() <  (explosion.GetNuclear() && !explosion.GetICBM() ? Defs.NUKE_ICBM_SILO_MAD_CHANCE : Defs.ATTACK_ICBM_SILO_MAD_CHANCE))
-                            {
-                                ProcessMAD(inflictor, GetOwner(site), String.format("%s attacked %s's %s.", inflictor.GetName(), owner.GetName(), structure.GetTypeName()));
-                            }
-                        }
-                        else if(explosion.GetNuclear() && !explosion.GetICBM() && (structure instanceof Processor || structure instanceof OreMine || structure instanceof Warehouse))
-                        {
-                            if(random.nextFloat() < Defs.NUKE_CIVILIAN_STRUCTURE_MAD_CHANCE)
-                            {
-                                ProcessMAD(inflictor, GetOwner(structure), String.format("%s nuked %s's civilian structures.", inflictor.GetName(), owner.GetName()));
-                            }
-                        }
 
                         if(structure.Destroyed())
                         {
@@ -3856,7 +4035,7 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                                 CreateReport(inflictor, new LaunchReport(String.format("You destroyed %s's %s!", owner.GetName(), structure.GetTypeName()), true, inflictor.GetID(), owner.GetID()));
                             }  
 
-                            long oLootValue = GetSaleValue(structure).get(ResourceType.WEALTH);
+                            long oLootValue = GetSaleValue(structure).get(ResourceType.WEALTH) != null ? GetSaleValue(structure).get(ResourceType.WEALTH) : 0;
                             
                             CreateLoot(structure.GetPosition().GetCopy(), String.format("Rubble from %s's %s.", owner.GetName(), structure.GetTypeName()), ProcessBounty(inflictor, owner, oLootValue), true);
                         }
@@ -4054,8 +4233,11 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
         
         for(Structure structure : GetAllStructures())
         {
+            if(structure instanceof CommandPost post && post.GetIsHQ())
+                    continue;
+            
             if(structure != null && !structure.GetRespawnProtected() && (structure.GetBooting() || structure.GetOnline()))
-            {  
+            {
                 if(random.nextFloat() < 0.5f)
                 {
                     if(geoLocation.DistanceTo(structure.GetPosition()) < fltRadius)
@@ -4100,6 +4282,58 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                                 
                         //CreateLoot(aircraft.GetPosition(), String.format("Rubble from %s's %s.", aircraftOwner.GetName(), aircraft.GetTypeName()), ProcessBounty(player, aircraftOwner, oLootValue), true);                    
                     }  
+                }
+            }
+        }
+    }
+    
+    /**
+     * Register a player death for the purpose of scoring.
+     * Only wars need the stats updating; the player's own deaths count property should have already been updated by calling SetDead().
+     * @param player 
+     */
+    private void Scoring_Death(Player player)
+    {
+        if(player.GetAllianceMemberID() != Alliance.ALLIANCE_ID_UNAFFILIATED)
+        {
+            int lAllianceID = player.GetAllianceMemberID();
+            
+            for(Treaty treaty : GetTreaties())
+            {
+                if(treaty instanceof War)
+                {
+                    if(treaty.IsAParty(lAllianceID))
+                        ((War)treaty).AddDeath(lAllianceID);
+                }
+            }
+        }
+    }
+    
+    /**
+     * Register that a player killed another player.
+     * All instances of such should use this as it increments the killing player's kill count (unlike registering deaths).
+     * @param player 
+     */
+    private void Scoring_Kill(Player killer, Player victim)
+    {
+        if(GetNetWorthMultiplier(killer, victim) >= Defs.NOOB_WARNING)
+        {
+            killer.IncrementKills();
+        }
+        
+        if(killer.GetAllianceMemberID() != Alliance.ALLIANCE_ID_UNAFFILIATED && victim.GetAllianceMemberID() != Alliance.ALLIANCE_ID_UNAFFILIATED)
+        {
+            int lAllianceIDKiller = killer.GetAllianceMemberID();
+            int lAllianceIDVictim = victim.GetAllianceMemberID();
+            
+            for(Treaty treaty : GetTreaties())
+            {
+                if(treaty instanceof War)
+                {
+                    if(treaty.AreParties(lAllianceIDKiller, lAllianceIDVictim))
+                    {
+                        ((War)treaty).AddKill(lAllianceIDKiller);
+                    }
                 }
             }
         }
@@ -4363,8 +4597,8 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
     private Player CreatePlayer(String strName, int lAvatarID)
     {
         LaunchLog.Log(LaunchLog.LogType.GAME, LOG_NAME, "Creating a player.");
-        
-        Player player = new Player(GetAtomicID(lPlayerIndex, Players), strName, lAvatarID, config.GetStartingWealth());
+
+        Player player = new Player(GetAtomicID(lPlayerIndex, Players), config.GetPlayerBaseHP(), strName, lAvatarID, config.GetStartingWealth());
         
         player.SetJoinTime(System.currentTimeMillis());
         
@@ -4472,11 +4706,6 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                                         }
                                     }  
                                 }
-                                
-                                if(type.GetICBM())
-                                {
-                                    ProcessMAD(attacker, player, String.format("%s launched an ICBM at %s.", attacker.GetName(), player.GetName()));
-                                }  
                             }
                         }
                     }
@@ -4534,17 +4763,14 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                                             User otherUser = ally.GetUser();
 
                                             if(otherUser != null)
+                                            {
                                                 otherUser.SetAllyUnderAttack();
+                                            }
 
                                             CreateReport(ally, new LaunchReport(String.format("%s attacked your ally %s!", attacker.GetName(), victim.GetName()), true, attacker.GetID(), victim.GetID()));                                      
                                         }
                                     }  
                                 }
-                                
-                                if(type.GetICBM())
-                                {
-                                    ProcessMAD(attacker, victim, String.format("%s launched an ICBM at %s.", attacker.GetName(), victim.GetName()));
-                                }   
                             }
                         }
                     } 
@@ -6409,11 +6635,7 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
 
             if(player.Functioning())
             {
-                if(bUseSubstitutes && ((resources != null && resources.ChargeQuantities(costs)) || (cargo != null && cargo.ChargeQuantities(costs))))
-                {
-                    return true;
-                }
-                else if(player.SubtractWealth(costs.get(ResourceType.WEALTH)))
+                if(player.SubtractWealth(costs.get(ResourceType.WEALTH) != null ? costs.get(ResourceType.WEALTH) : 0))
                 {
                     return true;
                 }
@@ -6768,30 +6990,7 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
             Map<ResourceType, Long> Costs = config.GetStructureBuildCost(structureType, type);
             GeoCoord geoPosition = player.GetPosition().GetCopy();
             
-            if(bUseSubstitutes)
-                Costs = GetSubstitutionCost(Costs);
-            else
-                Costs = GetRequiredCost(Costs);
-            
-            if(lCommandPostID != LaunchEntity.ID_NONE && structureType != EntityType.COMMAND_POST)
-            {
-                if(GetCommandPost(lCommandPostID) != null)
-                {
-                    CommandPost post = GetCommandPost(lCommandPostID);
-                    
-                    if(post.GetOwnedBy(lPlayerID) && post.GetOnline())
-                    {
-                        geoPosition = geoRemotebuild;
-                    }
-                }
-            }
-            else if(player.GetStructures().size() < 10)
-            {
-                //This is an in-person build and the player has less than 10 structures. Offset the location to protect player home privacy.
-                geoPosition.Move(random.nextDouble() * (2.0 * Math.PI), Defs.PRIVACY_OFFSET);
-            }
-            
-            if(ValidateConstructionRequest(player, geoPosition, structureType.toString(), structureType, Costs.get(ResourceType.WEALTH)))
+            if(ValidateConstructionRequest(player, geoPosition, structureType.toString(), structureType, Costs.get(ResourceType.WEALTH) != null ? Costs.get(ResourceType.WEALTH) : 0))
             {
                 return AddStructure(lPlayerID, geoPosition, structureType, type);
             }
@@ -6804,7 +7003,7 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
     {
         Player player = Players.get(lPlayerID);
         
-        if(player != null && (GetPlayerHasHQ(player) || structureType == EntityType.COMMAND_POST))
+        if(player != null && player.Functioning())
         {
             switch(structureType)
             {
@@ -6890,36 +7089,6 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
 
                     RemoveNearbyRubbles(sentryGun.GetPosition());
                     CreateEvent(new LaunchEvent(String.format("%s constructed a %s.", player.GetName(), sentryGun.GetTypeName()), SoundEffect.CONSTRUCTION));
-
-                    return true;
-                }
-
-                case COMMAND_POST:
-                {
-                    GeoCoord geoBuild = geoPosition;
-                    
-                    boolean bPlayerHasHQ = false;
-                    
-                    for(Structure structure : new ArrayList<>(player.GetStructures()))
-                    {
-                        if(structure instanceof CommandPost post && post.GetIsHQ())
-                        {
-                            bPlayerHasHQ = true;
-                            
-                            //Move the HQ randomly a set distance to protect player home privacy.
-                            geoBuild.Move(random.nextDouble() * (2.0 * Math.PI), Defs.HQ_VARIANCE_DISTANCE);
-                            break;
-                        }
-                    }
-                    
-                    CommandPost commandPost = new CommandPost(GetAtomicID(lCommandPostIndex, CommandPosts), geoPosition, StructureStats.GetMaxHPByType(structureType, this), StructureStats.GetMaxHPByType(structureType, this), player.GetID(), player.GetRespawnProtected(), config.GetStructureBootTime(player), !bPlayerHasHQ);
-                    AddCommandPost(commandPost);
-                    EstablishStructureThreats(commandPost);
-
-                    ProcessPlayerXPGain(lPlayerID, Defs.STRUCTURE_BUILT_XP, "You built a structure.");
-
-                    RemoveNearbyRubbles(commandPost.GetPosition());
-                    CreateEvent(new LaunchEvent(String.format("%s constructed a %s.", player.GetName(), commandPost.GetTypeName()), SoundEffect.CONSTRUCTION));
 
                     return true;
                 }
@@ -7030,12 +7199,14 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
     {
         switch(systemType)
         {
+            case PLAYER_INTERCEPTORS:
             case SAM_SITE:
             case AIRCRAFT_INTERCEPTORS:
             case STORED_AIRCRAFT_INTERCEPTORS:
             case TANK_INTERCEPTORS: 
             case SHIP_INTERCEPTORS: return PurchaseInterceptors(lPlayerID, lSiteID, lSlotNo, lLaunchableTypes, systemType);
                 
+            case PLAYER_MISSILES:
             case TANK_MISSILES:
             case STORED_TANK_ARTILLERY:
             case TANK_ARTILLERY:
@@ -7139,6 +7310,15 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                             {
                                 system = ship.GetMissileSystem();
                             }
+                        }
+                    }
+                    break;
+                    
+                    case PLAYER_MISSILES:
+                    {
+                        if(player.GetHasCruiseMissileSystem())
+                        {
+                            system = player.GetMissileSystem();
                         }
                     }
                     break;
@@ -7324,6 +7504,17 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                                             system.AddMissileToNextSlot(lSlotNo, lType, lPrepTime);
                                             submarine.SetVisible(Defs.SUBMARINE_ACTION_VISIBLE_TIME);
                                             EntityUpdated(submarine, false);
+                                        }
+                                    }
+                                }
+                                else if(systemType == SystemType.PLAYER_MISSILES)
+                                {
+                                    if(!type.GetICBM() && !type.GetNuclear() && type.GetGroundLaunched() && type.GetPurchasable())
+                                    {
+                                        if(ProcessPlayerWeaponPurchase(lPlayerID, type.GetCost(), true))
+                                        {
+                                            system.AddMissileToNextSlot(lSlotNo, lType, lPrepTime);
+                                            EntityUpdated(player, false);
                                         }
                                     }
                                 }
@@ -7669,7 +7860,6 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                     {
                         bank.Withdraw(oAmount);
                         owner.AddWealth(oAmount);
-                        ProcessPlayerIncome(owner, null, Map.ofEntries(entry(ResourceType.WEALTH, oAmount)), false);
                         EntityUpdated(owner, false);
                         return true;
                     }
@@ -7677,7 +7867,7 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                     {
                         long oAmountWithdrawn = bank.GetWealth();
                         bank.Withdraw(oAmountWithdrawn);
-                        ProcessPlayerIncome(owner, null, Map.ofEntries(entry(ResourceType.WEALTH, oAmountWithdrawn)), false);
+                        owner.AddWealth(oAmountWithdrawn);
                         EntityUpdated(owner, false);
                         return true;
                     }
@@ -7840,11 +8030,6 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
             {
                 Map<ResourceType, Long> Costs = Defs.TANK_BUILD_COST;
                 
-                if(bUseSubstitutes)
-                    Costs = GetSubstitutionCost(Costs);
-                else
-                    Costs = GetRequiredCost(Costs);
-                
                 PurchaseType purchaseType = PurchaseType.OFFENSIVE;
                 
                 if(tankType == EntityType.SPAAG || tankType == EntityType.SAM_TANK)
@@ -7987,11 +8172,6 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                     lBuildTime = 0;
                 }
                 
-                if(bUseSubstitutes)
-                    costs = GetSubstitutionCost(costs);
-                else
-                    costs = GetRequiredCost(costs);
-                
                 if(ProcessPlayerPurchase(lPlayerID, costs, resources, null, bUseSubstitutes, purchaseType))
                 {
                     aircraft = new StoredAirplane(GetAtomicID(lAirplaneIndex, Airplanes), lPlayerID, (short)1, (short)1, lBuildTime, host, aircraftType, missiles, interceptors, cargo);
@@ -8031,11 +8211,6 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                 {
                     long oBuildTime = Defs.GetNavalBuildTime(shipType);
                     Map<ResourceType, Long> costs = Defs.GetNavalBuildCost(shipType);
-                    
-                    if(bUseSubstitutes)
-                        costs = GetSubstitutionCost(costs);
-                    else
-                        costs = GetRequiredCost(costs);
                     
                     PurchaseType purchaseType = PurchaseType.OFFENSIVE;
                     
@@ -8190,6 +8365,110 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                 missileSystem.SetSlotCount(Defs.MAX_MISSILE_SLOTS - 1);
                 CreateEvent(new LaunchEvent(String.format("%s maxed %s slot count.", player.GetName(), samSite.GetTypeName()), SoundEffect.EQUIP));
                 return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    @Override
+    public boolean PlayerMissileSlotUpgrade(int lPlayerID)
+    {
+        Player player = Players.get(lPlayerID);
+        
+        LaunchLog.Log(LaunchLog.LogType.GAME, LOG_NAME, String.format("%s is attempting to upgrade player missile slots...", player.GetName()));
+        
+        if(player.GetHasCruiseMissileSystem() && player.Functioning())
+        {
+            MissileSystem missileSystem = player.GetMissileSystem();
+            
+            if(((int)missileSystem.GetSlotCount() + (int)config.GetMissileUpgradeCount()) <= Defs.MAX_MISSILE_SLOTS)
+            {
+                if(player.SubtractWealth(GetMissileSlotUpgradeCost(missileSystem, config.GetInitialMissileSlots())))
+                {
+                    missileSystem.IncreaseSlotCount(config.GetMissileUpgradeCount());
+                    CreateEvent(new LaunchEvent(String.format("%s upgraded missile slots.", player.GetName()), SoundEffect.EQUIP));
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+    }
+
+    @Override
+    public boolean PlayerInterceptorSlotUpgrade(int lPlayerID)
+    {
+        Player player = Players.get(lPlayerID);
+        
+        LaunchLog.Log(LaunchLog.LogType.GAME, LOG_NAME, String.format("%s is attempting to upgrade player interceptor slots...", player.GetName()));
+        
+        if(player.GetHasAirDefenceSystem() && player.Functioning())
+        {
+            MissileSystem missileSystem = player.GetInterceptorSystem();
+            
+            if(((int)missileSystem.GetSlotCount() + (int)config.GetMissileUpgradeCount()) <= Defs.MAX_MISSILE_SLOTS)
+            {
+                if(player.SubtractWealth(GetMissileSlotUpgradeCost(missileSystem, config.GetInitialInterceptorSlots())))
+                {
+                    missileSystem.IncreaseSlotCount(config.GetMissileUpgradeCount());
+                    CreateEvent(new LaunchEvent(String.format("%s upgraded interceptor slots.", player.GetName()), SoundEffect.EQUIP));
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+    }
+    
+    @Override
+    public boolean PlayerMissileReloadUpgrade(int lPlayerID)
+    {
+        Player player = Players.get(lPlayerID);
+        
+        LaunchLog.Log(LaunchLog.LogType.GAME, LOG_NAME, String.format("%s is attempting to upgrade player missile reload time...", player.GetName()));
+        
+        if(player.GetHasCruiseMissileSystem() && player.Functioning())
+        {
+            MissileSystem system = player.GetMissileSystem();
+            int lCost = GetReloadUpgradeCost(system);
+            
+            if(lCost != Defs.UPGRADE_COST_MAXED)
+            {
+                if(player.GetWealth() >= lCost)
+                {
+                    player.SubtractWealth(lCost);
+                    system.SetReloadTime(GetReloadUpgradeTime(system));
+                    CreateEvent(new LaunchEvent(String.format("%s upgraded missile system reload time.", player.GetName()), SoundEffect.EQUIP));
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+    }
+
+    @Override
+    public boolean PlayerInterceptorReloadUpgrade(int lPlayerID)
+    {
+        Player player = Players.get(lPlayerID);
+        
+        LaunchLog.Log(LaunchLog.LogType.GAME, LOG_NAME, String.format("%s is attempting to upgrade player interceptor reload time...", player.GetName()));
+        
+        if(player.GetHasAirDefenceSystem() && player.Functioning())
+        {
+            MissileSystem system = player.GetInterceptorSystem();
+            int lCost = GetReloadUpgradeCost(system);
+            
+            if(lCost != Defs.UPGRADE_COST_MAXED)
+            {
+                if(player.GetWealth() >= lCost)
+                {
+                    player.SubtractWealth(lCost);
+                    system.SetReloadTime(GetReloadUpgradeTime(system));
+                    CreateEvent(new LaunchEvent(String.format("%s upgraded interceptor system reload time.", player.GetName()), SoundEffect.EQUIP));
+                    return true;
+                }
             }
         }
         
@@ -8969,7 +9248,7 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
     {
         Player player = Players.get(lPlayerID);
         
-        if(player != null)
+        if(player != null && player.Functioning())
         {
             switch(systemType)
             {
@@ -9032,58 +9311,6 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                                 else
                                 {
                                     LaunchLog.ConsoleMessage(String.format("Missile Site %s Cannot fire. Slot no: %s. Slot contents: %d. Prep time remaining: %s.", String.valueOf(missileSite.GetID()), String.valueOf(lSlotNo), missileSite.GetMissileSystem().GetSlotMissileType(lSlotNo), String.valueOf(missileSystem.GetReloadTimeRemaining())));
-                                }
-                            }
-                        }
-                    }
-
-                    return false;
-                }
-
-                case ARTILLERY_GUN:
-                {
-                    ArtilleryGun artillery = ArtilleryGuns.get(lSiteID);
-
-                    LaunchLog.Log(LaunchLog.LogType.GAME, LOG_NAME, String.format("%s is attempting to launch a missile...", player.GetName()));
-
-                    if(artillery != null)
-                    {
-                        if(artillery.GetOwnerID() == lPlayerID)
-                        {
-                            if(artillery.GetOnline() && player.Functioning())
-                            {
-                                MissileSystem missileSystem = artillery.GetMissileSystem();
-
-                                if(missileSystem.GetSlotReadyToFire(lSlotNo))
-                                {
-                                    int lTypeID = missileSystem.GetSlotMissileType(lSlotNo);
-                                    MissileType type = config.GetMissileType(lTypeID);
-                                    GeoCoord geoTarget = new GeoCoord(fltTargetLatitude, fltTargetLongitude);
-
-                                    if(!ThreatensPlayer(lPlayerID, geoTarget, type, false, false, bAirburst))
-                                    {
-                                        if(!ThreatensFriendlies(lPlayerID, geoTarget, type, false, false, bAirburst) && !IsBullyingOrNuisance(lPlayerID, geoTarget, type, false, false, bAirburst))
-                                        {
-                                            //Remove respawn protection from the player.
-                                            RemoveRespawnProtection(player, true);
-                                            artillery.SetVisible(Defs.FIRE_VISIBILITY_TIME);
-                                            missileSystem.Fire(lSlotNo);
-
-                                            missileSystem.SetReloadTimeRemaining(Defs.ARTILLERY_GUN_RELOAD);
-
-                                            LaunchLog.Log(LaunchLog.LogType.GAME, "artillery", String.format("Artillery Gun %s Firing %s.", String.valueOf(artillery.GetID()), type.GetName()));
-                                            CreateMissileLaunch(artillery, artillery.GetPosition().GetCopy(), lTypeID, lPlayerID, geoTarget, target, bAirburst);
-                                            EntityUpdated(artillery, false);
-
-                                            CreateEvent(new LaunchEvent(String.format("%s launched %s artillery shell.", player.GetName(), type.GetName()), SoundEffect.ARTILLERY_FIRE));
-
-                                            return true;
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    LaunchLog.ConsoleMessage(String.format("Artillery Gun %s Cannot fire. Slot no: %s. Slot contents: %d. Prep time remaining: %s.", String.valueOf(artillery.GetID()), String.valueOf(lSlotNo), artillery.GetMissileSystem().GetSlotMissileType(lSlotNo), String.valueOf(missileSystem.GetReloadTimeRemaining())));
                                 }
                             }
                         }
@@ -9189,50 +9416,6 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                     return false;
                 }
 
-                case SHIP_ARTILLERY:
-                {
-                    Ship ship = GetShip(lSiteID);
-
-                    LaunchLog.Log(LaunchLog.LogType.GAME, LOG_NAME, String.format("%s is attempting to launch a tank missile...", player.GetName()));
-
-                    if(ship != null)
-                    {
-                        if(ship.GetOwnerID() == lPlayerID)
-                        {
-                            if(player.Functioning())
-                            {
-                                MissileSystem missileSystem = ship.GetArtillerySystem();
-
-                                if(missileSystem != null && missileSystem.GetSlotReadyToFire(lSlotNo))
-                                {
-                                    int lTypeID = missileSystem.GetSlotMissileType(lSlotNo);
-                                    MissileType type = config.GetMissileType(lTypeID);
-                                    GeoCoord geoTarget = new GeoCoord(fltTargetLatitude, fltTargetLongitude);
-
-                                    if(!ThreatensPlayer(lPlayerID, geoTarget, type, false, false, bAirburst)/* && type.GetAirLaunched()*/)
-                                    {
-                                        if(!ThreatensFriendlies(lPlayerID, geoTarget, type, false, false, bAirburst) && !IsBullyingOrNuisance(lPlayerID, geoTarget, type, false, false, bAirburst))
-                                        {
-                                            //Remove respawn protection from the player.
-                                            RemoveRespawnProtection(player, true);
-                                            ship.SetVisible(Defs.FIRE_VISIBILITY_TIME);
-
-                                            missileSystem.Fire(lSlotNo);
-                                            CreateMissileLaunch(ship, ship.GetPosition().GetCopy(), lTypeID, lPlayerID, geoTarget, target, bAirburst);
-
-                                            CreateEvent(new LaunchEvent(String.format("%s launched %s artillery shell.", player.GetName(), type.GetName()), SoundEffect.ARTILLERY_FIRE));
-                                            EntityUpdated(ship, false);
-                                            return true;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    return false;
-                }
-
                 case SUBMARINE_MISSILES:
                 {
                     Submarine submarine = GetSubmarine(lSiteID);
@@ -9317,6 +9500,49 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                                     }
                                 }
                             }
+                        }
+                    }
+
+                    return false;
+                }
+                
+                case PLAYER_MISSILES:
+                {
+                    LaunchLog.Log(LaunchLog.LogType.GAME, LOG_NAME, String.format("%s is attempting to launch a missile...", player.GetName()));
+
+                    if(player.Functioning() && player.GetHasCruiseMissileSystem())
+                    {
+                        MissileSystem missileSystem = player.GetMissileSystem();
+
+                        if(missileSystem.GetSlotReadyToFire(lSlotNo))
+                        {
+                            int lTypeID = missileSystem.GetSlotMissileType(lSlotNo);
+                            MissileType type = config.GetMissileType(lTypeID);
+                            GeoCoord geoTarget = new GeoCoord(fltTargetLatitude, fltTargetLongitude);
+
+                            if(type != null)
+                            {
+                                if(!ThreatensPlayer(lPlayerID, geoTarget, type, false, false, bAirburst))
+                                {
+                                    if(!ThreatensFriendlies(lPlayerID, geoTarget, type, false, false, bAirburst) && !IsBullyingOrNuisance(lPlayerID, geoTarget, type, false, false, bAirburst))
+                                    {
+                                        //Remove respawn protection from the player.
+                                        RemoveRespawnProtection(player, true);
+                                        missileSystem.Fire(lSlotNo);
+                                        LaunchLog.Log(LaunchLog.LogType.GAME, "Player", String.format("Player %s Firing %s.", String.valueOf(player.GetID()), type.GetName()));
+                                        CreateMissileLaunch(player, player.GetPosition().GetCopy(), lTypeID, lPlayerID, geoTarget, target, bAirburst);
+                                        EntityUpdated(player, false);
+
+                                        CreateEvent(new LaunchEvent(String.format("%s launched %s missile.", player.GetName(), type.GetName()), SoundEffect.MISSILE_LAUNCH));
+
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            LaunchLog.ConsoleMessage(String.format("Player %s Cannot fire. Slot no: %s. Slot contents: %d. Prep time remaining: %s.", String.valueOf(player.GetID()), String.valueOf(lSlotNo), player.GetMissileSystem().GetSlotMissileType(lSlotNo), String.valueOf(missileSystem.GetReloadTimeRemaining())));
                         }
                     }
 
@@ -9781,6 +10007,90 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
         return false;
     }
     
+    @Override
+    public boolean PurchaseMissileSystem(int lPlayerID)
+    {
+        Player player = Players.get(lPlayerID);
+        
+        if(player != null)
+        {
+            LaunchLog.Log(LaunchLog.LogType.GAME, LOG_NAME, String.format("%s is attempting to purchase a missile system...", player.GetName()));
+            
+            if((!player.GetHasCruiseMissileSystem()) && player.Functioning())
+            {
+                if(player.SubtractWealth(config.GetCMSSystemCost()))
+                {
+                    player.AddMissileSystem(config.GetReloadTimeBase(), config.GetInitialMissileSlots());
+                    CreateEvent(new LaunchEvent(String.format("%s acquired a missile system.", player.GetName()), SoundEffect.EQUIP));
+                    EntityUpdated(player, false);
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+    }
+
+    @Override
+    public boolean PurchaseSAMSystem(int lPlayerID)
+    {
+        Player player = Players.get(lPlayerID);
+        
+        if(player != null)
+        {
+            LaunchLog.Log(LaunchLog.LogType.GAME, LOG_NAME, String.format("%s is attempting to purchase a SAM system...", player.GetName()));
+            
+            if((!player.GetHasAirDefenceSystem()) && player.Functioning())
+            {
+                if(player.SubtractWealth(config.GetSAMSystemCost()))
+                {
+                    player.AddInterceptorSystem(config.GetReloadTimeBase(), config.GetInitialInterceptorSlots());
+                    CreateEvent(new LaunchEvent(String.format("%s acquired an air defence system.", player.GetName()), SoundEffect.EQUIP));
+                    EntityUpdated(player, false);
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+    }
+
+    @Override
+    public boolean Respawn(int lPlayerID)
+    {
+        Player player = Players.get(lPlayerID);
+        User user = player.GetUser();
+        
+        LaunchLog.Log(LaunchLog.LogType.GAME, LOG_NAME, String.format("%s is attempting to respawn...", player.GetName()));
+        
+        if(player.Destroyed() && player.GetCanRespawn())
+        {
+            player.Respawn(config.GetPlayerBaseHP(), config.GetRespawnProtectionTime());
+            
+            if(config.GetRespawnWealth() > 0)
+                ProcessPlayerIncome(player, "respawn wealth", Map.ofEntries(entry(ResourceType.WEALTH, (long)config.GetRespawnWealth())), false);
+            
+            if(!user.AccountRestricted())
+            {
+                this.CheckAccountIdentityOnRespawn(user, 5);
+            }
+            
+            if(player.GetFirstSpawn())
+            {
+                CreateEvent(new LaunchEvent(String.format("%s spawned for the first time!", player.GetName()), SoundEffect.RESPAWN));
+            }
+            else
+            {
+                CreateEvent(new LaunchEvent(String.format("%s respawned.", player.GetName()), SoundEffect.RESPAWN));
+            }
+            
+            EntityUpdated(player, false);
+            return true;
+        }
+        
+        return false;
+    }
+    
     /**
      * 
      * @param lPlayerID the player kicking the aircraft out.
@@ -10206,18 +10516,58 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
         
         return false;
     }
+    
+    @Override
+    public boolean SellMissileSystem(int lPlayerID)
+    {
+        Player player = Players.get(lPlayerID);
+        
+        LaunchLog.Log(LaunchLog.LogType.GAME, LOG_NAME, String.format("%s is attempting to sell a missile system...", player.GetName()));
+        
+        if(player.GetHasCruiseMissileSystem() && player.Functioning() && !InBattle(player))
+        {
+            Map<ResourceType, Long> Values = GetSaleValue(player.GetMissileSystem(), true);
+            player.RemoveMissileSystem();
+            ProcessPlayerIncome(player, "sale of missile system", Values, false);
+            CreateEvent(new LaunchEvent(String.format("%s sold their missile system.", player.GetName()), SoundEffect.MONEY));
+            return true;
+        }
+        
+        return false;
+    }
+
+    @Override
+    public boolean SellSAMSystem(int lPlayerID)
+    {
+        Player player = Players.get(lPlayerID);
+        
+        LaunchLog.Log(LaunchLog.LogType.GAME, LOG_NAME, String.format("%s is attempting to sell a SAM system...", player.GetName()));
+        
+        if(player.GetHasAirDefenceSystem() && player.Functioning() && !InBattle(player))
+        {
+            Map<ResourceType, Long> Values = GetSaleValue(player.GetInterceptorSystem(), false);
+            player.RemoveAirDefenceSystem();
+            ProcessPlayerIncome(player, "sale of SAM system", Values, false);
+            CreateEvent(new LaunchEvent(String.format("%s sold their air defence system.", player.GetName()), SoundEffect.MONEY));
+            return true;
+        }
+        
+        return false;
+    }
 
     @Override
     public boolean SellLaunchable(int lPlayerID, int lSiteID, int lSlotIndex, SystemType systemType)
     {
         switch(systemType)
         {
+            case PLAYER_INTERCEPTORS:
             case SAM_SITE:
             case AIRCRAFT_INTERCEPTORS:
             case STORED_AIRCRAFT_INTERCEPTORS:
             case TANK_INTERCEPTORS:
             case SHIP_INTERCEPTORS: return SellInterceptor(lPlayerID, lSiteID, lSlotIndex, systemType);
                 
+            case PLAYER_MISSILES:
             case TANK_MISSILES:
             case TANK_ARTILLERY:
             case MISSILE_SITE:
@@ -10244,7 +10594,7 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
         {
             LaunchLog.Log(LaunchLog.LogType.GAME, LOG_NAME, String.format("%s is attempting to sell a launchable...", player.GetName()));
             
-            if(player.Functioning() && !InBattle(player))
+            if(!InBattle(player))
             {
                 switch(systemType)
                 {
@@ -10257,20 +10607,6 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                             if(missileSite.GetOwnerID() == lPlayerID)
                             {
                                 system = missileSite.GetMissileSystem();
-                            }
-                        }
-                    }
-                    break;
-                    
-                    case ARTILLERY_GUN:
-                    {
-                        ArtilleryGun artillery = ArtilleryGuns.get(lSiteID);
-                        
-                        if(artillery != null)
-                        {
-                            if(artillery.GetOwnerID() == lPlayerID)
-                            {
-                                system = artillery.GetMissileSystem();
                             }
                         }
                     }
@@ -10317,6 +10653,14 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                         }
                     }
                     break;
+                    
+                    case PLAYER_MISSILES:
+                    {
+                        if(player.GetHasCruiseMissileSystem())
+                        {
+                            system = player.GetMissileSystem();
+                        }
+                    }
                 }
                 
                 if(system != null)
@@ -10348,7 +10692,7 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
         {
             LaunchLog.Log(LaunchLog.LogType.GAME, LOG_NAME, String.format("%s is attempting to sell a launchable...", player.GetName()));
             
-            if(player.Functioning() && !InBattle(player))
+            if(!InBattle(player))
             {
                 switch(systemType)
                 {
@@ -10652,6 +10996,10 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                 for(Integer lSiteID : SiteIDs)
                 {
                     CommandPost commandPost = CommandPosts.get(lSiteID);
+                    
+                    if(commandPost.GetIsHQ())
+                        continue;
+                    
                     bSuccess = bSuccess && StructureOnlineOffline(lPlayerID, commandPost, bOnline);
                 }
             }
@@ -10865,6 +11213,20 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
     @Override
     public boolean HealPlayer(int lPlayerID)
     {
+        Player player = GetPlayer(lPlayerID);
+        
+        LaunchLog.Log(LaunchLog.LogType.GAME, LOG_NAME, String.format("%s is attempting to heal...", player.GetName()));
+        
+        if(player.Functioning())
+        {
+            if(player.SubtractWealth(GetHealCost(player)))
+            {
+                player.FullyRepair();
+                CreateEvent(new LaunchEvent(String.format("%s healed.", player.GetName()), SoundEffect.HEAL));
+                return true;
+            }
+        }
+        
         return false;
     }
 
@@ -12596,9 +12958,7 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
             {
                 StoredAirplane storedAircraft = new StoredAirplane(this, GetAtomicID(lAirplaneIndex, Airplanes), aircraft);
                 
-                int lTimeAirborne = aircraft.GetTimeAirborne();
                 int lHourlyMaintenance = Defs.GetAircraftMaintenanceCost(aircraft.GetEntityType());
-                int lMaintenance = (lTimeAirborne/Defs.MS_PER_HOUR) * lHourlyMaintenance;
                 long oAmountCharged = Math.min(lHourlyMaintenance, owner.GetWealth());
 
                 owner.ChargeWealth(oAmountCharged);
@@ -13123,7 +13483,7 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
      */
     public void ProcessPlayerIncome(Player payee, String strSource, Map<ResourceType, Long> Incomes, boolean bTaxable)
     {
-        long oIncome = Incomes.get(ResourceType.WEALTH);
+        long oIncome = Incomes.get(ResourceType.WEALTH) != null ? Incomes.get(ResourceType.WEALTH) : 0;
         
         if(oIncome > 0)
         {
@@ -13331,6 +13691,36 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
     {
         Shipyard shipyard = new Shipyard(GetAtomicID(lShipyardIndex, Shipyards), geoPosition, strName, geoOutput, Defs.SHIPYARD_MAX_HP, Defs.SHIPYARD_MAX_HP);
         AddShipyard(shipyard);
+    }
+    
+    
+    /**
+     * A more optimized version of the shelter code to be used on the server.
+     * @param player
+     * @return 
+     */
+    public boolean GetPlayerIsShelteredServer(Player player)
+    {
+        for(EntityPointer pointer : quadtree.GetAffectedStructures(player.GetPosition(), config.GetCommandPostShelterRadius()))
+        {
+            Structure structure = pointer.GetStructure(game);
+            
+            if(structure != null)
+            {
+                if(structure instanceof CommandPost && structure.GetOnline())
+                {
+                    if(player.GetPosition().DistanceTo(structure.GetPosition()) <= config.GetCommandPostShelterRadius())
+                    {
+                        if(EntityIsFriendly(structure, player))
+                        {
+                            return true;
+                        }
+                    }
+                } 
+            }
+        }
+        
+        return false;
     }
     
     @Override

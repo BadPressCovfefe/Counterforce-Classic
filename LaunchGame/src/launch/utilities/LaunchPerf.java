@@ -39,7 +39,7 @@ public class LaunchPerf
         UserTick,
         WarehouseTick,
         ArmoryTick,
-        NPCTick,
+        HealthTick,
     }
     
     private static final int NumberOfMetrics = Metric.values().length;

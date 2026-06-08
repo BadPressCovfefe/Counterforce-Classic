@@ -13,27 +13,27 @@ import java.util.ArrayList;
 import java.util.List;
 import launch.comm.LaunchSession;
 import launch.game.Alliance;
+import launch.game.Defs;
 import launch.game.User;
 import launch.game.systems.*;
 import launch.utilities.ShortDelay;
 import launch.game.EntityPointer.EntityType;
-import launch.game.LaunchGame;
 import launch.utilities.LaunchLog;
 
 /**
  *
  * @author tobster
  */
-public class Player extends MapEntity implements LaunchSystemListener
+public class Player extends Damagable implements LaunchSystemListener
 {
     private static final int DATA_SIZE = 66;
     private static final int STATS_DATA_SIZE = 40;
    
     private static final int FLAG1_BANNED = 0x01;        //Banned. NOTE: NOT SAVED (well, it is, but the server ignores it), but determined at run time when getting player data.
-    private static final int FLAG1_PRISONER = 0x02;       //Unused.
-    private static final int FLAG1_RES3 = 0x04;          //Unused.
-    private static final int FLAG1_RES4 = 0x08;       //Player possesses a cruise missile system.
-    private static final int FLAG1_RES5 = 0x10;       //Player possesses a missile defence system.
+    private static final int FLAG1_PRISONER = 0x02;      //Unused.
+    private static final int FLAG1_FIRST_SPAWN = 0x04;   //This player just joined the game and has not spawned yet..
+    private static final int FLAG1_HAS_CMS = 0x08;       //Player possesses a cruise missile system.
+    private static final int FLAG1_HAS_SAM = 0x10;       //Player possesses a missile defence system.
     private static final int FLAG1_MP = 0x20;            //The player is a leader in an alliance.
     private static final int FLAG1_AWOL = 0x40;          //The player is AWOL. NOTE: AWOL can only happen to dead players, to stop them being considered for scoring.
     private static final int FLAG1_RSPAWN_PROT = 0x80;   //The player is subject to respawn protection.
@@ -68,6 +68,9 @@ public class Player extends MapEntity implements LaunchSystemListener
     private boolean bMuted;
     private boolean bVeteran;
     private boolean bPrisoner;
+    private boolean bHasCMS;
+    private boolean bHasSAM;
+    private boolean bFirstSpawn;
     
     //Stats data.
     private short nWeeklyKills;
@@ -88,6 +91,10 @@ public class Player extends MapEntity implements LaunchSystemListener
     private long oWealth;
     private int lKOTHWins;
     
+    //Systems.
+    private MissileSystem missiles = null;
+    private MissileSystem interceptors = null;
+    
     //Server only.
     private User user = null;
     private long oJoinTime;
@@ -107,20 +114,21 @@ public class Player extends MapEntity implements LaunchSystemListener
     private List<Integer> OurBlueprints = new ArrayList<>();
     private List<Integer> OurWarehouses = new ArrayList<>();
     private List<Integer> OurShips = new ArrayList<>();
+    private List<Integer> OurSubmarines = new ArrayList<>();
     private List<Integer> OurTanks = new ArrayList<>();
     
-    private LaunchGame game;
-    
     //New player.
-    public Player(int lID, String strName, int lAvatarID, int lWealth)
+    public Player(int lID, short nStartingHP, String strName, int lAvatarID, int lWealth)
     {
-        super(lID, new GeoCoord(), true, 0);
+        super(lID, new GeoCoord(), (short)0, nStartingHP, true, 0);
         this.strName = strName;
         this.lAvatarID = lAvatarID;
         this.dlyStateChange = new ShortDelay();
         this.lAllianceID = Alliance.ALLIANCE_ID_UNAFFILIATED;
         this.dlyAllianceCooloff = new ShortDelay();
         this.Blacklist = new ArrayList<>();
+        bHasCMS = false;
+        bHasSAM = false;
         bLeader = false;
         bAWOL = false;
         bRespawnProtected = true;
@@ -130,6 +138,7 @@ public class Player extends MapEntity implements LaunchSystemListener
         bMuted = false;
         bVeteran = false;
         bPrisoner = false;
+        bFirstSpawn = true;
         
         this.nWeeklyKills = 0;
         this.nWeeklyDeaths = 0;
@@ -159,9 +168,9 @@ public class Player extends MapEntity implements LaunchSystemListener
     }
     
     //From save.
-    public Player(int lID, GeoCoord geoPosition, String strName, int lAvatarID, long oLastSeen, int lStateChange, int lAllianceID, byte cFlags1, byte cFlags2, int lAllianceCooloff, short nKills, short nDeaths, int lOffenceSpending, int lDefenceSpending, int lDamageInflicted, int lDamageReceived, int lRank, int lExperience, int lTotalKills, int lTotalDeaths, long oJoinTime, int lDefenseValue, int lOffenseValue, int lNeutralValue, float fltDistanceTraveled, float fltDistanceTraveledToday, long oWealth, int lKOTHWins, int lBounty, List<Integer> Blacklist)
+    public Player(int lID, GeoCoord geoPosition, short nHP, short nMaxHP, String strName, int lAvatarID, long oLastSeen, int lStateChange, int lAllianceID, byte cFlags1, byte cFlags2, int lAllianceCooloff, short nKills, short nDeaths, int lOffenceSpending, int lDefenceSpending, int lDamageInflicted, int lDamageReceived, int lRank, int lExperience, int lTotalKills, int lTotalDeaths, long oJoinTime, int lDefenseValue, int lOffenseValue, int lNeutralValue, float fltDistanceTraveled, float fltDistanceTraveledToday, long oWealth, int lKOTHWins, int lBounty, List<Integer> Blacklist)
     {
-        super(lID, geoPosition, true, 0);
+        super(lID, geoPosition, nHP, nMaxHP, true, 0);
         this.strName = strName;
         this.lAvatarID = lAvatarID;
         this.oLastSeen = oLastSeen;
@@ -169,9 +178,12 @@ public class Player extends MapEntity implements LaunchSystemListener
         this.lAllianceID = lAllianceID;
         this.dlyAllianceCooloff = new ShortDelay(lAllianceCooloff);
         this.Blacklist = Blacklist;
+        bHasCMS = (cFlags1 & FLAG1_HAS_CMS) != 0x00;
+        bHasSAM = (cFlags1 & FLAG1_HAS_SAM) != 0x00;
         bLeader = (cFlags1 & FLAG1_MP) != 0x00;
         bAWOL = (cFlags1 & FLAG1_AWOL) != 0x00;
         bPrisoner = (cFlags1 & FLAG1_PRISONER) != 0x00;
+        bFirstSpawn = (cFlags1 & FLAG1_FIRST_SPAWN) != 0x00;
         bRespawnProtected = (cFlags1 & FLAG1_RSPAWN_PROT) != 0x00;
         bRequestingAllianceJoin = (cFlags2 & FLAG2_ALLIANCE_REQ_JOIN) != 0x00;
         bAdmin = (cFlags2 & FLAG2_ADMIN) != 0x00;
@@ -231,6 +243,9 @@ public class Player extends MapEntity implements LaunchSystemListener
 
         bBanned = (cFlags1 & FLAG1_BANNED) != 0x00;
         bPrisoner = (cFlags1 & FLAG1_PRISONER) != 0x00;
+        bFirstSpawn = (cFlags1 & FLAG1_FIRST_SPAWN) != 0x00;
+        bHasCMS = (cFlags1 & FLAG1_HAS_CMS) != 0x00;
+        bHasSAM = (cFlags1 & FLAG1_HAS_SAM) != 0x00;
         bLeader = (cFlags1 & FLAG1_MP) != 0x00;
         bAWOL = (cFlags1 & FLAG1_AWOL) != 0x00;
         bRespawnProtected = (cFlags1 & FLAG1_RSPAWN_PROT) != 0x00;
@@ -239,6 +254,31 @@ public class Player extends MapEntity implements LaunchSystemListener
         bBoss = (cFlags2 & FLAG2_BOSS) != 0x00;
         bMuted = (cFlags2 & FLAG2_MUTED) != 0x00;
         bVeteran = (cFlags2 & FLAG2_VET) != 0x00;
+        
+        if(lReceivingID == lID)
+        {
+            if(GetHasCruiseMissileSystem())
+            {
+                missiles = new MissileSystem(this, bb);
+            }
+            
+            if(GetHasAirDefenceSystem())
+            {
+                interceptors = new MissileSystem(this, bb);
+            }
+        }
+        else
+        {
+            if(GetHasCruiseMissileSystem())
+            {
+                missiles = new MissileSystem();
+            }
+            
+            if(GetHasAirDefenceSystem())
+            {
+                interceptors = new MissileSystem();
+            }
+        }
         
         //If there are bytes remaining, this is a "full" image complete with stats.
         if(bb.hasRemaining())
@@ -272,22 +312,27 @@ public class Player extends MapEntity implements LaunchSystemListener
     {
         dlyStateChange.Tick(lMS);
         dlyAllianceCooloff.Tick(lMS);
+        
+        if(GetHasCruiseMissileSystem())
+        {
+            missiles.Tick(lMS);
+        }
+        
+        if(GetHasAirDefenceSystem())
+        {
+            interceptors.Tick(lMS);
+        }
     }
 
     @Override
     public byte[] GetData(int lAskingID)
     {
-        GeoCoord geoToSend = new GeoCoord(0.0f, 0.0f);
-        
-        if(lAskingID == this.lID || (game != null && game.GetPlayer(lAskingID) != null && game.GetPlayer(lAskingID).GetIsAnAdmin()))
-        {
-            geoToSend = this.geoPosition;
-        }
-        
-        byte[] cBaseData = super.GetData(lAskingID, geoToSend);
+        byte[] cBaseData = super.GetData(lAskingID);
+        byte[] cMissileSystemData = (lAskingID == lID && GetHasCruiseMissileSystem()) ? missiles.GetData(lID) : new byte[0];
+        byte[] cInterceptorSystemData = (lAskingID == lID && GetHasAirDefenceSystem()) ? interceptors.GetData(lID) : new byte[0];
         byte[] cBlacklistData = LaunchUtilities.GetIntListData(Blacklist);
         
-        ByteBuffer bb = ByteBuffer.allocate(cBaseData.length + DATA_SIZE + LaunchUtilities.GetStringDataSize(strName) + cBlacklistData.length);
+        ByteBuffer bb = ByteBuffer.allocate(cBaseData.length + DATA_SIZE + LaunchUtilities.GetStringDataSize(strName) + cBlacklistData.length + cMissileSystemData.length + cInterceptorSystemData.length);
         
         bb.put(cBaseData);
         bb.put(LaunchUtilities.GetStringData(strName));
@@ -307,6 +352,8 @@ public class Player extends MapEntity implements LaunchSystemListener
         bb.putLong(oWealth);
         bb.putInt(lBounty);
         bb.put(cBlacklistData);
+        bb.put(cMissileSystemData);
+        bb.put(cInterceptorSystemData);
         
         return bb.array();
     }
@@ -442,6 +489,9 @@ public class Player extends MapEntity implements LaunchSystemListener
         byte cFlags1 = 0x00;
         cFlags1 |= bBanned ? FLAG1_BANNED : 0x00;
         cFlags1 |= bPrisoner ? FLAG1_PRISONER : 0x00;
+        cFlags1 |= bFirstSpawn ? FLAG1_FIRST_SPAWN : 0x00;
+        cFlags1 |= bHasCMS ? FLAG1_HAS_CMS : 0x00;
+        cFlags1 |= bHasSAM ? FLAG1_HAS_SAM : 0x00;
         cFlags1 |= bLeader ? FLAG1_MP : 0x00;
         cFlags1 |= bAWOL ? FLAG1_AWOL : 0x00;
         cFlags1 |= bRespawnProtected ? FLAG1_RSPAWN_PROT : 0x00;
@@ -500,6 +550,18 @@ public class Player extends MapEntity implements LaunchSystemListener
     {
         this.bRequestingAllianceJoin = bRequestingToJoin;
         Changed(false);
+    }
+    
+    public void Respawn(short nHP, int lRespawnProtectionTime)
+    {
+        SetHP(nHP);
+        dlyStateChange.Set(lRespawnProtectionTime);
+        SetRespawnProtected(true);
+        
+        if(bFirstSpawn)
+        {
+            bFirstSpawn = false;
+        }
     }
     
     public void SetCompassionateInvulnerability(int lProtectionTime)
@@ -566,7 +628,7 @@ public class Player extends MapEntity implements LaunchSystemListener
     public boolean Functioning()
     {
         //Can be hit or detected. Immediately influential on the game.
-        return !GetAWOL();
+        return !Destroyed() && !GetAWOL();
     }
 
     @Override
@@ -584,6 +646,11 @@ public class Player extends MapEntity implements LaunchSystemListener
     public boolean GetBoss()
     {
         return bBoss;
+    }
+    
+    public boolean GetFirstSpawn()
+    {
+        return this.bFirstSpawn;
     }
     
     public boolean Muted()
@@ -922,6 +989,9 @@ public class Player extends MapEntity implements LaunchSystemListener
             if(entity instanceof Ship && !OurShips.contains(entity.GetID()))
                 OurShips.add(entity.GetID());
             
+            if(entity instanceof Submarine && !OurSubmarines.contains(entity.GetID()))
+                OurSubmarines.add(entity.GetID());
+            
             if(entity instanceof Tank && !OurTanks.contains(entity.GetID()))
                 OurTanks.add(entity.GetID());
         }
@@ -977,6 +1047,12 @@ public class Player extends MapEntity implements LaunchSystemListener
     {
         if(OurShips.contains(lShipID))
             OurShips.remove(OurShips.indexOf(lShipID));
+    }
+    
+    public void RemoveSubmarine(int lSubmarineID)
+    {
+        if(OurSubmarines.contains(lSubmarineID))
+            OurSubmarines.remove(OurSubmarines.indexOf(lSubmarineID));
     }
     
     public void RemoveTank(int lTankID)
@@ -1067,6 +1143,12 @@ public class Player extends MapEntity implements LaunchSystemListener
             OurShips.add(lShipID);
     }
     
+    public void AddSubmarine(int lSubmarineID)
+    {
+        if(!OurSubmarines.contains(lSubmarineID))
+            OurSubmarines.add(lSubmarineID);
+    }
+    
     public void AddTank(int lTankID)
     {
         if(!OurTanks.contains(lTankID))
@@ -1086,6 +1168,11 @@ public class Player extends MapEntity implements LaunchSystemListener
     public List<Integer> GetShips()
     {
         return OurShips;
+    }
+    
+    public List<Integer> GetSubmarines()
+    {
+        return OurSubmarines;
     }
     
     public List<Integer> GetTanks()
@@ -1229,11 +1316,6 @@ public class Player extends MapEntity implements LaunchSystemListener
         this.bPrisoner = bPrisoner;
     }
     
-    public void SetGame(LaunchGame game)
-    {
-        this.game = game;
-    }
-    
     public int GetKOTHWins()
     {
         return this.lKOTHWins;
@@ -1252,5 +1334,104 @@ public class Player extends MapEntity implements LaunchSystemListener
     public void SetBounty(int lBounty)
     {
         this.lBounty = lBounty;
+    }
+    
+    public boolean GetHasCruiseMissileSystem()
+    {
+        return bHasCMS;
+    }
+    
+    public boolean GetHasAirDefenceSystem()
+    {
+        return bHasSAM;
+    }
+    
+    public MissileSystem GetMissileSystem() 
+    {
+        return missiles;
+    }
+    
+    public MissileSystem GetInterceptorSystem()
+    {
+        return interceptors;
+    }
+    
+    //Brand new.
+    public void AddMissileSystem(int lReloadTime, byte cMissileSlotCount)
+    {
+        missiles = new MissileSystem(this, lReloadTime, cMissileSlotCount);
+        SetHasCruiseMissileSystem(true);
+    }
+    
+    //From save (alt).
+    public void AddMissileSystem(MissileSystem missileSystem)
+    {
+        missiles = missileSystem;
+        SetHasCruiseMissileSystem(true);
+    }
+    
+    //Brand new.
+    public void AddInterceptorSystem(int lReloadTime, byte cMissileSlotCount)
+    {
+        interceptors = new MissileSystem(this, lReloadTime, cMissileSlotCount);
+        SetHasAirDefenceSystem(true);
+    }
+    
+    //From save (alt).
+    public void AddInterceptorSystem(MissileSystem interceptorSystem)
+    {
+        interceptors = interceptorSystem;
+        SetHasAirDefenceSystem(true);
+    }
+    
+    public void RemoveMissileSystem()
+    {
+        SetHasCruiseMissileSystem(false);
+        missiles = null;
+    }
+    
+    public void RemoveAirDefenceSystem()
+    {
+        SetHasAirDefenceSystem(false);
+        interceptors = null;
+    }
+    
+    public boolean GetCanRespawn() 
+    { 
+        return Destroyed() && dlyStateChange.Expired(); 
+    }
+    
+    public void SetDead()
+    {
+        //Just to be sure (although this is called on us when the game determines we've died).
+        SetHP((short)0);
+        
+        //Register the death.
+        nWeeklyDeaths++;
+        lTotalDeaths++;
+        
+        //Set respawn time.
+        dlyStateChange.Set(bBoss ? 0 : Defs.RESPAWN_TIME);
+        
+        //Remove all add-ons.
+        SetHasAirDefenceSystem(false);
+        SetHasCruiseMissileSystem(false);
+        missiles = null;
+        interceptors = null;
+        
+        //Notify listeners.
+        Changed(false);
+    }
+    
+    private void SetHasCruiseMissileSystem(boolean bHasCMS)
+    {
+        this.bHasCMS = bHasCMS;
+        Changed(true);
+    }
+    
+    private void SetHasAirDefenceSystem(boolean bHasSAM)
+    {
+        this.bHasSAM = bHasSAM;
+        Changed(true);
     }
 }

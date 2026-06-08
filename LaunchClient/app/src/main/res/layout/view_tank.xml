@@ -30,12 +30,13 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:layout_marginTop="@dimen/SeperatorMargins"
-                    android:layout_marginEnd="@dimen/ButtonSpacingNarrow"
+                    android:id="@+id/imgTank"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/imgTank"
-                    android:src="@drawable/build_tank"/>
+                    android:layout_marginTop="@dimen/SeperatorMargins"
+                    android:layout_marginEnd="@dimen/ButtonSpacingNarrow"
+                    android:src="@drawable/build_tank"
+                    android:visibility="gone" />
 
                 <LinearLayout
                     android:orientation="vertical"

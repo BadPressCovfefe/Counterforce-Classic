@@ -428,7 +428,12 @@ public class TextUtilities
         }
         else if(entity instanceof CommandPost)
         {
-            return context.getString(R.string.command_post);
+            CommandPost post = (CommandPost)entity;
+
+            if(post.GetIsHQ())
+                return context.getString(R.string.headquarters);
+            else
+                return context.getString(R.string.command_post);
         }
         else if(entity instanceof Bank)
         {
@@ -489,6 +494,10 @@ public class TextUtilities
                 case SAM_SITE: return context.getString(R.string.rubble_title_format, context.getString(R.string.sam_site));
                 case MISSILE_SITE: return context.getString(R.string.rubble_title_format, context.getString(R.string.missile_site));
                 case ARTILLERY_GUN: return context.getString(R.string.rubble_title_format, context.getString(R.string.artillery_gun));
+                case ORE_MINE: return context.getString(R.string.rubble_title_format, context.getString(R.string.ore_mine));
+                case SOLAR_PANEL: return context.getString(R.string.rubble_title_format, context.getString(R.string.solar_panel));
+                case FARM: return context.getString(R.string.rubble_title_format, context.getString(R.string.farm));
+                case LOGISTICS_DEPOT: return context.getString(R.string.rubble_title_format, context.getString(R.string.logistics_depot));
                 default: return "NOT IMPLEMENTED! (Rubble name)";
             }
         }
@@ -617,8 +626,12 @@ public class TextUtilities
             }
             else if(entity instanceof CommandPost)
             {
-                CommandPost bunker = (CommandPost)entity;
-                return context.getString(R.string.owners_entity, ownerName, context.getString(R.string.command_post_title));
+                CommandPost post = (CommandPost)entity;
+
+                if(post.GetIsHQ())
+                    return context.getString(R.string.owners_entity, ownerName, context.getString(R.string.headquarters_title));
+                else
+                    return context.getString(R.string.owners_entity, ownerName, context.getString(R.string.command_post_title));
             }
             else if(entity instanceof Bank)
             {
@@ -747,6 +760,11 @@ public class TextUtilities
             case COMMAND_POST:
             {
                 return context.getString(R.string.construct_name_command_post);
+            }
+
+            case HEADQUARTERS:
+            {
+                return context.getString(R.string.construct_name_headquarters);
             }
 
             case AIRBASE:
@@ -1011,22 +1029,22 @@ public class TextUtilities
 
             case ORE_MINE:
             {
-                return context.getString(R.string.ore_mine_title);
+                return context.getString(R.string.ore_mine);
             }
 
             case FARM:
             {
-                return context.getString(R.string.farm_title);
+                return context.getString(R.string.farm);
             }
 
             case SOLAR_PANEL:
             {
-                return context.getString(R.string.solar_panel_title);
+                return context.getString(R.string.solar_panel);
             }
 
             case LOGISTICS_DEPOT:
             {
-                return context.getString(R.string.logistics_depot_title);
+                return context.getString(R.string.logistics_depot);
             }
 
             default: return "NOT IMPLEMENTED! (GetEntityTypeName)";

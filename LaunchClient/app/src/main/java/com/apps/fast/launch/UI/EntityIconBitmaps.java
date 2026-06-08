@@ -4,41 +4,27 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 
 import androidx.core.graphics.ColorUtils;
 
 import com.apps.fast.launch.R;
-import com.apps.fast.launch.UI.map.LaunchClusterItem;
 import com.apps.fast.launch.activities.MainActivity;
 import com.apps.fast.launch.components.ClientDefs;
-import com.google.maps.android.clustering.Cluster;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 import launch.game.Alliance;
-import launch.game.Defs;
 import launch.game.EntityPointer.EntityType;
 import launch.game.LaunchClientGame;
 import launch.game.entities.AirplaneInterface;
-import launch.game.entities.Airdrop;
 import launch.game.entities.KOTH;
 import launch.game.entities.LaunchEntity;
 import launch.game.entities.Loot;
 import launch.game.entities.NavalVessel;
 import launch.game.entities.Player;
 import launch.game.entities.Rubble;
-import launch.game.entities.Ship;
 import launch.game.entities.Shipyard;
-import launch.game.entities.Submarine;
-import launch.game.entities.conceptuals.Resource.ResourceType;
-import launch.game.systems.CargoSystem;
 import launch.game.types.InterceptorType;
 import launch.game.types.LaunchType;
 import launch.game.types.MissileType;
@@ -58,6 +44,18 @@ public class EntityIconBitmaps
     private static final Bitmap[] RubbleBitmaps = new Bitmap[Allegiance.values().length];
 
     private static final Map<Integer, Bitmap[]> CustomAssets = new HashMap<>();
+
+    public static Bitmap GetDefaultPlayerBitmap(Context context, LaunchClientGame game, Player player)
+    {
+        Allegiance allegiance = game.GetAllegiance(game.GetOurPlayer(), player);
+        return GetTintedResBitmap(context, R.drawable.marker_player, DefaultPlayerBitmaps, allegiance);
+    }
+
+    public static Bitmap GetDeadPlayerBitmap(Context context, LaunchClientGame game, Player player)
+    {
+        Allegiance allegiance = game.GetAllegiance(game.GetOurPlayer(), player);
+        return GetTintedResBitmap(context, R.drawable.marker_player_dead, DeadPlayerBitmaps, allegiance);
+    }
 
     public static Bitmap GetRubbleBitmap(Context context, LaunchClientGame game, Rubble rubble)
     {

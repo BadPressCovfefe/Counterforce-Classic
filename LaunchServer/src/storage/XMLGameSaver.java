@@ -277,6 +277,8 @@ public class XMLGameSaver
             {
                 Element elePlayer = AddNode(doc, elements, XMLDefs.PLAYER, XMLDefs.ID, Integer.toString(player.GetID()), XMLDefs.NAME, player.GetName());
                 AddPositionNode(doc, elePlayer, XMLDefs.POSITION, player.GetPosition());
+                AddNode(doc, elePlayer, XMLDefs.HP, player.GetHP());
+                AddNode(doc, elePlayer, XMLDefs.MAX_HP, player.GetMaxHP());
                 AddNode(doc, elePlayer, XMLDefs.AVATAR, player.GetAvatarID());
                 AddNode(doc, elePlayer, XMLDefs.LAST_SEEN, player.GetLastSeen());
                 AddNode(doc, elePlayer, XMLDefs.STATE_CHANGE, player.GetStateTimeRemaining());
@@ -304,6 +306,16 @@ public class XMLGameSaver
                 AddNode(doc, elePlayer, XMLDefs.WEALTH, player.GetWealth());
                 AddNode(doc, elePlayer, XMLDefs.BOUNTY, player.GetBounty());
                 AddNode(doc, elePlayer, XMLDefs.KOTH_WINS, player.GetKOTHWins());
+                
+                if(player.GetHasAirDefenceSystem())
+                {
+                    AddMissileSystem(doc, elePlayer, player.GetInterceptorSystem(), XMLDefs.INTERCEPTOR_SYSTEM);
+                }
+                
+                if(player.GetHasCruiseMissileSystem())
+                {
+                    AddMissileSystem(doc, elePlayer, player.GetMissileSystem(), XMLDefs.MISSILE_SYSTEM);
+                }
             }
             
             elements = AddNode(doc, eleGame, XMLDefs.MISSILES);
@@ -448,7 +460,6 @@ public class XMLGameSaver
                 AddNode(doc, eleOreMine, XMLDefs.OWNER_ID, oreMine.GetOwnerID());
                 AddNode(doc, eleOreMine, XMLDefs.FLAGS, oreMine.GetFlags());
                 AddNode(doc, eleOreMine, XMLDefs.STATE_TIME, oreMine.GetStateTimeRemaining());
-                AddNode(doc, eleOreMine, XMLDefs.TYPE, oreMine.GetEntityType().ordinal());
                 AddNode(doc, eleOreMine, XMLDefs.VISIBLE, oreMine.GetVisible());
                 AddNode(doc, eleOreMine, XMLDefs.VISIBLE_TIME, oreMine.GetVisibleTimeRemaining());
                 AddNode(doc, eleOreMine, XMLDefs.BUILT_BY_ID, oreMine.GetBuiltByID());

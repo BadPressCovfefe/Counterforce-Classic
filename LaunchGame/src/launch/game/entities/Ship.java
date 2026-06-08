@@ -42,7 +42,6 @@ public class Ship extends NavalVessel implements AirbaseInterface, FuelableInter
     {
         super(lID, geoPosition, lOwnerID, nHP, nMaxHP, type, missiles, torpedoes);
         this.cargo = cargo;
-        this.artillery = artillery;
         this.cMode = SAMSite.MODE_AUTO;
         this.bRadarActive = false;
         
@@ -97,9 +96,6 @@ public class Ship extends NavalVessel implements AirbaseInterface, FuelableInter
         
         if(this.cargo != null)
             this.cargo.SetSystemListener(this);
-        this.artillery = artillery;
-        if(this.artillery != null)
-            this.artillery.SetSystemListener(this);
         this.interceptors = interceptors;
         if(this.interceptors != null)
             this.interceptors.SetSystemListener(this);
@@ -464,12 +460,6 @@ public class Ship extends NavalVessel implements AirbaseInterface, FuelableInter
     }
     
     @Override
-    public boolean GetVisible()
-    {
-        return super.GetVisible() || bRadarActive;
-    }
-    
-    @Override
     public void Wait()
     {
         super.Wait();
@@ -488,5 +478,11 @@ public class Ship extends NavalVessel implements AirbaseInterface, FuelableInter
     public EntityType GetEntityType()
     {
         return type;
+    }
+    
+    @Override
+    public boolean GetVisible()
+    {
+        return true;
     }
 }

@@ -3,12 +3,10 @@ package com.apps.fast.launch.UI;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 
 import com.apps.fast.launch.R;
 import com.apps.fast.launch.activities.MainActivity;
 import com.apps.fast.launch.components.ClientDefs;
-import com.apps.fast.launch.components.Utilities;
 
 import java.io.File;
 import java.util.HashMap;
@@ -17,7 +15,6 @@ import launch.game.Alliance;
 import launch.game.Defs;
 import launch.game.LaunchClientGame;
 import launch.game.LaunchGame.Allegiance;
-import launch.game.entities.LaunchEntity;
 import launch.game.entities.Player;
 
 public class AvatarBitmaps
@@ -186,18 +183,13 @@ public class AvatarBitmaps
     public static Bitmap GetPlayerAvatar(MainActivity activity, LaunchClientGame game, Player player)
     {
         int lAllegianceOrdinal = game.GetAllegiance(game.GetOurPlayer(), player).ordinal();
-        return GetAvatar(activity, game, player == null ? LaunchEntity.ID_NONE : player.GetAvatarID(), lAllegianceOrdinal, LaunchUICommon.AvatarPurpose.PLAYER);
+        return GetAvatar(activity, game, player.GetAvatarID(), lAllegianceOrdinal, LaunchUICommon.AvatarPurpose.PLAYER);
     }
 
     public static Bitmap GetAllianceAvatar(MainActivity activity, LaunchClientGame game, Alliance alliance)
     {
         int lAllegianceOrdinal = game.GetAllegiance(game.GetOurPlayer(), alliance).ordinal();
-        int lAvatarID = 0;
-
-        if(alliance != null)
-            lAvatarID = alliance.GetAvatarID();
-
-        return GetAvatar(activity, game, lAvatarID, lAllegianceOrdinal, LaunchUICommon.AvatarPurpose.ALLIANCE);
+        return GetAvatar(activity, game, alliance.GetAvatarID(), lAllegianceOrdinal, LaunchUICommon.AvatarPurpose.ALLIANCE);
     }
 
     public static Bitmap GetNeutralAllianceAvatar(MainActivity activity, LaunchClientGame game, int lAvatarID)

@@ -110,7 +110,7 @@ public class LaunchServer implements LaunchServerAppInterface, GameLoadSaveListe
         
         if(config != null)
         {
-            game = new LaunchServerGame(config, this, 30070);//config.GetPort());
+            game = new LaunchServerGame(config, this, 30069);
             TerrainChecker.InitializeMaps();
             
             LaunchLog.Log(APPLICATION, LOG_NAME, "Loading game...");

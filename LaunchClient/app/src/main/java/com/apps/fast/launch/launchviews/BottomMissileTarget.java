@@ -122,6 +122,14 @@ public class BottomMissileTarget extends LaunchView
                 missileType = game.GetConfig().GetMissileType(game.GetSubmarine(lSiteID).GetICBMSystem().GetSlotMissileType(lSlotNo));
             }
             break;
+
+            case PLAYER_MISSILES:
+            {
+                geoSource = game.GetOurPlayer().GetPosition();
+                bFromPlayer = true;
+                missileType = game.GetConfig().GetMissileType(game.GetPlayer(game.GetOurPlayerID()).GetMissileSystem().GetSlotMissileType(lSlotNo));
+            }
+            break;
         }
 
         Setup();
@@ -263,17 +271,11 @@ public class BottomMissileTarget extends LaunchView
         if(AffectedPlayers.size() == 1)
         {
             final Player affectedPlayer = AffectedPlayers.get(0);
+            float fltMultiplier = game.GetNetWorthMultiplier(game.GetOurPlayer(), affectedPlayer);
 
             if(game.WouldBeFriendlyFire(game.GetOurPlayer(), affectedPlayer))
             {
                 activity.ShowBasicOKDialog(context.getString(R.string.deliberate_friendly_fire));
-            }
-            else if(game.GetAttackIsBullying(game.GetOurPlayer(), affectedPlayer))
-            {
-                if(game.GetOurPlayer().GetTotalValue() < Defs.WEAKLING_VALUE_THRESHOLD)
-                    activity.ShowBasicOKDialog(context.getString(R.string.cant_attack_elites, Defs.WEAKLING_VALUE_THRESHOLD, Defs.WEAKLING_VALUE_THRESHOLD));
-                else
-                    activity.ShowBasicOKDialog(context.getString(R.string.cant_attack_noobs, Defs.WEAKLING_VALUE_THRESHOLD, Defs.WEAKLING_VALUE_THRESHOLD));
             }
             else if(lLastWarnedID != affectedPlayer.GetID() && affectedPlayer.GetRespawnProtected())
             {
@@ -300,7 +302,32 @@ public class BottomMissileTarget extends LaunchView
                 });
                 launchDialog.show(activity.getFragmentManager(), "");
             }
-            else if(lLastWarnedID != affectedPlayer.GetID() && game.GetNetWorthMultiplier(game.GetOurPlayer(), affectedPlayer) > Defs.ELITE_WARNING)
+            else if(lLastWarnedID != affectedPlayer.GetID() && fltMultiplier < Defs.NOOB_WARNING)
+            {
+                final LaunchDialog launchDialog = new LaunchDialog();
+                launchDialog.SetHeaderLaunch();
+                launchDialog.SetMessage(context.getString(R.string.attacking_noob, affectedPlayer.GetName(), TextUtilities.GetPercentStringFromFraction(fltMultiplier)));
+                launchDialog.SetOnClickYes(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View view)
+                    {
+                        launchDialog.dismiss();
+                        lLastWarnedID = affectedPlayer.GetID();
+                        Launch();
+                    }
+                });
+                launchDialog.SetOnClickNo(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View view)
+                    {
+                        launchDialog.dismiss();
+                    }
+                });
+                launchDialog.show(activity.getFragmentManager(), "");
+            }
+            else if(lLastWarnedID != affectedPlayer.GetID() && fltMultiplier > Defs.ELITE_WARNING)
             {
                 final LaunchDialog launchDialog = new LaunchDialog();
                 launchDialog.SetHeaderLaunch();
@@ -365,23 +392,6 @@ public class BottomMissileTarget extends LaunchView
                         txtFriendlyFire.setVisibility(bThreatensFriendlies ? VISIBLE : GONE);
                     }
                 });
-
-                if(!bThreatensFriendlies)
-                {
-                    final boolean bBullying = game.IsBullyingOrNuisance(game.GetOurPlayerID(), geoTarget, missileType, false, false, bAirburst);
-
-                    activity.runOnUiThread(new Runnable()
-                    {
-                        @Override
-                        public void run()
-                        {
-                            txtFriendlyFire.setVisibility(bBullying ? VISIBLE : GONE);
-
-                            if(bBullying)
-                                txtFriendlyFire.setText(context.getString(R.string.player_size_difference_warning));
-                        }
-                    });
-                }
             }
         }).start();
 
@@ -403,11 +413,6 @@ public class BottomMissileTarget extends LaunchView
                 if(game.EntityIsFriendly(target, game.GetOurPlayer()))
                 {
                     txtFriendlyFire.setVisibility(VISIBLE);
-                }
-                else if(game.GetAttackIsBullying(game.GetOurPlayer(), game.GetOwner(target)))
-                {
-                    txtFriendlyFire.setVisibility(VISIBLE);
-                    txtFriendlyFire.setText(context.getString(R.string.player_size_difference_warning));
                 }
                 else if(target instanceof Submarine && !missileType.GetAntiSubmarine())
                 {

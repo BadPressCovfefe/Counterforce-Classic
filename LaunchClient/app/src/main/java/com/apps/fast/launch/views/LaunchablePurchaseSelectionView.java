@@ -40,8 +40,6 @@ public class LaunchablePurchaseSelectionView extends FrameLayout
 
     private MainActivity activity;  //Full activity not just context, so we can display dialogs.
     private LaunchClientGame game;
-    private LinearLayout lytType;
-    private LinearLayout lytSpecs;
     private ImageView imgType;
     private TextView txtName;
     private TextView txtRange;
@@ -120,8 +118,6 @@ public class LaunchablePurchaseSelectionView extends FrameLayout
         txtNumber = findViewById(R.id.txtNumber);
         txtCost = findViewById(R.id.txtCost);
 
-        lytSpecs = findViewById(R.id.lytSpecs);
-        lytType = findViewById(R.id.lytType);
         imgType = findViewById(R.id.imgType);
 
         imgType.setImageBitmap(EntityIconBitmaps.GetMissileBitmap(activity, game, type, LaunchGame.Allegiance.UNAFFILIATED, type.GetAssetID()));
@@ -280,13 +276,10 @@ public class LaunchablePurchaseSelectionView extends FrameLayout
         TextView txtPrepTime = findViewById(R.id.txtPrepTime);
         TextView txtYield = findViewById(R.id.txtYield);
         TextView txtYieldTitle = findViewById(R.id.txtYieldTitle);
-        TextView txtPrepTimeTitle = findViewById(R.id.txtPrepTimeTitle);
         txtNumber = findViewById(R.id.txtNumber);
         ImageView imgFast = findViewById(R.id.imgFast);
         ImageView imgABM = findViewById(R.id.imgABM);
         ImageView imgNuclear = findViewById(R.id.imgNuclear);
-        lytSpecs = findViewById(R.id.lytSpecs);
-        lytType = findViewById(R.id.lytType);
         imgType = findViewById(R.id.imgType);
         txtCost = findViewById(R.id.txtCost);
 
@@ -369,8 +362,6 @@ public class LaunchablePurchaseSelectionView extends FrameLayout
         txtNumber = findViewById(R.id.txtNumber);
         ImageView imgHoming = findViewById(R.id.imgHoming);
         ImageView imgNuclear = findViewById(R.id.imgNuclear);
-        lytSpecs = findViewById(R.id.lytSpecs);
-        lytType = findViewById(R.id.lytType);
         imgType = findViewById(R.id.imgType);
         txtCost = findViewById(R.id.txtCost);
 

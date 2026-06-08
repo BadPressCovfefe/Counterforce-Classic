@@ -21,6 +21,7 @@ import java.util.Map;
 import launch.game.Alliance;
 import launch.game.Config;
 import launch.game.Defs;
+import launch.game.EntityPointer;
 import launch.game.LaunchClientGame;
 import launch.game.entities.Airbase;
 import launch.game.entities.AirplaneInterface;
@@ -30,6 +31,7 @@ import launch.game.entities.Armory;
 import launch.game.entities.CommandPost;
 import launch.game.entities.CargoTruck;
 import launch.game.entities.CargoTruckInterface;
+import launch.game.entities.KOTH;
 import launch.game.entities.MissileFactory;
 import launch.game.entities.Distributor;
 import launch.game.entities.InfantryInterface;
@@ -54,6 +56,32 @@ public class WealthRulesView extends LaunchView
 {
     private static final int HOURS_PER_24 = 24;
 
+    private TextView txtGettingStats;
+    private LinearLayout lytBonusDiplomaticPresence;
+    private LinearLayout lytBonusPoliticalEngagement;
+    private LinearLayout lytBonusDefenderOfTheNation;
+    private LinearLayout lytBonusNuclearSuperpower;
+    private LinearLayout lytBonusSurvivor;
+    private LinearLayout lytBonusHippy;
+    private LinearLayout lytBonusPeaceMaker;
+    private LinearLayout lytBonusWarMonger;
+    private LinearLayout lytBonusLoneWolf;
+    private LinearLayout lytBonusNuclearTriad;
+    private LinearLayout lytBonusBlueWater;
+    private LinearLayout lytBonusKoth;
+    private TextView txtDiplomaticPresenceVal;
+    private TextView txtPoliticalEngagementVal;
+    private TextView txtDefenderOfTheNationVal;
+    private TextView txtNuclearSuperpowerVal;
+    private TextView txtSurvivorVal;
+    private TextView txtHippyVal;
+    private TextView txtPeaceMakerVal;
+    private TextView txtWarMongerVal;
+    private TextView txtLoneWolfVal;
+    private TextView txtNuclearTriadVal;
+    private TextView txtBlueWaterVal;
+    private TextView txtKothVal;
+
     private LinearLayout lytHourlyCosts;
     private List<LaunchView> EntityViews;
     private ImageView imgShowOnline;
@@ -70,7 +98,10 @@ public class WealthRulesView extends LaunchView
     private ImageView imgShowTanks;
     private ImageView imgShowShips;
     private ImageView imgShowSubmarines;
-    private ImageView imgShowCargoTrucks;
+    private ImageView imgShowSolarPanels;
+    private ImageView imgShowFarms;
+    private ImageView imgShowOreMines;
+    private ImageView imgShowLogisticsDepots;
     private TextView txtRankPayQuantity;
     private TextView txtRankPayEach;
     private TextView txtRankPay;
@@ -131,12 +162,16 @@ public class WealthRulesView extends LaunchView
     private boolean bShowAircrafts;
     private boolean bShowInfantry;
     private boolean bShowTanks;
-    private boolean bShowCargoTrucks;
     private boolean bShowShips;
     private boolean bShowSubmarines;
+    private boolean bShowSolarPanels;
+    private boolean bShowFarms;
+    private boolean bShowOreMines;
+    private boolean bShowLogisticsDepots;
     private boolean bHasBonuses = false;
     private int lBasicIncome;
     private int lRankIncome;
+    private int lBonusIncome;
     private float fltAllianceTaxRate;
     private int lStructureMaintenance;
     private int lExtractorMaintenance;
@@ -193,9 +228,38 @@ public class WealthRulesView extends LaunchView
         imgShowArtilleryGuns = findViewById(R.id.imgShowArtilleryGuns);
         imgShowAircrafts = findViewById(R.id.imgShowAircrafts);
         imgShowTanks = findViewById(R.id.imgShowTanks);
-        imgShowCargoTrucks = findViewById(R.id.imgShowCargoTrucks);
+        imgShowFarms = findViewById(R.id.imgShowFarms);
+        imgShowOreMines = findViewById(R.id.imgShowOreMines);
+        imgShowSolarPanels = findViewById(R.id.imgShowSolarPanels);
+        imgShowLogisticsDepots = findViewById(R.id.imgShowLogisticsDepots);
         imgShowShips = findViewById(R.id.imgShowShips);
         imgShowSubmarines = findViewById(R.id.imgShowSubmarines);
+
+        txtGettingStats = findViewById(R.id.txtGettingStats);
+        lytBonusDiplomaticPresence = findViewById(R.id.lytBonusDiplomaticPresence);
+        lytBonusPoliticalEngagement = findViewById(R.id.lytBonusPoliticalEngagement);
+        lytBonusDefenderOfTheNation = findViewById(R.id.lytBonusDefenderOfTheNation);
+        lytBonusNuclearSuperpower = findViewById(R.id.lytBonusNuclearSuperpower);
+        lytBonusSurvivor = findViewById(R.id.lytBonusSurvivor);
+        lytBonusHippy = findViewById(R.id.lytBonusHippy);
+        lytBonusPeaceMaker = findViewById(R.id.lytBonusPeaceMaker);
+        lytBonusWarMonger = findViewById(R.id.lytBonusWarMonger);
+        lytBonusLoneWolf = findViewById(R.id.lytBonusLoneWolf);
+        txtDiplomaticPresenceVal = findViewById(R.id.txtDiplomaticPresenceVal);
+        txtPoliticalEngagementVal = findViewById(R.id.txtPoliticalEngagementVal);
+        txtDefenderOfTheNationVal = findViewById(R.id.txtDefenderOfTheNationVal);
+        txtNuclearSuperpowerVal = findViewById(R.id.txtNuclearSuperpowerVal);
+        txtSurvivorVal = findViewById(R.id.txtSurvivorVal);
+        txtHippyVal = findViewById(R.id.txtHippyVal);
+        txtPeaceMakerVal = findViewById(R.id.txtPeaceMakerVal);
+        txtWarMongerVal = findViewById(R.id.txtWarMongerVal);
+        txtLoneWolfVal = findViewById(R.id.txtLoneWolfVal);
+        txtNuclearTriadVal = findViewById(R.id.txtNuclearTriadVal);
+        txtBlueWaterVal = findViewById(R.id.txtBlueWaterVal);
+        txtKothVal = findViewById(R.id.txtKothVal);
+        lytBonusNuclearTriad = findViewById(R.id.lytBonusNuclearTriad);
+        lytBonusBlueWater = findViewById(R.id.lytBonusBlueWater);
+        lytBonusKoth = findViewById(R.id.lytBonusKoth);
 
         txtRankPayQuantity = findViewById(R.id.txtRankPayQuantity);
         txtRankPayEach = findViewById(R.id.txtRankPayEach);
@@ -247,6 +311,7 @@ public class WealthRulesView extends LaunchView
 
         lBasicIncome = game.GetHourlyIncome(ourPlayer);
         lRankIncome = game.GetPlayerRankIncome(ourPlayer);
+        lBonusIncome = game.GetHourlyBonusIncome(ourPlayer);
 
         int lOnlineStructureCount = 0;
 
@@ -270,7 +335,7 @@ public class WealthRulesView extends LaunchView
         lInfantryMaintenance = game.GetInfantryMaintenanceCost(ourPlayer.GetID());
         lCargoTruckMaintenance = game.GetCargoTruckMaintenanceCost(ourPlayer.GetID());
         lTankMaintenance = game.GetTankMaintenanceCost(ourPlayer.GetID());
-        lGrossHourly = lBasicIncome + lRankIncome;
+        lGrossHourly = lBasicIncome + lRankIncome + lBonusIncome;
 
         if(ourAlliance != null)
         {
@@ -435,7 +500,10 @@ public class WealthRulesView extends LaunchView
         bShowAircrafts = true;
         bShowTanks = true;
         bShowInfantry = true;
-        bShowCargoTrucks = true;
+        bShowOreMines = true;
+        bShowSolarPanels = true;
+        bShowFarms = true;
+        bShowLogisticsDepots = true;
         bShowShips = true;
         bShowSubmarines = true;
 
@@ -651,19 +719,76 @@ public class WealthRulesView extends LaunchView
             }
         });
 
-        imgShowCargoTrucks.setOnClickListener(new OnClickListener()
+        imgShowFarms.setOnClickListener(new OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                bShowCargoTrucks = !bShowCargoTrucks;
+                bShowFarms = !bShowFarms;
 
                 activity.runOnUiThread(new Runnable()
                 {
                     @Override
                     public void run()
                     {
-                        imgShowCargoTrucks.setColorFilter(bShowCargoTrucks? 0 : LaunchUICommon.COLOUR_TINTED);
+                        imgShowFarms.setColorFilter(bShowFarms? 0 : LaunchUICommon.COLOUR_TINTED);
+                        RebuildCostableEntityList();
+                    }
+                });
+            }
+        });
+
+        imgShowSolarPanels.setOnClickListener(new OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                bShowSolarPanels = !bShowSolarPanels;
+
+                activity.runOnUiThread(new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        imgShowSolarPanels.setColorFilter(bShowSolarPanels? 0 : LaunchUICommon.COLOUR_TINTED);
+                        RebuildCostableEntityList();
+                    }
+                });
+            }
+        });
+
+        imgShowOreMines.setOnClickListener(new OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                bShowOreMines = !bShowOreMines;
+
+                activity.runOnUiThread(new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        imgShowOreMines.setColorFilter(bShowOreMines? 0 : LaunchUICommon.COLOUR_TINTED);
+                        RebuildCostableEntityList();
+                    }
+                });
+            }
+        });
+
+        imgShowLogisticsDepots.setOnClickListener(new OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                bShowLogisticsDepots = !bShowLogisticsDepots;
+
+                activity.runOnUiThread(new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        imgShowLogisticsDepots.setColorFilter(bShowLogisticsDepots? 0 : LaunchUICommon.COLOUR_TINTED);
                         RebuildCostableEntityList();
                     }
                 });
@@ -943,7 +1068,7 @@ public class WealthRulesView extends LaunchView
         if(!bShowBanks && entity instanceof Bank)
             return false;
 
-        if(!bShowArtilleryGuns && entity instanceof ArtilleryGun)
+        if(!bShowArtilleryGuns && entity.GetEntityType() == EntityPointer.EntityType.WATCH_TOWER)
             return false;
 
         if(!bShowAircrafts && entity instanceof AirplaneInterface)
@@ -955,7 +1080,16 @@ public class WealthRulesView extends LaunchView
         if(!bShowTanks && entity instanceof TankInterface)
             return false;
 
-        if(!bShowCargoTrucks && entity instanceof CargoTruckInterface)
+        if(!bShowFarms && entity.GetEntityType() == EntityPointer.EntityType.FARM)
+            return false;
+
+        if(!bShowOreMines && entity.GetEntityType() == EntityPointer.EntityType.ORE_MINE)
+            return false;
+
+        if(!bShowSolarPanels && entity.GetEntityType() == EntityPointer.EntityType.SOLAR_PANEL)
+            return false;
+
+        if(!bShowLogisticsDepots && entity instanceof LogisticsDepot)
             return false;
 
         if(!bShowShips && entity instanceof Ship)
@@ -1024,6 +1158,271 @@ public class WealthRulesView extends LaunchView
                                             }
                                         }
                                     }
+                                }
+
+                                txtDiplomaticPresenceVal.setText(TextUtilities.GetCurrencyString(config.GetHourlyBonusDiplomaticPresence()));
+
+                                if(game.GetDiplomaticPresenceEligible(ourPlayer))
+                                {
+                                    txtDiplomaticPresenceVal.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableNormal));
+                                }
+                                else
+                                {
+                                    txtDiplomaticPresenceVal.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableDisabled));
+                                }
+
+                                lytBonusDiplomaticPresence.setOnClickListener(new OnClickListener()
+                                {
+                                    @Override
+                                    public void onClick(View view)
+                                    {
+                                        activity.ShowBasicOKDialog(context.getString(R.string.bonus_diplomatic_presence_description));
+                                    }
+                                });
+
+                                txtPoliticalEngagementVal.setText(TextUtilities.GetCurrencyString(config.GetHourlyBonusPoliticalEngagement()));
+
+                                if(game.GetPoliticalEngagementEligible(ourPlayer))
+                                {
+                                    txtPoliticalEngagementVal.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableNormal));
+                                }
+                                else
+                                {
+                                    txtPoliticalEngagementVal.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableDisabled));
+                                }
+
+                                lytBonusPoliticalEngagement.setOnClickListener(new OnClickListener()
+                                {
+                                    @Override
+                                    public void onClick(View view)
+                                    {
+                                        activity.ShowBasicOKDialog(context.getString(R.string.bonus_political_engagement_description));
+                                    }
+                                });
+
+                                txtDefenderOfTheNationVal.setText(TextUtilities.GetCurrencyString(config.GetHourlyBonusDefenderOfTheNation()));
+
+                                if(game.GetDefenderOfTheNationEligible(ourPlayer))
+                                {
+                                    txtDefenderOfTheNationVal.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableNormal));
+                                }
+                                else
+                                {
+                                    txtDefenderOfTheNationVal.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableDisabled));
+                                }
+
+                                lytBonusDefenderOfTheNation.setOnClickListener(new OnClickListener()
+                                {
+                                    @Override
+                                    public void onClick(View view)
+                                    {
+                                        activity.ShowBasicOKDialog(context.getString(R.string.bonus_defender_of_the_nation_description));
+                                    }
+                                });
+
+                                txtNuclearSuperpowerVal.setText(TextUtilities.GetCurrencyString(config.GetHourlyBonusNuclearSuperpower()));
+
+                                if(game.GetNuclearSuperpowerEligible(ourPlayer))
+                                {
+                                    txtNuclearSuperpowerVal.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableNormal));
+                                }
+                                else
+                                {
+                                    txtNuclearSuperpowerVal.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableDisabled));
+                                }
+
+                                lytBonusNuclearSuperpower.setOnClickListener(new OnClickListener()
+                                {
+                                    @Override
+                                    public void onClick(View view)
+                                    {
+                                        activity.ShowBasicOKDialog(context.getString(R.string.bonus_nuclear_superpower_description));
+                                    }
+                                });
+
+                                txtSurvivorVal.setText(TextUtilities.GetCurrencyString(config.GetHourlyBonusSurvivor()));
+
+                                if(game.GetSurvivorEligible(ourPlayer))
+                                {
+                                    txtSurvivorVal.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableNormal));
+                                }
+                                else
+                                {
+                                    txtSurvivorVal.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableDisabled));
+                                }
+
+                                lytBonusSurvivor.setOnClickListener(new OnClickListener()
+                                {
+                                    @Override
+                                    public void onClick(View view)
+                                    {
+                                        activity.ShowBasicOKDialog(context.getString(R.string.bonus_survivor_description));
+                                    }
+                                });
+
+                                txtHippyVal.setText(TextUtilities.GetCurrencyString(config.GetHourlyBonusHippy()));
+
+                                if(game.GetHippyEligible(ourPlayer))
+                                {
+                                    txtHippyVal.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableNormal));
+                                }
+                                else
+                                {
+                                    txtHippyVal.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableDisabled));
+                                }
+
+                                lytBonusHippy.setOnClickListener(new OnClickListener()
+                                {
+                                    @Override
+                                    public void onClick(View view)
+                                    {
+                                        activity.ShowBasicOKDialog(context.getString(R.string.bonus_hippy_description));
+                                    }
+                                });
+
+                                txtNuclearTriadVal.setText(TextUtilities.GetCurrencyString(Defs.NUCLEAR_TRIAD_BONUS));
+
+                                if(game.GetNuclearTriadEligible(ourPlayer))
+                                {
+                                    txtNuclearTriadVal.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableNormal));
+                                }
+                                else
+                                {
+                                    txtNuclearTriadVal.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableDisabled));
+                                }
+
+                                lytBonusNuclearTriad.setOnClickListener(new OnClickListener()
+                                {
+                                    @Override
+                                    public void onClick(View view)
+                                    {
+                                        activity.ShowBasicOKDialog(context.getString(R.string.bonus_nuclear_triad_description));
+                                    }
+                                });
+
+                                txtBlueWaterVal.setText(TextUtilities.GetCurrencyString(Defs.BLUE_WATER_BONUS));
+
+                                if(game.GetBlueWaterEligible(ourPlayer))
+                                {
+                                    txtBlueWaterVal.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableNormal));
+                                }
+                                else
+                                {
+                                    txtBlueWaterVal.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableDisabled));
+                                }
+
+                                lytBonusBlueWater.setOnClickListener(new OnClickListener()
+                                {
+                                    @Override
+                                    public void onClick(View view)
+                                    {
+                                        activity.ShowBasicOKDialog(context.getString(R.string.bonus_blue_water_description));
+                                    }
+                                });
+
+                                Alliance alliance = game.GetAlliance(ourPlayer.GetAllianceMemberID());
+                                KOTH kingOfTheHill = game.GetKOTH();
+                                int lKothBonus = 0;
+
+                                if(alliance != null)
+                                {
+                                    if(kingOfTheHill != null && kingOfTheHill.GetOccupiedByAlliance() && kingOfTheHill.GetOwnedBy(alliance.GetID()))
+                                    {
+                                        lKothBonus = Defs.KOTH_BONUS_ALLIANCE;
+                                    }
+                                }
+
+                                if(kingOfTheHill != null && !kingOfTheHill.GetOccupiedByAlliance() && kingOfTheHill.GetOwnedBy(ourPlayer.GetID()))
+                                {
+                                    lKothBonus = Defs.KOTH_BONUS_PLAYER;
+                                }
+
+                                txtKothVal.setText(TextUtilities.GetCurrencyString(lKothBonus));
+
+                                if(game.GetKingOfTheHillEligible(ourPlayer))
+                                {
+                                    txtKothVal.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableNormal));
+                                }
+                                else
+                                {
+                                    txtKothVal.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableDisabled));
+                                }
+
+                                lytBonusKoth.setOnClickListener(new OnClickListener()
+                                {
+                                    @Override
+                                    public void onClick(View view)
+                                    {
+                                        activity.ShowBasicOKDialog(context.getString(R.string.bonus_blue_water_description));
+                                    }
+                                });
+
+                                if(lActivePlayers > 0)
+                                {
+                                    txtPeaceMakerVal.setText(TextUtilities.GetCurrencyString(config.GetHourlyBonusPeaceMaker()));
+                                    final float fltFriends = (float)lFriends / (float)lActivePlayers;
+
+                                    if((fltFriends > Defs.RELATIONSHIP_BONUS_THRESHOLD))
+                                    {
+                                        txtPeaceMakerVal.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableNormal));
+                                    }
+                                    else
+                                    {
+                                        txtPeaceMakerVal.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableDisabled));
+                                    }
+
+                                    lytBonusPeaceMaker.setOnClickListener(new OnClickListener()
+                                    {
+                                        @Override
+                                        public void onClick(View view)
+                                        {
+                                            activity.ShowBasicOKDialog(context.getString(R.string.bonus_peace_maker_description, TextUtilities.GetPercentStringFromFraction(Defs.RELATIONSHIP_BONUS_THRESHOLD), TextUtilities.GetPercentStringFromFraction(fltFriends)));
+                                        }
+                                    });
+
+                                    txtWarMongerVal.setText(TextUtilities.GetCurrencyString(config.GetHourlyBonusWarMonger()));
+                                    final float fltEnemies = (float)lEnemies / (float)lActivePlayers;
+
+                                    if((fltEnemies > Defs.RELATIONSHIP_BONUS_THRESHOLD))
+                                    {
+                                        txtWarMongerVal.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableNormal));
+                                    }
+                                    else
+                                    {
+                                        txtWarMongerVal.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableDisabled));
+                                    }
+
+                                    lytBonusWarMonger.setOnClickListener(new OnClickListener()
+                                    {
+                                        @Override
+                                        public void onClick(View view)
+                                        {
+                                            activity.ShowBasicOKDialog(context.getString(R.string.bonus_war_monger_description, TextUtilities.GetPercentStringFromFraction(Defs.RELATIONSHIP_BONUS_THRESHOLD), TextUtilities.GetPercentStringFromFraction(fltEnemies)));
+                                        }
+                                    });
+
+                                    txtLoneWolfVal.setText(TextUtilities.GetCurrencyString(config.GetHourlyBonusLoneWolf()));
+
+                                    if(nearestPlayer != null && nearestPlayer.GetPosition().DistanceTo(ourPlayer.GetPosition()) > config.GetLoneWolfDistance())
+                                    {
+                                        txtLoneWolfVal.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableNormal));
+                                    }
+                                    else
+                                    {
+                                        txtLoneWolfVal.setBackground(Utilities.DrawableFromAttr(context, R.attr.DetailButtonDrawableDisabled));
+                                    }
+
+                                    final Player finalNearestPlayer = nearestPlayer;
+                                    final float finalFltNearestPlayerDistance = fltNearestPlayerDistance;
+
+                                    lytBonusLoneWolf.setOnClickListener(new OnClickListener()
+                                    {
+                                        @Override
+                                        public void onClick(View view)
+                                        {
+                                            activity.ShowBasicOKDialog(context.getString(R.string.bonus_lone_wolf_description, TextUtilities.GetDistanceStringFromKM(config.GetLoneWolfDistance()), finalNearestPlayer.GetName(), TextUtilities.GetDistanceStringFromKM(finalFltNearestPlayerDistance)));
+                                        }
+                                    });
                                 }
                             }
                         });

@@ -31,12 +31,13 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:layout_marginTop="@dimen/SeperatorMargins"
-                    android:layout_marginEnd="@dimen/ButtonSpacingNarrow"
+                    android:id="@+id/imgLoot"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/imgLoot"
-                    android:src="@drawable/image_koth"/>
+                    android:layout_marginTop="@dimen/SeperatorMargins"
+                    android:layout_marginEnd="@dimen/ButtonSpacingNarrow"
+                    android:src="@drawable/image_koth"
+                    android:visibility="gone" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

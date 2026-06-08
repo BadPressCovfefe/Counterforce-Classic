@@ -75,6 +75,7 @@ public class BottomBuildStructure extends LaunchView
         txtBuildStructure = findViewById(R.id.txtBuildStructure);
         btnBuildStructure = findViewById(R.id.btnBuildStructure);
         txtTooFar = findViewById(R.id.txtTooFar);
+        txtTooClose = findViewById(R.id.txtTooClose);
 
         btnBuildStructure.setOnClickListener(new OnClickListener()
         {

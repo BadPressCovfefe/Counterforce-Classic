@@ -127,7 +127,7 @@ public class StoredAirplane extends StoredDamagable implements LaunchSystemListe
     {
         super(lNewID, aircraft.GetOwnerID(), aircraft.GetHP(), aircraft.GetMaxHP(), 0, aircraft.GetName()); //0 because the aircraft isn't being built new.
 
-        fltCurrentFuel = aircraft.GetCurrentFuel();
+        fltCurrentFuel = 1.0f;
         homebase = aircraft.GetHomeBase();
         bAutoReturn = aircraft.WillAutoReturn();
         missiles = aircraft.HasMissiles() ? aircraft.GetMissileSystem() : null;

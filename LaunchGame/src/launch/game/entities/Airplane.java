@@ -691,12 +691,6 @@ public class Airplane extends Movable implements LaunchSystemListener, FuelableI
     }
     
     @Override
-    public boolean GetVisible()
-    {
-        return super.GetVisible() || bRadarActive;
-    }
-    
-    @Override
     public void Wait()
     {
         moveOrders = MoveOrders.MOVE;
@@ -740,5 +734,11 @@ public class Airplane extends Movable implements LaunchSystemListener, FuelableI
     public EntityType GetAircraftType()
     {
         return this.type;
+    }
+    
+    @Override
+    public boolean GetVisible()
+    {
+        return true;
     }
 }

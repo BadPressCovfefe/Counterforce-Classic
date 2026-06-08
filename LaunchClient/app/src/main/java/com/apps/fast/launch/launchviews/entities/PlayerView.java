@@ -43,6 +43,7 @@ public class PlayerView extends LaunchView
     private TextView txtRespawnProtected;
     private TextView txtLastSeen;
     private TextView txtMoney;
+    private TextView txtHealth;
     private TextView txtGettingStats;
     private LinearLayout lytStats;
     private TextView txtDamageInflictedTotal;
@@ -53,7 +54,7 @@ public class PlayerView extends LaunchView
     private LinearLayout btnPromote;
     private LinearLayout btnKick;
     private LinearLayout btnBlacklist;
-    private ImageView imgBlacklist;
+    private TextView txtBlacklist;
     private LinearLayout btnGiveWealth;
     private LinearLayout btnObliterate;
 
@@ -113,6 +114,7 @@ public class PlayerView extends LaunchView
         txtMoney = findViewById(R.id.txtMoney);
         txtWins = findViewById(R.id.txtWins);
         btnTransferAccount = findViewById(R.id.btnTransferAccount);
+        txtHealth = findViewById(R.id.txtHealth);
 
         txtPlayerStatus = findViewById(R.id.txtPlayerStatus);
 
@@ -133,7 +135,7 @@ public class PlayerView extends LaunchView
         btnKick = findViewById(R.id.btnKick);
         lytMoneyOptions = findViewById(R.id.lytMoneyOptions);
         btnBlacklist = findViewById(R.id.btnBlacklist);
-        imgBlacklist = findViewById(R.id.imgBlacklist);
+        txtBlacklist = findViewById(R.id.txtBlacklist);
         btnGiveWealth = findViewById(R.id.btnGiveWealth);
         btnObliterate = findViewById(R.id.btnObliterate);
 
@@ -156,7 +158,7 @@ public class PlayerView extends LaunchView
         txtBounty = findViewById(R.id.txtBounty);
         btnAddBounty = findViewById(R.id.btnAddBounty);
 
-        txtBounty.setText(TextUtilities.GetCurrencyString(player.GetBounty()));
+        txtBounty.setText(context.getString(R.string.bounty_title, TextUtilities.GetCurrencyString(player.GetBounty())));
 
         btnAddBounty.setOnClickListener(new OnClickListener()
         {
@@ -223,11 +225,13 @@ public class PlayerView extends LaunchView
         {
             //The blacklistee is already blacklisted, so we are whitelisting them now.
             bBlacklisting = false;
-            imgBlacklist.setImageResource(R.drawable.button_whitelist);
+            txtBlacklist.setText(R.string.whitelist);
+            txtBlacklist.setTextColor(Utilities.ColourFromAttr(context, R.attr.GoodColour));
         }
         else
         {
-            imgBlacklist.setImageResource(R.drawable.button_blacklist);
+            txtBlacklist.setText(R.string.blacklist);
+            txtBlacklist.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
         }
 
         if(!bBlacklisting || (!game.EntityIsFriendly(player, game.GetOurPlayer()) && !game.GetAttackIsBullying(game.GetOurPlayer(), player)))
@@ -791,6 +795,8 @@ public class PlayerView extends LaunchView
                         {
                             txtRespawnProtected.setVisibility(GONE);
                         }
+
+                        TextUtilities.AssignHealthStringAndAppearance(txtHealth, player);
 
                         txtMoney.setText(TextUtilities.GetCurrencyString(player.GetWealth()));
 

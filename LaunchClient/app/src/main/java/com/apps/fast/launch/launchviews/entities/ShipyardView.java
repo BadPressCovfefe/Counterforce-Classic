@@ -134,7 +134,7 @@ public class ShipyardView extends LaunchView implements LaunchUICommon.ShipyardI
             txtDescUpgradeCapacity.setVisibility(VISIBLE);
             btnPurchaseUpgrade.setVisibility(VISIBLE);
 
-            txtReloadUpgradeCost.setText(String.valueOf(Defs.SHIPYARD_UPGRADE_WEALTH_COST));
+            txtReloadUpgradeCost.setText(TextUtilities.GetCurrencyString(Defs.SHIPYARD_UPGRADE_WEALTH_COST));
             txtReloadUpgradeCost.setTextColor(Utilities.ColourFromAttr(context, Defs.SHIPYARD_UPGRADE_WEALTH_COST > game.GetOurPlayer().GetWealth() ? R.attr.BadColour : R.attr.GoodColour));
             txtSlotUpgrade.setText(context.getString(R.string.upgrade, String.valueOf(shipyardShadow.GetProductionCapacity()), String.valueOf(shipyardShadow.GetProductionCapacity() + 1)));
 

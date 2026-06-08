@@ -1320,12 +1320,39 @@ public class LaunchServerSession extends LaunchSession
                         }
                         break;
                         
+                        case PurchaseMissileSystem:
+                        {
+                            HandleSimpleResult(tobComm, lInstanceNumber,
+                                    gameInterface.PurchaseMissileSystem(AuthenticatedUser.GetPlayerID()),
+                                    "Missile system purchased.",
+                                    "Missile system purchase failed.");
+                        }
+                        break;
+                        
                         case Obliterate:
                         {
                             HandleSimpleResult(tobComm, lInstanceNumber,
                                     gameInterface.Obliterate(AuthenticatedUser.GetPlayerID(), lInstanceNumber),
                                     "Player obliterated.",
                                     "Could not obliterate player.");
+                        }
+                        break;
+
+                        case PurchaseSAMSystem:
+                        {
+                            HandleSimpleResult(tobComm, lInstanceNumber,
+                                    gameInterface.PurchaseSAMSystem(AuthenticatedUser.GetPlayerID()),
+                                    "SAM system purchased.",
+                                    "SAM system purchase failed.");
+                        }
+                        break;
+                        
+                        case Respawn:
+                        {
+                            HandleSimpleResult(tobComm, lInstanceNumber,
+                                    gameInterface.Respawn(AuthenticatedUser.GetPlayerID()),
+                                    "Respawn successful.",
+                                    "Could not respawn.");
                         }
                         break;
                         
@@ -1344,6 +1371,42 @@ public class LaunchServerSession extends LaunchSession
                                     gameInterface.DiveOrSurface(AuthenticatedUser.GetPlayerID(), lInstanceNumber),
                                     "Submarine dive/surface successful.",
                                     "Could not dive/surface submarine.");
+                        }
+                        break;
+                        
+                        case PlayerMissileSlotUpgrade:
+                        {
+                            HandleSimpleResult(tobComm, lInstanceNumber,
+                                    gameInterface.PlayerMissileSlotUpgrade(AuthenticatedUser.GetPlayerID()),
+                                    "Slots upgraded.",
+                                    "Could not upgrade slots.");
+                        }
+                        break;
+
+                        case PlayerInterceptorSlotUpgrade:
+                        {
+                            HandleSimpleResult(tobComm, lInstanceNumber,
+                                    gameInterface.PlayerInterceptorSlotUpgrade(AuthenticatedUser.GetPlayerID()),
+                                    "Slots upgraded.",
+                                    "Could not upgrade slots.");
+                        }
+                        break;
+            
+                        case PlayerMissileReloadUpgrade:
+                        {
+                            HandleSimpleResult(tobComm, lInstanceNumber,
+                                    gameInterface.PlayerMissileReloadUpgrade(AuthenticatedUser.GetPlayerID()),
+                                    "Reload upgraded.",
+                                    "Could not upgrade reload.");
+                        }
+                        break;
+
+                        case PlayerInterceptorReloadUpgrade:
+                        {
+                            HandleSimpleResult(tobComm, lInstanceNumber,
+                                    gameInterface.PlayerInterceptorReloadUpgrade(AuthenticatedUser.GetPlayerID()),
+                                    "Reload upgraded.",
+                                    "Could not upgrade reload.");
                         }
                         break;
                         
@@ -1443,6 +1506,24 @@ public class LaunchServerSession extends LaunchSession
                                     gameInterface.SentryRangeUpgrade(AuthenticatedUser.GetPlayerID(), lInstanceNumber),
                                     "Sentry gun range upgraded.",
                                     "Could not upgrade sentry gun range.");
+                        }
+                        break;
+                        
+                        case SellMissileSystem:
+                        {
+                            HandleSimpleResult(tobComm, lInstanceNumber,
+                                    gameInterface.SellMissileSystem(AuthenticatedUser.GetPlayerID()),
+                                    "Missile system sold.",
+                                    "Could not sell missile system.");
+                        }
+                        break;
+                        
+                        case SellSAMSystem:
+                        {
+                            HandleSimpleResult(tobComm, lInstanceNumber,
+                                    gameInterface.SellSAMSystem(AuthenticatedUser.GetPlayerID()),
+                                    "SAM system sold.",
+                                    "Could not sell SAM system.");
                         }
                         break;
                         
@@ -1830,6 +1911,13 @@ public class LaunchServerSession extends LaunchSession
                         {
                             lastHandled = entity;
                             tobComm.SendObject(Warehouse, entity.GetID(), 0, entity.GetData(lTheirPlayerID));
+                        }
+
+                        //Send all warehouses.
+                        for(OreMine entity : game.GetOreMines())
+                        {
+                            lastHandled = entity;
+                            tobComm.SendObject(OreMine, entity.GetID(), 0, entity.GetData(lTheirPlayerID));
                         }
 
                         //Send all planes. Note that stored aircraft are not sent separately in the snapshot as they are sent inside airbases themselves.

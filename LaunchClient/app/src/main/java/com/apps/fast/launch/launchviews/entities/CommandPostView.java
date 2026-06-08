@@ -10,15 +10,24 @@ import com.apps.fast.launch.launchviews.controls.CommandPostControl;
 import java.util.List;
 
 import launch.game.LaunchClientGame;
+import launch.game.entities.CommandPost;
 import launch.game.entities.LaunchEntity;
 import launch.game.entities.Structure;
 import launch.game.EntityPointer.EntityType;
 
 public class CommandPostView extends StructureView
 {
+    boolean bHQ;
     public CommandPostView(LaunchClientGame game, MainActivity activity, LaunchEntity structure)
     {
         super(game, activity, structure);
+
+        if(structure instanceof CommandPost)
+        {
+            CommandPost post = (CommandPost) structure;
+
+            bHQ = post.GetIsHQ();
+        }
     }
 
     @Override
@@ -44,7 +53,10 @@ public class CommandPostView extends StructureView
             });
         }
 
-        imgLogo.setImageResource(R.drawable.build_command_post);
+        if(bHQ)
+            imgLogo.setImageResource(R.drawable.build_headquarters);
+        else
+            imgLogo.setImageResource(R.drawable.build_command_post);
 
         lytConfig.addView(systemView);
         Update();

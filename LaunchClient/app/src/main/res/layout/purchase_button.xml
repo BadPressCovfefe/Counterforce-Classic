@@ -42,8 +42,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/desc_mbt"
-                android:textColor="?attr/InfoColour"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="?attr/InfoColour" />
 
             <TextView
                 android:id="@+id/txtCost"

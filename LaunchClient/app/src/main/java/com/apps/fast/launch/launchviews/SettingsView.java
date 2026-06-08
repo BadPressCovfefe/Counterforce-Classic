@@ -61,6 +61,10 @@ public class SettingsView extends LaunchView
     private ImageView imgShowMissiles;
     private ImageView imgShowInterceptors;
     private ImageView imgShowTanks;
+    private ImageView imgShowOreMines;
+    private ImageView imgShowSolarPanels;
+    private ImageView imgShowFarms;
+    private ImageView imgShowLogisticsDepots;
     private LinearLayout lytNotificationSettings;
     private CheckBox chkNukeEscalationNotifications;
     private CheckBox chkAllyNotifications;
@@ -155,6 +159,10 @@ public class SettingsView extends LaunchView
         imgShowMissiles = findViewById(R.id.imgShowMissiles);
         imgShowInterceptors = findViewById(R.id.imgShowInterceptors);
         imgShowTanks = findViewById(R.id.imgShowTanks);
+        imgShowFarms = findViewById(R.id.imgShowFarms);
+        imgShowOreMines = findViewById(R.id.imgShowOreMines);
+        imgShowSolarPanels = findViewById(R.id.imgShowSolarPanels);
+        imgShowLogisticsDepots = findViewById(R.id.imgShowLogisticsDepots);
 
         lytNotificationSettings = findViewById(R.id.lytNotificationSettings);
         chkNukeEscalationNotifications = findViewById(R.id.chkNukeEscalationNotifications);
@@ -481,6 +489,50 @@ public class SettingsView extends LaunchView
             public void onClick(View view)
             {
                 LaunchUtilities.INTERCEPTORS_VISIBLE = !LaunchUtilities.INTERCEPTORS_VISIBLE;
+                MapToolIconsChanged();
+                activity.RebuildMap();
+            }
+        });
+
+        imgShowFarms.setOnClickListener(new OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                LaunchUtilities.FARMS_VISIBLE = !LaunchUtilities.FARMS_VISIBLE;
+                MapToolIconsChanged();
+                activity.RebuildMap();
+            }
+        });
+
+        imgShowSolarPanels.setOnClickListener(new OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                LaunchUtilities.SOLAR_PANELS_VISIBLE = !LaunchUtilities.SOLAR_PANELS_VISIBLE;
+                MapToolIconsChanged();
+                activity.RebuildMap();
+            }
+        });
+
+        imgShowOreMines.setOnClickListener(new OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                LaunchUtilities.ORE_MINES_VISIBLE = !LaunchUtilities.ORE_MINES_VISIBLE;
+                MapToolIconsChanged();
+                activity.RebuildMap();
+            }
+        });
+
+        imgShowLogisticsDepots.setOnClickListener(new OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                LaunchUtilities.LOGISTICS_DEPOTS_VISIBLE = !LaunchUtilities.LOGISTICS_DEPOTS_VISIBLE;
                 MapToolIconsChanged();
                 activity.RebuildMap();
             }
@@ -1183,6 +1235,10 @@ public class SettingsView extends LaunchView
                 imgShowMissiles.setColorFilter(LaunchUtilities.MISSILES_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
                 imgShowInterceptors.setColorFilter(LaunchUtilities.INTERCEPTORS_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
                 imgShowTanks.setColorFilter(LaunchUtilities.TANKS_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
+                imgShowOreMines.setColorFilter(LaunchUtilities.ORE_MINES_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
+                imgShowFarms.setColorFilter(LaunchUtilities.FARMS_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
+                imgShowSolarPanels.setColorFilter(LaunchUtilities.SOLAR_PANELS_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
+                imgShowLogisticsDepots.setColorFilter(LaunchUtilities.LOGISTICS_DEPOTS_VISIBLE ? 0 : LaunchUICommon.COLOUR_TINTED);
             }
         });
     }

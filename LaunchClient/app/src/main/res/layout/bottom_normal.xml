@@ -38,6 +38,31 @@
                 android:src="@drawable/button_build" />
 
             <ImageView
+                android:background="@drawable/text_button_normal"
+                android:layout_width="@dimen/PlayerInfoIconSize"
+                android:layout_height="@dimen/PlayerInfoIconSize"
+                android:layout_margin="@dimen/ButtonInset"
+                android:id="@+id/btnMissiles"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:padding="@dimen/ButtonImagePadding"
+                android:src="@drawable/button_missiles"
+                android:onClick="ButtonMissiles"/>
+
+            <ImageView
+                android:background="@drawable/text_button_normal"
+                android:layout_width="@dimen/PlayerInfoIconSize"
+                android:layout_height="@dimen/PlayerInfoIconSize"
+                android:layout_margin="@dimen/ButtonInset"
+                android:id="@+id/btnInterceptors"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:padding="@dimen/ButtonImagePadding"
+                android:src="@drawable/button_interceptors"
+                android:onClick="ButtonInterceptors"
+                />
+
+            <ImageView
                 android:id="@+id/btnReports"
                 android:layout_width="@dimen/PlayerInfoIconSize"
                 android:layout_height="@dimen/PlayerInfoIconSize"

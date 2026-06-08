@@ -129,6 +129,15 @@ public interface LaunchServerGameInterface
     boolean AllianceWithdraw(int lPlayerID, int lAmount);
     boolean AlliancePanic(int lPlayerID, int lAllianceID);
     void SendUserAlert(User user, String strTitle, String strBody, boolean bRespectInterval, boolean bSendWhileOnline);
+    boolean SellSAMSystem(int lPlayerID);
+    boolean SellMissileSystem(int lPlayerID);
+    boolean Respawn(int lPlayerID);
+    boolean PurchaseMissileSystem(int lPlayerID);
+    boolean PurchaseSAMSystem(int lPlayerID);
+    boolean PlayerMissileSlotUpgrade(int lPlayerID);
+    boolean PlayerInterceptorSlotUpgrade(int lPlayerID);
+    boolean PlayerMissileReloadUpgrade(int lPlayerID);
+    boolean PlayerInterceptorReloadUpgrade(int lPlayerID);
     
     String GetPlayerName(int lPlayerID);
     User GetUser(int lPlayerID);
@@ -143,5 +152,5 @@ public interface LaunchServerGameInterface
     boolean GetIpAddressProscribed(String strIPAddress);
     boolean GetLocationProscribed(GeoCoord geoLocation);
 	
-	CounterShieldEngine GetCounterShield();
+    CounterShieldEngine GetCounterShield();
 }

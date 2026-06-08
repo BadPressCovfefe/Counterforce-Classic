@@ -27,6 +27,7 @@ import java.util.Map;
 
 import launch.game.Defs;
 import launch.game.LaunchClientGame;
+import launch.game.entities.CommandPost;
 import launch.game.entities.LaunchEntity;
 import launch.game.entities.Structure;
 import launch.game.entities.conceptuals.Resource;
@@ -46,6 +47,7 @@ public abstract class StructureView extends LaunchView implements LaunchUICommon
     protected EditText txtNameEdit;
     protected LinearLayout btnApplyName;
     private View viewAdmin;
+    private View viewPower;
     private LinearLayout btnAdminDelete;
     private TextView txtOffline;
     private TextView txtBooting;
@@ -55,6 +57,7 @@ public abstract class StructureView extends LaunchView implements LaunchUICommon
     private ImageView imgPower;
     private LinearLayout btnSell;
     private LinearLayout btnCancelSale;
+    private LinearLayout lytPower;
     private LinearLayout btnRepair;
     protected FrameLayout lytConfig;
     protected LaunchView systemView;
@@ -78,6 +81,8 @@ public abstract class StructureView extends LaunchView implements LaunchUICommon
 
         imgLogo = findViewById(R.id.imgLogo);
         txtHP = findViewById(R.id.txtHP);
+        viewPower = findViewById(R.id.viewPower);
+        lytPower = findViewById(R.id.lytPower);
 
         txtName = findViewById(R.id.txtName);
         txtNameButton = findViewById(R.id.txtNameButton);
@@ -104,6 +109,17 @@ public abstract class StructureView extends LaunchView implements LaunchUICommon
 
         viewAdmin = findViewById(R.id.viewAdmin);
         btnAdminDelete = findViewById(R.id.btnAdminDelete);
+
+        if(structureShadow instanceof CommandPost)
+        {
+            CommandPost post = (CommandPost)structureShadow;
+
+            if(post.GetIsHQ())
+            {
+                viewPower.setVisibility(GONE);
+                lytPower.setVisibility(GONE);
+            }
+        }
 
         if(game.GetOurPlayer().GetIsAnAdmin())
         {

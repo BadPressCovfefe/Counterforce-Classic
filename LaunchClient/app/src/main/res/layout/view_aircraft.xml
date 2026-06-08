@@ -31,12 +31,13 @@
                 >
 
                 <ImageView
+                    android:id="@+id/imgAircraft"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/SeperatorMargins"
                     android:layout_marginEnd="@dimen/ButtonSpacingNarrow"
-                    android:id="@+id/imgAircraft"
-                    android:src="@drawable/build_fighter"/>
+                    android:src="@drawable/build_fighter"
+                    android:visibility="gone" />
 
                 <LinearLayout
                     android:orientation="vertical"

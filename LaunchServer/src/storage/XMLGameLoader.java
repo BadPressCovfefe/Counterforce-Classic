@@ -201,6 +201,10 @@ public class XMLGameLoader
                 GetIntRootElement(doc, XMLDefs.HOURLY_BONUS_PEACE_MAKER),
                 GetIntRootElement(doc, XMLDefs.HOURLY_BONUS_WAR_MONGER),
                 GetIntRootElement(doc, XMLDefs.HOURLY_BONUS_LONE_WOLF),
+                //GetIntRootElement(doc, XMLDefs.HOURLY_BONUS_NUCLEAR_TRIAD),
+                //GetIntRootElement(doc, XMLDefs.HOURLY_BONUS_MECHANIZED_WARFARE),
+                //GetIntRootElement(doc, XMLDefs.HOURLY_BONUS_BLUE_WATER_NAVY),
+                //GetIntRootElement(doc, XMLDefs.HOURLY_BONUS_KING_OF_THE_HILL),
                 GetFloatRootElement(doc, XMLDefs.LONE_WOLF_DISTANCE),
                 GetIntRootElement(doc, XMLDefs.RADAR_STATION_MAINTENANCE_COST),
                 GetIntRootElement(doc, XMLDefs.RADAR_STATION_STRUCTURE_COST),
@@ -726,6 +730,8 @@ public class XMLGameLoader
                     float fltDistanceTraveledToday = GetFloatElement(elePlayer, XMLDefs.DISTANCE_TRAVELED_TODAY, 0);
                     int lKOTHWins = GetIntElement(elePlayer, XMLDefs.KOTH_WINS);
                     int lBounty = GetIntElement(elePlayer, XMLDefs.BOUNTY);
+                    short nHP = GetShortElement(elePlayer, XMLDefs.HP);
+                    short nMaxHP = GetShortElement(elePlayer, XMLDefs.MAX_HP);
                     List<Integer> Blacklist = new ArrayList<>();
                     
                     if(GetHasNode(elePlayer, XMLDefs.BLACKLIST))
@@ -748,7 +754,19 @@ public class XMLGameLoader
                         oWealth = GetLongElement(elePlayer, XMLDefs.WEALTH);
                     }
                     
-                    game.AddPlayer(new Player(lID, geoPosition, strName, lAvatarID, oLastSeen, lStateChange, lAllianceID, cFlags1, cFlags2, lAllianceCooloffTime, nKills, nDeaths, lOffenceSpending, lDefenceSpending, lDamageInflicted, lDamageReceived, lRank, lExperience, lTotalKills, lTotalDeaths, oJoinTime, lDefenseValue, lOffenseValue, lNeutralValue, fltDistanceTraveled, fltDistanceTraveledToday, oWealth, lKOTHWins, lBounty, Blacklist));
+                    game.AddPlayer(new Player(lID, geoPosition, nHP, nMaxHP, strName, lAvatarID, oLastSeen, lStateChange, lAllianceID, cFlags1, cFlags2, lAllianceCooloffTime, nKills, nDeaths, lOffenceSpending, lDefenceSpending, lDamageInflicted, lDamageReceived, lRank, lExperience, lTotalKills, lTotalDeaths, oJoinTime, lDefenseValue, lOffenseValue, lNeutralValue, fltDistanceTraveled, fltDistanceTraveledToday, oWealth, lKOTHWins, lBounty, Blacklist));
+                
+                    if(GetHasNode(elePlayer, XMLDefs.INTERCEPTOR_SYSTEM))
+                    {
+                        MissileSystem missileSystem = GetMissileSystem(elePlayer, XMLDefs.INTERCEPTOR_SYSTEM);
+                        game.AddPlayerInterceptorSystem(lID, missileSystem);
+                    }
+                    
+                    if(GetHasNode(elePlayer, XMLDefs.MISSILE_SYSTEM))
+                    {
+                        MissileSystem missileSystem = GetMissileSystem(elePlayer, XMLDefs.MISSILE_SYSTEM);
+                        game.AddPlayerMissileSystem(lID, missileSystem);
+                    }
                 }
                 catch(Exception ex)
                 {
@@ -1233,7 +1251,7 @@ public class XMLGameLoader
                         }
                         catch(Exception ex)
                         {
-                            listener.LoadError(String.format("Error loading warehouse at index %d: %s.", i, ex.getMessage()));
+                            listener.LoadError(String.format("Error loading logistics depot at index %d: %s.", i, ex.getMessage()));
                         }
                     }
                     
@@ -1269,14 +1287,15 @@ public class XMLGameLoader
                             boolean bVisible = GetBooleanElement(eleDepot, XMLDefs.VISIBLE);
                             int lVisibleTime = GetIntElement(eleDepot, XMLDefs.VISIBLE_TIME);
                             int lBuiltByID = lOwnerID;
-                            EntityType type = EntityType.valueOf(GetStringElement(eleDepot, XMLDefs.TYPE));
+                            String strType = GetStringElement(eleDepot, XMLDefs.TYPE);
+                            EntityType type = EntityType.valueOf(strType);
                             int lGenerate = GetIntElement(eleDepot, XMLDefs.GENERATE_TIME);
 
                             game.AddOreMine(new OreMine(lID, geoPosition, nHP, nMaxHP, strName, lOwnerID, cFlags, lStateTime, bVisible, lVisibleTime, lBuiltByID, type, lGenerate));
                         }
                         catch(Exception ex)
                         {
-                            listener.LoadError(String.format("Error loading warehouse at index %d: %s.", i, ex.getMessage()));
+                            listener.LoadError(String.format("Error loading ore mine at index %d: %s.", i, ex.getMessage()));
                         }
                     }
                     

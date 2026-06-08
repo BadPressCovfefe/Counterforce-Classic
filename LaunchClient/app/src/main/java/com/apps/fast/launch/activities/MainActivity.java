@@ -73,6 +73,8 @@ import com.apps.fast.launch.launchviews.MapClickView;
 import com.apps.fast.launch.launchviews.MapSelectView;
 import com.apps.fast.launch.launchviews.NoIMEIView;
 import com.apps.fast.launch.launchviews.PermissionsView;
+import com.apps.fast.launch.launchviews.PlayerInterceptorView;
+import com.apps.fast.launch.launchviews.PlayerMissileView;
 import com.apps.fast.launch.launchviews.PlayersView;
 import com.apps.fast.launch.launchviews.PrivacyZonesView;
 import com.apps.fast.launch.launchviews.RegisterView;
@@ -232,8 +234,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         SEEK_FUEL,              //Select a tanker for refueling.
         PROVIDE_FUEL,           //Select a naval vessel or aircraft to provide fuel to.
         CAPTURE_TARGET,         //Select a target to capture with infantry.
-        LIBERATE_TARGET,         //Select a target to capture with infantry.
-        TURN_INFANTRY,          //Turn infantry to face a new direction.
         ELECTRONIC_WARFARE,     //Select a target structure or ship to disable it with electronic warfare.
         LOAD_LOOT,              //Select a loot object to pick up.
         TRANSFER_CARGO,         //Select a unit to transfer cargo to.
@@ -1060,14 +1060,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                     }
                     break;
 
-                    case TURN_INFANTRY:
-                    {
-                        MainNormalView normalView = new MainNormalView(game, me);
-                        SetView(normalView);
-                        normalView.BottomLayoutShowView(new BottomUnitCommand(game, me, MoveOrders.TURN, targeter));
-                    }
-                    break;
-
                     case ELECTRONIC_WARFARE:
                     {
                         MainNormalView normalView = new MainNormalView(game, me);
@@ -1153,14 +1145,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                         MainNormalView normalView = new MainNormalView(game, me);
                         SetView(normalView);
                         normalView.BottomLayoutShowView(new BottomUnitCommand(game, me, MoveOrders.CAPTURE, targeter));
-                    }
-                    break;
-
-                    case LIBERATE_TARGET:
-                    {
-                        MainNormalView normalView = new MainNormalView(game, me);
-                        SetView(normalView);
-                        normalView.BottomLayoutShowView(new BottomUnitCommand(game, me, MoveOrders.LIBERATE, targeter));
                     }
                     break;
 
@@ -1254,7 +1238,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             case SEEK_FUEL:
             case PROVIDE_FUEL:
             case CAPTURE_TARGET:
-            case LIBERATE_TARGET:
             case TARGET_INTERCEPTOR:
             {
                 ResetInteractionMode();
@@ -1713,6 +1696,21 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                 .strokeWidth(5.0f)));
                     }
 
+                    if(entity instanceof LogisticsDepot)
+                    {
+                        multiCircleOverlays.add(map.addCircle(new CircleOptions()
+                                .center(Utilities.GetLatLng(entity.GetPosition()))
+                                .radius(game.GetConfig().GetOreCollectRadius() * Defs.METRES_PER_KM)
+                                .fillColor(Utilities.ColourFromAttr(context, R.attr.LootRadiusColour))
+                                .strokeWidth(0.0f)));
+
+                        multiCircleOverlays.add(map.addCircle(new CircleOptions()
+                                .center(Utilities.GetLatLng(entity.GetPosition()))
+                                .radius(Defs.LOGISTICS_DEPOT_COLLECT_RADIUS * Defs.METRES_PER_KM)
+                                .strokeColor(Utilities.ColourFromAttr(context, R.attr.MissilePathColour))
+                                .strokeWidth(5.0f)));
+                    }
+
                     if(entity.GetOwnedBy(game.GetOurPlayerID()))
                     {
                         if(entity instanceof CommandPost && ZoomedIn())
@@ -1948,15 +1946,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                 .strokeWidth(0.0f)));
                     }
 
-                    if(entity instanceof ResourceDeposit)
-                    {
-                        CircleOverlays.add(map.addCircle(new CircleOptions()
-                                .center(Utilities.GetLatLng(entity.GetPosition()))
-                                .radius(Defs.DEPOSIT_RADIUS * Defs.METRES_PER_KM)
-                                .fillColor(Utilities.ColourFromAttr(context, R.attr.LootRadiusColour))
-                                .strokeWidth(0.0f)));
-                    }
-
                     if(entity instanceof OreMine)
                     {
                         OreMine mine = (OreMine)entity;
@@ -2011,6 +2000,21 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                         }
                     }
 
+                    if(entity instanceof LogisticsDepot)
+                    {
+                        CircleOverlays.add(map.addCircle(new CircleOptions()
+                                .center(Utilities.GetLatLng(entity.GetPosition()))
+                                .radius(game.GetConfig().GetOreCollectRadius() * Defs.METRES_PER_KM)
+                                .fillColor(Utilities.ColourFromAttr(context, R.attr.LootRadiusColour))
+                                .strokeWidth(0.0f)));
+
+                        CircleOverlays.add(map.addCircle(new CircleOptions()
+                                .center(Utilities.GetLatLng(entity.GetPosition()))
+                                .radius(Defs.LOGISTICS_DEPOT_COLLECT_RADIUS * Defs.METRES_PER_KM)
+                                .strokeColor(Utilities.ColourFromAttr(context, R.attr.MissilePathColour))
+                                .strokeWidth(5.0f)));
+                    }
+
                     if(entity instanceof SentryGun)
                     {
                         SentryGun gun = (SentryGun)entity;
@@ -2022,77 +2026,48 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                 .strokeWidth(5.0f)));
                     }
 
-                    if(game.EntityIsFriendly(entity, game.GetOurPlayer()))
+                    if(entity instanceof CommandPost)
                     {
-                        if(entity instanceof ArtilleryGun || (entity instanceof Ship && ((Ship)entity).HasArtillery()))
+                        CircleOverlays.add(map.addCircle(new CircleOptions()
+                                .center(Utilities.GetLatLng(entity.GetPosition()))
+                                .radius(Defs.COMMAND_POST_RADIUS * Defs.METRES_PER_KM)
+                                .strokeColor(Utilities.ColourFromAttr(context, R.attr.StructureSeparationRadiusColour))
+                                .strokeWidth(5.0f)));
+                    }
+
+                    if(entity instanceof SAMSite)
+                    {
+                        SAMSite samSite = ((SAMSite)entity);
+
+                        MissileSystem missileSystem = samSite.GetInterceptorSystem();
+
+                        for(Map.Entry<Integer, Integer> TypeCount : missileSystem.GetTypeCounts().entrySet())
                         {
-                            ArtilleryInterface artillery = (ArtilleryInterface)entity;
+                            InterceptorType type = game.GetConfig().GetInterceptorType(TypeCount.getKey());
+                            float fltRangeRadius = Math.min(ClientDefs.MAX_RANGE_RING_THICKNESS, TypeCount.getValue());
 
                             CircleOverlays.add(map.addCircle(new CircleOptions()
                                     .center(Utilities.GetLatLng(entity.GetPosition()))
-                                    .radius(Defs.ARTILLERY_RANGE * Defs.METRES_PER_KM)
+                                    .radius(game.GetConfig().GetInterceptorRange(type) * Defs.METRES_PER_KM)
+                                    .strokeColor(Utilities.ColourFromAttr(context, R.attr.InterceptorPathColour))
+                                    .strokeWidth(fltRangeRadius)));
+                        }
+                    }
+
+                    if(entity instanceof MissileSite)
+                    {
+                        MissileSystem missileSystem = ((MissileSite)entity).GetMissileSystem();
+
+                        for(Map.Entry<Integer, Integer> TypeCount : missileSystem.GetTypeCounts().entrySet())
+                        {
+                            MissileType type = game.GetConfig().GetMissileType(TypeCount.getKey());
+                            float fltRangeRadius = Math.min(ClientDefs.MAX_RANGE_RING_THICKNESS, TypeCount.getValue());
+
+                            CircleOverlays.add(map.addCircle(new CircleOptions()
+                                    .center(Utilities.GetLatLng(entity.GetPosition()))
+                                    .radius(game.GetConfig().GetMissileRange(type) * Defs.METRES_PER_KM)
                                     .strokeColor(Utilities.ColourFromAttr(context, R.attr.MissilePathColour))
-                                    .strokeWidth(5.0f)));
-
-                            if(artillery.HasFireOrder())
-                            {
-                                PolyLines.add(map.addPolyline(new PolylineOptions()
-                                        .add(Utilities.GetLatLng(entity.GetPosition()))
-                                        .add(Utilities.GetLatLng(artillery.GetFireOrder().GetGeoTarget()))
-                                        .width(3.0f)
-                                        .color(Utilities.ColourFromAttr(context, R.attr.MissilePathColour))));
-
-                                CircleOverlays.add(map.addCircle(new CircleOptions()
-                                        .center(Utilities.GetLatLng(artillery.GetFireOrder().GetGeoTarget()))
-                                        .radius(artillery.GetFireOrder().GetRadius() * Defs.METRES_PER_KM)
-                                        .strokeColor(Utilities.ColourFromAttr(context, R.attr.MissilePathColour))
-                                        .strokeWidth(5.0f)));
-                            }
-                        }
-
-                        if(entity instanceof CommandPost)
-                        {
-                            CircleOverlays.add(map.addCircle(new CircleOptions()
-                                    .center(Utilities.GetLatLng(entity.GetPosition()))
-                                    .radius(Defs.COMMAND_POST_RADIUS * Defs.METRES_PER_KM)
-                                    .strokeColor(Utilities.ColourFromAttr(context, R.attr.StructureSeparationRadiusColour))
-                                    .strokeWidth(5.0f)));
-                        }
-
-                        if(entity instanceof SAMSite)
-                        {
-                            SAMSite samSite = ((SAMSite)entity);
-
-                            MissileSystem missileSystem = samSite.GetInterceptorSystem();
-
-                            for(Map.Entry<Integer, Integer> TypeCount : missileSystem.GetTypeCounts().entrySet())
-                            {
-                                InterceptorType type = game.GetConfig().GetInterceptorType(TypeCount.getKey());
-                                float fltRangeRadius = Math.min(ClientDefs.MAX_RANGE_RING_THICKNESS, TypeCount.getValue());
-
-                                CircleOverlays.add(map.addCircle(new CircleOptions()
-                                        .center(Utilities.GetLatLng(entity.GetPosition()))
-                                        .radius(game.GetConfig().GetInterceptorRange(type) * Defs.METRES_PER_KM)
-                                        .strokeColor(Utilities.ColourFromAttr(context, R.attr.InterceptorPathColour))
-                                        .strokeWidth(fltRangeRadius)));
-                            }
-                        }
-
-                        if(entity instanceof MissileSite)
-                        {
-                            MissileSystem missileSystem = ((MissileSite)entity).GetMissileSystem();
-
-                            for(Map.Entry<Integer, Integer> TypeCount : missileSystem.GetTypeCounts().entrySet())
-                            {
-                                MissileType type = game.GetConfig().GetMissileType(TypeCount.getKey());
-                                float fltRangeRadius = Math.min(ClientDefs.MAX_RANGE_RING_THICKNESS, TypeCount.getValue());
-
-                                CircleOverlays.add(map.addCircle(new CircleOptions()
-                                        .center(Utilities.GetLatLng(entity.GetPosition()))
-                                        .radius(game.GetConfig().GetMissileRange(type) * Defs.METRES_PER_KM)
-                                        .strokeColor(Utilities.ColourFromAttr(context, R.attr.MissilePathColour))
-                                        .strokeWidth(fltRangeRadius)));
-                            }
+                                    .strokeWidth(fltRangeRadius)));
                         }
                     }
 
@@ -2879,37 +2854,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
                 if(selectedEntity != null)
                 {
-                    if((!(selectedEntity instanceof Player) || selectedEntity.GetID() == game.GetOurPlayerID()))
-                    {
-                        location = Utilities.GetLatLng(selectedEntity.GetPosition());
-                    }
-                    else if(selectedEntity instanceof Player)
-                    {
-                        Player player = (Player)selectedEntity;
-
-                        for(Structure structure : player.GetStructures())
-                        {
-                            if(structure instanceof CommandPost && ((CommandPost)structure).GetIsHQ())
-                            {
-                                location = Utilities.GetLatLng(structure.GetPosition());
-                                break;
-                            }
-                        }
-
-                        //If location is null, player has no HQ. Pick any command post.
-                        //If player has no command posts, they simply cannot be zoomed to.
-                        if(location == null)
-                        {
-                            for(Structure structure : player.GetStructures())
-                            {
-                                if(structure instanceof CommandPost)
-                                {
-                                    location = Utilities.GetLatLng(structure.GetPosition());
-                                    break;
-                                }
-                            }
-                        }
-                    }
+                    location = Utilities.GetLatLng(selectedEntity.GetPosition());
                 }
 
                 if(location != null)
@@ -2922,10 +2867,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                     {
                         map.animateCamera(CameraUpdateFactory.newLatLng(location));
                     }
-                }
-                else if(selectedEntity instanceof Player)
-                {
-                    ShowBasicOKDialog(getString(R.string.no_hq_cant_zoom));
                 }
             }
         });
@@ -3074,24 +3015,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         ReturnToMainView();
     }
 
-    public void TurnInfantryMode(int lInfantryID)
-    {
-        Infantry infantry = game.GetInfantry(lInfantryID);
-
-        if(infantry != null)
-        {
-            geoTargetingOrigin = infantry.GetPosition();
-        }
-
-        if(geoTargetingOrigin != null)
-        {
-            interactionMode = InteractionMode.TURN_INFANTRY;
-            targeter = infantry.GetPointer();
-        }
-
-        ReturnToMainView();
-    }
-
     public void SeekFuelMode(EntityPointer refueleePointer)
     {
         switch(refueleePointer.GetType())
@@ -3212,22 +3135,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         if(geoTargetingOrigin != null)
         {
             interactionMode = InteractionMode.CAPTURE_TARGET;
-            targeter = infantry;
-            movableEntity = infantry;
-            //RebuildMap();
-        }
-
-        ReturnToMainView();
-    }
-
-    public void LiberateTargetMode(EntityPointer infantry)
-    {
-        Infantry capturer = (Infantry)infantry.GetEntity(game);
-        geoTargetingOrigin = capturer.GetPosition();
-
-        if(geoTargetingOrigin != null)
-        {
-            interactionMode = InteractionMode.LIBERATE_TARGET;
             targeter = infantry;
             movableEntity = infantry;
             //RebuildMap();
@@ -3384,6 +3291,24 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             }
             break;
+
+            case PLAYER_MISSILES:
+            {
+                Player player = game.GetOurPlayer();
+                type = game.GetConfig().GetMissileType(player.GetMissileSystem().GetSlotMissileType(lSlotNo));
+                geoTargetingOrigin = player.GetPosition();
+                targetingMissileType = type;
+
+                if(type != null && type.GetMissileRange() < 20038)
+                {
+                    targetRange = map.addCircle(new CircleOptions()
+                            .center(Utilities.GetLatLng(player.GetPosition()))
+                            .radius(game.GetConfig().GetMissileRange(type) * Defs.METRES_PER_KM)
+                            .strokeColor(Utilities.ColourFromAttr(this, R.attr.MissilePathColour))
+                            .strokeWidth(5.0f));
+                }
+            }
+            break;
         }
 
         if(targetingMissileType != null)
@@ -3393,50 +3318,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             lTargettingSiteID = lSiteID;
             lTargettingSlotNo = lSlotNo;
             bAirburst = bAirburstMode;
-        }
-
-        ReturnToMainView();
-    }
-
-    public void SetArtilleryTargetMode(int lSiteID, SystemType systemType)
-    {
-        switch(systemType)
-        {
-            case MISSILE_SITE:
-            {
-                MissileSite site = game.GetMissileSite(lSiteID);
-                geoTargetingOrigin = site.GetPosition();
-            }
-            break;
-
-            case ARTILLERY_GUN:
-            {
-                ArtilleryGun artillery = game.GetArtilleryGun(lSiteID);
-                geoTargetingOrigin = artillery.GetPosition();
-            }
-            break;
-
-            case TANK_ARTILLERY:
-            case TANK_MISSILES:
-            {
-                Tank tank = game.GetTank(lSiteID);
-                geoTargetingOrigin = tank.GetPosition();
-            }
-            break;
-
-            case SHIP_ARTILLERY:
-            {
-                Ship ship = game.GetShip(lSiteID);
-                geoTargetingOrigin = ship.GetPosition();
-            }
-            break;
-        }
-
-        if(geoTargetingOrigin != null)
-        {
-            interactionMode = InteractionMode.SET_ARTILLERY_TARGET;
-            targetSystemType = systemType;
-            lTargettingSiteID = lSiteID;
         }
 
         ReturnToMainView();
@@ -4515,32 +4396,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    private void TurnInfantry(EntityPointer movable, GeoCoord geoLocation)
-    {
-        Infantry infantry = ((Infantry)movable.GetEntity(game));
-
-        if(movableTrajectory != null)
-        {
-            movableTrajectory.remove();
-        }
-
-        GeoCoord geoSource = infantry.GetPosition();
-            PatternItem dash = new Dash(10);
-            PatternItem gap = new Gap(20);
-
-        List<PatternItem> trajectoryPattern = Arrays.asList(gap, dash);
-
-        movableTrajectory = map.addPolyline(new PolylineOptions()
-                .add(Utilities.GetLatLng(geoSource))
-                .add(Utilities.GetLatLng(geoLocation))
-                .pattern(trajectoryPattern)
-                .geodesic(true)
-                .width(3.0f)
-                .color(Utilities.ColourFromAttr(this, R.attr.GoodColour)));
-
-        ((BottomUnitCommand)((MainNormalView)CurrentView).GetBottomView()).LocationSelected(geoLocation, movableTrajectory, MassCommandTrajectories, movableTarget, map);
-    }
-
     private void TargetInterceptor(MapEntity targetEntity)
     {
         for(Circle targetBlastRadius : targetBlastRadii)
@@ -4650,12 +4505,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             case BUILD_STRUCTURE:
             {
                 BuildStructure(new GeoCoord(latLng.latitude, latLng.longitude, true));
-            }
-            break;
-
-            case TURN_INFANTRY:
-            {
-                TurnInfantry(targeter, new GeoCoord(latLng.latitude, latLng.longitude, true));
             }
             break;
 
@@ -4926,18 +4775,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             }
             break;
 
-            case LIBERATE_TARGET:
-            {
-                LiberateTarget(movableEntity, MovableEntities, entity);
-            }
-            break;
-
-            case TURN_INFANTRY:
-            {
-                TurnInfantry(targeter, entity.GetPosition());
-            }
-            break;
-
             case SEEK_FUEL:
             {
                 if(entity instanceof Airplane)
@@ -5039,6 +4876,52 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 public void run()
                 {
                     SetView(new BuildViewNew(game, me));
+                }
+            });
+        }
+    }
+
+    public void ButtonMissiles(View view)
+    {
+        if(!game.GetInteractionReady())
+        {
+            ShowBasicOKDialog(getString(R.string.waiting_for_data));
+        }
+        else if(game.GetOurPlayer().Destroyed())
+        {
+            ShowBasicOKDialog(getString(R.string.you_must_respawn));
+        }
+        else
+        {
+            runOnUiThread(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    SetView(new PlayerMissileView(game, me));
+                }
+            });
+        }
+    }
+
+    public void ButtonInterceptors(View view)
+    {
+        if(!game.GetInteractionReady())
+        {
+            ShowBasicOKDialog(getString(R.string.waiting_for_data));
+        }
+        else if(game.GetOurPlayer().Destroyed())
+        {
+            ShowBasicOKDialog(getString(R.string.you_must_respawn));
+        }
+        else
+        {
+            runOnUiThread(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    SetView(new PlayerInterceptorView(game, me));
                 }
             });
         }
@@ -5775,6 +5658,11 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                         AddEntityToChunk(bunker);
                                     }
 
+                                    for(LogisticsDepot depot : game.GetLogisticsDepots())
+                                    {
+                                        AddEntityToChunk(depot);
+                                    }
+
                                     for(Airbase airbase : game.GetAirbases())
                                     {
                                         AddEntityToChunk(airbase);
@@ -5825,11 +5713,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                         AddEntityToChunk(rubble);
                                     }
 
-                                    for(ResourceDeposit deposit : game.GetResourceDeposits())
-                                    {
-                                        CreateEntityUI(deposit);
-                                    }
-
                                     for(Radiation radiation : game.GetRadiations())
                                     {
                                         CreateEntityUI(radiation);
@@ -5838,7 +5721,9 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                     if(selectedEntity != null)
                                     {
                                         if((movableEntity != null && movableEntity.GetMapEntity(game) != null) && !selectedEntity.ApparentlyEquals(movableEntity.GetMapEntity(game)))
+                                        {
                                             DrawEntityOverlay(selectedEntity);
+                                        }
                                     }
 
                                     for(Missile missile : game.GetMissiles())
@@ -6451,8 +6336,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                             if(marker != null)
                             {
                                 marker.setPosition(Utilities.GetLatLng(player.GetPosition()));
-                                //marker.setIcon(GetPlayerIcon(player));
-                                //marker.setAlpha(player.GetRespawnProtected() ? 0.5f : 1.0f);
+                                marker.setIcon(GetPlayerIcon(player));
+                                marker.setAlpha(player.GetRespawnProtected() ? 0.5f : 1.0f);
                             }
                             else
                             {
@@ -6519,6 +6404,11 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     public BitmapDescriptor GetPlayerIcon(Player player)
     {
+        if(player.Destroyed())
+        {
+            return BitmapDescriptorFactory.fromBitmap(EntityIconBitmaps.GetDeadPlayerBitmap(this, game, player));
+        }
+
         //Scale it to be smaller for the map.
         Bitmap src = AvatarBitmaps.GetPlayerAvatar(this, game, player);
 
@@ -7733,13 +7623,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                             if(entity instanceof Player)
                             {
                                 Player player = (Player) entity;
-                                options.icon(BitmapDescriptorFactory.fromBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.button_location), LaunchUICommon.AllegianceColours[0])));
+                                options.icon(GetPlayerIcon(player));
                                 options.alpha(player.GetRespawnProtected() ? 0.5f : 1.0f);
-
-                                if(player.GetID() != game.GetOurPlayerID() && !game.GetOurPlayer().GetIsAnAdmin())
-                                {
-                                    return;
-                                }
                             }
                             else if(entity instanceof Shipyard)
                             {
@@ -7759,16 +7644,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
                                 if(game.EntityIsFriendly(structure, game.GetOurPlayer()) || structure.GetVisible())
                                 {
-                                    if(entity instanceof CommandPost && ((CommandPost)entity).GetIsHQ())
-                                    {
-                                        options.icon(GetPlayerIcon(game.GetOwner(structure)));
-                                        options.alpha(structure.GetRespawnProtected() ? 0.5f : 1.0f);
-                                    }
-                                    else
-                                    {
-                                        options.icon(BitmapDescriptorFactory.fromBitmap(StructureIconBitmaps.GetStructureBitmap(context, game, (Structure)entity)));
-                                        options.alpha(structure.GetRespawnProtected() ? 0.5f : 1.0f);
-                                    }
+                                    options.icon(BitmapDescriptorFactory.fromBitmap(StructureIconBitmaps.GetStructureBitmap(context, game, (Structure)entity)));
+                                    options.alpha(structure.GetRespawnProtected() ? 0.5f : 1.0f);
                                 }
                                 else
                                 {

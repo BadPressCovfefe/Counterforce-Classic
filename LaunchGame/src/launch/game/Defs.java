@@ -443,35 +443,35 @@ public class Defs
     public static final List<ResourceType> INFANTRY_TYPES = Arrays.asList(ResourceType.MEDICINE, ResourceType.FOOD);
     
     //Structure cost
-    public static final Map<ResourceType, Long> MISSILE_SITE_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)3000), entry(ResourceType.STEEL, (long)(30000/T2_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> ARTILLERY_GUN_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)3000), entry(ResourceType.STEEL, (long)(30000/T2_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> SAM_SITE_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)3000), entry(ResourceType.STEEL, (long)(30000/T2_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> ICBM_SILO_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)10000), entry(ResourceType.CONCRETE, (long)(75000/T1_SUBSTITUTION_VALUE_KG)), entry(ResourceType.MACHINERY, (long)(25000/T3_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> ABM_SILO_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)10000), entry(ResourceType.CONCRETE, (long)(75000/T1_SUBSTITUTION_VALUE_KG)), entry(ResourceType.MACHINERY, (long)(25000/T3_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> ORE_MINE_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)7500), entry(ResourceType.STEEL, (long)(50000/T2_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> SOLAR_PANEL_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)1500), entry(ResourceType.STEEL, (long)(50000/T2_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> FARM_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)30000), entry(ResourceType.STEEL, (long)(50000/T2_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> LOGISTICS_DEPOT_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)105000), entry(ResourceType.STEEL, (long)(50000/T2_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> SENTRY_GUN_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)750), entry(ResourceType.STEEL, (long)(5000/T2_SUBSTITUTION_VALUE_KG)), entry(ResourceType.OIL, (long)(2500/T1_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> WATCH_TOWER_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)750), entry(ResourceType.CONSTRUCTION_SUPPLIES, (long)(7500/T2_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> AIRBASE_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)10000), entry(ResourceType.CONSTRUCTION_SUPPLIES, (long)(75000/T2_SUBSTITUTION_VALUE_KG)), entry(ResourceType.STEEL, (long)(25000/T2_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> COMMAND_POST_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)5000), entry(ResourceType.CONSTRUCTION_SUPPLIES, (long)(50000/T2_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> RADAR_STATION_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)10000), entry(ResourceType.ELECTRONICS, (long)(25000/T2_SUBSTITUTION_VALUE_KG)), entry(ResourceType.CONCRETE, (long)(75000/T1_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> WAREHOUSE_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)7500), entry(ResourceType.CONSTRUCTION_SUPPLIES, (long)(75000/T2_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> ARMORY_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)5000), entry(ResourceType.STEEL, (long)(25000/T2_SUBSTITUTION_VALUE_KG)), entry(ResourceType.CONCRETE, (long)(25000/T1_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> BARRACKS_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)5000), entry(ResourceType.CONSTRUCTION_SUPPLIES, (long)(50000/T2_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> DISTRIBUTOR_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)5000), entry(ResourceType.MACHINERY, (long)5000), entry(ResourceType.CONSTRUCTION_SUPPLIES, (long)(45000/T2_SUBSTITUTION_VALUE_KG)));
+    public static final Map<ResourceType, Long> MISSILE_SITE_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)7500));
+    public static final Map<ResourceType, Long> ARTILLERY_GUN_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)7500));
+    public static final Map<ResourceType, Long> SAM_SITE_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)7500));
+    public static final Map<ResourceType, Long> ICBM_SILO_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)35000));
+    public static final Map<ResourceType, Long> ABM_SILO_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)25000));
+    public static final Map<ResourceType, Long> ORE_MINE_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)350000));
+    public static final Map<ResourceType, Long> SOLAR_PANEL_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)2700));
+    public static final Map<ResourceType, Long> FARM_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)180000));
+    public static final Map<ResourceType, Long> LOGISTICS_DEPOT_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)105000));
+    public static final Map<ResourceType, Long> SENTRY_GUN_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)2500));
+    public static final Map<ResourceType, Long> WATCH_TOWER_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)7500));
+    public static final Map<ResourceType, Long> AIRBASE_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)38000));
+    public static final Map<ResourceType, Long> COMMAND_POST_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)5000));
+    public static final Map<ResourceType, Long> RADAR_STATION_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)10000));
+    public static final Map<ResourceType, Long> WAREHOUSE_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)11000));
+    public static final Map<ResourceType, Long> ARMORY_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)5000));
+    public static final Map<ResourceType, Long> BARRACKS_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)5000));
+    public static final Map<ResourceType, Long> DISTRIBUTOR_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)5000));
     
-    public static final Map<ResourceType, Long> RESOURCE_COST_GRANARY = Map.ofEntries(entry(ResourceType.WEALTH, (long)30000), entry(ResourceType.LUMBER, (long)(150000/T1_SUBSTITUTION_VALUE_KG)), entry(ResourceType.CONCRETE, (long)(150000/T1_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> RESOURCE_COST_OIL_REFINERY = Map.ofEntries(entry(ResourceType.WEALTH, (long)30000), entry(ResourceType.IRON, (long)(300000/T1_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> RESOURCE_COST_FOUNDRY = Map.ofEntries(entry(ResourceType.WEALTH, (long)30000), entry(ResourceType.CONCRETE, (long)(300000/T1_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> RESOURCE_COST_POWER_PLANT = Map.ofEntries(entry(ResourceType.WEALTH, (long)30000), entry(ResourceType.IRON, (long)(150000/T1_SUBSTITUTION_VALUE_KG)), entry(ResourceType.CONCRETE, (long)(150000/T1_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> RESOURCE_COST_CONSTRUCTION_YARD = Map.ofEntries(entry(ResourceType.WEALTH, (long)60000), entry(ResourceType.STEEL, (long)(150000/T2_SUBSTITUTION_VALUE_KG)), entry(ResourceType.FUEL, (long)(150000/T2_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> RESOURCE_COST_LABORATORY = Map.ofEntries(entry(ResourceType.WEALTH, (long)60000), entry(ResourceType.STEEL, (long)(150000/T2_SUBSTITUTION_VALUE_KG)), entry(ResourceType.CROPS, (long)(150000/T1_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> RESOURCE_COST_MACHINE_SHOP = Map.ofEntries(entry(ResourceType.WEALTH, (long)60000), entry(ResourceType.STEEL, (long)(150000/T2_SUBSTITUTION_VALUE_KG)), entry(ResourceType.OIL, (long)(150000/T1_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> RESOURCE_COST_LITHOGRAPHY_PLANT = Map.ofEntries(entry(ResourceType.WEALTH, (long)90000), entry(ResourceType.MACHINERY, (long)150000), entry(ResourceType.ELECTRICITY, (long)(150000/T1_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> RESOURCE_COST_NUCLEAR_POWER_PLANT = Map.ofEntries(entry(ResourceType.WEALTH, (long)90000), entry(ResourceType.CONCRETE, (long)(600000/T1_SUBSTITUTION_VALUE_KG)), entry(ResourceType.MACHINERY, (long)(150000/T3_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> RESOURCE_COST_ENRICHMENT_FACILITY = Map.ofEntries(entry(ResourceType.WEALTH, (long)90000), entry(ResourceType.CONCRETE, (long)(600000/T1_SUBSTITUTION_VALUE_KG)), entry(ResourceType.MACHINERY, (long)(300000/T3_SUBSTITUTION_VALUE_KG)));
+    public static final Map<ResourceType, Long> RESOURCE_COST_GRANARY = Map.ofEntries(entry(ResourceType.WEALTH, (long)30000));
+    public static final Map<ResourceType, Long> RESOURCE_COST_OIL_REFINERY = Map.ofEntries(entry(ResourceType.WEALTH, (long)30000));
+    public static final Map<ResourceType, Long> RESOURCE_COST_FOUNDRY = Map.ofEntries(entry(ResourceType.WEALTH, (long)30000));
+    public static final Map<ResourceType, Long> RESOURCE_COST_POWER_PLANT = Map.ofEntries(entry(ResourceType.WEALTH, (long)30000));
+    public static final Map<ResourceType, Long> RESOURCE_COST_CONSTRUCTION_YARD = Map.ofEntries(entry(ResourceType.WEALTH, (long)60000));
+    public static final Map<ResourceType, Long> RESOURCE_COST_LABORATORY = Map.ofEntries(entry(ResourceType.WEALTH, (long)60000));
+    public static final Map<ResourceType, Long> RESOURCE_COST_MACHINE_SHOP = Map.ofEntries(entry(ResourceType.WEALTH, (long)60000));
+    public static final Map<ResourceType, Long> RESOURCE_COST_LITHOGRAPHY_PLANT = Map.ofEntries(entry(ResourceType.WEALTH, (long)90000));
+    public static final Map<ResourceType, Long> RESOURCE_COST_NUCLEAR_POWER_PLANT = Map.ofEntries(entry(ResourceType.WEALTH, (long)90000));
+    public static final Map<ResourceType, Long> RESOURCE_COST_ENRICHMENT_FACILITY = Map.ofEntries(entry(ResourceType.WEALTH, (long)90000));
     
     public static Map<ResourceType, Long> GetProcessorCost(ResourceType type)
     {
@@ -589,7 +589,7 @@ public class Defs
     }
     
     public static final int SHIPYARD_UPGRADE_WEALTH_COST = 30000;
-    public static final byte MAX_SHIPYARD_CAPACITY = 6;
+    public static final byte MAX_SHIPYARD_CAPACITY = 60;
     
     public static final int TANK_BUILD_TIME = MS_PER_HOUR * 1;
     public static final float BATTLE_TANK_FIRING_RANGE = 1.0f;
@@ -690,7 +690,7 @@ public class Defs
     public static final long ALLIANCE_RECORD_AGE_THRESHOLD = MS_PER_DAY * 30;
     public static final int ALLIANCE_RECORD_MEMBER_THRESHOLD = 15;              //Once an alliance hits this number of players, it will be recorded regardless of age.
     
-    public static final Map<ResourceType, Long> TANK_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)12500), entry(ResourceType.STEEL, (long)(125000/T2_SUBSTITUTION_VALUE_KG)));
+    public static final Map<ResourceType, Long> TANK_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)12500));
         
     public static final float LOOT_DROP_CHANCE = 0.25f;
     public static final int WEAKLING_VALUE_THRESHOLD = 1000;
@@ -812,14 +812,14 @@ public class Defs
         return Integer.MAX_VALUE;
     }
     
-    public static final Map<ResourceType, Long> FRIGATE_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)9000), entry(ResourceType.STEEL, (long)(80000/T2_SUBSTITUTION_VALUE_KG)), entry(ResourceType.OIL, (long)(10000/T1_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> DESTROYER_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)15000), entry(ResourceType.STEEL, (long)(130000/T2_SUBSTITUTION_VALUE_KG)), entry(ResourceType.OIL, (long)(20000/T1_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> AMPHIB_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)30000), entry(ResourceType.STEEL, (long)(250000/T2_SUBSTITUTION_VALUE_KG)), entry(ResourceType.OIL, (long)(50000/T1_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> CARGO_SHIP_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)12000), entry(ResourceType.STEEL, (long)(100000/T2_SUBSTITUTION_VALUE_KG)), entry(ResourceType.OIL, (long)(20000/T1_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> FLEET_OILER_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)24000), entry(ResourceType.STEEL, (long)(200000/T2_SUBSTITUTION_VALUE_KG)), entry(ResourceType.OIL, (long)(40000/T1_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> SUPER_CARRIER_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)60000), entry(ResourceType.STEEL, (long)(550000/T2_SUBSTITUTION_VALUE_KG)), entry(ResourceType.ENRICHED_URANIUM, (long)1000));
-    public static final Map<ResourceType, Long> ATTACK_SUB_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)13000), entry(ResourceType.STEEL, (long)(100000/T2_SUBSTITUTION_VALUE_KG)), entry(ResourceType.MACHINERY, (long)(20000/T3_SUBSTITUTION_VALUE_KG)), entry(ResourceType.OIL, (long)(10000/T1_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> SSBN_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)50000), entry(ResourceType.STEEL, (long)(400000/T2_SUBSTITUTION_VALUE_KG)), entry(ResourceType.MACHINERY, (long)(75000/T3_SUBSTITUTION_VALUE_KG)), entry(ResourceType.ENRICHED_URANIUM, (long)500));
+    public static final Map<ResourceType, Long> FRIGATE_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)90000));
+    public static final Map<ResourceType, Long> DESTROYER_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)150000));
+    public static final Map<ResourceType, Long> AMPHIB_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)300000));
+    public static final Map<ResourceType, Long> CARGO_SHIP_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)120000));
+    public static final Map<ResourceType, Long> FLEET_OILER_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)240000));
+    public static final Map<ResourceType, Long> SUPER_CARRIER_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)600000));
+    public static final Map<ResourceType, Long> ATTACK_SUB_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)130000));
+    public static final Map<ResourceType, Long> SSBN_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)500000));
     
     public static final Map<ResourceType, Long> GetNavalBuildCost(EntityType type)
     {
@@ -859,16 +859,16 @@ public class Defs
     public static final int SSB_MISSILE_SLOTS = 18;
     public static final int CARGO_PLANE_CAPACITY = 125000;
     
-    public static final Map<ResourceType, Long> FIGHTER_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)2700), entry(ResourceType.STEEL, (long)(10000/T2_SUBSTITUTION_VALUE_KG)), entry(ResourceType.FUEL, (long)(50000/T2_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> BOMBER_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)4200), entry(ResourceType.STEEL, (long)(30000/T2_SUBSTITUTION_VALUE_KG)), entry(ResourceType.FUEL, (long)(7000/T2_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> STEALTH_FIGHTER_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)3700), entry(ResourceType.ELECTRONICS, (long)(25000/T2_SUBSTITUTION_VALUE_KG)), entry(ResourceType.FUEL, (long)(5000/T2_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> STEALTH_BOMBER_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)7400), entry(ResourceType.ELECTRONICS, (long)(67000/T2_SUBSTITUTION_VALUE_KG)), entry(ResourceType.FUEL, (long)(7000/T2_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> ATTACK_AIRCRAFT_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)2400), entry(ResourceType.STEEL, (long)(12000/T2_SUBSTITUTION_VALUE_KG)), entry(ResourceType.FUEL, (long)(5000/T2_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> AWACS_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)5000), entry(ResourceType.ELECTRONICS, (long)(40000/T2_SUBSTITUTION_VALUE_KG)), entry(ResourceType.FUEL, (long)(10000/T2_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> REFUELER_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)4500), entry(ResourceType.STEEL, (long)(20000/T2_SUBSTITUTION_VALUE_KG)), entry(ResourceType.FUEL, (long)(25000/T2_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> CARGO_PLANE_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)3000), entry(ResourceType.STEEL, (long)(25000/T2_SUBSTITUTION_VALUE_KG)), entry(ResourceType.FUEL, (long)(5000/T2_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> SSB_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)5500), entry(ResourceType.STEEL, (long)(45000/T2_SUBSTITUTION_VALUE_KG)), entry(ResourceType.FUEL, (long)(10000/T2_SUBSTITUTION_VALUE_KG)));
-    public static final Map<ResourceType, Long> MULTI_ROLE_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)2500), entry(ResourceType.STEEL, (long)(20000/T2_SUBSTITUTION_VALUE_KG)), entry(ResourceType.FUEL, (long)(5000/T2_SUBSTITUTION_VALUE_KG)));
+    public static final Map<ResourceType, Long> FIGHTER_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)35000));
+    public static final Map<ResourceType, Long> BOMBER_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)77000));
+    public static final Map<ResourceType, Long> STEALTH_FIGHTER_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)3700));
+    public static final Map<ResourceType, Long> STEALTH_BOMBER_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)7400));
+    public static final Map<ResourceType, Long> ATTACK_AIRCRAFT_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)25000));
+    public static final Map<ResourceType, Long> AWACS_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)5000));
+    public static final Map<ResourceType, Long> REFUELER_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)55000));
+    public static final Map<ResourceType, Long> CARGO_PLANE_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)3000));
+    public static final Map<ResourceType, Long> SSB_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)85000));
+    public static final Map<ResourceType, Long> MULTI_ROLE_BUILD_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)47000));
     
     public static final Map<ResourceType, Long> GetAircraftBuildCost(EntityType type)
     {
@@ -915,7 +915,7 @@ public class Defs
     
     public static final float FARM_SEPARATION_DISTANCE = 1.1f;
     public static final float FARM_GENERATE_DISTANCE = 0.7f;
-    public static final float FARM_WORK_RADIUS = 15f;                           //The radius around a farm which the owner must be inside of for the farm to function.
+    public static final float FARM_WORK_RADIUS = 1.4f;                          //The radius around a farm which the owner must be inside of for the farm to function.
     public static final float ORE_MINE_COMPETITION_DISTANCE = 15f;
     public static final float ORE_MINE_GENERATION_DISTANCE = 15f;
     public static final int ORE_MINE_GENERATE_TIME = MS_PER_MIN * 60;
@@ -924,4 +924,12 @@ public class Defs
     public static final int LOGISTICS_DEPOT_WEALTH_CAPACITY = 10000;
     public static final float LOGISTICS_DEPOT_COLLECT_RADIUS = 1.0f;
     public static final int LOGISTICS_DEPOT_COLLECT_COOLDOWN = MS_PER_HOUR * 3;
+    
+    public static final int PLAYER_KILLED_XP = 150;
+    public static final int DEATH_XP = (int)(PLAYER_KILLED_XP * XP_LOSS_VS_GAIN_MULTIPLIER);
+    
+    public static final int NUCLEAR_TRIAD_BONUS = 750;
+    public static final int BLUE_WATER_BONUS = 500;
+    public static final int KOTH_BONUS_PLAYER = 10000;  //The bonus per hour for an individual player who controls the hill.
+    public static final int KOTH_BONUS_ALLIANCE = 1000; //The bonus per player in an alliance that controls the hill.
 }   

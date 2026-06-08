@@ -26,7 +26,7 @@ import launch.utilities.MissileStats;
  */
 public class Config
 {
-    protected static final int RULES_DATA_SIZE = 517 + (3 * 4);  //Rules, plus a 32-bit int count for missile/interceptor/torpedo type lists.
+    protected static final int RULES_DATA_SIZE = 561 + (3 * 4);  //Rules, plus a 32-bit int count for missile/interceptor/torpedo type lists.
 
     //Server-only, not communicated.
     protected int lPort;
@@ -177,6 +177,18 @@ public class Config
     protected int lBlueprintCost;
     protected int lBlueprintExpiry;
     protected float fltBlueprintBuildDistance;
+    
+    protected int lHourlyBonusDiplomaticPresence;     //Hourly bonus for having an avatar.
+    protected int lHourlyBonusPoliticalEngagement;    //Hourly bonus for being in an alliance that has an avatar.
+    protected int lHourlyBonusDefenderOfTheNation;    //Hourly bonus for having an active defense system.
+    protected int lHourlyBonusNuclearSuperpower;      //Hourly bonus for possessing nuclear weapons.
+    protected int lHourlyBonusWeeklyKillsBatch;       //Stackable hourly bonus for killing every n^2 players this week.
+    protected int lHourlyBonusSurvivor;               //Hourly bonus for not having died this week.
+    protected int lHourlyBonusHippy;                  //Hourly bonus for having made no attacks this week.
+    protected int lHourlyBonusPeaceMaker;             //Hourly bonus for being allied or affiliated with 25% of players in the game.
+    protected int lHourlyBonusWarMonger;              //Hourly bonus for being at war with 25% of players in the game.
+    protected int lHourlyBonusLoneWolf;               //Hourly bonus for being isolated from other players by distance.
+    protected float fltLoneWolfDistance;              //Distance from the nearest player to be eligible for the Lone Wolf bonus.
     
     //Server-only.
     protected List<LaunchBannedApp> MinorCheatingApps = new ArrayList();
@@ -384,6 +396,17 @@ public class Config
         this.lMaxRadiationTime = lMaxRadiationTime;
         this.lMissileUpgradeBaseCost = lMissileUpgradeBaseCost;
         this.cMissileUpgradeCount = cMissileUpgradeCount;
+        this.lHourlyBonusDiplomaticPresence = lHourlyBonusDiplomaticPresence;
+        this.lHourlyBonusPoliticalEngagement = lHourlyBonusPoliticalEngagement;
+        this.lHourlyBonusDefenderOfTheNation = lHourlyBonusDefenderOfTheNation;
+        this.lHourlyBonusNuclearSuperpower = lHourlyBonusNuclearSuperpower;
+        this.lHourlyBonusWeeklyKillsBatch = lHourlyBonusWeeklyKillsBatch;
+        this.lHourlyBonusSurvivor = lHourlyBonusSurvivor;
+        this.lHourlyBonusHippy = lHourlyBonusHippy;
+        this.lHourlyBonusPeaceMaker = lHourlyBonusPeaceMaker;
+        this.lHourlyBonusWarMonger = lHourlyBonusWarMonger;
+        this.lHourlyBonusLoneWolf = lHourlyBonusLoneWolf;
+        this.fltLoneWolfDistance = fltLoneWolfDistance;
         this.fltResaleValue = fltResaleValue;
         this.lDecommissionTime = lDecommissionTime;
         this.lReloadTimeBase = lReloadTimeBase;
@@ -641,6 +664,17 @@ public class Config
         lBlueprintCost = bb.getInt();
         lBlueprintExpiry = bb.getInt();
         fltBlueprintBuildDistance = bb.getFloat();
+        lHourlyBonusDiplomaticPresence = bb.getInt();
+        lHourlyBonusPoliticalEngagement = bb.getInt();
+        lHourlyBonusDefenderOfTheNation = bb.getInt();
+        lHourlyBonusNuclearSuperpower = bb.getInt();
+        lHourlyBonusWeeklyKillsBatch = bb.getInt();
+        lHourlyBonusSurvivor = bb.getInt();
+        lHourlyBonusHippy = bb.getInt();
+        lHourlyBonusPeaceMaker = bb.getInt();
+        lHourlyBonusWarMonger = bb.getInt();
+        lHourlyBonusLoneWolf = bb.getInt();
+        fltLoneWolfDistance = bb.getFloat();
         
         //Assign types.
         int lMissileTypes = bb.getInt();
@@ -865,6 +899,17 @@ public class Config
         bb.putInt(lBlueprintCost);
         bb.putInt(lBlueprintExpiry);
         bb.putFloat(fltBlueprintBuildDistance);
+        bb.putInt(lHourlyBonusDiplomaticPresence);
+        bb.putInt(lHourlyBonusPoliticalEngagement);
+        bb.putInt(lHourlyBonusDefenderOfTheNation);
+        bb.putInt(lHourlyBonusNuclearSuperpower);
+        bb.putInt(lHourlyBonusWeeklyKillsBatch);
+        bb.putInt(lHourlyBonusSurvivor);
+        bb.putInt(lHourlyBonusHippy);
+        bb.putInt(lHourlyBonusPeaceMaker);
+        bb.putInt(lHourlyBonusWarMonger);
+        bb.putInt(lHourlyBonusLoneWolf);
+        bb.putFloat(fltLoneWolfDistance);
         
         bb.putInt(MissileTypes.size());
         for(MissileType missileType : MissileTypes.values())
@@ -960,6 +1005,17 @@ public class Config
     public float GetSentryGunHitChance() { return fltSentryGunHitChance; }
     public float GetOreCollectRadius() { return fltOreCollectRadius; }
     public int GetOreMineGenerateTime() { return bDebugMode ? 1800000 : lOreMineGenerateTime; }
+    public int GetHourlyBonusDiplomaticPresence() { return lHourlyBonusDiplomaticPresence; }
+    public int GetHourlyBonusPoliticalEngagement() { return lHourlyBonusPoliticalEngagement; }
+    public int GetHourlyBonusDefenderOfTheNation() { return lHourlyBonusDefenderOfTheNation; }
+    public int GetHourlyBonusNuclearSuperpower() { return lHourlyBonusNuclearSuperpower; }
+    public int GetHourlyBonusWeeklyKillsBatch() { return lHourlyBonusWeeklyKillsBatch; }
+    public int GetHourlyBonusSurvivor() { return lHourlyBonusSurvivor; }
+    public int GetHourlyBonusHippy() { return lHourlyBonusHippy; }
+    public int GetHourlyBonusPeaceMaker() { return lHourlyBonusPeaceMaker; }
+    public int GetHourlyBonusWarMonger() { return lHourlyBonusWarMonger; }
+    public int GetHourlyBonusLoneWolf() { return lHourlyBonusLoneWolf; }
+    public float GetLoneWolfDistance() { return fltLoneWolfDistance; }
     public int GetABMSiloStructureCost() { return lABMSiloStructureCost; }
     
     public int GetSentryRangeUpgradeCost() { return lSentryGunRangeUpgradeCost; }
@@ -1362,12 +1418,15 @@ public class Config
             
             return Defs.SENTRY_GUN_STRUCTURE_COST;
         }
-        else if(structure instanceof RadarStation)
-            return Defs.RADAR_STATION_STRUCTURE_COST;
         else if(structure instanceof OreMine)
-            return Defs.ORE_MINE_STRUCTURE_COST;
-        else if(structure instanceof ArtilleryGun)
-            return Defs.ARTILLERY_GUN_STRUCTURE_COST;
+        {
+            switch(structure.GetEntityType())
+            {
+                case FARM: return Defs.FARM_STRUCTURE_COST;
+                case SOLAR_PANEL: return Defs.SOLAR_PANEL_STRUCTURE_COST;
+                case ORE_MINE: return Defs.ORE_MINE_STRUCTURE_COST;
+            }
+        }
         else if(structure instanceof CommandPost)
             return Defs.COMMAND_POST_STRUCTURE_COST;
         else if(structure instanceof Airbase)
@@ -1378,14 +1437,6 @@ public class Config
             return Defs.WAREHOUSE_STRUCTURE_COST;
         else if(structure instanceof LogisticsDepot)
             return Defs.LOGISTICS_DEPOT_STRUCTURE_COST;
-        else if(structure instanceof Distributor)
-            return Defs.DISTRIBUTOR_STRUCTURE_COST;
-        else if(structure instanceof Processor)
-        {
-            Processor processor = (Processor)structure;
-            
-            return Defs.GetProcessorCost(processor.GetType());
-        }
         
         return null;
     }
@@ -1399,7 +1450,8 @@ public class Config
             case MISSILE_SITE: return Defs.MISSILE_SITE_STRUCTURE_COST;
             case NUCLEAR_MISSILE_SITE: return Defs.ICBM_SILO_STRUCTURE_COST;
             case SENTRY_GUN: return Defs.SENTRY_GUN_STRUCTURE_COST;
-            case RADAR_STATION: return Defs.RADAR_STATION_STRUCTURE_COST;
+            case FARM: return Defs.FARM_STRUCTURE_COST;
+            case SOLAR_PANEL: return Defs.SOLAR_PANEL_STRUCTURE_COST;
             case ORE_MINE: return Defs.ORE_MINE_STRUCTURE_COST;
             case ARTILLERY_GUN: return Defs.ARTILLERY_GUN_STRUCTURE_COST;
             case COMMAND_POST: return Defs.COMMAND_POST_STRUCTURE_COST;
@@ -1408,9 +1460,7 @@ public class Config
             case BARRACKS: return Defs.BARRACKS_STRUCTURE_COST;
             case WAREHOUSE: return Defs.WAREHOUSE_STRUCTURE_COST;
             case LOGISTICS_DEPOT: return Defs.LOGISTICS_DEPOT_STRUCTURE_COST;
-            case DISTRIBUTOR: return Defs.DISTRIBUTOR_STRUCTURE_COST;
             case WATCH_TOWER: return Defs.WATCH_TOWER_STRUCTURE_COST;
-            case PROCESSOR: return Defs.GetProcessorCost(resourceType);
         }
         
         return null;

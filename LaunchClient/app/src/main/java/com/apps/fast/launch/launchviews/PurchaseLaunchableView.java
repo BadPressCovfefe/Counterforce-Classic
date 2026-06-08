@@ -270,6 +270,25 @@ public class PurchaseLaunchableView extends LaunchView
                 listType = LaunchableType.INTERCEPTOR;
             }
             break;
+
+            case PLAYER_INTERCEPTORS:
+            {
+                if(bMissiles)
+                {
+                    system = game.GetOurPlayer().GetMissileSystem();
+
+                    Setup();
+                    SetupMissiles();
+                }
+                else
+                {
+                    system = game.GetOurPlayer().GetInterceptorSystem();
+
+                    Setup();
+                    SetupInterceptors();
+                }
+            }
+            break;
         }
 
         UpdateSelections();
@@ -1095,6 +1114,7 @@ public class PurchaseLaunchableView extends LaunchView
                 case TANK_ARTILLERY:
                 case ARTILLERY_GUN: return missileType.GetArtillery() && !missileType.GetShipLaunched();
                 case TANK_MISSILES: return missileType.GetTankLaunched();
+                case PLAYER_MISSILES: return !missileType.GetICBM() && !missileType.GetNuclear() && missileType.GetGroundLaunched();
             }
         }
         else if(type instanceof InterceptorType)
@@ -1108,6 +1128,7 @@ public class PurchaseLaunchableView extends LaunchView
                 case STORED_AIRCRAFT_INTERCEPTORS: return interceptorType.GetAirLaunched();
                 case SHIP_INTERCEPTORS: return interceptorType.GetShipLaunched();
                 case TANK_INTERCEPTORS: return interceptorType.GetTankLaunched();
+                case PLAYER_INTERCEPTORS: return !interceptorType.GetABM() && !interceptorType.GetAirLaunched() && !interceptorType.GetNuclear();
             }
         }
 

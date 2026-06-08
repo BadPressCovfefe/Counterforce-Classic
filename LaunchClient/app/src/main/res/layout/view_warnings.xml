@@ -242,7 +242,7 @@
                         android:layout_width="@dimen/PlayerInfoIconSize"
                         android:layout_height="@dimen/PlayerInfoIconSize"
                         android:layout_margin="@dimen/ButtonEdgePadding"
-                        android:src="@drawable/marker_loot_8" />
+                        android:src="@drawable/marker_loot" />
 
                     <LinearLayout
                         android:id="@+id/lytText3"
@@ -289,7 +289,7 @@
                         android:layout_width="@dimen/PlayerInfoIconSize"
                         android:layout_height="@dimen/PlayerInfoIconSize"
                         android:layout_margin="@dimen/ButtonEdgePadding"
-                        android:src="@drawable/marker_loot_8" />
+                        android:src="@drawable/marker_loot" />
 
                     <LinearLayout
                         android:layout_width="fill_parent"

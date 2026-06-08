@@ -44,6 +44,8 @@ public abstract class LaunchSystem
         ARTILLERY_GUN,
         STORED_TANK_ARTILLERY,
         TANK_ARTILLERY,
+        PLAYER_MISSILES,
+        PLAYER_INTERCEPTORS,
     }
     
     public LaunchSystem()

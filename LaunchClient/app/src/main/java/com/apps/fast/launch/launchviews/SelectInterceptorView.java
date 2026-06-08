@@ -83,6 +83,16 @@ public class SelectInterceptorView extends LaunchView
 
                 Player ourPlayer = game.GetOurPlayer();
 
+                if(ourPlayer.GetHasAirDefenceSystem())
+                {
+                    MissileSystem missileSystem = ourPlayer.GetInterceptorSystem();
+
+                    if(AddUIForSystem(ourPlayer.GetPosition(), target, missileSystem, true, 0, SystemType.PLAYER_INTERCEPTORS))
+                    {
+                        bInterceptorsAvailable = true;
+                    }
+                }
+
                 for(final SAMSite samSite : game.GetSAMSites())
                 {
                     if((samSite.GetOwnerID() == ourPlayer.GetID()) && samSite.GetOnline() && samSite.GetInterceptorSystem().ReadyToFire())

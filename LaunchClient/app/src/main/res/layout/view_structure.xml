@@ -32,11 +32,12 @@
 
                 <ImageView
                     android:id="@+id/imgLogo"
-                    android:layout_marginTop="@dimen/SeperatorMargins"
-                    android:layout_marginEnd="@dimen/ButtonSpacingNarrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/build_missile_site" />
+                    android:layout_marginTop="@dimen/SeperatorMargins"
+                    android:layout_marginEnd="@dimen/ButtonSpacingNarrow"
+                    android:src="@drawable/build_missile_site"
+                    android:visibility="gone" />
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -138,6 +139,7 @@
                 android:layout_marginBottom="@dimen/SeperatorMargins"/>
 
             <LinearLayout
+                android:id="@+id/lytPower"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
@@ -204,6 +206,7 @@
             </LinearLayout>
 
             <View
+                android:id="@+id/viewPower"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/SeparatorThickness"
                 android:background="?attr/ButtonEdgeColour"

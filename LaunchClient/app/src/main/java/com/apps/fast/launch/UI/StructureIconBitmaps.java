@@ -263,6 +263,7 @@ public class StructureIconBitmaps
             case AIRBASE: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_airbase), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
             case ABM_SILO: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_abmsite), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
             case SENTRY_GUN: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_sentry), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
+            case ARTILLERY_GUN:
             case WATCH_TOWER: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_artillery_gun), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
             case WAREHOUSE: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_bank), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);
             case NUCLEAR_MISSILE_SITE: return LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_icbm_silo), LaunchUICommon.AllegianceColours[Allegiance.YOU.ordinal()]);

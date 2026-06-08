@@ -120,54 +120,9 @@ public class BuildViewNew extends LaunchView
         btnBuildOreMine.SetUnit(game, activity, game.GetOurPlayer().GetPointer(), EntityType.ORE_MINE, Resource.ResourceType.FOOD, Defs.ORE_MINE_STRUCTURE_COST);
         btnBuildLogisticsDepot.SetUnit(game, activity, game.GetOurPlayer().GetPointer(), EntityType.LOGISTICS_DEPOT, Resource.ResourceType.FOOD, Defs.LOGISTICS_DEPOT_STRUCTURE_COST);
 
-        //Do we have an HQ?
-        boolean bHasHQ = false;
+        btnBuildCommandPost.SetUnit(game, activity, game.GetOurPlayer().GetPointer(), EntityType.COMMAND_POST, Resource.ResourceType.FOOD, Defs.COMMAND_POST_STRUCTURE_COST);
 
-        for(Structure structure : game.GetOurPlayer().GetStructures())
-        {
-            if(structure instanceof CommandPost && ((CommandPost)structure).GetIsHQ())
-            {
-                bHasHQ = true;
-                break;
-            }
-        }
-
-        if(bHasHQ)
-        {
-            btnBuildCommandPost.SetUnit(game, activity, game.GetOurPlayer().GetPointer(), EntityType.COMMAND_POST, Resource.ResourceType.FOOD, Defs.COMMAND_POST_STRUCTURE_COST);
-            btnBuildABMSilo.setVisibility(VISIBLE);
-            btnBuildAirbase.setVisibility(VISIBLE);
-            btnBuildArmory.setVisibility(VISIBLE);
-            btnBuildArtilleryGun.setVisibility(VISIBLE);
-            btnBuildMissileLauncher.setVisibility(VISIBLE);
-            btnBuildNukeLauncher.setVisibility(VISIBLE);
-            btnBuildSAM.setVisibility(VISIBLE);
-            btnBuildSentryGun.setVisibility(VISIBLE);
-            btnBuildWarehouse.setVisibility(VISIBLE);
-            btnBuildSolarPanel.setVisibility(VISIBLE);
-            btnBuildFarm.setVisibility(VISIBLE);
-            btnBuildOreMine.setVisibility(VISIBLE);
-            btnBuildLogisticsDepot.setVisibility(VISIBLE);
-            txtBuildHQ.setVisibility(GONE);
-        }
-        else
-        {
-            btnBuildCommandPost.SetUnit(game, activity, game.GetOurPlayer().GetPointer(), EntityType.HEADQUARTERS, Resource.ResourceType.FOOD, Defs.COMMAND_POST_STRUCTURE_COST);
-            btnBuildABMSilo.setVisibility(GONE);
-            btnBuildAirbase.setVisibility(GONE);
-            btnBuildArmory.setVisibility(GONE);
-            btnBuildArtilleryGun.setVisibility(GONE);
-            btnBuildMissileLauncher.setVisibility(GONE);
-            btnBuildNukeLauncher.setVisibility(GONE);
-            btnBuildSAM.setVisibility(GONE);
-            btnBuildSentryGun.setVisibility(GONE);
-            btnBuildWarehouse.setVisibility(GONE);
-            btnBuildSolarPanel.setVisibility(GONE);
-            btnBuildFarm.setVisibility(GONE);
-            btnBuildOreMine.setVisibility(GONE);
-            btnBuildLogisticsDepot.setVisibility(GONE);
-            txtBuildHQ.setVisibility(VISIBLE);
-        }
+        txtBuildHQ.setVisibility(GONE);
 
         Update();
     }

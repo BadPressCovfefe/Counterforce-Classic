@@ -2,24 +2,21 @@ Game todo:
 
 CURRENT WORK:
 	-LAST TOUCHED:
+		
 	
-	-NEXT ON THE LIST: 
-			
+	-NEXT ON THE LIST:
+	
 		Counterforce: Classic Concept:
 			-To test:
 			
 			-To do:
-				-Make sure enemy submarines have target button.
-				-Farms
-					-Require the player to be near (within 1.3 km) and have a large separation distance. (1.1 km.)
-					-Output a large amount of money every 3 days.
-				-Solar panels
-					-Outputs a small amount of money directly on-center hourly.
-					-No other restrictions.
-				-Ore mine
-					-Output money near the center hourly and compete by a huge amount if placed near eachother.
-				-Logistics depot
-					-Button collects wealth in radius but has a cooldown.
-					-Gives money to player if player passes near.
-				-Code in updateplayerlocation that collects money from depots.
+				-New bonuses:
+					-Nuclear Triad [DONE]
+					-Blue Water Navy [DONE]
+					-Mechanized Warfare
+					-King of the Hill [DONE]
+					-Green Thumb
+					-Environmentally Conscious
+					-Ore Lord
 					
+				

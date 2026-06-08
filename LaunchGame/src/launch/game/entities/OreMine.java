@@ -31,6 +31,8 @@ public class OreMine extends Structure
         super(lID, geoPosition, nHP, nMaxHP, lOwnerID, bRespawnProtected, lBootTime, new ResourceSystem());
         this.type = type;
         this.dlyGenerate = new ShortDelay(lGenerateTime);
+        
+        SetPointer();
     }
     
     /** From save. */
@@ -39,6 +41,8 @@ public class OreMine extends Structure
         super(lID, geoPosition, nHP, nMaxHP, strName, lOwnerID, cFlags, lStateTime, bVisible, lVisibleTime, lBuiltByID, new ResourceSystem());
         this.type = type;
         this.dlyGenerate = new ShortDelay(lGenerateTime);
+        
+        SetPointer();
     }
     
     /** From comms. */
@@ -47,6 +51,8 @@ public class OreMine extends Structure
         super(bb, lReceivingID);
         this.type = EntityType.values()[bb.get()];
         this.dlyGenerate = new ShortDelay(bb);
+        
+        SetPointer();
     }
 
     @Override
