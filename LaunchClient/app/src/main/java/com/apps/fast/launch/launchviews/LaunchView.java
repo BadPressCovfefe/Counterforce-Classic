@@ -115,8 +115,13 @@ public abstract class LaunchView extends FrameLayout
         //Do nothing unless overridden.
     }
 
+    public boolean OnBackPressed()
+    {
+        return false;
+    }
+
     public void MapCleared()
     {
-        //Do nothing unless overridden.
+        //Nothing unless overidden.
     }
 }

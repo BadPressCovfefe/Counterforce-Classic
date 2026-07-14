@@ -23,10 +23,13 @@
             android:textAppearance="?android:attr/textAppearanceLarge"/>
 
         <ImageView
-            android:layout_width="@dimen/PlayerInfoIconSize"
-            android:layout_height="@dimen/PlayerInfoIconSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/CheckBoxBorderWidth"
+            android:background="@drawable/detail_button"
             android:id="@+id/imgType"
             android:layout_margin="@dimen/ButtonEdgePadding"
+            android:src="@drawable/build_missile_site"
             android:layout_gravity="center"/>
     </LinearLayout>
 

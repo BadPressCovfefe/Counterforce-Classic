@@ -36,7 +36,9 @@
                     android:layout_marginTop="@dimen/SeperatorMargins"
                     android:layout_marginEnd="@dimen/ButtonSpacingNarrow"
                     android:src="@drawable/build_tank"
-                    android:visibility="gone" />
+                    android:padding="@dimen/CheckBoxBorderWidth"
+                    android:background="@drawable/detail_button"
+                    android:visibility="visible" />
 
                 <LinearLayout
                     android:orientation="vertical"

@@ -8,11 +8,13 @@
 
     <ImageView
         android:id="@+id/imgType"
-        android:layout_width="@dimen/PlayerInfoIconSize"
-        android:layout_height="@dimen/PlayerInfoIconSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:padding="@dimen/ButtonImagePadding"
-        android:src="@drawable/marker_destroyer"/>
+        android:layout_margin="@dimen/ButtonEdgePadding"
+        android:padding="@dimen/CheckBoxBorderWidth"
+        android:background="@drawable/detail_button"
+        android:src="@drawable/build_attack_sub"/>
 
     <TextView
         android:id="@+id/txtBuildTime"
@@ -20,11 +22,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="1"
-        android:layout_marginLeft="@dimen/MainViewSideMargin"
-        android:layout_marginRight="@dimen/MainViewSideMargin"
+        android:layout_marginLeft="@dimen/MainViewSpacing"
+        android:layout_marginRight="@dimen/MainViewSpacing"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="1 day "
+        android:text="1 day"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="?attr/BadColour"/>
 

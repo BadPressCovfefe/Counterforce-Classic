@@ -69,7 +69,7 @@ public class NavalProductionOrderView extends LaunchView
 
             case SSBN:
             {
-                imgType.setImageResource(R.drawable.build_ssbn_2);
+                imgType.setImageResource(R.drawable.build_ssbn);
             }
             break;
         }

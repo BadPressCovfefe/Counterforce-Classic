@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import launch.game.Defs;
 import launch.game.LaunchClientGame;
 import launch.game.entities.Tank;
 import launch.game.entities.LaunchEntity;
@@ -21,6 +22,7 @@ public class TankMaintenanceView extends LaunchView implements LaunchUICommon.Ta
 {
     private Tank tankShadow = null;
     private Collection TankList = null;
+    private TextView txtCost;
 
     /**
      * Initialise for a single structure.
@@ -79,6 +81,8 @@ public class TankMaintenanceView extends LaunchView implements LaunchUICommon.Ta
 
             if(tank != null)
             {
+                txtCost.setText(TextUtilities.GetCurrencyString(Defs.TANK_MAINTENANCE_COST));
+
                 if(tank.GetMoveOrders() != Movable.MoveOrders.WAIT && tank.GetMoveOrders() != Movable.MoveOrders.DEFEND)
                     bShowCeaseFire = true;
             }
@@ -95,6 +99,8 @@ public class TankMaintenanceView extends LaunchView implements LaunchUICommon.Ta
                         bShowCeaseFire = true;
                 }
             }
+
+            txtCost.setText(TextUtilities.GetCurrencyString(Defs.TANK_MAINTENANCE_COST * TankList.size()));
         }
     }
 

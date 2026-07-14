@@ -86,22 +86,6 @@ public class MapClickView extends LaunchView
             });
         }
 
-        /*btnAttack.setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                if(!game.GetInteractionReady())
-                {
-                    activity.ShowBasicOKDialog(context.getString(R.string.waiting_for_data));
-                }
-                else
-                {
-                    activity.MissileSelectForTarget(geoClick, null, TextUtilities.GetLatLongString(geoClick.GetLatitude(), geoClick.GetLongitude()));
-                }
-            }
-        });*/
-
         ((TextView)findViewById(R.id.txtPlayerJoins)).setText(TextUtilities.GetLatLongString(geoClick.GetLatitude(), geoClick.GetLongitude()));
 
         txtRadioactive.setVisibility(GONE);
@@ -144,7 +128,7 @@ public class MapClickView extends LaunchView
 
                         for(final MapEntity entity : Nearest)
                         {
-                            if((entity.GetVisible() || game.EntityIsFriendly(entity, game.GetOurPlayer())) && !(entity instanceof Loot))
+                            if((entity.GetVisible() || (game.EntityIsFriendly(entity, game.GetOurPlayer())) && !(entity instanceof Loot)) || entity.GetPosition().DistanceTo(geoClick) <= 1.5f)
                             {
                                 DistancedEntityView nev = new DistancedEntityView(context, activity, entity, geoClick, game);
 

@@ -858,10 +858,14 @@ public class XMLGameSaver
                 AddNode(doc, eleShipyard, XMLDefs.NAME, shipyard.GetName());
                 AddPositionNode(doc, eleShipyard, XMLDefs.POSITION, shipyard.GetPosition());
                 AddPositionNode(doc, eleShipyard, XMLDefs.OUTPUT_COORD, shipyard.GetOutputCoord());
-                AddNode(doc, eleShipyard, XMLDefs.HP, shipyard.GetHP());
                 AddNode(doc, eleShipyard, XMLDefs.OWNER_ID, shipyard.GetOwnerID());
+                AddNode(doc, eleShipyard, XMLDefs.HP, shipyard.GetHP());
                 AddNode(doc, eleShipyard, XMLDefs.MAX_HP, shipyard.GetMaxHP());
-                AddNode(doc, eleShipyard, XMLDefs.CONTESTED, shipyard.GetContested());
+                AddNode(doc, eleShipyard, XMLDefs.FLAGS, shipyard.GetFlags());
+                AddNode(doc, eleShipyard, XMLDefs.STATE_TIME, shipyard.GetStateTimeRemaining());
+                AddNode(doc, eleShipyard, XMLDefs.VISIBLE, shipyard.GetVisible());
+                AddNode(doc, eleShipyard, XMLDefs.VISIBLE_TIME, shipyard.GetVisibleTimeRemaining());
+                AddNode(doc, eleShipyard, XMLDefs.BUILT_BY_ID, shipyard.GetBuiltByID());
                 AddNode(doc, eleShipyard, XMLDefs.PRODUCTION_CAPACITY, shipyard.GetProductionCapacity());
                 AddShipyardQueue(doc, eleShipyard, shipyard, XMLDefs.QUEUE);
             }

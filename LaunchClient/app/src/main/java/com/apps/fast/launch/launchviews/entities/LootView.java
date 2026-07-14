@@ -23,11 +23,9 @@ import launch.game.entities.conceptuals.StoredLaunchable;
 public class LootView extends LaunchView
 {
     private int lLootID;
-    private ImageView imgLoot;
-    private TextView txtLootTitle;
+
     private TextView txtValue;
     private TextView txtExpiresIn;
-    private LinearLayout lytContents;
 
     public LootView(LaunchClientGame game, MainActivity activity, int lLootID)
     {
@@ -46,13 +44,11 @@ public class LootView extends LaunchView
             inflate(context, R.layout.view_loot, this);
             ((EntityControls)findViewById(R.id.entityControls)).SetActivity(activity);
 
-            txtLootTitle = (TextView) findViewById(R.id.txtLootTitle);
-            txtExpiresIn = (TextView) findViewById(R.id.txtExpiresIn);
-            lytContents = findViewById(R.id.lytContents);
-            imgLoot = findViewById(R.id.imgLoot);
-            txtValue = findViewById(R.id.txtValue);
+            ((TextView) findViewById(R.id.txtLootTitle)).setText(loot.GetDescription());
 
-            txtLootTitle.setText(loot.GetTypeName());
+            txtValue = (TextView) findViewById(R.id.txtValue);
+            txtExpiresIn = (TextView) findViewById(R.id.txtExpiresIn);
+
             txtValue.setText(context.getString(R.string.loot_value, TextUtilities.GetCurrencyString(loot.GetValue())));
 
             Update();
@@ -76,7 +72,6 @@ public class LootView extends LaunchView
                 if(loot != null)
                 {
                     txtExpiresIn.setText(context.getString(R.string.expires_in, TextUtilities.GetTimeAmount(loot.GetExpiryRemaining())));
-                    txtValue.setText(context.getString(R.string.loot_value, TextUtilities.GetCurrencyString(loot.GetValue())));
                 }
                 else
                 {

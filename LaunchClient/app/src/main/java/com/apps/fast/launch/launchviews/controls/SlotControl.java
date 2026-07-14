@@ -92,7 +92,7 @@ public class SlotControl extends LaunchView
 
             long oPrepTime = listener.GetSlotPrepTime(lSlotNumber);
 
-            if (oPrepTime > 0)
+            if(oPrepTime > 0)
             {
                 txtStatus.setText(TextUtilities.GetTimeAmount(oPrepTime));
                 txtStatus.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));

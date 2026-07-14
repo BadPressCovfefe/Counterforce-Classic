@@ -62,7 +62,6 @@ import launch.game.entities.conceptuals.StoredInfantry;
 import launch.game.entities.conceptuals.StoredTank;
 import launch.game.systems.AircraftSystem;
 import launch.game.systems.CargoSystem;
-import launch.game.systems.CargoSystem.LootType;
 import launch.game.treaties.Treaty.Type;
 import launch.game.systems.MissileSystem;
 
@@ -1438,7 +1437,6 @@ public class XMLGameLoader
                             String strName = GetStringElement(eleAircraft, XMLDefs.NAME);
                             float fltCurrentFuel = GetFloatElement(eleAircraft, XMLDefs.CURRENT_FUEL, 0);
                             boolean bAutoReturn = GetBooleanElement(eleAircraft, XMLDefs.AUTO_RETURN);
-                            boolean bRadarActive = GetBooleanElement(eleAircraft, XMLDefs.RADAR_ACTIVE);
                             int lCannonReload = GetIntElement(eleAircraft, XMLDefs.RELOAD_REMAINING);
                             int lElecWarReload = GetIntElement(eleAircraft, XMLDefs.ELECTRONIC_WARFARE_RELOAD);
                             boolean bVisible = GetBooleanElement(eleAircraft, XMLDefs.VISIBLE);
@@ -1487,7 +1485,7 @@ public class XMLGameLoader
                                                         bVisible, 
                                                         lVisibleTime,
                                                         lTimeAirborne,
-                                                        bRadarActive,
+                                                        false,
                                                         cMode,
                                                         Coordinates));
                         }
@@ -1646,7 +1644,6 @@ public class XMLGameLoader
                             boolean bVisible = GetBooleanElement(eleShip, XMLDefs.VISIBLE);
                             int lVisibleTime = GetIntElement(eleShip, XMLDefs.VISIBLE_TIME);
                             byte cMode = GetByteElement(eleShip, XMLDefs.MODE);
-                            boolean bRadarActive = GetBooleanElement(eleShip, XMLDefs.RADAR_ACTIVE);
                             boolean bSelling = GetBooleanElement(eleShip, XMLDefs.SELLING);
                             int lSellTime = GetIntElement(eleShip, XMLDefs.SELL_TIME);
                             Map<Integer, GeoCoord> Coordinates = null;
@@ -1720,7 +1717,7 @@ public class XMLGameLoader
                                     bVisible, 
                                     lVisibleTime, 
                                     order, 
-                                    bRadarActive,
+                                    false,
                                     bSelling, 
                                     lSellTime,
                                     Coordinates);
@@ -1960,8 +1957,12 @@ public class XMLGameLoader
                             GeoCoord geoOutput = GetPositionElement(eleShipyard, XMLDefs.OUTPUT_COORD);
                             int lOwnerID = GetIntElement(eleShipyard, XMLDefs.OWNER_ID);
                             short nHP = GetShortElement(eleShipyard, XMLDefs.HP);
-                            short nMaxHP = Defs.SHIPYARD_MAX_HP;
-                            boolean bContested = GetBooleanElement(eleShipyard, XMLDefs.CONTESTED);
+                            short nMaxHP = GetShortElement(eleShipyard, XMLDefs.MAX_HP);
+                            byte cFlags = GetByteElement(eleShipyard, XMLDefs.FLAGS);
+                            int lStateTime = GetIntElement(eleShipyard, XMLDefs.STATE_TIME);
+                            boolean bVisible = GetBooleanElement(eleShipyard, XMLDefs.VISIBLE);
+                            int lVisibleTime = GetIntElement(eleShipyard, XMLDefs.VISIBLE_TIME);
+                            int lBuiltByID = lOwnerID;
                             byte cCapacity = GetByteElement(eleShipyard, XMLDefs.PRODUCTION_CAPACITY);
 
                             if(cCapacity == 0)
@@ -1974,7 +1975,7 @@ public class XMLGameLoader
                                 Queue = GetShipyardQueue(eleShipyard, XMLDefs.QUEUE);
                             }
                             
-                            game.AddShipyard(new Shipyard(lID, strName, geoPosition, geoOutput, lOwnerID, nHP, nMaxHP, bContested, cCapacity, Queue));
+                            game.AddShipyard(new Shipyard(lID, strName, geoPosition, geoOutput, lOwnerID, nHP, nMaxHP, cFlags, lStateTime, bVisible, lVisibleTime, lBuiltByID, cCapacity, Queue));
                         }
                         catch(Exception ex)
                         {
@@ -2031,55 +2032,6 @@ public class XMLGameLoader
             game.DoneLoading();
             listener.StartAPI();
             LaunchLog.Log(APPLICATION, LOG_NAME, "GAME LOADED.");
-        }
-    }
-    
-    public static void LoadShipyards(String strShipyardFile, LaunchServerGame game)
-    {
-        LaunchLog.Log(APPLICATION, LOG_NAME, "Loading shipyards...");
-        
-        try
-        {            
-            FileInputStream fstream = new FileInputStream("shipyards.txt");
-
-            // Get the object of DataInputStream
-            DataInputStream in = new DataInputStream(fstream);
-            BufferedReader br = new BufferedReader(new InputStreamReader(in));
-            String strLine;
-
-            //Read File Line By Line
-            while((strLine = br.readLine()) != null)   
-            {
-                String replace = strLine.replace("\"", "");
-                String stats[] = replace.split(",");
-                
-                try
-                {
-                    String strName = stats[0];
-                    float fltLat = Float.parseFloat(stats[1]);
-                    float fltLng = Float.parseFloat(stats[2]);
-                    float fltOutputLat = Float.parseFloat(stats[3]);
-                    float fltOutputLng = Float.parseFloat(stats[4]);
-                    boolean bPortOnly = Boolean.parseBoolean(stats[5]);
-                    GeoCoord geoPosition = new GeoCoord(fltLat, fltLng);
-                    GeoCoord geoOutput = new GeoCoord(fltOutputLat, fltOutputLng);
-                    
-                    game.GenerateShipyard(strName, geoPosition, geoOutput, bPortOnly);
-                    
-                    LaunchLog.ConsoleMessage(String.format("Generated %s.", strName));
-                }
-                catch(Exception ex)
-                {
-                    LaunchLog.ConsoleMessage(ex.getMessage());
-                }  
-            }
-            
-            //Close the input stream
-            in.close();
-        }
-        catch(Exception ex)
-        {
-            LaunchLog.ConsoleMessage(ex.getMessage());
         }
     }
     

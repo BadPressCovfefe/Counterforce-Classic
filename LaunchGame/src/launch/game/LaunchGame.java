@@ -553,9 +553,12 @@ public abstract class LaunchGame implements LaunchEntityListener
         
         for(Shipyard shipyard : GetShipyards())
         {
-            if(!shipyard.Destroyed())
+            shipyard.Tick(lMS);
+            
+            if(shipyard.Destroyed())
             {
-                shipyard.Tick(lMS);
+                Shipyards.remove(shipyard.GetID());
+                EntityRemoved(shipyard, true);
             }
         }
         
@@ -681,29 +684,35 @@ public abstract class LaunchGame implements LaunchEntityListener
                             GeoCoord geoTarget = ship.GetNextCoordinate();
                             GeoCoord geoPosition = ship.GetPosition();
 
-                            if(geoPosition.MoveToward(geoTarget, Defs.NAVAL_SPEED, lMS))
+                            if(geoPosition.TurnToward(geoTarget, Defs.NAVAL_TURN_RATE, 0.0, lMS))
                             {
-                                ship.ReachedFirstCoordinate();
-
-                                if(ship.GetNextCoordinate() == null)
+                                if(geoPosition.MoveToward(geoTarget, Defs.NAVAL_SPEED, lMS))
                                 {
-                                    ship.Wait();
-                                }
-                            }
+                                    ship.ReachedFirstCoordinate();
 
-                            EntityMoved(ship);
+                                    if(ship.GetNextCoordinate() == null)
+                                    {
+                                        ship.Wait();
+                                    }
+                                }
+
+                                EntityMoved(ship);
+                            }  
                         }
                         else if(ship.HasGeoTarget())
                         {
                             GeoCoord geoTarget = ship.GetGeoTarget();
                             GeoCoord geoPosition = ship.GetPosition();
 
-                            if(geoPosition.MoveToward(geoTarget, Defs.NAVAL_SPEED, lMS))
+                            if(geoPosition.TurnToward(geoTarget, Defs.NAVAL_TURN_RATE, 0.0, lMS))
                             {
-                                ship.Wait();
-                            }
+                                if(geoPosition.MoveToward(geoTarget, Defs.NAVAL_SPEED, lMS))
+                                {
+                                    ship.Wait();
+                                }
 
-                            EntityMoved(ship);
+                                EntityMoved(ship);
+                            }  
                         }
                         else
                         {
@@ -736,29 +745,35 @@ public abstract class LaunchGame implements LaunchEntityListener
                             GeoCoord geoTarget = submarine.GetNextCoordinate();
                             GeoCoord geoPosition = submarine.GetPosition();
 
-                            if(geoPosition.MoveToward(geoTarget, Defs.NAVAL_SPEED, lMS))
+                            if(geoPosition.TurnToward(geoTarget, Defs.NAVAL_TURN_RATE, 0.0, lMS))
                             {
-                                submarine.ReachedFirstCoordinate();
-
-                                if(submarine.GetNextCoordinate() == null)
+                                if(geoPosition.MoveToward(geoTarget, Defs.NAVAL_SPEED, lMS))
                                 {
-                                    submarine.Wait();
-                                }
-                            }
+                                    submarine.ReachedFirstCoordinate();
 
-                            EntityMoved(submarine);
+                                    if(submarine.GetNextCoordinate() == null)
+                                    {
+                                        submarine.Wait();
+                                    }
+                                }
+
+                                EntityMoved(submarine);
+                            } 
                         }
                         else if(submarine.HasGeoTarget())
                         {
                             GeoCoord geoTarget = submarine.GetGeoTarget();
                             GeoCoord geoPosition = submarine.GetPosition();
 
-                            if(geoPosition.MoveToward(geoTarget, Defs.NAVAL_SPEED, lMS))
+                            if(geoPosition.TurnToward(geoTarget, Defs.NAVAL_TURN_RATE, 0.0, lMS))
                             {
-                                submarine.Wait();
-                            }
+                                if(geoPosition.MoveToward(geoTarget, Defs.NAVAL_SPEED, lMS))
+                                {
+                                    submarine.Wait();
+                                }
 
-                            EntityMoved(submarine);
+                                EntityMoved(submarine);
+                            } 
                         }
                         else
                         {
@@ -1493,24 +1508,6 @@ public abstract class LaunchGame implements LaunchEntityListener
                 }
             }
         }
-
-        for(Capturable capturable : GetAllCapturables())
-        {
-            if(capturable.GetCaptured() && !missile.ThreatensPlayersStructures(capturable.GetOwnerID()) && !capturable.Destroyed())
-            {
-                if(capturable.GetPosition().DistanceTo(geoTarget) <= fltThreatRadius)
-                {
-                    missile.AddStructureThreatenedPlayer(capturable.GetOwnerID());
-
-                    Player player = Players.get(capturable.GetOwnerID());
-
-                    if(player != null)
-                    {
-                        player.AddHostileMissile(missile.GetID());
-                    }
-                }
-            }
-        }
         
         if(lPlayerID != LaunchEntity.ID_NONE)
         {
@@ -2229,16 +2226,16 @@ public abstract class LaunchGame implements LaunchEntityListener
 
     public int GetReloadUpgradeTime(MissileSystem system)
     {
-        if(system.GetReloadTime() >= Defs.RELOAD_TIME_BASE)
+        if(system.GetReloadTime() == config.GetReloadTimeBase())
         {
-            return Defs.RELOAD_TIME_STAGE_1;
+            return config.GetReloadTimeStage1();
         }
-        else if(system.GetReloadTime() >= Defs.RELOAD_TIME_STAGE_1)
+        else if(system.GetReloadTime() == config.GetReloadTimeStage1())
         {
-            return Defs.RELOAD_TIME_STAGE_2;
+            return config.GetReloadTimeStage2();
         }
         
-        return Defs.RELOAD_TIME_STAGE_3;
+        return config.GetReloadTimeStage3();
     }
     
     public short GetCommandPostHPUpgradeHP(CommandPost commandPost)
@@ -2353,9 +2350,16 @@ public abstract class LaunchGame implements LaunchEntityListener
             
             LaunchUtilities.AddResourceMapsTogether(Values, GetCargoSystemTotalValue(armory.GetCargoSystem()));
         }
-        else if(structure instanceof Processor)
+        else if(structure instanceof Shipyard shipyard)
         {
-            LaunchUtilities.AddResourceMapsTogether(Values, Defs.GetProcessorCost(((Processor)structure).GetType()));
+            LaunchUtilities.AddResourceMapsTogether(Values, Map.ofEntries(entry(ResourceType.WEALTH, Defs.SHIPYARD_STRUCTURE_COST)));
+            
+            if(shipyard.GetProductionCapacity() > 1)
+            {
+                int lUpgradeCount = shipyard.GetProductionCapacity() - 1;
+                
+                LaunchUtilities.AddResourceMapsTogether(Values, Map.ofEntries(entry(ResourceType.WEALTH, (long)(Defs.SHIPYARD_UPGRADE_WEALTH_COST * lUpgradeCount))));
+            }
         }
         else if(structure instanceof Warehouse warehouse)
         {
@@ -2725,7 +2729,6 @@ public abstract class LaunchGame implements LaunchEntityListener
     
     public int GetTimeToTarget(Missile missile)
     {
-        MissileType type = config.GetMissileType(missile.GetType());
         GeoCoord geoTarget = GetMissileTarget(missile);
         
         return GetTimeToTarget(missile.GetPosition(), geoTarget, missile.GetSpeed());
@@ -3649,7 +3652,16 @@ public abstract class LaunchGame implements LaunchEntityListener
                 {
                     if(kingOfTheHill != null && kingOfTheHill.GetOccupiedByAlliance() && kingOfTheHill.GetOwnedBy(alliance.GetID()))
                     {
-                        lAmountToAdd += Defs.KOTH_BONUS_ALLIANCE;
+                        int lMembers = GetAllianceMemberCount(alliance);
+                        
+                        if(Defs.KOTH_BONUS_PLAYER/lMembers < Defs.KOTH_BONUS_ALLIANCE)
+                        {
+                            lAmountToAdd += Defs.KOTH_BONUS_ALLIANCE;
+                        }
+                        else
+                        {
+                            lAmountToAdd += Defs.KOTH_BONUS_PLAYER/lMembers;
+                        }
                     }
                 }
 
@@ -3963,13 +3975,13 @@ public abstract class LaunchGame implements LaunchEntityListener
         
         if(alliance != null)
         {
-            if(kingOfTheHill != null && kingOfTheHill.GetOccupiedByAlliance() && kingOfTheHill.GetOwnedBy(alliance.GetID()))
+            if(kingOfTheHill != null && kingOfTheHill.GetOccupiedByAlliance() && kingOfTheHill.GetKingID() == alliance.GetID())
             {
                 return true;
             }
         }
         
-        return kingOfTheHill != null && !kingOfTheHill.GetOccupiedByAlliance() && kingOfTheHill.GetOwnedBy(player.GetID());
+        return kingOfTheHill != null && !kingOfTheHill.GetOccupiedByAlliance() && kingOfTheHill.GetKingID() == player.GetID();
     }
 
     public float GetInterceptorAccuracy(InterceptorType type)
@@ -5044,17 +5056,10 @@ public abstract class LaunchGame implements LaunchEntityListener
         
         for(LogisticsDepot depot : LogisticsDepots.values())
             Result.add(depot);
-                
-        return Result;
-    }
-    
-    public Collection<Capturable> GetAllCapturables()
-    {
-        List<Capturable> Result = new ArrayList();
         
-        for(Shipyard shipyard : GetShipyards())
+        for(Shipyard shipyard : Shipyards.values())
             Result.add(shipyard);
-        
+                
         return Result;
     }
     
@@ -5275,7 +5280,6 @@ public abstract class LaunchGame implements LaunchEntityListener
     protected abstract void TorpedoExploded(Torpedo torpedo);
     protected abstract void InterceptorLostTarget(Interceptor interceptor);
     protected abstract void InterceptorReachedTarget(Interceptor interceptor);
-    protected abstract void InfantryReachedTarget(Infantry infantry);
     protected abstract void AirbaseDestroyed(Airbase airbase);
     protected abstract void ShipDestroyed(Ship ship);
     protected abstract void AirplaneDestroyed(AirplaneInterface aircraft);
@@ -6017,11 +6021,6 @@ public abstract class LaunchGame implements LaunchEntityListener
             if(player != null)
             {
                 int lBuilderID = LaunchEntity.ID_NONE;
-
-                if(target instanceof Shipyard shipyard)
-                {
-                    return shipyard.GetCaptured() && !WouldBeFriendlyFire(player, GetOwner(shipyard));
-                }
                 
                 if(target instanceof Structure structure)
                     lBuilderID = structure.GetBuiltByID();
@@ -6504,7 +6503,7 @@ public abstract class LaunchGame implements LaunchEntityListener
         {
             if(structure != null && structure.GetOwnerID() == lPlayerID && !structure.GetOffline())
             {
-                lCost += Defs.ONLINE_MAINTENANCE_COST;
+                lCost += Defs.GetMaintenanceCost(structure.GetEntityType());
             }
         }
         

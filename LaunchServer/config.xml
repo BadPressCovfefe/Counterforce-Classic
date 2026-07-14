@@ -35,10 +35,10 @@
   <MissileSlotUpgradeCount>3</MissileSlotUpgradeCount>
   <ResaleValue>0.7</ResaleValue>
   <DecommissionTime>1800000</DecommissionTime>
-  <ReloadTimeBase>30000</ReloadTimeBase>
-  <ReloadTimeStage1>15000</ReloadTimeStage1>
-  <ReloadTimeStage2>10000</ReloadTimeStage2>
-  <ReloadTimeStage3>5000</ReloadTimeStage3>
+  <ReloadTimeBase>60000</ReloadTimeBase>
+  <ReloadTimeStage1>45000</ReloadTimeStage1>
+  <ReloadTimeStage2>30000</ReloadTimeStage2>
+  <ReloadTimeStage3>15000</ReloadTimeStage3>
   <ReloadStage1Cost>500</ReloadStage1Cost>
   <ReloadStage2Cost>1000</ReloadStage2Cost>
   <ReloadStage3Cost>1500</ReloadStage3Cost>
@@ -64,7 +64,7 @@
   <HourlyBonusDiplomaticPresence>50</HourlyBonusDiplomaticPresence>
   <HourlyBonusPoliticalEngagement>100</HourlyBonusPoliticalEngagement>
   <HourlyBonusDefenderOfTheNation>50</HourlyBonusDefenderOfTheNation>
-  <HourlyBonusNuclearSuperpower>500</HourlyBonusNuclearSuperpower>
+  <HourlyBonusNuclearSuperpower>250</HourlyBonusNuclearSuperpower>
   <HourlyBonusWeeklyKillsBatch>200</HourlyBonusWeeklyKillsBatch>
   <HourlyBonusSurvivor>300</HourlyBonusSurvivor>
   <HourlyBonusHippy>50</HourlyBonusHippy>
@@ -91,17 +91,17 @@
   <JihadistThreshold>3</JihadistThreshold>
   <OreGenerateRadius>0.03</OreGenerateRadius>
   <OreMineSpacing>15</OreMineSpacing>
-  <OreMinExpiry>28800000</OreMinExpiry>
+  <OreMinExpiry>18000000</OreMinExpiry>
   <OreMaxExpiry>28800000</OreMaxExpiry>
   <MaxOreValue>25000</MaxOreValue>
   <SPanelMaintenanceCost>10</SPanelMaintenanceCost>
   <SPanelStructureCost>2700</SPanelStructureCost>
   <SPanelStructureHP>50</SPanelStructureHP>
   <SPanelGenerateTime>3600000</SPanelGenerateTime>
-  <ElecMinExpiry>3599999</ElecMinExpiry>
+  <ElecMinExpiry>2400000</ElecMinExpiry>
   <ElecMaxExpiry>3600000</ElecMaxExpiry>
-  <ElecMinValue>300</ElecMinValue>
-  <ElecMaxValue>950</ElecMaxValue>
+  <ElecMinValue>100</ElecMinValue>
+  <ElecMaxValue>300</ElecMaxValue>
   <SPanelSpacing>0.1</SPanelSpacing>
   <CommandPostShelterRadius>0.3</CommandPostShelterRadius>
   <CommandPostHPUpgradeCost>5000</CommandPostHPUpgradeCost>
@@ -166,7 +166,7 @@
 	  <Yield>2500</Yield>
 	  <Accuracy>0.7</Accuracy>
 	  <Costs>
-		<Resource Quantity="53000" Type="WEALTH"/>
+		<Resource Quantity="180000" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
     <MissileType ID="1142" Name="Prompt Strike">
@@ -178,7 +178,7 @@
 	  <Yield>2500</Yield>
 	  <Accuracy>0.7</Accuracy>
 	  <Costs>
-		<Resource Quantity="53000" Type="WEALTH"/>
+		<Resource Quantity="180000" Type="WEALTH"/>
 	  </Costs>
     </MissileType>
     <MissileType ID="1141" Name="Wealth Balloon">
@@ -1473,6 +1473,16 @@
     </MinorBannedApp>
   </MinorBannedApps>
   <WaterMaps>
+  <WaterMap FileName="all_water.bmp">
+		<NorthwestBound>
+			<Latitude>21.384</Latitude>
+			<Longitude>-79.326012</Longitude>
+		</NorthwestBound>
+		<SoutheastBound>
+			<Latitude>21.176720</Latitude>
+			<Longitude>-157.561737</Longitude>
+		</SoutheastBound>
+	</WaterMap>
 	<WaterMap FileName="norfolk_map.bmp">
 		<NorthwestBound>
 			<Latitude>37.151478</Latitude>
@@ -1715,8 +1725,8 @@
 	</WaterMap>
 	<WaterMap FileName="all_water.bmp">
 		<NorthwestBound>
-			<Latitude>42.868313</Latitude>
-			<Longitude>-79.326012</Longitude>
+			<Latitude>21.384270</Latitude>
+			<Longitude>-157.652771</Longitude>
 		</NorthwestBound>
 		<SoutheastBound>
 			<Latitude>42.815536</Latitude>

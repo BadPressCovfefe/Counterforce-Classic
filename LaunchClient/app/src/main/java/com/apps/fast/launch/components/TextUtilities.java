@@ -471,9 +471,6 @@ public class TextUtilities
             {
                 case FRIGATE: return context.getString(R.string.frigate_title);
                 case DESTROYER: return context.getString(R.string.destroyer_title);
-                case AMPHIB: return context.getString(R.string.assault_ship_title);
-                case CARGO_SHIP: return context.getString(R.string.cargo_ship_title);
-                case FLEET_OILER: return context.getString(R.string.fleet_oiler_title);
                 case SUPER_CARRIER: return context.getString(R.string.super_carrier_title);
                 case ATTACK_SUB: return context.getString(R.string.attack_sub_title);
                 case SSBN: return context.getString(R.string.ssbn_title);
@@ -498,18 +495,17 @@ public class TextUtilities
                 case SOLAR_PANEL: return context.getString(R.string.rubble_title_format, context.getString(R.string.solar_panel));
                 case FARM: return context.getString(R.string.rubble_title_format, context.getString(R.string.farm));
                 case LOGISTICS_DEPOT: return context.getString(R.string.rubble_title_format, context.getString(R.string.logistics_depot));
+                case SHIPYARD: return context.getString(R.string.rubble_title_format, context.getString(R.string.shipyard));
                 default: return "NOT IMPLEMENTED! (Rubble name)";
             }
         }
         else if(entity instanceof Shipyard)
         {
-            Shipyard shipyard = (Shipyard)entity;
-
-            return shipyard.GetName();
+            return context.getString(R.string.shipyard);
         }
         else if(entity instanceof Loot)
         {
-            return GetLootContentString(((Loot)entity), game);
+            return GetLootContentString(((Loot)entity));
         }
         else if(entity instanceof Tank)
         {
@@ -683,8 +679,7 @@ public class TextUtilities
             }
             else if(entity instanceof Shipyard)
             {
-                Shipyard shipyard = ((Shipyard)entity);
-                return shipyard.GetName();
+                return context.getString(R.string.owners_entity, ownerName, context.getString(R.string.shipyard));
             }
             else if(entity instanceof Tank)
             {
@@ -887,6 +882,11 @@ public class TextUtilities
                 return context.getString(R.string.logistics_depot_title);
             }
 
+            case SHIPYARD:
+            {
+                return context.getString(R.string.shipyard_lowercase);
+            }
+
             default: return "NOT IMPLEMENTED! (GetEntityTypeName)";
         }
     }
@@ -931,11 +931,6 @@ public class TextUtilities
                 return context.getString(R.string.command_post);
             }
 
-            case HEADQUARTERS:
-            {
-                return context.getString(R.string.headquarters);
-            }
-
             case AIRBASE:
             {
                 return context.getString(R.string.airbase);
@@ -970,21 +965,6 @@ public class TextUtilities
             case SUPER_CARRIER:
             {
                 return context.getString(R.string.super_carrier_title);
-            }
-
-            case CARGO_SHIP:
-            {
-                return context.getString(R.string.cargo_ship_title);
-            }
-
-            case AMPHIB:
-            {
-                return context.getString(R.string.assault_ship_title);
-            }
-
-            case FLEET_OILER:
-            {
-                return context.getString(R.string.fleet_oiler_title);
             }
 
             case ATTACK_SUB:
@@ -1045,6 +1025,11 @@ public class TextUtilities
             case LOGISTICS_DEPOT:
             {
                 return context.getString(R.string.logistics_depot);
+            }
+
+            case SHIPYARD:
+            {
+                return context.getString(R.string.shipyard);
             }
 
             default: return "NOT IMPLEMENTED! (GetEntityTypeName)";
@@ -1249,30 +1234,6 @@ public class TextUtilities
         }
         else
         {
-            textView.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
-        }
-    }
-
-    public static void AssignAccuracyBoostPercentage(TextView textView, float fltHitChance, LaunchClientGame game)
-    {
-        if(fltHitChance >= game.GetConfig().GetMaxRadarAccuracyBoost())
-        {
-            textView.setText(context.getString(R.string.high_accuracy));
-            textView.setTextColor(Utilities.ColourFromAttr(context, R.attr.GoodColour));
-        }
-        else if(fltHitChance >= 0.35f)
-        {
-            textView.setText(context.getString(R.string.high_accuracy));
-            textView.setTextColor(Utilities.ColourFromAttr(context, R.attr.GoodColour));
-        }
-        else if(fltHitChance >= 0.15f && fltHitChance < 0.35f)
-        {
-            textView.setText(context.getString(R.string.medium_accuracy));
-            textView.setTextColor(Utilities.ColourFromAttr(context, R.attr.WarningColour));
-        }
-        else
-        {
-            textView.setText(context.getString(R.string.low_accuracy));
             textView.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
         }
     }
@@ -1664,62 +1625,9 @@ public class TextUtilities
         return GetPercentStringFromFraction(fuelPercent);
     }
 
-    public static String GetCostStatement(Map<ResourceType, Long> costs)
+    public static String GetLootContentString(Loot loot)
     {
-        if(costs.isEmpty())
-            return context.getString(R.string.free).toLowerCase();
-
-        List<String> parts = new ArrayList<>();
-
-        for(Map.Entry<ResourceType, Long> cost : costs.entrySet())
-        {
-            parts.add(GetResourceQuantityStringWithName(cost.getKey(), cost.getValue()));
-        }
-
-        if(parts.isEmpty())
-        {
-            return "";
-        }
-        else if(parts.size() == 1)
-        {
-            return parts.get(0);
-        }
-        else if(parts.size() == 2)
-        {
-            return parts.get(0) + " and " + parts.get(1);
-        }
-        else
-        {
-            String allButLast = String.join(", ", parts.subList(0, parts.size() - 1));
-            String last = parts.get(parts.size() - 1);
-            return allButLast + ", and " + last;
-        }
-    }
-
-    public static String GetResourceQuantityString(ResourceType type, long oQuantity)
-    {
-        switch(type)
-        {
-            case WEALTH:
-            {
-                return GetCurrencyString(oQuantity);
-            }
-
-            default:
-            {
-                return GetWeightStringFromKG(oQuantity);
-            }
-        }
-    }
-
-    public static String GetResourceQuantityStringWithName(ResourceType type, long oQuantity)
-    {
-        return "REMOVE TODO";
-    }
-
-    public static String GetLootContentString(Loot loot, LaunchGame game)
-    {
-        return "[NOT IMPLEMENTED! (GetLootContentString)]";
+        return (loot.GetDescription().isEmpty() ? context.getString(R.string.loot) : context.getString(R.string.named_entity, context.getString(R.string.loot), loot.GetDescription()));
     }
 
     public static String GetOreMineCompetitionString(int lTotal, int lCompeting, int lMaxValue)

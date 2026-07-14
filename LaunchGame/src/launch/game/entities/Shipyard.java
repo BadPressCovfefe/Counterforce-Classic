@@ -16,13 +16,14 @@ import launch.game.EntityPointer.EntityType;
 import launch.game.entities.conceptuals.ShipProductionOrder;
 import launch.game.systems.LaunchSystem;
 import launch.game.systems.LaunchSystemListener;
+import launch.game.systems.ResourceSystem;
 
 
 /**
  *
  * @author Corbin
  */
-public class Shipyard extends Capturable implements LaunchSystemListener
+public class Shipyard extends Structure implements LaunchSystemListener
 {
     public static final int DATA_SIZE = 9;
     
@@ -33,17 +34,17 @@ public class Shipyard extends Capturable implements LaunchSystemListener
     
     
     /** New. */
-    public Shipyard(int lID, GeoCoord geoPosition, String strName, GeoCoord geoOutput, short nHP, short nMaxHP)
+    public Shipyard(int lID, GeoCoord geoPosition, short nHP, short nMaxHP, int lOwnerID, boolean bRespawnProtected, int lBootTime, GeoCoord geoOutput)
     {
-        super(lID, geoPosition, strName, nHP, nMaxHP, LaunchEntity.ID_NONE, false);
+        super(lID, geoPosition, nHP, nMaxHP, lOwnerID, bRespawnProtected, lBootTime, new ResourceSystem());
         this.geoOutput = geoOutput;
         this.cProductionCapacity = 1;
     }
     
     /** From save. */
-    public Shipyard(int lID, String strName, GeoCoord geoPosition, GeoCoord geoOutput, int lOwnerID, short nHP, short nMaxHP, boolean bContested, byte cCapacity, List<ShipProductionOrder> Queue)
+    public Shipyard(int lID, String strName, GeoCoord geoPosition, GeoCoord geoOutput, int lOwnerID, short nHP, short nMaxHP, byte cFlags, int lStateTime, boolean bVisible, int lVisibleTime, int lBuiltByID, byte cCapacity, List<ShipProductionOrder> Queue)
     {
-        super(lID, geoPosition, strName, nHP, nMaxHP, lOwnerID, bContested);
+        super(lID, geoPosition, nHP, nMaxHP, strName, lOwnerID, cFlags, lStateTime, bVisible, lVisibleTime, lBuiltByID, new ResourceSystem());
         this.geoOutput = geoOutput;
         this.cProductionCapacity = cCapacity;
         this.Queue = Queue;
@@ -52,7 +53,7 @@ public class Shipyard extends Capturable implements LaunchSystemListener
     /** From comms. */
     public Shipyard(ByteBuffer bb, int lReceivingID)
     {
-        super(bb);
+        super(bb, lReceivingID);
         geoOutput = new GeoCoord(bb.getFloat(), bb.getFloat());
         cProductionCapacity = bb.get();
         Queue = QueueFromData(bb);
@@ -61,6 +62,8 @@ public class Shipyard extends Capturable implements LaunchSystemListener
     @Override
     public void Tick(int lMS)
     {
+        super.Tick(lMS);
+        
         for(ShipProductionOrder order : new ArrayList<>(Queue))
         {
             order.Tick(lMS);

@@ -1,26 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
+    android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
               android:layout_marginBottom="@dimen/SelectListSpacing"
               android:background="@drawable/detail_button">
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center">
-
-        <ImageView
-            android:layout_width="@dimen/PlayerInfoIconSize"
-            android:layout_height="@dimen/PlayerInfoIconSize"
-            android:id="@+id/imgAircraftType"
-            android:src="@drawable/marker_bomber"
-            android:layout_margin="@dimen/ButtonEdgePadding"
-            android:layout_gravity="center"/>
-    </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -28,123 +13,155 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center_vertical"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/MainViewSpacing"
-        android:layout_marginBottom="@dimen/MainViewSpacing">
+        android:layout_gravity="center">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:orientation="vertical">
+            android:layout_gravity="center">
 
-            <TextView
-                android:id="@+id/txtAircraftType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Bomber"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <TextView
-                android:id="@+id/txtName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
                 android:gravity="center_vertical"
-                android:text="Name" />
-
-            <LinearLayout
-                android:id="@+id/lytArsenal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/imgArsenalType"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/marker_missile" />
+                android:background="@drawable/detail_button"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/txtArmaments"
+                    android:id="@+id/txtAircraftType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/aircraft_armaments" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lytArsenal2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/imgArsenalType2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/marker_interceptor" />
+                    android:textAllCaps="false"
+                    android:layout_marginLeft="@dimen/ButtonEdgePadding"
+                    android:text="Bomber"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <TextView
-                    android:id="@+id/txtArmaments2"
+                    android:id="@+id/txtName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/aircraft_armaments" />
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/ButtonEdgePadding"
+                    android:gravity="center_vertical"
+                    android:textAllCaps="false"
+                    android:text="Name" />
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:id="@+id/lytFuel"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/imgFuel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/icon_fuel" />
-
-                <TextView
-                    android:id="@+id/txtFuelLevel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="100%"
-                    android:textColor="?attr/BadColour" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/txtHPTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:gravity="center_vertical"
-                android:text="HP" />
-
-            <TextView
-                android:id="@+id/txtInfantryStatus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Ready" />
+                android:gravity="center_vertical"
+                android:background="@drawable/detail_button"
+                android:orientation="vertical">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/status"
+                        android:layout_marginStart="@dimen/ButtonEdgePadding"
+                        android:layout_marginEnd="@dimen/ButtonEdgePadding"
+                        android:textColor="?attr/GoodColour" />
+
+                    <TextView
+                        android:id="@+id/txtInfantryStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textAllCaps="false"
+                        android:text="Ready" /> />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/fuel"
+                        android:layout_marginStart="@dimen/ButtonEdgePadding"
+                        android:layout_marginEnd="@dimen/ButtonEdgePadding"
+                        android:textColor="?attr/GoodColour" />
+
+                    <TextView
+                        android:id="@+id/txtFuelLevel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="100%"
+                        android:textColor="?attr/BadColour" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/detail_button"
+        android:gravity="center_vertical"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1.5"
+            android:background="@drawable/detail_button"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/CheckBoxBorderWidth"
+                android:background="@drawable/detail_button"
+                android:id="@+id/imgAircraftType"
+                android:src="@drawable/build_bomber"/>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/lytInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginRight="@dimen/MainViewSpacing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:background="@drawable/detail_button"
+            android:layout_weight="1"
             android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/ButtonEdgePadding"
+                android:text="@string/mission"
+                android:textAllCaps="false"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
                 android:id="@+id/txtFuelUsage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/MainViewSpacing"
-                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginLeft="@dimen/ButtonEdgePadding"
                 android:layout_marginRight="@dimen/MainViewSideMargin"
                 android:text="@string/fuel_percent_for_trip"
+                android:textAllCaps="false"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="?attr/WarningColour"
                 android:visibility="visible" />
@@ -153,15 +170,31 @@
                 android:id="@+id/txtTravelTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/MainViewSpacing"
-                android:layout_marginTop="@dimen/MainViewSpacing"
+                android:layout_marginLeft="@dimen/ButtonEdgePadding"
                 android:layout_marginRight="@dimen/MainViewSideMargin"
                 android:text="@string/flight_time_target"
+                android:textAllCaps="false"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="?attr/WarningColour"
                 android:visibility="visible" />
         </LinearLayout>
 
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/ButtonEdgePadding"
+        android:text="@string/armament"
+        android:textAllCaps="false"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <LinearLayout
+        android:id="@+id/lytArmament"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/ButtonEdgePadding"
+        android:layout_marginBottom="@dimen/ButtonEdgePadding"
+        android:orientation="vertical"/>
 
 </LinearLayout>

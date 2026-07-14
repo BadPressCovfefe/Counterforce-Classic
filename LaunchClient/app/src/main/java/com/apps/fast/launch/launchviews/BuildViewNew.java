@@ -39,6 +39,7 @@ public class BuildViewNew extends LaunchView
     private PurchaseButton btnBuildFarm;
     private PurchaseButton btnBuildOreMine;
     private PurchaseButton btnBuildLogisticsDepot;
+    private PurchaseButton btnBuildShipyard;
     private TextView txtBuildHQ;
     boolean bTooCloseToStructures;
 
@@ -68,7 +69,9 @@ public class BuildViewNew extends LaunchView
         btnBuildFarm = findViewById(R.id.btnBuildFarm);
         btnBuildOreMine = findViewById(R.id.btnBuildOreMine);
         btnBuildLogisticsDepot = findViewById(R.id.btnBuildLogisticsDepot);
+        btnBuildShipyard = findViewById(R.id.btnBuildShipyard);
         txtBuildHQ = findViewById(R.id.txtBuildHQ);
+
         bTooCloseToStructures = !game.GetNearbyStructures(game.GetOurPlayer()).isEmpty();
 
         if(bTooCloseToStructures)
@@ -87,6 +90,7 @@ public class BuildViewNew extends LaunchView
             btnBuildFarm.setAlpha(0.5f);
             btnBuildOreMine.setAlpha(0.5f);
             btnBuildLogisticsDepot.setAlpha(0.5f);
+            btnBuildShipyard.setAlpha(0.5f);
         }
         else
         {
@@ -104,23 +108,24 @@ public class BuildViewNew extends LaunchView
             btnBuildFarm.setAlpha(1.0f);
             btnBuildOreMine.setAlpha(1.0f);
             btnBuildLogisticsDepot.setAlpha(1.0f);
+            btnBuildShipyard.setAlpha(1.0f);
         }
 
-        btnBuildMissileLauncher.SetUnit(game, activity, game.GetOurPlayer().GetPointer(), EntityType.MISSILE_SITE, Resource.ResourceType.FOOD, Defs.MISSILE_SITE_STRUCTURE_COST);
-        btnBuildArtilleryGun.SetUnit(game, activity, game.GetOurPlayer().GetPointer(), EntityType.ARTILLERY_GUN, Resource.ResourceType.FOOD, Defs.ARTILLERY_GUN_STRUCTURE_COST);
-        btnBuildNukeLauncher.SetUnit(game, activity, game.GetOurPlayer().GetPointer(), EntityType.NUCLEAR_MISSILE_SITE, Resource.ResourceType.FOOD, Defs.ICBM_SILO_STRUCTURE_COST);
-        btnBuildAirbase.SetUnit(game, activity, game.GetOurPlayer().GetPointer(), EntityType.AIRBASE, Resource.ResourceType.FOOD, Defs.AIRBASE_STRUCTURE_COST);
-        btnBuildArmory.SetUnit(game, activity, game.GetOurPlayer().GetPointer(), EntityType.ARMORY, Resource.ResourceType.FOOD, Defs.BARRACKS_STRUCTURE_COST);
-        btnBuildSAM.SetUnit(game, activity, game.GetOurPlayer().GetPointer(), EntityType.SAM_SITE, Resource.ResourceType.FOOD, Defs.SAM_SITE_STRUCTURE_COST);
-        btnBuildABMSilo.SetUnit(game, activity, game.GetOurPlayer().GetPointer(), EntityType.ABM_SILO, Resource.ResourceType.FOOD, Defs.ABM_SILO_STRUCTURE_COST);
-        btnBuildSentryGun.SetUnit(game, activity, game.GetOurPlayer().GetPointer(), EntityType.SENTRY_GUN, Resource.ResourceType.FOOD, Defs.SENTRY_GUN_STRUCTURE_COST);
-        btnBuildWarehouse.SetUnit(game, activity, game.GetOurPlayer().GetPointer(), EntityType.WAREHOUSE, Resource.ResourceType.FOOD, Defs.WAREHOUSE_STRUCTURE_COST);
-        btnBuildSolarPanel.SetUnit(game, activity, game.GetOurPlayer().GetPointer(), EntityType.SOLAR_PANEL, Resource.ResourceType.FOOD, Defs.SOLAR_PANEL_STRUCTURE_COST);
-        btnBuildFarm.SetUnit(game, activity, game.GetOurPlayer().GetPointer(), EntityType.FARM, Resource.ResourceType.FOOD, Defs.FARM_STRUCTURE_COST);
-        btnBuildOreMine.SetUnit(game, activity, game.GetOurPlayer().GetPointer(), EntityType.ORE_MINE, Resource.ResourceType.FOOD, Defs.ORE_MINE_STRUCTURE_COST);
-        btnBuildLogisticsDepot.SetUnit(game, activity, game.GetOurPlayer().GetPointer(), EntityType.LOGISTICS_DEPOT, Resource.ResourceType.FOOD, Defs.LOGISTICS_DEPOT_STRUCTURE_COST);
-
-        btnBuildCommandPost.SetUnit(game, activity, game.GetOurPlayer().GetPointer(), EntityType.COMMAND_POST, Resource.ResourceType.FOOD, Defs.COMMAND_POST_STRUCTURE_COST);
+        btnBuildMissileLauncher.SetUnit(game, activity, game.GetOurPlayer().GetPointer(), EntityType.MISSILE_SITE);
+        btnBuildArtilleryGun.SetUnit(game, activity, game.GetOurPlayer().GetPointer(), EntityType.ARTILLERY_GUN);
+        btnBuildNukeLauncher.SetUnit(game, activity, game.GetOurPlayer().GetPointer(), EntityType.NUCLEAR_MISSILE_SITE);
+        btnBuildAirbase.SetUnit(game, activity, game.GetOurPlayer().GetPointer(), EntityType.AIRBASE);
+        btnBuildArmory.SetUnit(game, activity, game.GetOurPlayer().GetPointer(), EntityType.ARMORY);
+        btnBuildSAM.SetUnit(game, activity, game.GetOurPlayer().GetPointer(), EntityType.SAM_SITE);
+        btnBuildABMSilo.SetUnit(game, activity, game.GetOurPlayer().GetPointer(), EntityType.ABM_SILO);
+        btnBuildSentryGun.SetUnit(game, activity, game.GetOurPlayer().GetPointer(), EntityType.SENTRY_GUN);
+        btnBuildWarehouse.SetUnit(game, activity, game.GetOurPlayer().GetPointer(), EntityType.WAREHOUSE);
+        btnBuildSolarPanel.SetUnit(game, activity, game.GetOurPlayer().GetPointer(), EntityType.SOLAR_PANEL);
+        btnBuildFarm.SetUnit(game, activity, game.GetOurPlayer().GetPointer(), EntityType.FARM);
+        btnBuildOreMine.SetUnit(game, activity, game.GetOurPlayer().GetPointer(), EntityType.ORE_MINE);
+        btnBuildLogisticsDepot.SetUnit(game, activity, game.GetOurPlayer().GetPointer(), EntityType.LOGISTICS_DEPOT);
+        btnBuildCommandPost.SetUnit(game, activity, game.GetOurPlayer().GetPointer(), EntityType.COMMAND_POST);
+        btnBuildShipyard.SetUnit(game, activity, game.GetOurPlayer().GetPointer(), EntityType.SHIPYARD);
 
         txtBuildHQ.setVisibility(GONE);
 

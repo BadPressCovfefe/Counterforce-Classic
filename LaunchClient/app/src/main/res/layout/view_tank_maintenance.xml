@@ -23,10 +23,12 @@
             android:textAppearance="?android:attr/textAppearanceLarge"/>
 
         <ImageView
-            android:layout_width="@dimen/PlayerInfoIconSize"
-            android:layout_height="@dimen/PlayerInfoIconSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/imgTank"
-            android:src="@drawable/marker_tank_east"
+            android:src="@drawable/build_tank"
+            android:padding="@dimen/CheckBoxBorderWidth"
+            android:background="@drawable/detail_button"
             android:layout_margin="@dimen/ButtonEdgePadding"
             android:layout_gravity="center"/>
     </LinearLayout>
@@ -51,11 +53,28 @@
             <TextView
                 android:id="@+id/txtTitle"
                 android:layout_width="wrap_content"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="Type"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"></LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Cost"
+            android:layout_weight="0"
+            android:layout_marginEnd="@dimen/MainViewSpacing"
+            android:id="@+id/txtCost"
+            android:layout_gravity="center"/>
 
     </LinearLayout>
 

@@ -4,19 +4,16 @@ CURRENT WORK:
 	-LAST TOUCHED:
 		
 	
-	-NEXT ON THE LIST:
+	-NEXT ON THE LIST: Implement strategic/dynamic icons for tanks.
+			-Naval travel time needs to take into account the vessel turning.
+				-In GetNavalTravelTime, if the vessel is not currently facing the target, figure out how many seconds it will take to rotate to face the target and add that.
+					-For coordinate chains, this will need to get the bearing from point A to B, then the bearing from point B to C, find the difference, then divide by the turn rate per second. Do this for every coordinate in the chain and add it all up.
+
 	
 		Counterforce: Classic Concept:
-			-To test:
+			-To test: Strategic/dynamic icons for aircraft, and toggleable dynamic icons for ships and aircraft.
 			
 			-To do:
-				-New bonuses:
-					-Nuclear Triad [DONE]
-					-Blue Water Navy [DONE]
-					-Mechanized Warfare
-					-King of the Hill [DONE]
-					-Green Thumb
-					-Environmentally Conscious
-					-Ore Lord
+				-OreMine Contest PNG uses the old OreMine marker and needs remade.
 					
 				

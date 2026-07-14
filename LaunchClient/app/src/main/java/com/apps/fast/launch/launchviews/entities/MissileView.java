@@ -96,9 +96,19 @@ public class MissileView extends LaunchView
                     }
                 });
 
-                imgMissile = (ImageView) findViewById(R.id.imgMissile);
+                imgMissile = findViewById(R.id.imgMissile);
 
-                imgMissile.setImageBitmap(EntityIconBitmaps.GetMissileBitmap(activity, game, type, game.GetAllegiance(game.GetOurPlayer(), missile), type.GetAssetID()));
+                if(missileType.GetICBM())
+                {
+                    if(missileType.GetSubmarineLaunched())
+                    {
+                        imgMissile.setImageResource(R.drawable.image_slbm);
+                    }
+                    else
+                    {
+                        imgMissile.setImageResource(R.drawable.image_icbm);
+                    }
+                }
 
                 //txtBlastRadius.setVisibility(type.GetBlastRadius() != 0 ? VISIBLE : GONE);
                 //txtMaxDamage.setVisibility(type.GetMaxDamage() != 0 ? VISIBLE : GONE);

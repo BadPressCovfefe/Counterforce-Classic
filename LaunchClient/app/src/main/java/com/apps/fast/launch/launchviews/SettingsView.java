@@ -83,23 +83,17 @@ public class SettingsView extends LaunchView
     private CheckBox chkKph;
     private CheckBox chkMph;
     private CheckBox chkKts;
-
     private TextView txtCurrency;
-
     private LinearLayout btnChangeAvatar;
     private TextView btnCloseAccount;
-
     private CheckBox chkDisableAudio;
     private CheckBox chkInitialZoom;
-    private CheckBox chkHints;
+    private CheckBox chkDynamicMarkers;
     private CheckBox chkBlastRadiiClickable;
-
     private TextView txtClustering;
     private TextView txtDefaultZoom;
     private TextView txtMaxZoom;
-
     private TextView btnTheme;
-
     private TextView txtRenamePlayer;
     private EditText txtNameEdit;
     private LinearLayout btnApplyName;
@@ -190,7 +184,7 @@ public class SettingsView extends LaunchView
 
         chkDisableAudio = findViewById(R.id.chkDisableAudio);
         chkInitialZoom = findViewById(R.id.chkInitialZoom);
-        chkHints = findViewById(R.id.chkHints);
+        chkDynamicMarkers = findViewById(R.id.chkDynamicMarkers);
         chkBlastRadiiClickable = findViewById(R.id.chkBlastRadiiClickable);
 
         txtClustering = findViewById(R.id.txtClustering);
@@ -207,6 +201,8 @@ public class SettingsView extends LaunchView
         txtServerName = findViewById(R.id.txtServerName);
 
         lytConnectionSettings = findViewById(R.id.lytConnectionSettings);
+
+        lytConnectionSettings.setVisibility(VISIBLE);
 
         if(activity.GetMapSatellite())
         {
@@ -798,16 +794,17 @@ public class SettingsView extends LaunchView
             }
         });
 
-        chkHints.setChecked(sharedPreferences.getBoolean(ClientDefs.SETTINGS_SHOW_HINTS, ClientDefs.SETTINGS_SHOW_HINTS_DEFAULT));
+        chkDynamicMarkers.setChecked(sharedPreferences.getBoolean(ClientDefs.SETTINGS_DYNAMIC_MARKERS, ClientDefs.SETTINGS_DYNAMIC_MARKERS_DEFAULT));
 
-        chkHints.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        chkDynamicMarkers.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
         {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b)
             {
                 SharedPreferences.Editor editor = context.getSharedPreferences(ClientDefs.SETTINGS, Context.MODE_PRIVATE).edit();
-                editor.putBoolean(ClientDefs.SETTINGS_SHOW_HINTS, b);
+                editor.putBoolean(ClientDefs.SETTINGS_DYNAMIC_MARKERS, b);
                 editor.commit();
+                activity.recreate();
             }
         });
 

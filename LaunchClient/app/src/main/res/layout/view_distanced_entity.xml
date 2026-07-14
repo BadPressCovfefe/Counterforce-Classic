@@ -7,10 +7,14 @@
               android:background="@drawable/detail_button">
 
     <ImageView
-        android:layout_width="@dimen/PlayerInfoIconSize"
-        android:layout_height="@dimen/PlayerInfoIconSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/imgType"
-        android:layout_margin="@dimen/ButtonEdgePadding"/>
+        android:padding="@dimen/CheckBoxBorderWidth"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/detail_button"
+        android:layout_margin="@dimen/ButtonEdgePadding"
+        android:src="@drawable/image_missile"/>
 
     <LinearLayout
         android:orientation="vertical"

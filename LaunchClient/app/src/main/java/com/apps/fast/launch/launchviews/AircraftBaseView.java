@@ -35,7 +35,6 @@ public class AircraftBaseView extends LaunchView
     private AirplaneInterface aircraft;
     private LinearLayout lytFuel;
     private TextView txtName;
-    private TextView txtHP;
     private TextView txtMissiles;
     private ImageView imgMissiles;
     private LinearLayout lytMissiles;
@@ -103,7 +102,6 @@ public class AircraftBaseView extends LaunchView
         txtFuelLevel = findViewById(R.id.txtFuelLevel);
         txtAircraftStatus = findViewById(R.id.txtInfantryStatus);
         btnMove = findViewById(R.id.btnMove);
-        txtHP = findViewById(R.id.txtHPTitle);
 
         imgInterceptors = findViewById(R.id.imgArsenalType2);
         txtInterceptors = findViewById(R.id.txtArmaments2);
@@ -236,7 +234,6 @@ public class AircraftBaseView extends LaunchView
             lytMissiles.setVisibility(GONE);
             lytInterceptors.setVisibility(GONE);
             lytFuel.setVisibility(GONE);
-            txtHP.setVisibility(GONE);
             btnMove.setVisibility(GONE);
             txtName.setVisibility(GONE);
         }
@@ -272,7 +269,6 @@ public class AircraftBaseView extends LaunchView
             lytInterceptors.setVisibility(GONE);
             lytFuel.setVisibility(GONE);
             txtAircraftStatus.setVisibility(GONE);
-            txtHP.setVisibility(GONE);
             txtName.setVisibility(GONE);
             btnMove.setVisibility(GONE);
         }
@@ -298,8 +294,6 @@ public class AircraftBaseView extends LaunchView
 
                         if(aircraft.DoneBuilding())
                         {
-                            TextUtilities.AssignHealthStringAndAppearance(txtHP, aircraft);
-
                             if(aircraft.HasMissiles())
                             {
                                 missileSystem = aircraft.GetMissileSystem();
@@ -364,7 +358,6 @@ public class AircraftBaseView extends LaunchView
                             lytMissiles.setVisibility(GONE);
                             lytInterceptors.setVisibility(GONE);
                             lytFuel.setVisibility(GONE);
-                            txtHP.setVisibility(GONE);
                             btnMove.setVisibility(GONE);
                             txtName.setVisibility(GONE);
                         }

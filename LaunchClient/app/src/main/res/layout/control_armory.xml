@@ -60,8 +60,9 @@
                 android:id="@+id/imgProduction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/ButtonImagePadding"
                 android:layout_gravity="center"
+                android:padding="@dimen/CheckBoxBorderWidth"
+                android:background="@drawable/detail_button"
                 android:src="@drawable/build_tank" />
 
             <TextView

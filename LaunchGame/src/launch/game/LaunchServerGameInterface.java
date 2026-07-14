@@ -35,6 +35,7 @@ public interface LaunchServerGameInterface
     boolean PurchaseCargoTruck(int lPlayerID, int lWarehouseID, boolean bUseSubstitutes);
     boolean PurchaseTank(int lPlayerID, int lArmoryID, EntityType type, boolean bUseSubstitutes);
     boolean ConstructStructure(int lPlayerID, EntityType structureType, ResourceType type, int lCommandPostID, GeoCoord geoRemotebuild, boolean bUseSubstitutes);
+    boolean ConstructShipyard(int lPlayerID, GeoCoord geoOutput);
     boolean PlaceBlueprint(int lPlayerID, EntityType structureType, ResourceType resourceType, GeoCoord geoPosition);
     boolean ElectronicWarfare(int lPlayerID, int lAircraftID, EntityPointer target);
     boolean PurchaseLaunchables(int lPlayerID, int lMissileSiteID, int lSlotNo, List<Integer> lMissileTypes, SystemType systemType);

@@ -211,6 +211,18 @@
                         android:layout_height="wrap_content" />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:id="@+id/lytBuildShipyard"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <com.apps.fast.launch.views.PurchaseButton
+                        android:id="@+id/btnBuildShipyard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
                 <TextView
                     android:id="@+id/textView8"
                     android:layout_width="fill_parent"

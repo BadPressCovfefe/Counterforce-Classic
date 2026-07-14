@@ -1,5 +1,8 @@
 package com.apps.fast.launch.launchviews;
 
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -10,28 +13,29 @@ import com.apps.fast.launch.activities.MainActivity;
 import com.apps.fast.launch.components.TextUtilities;
 import com.apps.fast.launch.components.Utilities;
 
+import java.util.Map;
+
 import launch.game.Defs;
+import launch.game.EntityPointer;
 import launch.game.GeoCoord;
 import launch.game.LaunchClientGame;
+import launch.game.LaunchGame;
 import launch.game.entities.AirplaneInterface;
 import launch.game.entities.Airplane;
-import launch.game.entities.AirplaneInterface;
 import launch.game.entities.LaunchEntity;
 import launch.game.entities.MapEntity;
 import launch.game.entities.Movable;
-import launch.game.entities.conceptuals.StoredAirplane;
 import launch.game.entities.conceptuals.StoredDamagable;
-import launch.game.entities.conceptuals.StoredEntity;
+import launch.game.systems.LaunchSystem;
 import launch.game.systems.MissileSystem;
 import launch.game.entities.Movable.MoveOrders;
+import launch.game.types.InterceptorType;
+import launch.game.types.MissileType;
 
 public class AircraftQuickSelectView extends LaunchView
 {
     private TextView txtAircraftType;
     private ImageView imgAircraftType;
-    private ImageView imgMissiles;
-    private LinearLayout lytMissiles;
-    private TextView txtMissiles;
     private TextView txtFuelLevel;
     private TextView txtAircraftStatus;
     private AirplaneInterface aircraft;
@@ -42,11 +46,9 @@ public class AircraftQuickSelectView extends LaunchView
     private MapEntity targetEntity;
     private MoveOrders order;
     private TextView txtName;
-    private TextView txtHP;
-    private LinearLayout lytInterceptors;
-    private ImageView imgInterceptors;
-    private TextView txtInterceptors;
+    private LinearLayout lytArmament;
     private MissileSystem interceptorSystem;
+    private AircraftQuickSelectView me;
 
     /**
      * Initialise for a single structure.
@@ -62,6 +64,7 @@ public class AircraftQuickSelectView extends LaunchView
         this.geoTarget = geoTarget;
         this.targetEntity = entity;
         this.order = order;
+        this.me = this;
 
         if(aircraft.HasMissiles())
         {
@@ -71,11 +74,6 @@ public class AircraftQuickSelectView extends LaunchView
         if(!aircraft.HasMissiles() && aircraft.HasInterceptors())
         {
             interceptorSystem = aircraft.GetInterceptorSystem();
-        }
-
-        if(aircraft.HasCargo())
-        {
-            //system3 = aircraft.GetCargoSystem();
         }
 
         Setup();
@@ -88,90 +86,268 @@ public class AircraftQuickSelectView extends LaunchView
 
         imgAircraftType = findViewById(R.id.imgAircraftType);
         txtAircraftType = findViewById(R.id.txtAircraftType);
-        imgMissiles = findViewById(R.id.imgArsenalType);
-        lytMissiles = findViewById(R.id.lytArsenal);
-        txtMissiles = findViewById(R.id.txtArmaments);
         txtFuelLevel = findViewById(R.id.txtFuelLevel);
         txtAircraftStatus = findViewById(R.id.txtInfantryStatus);
         txtFlightTime = findViewById(R.id.txtTravelTime);
         txtFuelUsage = findViewById(R.id.txtFuelUsage);
         txtName = findViewById(R.id.txtName);
-        txtHP = findViewById(R.id.txtHPTitle);
-        imgInterceptors = findViewById(R.id.imgArsenalType2);
-        txtInterceptors = findViewById(R.id.txtArmaments2);
-        lytInterceptors = findViewById(R.id.lytArsenal2);
+        lytArmament = findViewById(R.id.lytArmament);
+
+        //Armament layout.
+        lytArmament.removeAllViews();
+
+        if(aircraft.GetAircraftType() == EntityPointer.EntityType.BOMBER || aircraft.GetAircraftType() == EntityPointer.EntityType.SSB || aircraft.GetAircraftType() == EntityPointer.EntityType.FIGHTER || aircraft.GetAircraftType() == EntityPointer.EntityType.MULTI_ROLE)
+        {
+            if(missileSystem != null)
+            {
+                if(missileSystem.GetReadySlotCount() > 0)
+                {
+                    //Has missiles. Include them in the list.
+                    for(Map.Entry<Integer, Integer> typeCount : missileSystem.GetTypeCounts().entrySet())
+                    {
+                        MissileType type = game.GetConfig().GetMissileType(typeCount.getKey());
+
+                        LinearLayout row = new LinearLayout(activity);
+                        row.setOrientation(LinearLayout.HORIZONTAL);
+                        row.setGravity(Gravity.CENTER_VERTICAL);
+
+                        ImageView image = new ImageView(activity);
+
+                        image.setImageBitmap(EntityIconBitmaps.GetMissileBitmap(activity, game, type, LaunchGame.Allegiance.UNAFFILIATED, type.GetAssetID()));
+
+                        LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                        imageParams.setMarginEnd(8);
+                        image.setLayoutParams(imageParams);
+
+                        TextView text = new TextView(activity);
+
+                        text.setAllCaps(true);
+                        text.setText(type.GetName() + " x" + typeCount.getValue());
+
+                        row.addView(image);
+                        row.addView(text);
+
+                        lytArmament.addView(row);
+                    }
+                }
+
+                if(missileSystem.GetEmptySlotCount() > 0)
+                {
+                    LinearLayout row = new LinearLayout(activity);
+                    row.setOrientation(LinearLayout.HORIZONTAL);
+                    row.setGravity(Gravity.CENTER_VERTICAL);
+
+                    ImageView image = new ImageView(activity);
+
+                    image.setImageResource(R.drawable.button_add);
+
+                    LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                    imageParams.setMarginEnd(8);
+                    image.setLayoutParams(imageParams);
+                    image.setBackground(context.getDrawable(R.drawable.detail_button));
+
+                    image.setOnClickListener(new OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View view)
+                        {
+                            activity.SetView(new PurchaseLaunchableView(game, activity, aircraft.GetAirplane(), LaunchSystem.SystemType.STORED_AIRCRAFT_MISSILES, geoTarget, targetEntity, order));
+                        }
+                    });
+
+                    TextView text = new TextView(activity);
+
+                    text.setAllCaps(true);
+                    text.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
+                    text.setText(context.getString(R.string.empty) + " x" + missileSystem.GetEmptySlotCount());
+
+                    text.setOnClickListener(new OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View view)
+                        {
+                            activity.SetView(new PurchaseLaunchableView(game, activity, aircraft.GetAirplane(), LaunchSystem.SystemType.STORED_AIRCRAFT_MISSILES, geoTarget, targetEntity, order));
+                        }
+                    });
+
+                    row.addView(image);
+                    row.addView(text);
+
+                    lytArmament.addView(row);
+                }
+            }
+
+            if(interceptorSystem != null)
+            {
+                if(interceptorSystem.GetReadySlotCount() > 0)
+                {
+                    //Has interceptors. Include them in the list.
+                    for(Map.Entry<Integer, Integer> typeCount : interceptorSystem.GetTypeCounts().entrySet())
+                    {
+                        InterceptorType type = game.GetConfig().GetInterceptorType(typeCount.getKey());
+
+                        LinearLayout row = new LinearLayout(activity);
+                        row.setOrientation(LinearLayout.HORIZONTAL);
+                        row.setGravity(Gravity.CENTER_VERTICAL);
+
+                        ImageView image = new ImageView(activity);
+
+                        image.setImageBitmap(EntityIconBitmaps.GetInterceptorBitmap(activity, game, type, LaunchGame.Allegiance.UNAFFILIATED, type.GetAssetID()));
+
+                        LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                        imageParams.setMarginEnd(8);
+                        image.setLayoutParams(imageParams);
+
+                        TextView text = new TextView(activity);
+
+                        text.setAllCaps(true);
+                        text.setText(type.GetName() + " x" + typeCount.getValue());
+
+                        row.addView(image);
+                        row.addView(text);
+
+                        lytArmament.addView(row);
+                    }
+                }
+
+                if(interceptorSystem.GetEmptySlotCount() > 0)
+                {
+                    LinearLayout row = new LinearLayout(activity);
+                    row.setOrientation(LinearLayout.HORIZONTAL);
+                    row.setGravity(Gravity.CENTER_VERTICAL);
+
+                    ImageView image = new ImageView(activity);
+
+                    image.setImageResource(R.drawable.button_add);
+
+                    LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                    imageParams.setMarginEnd(8);
+                    image.setLayoutParams(imageParams);
+                    image.setBackground(context.getDrawable(R.drawable.detail_button));
+
+                    image.setOnClickListener(new OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View view)
+                        {
+                            activity.SetView(new PurchaseLaunchableView(game, activity, aircraft.GetAirplane(), LaunchSystem.SystemType.STORED_AIRCRAFT_MISSILES, geoTarget, targetEntity, order));
+                        }
+                    });
+
+                    TextView text = new TextView(activity);
+
+                    text.setAllCaps(true);
+                    text.setText(context.getString(R.string.empty) + " x" + interceptorSystem.GetEmptySlotCount());
+
+                    text.setOnClickListener(new OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View view)
+                        {
+                            activity.SetView(new PurchaseLaunchableView(game, activity, aircraft.GetAirplane(), LaunchSystem.SystemType.STORED_AIRCRAFT_MISSILES, geoTarget, targetEntity, order));
+                        }
+                    });
+
+                    row.addView(image);
+                    row.addView(text);
+
+                    lytArmament.addView(row);
+                }
+            }
+        }
+        else if(aircraft.GetAircraftType() == EntityPointer.EntityType.REFUELER)
+        {
+            LinearLayout row = new LinearLayout(activity);
+            row.setOrientation(LinearLayout.HORIZONTAL);
+            row.setGravity(Gravity.CENTER_VERTICAL);
+
+            ImageView image = new ImageView(activity);
+
+            LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+            textParams.setMarginEnd(8);
+
+            TextView text = new TextView(activity);
+
+            text.setAllCaps(true);
+            text.setText(context.getString(R.string.none));
+            text.setLayoutParams(textParams);
+
+            row.addView(image);
+            row.addView(text);
+
+            lytArmament.addView(row);
+        }
+        else if(aircraft.GetAircraftType() == EntityPointer.EntityType.ATTACK_AIRCRAFT)
+        {
+            LinearLayout row = new LinearLayout(activity);
+            row.setOrientation(LinearLayout.HORIZONTAL);
+            row.setGravity(Gravity.CENTER_VERTICAL);
+
+            ImageView image = new ImageView(activity);
+
+            LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+            textParams.setMarginEnd(8);
+
+            TextView text = new TextView(activity);
+
+            text.setAllCaps(true);
+            text.setText(context.getString(R.string.cannon));
+            text.setLayoutParams(textParams);
+
+            row.addView(image);
+            row.addView(text);
+
+            lytArmament.addView(row);
+        }
 
         txtName.setText(aircraft.GetName().length() > 0 ? aircraft.GetName() : context.getString(R.string.unnamed));
 
-        imgAircraftType.setImageBitmap(EntityIconBitmaps.GetAircraftBitmap(context, game, aircraft));
+        switch(aircraft.GetAircraftType())
+        {
+            case BOMBER:
+            {
+                imgAircraftType.setImageResource(R.drawable.build_bomber);
+            }
+            break;
+
+            case FIGHTER:
+            {
+                imgAircraftType.setImageResource(R.drawable.build_fighter);
+            }
+            break;
+
+            case ATTACK_AIRCRAFT:
+            {
+                imgAircraftType.setImageResource(R.drawable.build_ground_attack);
+            }
+            break;
+
+            case REFUELER:
+            {
+                imgAircraftType.setImageResource(R.drawable.build_refueler);
+            }
+            break;
+
+            case MULTI_ROLE:
+            {
+                imgAircraftType.setImageResource(R.drawable.build_multi_role);
+            }
+            break;
+
+            case SSB:
+            {
+                imgAircraftType.setImageResource(R.drawable.build_ssb);
+            }
+            break;
+        }
 
         txtAircraftType.setText(TextUtilities.GetEntityTypeAndName((LaunchEntity)aircraft, game));
-
-        if(aircraft.HasMissiles())
-        {
-            lytMissiles.setVisibility(VISIBLE);
-        }
-        else
-        {
-            lytMissiles.setVisibility(GONE);
-        }
-
-        if(aircraft.HasInterceptors())
-        {
-            lytInterceptors.setVisibility(VISIBLE);
-        }
-        else
-        {
-            lytInterceptors.setVisibility(GONE);
-        }
-
-        if(aircraft.HasCargo())
-        {
-            //TODO
-            //imgCargo.setImageResource(R.drawable.icon_cargo);
-            //lytCargo.setVisibility(VISIBLE);
-        }
-
-        /*For setting up the missile/interceptor count readout.*/
-        if(missileSystem != null)
-        {
-            txtMissiles.setText(context.getString(R.string.aircraft_armaments, missileSystem.GetOccupiedSlotCount(), missileSystem.GetSlotCount()));
-
-            int lowMissileThreshold = missileSystem.GetSlotCount()/3;
-
-            if(missileSystem.GetOccupiedSlotCount() == missileSystem.GetSlotCount())
-            {
-                txtMissiles.setTextColor(Utilities.ColourFromAttr(context, R.attr.GoodColour));
-            }
-            else if(missileSystem.GetOccupiedSlotCount() < lowMissileThreshold)
-            {
-                txtMissiles.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
-            }
-            else
-            {
-                txtMissiles.setTextColor(Utilities.ColourFromAttr(context, R.attr.WarningColour));
-            }
-        }
-
-        if(interceptorSystem != null)
-        {
-            int lowInterceptorThreshold = interceptorSystem.GetSlotCount()/3;
-
-            txtInterceptors.setText(context.getString(R.string.aircraft_armaments, interceptorSystem.GetOccupiedSlotCount(), interceptorSystem.GetSlotCount()));
-
-            if(interceptorSystem.GetOccupiedSlotCount() == interceptorSystem.GetSlotCount())
-            {
-                txtInterceptors.setTextColor(Utilities.ColourFromAttr(context, R.attr.GoodColour));
-            }
-            else if(interceptorSystem.GetOccupiedSlotCount() < lowInterceptorThreshold)
-            {
-                txtInterceptors.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
-            }
-            else
-            {
-                txtInterceptors.setTextColor(Utilities.ColourFromAttr(context, R.attr.WarningColour));
-            }
-        }
 
         /*For setting up fuel level readout.*/
         txtFuelLevel = findViewById(R.id.txtFuelLevel);
@@ -274,51 +450,8 @@ public class AircraftQuickSelectView extends LaunchView
                 {
                     Movable flyingAircraft = (Movable)aircraft;
 
-                    TextUtilities.AssignHealthStringAndAppearance(txtHP, flyingAircraft);
-                    txtFlightTime.setText(context.getString(R.string.flight_time_target, TextUtilities.GetTimeAmount(game.GetTravelTime(Defs.GetAircraftSpeed(((LaunchEntity)aircraft).GetEntityType()), flyingAircraft.GetPosition(), geoTarget))));
+                    txtFlightTime.setText(context.getString(R.string.flight_time_target, TextUtilities.GetTimeAmount(game.GetTravelTime(Defs.GetAircraftSpeed(aircraft.GetAircraftType()), flyingAircraft.GetPosition(), geoTarget))));
                     txtFuelUsage.setText(context.getString(R.string.fuel_percent_for_trip, TextUtilities.GetFuelUsageString(game, aircraft, geoTarget)));
-                    /*For setting up the missile/interceptor count readout.*/
-
-                    if(missileSystem != null)
-                    {
-                        /*For setting up the missile/interceptor count readout.*/
-                        txtMissiles.setText(context.getString(R.string.aircraft_armaments, missileSystem.GetOccupiedSlotCount(), missileSystem.GetSlotCount()));
-
-                        int lowMissileThreshold = missileSystem.GetSlotCount()/3;
-
-                        if(missileSystem.GetOccupiedSlotCount() == missileSystem.GetSlotCount())
-                        {
-                            txtMissiles.setTextColor(Utilities.ColourFromAttr(context, R.attr.GoodColour));
-                        }
-                        else if(missileSystem.GetOccupiedSlotCount() < lowMissileThreshold)
-                        {
-                            txtMissiles.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
-                        }
-                        else
-                        {
-                            txtMissiles.setTextColor(Utilities.ColourFromAttr(context, R.attr.WarningColour));
-                        }
-                    }
-
-                    if(interceptorSystem != null)
-                    {
-                        int lowInterceptorThreshold = interceptorSystem.GetSlotCount()/3;
-
-                        txtInterceptors.setText(context.getString(R.string.aircraft_armaments, interceptorSystem.GetOccupiedSlotCount(), interceptorSystem.GetSlotCount()));
-
-                        if(interceptorSystem.GetOccupiedSlotCount() == interceptorSystem.GetSlotCount())
-                        {
-                            txtInterceptors.setTextColor(Utilities.ColourFromAttr(context, R.attr.GoodColour));
-                        }
-                        else if(interceptorSystem.GetOccupiedSlotCount() < lowInterceptorThreshold)
-                        {
-                            txtInterceptors.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
-                        }
-                        else
-                        {
-                            txtInterceptors.setTextColor(Utilities.ColourFromAttr(context, R.attr.WarningColour));
-                        }
-                    }
 
                     /*For setting up fuel level readout.*/
                     txtFuelLevel = findViewById(R.id.txtFuelLevel);
@@ -328,52 +461,9 @@ public class AircraftQuickSelectView extends LaunchView
                 }
                 else
                 {
-                    StoredDamagable storedAircraft = (StoredDamagable)aircraft;
-                    TextUtilities.AssignHealthStringAndAppearance(txtHP, storedAircraft);
                     GeoCoord geoStart = aircraft.GetHomeBase().GetMapEntity(game).GetPosition();
-                    txtFlightTime.setText(context.getString(R.string.flight_time_target, TextUtilities.GetTimeAmount(game.GetTravelTime(Defs.GetAircraftSpeed(((LaunchEntity)aircraft).GetEntityType()), geoStart, geoTarget))));
+                    txtFlightTime.setText(context.getString(R.string.flight_time_target, TextUtilities.GetTimeAmount(game.GetTravelTime(Defs.GetAircraftSpeed(aircraft.GetAircraftType()), geoStart, geoTarget))));
                     txtFuelUsage.setText(context.getString(R.string.fuel_percent_for_trip, TextUtilities.GetFuelUsageString(game, aircraft, geoTarget)));
-
-                    if(missileSystem != null)
-                    {
-                        /*For setting up the missile/interceptor count readout.*/
-                        txtMissiles.setText(context.getString(R.string.aircraft_armaments, missileSystem.GetOccupiedSlotCount(), missileSystem.GetSlotCount()));
-
-                        int lowMissileThreshold = missileSystem.GetSlotCount()/3;
-
-                        if(missileSystem.GetOccupiedSlotCount() == missileSystem.GetSlotCount())
-                        {
-                            txtMissiles.setTextColor(Utilities.ColourFromAttr(context, R.attr.GoodColour));
-                        }
-                        else if(missileSystem.GetOccupiedSlotCount() < lowMissileThreshold)
-                        {
-                            txtMissiles.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
-                        }
-                        else
-                        {
-                            txtMissiles.setTextColor(Utilities.ColourFromAttr(context, R.attr.WarningColour));
-                        }
-                    }
-
-                    if(interceptorSystem != null)
-                    {
-                        int lowInterceptorThreshold = interceptorSystem.GetSlotCount()/3;
-
-                        txtInterceptors.setText(context.getString(R.string.aircraft_armaments, interceptorSystem.GetOccupiedSlotCount(), interceptorSystem.GetSlotCount()));
-
-                        if(interceptorSystem.GetOccupiedSlotCount() == interceptorSystem.GetSlotCount())
-                        {
-                            txtInterceptors.setTextColor(Utilities.ColourFromAttr(context, R.attr.GoodColour));
-                        }
-                        else if(interceptorSystem.GetOccupiedSlotCount() < lowInterceptorThreshold)
-                        {
-                            txtInterceptors.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
-                        }
-                        else
-                        {
-                            txtInterceptors.setTextColor(Utilities.ColourFromAttr(context, R.attr.WarningColour));
-                        }
-                    }
 
                     /*For setting up fuel level readout.*/
                     txtFuelLevel = findViewById(R.id.txtFuelLevel);

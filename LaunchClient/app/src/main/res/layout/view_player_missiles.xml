@@ -37,6 +37,8 @@
                 android:id="@+id/imageView22"
                 android:src="@drawable/build_missile_site"
                 android:layout_gravity="center"
+                android:padding="@dimen/CheckBoxBorderWidth"
+                android:background="@drawable/detail_button"
                 android:layout_marginStart="@dimen/ButtonInset"
                 android:layout_marginTop="@dimen/ButtonInset"
                 android:layout_marginRight="@dimen/ButtonInset"

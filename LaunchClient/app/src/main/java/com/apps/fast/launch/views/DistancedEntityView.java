@@ -40,7 +40,7 @@ public class DistancedEntityView extends FrameLayout
         txtLocation.setText(TextUtilities.GetDistanceStringFromKM(fltDistance) + " " + TextUtilities.QualitativeDirectionFromBearing(dblDirection));
     }
 
-    public DistancedEntityView(Context context, MainActivity activity, LaunchEntity entity, LaunchClientGame game)
+    public DistancedEntityView(Context context, MainActivity activity, MapEntity entity, LaunchClientGame game)
     {
         super(context);
 
@@ -51,7 +51,7 @@ public class DistancedEntityView extends FrameLayout
         findViewById(R.id.txtLocation).setVisibility(GONE);
     }
 
-    void Setup(MainActivity activity, LaunchEntity entity, LaunchClientGame game)
+    void Setup(MainActivity activity, MapEntity entity, LaunchClientGame game)
     {
         ImageView imgType = findViewById(R.id.imgType);
         ImageView imgOwner = findViewById(R.id.imgOwner);
@@ -63,28 +63,7 @@ public class DistancedEntityView extends FrameLayout
         {
             imgType.setImageBitmap(AvatarBitmaps.GetPlayerAvatar(activity, game, (Player)entity));
             txtEntityName.setText(((Player)entity).GetName());
-        }
-        else if(entity instanceof Structure)
-        {
-            imgType.setImageBitmap(StructureIconBitmaps.GetStructureBitmap(activity, game, (Structure)entity));
-            txtEntityName.setText(TextUtilities.GetEntityTypeAndName(entity, game));
-            owner = game.GetPlayer(entity.GetOwnerID());
-        }
-        else if(entity instanceof Missile)
-        {
-            Missile missile = ((Missile)entity);
-            MissileType type = game.GetConfig().GetMissileType(missile.GetType());
-            imgType.setImageBitmap(EntityIconBitmaps.GetMissileBitmap(activity, game, type, game.GetAllegiance(game.GetOurPlayer(), missile), type.GetAssetID()));
-            txtEntityName.setText(TextUtilities.GetEntityTypeAndName(entity, game));
-            owner = type.GetStealth() ? null : game.GetPlayer(((Missile)entity).GetOwnerID());
-        }
-        else if(entity instanceof Interceptor)
-        {
-            Interceptor interceptor = ((Interceptor)entity);
-            InterceptorType type = game.GetConfig().GetInterceptorType(interceptor.GetType());
-            imgType.setImageBitmap(EntityIconBitmaps.GetInterceptorBitmap(activity, game, type, game.GetAllegiance(game.GetOurPlayer(), interceptor), type.GetAssetID()));
-            txtEntityName.setText(TextUtilities.GetEntityTypeAndName(entity, game));
-            owner = game.GetPlayer(((Interceptor)entity).GetOwnerID());
+            imgType.setBackground(null);
         }
         else if(entity instanceof Loot)
         {
@@ -95,53 +74,14 @@ public class DistancedEntityView extends FrameLayout
         }
         else if(entity instanceof Rubble)
         {
-            Rubble rubble = ((Rubble)entity);
-
-            imgType.setImageBitmap(EntityIconBitmaps.GetRubbleBitmap(activity, game, rubble));
+            imgType.setImageResource(EntityIconBitmaps.GetEntityImageResource(game, entity));
             txtEntityName.setText(TextUtilities.GetEntityTypeAndName(entity, game));
-        }
-        else if(entity instanceof Airplane)
-        {
-            imgType.setImageBitmap(EntityIconBitmaps.GetAircraftBitmap(activity, game, (Airplane)entity));
-            txtEntityName.setText(TextUtilities.GetEntityTypeAndName(entity, game));
-            owner = ((Airplane)entity).GetStealth() ? null : game.GetPlayer(((Airplane)entity).GetOwnerID());
-        }
-        else if(entity instanceof Infantry)
-        {
-            imgType.setImageBitmap(LandUnitIconBitmaps.GetLandUnitBitmap(activity, game, (Infantry)entity));
-            txtEntityName.setText(TextUtilities.GetEntityTypeAndName(entity, game));
-            owner = game.GetPlayer(((Infantry)entity).GetOwnerID());
-        }
-        else if(entity instanceof CargoTruck)
-        {
-            CargoTruck truck = (CargoTruck)entity;
-
-            imgType.setImageBitmap(LandUnitIconBitmaps.GetLandUnitBitmap(activity, game, (CargoTruck)entity));
-            txtEntityName.setText(TextUtilities.GetEntityTypeAndName(entity, game));
-            owner = game.GetPlayer(((CargoTruck)entity).GetOwnerID());
-        }
-        else if(entity instanceof Tank)
-        {
-            imgType.setImageBitmap(LandUnitIconBitmaps.GetLandUnitBitmap(activity, game, (Tank)entity));
-            txtEntityName.setText(TextUtilities.GetEntityTypeAndName(entity, game));
-            owner = game.GetPlayer(((Tank)entity).GetOwnerID());
-        }
-        else if(entity instanceof Shipyard)
-        {
-            imgType.setImageBitmap(EntityIconBitmaps.GetShipyardBitmap(activity, game, (Shipyard)entity));
-            txtEntityName.setText(((Shipyard)entity).GetName());
-            owner = game.GetPlayer(((Shipyard)entity).GetOwnerID());
-        }
-        else if(entity instanceof NavalVessel)
-        {
-            imgType.setImageBitmap(EntityIconBitmaps.GetOwnedNavalBitmap(activity, game, (NavalVessel)entity));
-            txtEntityName.setText(TextUtilities.GetOwnedEntityName(entity, game));
-            owner = game.GetPlayer(((NavalVessel)entity).GetOwnerID());
         }
         else
         {
-            imgType.setImageResource(R.drawable.todo);
-            txtEntityName.setText(String.format("Support for %s not implemented!", entity.getClass().getName()));
+            imgType.setImageResource(EntityIconBitmaps.GetEntityImageResource(game, entity));
+            txtEntityName.setText(TextUtilities.GetEntityTypeAndName(entity, game));
+            owner = game.GetPlayer(entity.GetOwnerID());
         }
 
         if(owner != null)

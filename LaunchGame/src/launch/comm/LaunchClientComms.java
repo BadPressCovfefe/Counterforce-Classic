@@ -452,6 +452,11 @@ public class LaunchClientComms extends LaunchComms
         currentTask = new BuildStructureTask(gameInterface, structureType, type, lCommandPostID, geoRemoteBuild, bUseSubstitutes);
     }
     
+    public void ConstructShipyard(GeoCoord geoOutput)
+    {
+        currentTask = new BuildShipyardTask(gameInterface, geoOutput);
+    }
+    
     /**
      * Purchasing an existing aircraft type.
      * @param lAirbaseID the id of the airbase the aircraft will go in.

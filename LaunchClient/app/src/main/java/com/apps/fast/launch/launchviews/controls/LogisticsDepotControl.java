@@ -19,7 +19,7 @@ public class LogisticsDepotControl extends LaunchView
 {
     private int lID;
     private TextView txtDepotMoneyStats;
-    private TextView txtGenerationRemaining;
+    private TextView txtCooldownRemaining;
     private LinearLayout btnCollect;
     private boolean bOurStructure;
     private LogisticsDepot depot;
@@ -48,12 +48,12 @@ public class LogisticsDepotControl extends LaunchView
         inflate(context, R.layout.control_logisticsdepot, this);
 
         txtDepotMoneyStats = findViewById(R.id.txtDepotMoneyStats);
-        txtGenerationRemaining = findViewById(R.id.txtGenerationRemaining);
+        txtCooldownRemaining = findViewById(R.id.txtCooldownRemaining);
         btnCollect = findViewById(R.id.btnCollect);
 
         if(bOurStructure)
         {
-            txtGenerationRemaining.setText(TextUtilities.GetTimeAmount(depot.GetCollectCooldownRemaining()));
+            txtCooldownRemaining.setText(TextUtilities.GetTimeAmount(depot.GetCollectCooldownRemaining()));
             txtDepotMoneyStats.setText(context.getString(R.string.bank_money_stats, TextUtilities.GetCurrencyString(depot.GetWealth()), TextUtilities.GetCurrencyString(Defs.LOGISTICS_DEPOT_WEALTH_CAPACITY)));
 
             btnCollect.setOnClickListener(new OnClickListener()
@@ -98,7 +98,7 @@ public class LogisticsDepotControl extends LaunchView
 
         if(depot != null)
         {
-            txtGenerationRemaining.setText(TextUtilities.GetTimeAmount(depot.GetCollectCooldownRemaining()));
+            txtCooldownRemaining.setText(TextUtilities.GetTimeAmount(depot.GetCollectCooldownRemaining()));
             txtDepotMoneyStats.setText(context.getString(R.string.bank_money_stats, TextUtilities.GetCurrencyString(depot.GetWealth()), TextUtilities.GetCurrencyString(Defs.LOGISTICS_DEPOT_WEALTH_CAPACITY)));
         }
     }

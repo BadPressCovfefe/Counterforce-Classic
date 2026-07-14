@@ -20,7 +20,7 @@ public class Loot extends MapEntity
 {
     private static final int DATA_SIZE = 12;
     
-    private String strTitle = "Loot";                                                    
+    private String strTitle;                                                    
     private long oQuantity;                                                     
     private ShortDelay dlyExpiry;
     
@@ -30,6 +30,7 @@ public class Loot extends MapEntity
     public Loot(int lID, GeoCoord geoPosition, String strTitle, long oQuantity, int lExpiry)
     {
         super(lID, geoPosition, true, 0);
+        this.strTitle = strTitle;
         this.dlyExpiry = new ShortDelay(lExpiry);
         this.bVisible = true;
         this.oQuantity = oQuantity;
@@ -61,6 +62,11 @@ public class Loot extends MapEntity
         dlyExpiry.GetData(bb);
         
         return bb.array();
+    }
+    
+    public String GetDescription()
+    {
+        return strTitle;
     }
     
     @Override
@@ -140,7 +146,7 @@ public class Loot extends MapEntity
     @Override
     public String GetTypeName()
     {
-        return strTitle != null ? strTitle : "Loot";
+        return strTitle;
     }
     
     /**

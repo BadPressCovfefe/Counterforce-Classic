@@ -12,5 +12,4 @@ package launch.game;
 public interface LaunchServerAppInterface
 {
     void SaveTheGame();
-    void LoadShipyards(LaunchServerGame game);
 }

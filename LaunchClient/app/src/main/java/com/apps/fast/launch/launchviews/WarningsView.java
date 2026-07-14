@@ -53,6 +53,7 @@ public class WarningsView extends LaunchView
     private TextView txtWarning;
     private FrameLayout lytNotifications;
     private LinearLayout btnNotifications;
+    private FrameLayout lytPerimeterDefence;
     private FrameLayout lytAirCover;
     private FrameLayout lytAttack;
     private FrameLayout lytExpenses;
@@ -81,6 +82,7 @@ public class WarningsView extends LaunchView
 
         lytNotifications = findViewById(R.id.lytNotifications);
         btnNotifications = findViewById(R.id.btnNotifications);
+        lytPerimeterDefence = findViewById(R.id.lytPerimeterDefence);
         lytAirCover = findViewById(R.id.lytAirCover);
         lytAttack = findViewById(R.id.lytAttack);
         lytExpenses = findViewById(R.id.lytExpenses);
@@ -193,6 +195,17 @@ public class WarningsView extends LaunchView
                 else
                 {
                     lytNotifications.setVisibility(GONE);
+                }
+
+                //No air cover.
+                if(game.GetPlayerHasNoPerimeterDefences(game.GetOurPlayer()))
+                {
+                    bNoProblems = false;
+                    lytPerimeterDefence.setVisibility(VISIBLE);
+                }
+                else
+                {
+                    lytPerimeterDefence.setVisibility(GONE);
                 }
 
                 //No air cover.

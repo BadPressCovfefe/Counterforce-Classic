@@ -107,6 +107,11 @@ public class LogisticsDepot extends Structure
         return this.lWealth;
     }
     
+    public int GetRemainingCapacity()
+    {
+        return Defs.LOGISTICS_DEPOT_WEALTH_CAPACITY - this.lWealth;
+    }
+    
     public void AddWealth(int lWealth)
     {
         if(this.lWealth + lWealth > Defs.LOGISTICS_DEPOT_WEALTH_CAPACITY)

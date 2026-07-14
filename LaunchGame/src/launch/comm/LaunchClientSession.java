@@ -908,6 +908,12 @@ public class LaunchClientSession extends LaunchSession
             }
             break;
             
+            case RemoveShipyard:
+            {
+                gameInterface.RemoveShipyard(lInstanceNumber);
+            }
+            break;
+            
             case RemoveSubmarine:
             {
                 gameInterface.RemoveSubmarine(lInstanceNumber);

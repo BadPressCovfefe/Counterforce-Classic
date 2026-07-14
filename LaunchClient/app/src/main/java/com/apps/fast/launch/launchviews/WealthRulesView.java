@@ -317,7 +317,7 @@ public class WealthRulesView extends LaunchView
 
         for(Structure structure : new ArrayList<>(ourPlayer.GetStructures()))
         {
-            if(structure != null && !structure.GetOffline() && !(structure instanceof OreMine))
+            if(structure != null && !structure.GetOffline())
             {
                 lOnlineStructureCount++;
             }
@@ -332,8 +332,6 @@ public class WealthRulesView extends LaunchView
         lMissileMaintenance = game.GetHourlyMissileMaintenance(ourPlayer.GetID());
         lInterceptorsMaintenance = game.GetHourlyInterceptorMaintenance(ourPlayer.GetID());
         lTorpedoMaintenance = game.GetHourlyTorpedoMaintenance(ourPlayer.GetID());
-        lInfantryMaintenance = game.GetInfantryMaintenanceCost(ourPlayer.GetID());
-        lCargoTruckMaintenance = game.GetCargoTruckMaintenanceCost(ourPlayer.GetID());
         lTankMaintenance = game.GetTankMaintenanceCost(ourPlayer.GetID());
         lGrossHourly = lBasicIncome + lRankIncome + lBonusIncome;
 
@@ -369,7 +367,6 @@ public class WealthRulesView extends LaunchView
         txtRankPay.setText(TextUtilities.GetCurrencyString(lRankIncome));
 
         txtStructureQuantity.setText(String.valueOf(lOnlineStructureCount));
-        txtStructureCostEach.setText(TextUtilities.GetCurrencyString(Defs.ONLINE_MAINTENANCE_COST));
         txtStructureCost.setText(TextUtilities.GetCurrencyString(lStructureMaintenance));
 
         txtAircraftQuantity.setText(String.valueOf(game.GetAircraftCount(ourPlayer.GetID())));
@@ -881,8 +878,6 @@ public class WealthRulesView extends LaunchView
 
     private void RebuildCostableEntityList()
     {
-        int lHourlyGeneration = RebuildPlayerWealthStatement();
-
         //Compute hourly maintenances.
         List<Structure> OurStructures = game.GetOurStructures();
         List<AirplaneInterface> OurAircraft = game.GetOurAircrafts();
@@ -890,9 +885,7 @@ public class WealthRulesView extends LaunchView
         List<Ship> OurShips = game.GetOurShips();
         List<Submarine> OurSubmarines = game.GetOurSubmarines();
 
-        int lHourlyCosts = 0;
-
-        if(!OurStructures.isEmpty())
+        if(!OurStructures.isEmpty() || !OurAircraft.isEmpty() || !OurTanks.isEmpty() || !OurShips.isEmpty() || !OurSubmarines.isEmpty())
         {
             findViewById(R.id.txtMaintenanceNone).setVisibility(View.GONE);
         }
@@ -929,15 +922,6 @@ public class WealthRulesView extends LaunchView
 
                 lytHourlyCosts.addView(mev);
             }
-
-            if(structure.GetOnline() || structure.GetBooting())
-            {
-                lHourlyCosts += game.GetConfig().GetMaintenanceCost();
-            }
-            else if(structure.GetOffline())
-            {
-                lHourlyCosts += 5;
-            }
         }
 
         for(final AirplaneInterface aircraft : OurAircraft)
@@ -959,11 +943,6 @@ public class WealthRulesView extends LaunchView
                     });
 
                     lytHourlyCosts.addView(mev);
-                }
-
-                if(aircraft.Flying())
-                {
-                    lHourlyCosts += Defs.GetAircraftMaintenanceCost(aircraft.GetAircraftType());
                 }
             }
         }
@@ -1006,11 +985,6 @@ public class WealthRulesView extends LaunchView
 
                 lytHourlyCosts.addView(mev);
             }
-
-            if(game.ShipInPort(ship))
-            {
-                lHourlyCosts += Defs.GetNavalMaintenanceCost(ship.GetEntityType());
-            }
         }
 
         for(final Submarine submarine : OurSubmarines)
@@ -1030,11 +1004,6 @@ public class WealthRulesView extends LaunchView
                 });
 
                 lytHourlyCosts.addView(mev);
-            }
-
-            if(game.ShipInPort(submarine))
-            {
-                lHourlyCosts += Defs.GetNavalMaintenanceCost(submarine.GetEntityType());
             }
         }
     }
@@ -1328,7 +1297,16 @@ public class WealthRulesView extends LaunchView
                                 {
                                     if(kingOfTheHill != null && kingOfTheHill.GetOccupiedByAlliance() && kingOfTheHill.GetOwnedBy(alliance.GetID()))
                                     {
-                                        lKothBonus = Defs.KOTH_BONUS_ALLIANCE;
+                                        int lMembers = game.GetAllianceMemberCount(alliance);
+
+                                        if(Defs.KOTH_BONUS_PLAYER/lMembers < Defs.KOTH_BONUS_ALLIANCE)
+                                        {
+                                            lKothBonus += Defs.KOTH_BONUS_ALLIANCE;
+                                        }
+                                        else
+                                        {
+                                            lKothBonus += Defs.KOTH_BONUS_PLAYER/lMembers;
+                                        }
                                     }
                                 }
 
@@ -1353,7 +1331,7 @@ public class WealthRulesView extends LaunchView
                                     @Override
                                     public void onClick(View view)
                                     {
-                                        activity.ShowBasicOKDialog(context.getString(R.string.bonus_blue_water_description));
+                                        activity.ShowBasicOKDialog(context.getString(R.string.bonus_king_of_the_hill_description));
                                     }
                                 });
 

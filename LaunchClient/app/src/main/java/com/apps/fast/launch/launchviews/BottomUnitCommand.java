@@ -67,17 +67,6 @@ public class BottomUnitCommand extends LaunchView
     private ImageView imgCommand;
     private LinearLayout btnCancel;
     private TextView txtFuelUsage;
-    private TextView txtAirspaceWarning;
-    private TextView txtManualReturnWarning;
-    private TextView txtAutoReturnWarning;
-
-    private boolean bShowFlightTime;
-    private boolean bShowFuelUsage;
-    private boolean bShowOutOfRange;
-    private boolean bShowAirspaceWarning;
-    private boolean bShowAutoReturnWarning;
-
-    //private LaunchEntity movableEntity;
 
     private GeoCoord geoTarget = null;
     private EntityPointer target = null;
@@ -85,11 +74,8 @@ public class BottomUnitCommand extends LaunchView
     private List<EntityPointer> MovableEntities;
     private Map<EntityPointer, Polyline> MovableTrajectories = new ConcurrentHashMap<>();
     private MoveOrders command;
-
-    private GoogleMap map;
     private Polyline targetTrajectory;
     private Marker movementMarker;
-    private MovableType movableType;
 
     public BottomUnitCommand(LaunchClientGame game, MainActivity activity, MoveOrders command, EntityPointer movable)
     {
@@ -123,9 +109,6 @@ public class BottomUnitCommand extends LaunchView
         imgCommand = findViewById(R.id.imgCommand);
         btnCancel = findViewById(R.id.btnCancel);
         txtFuelUsage = findViewById(R.id.txtFuelUsage);
-        txtAirspaceWarning = findViewById(R.id.txtAirspaceWarning);
-        txtManualReturnWarning = findViewById(R.id.txtManualReturnWarning);
-        txtAutoReturnWarning = findViewById(R.id.txtAutoReturnWarning);
 
         switch(command)
         {
@@ -290,7 +273,6 @@ public class BottomUnitCommand extends LaunchView
     public void LocationSelected(GeoCoord geoLocation, Polyline trajectory, Map<EntityPointer, Polyline> Trajectories, Marker marker, GoogleMap map)
     {
         geoTarget = geoLocation;
-        this.map = map;
         this.targetTrajectory = trajectory;
         this.movementMarker = marker;
         this.MovableTrajectories = Trajectories;
@@ -301,7 +283,6 @@ public class BottomUnitCommand extends LaunchView
     public void TargetSelected(MapEntity targetEntity, Polyline trajectory, Map<EntityPointer, Polyline> Trajectories, Marker marker, GoogleMap map)
     {
         this.target = targetEntity.GetPointer();
-        this.map = map;
         this.targetTrajectory = trajectory;
         this.geoTarget = targetEntity.GetPosition();
         this.movementMarker = marker;
@@ -320,8 +301,6 @@ public class BottomUnitCommand extends LaunchView
                 txtFriendlyFire.setVisibility(GONE);
             }
         }
-
-        //TODO: Logic should be here that distinguishes what to do with the target.
 
         Update();
     }

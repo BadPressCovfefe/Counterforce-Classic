@@ -176,6 +176,50 @@
             </FrameLayout>
 
             <FrameLayout
+                android:id="@+id/lytPerimeterDefence"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/MainViewSideMargin"
+                android:layout_marginRight="@dimen/MainViewSideMargin">
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/SelectListSpacing"
+                    android:background="@drawable/detail_button"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/PlayerInfoIconSize"
+                        android:layout_height="@dimen/PlayerInfoIconSize"
+                        android:layout_margin="@dimen/ButtonEdgePadding"
+                        android:src="@drawable/marker_artillery_gun" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:text="@string/warning_perimeter_defences" />
+
+                        <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:text="@string/warning_perimeter_defences_text" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </FrameLayout>
+
+            <FrameLayout
                 android:id="@+id/lytAttack"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

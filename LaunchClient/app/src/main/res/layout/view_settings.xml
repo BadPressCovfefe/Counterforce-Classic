@@ -880,7 +880,7 @@
                 android:orientation="horizontal">
 
                 <CheckBox
-                    android:id="@+id/chkHints"
+                    android:id="@+id/chkDynamicMarkers"
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -889,7 +889,7 @@
                     android:layout_marginRight="@dimen/MainViewSideMargin"
                     android:button="@drawable/checkbox"
                     android:checked="false"
-                    android:text="@string/show_hints"
+                    android:text="@string/dynamic_markers"
                     android:textColor="?attr/MainUIColour" />
             </LinearLayout>
 

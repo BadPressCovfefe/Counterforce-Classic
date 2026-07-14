@@ -67,12 +67,7 @@ public class ArmoryControl extends LaunchView
 
         Armory armory = game.GetArmory(lID);
 
-        btnBuildMBT.SetUnit(game, activity, armory.GetPointer(), EntityPointer.EntityType.MBT, null, Defs.TANK_BUILD_COST);
-        //btnBuildSPAAG.SetUnit(game, activity, armory.GetPointer(), EntityPointer.EntityType.SPAAG, null, Defs.TANK_BUILD_COST);
-        //btnBuildMissileTank.SetUnit(game, activity, armory.GetPointer(), EntityPointer.EntityType.MISSILE_TANK, null, Defs.TANK_BUILD_COST);
-        //btnBuildSAMTank.SetUnit(game, activity, armory.GetPointer(), EntityPointer.EntityType.SAM_TANK, null, Defs.TANK_BUILD_COST);
-        //btnBuildHowitzer.SetUnit(game, activity, armory.GetPointer(), EntityPointer.EntityType.HOWITZER, null, Defs.TANK_BUILD_COST);
-        //btnBuildInfantry.SetUnit(game, activity, armory.GetPointer(), EntityPointer.EntityType.INFANTRY, null, Defs.INFANTRY_UNIT_BUILD_COST);
+        btnBuildMBT.SetUnit(game, activity, armory.GetPointer(), EntityPointer.EntityType.MBT);
 
         if(bOurStructure)
         {
@@ -84,11 +79,6 @@ public class ArmoryControl extends LaunchView
             }
             else
             {
-                /*if(armory.GetIsBarracks())
-                    lytBuildInfantry.setVisibility(VISIBLE);
-                else
-                    lytBuildTank.setVisibility(VISIBLE);*/
-
                 lytProduction.setVisibility(GONE);
                 txtQueue.setVisibility(GONE);
                 lytBuildTank.setVisibility(VISIBLE);

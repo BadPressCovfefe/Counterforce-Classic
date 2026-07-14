@@ -157,6 +157,7 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
     private AtomicInteger lProscribedLocationIndex = new AtomicInteger();
     private AtomicInteger lBankIndex = new AtomicInteger();
     private AtomicInteger lWarehouseIndex = new AtomicInteger();
+    private AtomicInteger lLogisticsDepotIndex = new AtomicInteger();
     private AtomicInteger lBlueprintIndex = new AtomicInteger();
     private AtomicInteger lAirdropIndex = new AtomicInteger();
     private AtomicInteger lInfantryIndex = new AtomicInteger();
@@ -449,11 +450,6 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
 
             LaunchPerf.Measure(LaunchPerf.Metric.AircraftDefencesTick);
 
-            if(Shipyards.isEmpty())
-            {
-                application.LoadShipyards(this);
-            }
-
             //Process hourly events.
             int lHour = calendar.get(Calendar.HOUR_OF_DAY);
 
@@ -497,6 +493,41 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                     LogisticsDepots.remove(depot.GetID());
                     EntityRemoved(depot, false);
                 }
+                else if(depot.GetReadyToCollect())
+                {
+                    if(!depot.GetBooting())
+                    {
+                        for(Loot loot : GetLoots())
+                        {
+                            if(loot.GetPosition().DistanceTo(depot.GetPosition()) <= Defs.LOGISTICS_DEPOT_COLLECT_RADIUS)
+                            {
+                                loot.Collect();
+                                
+                                if(depot.GetRemainingCapacity() < loot.GetValue())
+                                {
+                                    int lAmountCollected = depot.GetRemainingCapacity();
+                                    depot.AddWealth(lAmountCollected);
+                                    loot.SetQuantity(lAmountCollected);
+                                }
+                                else
+                                {
+                                    depot.AddWealth((int)loot.GetValue());
+                                    loot.Collect();
+                                }
+                                
+                                EntityUpdated(loot, false);
+                                EntityUpdated(depot, false);
+                                
+                                if(depot.Full())
+                                {
+                                    break;
+                                }
+                            }
+                        }
+
+                        depot.Collected(Defs.LOGISTICS_DEPOT_COLLECT_COOLDOWN);
+                    } 
+                }
             }
 
             LaunchPerf.Measure(LaunchPerf.Metric.MissileSiteTick);
@@ -516,7 +547,7 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                                 GeoCoord geoPosition = new GeoCoord(oreMine.GetPosition());
                                 geoPosition.Move(random.nextDouble() * (2.0 * Math.PI), config.GetOreGenerateRadius());
                                 int lValue = random.nextInt(config.GetElecMinValue(), config.GetElecMaxValue());
-                                CreateLoot(geoPosition, "Electricity", lValue, false);
+                                CreateLoot(geoPosition, "Electricity", lValue, random.nextInt(config.GetElecMinExpiry(), config.GetElecMaxExpiry()));
                                 lGenerate = Defs.SOLAR_PANEL_GENERATE_TIME;
                             }
                         }
@@ -535,7 +566,7 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                                     geoPosition.Move(random.nextDouble() * (2.0 * Math.PI), random.nextDouble() * config.GetFarmGenerateRadius());
 
                                     int lValue = random.nextInt(config.GetCropMaxValue()/10, config.GetCropMaxValue());
-                                    CreateLoot(geoPosition, "Crops", lValue, false);
+                                    CreateLoot(geoPosition, "Crops", lValue, random.nextInt(config.GetCropMinExpiry(), config.GetCropMaxExpiry()));
                                 }
                                 
                                 lGenerate = Defs.FARM_GENERATE_TIME;
@@ -550,9 +581,8 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                                 //Process ore generation.
                                 GeoCoord geoPosition = new GeoCoord(oreMine.GetPosition());
 
-                                //Changed int lValue from random float to random float between .1 and 1. -Corbin
                                 int lValue = (int)((random.nextFloat(0.25f, 1f) * (float)GetMaxPotentialOreMineReturn(oreMine)));
-                                CreateLoot(geoPosition, "Ore", lValue, false);
+                                CreateLoot(geoPosition, "Ore", lValue, random.nextInt(config.GetOreMinExpiry(), config.GetOreMaxExpiry()));
                                 lGenerate = Defs.ORE_MINE_GENERATE_TIME;
                             }
                         }
@@ -683,19 +713,24 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
 
             for(Shipyard shipyard : GetShipyards())
             {
-                if(!shipyard.Destroyed())
+                if(shipyard.GetSelling() && shipyard.GetStateTimeExpired())
+                {
+                    Player owner = Players.get(shipyard.GetOwnerID());
+
+                    if(owner != null)
+                    {
+                        ProcessPlayerIncome(owner, String.format("sale of %s", shipyard.GetTypeName()), GetSaleValue(shipyard), false);
+                    }
+
+                    Shipyards.remove(shipyard.GetID());
+                    EntityRemoved(shipyard, false);
+                }
+                else if(!shipyard.Destroyed())
                 {
                     for(ShipProductionOrder order : shipyard.GetQueue())
                     {
                         if(order.Finished())
-                        {
-                            GeoCoord geoSpawn = shipyard.GetPosition().GetCopy();
-                            
-                            while(!TerrainChecker.CoordinateIsWater(geoSpawn))
-                            {
-                                geoSpawn.Move(random.nextDouble() * (2.0 * Math.PI), Defs.SHIPYARD_OUTPUT_DISTANCE);
-                            }
-                            
+                        {                            
                             short nMaxHP = 1;
                             MissileSystem missiles = null;
                             MissileSystem torpedoes = null;
@@ -724,7 +759,8 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                                     break;
                                 }
                                 
-                                Submarine submarine = new Submarine(GetAtomicID(lSubmarineIndex, Submarines), geoSpawn, order.GetProducingForID(), nMaxHP, nMaxHP, order.GetTypeUnderConstruction(), missiles, torpedoes, icbms);
+                                Submarine submarine = new Submarine(GetAtomicID(lSubmarineIndex, Submarines), shipyard.GetOutputCoord().GetCopy(), order.GetProducingForID(), nMaxHP, nMaxHP, order.GetTypeUnderConstruction(), missiles, torpedoes, icbms);
+                                submarine.GetPosition().SetLastBearing((float)submarine.GetPosition().BearingTo(shipyard.GetPosition()));
                                 AddSubmarine(submarine);
                                 order.SetCompleted();
                                 EntityUpdated(shipyard, false);
@@ -767,7 +803,8 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                                     break;
                                 }
                                 
-                                Ship ship = new Ship(GetAtomicID(lShipIndex, Ships), geoSpawn, order.GetProducingForID(), nMaxHP, nMaxHP, order.GetTypeUnderConstruction(), missiles, torpedoes, cargo, artillery, lSentryCount, interceptors, aircraft);
+                                Ship ship = new Ship(GetAtomicID(lShipIndex, Ships), shipyard.GetOutputCoord().GetCopy(), order.GetProducingForID(), nMaxHP, nMaxHP, order.GetTypeUnderConstruction(), missiles, torpedoes, cargo, artillery, lSentryCount, interceptors, aircraft);
+                                ship.GetPosition().SetLastBearing((float)ship.GetPosition().BearingTo(shipyard.GetPosition()));
                                 AddShip(ship);
                                 order.SetCompleted();
                                 EntityUpdated(shipyard, false);
@@ -1166,7 +1203,7 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
 
                         if(lTotalCost > player.GetWealth())
                         {
-                            short NeglectDamage = (short) 10; //(0.15 * structure.GetMaxHP());
+                            short NeglectDamage = (short) 10;
                             structure.InflictDamage(NeglectDamage);
                             player.SubtractExperience(25);
                             CreateReport(player, new LaunchReport(String.format("[ECONOMY] Your %s took damage due to lack of upkeep. You lost 50 xp. Sad!", structure.GetTypeName()), true, player.GetID()));
@@ -1174,7 +1211,7 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                     }
                     else if(structure.GetRunning())
                     {   
-                        lTotalCost += config.GetMaintenanceCost();
+                        lTotalCost += Defs.GetMaintenanceCost(structure.GetEntityType());
 
                         if(lTotalCost > player.GetWealth())
                         {
@@ -1403,7 +1440,6 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
     private void HourEnded()
     {
         ProcessHourlyMaintenance();
-        EstablishShipyardOwnership();
         
         //Unit Repair/Refuel End
         
@@ -2752,8 +2788,6 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                                             if(targetStructure.Destroyed())
                                             {
                                                 tank.Wait();
-                                                
-                                                EstablishShipyardOwnership();
 
                                                 long oLootValue = GetSaleValue(targetStructure).get(ResourceType.WEALTH) != null ? GetSaleValue(targetStructure).get(ResourceType.WEALTH) : 0;
                                                 
@@ -2789,62 +2823,6 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                                                 CreateReport(player, new LaunchReport(String.format("You damaged %s's %s!", targetOwner.GetName(), targetStructure.GetTypeName()), true, player.GetID(), targetOwner.GetID()));
                                             }
                                         }  
-                                    }
-                                    else if(target instanceof Shipyard)
-                                    {
-                                        Shipyard targetShipyard = ((Shipyard)target);
-
-                                        if(!targetShipyard.Destroyed())
-                                        {
-                                            Player player = GetOwner(tank);
-
-                                            short nDamageInflicted = targetShipyard.InflictDamage((short)LaunchUtilities.GetRandomIntInBounds(Defs.EFFECTIVE_MIN_DMG, Defs.EFFECTIVE_MAX_DMG));
-
-                                            Player targetOwner = GetOwner(targetShipyard);
-                                            Scoring_DamageInflicted(player, targetOwner, nDamageInflicted);
-
-                                            if(targetOwner != null)
-                                            {
-                                                targetOwner.AddHostilePlayer(tank.GetOwnerID());
-
-                                                if(targetShipyard.Destroyed())
-                                                {
-                                                    tank.Wait();
-
-                                                    ProcessPlayerXPGain(player.GetID(), Defs.SHIPYARD_KILLED_XP, String.format("You destroyed %s.", targetShipyard.GetName()));
-                                                    ProcessPlayerXPLoss(targetOwner.GetID(), Defs.SHIPYARD_LOST_XP, String.format("You lost %s.", targetShipyard.GetName()));
-
-                                                    CreateReport(targetOwner, new LaunchReport(String.format("%s destroyed %s!", player.GetName(), targetShipyard.GetName()), true, targetOwner.GetID(), player.GetID()));
-                                                    CreateEvent(new LaunchEvent(String.format("%s's tank shelled %s, causing %d HP of damage and destroying it.", player.GetName(), targetShipyard.GetName(), nDamageInflicted), SoundEffect.ARTILLERY_EXPLOSION));
-                                                    CreateReport(player, new LaunchReport(String.format("You destroyed %s!", targetShipyard.GetName()), true, player.GetID(), targetOwner.GetID()));
-                                                }
-                                                else
-                                                {
-                                                    CreateEvent(new LaunchEvent(String.format("%s's tank shelled %s, causing %d HP of damage.", player.GetName(), targetShipyard.GetName(), nDamageInflicted), SoundEffect.ARTILLERY_FIRE));
-                                                    CreateReport(player, new LaunchReport(String.format("You damaged %s!", targetShipyard.GetName()), true, player.GetID(), targetOwner.GetID()));
-                                                }
-                                            }
-                                            else
-                                            {
-                                                if(targetShipyard.Destroyed())
-                                                {
-                                                    tank.Wait();
-
-                                                    CreateReport(new LaunchReport(String.format("%s destroyed %s!", player.GetName(), targetShipyard.GetName()), true, player.GetID()));
-                                                    CreateEvent(new LaunchEvent(String.format("%s's tank shelled %s, causing %d HP of damage and destroying it.", player.GetName(), targetShipyard.GetName(), nDamageInflicted), SoundEffect.ARTILLERY_EXPLOSION));
-                                                    CreateReport(player, new LaunchReport(String.format("You destroyed %s!", targetShipyard.GetName()), true, player.GetID()));
-                                                }
-                                                else
-                                                {
-                                                    CreateEvent(new LaunchEvent(String.format("%s's tank shelled %s, causing %d HP of damage.", player.GetName(), targetShipyard.GetName(), nDamageInflicted), SoundEffect.ARTILLERY_FIRE));
-                                                    CreateReport(player, new LaunchReport(String.format("You damaged %s!", targetShipyard.GetName()), true, player.GetID()));
-                                                }
-                                            }
-                                        }
-                                        else
-                                        {
-                                            tank.Wait();
-                                        }   
                                     }
                                     else if(target instanceof Tank)
                                     {
@@ -4044,59 +4022,6 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
             }
         }
         
-        //Shipyards.
-        for(Shipyard shipyard : GetShipyards())
-        {
-            if(!shipyard.Destroyed())
-            {
-                float fltDistance = shipyard.GetPosition().DistanceTo(geoOrigin);
-
-                if(fltDistance <= fltBlastRadius)
-                {
-                    nDamage = (short)(LaunchUtilities.GetRandomFloatInBounds(explosion.GetAccuracy(), 1.0f) * MissileStats.GetDamageAtPosition(shipyard, geoOrigin, explosion));
-                    nDamageInflicted = shipyard.InflictDamage(nDamage);
-                    lTotalDamage += nDamageInflicted;
-                    Player owner = GetPlayer(shipyard.GetOwnerID());
-                    
-                    if(owner != null)
-                    {
-                        Scoring_DamageInflicted(inflictor, owner, nDamageInflicted);
-                    }
-
-                    if(shipyard.Destroyed())
-                    {
-                        ProcessPlayerXPGain(inflictor.GetID(), Defs.SHIPYARD_KILLED_XP, String.format("You destroyed %s!", shipyard.GetName()));
-                        
-                        if(owner != null)
-                        {
-                            ProcessPlayerXPLoss(owner.GetID(), Defs.SHIPYARD_LOST_XP, String.format("%s was destroyed!", shipyard.GetName()));
-                        }
-                        
-                        bReestablishStructureThreats = true;
-                        CreateEvent(new LaunchEvent(String.format("%s hit %s, causing %d HP of damage and destroying it.", strCause, shipyard.GetName(), nDamageInflicted)));
-                        
-                        CreateReport(inflictor, new LaunchReport(String.format("You destroyed %s!", shipyard.GetName()), true, inflictor.GetID()));
-                        
-                        if(!shipyard.GetQueue().isEmpty())
-                        {
-                            for(ShipProductionOrder order : shipyard.GetQueue())
-                            {
-                                Player player = GetPlayer(order.GetProducingForID());
-
-                                if(player != null)
-                                {
-                                    player.AddWealth(Defs.GetNavalBuildCost(order.GetTypeUnderConstruction()).get(ResourceType.WEALTH));
-                                }
-                            } 
-                            
-                            shipyard.ResetShipyard();
-                            EntityUpdated(shipyard, false);
-                        }
-                    }
-                }
-            }
-        }
-        
         for(Tank tank : GetTanks())
         {
             if(tank.GetPosition().DistanceTo(geoOrigin) <= fltBlastRadius)
@@ -4976,7 +4901,7 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
             oLootValue = random.nextLong((long)(config.GetRubbleMinValue() * oQuantity), (long)(config.GetRubbleMaxValue() * oQuantity));
         }
         
-        for(Loot loot : GetLoots())
+        /*for(Loot loot : GetLoots())
         {
             if(loot.GetPosition().BroadPhaseCollisionTest(geoPosition))
             {
@@ -4988,9 +4913,14 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                     return;
                 }
             }
-        }   
+        }*/
         
         AddLoot(new Loot(GetAtomicID(lLootIndex, Loots), geoPosition, strTitle, oLootValue, Defs.LOOT_EXPIRY));
+    }
+    
+    private void CreateLoot(GeoCoord geoPosition, String strTitle, long oQuantity, int lExpiry)
+    {
+        AddLoot(new Loot(GetAtomicID(lLootIndex, Loots), geoPosition, strTitle, oQuantity, lExpiry));
     }
     
     private void GenerateKOTH()
@@ -5572,14 +5502,6 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                     aircraft.GetCargoSystem().ClearNonEntities();
                 
                 aircraft.InflictDamage(aircraft.GetMaxHP());
-            }
-        }
-
-        for(Shipyard shipyard : Shipyards.values())
-        {
-            if(shipyard.GetOwnedBy(lPlayerID))
-            {
-                shipyard.Abandon();
             }
         }
         
@@ -6769,211 +6691,6 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
         return false;
     }
     
-    @Override
-    public void InfantryReachedTarget(Infantry infantry)
-    {
-        if(infantry != null && infantry.GetTarget() != null)
-        {
-            MapEntity target = infantry.GetTarget().GetMapEntity(this);
-            
-            if(target != null)
-            {
-                Player player = GetOwner(infantry);
-
-                if(player != null)
-                {
-                    if(infantry.GetMoveOrders() == MoveOrders.CAPTURE)
-                    {
-                        boolean bStuffCaptured = false;
-
-                        if(target instanceof Structure structure)
-                        {
-                            if(!structure.GetRespawnProtected())
-                            {
-                                if(!WouldBeFriendlyFire(GetOwner(structure), player) && !GetAttackIsBullying(player, GetOwner(structure)))
-                                {
-                                    Player targetOwner = GetOwner(structure);
-                                    structure.Capture(infantry.GetOwnerID());
-
-                                    bStuffCaptured = true;
-
-                                    if(targetOwner != null)
-                                    {
-                                        CreateEvent(new LaunchEvent(String.format("%s's infantry captured %s's %s", player.GetName(), targetOwner.GetName(), structure.GetTypeName()), SoundEffect.INFANTRY_CAPTURE));
-                                        CreateReport(targetOwner, new LaunchReport(String.format("%s's infantry captured your %s!", player.GetName(), structure.GetTypeName()), true, targetOwner.GetID(), player.GetID()));
-                                        CreateReport(player, new LaunchReport(String.format("Your infantry captured %s's %s!", targetOwner.GetName(), structure.GetTypeName(), structure.GetTypeName()), true, player.GetID(), targetOwner.GetID()));
-                                    }
-
-                                    if(structure instanceof Airbase airbase)
-                                    {
-                                        for(StoredAirplane aircraft : airbase.GetAircraftSystem().GetStoredAirplanes().values())
-                                        {
-                                            aircraft.Capture(player.GetID());
-                                            player.AddOwnedEntity(aircraft);
-                                        }
-                                    }
-                                    else if(structure instanceof Armory armory)
-                                    {
-                                        for(StoredTank tank : armory.GetCargoSystem().GetTanks())
-                                        {
-                                            tank.Capture(player.GetID());
-                                            player.AddOwnedEntity(tank);
-                                        }
-
-                                        for(StoredCargoTruck truck : armory.GetCargoSystem().GetCargoTrucks())
-                                        {
-                                            truck.Capture(player.GetID());
-                                            player.AddOwnedEntity(truck);
-                                        }
-
-                                        for(StoredInfantry storedInfantry : armory.GetCargoSystem().GetInfantries())
-                                        {
-                                            storedInfantry.Capture(player.GetID());
-                                            player.AddOwnedEntity(storedInfantry);
-                                        }
-                                    }
-
-                                    EntityUpdated(structure, false);
-                                }
-                            }  
-                        }
-                        else if(target instanceof Shipyard shipyard)
-                        {
-                            if(!WouldBeFriendlyFire(GetOwner(shipyard), player) && !GetAttackIsBullying(player, GetOwner(shipyard)))
-                            {
-                                Player targetOwner = GetOwner(shipyard);
-                                shipyard.Capture(infantry.GetOwnerID());
-
-                                bStuffCaptured = true;
-
-                                if(targetOwner != null)
-                                {
-                                    CreateEvent(new LaunchEvent(String.format("%s's infantry captured %s's %s", player.GetName(), targetOwner.GetName(), shipyard.GetTypeName()), SoundEffect.INFANTRY_CAPTURE));
-                                    CreateReport(targetOwner, new LaunchReport(String.format("%s's infantry captured your %s!", player.GetName(), shipyard.GetTypeName()), true, targetOwner.GetID(), player.GetID()));
-                                    CreateReport(player, new LaunchReport(String.format("Your infantry captured %s's %s!", targetOwner.GetName(), shipyard.GetTypeName()), true, player.GetID(), targetOwner.GetID()));
-                                }
-                                else
-                                {
-                                    CreateEvent(new LaunchEvent(String.format("%s's infantry captured a %s", player.GetName(), shipyard.GetTypeName()), SoundEffect.INFANTRY_CAPTURE));
-                                    CreateReport(player, new LaunchReport(String.format("Your infantry captured a %s!", shipyard.GetTypeName()), true, player.GetID()));
-                                }
-
-                                EntityUpdated(shipyard, false);
-                            } 
-                        }
-                        else if(target instanceof CargoTruck truck)
-                        {
-                            Player owner = GetOwner(truck);
-
-                            if(owner != null)
-                            {
-                                if(!owner.GetRespawnProtected())
-                                {
-                                    if(!WouldBeFriendlyFire(GetOwner(truck), player) && !GetAttackIsBullying(player, owner))
-                                    {
-                                        truck.Capture(infantry.GetOwnerID());
-
-                                        bStuffCaptured = true;
-
-                                        CreateEvent(new LaunchEvent(String.format("%s's infantry captured %s's %s", player.GetName(), owner.GetName(), truck.GetTypeName()), SoundEffect.INFANTRY_CAPTURE));
-                                        CreateReport(owner, new LaunchReport(String.format("%s's infantry captured your %s!", player.GetName(), truck.GetTypeName()), true, owner.GetID(), player.GetID()));
-                                        CreateReport(player, new LaunchReport(String.format("Your infantry captured %s's %s!", owner.GetName(), owner.GetName(), truck.GetTypeName()), true, player.GetID(), owner.GetID()));
-                                    }
-                                }
-                            }  
-                        }
-
-                        if(!bStuffCaptured)
-                        {
-                            infantry.Wait();
-                        }
-                        else
-                        {
-                            infantry.InflictDamage(infantry.GetHP());
-                        }
-
-                        EntityUpdated(infantry, false);
-                    }
-                    else if(infantry.GetMoveOrders() == MoveOrders.LIBERATE)
-                    {
-                        boolean bStuffLiberated = false;
-
-                        if(target instanceof Structure structure)
-                        {
-                            if(!structure.GetRespawnProtected())
-                            {
-                                if(GetCanBeLiberated(player, structure))
-                                {
-                                    //TODO: If the warehouse is not a logistics depot, it can be captured.
-                                    if(!(structure instanceof Warehouse))
-                                    {
-                                        Player targetOwner = GetOwner(structure);
-                                        structure.Liberate();
-
-                                        bStuffLiberated = true;
-
-                                        if(targetOwner != null)
-                                        {
-                                            CreateEvent(new LaunchEvent(String.format("%s's infantry liberated %s's %s", player.GetName(), targetOwner.GetName(), structure.GetTypeName()), SoundEffect.LIBERATE));
-                                            CreateReport(targetOwner, new LaunchReport(String.format("%s's infantry liberated your %s!", player.GetName(), structure.GetTypeName()), true, targetOwner.GetID(), player.GetID()));
-                                            CreateReport(player, new LaunchReport(String.format("Your infantry liberated %s's %s!", targetOwner.GetName(), structure.GetTypeName(), structure.GetTypeName()), true, player.GetID(), targetOwner.GetID()));
-                                        
-                                            if(structure instanceof Airbase airbase)
-                                            {
-                                                for(StoredAirplane aircraft : airbase.GetAircraftSystem().GetStoredAirplanes().values())
-                                                {
-                                                    aircraft.Capture(airbase.GetBuiltByID());
-                                                    targetOwner.AddOwnedEntity(aircraft);
-                                                }
-                                            }
-                                        }
-
-                                        EntityUpdated(structure, false);
-                                    }
-                                }
-                            }  
-                        }
-                        else if(target instanceof Shipyard shipyard)
-                        {
-                            if(GetCanBeLiberated(player, shipyard))
-                            {
-                                Player targetOwner = GetOwner(shipyard);
-                                shipyard.Abandon();
-
-                                bStuffLiberated = true;
-
-                                if(targetOwner != null)
-                                {
-                                    CreateEvent(new LaunchEvent(String.format("%s's infantry liberated %s's %s", player.GetName(), targetOwner.GetName(), shipyard.GetTypeName()), SoundEffect.LIBERATE));
-                                    CreateReport(targetOwner, new LaunchReport(String.format("%s's infantry liberated your %s!", player.GetName(), shipyard.GetTypeName()), true, targetOwner.GetID(), player.GetID()));
-                                    CreateReport(player, new LaunchReport(String.format("Your infantry liberated %s's %s!", targetOwner.GetName(), shipyard.GetTypeName(), shipyard.GetTypeName()), true, player.GetID(), targetOwner.GetID()));
-                                }
-                                else
-                                {
-                                    CreateEvent(new LaunchEvent(String.format("%s's infantry liberated a %s", player.GetName(), shipyard.GetTypeName()), SoundEffect.LIBERATE));
-                                    CreateReport(player, new LaunchReport(String.format("Your infantry liberated a %s!", shipyard.GetTypeName()), true, player.GetID()));
-                                }
-
-                                EntityUpdated(shipyard, false);
-                            } 
-                        }
-
-                        if(!bStuffLiberated)
-                        {
-                            infantry.Wait();
-                        }
-                        else
-                        {
-                            infantry.InflictDamage(infantry.GetHP());
-                        }
-
-                        EntityUpdated(infantry, false);
-                    }
-                } 
-            }
-        }
-    }
-    
     /**
      * @param lPlayerID
      * @param structureType
@@ -6993,6 +6710,34 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
             if(ValidateConstructionRequest(player, geoPosition, structureType.toString(), structureType, Costs.get(ResourceType.WEALTH) != null ? Costs.get(ResourceType.WEALTH) : 0))
             {
                 return AddStructure(lPlayerID, geoPosition, structureType, type);
+            }
+        }
+        
+        return false;
+    }
+    
+    @Override
+    public boolean ConstructShipyard(int lPlayerID, GeoCoord geoOutput)
+    {
+        Player player = Players.get(lPlayerID);
+        
+        if(player != null)
+        {
+            long oCost = Defs.SHIPYARD_STRUCTURE_COST;
+            GeoCoord geoPosition = player.GetPosition().GetCopy();
+            
+            if(ValidateConstructionRequest(player, geoPosition, EntityType.SHIPYARD.toString(), EntityType.SHIPYARD, oCost))
+            {
+                Shipyard shipyard = new Shipyard(GetAtomicID(lShipyardIndex, Shipyards), geoPosition, Defs.SHIPYARD_MAX_HP, Defs.SHIPYARD_MAX_HP, player.GetID(), player.GetRespawnProtected(), config.GetStructureBootTime(player), geoOutput);
+                AddShipyard(shipyard);
+                EstablishStructureThreats(shipyard);
+
+                ProcessPlayerXPGain(lPlayerID, Defs.STRUCTURE_BUILT_XP, "You built a structure.");
+
+                RemoveNearbyRubbles(shipyard.GetPosition());
+                CreateEvent(new LaunchEvent(String.format("%s constructed a %s.", player.GetName(), shipyard.GetTypeName()), SoundEffect.CONSTRUCTION));
+
+                return true;
             }
         }
         
@@ -7188,6 +6933,34 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                     
                     return true;
                 }
+                
+                case COMMAND_POST:
+                {
+                    CommandPost commandPost = new CommandPost(GetAtomicID(lCommandPostIndex, CommandPosts), geoPosition, Defs.COMMAND_POST_HP, Defs.COMMAND_POST_HP, player.GetID(), player.GetRespawnProtected(), config.GetStructureBootTime(player), false);
+                    AddCommandPost(commandPost);
+                    EstablishStructureThreats(commandPost);
+
+                    ProcessPlayerXPGain(lPlayerID, Defs.STRUCTURE_BUILT_XP, "You built a structure.");
+
+                    RemoveNearbyRubbles(commandPost.GetPosition());
+                    CreateEvent(new LaunchEvent(String.format("%s constructed a %s.", player.GetName(), commandPost.GetTypeName()), SoundEffect.CONSTRUCTION));
+
+                    return true;
+                }
+                
+                case LOGISTICS_DEPOT:
+                {
+                    LogisticsDepot depot = new LogisticsDepot(GetAtomicID(lLogisticsDepotIndex, LogisticsDepots), geoPosition, Defs.LOGISTICS_DEPOT_HP, Defs.LOGISTICS_DEPOT_HP, player.GetID(), player.GetRespawnProtected(), config.GetStructureBootTime(player));
+                    AddLogisticsDepot(depot);
+                    EstablishStructureThreats(depot);
+
+                    ProcessPlayerXPGain(lPlayerID, Defs.STRUCTURE_BUILT_XP, "You built a structure.");
+
+                    RemoveNearbyRubbles(depot.GetPosition());
+                    CreateEvent(new LaunchEvent(String.format("%s constructed a %s.", player.GetName(), depot.GetTypeName()), SoundEffect.CONSTRUCTION));
+
+                    return true;
+                }
             }
         }
         
@@ -7230,8 +7003,6 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
     {
         Player player = Players.get(lPlayerID);
         MissileSystem system = null;
-        boolean bGetCityTimeBoost = false;
-        //boolean bHostIsUnderWay = false;
         
         if(player != null)
         {
@@ -7438,32 +7209,6 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                                             system.AddMissileToNextSlot(lSlotNo, lType, lPrepTime);
                                             EntityUpdated(site, false);
                                         }
-                                    }
-                                }
-                                else if(systemType == SystemType.ARTILLERY_GUN)
-                                {
-                                    ArtilleryGun artillery = ArtilleryGuns.get(lSiteID);
-                                    
-                                    if(type.GetArtillery() && type.GetGroundLaunched() && type.GetPurchasable())
-                                    {
-                                        if(ProcessPlayerWeaponPurchase(lPlayerID, type.GetCost(),  true))
-                                        {
-                                            system.AddMissileToNextSlot(lSlotNo, lType, lPrepTime);
-                                            EntityUpdated(artillery, false);
-                                        }  
-                                    }
-                                }
-                                else if(systemType == SystemType.SHIP_ARTILLERY)
-                                {
-                                    Ship ship = GetShip(lSiteID);
-                                    
-                                    if(type.GetArtillery() && type.GetShipLaunched() && type.GetPurchasable())
-                                    {
-                                        if(ProcessPlayerWeaponPurchase(lPlayerID, type.GetCost(), true))
-                                        {
-                                            system.AddMissileToNextSlot(lSlotNo, lType, lPrepTime);
-                                            EntityUpdated(ship, false);
-                                        }  
                                     }
                                 }
                                 else if(systemType == SystemType.SHIP_MISSILES)
@@ -8205,7 +7950,7 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
         
         if(player != null && shipyard != null)
         {
-            if(player.Functioning() && !shipyard.Destroyed() && (!shipyard.GetCaptured() || EntityIsFriendly(shipyard, player)))
+            if(player.Functioning() && !shipyard.Destroyed() && EntityIsFriendly(shipyard, player))
             {
                 if(shipyard.GetOwnerID() == LaunchEntity.ID_NONE || shipyard.GetOwnedBy(lPlayerID) || GetAllegiance(shipyard, player) == Allegiance.ALLY)
                 {
@@ -8230,7 +7975,7 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
 
                             ProcessPlayerXPGain(lPlayerID, Defs.GetPurchaseXP(costs), "You built a ship.");
                             shipyard.AddProductionOrder(new ShipProductionOrder(lPlayerID, oBuildTime, shipType));
-                            EntityUpdated(shipyard, true);
+                            EntityUpdated(shipyard, false);
 
                             CreateEvent(new LaunchEvent(String.format("%s purchased a ship.", player.GetName()), SoundEffect.EQUIP));
 
@@ -10838,11 +10583,11 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
         {
             if(bOnline)
             {
-                if(player.GetWealth() >= Defs.ONLINE_MAINTENANCE_COST)
+                if(player.GetWealth() >= Defs.GetMaintenanceCost(structure.GetEntityType()))
                 {
                     LaunchLog.Log(LaunchLog.LogType.GAME, LOG_NAME, "...Brought online.");
 
-                    if(player.SubtractWealth(Defs.ONLINE_MAINTENANCE_COST))
+                    if(player.SubtractWealth(Defs.GetMaintenanceCost(structure.GetEntityType())))
                     {
                         int lBootTime = config.GetStructureBootTime(player);
 
@@ -11086,6 +10831,16 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
                 }             
             }
             break;
+            
+            case SHIPYARD:
+            {
+                for(Integer lSiteID : SiteIDs)
+                {
+                    Shipyard shipyard = Shipyards.get(lSiteID);
+                    bSuccess = bSuccess && StructureOnlineOffline(lPlayerID, shipyard, bOnline);
+                }             
+            }
+            break;
         }
         
         return bSuccess;
@@ -11115,21 +10870,6 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
 
                         return true;
                     }
-                }
-            }
-            else if(entity instanceof Shipyard)
-            {
-                Shipyard shipyard = (Shipyard)entity;
-
-                LaunchLog.Log(LaunchLog.LogType.GAME, LOG_NAME, String.format("%s is attempting to remotely repair %s %d...", player.GetName(), shipyard.GetName(), shipyard.GetID()));
-
-                if(player.SubtractWealth(GetRepairCost(shipyard).get(ResourceType.WEALTH)))
-                {
-                    shipyard.FullyRepair();
-
-                    CreateEvent(new LaunchEvent(String.format("%s repaired %s.", player.GetName(), shipyard.GetName()), SoundEffect.REPAIR));
-
-                    return true;
                 }
             }
             else if(entity instanceof Tank)
@@ -13687,12 +13427,6 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
         }
     }
     
-    public void GenerateShipyard(String strName, GeoCoord geoPosition, GeoCoord geoOutput, boolean bPortOnly)
-    {
-        Shipyard shipyard = new Shipyard(GetAtomicID(lShipyardIndex, Shipyards), geoPosition, strName, geoOutput, Defs.SHIPYARD_MAX_HP, Defs.SHIPYARD_MAX_HP);
-        AddShipyard(shipyard);
-    }
-    
     
     /**
      * A more optimized version of the shelter code to be used on the server.
@@ -14319,192 +14053,6 @@ public class LaunchServerGame extends LaunchGame implements LaunchServerGameInte
         }
 
         lPlayerIndex.set(lMaxID + 1);
-    }
-    
-    public boolean GetElectronicWarfare()
-    {
-        return false; //TODO: Eventually add an EW plane type?
-    }
-    
-    public void EstablishShipyardOwnership()
-    {
-        for(Capturable capturable : GetAllCapturables())
-        {
-            boolean bCapturableContested = false;
-            List<Player> OccupyingPlayers = new ArrayList<>();
-            List<Structure> NearbyStructures = new ArrayList<>();
-
-            for(EntityPointer pointer : quadtree.GetAffectedStructures(capturable.GetPosition(), Defs.IN_PORT_RADIUS))
-            {
-                MapEntity entity = pointer.GetMapEntity(game);
-
-                if(entity instanceof Structure)
-                {
-                    Structure structure = (Structure)entity;
-                    
-                    if(structure.GetPosition().DistanceTo(capturable.GetPosition()) <= Defs.IN_PORT_RADIUS)
-                    {
-                        NearbyStructures.add(structure);
-                    }
-                }
-            }
-
-            if(!NearbyStructures.isEmpty())
-            {
-                for(Structure structure : NearbyStructures)
-                {
-                    Player owner = GetOwner(structure);
-
-                    if(owner != null)
-                    {
-                        if(!OccupyingPlayers.contains(owner))
-                            OccupyingPlayers.add(owner);
-                    }
-                }
-            }
-
-            if(capturable instanceof Shipyard && OccupyingPlayers.size() > 1)
-            {
-                for(Player player : OccupyingPlayers)
-                {
-                    if(player != null)
-                    {
-                        for(Player otherPlayer : OccupyingPlayers)
-                        {
-                            if(player != otherPlayer)
-                            {
-                                //Check to see if the other player has a different alliance ID or see if this player is unaffiliated.
-                                if(player.GetAllianceMemberID() == Alliance.ALLIANCE_ID_UNAFFILIATED || !WouldBeFriendlyFire(player, otherPlayer))
-                                {
-                                    //The other player is not in our alliance or affiliated. City is contested.
-                                    bCapturableContested = true;
-
-                                    if(!capturable.GetContested())
-                                    {
-                                        CreateEvent(new LaunchEvent(String.format("%s is contested!", capturable.GetName()), SoundEffect.RESPAWN));
-                                        CreateReport(new LaunchReport(String.format("[COMBAT] %s is contested!", capturable.GetName()), true));
-                                        capturable.SetContested(true);
-                                    }
-
-                                    if(capturable.GetCaptured())
-                                        capturable.Abandon();
-                                }
-                            }
-                        }
-                    }
-                }
-
-                if(!bCapturableContested)
-                {
-                    //All the structure owners are apparently in the same alliance or are affiliated. Initialize a map of players and integers, count them, then give the capturable to the largest value key.
-                    Map<Integer, Player> StructureCounts = new HashMap<>();
-
-                    for(Player player : OccupyingPlayers)
-                    {
-                        int lStructureCount = 0;
-
-                        for(Structure structure : NearbyStructures)
-                        {
-                            if(structure.GetOwnedBy(player.GetID()))
-                                lStructureCount++;
-                        }
-
-                        StructureCounts.put(lStructureCount, player);
-                    }
-
-                    int lLargestStructureCount = 0;
-
-                    for(Entry<Integer, Player> entry : StructureCounts.entrySet())
-                    {
-                        if(entry.getKey() > lLargestStructureCount)
-                        {
-                            lLargestStructureCount = entry.getKey();
-                        }
-                    }
-
-                    Player occupierByNumbers = StructureCounts.get(lLargestStructureCount);
-
-                    if(occupierByNumbers != null)
-                    {
-                        //Give them the capturable if they don't own it already.
-
-                        if(!capturable.GetOwnedBy(occupierByNumbers.GetID()))
-                        {
-                            capturable.Capture(occupierByNumbers.GetID());
-                            CreateEvent(new LaunchEvent(String.format("%s captured %s!", occupierByNumbers.GetName(), capturable.GetName()), SoundEffect.RESPAWN));
-                            CreateReport(new LaunchReport(String.format("[COMBAT] %s captured %s!", occupierByNumbers.GetName(), capturable.GetName()), true, occupierByNumbers.GetID()));
-
-                            if(capturable instanceof Shipyard)
-                            {
-                                Shipyard shipyard = ((Shipyard)capturable);
-
-                                if(!shipyard.GetQueue().isEmpty())
-                                {
-                                    for(ShipProductionOrder order : shipyard.GetQueue())
-                                    {
-                                        Player customer = GetPlayer(order.GetProducingForID());
-
-                                        if(customer != null && customer.GetID() != occupierByNumbers.GetID() && !WouldBeFriendlyFire(customer, occupierByNumbers))
-                                        {
-                                            order.SetProducingForID(occupierByNumbers.GetID());
-
-                                        }
-                                    }
-
-                                    EntityUpdated(shipyard, false);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            else if(capturable instanceof Shipyard && OccupyingPlayers.size() == 1)
-            {
-                //The capturable has one occupier. Check if the capturable is already owned by this player. If not, give it to them.
-                Player occupier = OccupyingPlayers.get(0);
-
-                if(occupier != null && !capturable.GetOwnedBy(occupier.GetID()))
-                {
-                    capturable.Capture(occupier.GetID());
-                    CreateEvent(new LaunchEvent(String.format("%s captured %s!", occupier.GetName(), capturable.GetName()), SoundEffect.RESPAWN));
-                    CreateReport(new LaunchReport(String.format("[COMBAT] %s captured %s!", occupier.GetName(), capturable.GetName()), true, occupier.GetID()));
-
-                    if(capturable instanceof Shipyard)
-                    {
-                        if(capturable instanceof Shipyard)
-                        {
-                            Shipyard shipyard = ((Shipyard)capturable);
-
-                            if(!shipyard.GetQueue().isEmpty())
-                            {
-                                for(ShipProductionOrder order : shipyard.GetQueue())
-                                {
-                                    Player customer = GetPlayer(order.GetProducingForID());
-
-                                    if(customer != null && customer.GetID() != occupier.GetID() && !WouldBeFriendlyFire(customer, occupier))
-                                    {
-                                        order.SetProducingForID(occupier.GetID());
-
-                                    }
-                                }
-
-                                EntityUpdated(shipyard, false);
-                            }
-                        }
-                    }
-                }
-            }
-            else if(OccupyingPlayers.isEmpty())
-            {
-                //There are no player owned structures nearby. Revert the capturable to neutral status if it isn't already and set not contested if it isn't already.
-
-                if(capturable.GetCaptured())
-                    capturable.Abandon();
-
-                if(capturable.GetContested())
-                    capturable.SetContested(false);
-            }
-        }
     }
     
     /**

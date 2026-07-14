@@ -36,7 +36,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/SeperatorMargins"
                     android:layout_marginEnd="@dimen/ButtonSpacingNarrow"
-                    android:src="@drawable/image_koth"
                     android:visibility="gone" />
 
                 <LinearLayout

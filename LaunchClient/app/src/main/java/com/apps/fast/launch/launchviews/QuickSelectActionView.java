@@ -61,7 +61,7 @@ public class QuickSelectActionView extends LaunchView
     {
         inflate(context, R.layout.view_select_aircraft, this);
 
-        txtNoUnits = (TextView)findViewById(R.id.txtNoAircraft);
+        txtNoUnits = findViewById(R.id.txtNoAircraft);
         lytAvailableUnits = findViewById(R.id.lytAvailableAircrafts);
         btnCancel = findViewById(R.id.btnCancel);
 

@@ -1,0 +1,1194 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Game>
+    <GameStats>
+        <NextPlayerID>1</NextPlayerID>
+    </GameStats>
+    <KOTH>
+        <Position>
+            <Latitude>31.192215</Latitude>
+            <Longitude>95.83856</Longitude>
+        </Position>
+        <Radius>310.09012</Radius>
+        <KingID>-2</KingID>
+        <AllianceControl>false</AllianceControl>
+    </KOTH>
+    <Users>
+        <User Name="Covfefe">
+            <GoogleID>103690468106158765549</GoogleID>
+            <IMEI>4A4082D52A9557D702D52A61E10B25B630A17DFD775473DDD6752E4312315F59</IMEI>
+            <PlayerID>0</PlayerID>
+            <BanState>0</BanState>
+            <NextBanTime>3600000</NextBanTime>
+            <BanDurationRemaining>0</BanDurationRemaining>
+            <BanReason/>
+            <LastIP>192.168.0.21</LastIP>
+            <LastConnectionMobile>false</LastConnectionMobile>
+            <LastChecked>1783567862612</LastChecked>
+            <LastCheckFailed>false</LastCheckFailed>
+            <CheckAPIFailed>true</CheckAPIFailed>
+            <Proscribed>false</Proscribed>
+            <CheckFailCode>17</CheckFailCode>
+            <ProfileMatch>false</ProfileMatch>
+            <BasicIntegrity>false</BasicIntegrity>
+            <Approved>false</Approved>
+            <Expired>0</Expired>
+            <DeviceHash>samsung/a15xsq/a15x:16/BP2A.250605.031.A3/A156USQSBDZDC:user/release-keys|SM-A156U|samsung|samsung|a15x|a15xsq</DeviceHash>
+            <AppListHash>9206F376</AppListHash>
+            <FirebaseToken>fokn2HjVRUOrmcPRdJw1GQ:APA91bEz1vgxLxrVI_O12bY5FiwAPaymynTc5kH_eC7ABzJMbFsgXFPkhv6iORo_T_2WhEXKecbW2DVwbbUfxhSon46mx9XUzb-gumxpxe9EKKmeYyJbE3I</FirebaseToken>
+        </User>
+    </Users>
+    <Alliances/>
+    <Treaties/>
+    <Players>
+        <Player ID="0" Name="Covfefe">
+            <Position>
+                <Latitude>41.649437</Latitude>
+                <Longitude>-83.78745</Longitude>
+            </Position>
+            <HP>300</HP>
+            <MaxHP>300</MaxHP>
+            <Avatar>-1</Avatar>
+            <LastSeen>1783568492516</LastSeen>
+            <StateChange>0</StateChange>
+            <AllianceID>-1</AllianceID>
+            <Flags1>0</Flags1>
+            <Flags2>4</Flags2>
+            <AllianceCooloffTime>0</AllianceCooloffTime>
+            <Kills>0</Kills>
+            <Deaths>0</Deaths>
+            <OffenceSpending>79400</OffenceSpending>
+            <DefenceSpending>16560</DefenceSpending>
+            <DamageInflicted>0</DamageInflicted>
+            <DamageReceived>0</DamageReceived>
+            <Rank>10</Rank>
+            <Experience>30846</Experience>
+            <TotalKills>0</TotalKills>
+            <TotalDeaths>0</TotalDeaths>
+            <JoinTimeMS>1781624300319</JoinTimeMS>
+            <DefenseValue>72560</DefenseValue>
+            <OffenseValue>409400</OffenseValue>
+            <NeutralValue>6576210</NeutralValue>
+            <DistanceTraveled>2.8398516</DistanceTraveled>
+            <DistanceTraveledToday>0.0</DistanceTraveledToday>
+            <Blacklist>AAA=</Blacklist>
+            <Wealth>5998465</Wealth>
+            <Bounty>0</Bounty>
+            <KOTHWins>0</KOTHWins>
+        </Player>
+    </Players>
+    <Missiles/>
+    <Interceptors/>
+    <Torpedoes/>
+    <MissileSites>
+        <MissileSite ID="0" Name="">
+            <Position>
+                <Latitude>41.58871</Latitude>
+                <Longitude>-83.79289</Longitude>
+            </Position>
+            <HP>1500</HP>
+            <MaxHP>1500</MaxHP>
+            <OwnerID>0</OwnerID>
+            <Flags>-128</Flags>
+            <StateTime>0</StateTime>
+            <ICBMSilo>false</ICBMSilo>
+            <MissileSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>15000</ReloadTime>
+                <SlotCount>3</SlotCount>
+                <Slots/>
+            </MissileSystem>
+            <Mode>2</Mode>
+            <Retaliating>false</Retaliating>
+            <RetaliateTime>0</RetaliateTime>
+            <TargetID>0</TargetID>
+            <Visible>false</Visible>
+            <VisibleTime>0</VisibleTime>
+            <BuiltByID>0</BuiltByID>
+            <ResourceContainer>
+                <Capacity>500000</Capacity>
+                <Resources>
+                    <Resource Quantity="0" Type="ELECTRICITY"/>
+                    <Resource Quantity="0" Type="CONSTRUCTION_SUPPLIES"/>
+                    <Resource Quantity="0" Type="MACHINERY"/>
+                </Resources>
+            </ResourceContainer>
+        </MissileSite>
+        <MissileSite ID="1" Name="">
+            <Position>
+                <Latitude>41.64377</Latitude>
+                <Longitude>-83.845695</Longitude>
+            </Position>
+            <HP>1500</HP>
+            <MaxHP>1500</MaxHP>
+            <OwnerID>0</OwnerID>
+            <Flags>-128</Flags>
+            <StateTime>0</StateTime>
+            <ICBMSilo>false</ICBMSilo>
+            <MissileSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>15000</ReloadTime>
+                <SlotCount>3</SlotCount>
+                <Slots/>
+            </MissileSystem>
+            <Mode>2</Mode>
+            <Retaliating>false</Retaliating>
+            <RetaliateTime>0</RetaliateTime>
+            <TargetID>0</TargetID>
+            <Visible>false</Visible>
+            <VisibleTime>0</VisibleTime>
+            <BuiltByID>0</BuiltByID>
+            <ResourceContainer>
+                <Capacity>500000</Capacity>
+                <Resources>
+                    <Resource Quantity="0" Type="ELECTRICITY"/>
+                    <Resource Quantity="0" Type="CONSTRUCTION_SUPPLIES"/>
+                    <Resource Quantity="0" Type="MACHINERY"/>
+                </Resources>
+            </ResourceContainer>
+        </MissileSite>
+    </MissileSites>
+    <SAMSites>
+        <SAMSite ID="0" Name="">
+            <Position>
+                <Latitude>41.619152</Latitude>
+                <Longitude>-83.84577</Longitude>
+            </Position>
+            <HP>1500</HP>
+            <MaxHP>1500</MaxHP>
+            <OwnerID>0</OwnerID>
+            <Flags>-128</Flags>
+            <StateTime>0</StateTime>
+            <Mode>0</Mode>
+            <InterceptorSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>15000</ReloadTime>
+                <SlotCount>3</SlotCount>
+                <Slots/>
+            </InterceptorSystem>
+            <IsABM>false</IsABM>
+            <EngageSpeed>0.0</EngageSpeed>
+            <Visible>false</Visible>
+            <VisibleTime>0</VisibleTime>
+            <BuiltByID>0</BuiltByID>
+            <ResourceContainer>
+                <Capacity>500000</Capacity>
+                <Resources>
+                    <Resource Quantity="0" Type="ELECTRICITY"/>
+                    <Resource Quantity="0" Type="CONSTRUCTION_SUPPLIES"/>
+                    <Resource Quantity="0" Type="MACHINERY"/>
+                </Resources>
+            </ResourceContainer>
+        </SAMSite>
+        <SAMSite ID="1" Name="">
+            <Position>
+                <Latitude>41.64191</Latitude>
+                <Longitude>-83.82216</Longitude>
+            </Position>
+            <HP>1500</HP>
+            <MaxHP>1500</MaxHP>
+            <OwnerID>0</OwnerID>
+            <Flags>-128</Flags>
+            <StateTime>0</StateTime>
+            <Mode>0</Mode>
+            <InterceptorSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>15000</ReloadTime>
+                <SlotCount>3</SlotCount>
+                <Slots/>
+            </InterceptorSystem>
+            <IsABM>false</IsABM>
+            <EngageSpeed>0.0</EngageSpeed>
+            <Visible>false</Visible>
+            <VisibleTime>0</VisibleTime>
+            <BuiltByID>0</BuiltByID>
+            <ResourceContainer>
+                <Capacity>500000</Capacity>
+                <Resources>
+                    <Resource Quantity="0" Type="ELECTRICITY"/>
+                    <Resource Quantity="0" Type="CONSTRUCTION_SUPPLIES"/>
+                    <Resource Quantity="0" Type="MACHINERY"/>
+                </Resources>
+            </ResourceContainer>
+        </SAMSite>
+    </SAMSites>
+    <SentryGuns/>
+    <LogisticsDepots>
+        <LogisticsDepot ID="0" Name="">
+            <Position>
+                <Latitude>41.612106</Latitude>
+                <Longitude>-83.820595</Longitude>
+            </Position>
+            <HP>250</HP>
+            <MaxHP>250</MaxHP>
+            <OwnerID>0</OwnerID>
+            <Flags>-128</Flags>
+            <StateTime>0</StateTime>
+            <Visible>false</Visible>
+            <VisibleTime>0</VisibleTime>
+            <BuiltByID>0</BuiltByID>
+            <Wealth>0</Wealth>
+            <ReloadRemaining>3370000</ReloadRemaining>
+        </LogisticsDepot>
+    </LogisticsDepots>
+    <OreMines>
+        <OreMine ID="0" Name="">
+            <Position>
+                <Latitude>41.598385</Latitude>
+                <Longitude>-83.810036</Longitude>
+            </Position>
+            <HP>3000</HP>
+            <MaxHP>3000</MaxHP>
+            <OwnerID>0</OwnerID>
+            <Flags>-128</Flags>
+            <StateTime>0</StateTime>
+            <Visible>false</Visible>
+            <VisibleTime>0</VisibleTime>
+            <BuiltByID>0</BuiltByID>
+            <GenerateTime>259200000</GenerateTime>
+            <Type>FARM</Type>
+        </OreMine>
+        <OreMine ID="1" Name="">
+            <Position>
+                <Latitude>41.60221</Latitude>
+                <Longitude>-83.83205</Longitude>
+            </Position>
+            <HP>250</HP>
+            <MaxHP>250</MaxHP>
+            <OwnerID>0</OwnerID>
+            <Flags>-128</Flags>
+            <StateTime>0</StateTime>
+            <Visible>false</Visible>
+            <VisibleTime>0</VisibleTime>
+            <BuiltByID>0</BuiltByID>
+            <GenerateTime>1522000</GenerateTime>
+            <Type>SOLAR_PANEL</Type>
+        </OreMine>
+        <OreMine ID="2" Name="">
+            <Position>
+                <Latitude>41.570744</Latitude>
+                <Longitude>-83.801994</Longitude>
+            </Position>
+            <HP>1500</HP>
+            <MaxHP>1500</MaxHP>
+            <OwnerID>0</OwnerID>
+            <Flags>-128</Flags>
+            <StateTime>0</StateTime>
+            <Visible>false</Visible>
+            <VisibleTime>0</VisibleTime>
+            <BuiltByID>0</BuiltByID>
+            <GenerateTime>1528000</GenerateTime>
+            <Type>ORE_MINE</Type>
+        </OreMine>
+    </OreMines>
+    <RadarStations/>
+    <Processors/>
+    <Distributors/>
+    <CommandPosts>
+        <CommandPost ID="0" Name="">
+            <Position>
+                <Latitude>41.584656</Latitude>
+                <Longitude>-83.81353</Longitude>
+            </Position>
+            <HP>5000</HP>
+            <MaxHP>5000</MaxHP>
+            <OwnerID>0</OwnerID>
+            <Flags>-128</Flags>
+            <StateTime>0</StateTime>
+            <Visible>true</Visible>
+            <VisibleTime>0</VisibleTime>
+            <BuiltByID>0</BuiltByID>
+            <IsHQ>false</IsHQ>
+            <ResourceContainer>
+                <Capacity>0</Capacity>
+                <Resources/>
+            </ResourceContainer>
+        </CommandPost>
+    </CommandPosts>
+    <Banks/>
+    <Warehouses/>
+    <Airbases>
+        <Airbase ID="0" Name="">
+            <Position>
+                <Latitude>41.627453</Latitude>
+                <Longitude>-83.77989</Longitude>
+            </Position>
+            <HP>3150</HP>
+            <MaxHP>3150</MaxHP>
+            <OwnerID>0</OwnerID>
+            <Flags>-128</Flags>
+            <StateTime>0</StateTime>
+            <AircraftSystem>
+                <Open>false</Open>
+                <ReloadRemaining>0</ReloadRemaining>
+                <SlotCount>4</SlotCount>
+                <StoredAircrafts>
+                    <StoredAircraft ID="0">
+                        <HP>1</HP>
+                        <MaxHP>1</MaxHP>
+                        <OwnerID>0</OwnerID>
+                        <Name/>
+                        <CurrentFuel>1.0</CurrentFuel>
+                        <Homebase>
+                            <Type>8</Type>
+                            <ID>0</ID>
+                        </Homebase>
+                        <AutoReturn>true</AutoReturn>
+                        <AircraftRole>60</AircraftRole>
+                        <PrepTime>0</PrepTime>
+                        <EWReloadRemaining>0</EWReloadRemaining>
+                        <Mode>0</Mode>
+                        <InterceptorSystem>
+                            <ReloadRemaining>0</ReloadRemaining>
+                            <ReloadTime>8000</ReloadTime>
+                            <SlotCount>18</SlotCount>
+                            <Slots>
+                                <Slot Number="0" PrepTime="0" Type="1005"/>
+                                <Slot Number="1" PrepTime="0" Type="1005"/>
+                                <Slot Number="2" PrepTime="0" Type="1005"/>
+                                <Slot Number="3" PrepTime="0" Type="1005"/>
+                                <Slot Number="4" PrepTime="0" Type="1005"/>
+                                <Slot Number="5" PrepTime="0" Type="1005"/>
+                                <Slot Number="6" PrepTime="0" Type="1005"/>
+                                <Slot Number="7" PrepTime="0" Type="1005"/>
+                                <Slot Number="8" PrepTime="0" Type="1005"/>
+                                <Slot Number="9" PrepTime="0" Type="1005"/>
+                                <Slot Number="10" PrepTime="0" Type="1005"/>
+                                <Slot Number="11" PrepTime="0" Type="1005"/>
+                                <Slot Number="12" PrepTime="0" Type="1005"/>
+                                <Slot Number="13" PrepTime="0" Type="1005"/>
+                                <Slot Number="14" PrepTime="0" Type="1005"/>
+                                <Slot Number="15" PrepTime="0" Type="1005"/>
+                                <Slot Number="16" PrepTime="0" Type="1005"/>
+                                <Slot Number="17" PrepTime="0" Type="1005"/>
+                            </Slots>
+                        </InterceptorSystem>
+                    </StoredAircraft>
+                    <StoredAircraft ID="1">
+                        <HP>1</HP>
+                        <MaxHP>1</MaxHP>
+                        <OwnerID>0</OwnerID>
+                        <Name/>
+                        <CurrentFuel>1.0</CurrentFuel>
+                        <Homebase>
+                            <Type>8</Type>
+                            <ID>0</ID>
+                        </Homebase>
+                        <AutoReturn>true</AutoReturn>
+                        <AircraftRole>61</AircraftRole>
+                        <PrepTime>0</PrepTime>
+                        <EWReloadRemaining>0</EWReloadRemaining>
+                        <Mode>0</Mode>
+                        <MissileSystem>
+                            <ReloadRemaining>0</ReloadRemaining>
+                            <ReloadTime>5000</ReloadTime>
+                            <SlotCount>24</SlotCount>
+                            <Slots>
+                                <Slot Number="0" PrepTime="0" Type="1057"/>
+                                <Slot Number="1" PrepTime="0" Type="1057"/>
+                                <Slot Number="2" PrepTime="0" Type="1057"/>
+                                <Slot Number="3" PrepTime="0" Type="1057"/>
+                                <Slot Number="4" PrepTime="0" Type="1057"/>
+                                <Slot Number="5" PrepTime="0" Type="1057"/>
+                                <Slot Number="6" PrepTime="0" Type="1057"/>
+                                <Slot Number="7" PrepTime="0" Type="1057"/>
+                                <Slot Number="8" PrepTime="0" Type="1057"/>
+                                <Slot Number="9" PrepTime="0" Type="1057"/>
+                                <Slot Number="10" PrepTime="0" Type="3"/>
+                                <Slot Number="11" PrepTime="0" Type="3"/>
+                                <Slot Number="12" PrepTime="0" Type="3"/>
+                                <Slot Number="13" PrepTime="0" Type="3"/>
+                                <Slot Number="14" PrepTime="0" Type="3"/>
+                                <Slot Number="15" PrepTime="0" Type="3"/>
+                                <Slot Number="16" PrepTime="0" Type="3"/>
+                                <Slot Number="17" PrepTime="0" Type="3"/>
+                                <Slot Number="18" PrepTime="0" Type="3"/>
+                                <Slot Number="19" PrepTime="0" Type="3"/>
+                            </Slots>
+                        </MissileSystem>
+                    </StoredAircraft>
+                    <StoredAircraft ID="2">
+                        <HP>1</HP>
+                        <MaxHP>1</MaxHP>
+                        <OwnerID>0</OwnerID>
+                        <Name>P8 Poseidon</Name>
+                        <CurrentFuel>1.0</CurrentFuel>
+                        <Homebase>
+                            <Type>8</Type>
+                            <ID>0</ID>
+                        </Homebase>
+                        <AutoReturn>true</AutoReturn>
+                        <AircraftRole>61</AircraftRole>
+                        <PrepTime>0</PrepTime>
+                        <EWReloadRemaining>0</EWReloadRemaining>
+                        <Mode>0</Mode>
+                        <MissileSystem>
+                            <ReloadRemaining>0</ReloadRemaining>
+                            <ReloadTime>5000</ReloadTime>
+                            <SlotCount>24</SlotCount>
+                            <Slots>
+                                <Slot Number="0" PrepTime="0" Type="1112"/>
+                                <Slot Number="1" PrepTime="0" Type="1112"/>
+                                <Slot Number="2" PrepTime="0" Type="1112"/>
+                                <Slot Number="3" PrepTime="0" Type="1112"/>
+                                <Slot Number="4" PrepTime="0" Type="1112"/>
+                                <Slot Number="5" PrepTime="0" Type="1112"/>
+                                <Slot Number="6" PrepTime="0" Type="1112"/>
+                                <Slot Number="7" PrepTime="0" Type="1112"/>
+                                <Slot Number="8" PrepTime="0" Type="1112"/>
+                                <Slot Number="9" PrepTime="0" Type="1112"/>
+                                <Slot Number="10" PrepTime="0" Type="1104"/>
+                                <Slot Number="11" PrepTime="0" Type="1104"/>
+                                <Slot Number="12" PrepTime="0" Type="1104"/>
+                                <Slot Number="13" PrepTime="0" Type="1104"/>
+                                <Slot Number="14" PrepTime="0" Type="1104"/>
+                                <Slot Number="15" PrepTime="0" Type="1104"/>
+                                <Slot Number="16" PrepTime="0" Type="1104"/>
+                                <Slot Number="17" PrepTime="0" Type="1104"/>
+                                <Slot Number="18" PrepTime="0" Type="1104"/>
+                                <Slot Number="19" PrepTime="0" Type="1104"/>
+                                <Slot Number="20" PrepTime="0" Type="1104"/>
+                                <Slot Number="21" PrepTime="0" Type="1104"/>
+                                <Slot Number="22" PrepTime="0" Type="1104"/>
+                                <Slot Number="23" PrepTime="0" Type="1104"/>
+                            </Slots>
+                        </MissileSystem>
+                    </StoredAircraft>
+                    <StoredAircraft ID="3">
+                        <HP>1</HP>
+                        <MaxHP>1</MaxHP>
+                        <OwnerID>0</OwnerID>
+                        <Name/>
+                        <CurrentFuel>1.0</CurrentFuel>
+                        <Homebase>
+                            <Type>8</Type>
+                            <ID>0</ID>
+                        </Homebase>
+                        <AutoReturn>true</AutoReturn>
+                        <AircraftRole>64</AircraftRole>
+                        <PrepTime>0</PrepTime>
+                        <EWReloadRemaining>0</EWReloadRemaining>
+                        <Mode>0</Mode>
+                    </StoredAircraft>
+                </StoredAircrafts>
+            </AircraftSystem>
+            <Visible>false</Visible>
+            <VisibleTime>0</VisibleTime>
+            <BuiltByID>0</BuiltByID>
+            <ResourceContainer>
+                <Capacity>500000</Capacity>
+                <Resources>
+                    <Resource Quantity="0" Type="ELECTRONICS"/>
+                    <Resource Quantity="0" Type="FUEL"/>
+                    <Resource Quantity="0" Type="ELECTRICITY"/>
+                    <Resource Quantity="0" Type="CONSTRUCTION_SUPPLIES"/>
+                    <Resource Quantity="0" Type="MACHINERY"/>
+                    <Resource Quantity="0" Type="STEEL"/>
+                </Resources>
+            </ResourceContainer>
+        </Airbase>
+    </Airbases>
+    <Armories/>
+    <Infantries/>
+    <Tanks/>
+    <Ships>
+        <Ship ID="0" Name="">
+            <Position>
+                <Latitude>21.629393</Latitude>
+                <Longitude>-158.34528</Longitude>
+            </Position>
+            <HP>2400</HP>
+            <MaxHP>2400</MaxHP>
+            <OwnerID>0</OwnerID>
+            <MoveOrders>2</MoveOrders>
+            <Target>
+                <Latitude>-5.729578E7</Latitude>
+                <Longitude>-5.729578E7</Longitude>
+            </Target>
+            <SonarCooldown>0</SonarCooldown>
+            <CurrentFuel>1.0</CurrentFuel>
+            <Visible>true</Visible>
+            <VisibleTime>0</VisibleTime>
+            <Mode>0</Mode>
+            <ShipType>53</ShipType>
+            <Selling>false</Selling>
+            <SellTime>0</SellTime>
+            <MissileSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>15000</ReloadTime>
+                <SlotCount>72</SlotCount>
+                <Slots/>
+            </MissileSystem>
+            <TorpedoSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>30000</ReloadTime>
+                <SlotCount>36</SlotCount>
+                <Slots/>
+            </TorpedoSystem>
+            <InterceptorSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>20000</ReloadTime>
+                <SlotCount>72</SlotCount>
+                <Slots/>
+            </InterceptorSystem>
+            <SentrySystem>
+                <CIWSGuns>
+                    <CIWSGun ReloadRemaining="0"/>
+                    <CIWSGun ReloadRemaining="0"/>
+                    <CIWSGun ReloadRemaining="0"/>
+                    <CIWSGun ReloadRemaining="0"/>
+                </CIWSGuns>
+            </SentrySystem>
+        </Ship>
+        <Ship ID="1" Name="">
+            <Position>
+                <Latitude>21.681396</Latitude>
+                <Longitude>-158.28482</Longitude>
+            </Position>
+            <HP>1200</HP>
+            <MaxHP>1200</MaxHP>
+            <OwnerID>0</OwnerID>
+            <MoveOrders>2</MoveOrders>
+            <Target>
+                <Latitude>-5.729578E7</Latitude>
+                <Longitude>-5.729578E7</Longitude>
+            </Target>
+            <SonarCooldown>0</SonarCooldown>
+            <CurrentFuel>1.0</CurrentFuel>
+            <Visible>true</Visible>
+            <VisibleTime>0</VisibleTime>
+            <Mode>0</Mode>
+            <ShipType>52</ShipType>
+            <Selling>false</Selling>
+            <SellTime>0</SellTime>
+            <MissileSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>15000</ReloadTime>
+                <SlotCount>36</SlotCount>
+                <Slots/>
+            </MissileSystem>
+            <TorpedoSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>30000</ReloadTime>
+                <SlotCount>18</SlotCount>
+                <Slots/>
+            </TorpedoSystem>
+            <InterceptorSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>20000</ReloadTime>
+                <SlotCount>36</SlotCount>
+                <Slots/>
+            </InterceptorSystem>
+            <SentrySystem>
+                <CIWSGuns>
+                    <CIWSGun ReloadRemaining="0"/>
+                    <CIWSGun ReloadRemaining="0"/>
+                </CIWSGuns>
+            </SentrySystem>
+        </Ship>
+        <Ship ID="2" Name="">
+            <Position>
+                <Latitude>36.85807</Latitude>
+                <Longitude>-75.96916</Longitude>
+            </Position>
+            <HP>1200</HP>
+            <MaxHP>1200</MaxHP>
+            <OwnerID>0</OwnerID>
+            <MoveOrders>2</MoveOrders>
+            <Target>
+                <Latitude>-5.729578E7</Latitude>
+                <Longitude>-5.729578E7</Longitude>
+            </Target>
+            <SonarCooldown>0</SonarCooldown>
+            <CurrentFuel>1.0</CurrentFuel>
+            <Visible>true</Visible>
+            <VisibleTime>0</VisibleTime>
+            <Mode>0</Mode>
+            <ShipType>52</ShipType>
+            <Selling>false</Selling>
+            <SellTime>0</SellTime>
+            <MissileSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>15000</ReloadTime>
+                <SlotCount>36</SlotCount>
+                <Slots/>
+            </MissileSystem>
+            <TorpedoSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>30000</ReloadTime>
+                <SlotCount>18</SlotCount>
+                <Slots/>
+            </TorpedoSystem>
+            <InterceptorSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>20000</ReloadTime>
+                <SlotCount>36</SlotCount>
+                <Slots/>
+            </InterceptorSystem>
+            <SentrySystem>
+                <CIWSGuns>
+                    <CIWSGun ReloadRemaining="0"/>
+                    <CIWSGun ReloadRemaining="0"/>
+                </CIWSGuns>
+            </SentrySystem>
+        </Ship>
+        <Ship ID="3" Name="">
+            <Position>
+                <Latitude>21.374832</Latitude>
+                <Longitude>-157.64871</Longitude>
+            </Position>
+            <HP>5400</HP>
+            <MaxHP>5400</MaxHP>
+            <OwnerID>0</OwnerID>
+            <MoveOrders>2</MoveOrders>
+            <Target>
+                <Latitude>21.374832</Latitude>
+                <Longitude>-157.64871</Longitude>
+            </Target>
+            <SonarCooldown>0</SonarCooldown>
+            <CurrentFuel>1.0</CurrentFuel>
+            <Visible>true</Visible>
+            <VisibleTime>0</VisibleTime>
+            <Mode>0</Mode>
+            <ShipType>54</ShipType>
+            <Selling>false</Selling>
+            <SellTime>0</SellTime>
+            <AircraftSystem>
+                <Open>false</Open>
+                <ReloadRemaining>0</ReloadRemaining>
+                <SlotCount>72</SlotCount>
+                <StoredAircrafts/>
+            </AircraftSystem>
+        </Ship>
+        <Ship ID="4" Name="">
+            <Position>
+                <Latitude>21.135725</Latitude>
+                <Longitude>-157.77817</Longitude>
+            </Position>
+            <HP>1200</HP>
+            <MaxHP>1200</MaxHP>
+            <OwnerID>0</OwnerID>
+            <MoveOrders>2</MoveOrders>
+            <Target>
+                <Latitude>-5.729578E7</Latitude>
+                <Longitude>-5.729578E7</Longitude>
+            </Target>
+            <SonarCooldown>0</SonarCooldown>
+            <CurrentFuel>1.0</CurrentFuel>
+            <Visible>true</Visible>
+            <VisibleTime>0</VisibleTime>
+            <Mode>0</Mode>
+            <ShipType>52</ShipType>
+            <Selling>false</Selling>
+            <SellTime>0</SellTime>
+            <MissileSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>15000</ReloadTime>
+                <SlotCount>36</SlotCount>
+                <Slots/>
+            </MissileSystem>
+            <TorpedoSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>30000</ReloadTime>
+                <SlotCount>18</SlotCount>
+                <Slots/>
+            </TorpedoSystem>
+            <InterceptorSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>20000</ReloadTime>
+                <SlotCount>36</SlotCount>
+                <Slots/>
+            </InterceptorSystem>
+            <SentrySystem>
+                <CIWSGuns>
+                    <CIWSGun ReloadRemaining="0"/>
+                    <CIWSGun ReloadRemaining="0"/>
+                </CIWSGuns>
+            </SentrySystem>
+        </Ship>
+        <Ship ID="5" Name="">
+            <Position>
+                <Latitude>21.482637</Latitude>
+                <Longitude>-157.68059</Longitude>
+            </Position>
+            <HP>1200</HP>
+            <MaxHP>1200</MaxHP>
+            <OwnerID>0</OwnerID>
+            <MoveOrders>2</MoveOrders>
+            <Target>
+                <Latitude>21.482637</Latitude>
+                <Longitude>-157.68059</Longitude>
+            </Target>
+            <SonarCooldown>0</SonarCooldown>
+            <CurrentFuel>1.0</CurrentFuel>
+            <Visible>true</Visible>
+            <VisibleTime>0</VisibleTime>
+            <Mode>0</Mode>
+            <ShipType>52</ShipType>
+            <Selling>false</Selling>
+            <SellTime>0</SellTime>
+            <MissileSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>15000</ReloadTime>
+                <SlotCount>36</SlotCount>
+                <Slots/>
+            </MissileSystem>
+            <TorpedoSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>30000</ReloadTime>
+                <SlotCount>18</SlotCount>
+                <Slots/>
+            </TorpedoSystem>
+            <InterceptorSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>20000</ReloadTime>
+                <SlotCount>36</SlotCount>
+                <Slots/>
+            </InterceptorSystem>
+            <SentrySystem>
+                <CIWSGuns>
+                    <CIWSGun ReloadRemaining="0"/>
+                    <CIWSGun ReloadRemaining="0"/>
+                </CIWSGuns>
+            </SentrySystem>
+        </Ship>
+        <Ship ID="6" Name="">
+            <Position>
+                <Latitude>21.194185</Latitude>
+                <Longitude>-158.18439</Longitude>
+            </Position>
+            <HP>1200</HP>
+            <MaxHP>1200</MaxHP>
+            <OwnerID>0</OwnerID>
+            <MoveOrders>2</MoveOrders>
+            <Target>
+                <Latitude>-5.729578E7</Latitude>
+                <Longitude>-5.729578E7</Longitude>
+            </Target>
+            <SonarCooldown>0</SonarCooldown>
+            <CurrentFuel>1.0</CurrentFuel>
+            <Visible>true</Visible>
+            <VisibleTime>0</VisibleTime>
+            <Mode>0</Mode>
+            <ShipType>52</ShipType>
+            <Selling>false</Selling>
+            <SellTime>0</SellTime>
+            <MissileSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>15000</ReloadTime>
+                <SlotCount>36</SlotCount>
+                <Slots/>
+            </MissileSystem>
+            <TorpedoSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>30000</ReloadTime>
+                <SlotCount>18</SlotCount>
+                <Slots/>
+            </TorpedoSystem>
+            <InterceptorSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>20000</ReloadTime>
+                <SlotCount>36</SlotCount>
+                <Slots/>
+            </InterceptorSystem>
+            <SentrySystem>
+                <CIWSGuns>
+                    <CIWSGun ReloadRemaining="0"/>
+                    <CIWSGun ReloadRemaining="0"/>
+                </CIWSGuns>
+            </SentrySystem>
+        </Ship>
+        <Ship ID="7" Name="">
+            <Position>
+                <Latitude>21.618605</Latitude>
+                <Longitude>-157.88194</Longitude>
+            </Position>
+            <HP>2400</HP>
+            <MaxHP>2400</MaxHP>
+            <OwnerID>0</OwnerID>
+            <MoveOrders>2</MoveOrders>
+            <Target>
+                <Latitude>21.618605</Latitude>
+                <Longitude>-157.88194</Longitude>
+            </Target>
+            <SonarCooldown>0</SonarCooldown>
+            <CurrentFuel>1.0</CurrentFuel>
+            <Visible>true</Visible>
+            <VisibleTime>0</VisibleTime>
+            <Mode>0</Mode>
+            <ShipType>53</ShipType>
+            <Selling>false</Selling>
+            <SellTime>0</SellTime>
+            <MissileSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>15000</ReloadTime>
+                <SlotCount>72</SlotCount>
+                <Slots/>
+            </MissileSystem>
+            <TorpedoSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>30000</ReloadTime>
+                <SlotCount>36</SlotCount>
+                <Slots/>
+            </TorpedoSystem>
+            <InterceptorSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>20000</ReloadTime>
+                <SlotCount>72</SlotCount>
+                <Slots/>
+            </InterceptorSystem>
+            <SentrySystem>
+                <CIWSGuns>
+                    <CIWSGun ReloadRemaining="0"/>
+                    <CIWSGun ReloadRemaining="0"/>
+                    <CIWSGun ReloadRemaining="0"/>
+                    <CIWSGun ReloadRemaining="0"/>
+                </CIWSGuns>
+            </SentrySystem>
+        </Ship>
+        <Ship ID="8" Name="">
+            <Position>
+                <Latitude>21.121706</Latitude>
+                <Longitude>-158.09967</Longitude>
+            </Position>
+            <HP>2400</HP>
+            <MaxHP>2400</MaxHP>
+            <OwnerID>0</OwnerID>
+            <MoveOrders>2</MoveOrders>
+            <Target>
+                <Latitude>-5.729578E7</Latitude>
+                <Longitude>-5.729578E7</Longitude>
+            </Target>
+            <SonarCooldown>0</SonarCooldown>
+            <CurrentFuel>1.0</CurrentFuel>
+            <Visible>true</Visible>
+            <VisibleTime>0</VisibleTime>
+            <Mode>0</Mode>
+            <ShipType>53</ShipType>
+            <Selling>false</Selling>
+            <SellTime>0</SellTime>
+            <MissileSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>15000</ReloadTime>
+                <SlotCount>72</SlotCount>
+                <Slots/>
+            </MissileSystem>
+            <TorpedoSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>30000</ReloadTime>
+                <SlotCount>36</SlotCount>
+                <Slots/>
+            </TorpedoSystem>
+            <InterceptorSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>20000</ReloadTime>
+                <SlotCount>72</SlotCount>
+                <Slots/>
+            </InterceptorSystem>
+            <SentrySystem>
+                <CIWSGuns>
+                    <CIWSGun ReloadRemaining="0"/>
+                    <CIWSGun ReloadRemaining="0"/>
+                    <CIWSGun ReloadRemaining="0"/>
+                    <CIWSGun ReloadRemaining="0"/>
+                </CIWSGuns>
+            </SentrySystem>
+        </Ship>
+    </Ships>
+    <Submarines>
+        <Submarine ID="0" Name="">
+            <Position>
+                <Latitude>37.05812</Latitude>
+                <Longitude>-76.14412</Longitude>
+            </Position>
+            <HP>900</HP>
+            <MaxHP>900</MaxHP>
+            <OwnerID>0</OwnerID>
+            <MoveOrders>2</MoveOrders>
+            <Target>
+                <Latitude>37.05812</Latitude>
+                <Longitude>-76.14412</Longitude>
+            </Target>
+            <SonarCooldown>0</SonarCooldown>
+            <CurrentFuel>1.0</CurrentFuel>
+            <Submerged>false</Submerged>
+            <Diving>false</Diving>
+            <SubmergeTime>0</SubmergeTime>
+            <Visible>false</Visible>
+            <VisibleTime>0</VisibleTime>
+            <SubmarineType>58</SubmarineType>
+            <Selling>false</Selling>
+            <SellTime>0</SellTime>
+            <MissileSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>15000</ReloadTime>
+                <SlotCount>36</SlotCount>
+                <Slots/>
+            </MissileSystem>
+            <TorpedoSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>30000</ReloadTime>
+                <SlotCount>18</SlotCount>
+                <Slots/>
+            </TorpedoSystem>
+        </Submarine>
+        <Submarine ID="1" Name="">
+            <Position>
+                <Latitude>37.12462</Latitude>
+                <Longitude>-76.222664</Longitude>
+            </Position>
+            <HP>1500</HP>
+            <MaxHP>1500</MaxHP>
+            <OwnerID>0</OwnerID>
+            <MoveOrders>2</MoveOrders>
+            <Target>
+                <Latitude>-5.729578E7</Latitude>
+                <Longitude>-5.729578E7</Longitude>
+            </Target>
+            <SonarCooldown>0</SonarCooldown>
+            <CurrentFuel>1.0</CurrentFuel>
+            <Submerged>false</Submerged>
+            <Diving>false</Diving>
+            <SubmergeTime>0</SubmergeTime>
+            <Visible>false</Visible>
+            <VisibleTime>0</VisibleTime>
+            <SubmarineType>59</SubmarineType>
+            <Selling>false</Selling>
+            <SellTime>0</SellTime>
+            <MissileSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>15000</ReloadTime>
+                <SlotCount>72</SlotCount>
+                <Slots/>
+            </MissileSystem>
+            <TorpedoSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>30000</ReloadTime>
+                <SlotCount>36</SlotCount>
+                <Slots/>
+            </TorpedoSystem>
+            <ICBMSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>90000</ReloadTime>
+                <SlotCount>6</SlotCount>
+                <Slots/>
+            </ICBMSystem>
+        </Submarine>
+        <Submarine ID="2" Name="">
+            <Position>
+                <Latitude>21.288658</Latitude>
+                <Longitude>-158.23143</Longitude>
+            </Position>
+            <HP>1500</HP>
+            <MaxHP>1500</MaxHP>
+            <OwnerID>0</OwnerID>
+            <MoveOrders>2</MoveOrders>
+            <Target>
+                <Latitude>-5.729578E7</Latitude>
+                <Longitude>-5.729578E7</Longitude>
+            </Target>
+            <SonarCooldown>0</SonarCooldown>
+            <CurrentFuel>1.0</CurrentFuel>
+            <Submerged>false</Submerged>
+            <Diving>false</Diving>
+            <SubmergeTime>0</SubmergeTime>
+            <Visible>false</Visible>
+            <VisibleTime>0</VisibleTime>
+            <SubmarineType>59</SubmarineType>
+            <Selling>false</Selling>
+            <SellTime>0</SellTime>
+            <MissileSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>15000</ReloadTime>
+                <SlotCount>72</SlotCount>
+                <Slots/>
+            </MissileSystem>
+            <TorpedoSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>30000</ReloadTime>
+                <SlotCount>36</SlotCount>
+                <Slots/>
+            </TorpedoSystem>
+            <ICBMSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>90000</ReloadTime>
+                <SlotCount>6</SlotCount>
+                <Slots/>
+            </ICBMSystem>
+        </Submarine>
+        <Submarine ID="3" Name="">
+            <Position>
+                <Latitude>21.811949</Latitude>
+                <Longitude>-157.31543</Longitude>
+            </Position>
+            <HP>900</HP>
+            <MaxHP>900</MaxHP>
+            <OwnerID>0</OwnerID>
+            <MoveOrders>2</MoveOrders>
+            <Target>
+                <Latitude>21.811949</Latitude>
+                <Longitude>-157.31543</Longitude>
+            </Target>
+            <SonarCooldown>0</SonarCooldown>
+            <CurrentFuel>1.0</CurrentFuel>
+            <Submerged>false</Submerged>
+            <Diving>false</Diving>
+            <SubmergeTime>0</SubmergeTime>
+            <Visible>false</Visible>
+            <VisibleTime>0</VisibleTime>
+            <SubmarineType>58</SubmarineType>
+            <Selling>false</Selling>
+            <SellTime>0</SellTime>
+            <MissileSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>15000</ReloadTime>
+                <SlotCount>36</SlotCount>
+                <Slots/>
+            </MissileSystem>
+            <TorpedoSystem>
+                <ReloadRemaining>0</ReloadRemaining>
+                <ReloadTime>30000</ReloadTime>
+                <SlotCount>18</SlotCount>
+                <Slots/>
+            </TorpedoSystem>
+        </Submarine>
+    </Submarines>
+    <Aircrafts/>
+    <Blueprints/>
+    <Loots>
+        <Loot ID="97">
+            <Name>Ore</Name>
+            <Position>
+                <Latitude>41.570744</Latitude>
+                <Longitude>-83.801994</Longitude>
+            </Position>
+            <Quantity>18248</Quantity>
+            <Expiry>15251399</Expiry>
+        </Loot>
+        <Loot ID="99">
+            <Name>Ore</Name>
+            <Position>
+                <Latitude>41.570744</Latitude>
+                <Longitude>-83.801994</Longitude>
+            </Position>
+            <Quantity>7548</Quantity>
+            <Expiry>18299886</Expiry>
+        </Loot>
+        <Loot ID="101">
+            <Name>Ore</Name>
+            <Position>
+                <Latitude>41.570744</Latitude>
+                <Longitude>-83.801994</Longitude>
+            </Position>
+            <Quantity>15391</Quantity>
+            <Expiry>13307488</Expiry>
+        </Loot>
+        <Loot ID="102">
+            <Name>Electricity</Name>
+            <Position>
+                <Latitude>41.602345</Latitude>
+                <Longitude>-83.83173</Longitude>
+            </Position>
+            <Quantity>239</Quantity>
+            <Expiry>717675</Expiry>
+        </Loot>
+        <Loot ID="103">
+            <Name>Ore</Name>
+            <Position>
+                <Latitude>41.570744</Latitude>
+                <Longitude>-83.801994</Longitude>
+            </Position>
+            <Quantity>10173</Quantity>
+            <Expiry>20964725</Expiry>
+        </Loot>
+        <Loot ID="91">
+            <Name>Ore</Name>
+            <Position>
+                <Latitude>41.570744</Latitude>
+                <Longitude>-83.801994</Longitude>
+            </Position>
+            <Quantity>15422</Quantity>
+            <Expiry>3762389</Expiry>
+        </Loot>
+        <Loot ID="93">
+            <Name>Ore</Name>
+            <Position>
+                <Latitude>41.570744</Latitude>
+                <Longitude>-83.801994</Longitude>
+            </Position>
+            <Quantity>6589</Quantity>
+            <Expiry>3050835</Expiry>
+        </Loot>
+        <Loot ID="95">
+            <Name>Ore</Name>
+            <Position>
+                <Latitude>41.570744</Latitude>
+                <Longitude>-83.801994</Longitude>
+            </Position>
+            <Quantity>13332</Quantity>
+            <Expiry>7276149</Expiry>
+        </Loot>
+    </Loots>
+    <Rubbles/>
+    <Airdrops/>
+    <Deposits/>
+    <Radiations/>
+    <Shipyards>
+        <Shipyard ID="0">
+            <Name>Norfolk Naval Shipyard</Name>
+            <Position>
+                <Latitude>36.809834</Latitude>
+                <Longitude>-76.30072</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>36.960594</Latitude>
+                <Longitude>-76.36098</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>-1</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="1">
+            <Name>Alexandria Shipyard</Name>
+            <Position>
+                <Latitude>31.171999</Latitude>
+                <Longitude>29.867804</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>31.252813</Latitude>
+                <Longitude>29.784363</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>-1</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+        <Shipyard ID="2">
+            <Name>Pearl Harbor Naval Shipyard</Name>
+            <Position>
+                <Latitude>21.352638</Latitude>
+                <Longitude>-157.95016</Longitude>
+            </Position>
+            <OutputCoord>
+                <Latitude>21.260456</Latitude>
+                <Longitude>-157.96571</Longitude>
+            </OutputCoord>
+            <HP>15000</HP>
+            <OwnerID>-1</OwnerID>
+            <MaxHP>15000</MaxHP>
+            <Contested>false</Contested>
+            <ProductionCapacity>1</ProductionCapacity>
+            <Queue>
+                <ProductionOrders/>
+            </Queue>
+        </Shipyard>
+    </Shipyards>
+</Game>

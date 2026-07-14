@@ -24,8 +24,6 @@ import storage.XMLGameSaver;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import java.io.FileInputStream;
-import launch.game.Defs;
-
 
 /**
  *
@@ -187,12 +185,6 @@ public class LaunchServer implements LaunchServerAppInterface, GameLoadSaveListe
         {
             LaunchLog.Log(APPLICATION, LOG_NAME, "Did not save/backup the game due to IO error.");
         }
-    }
-    
-    @Override
-    public void LoadShipyards(LaunchServerGame game)
-    {
-        XMLGameLoader.LoadShipyards("shipyards.txt", game);
     }
     
     //---------------------------------------------------------------------------------------------------------------------------------

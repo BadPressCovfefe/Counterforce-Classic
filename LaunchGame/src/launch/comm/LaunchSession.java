@@ -173,9 +173,10 @@ public abstract class LaunchSession implements TobCommInterface, ConnectionLogge
     public static final int MigrateAccount = 146;                //A request to migrate an existing player account to a Google account.
     public static final int PurchaseListing = 147;               //A request to purchase a market listing.
     public static final int PurchaseTank = 148;                  //A request to purchase a tank.    
-    //149 is unused. 
+    public static final int BuildShipyard = 149;                 //A request to build a shipyard.
     public static final int ToggleAirbaseOpen = 150;             //Toggle an aircraft system open or closed.
     public static final int NPC = 151;                           //An NPC.
+    
     //Commands.
     public static final int AccountUnregistered = 0;             //The account must be registered (present user with form).
     public static final int MajorVersionInvalid = 1;             //Notify the client that a major update is available.
@@ -287,7 +288,7 @@ public abstract class LaunchSession implements TobCommInterface, ConnectionLogge
     public static final int DiveOrSurface = 108;                 //A command for a submarine to dive or surface.
     public static final int RemoveArtilleryGun = 109;            //An artillery gun has been removed from the game.
     public static final int AccountUnmigrated = 110;             //An old user needs to migrate their account to Google.
-    public static final int RemoveLogisticsDepot = 111;               //A scrap yard has been removed from the game.
+    public static final int RemoveLogisticsDepot = 111;          //A scrap yard has been removed from the game.
     public static final int UpgradeShipyard = 112;               //A command to upgrade a shipyard's production capacity.
     public static final int RemoveDistributor = 113;             //A distributor has been removed from the game.
     public static final int RemoveHelicopter = 114;              //A helicopter has been removed from the game.
@@ -302,6 +303,7 @@ public abstract class LaunchSession implements TobCommInterface, ConnectionLogge
     public static final int InterceptorSlotUpgradeToMax = 123;   //Max out the slots on a SAM.
     public static final int RemoveNPC = 124;                     //An NPC was removed from the game.
     public static final int DepotCollect = 125;                  //A command to collect loot around a depot.
+    public static final int RemoveShipyard = 126;                //A shipyard has been removed from the game.
     
     private static final int MESSAGE_BUFFER_SIZE = 10240;
     private static final int COMMS_THREAD_SLEEP = 20;

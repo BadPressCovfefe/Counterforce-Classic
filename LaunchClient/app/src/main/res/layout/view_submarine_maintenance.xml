@@ -23,11 +23,13 @@
             android:textAppearance="?android:attr/textAppearanceLarge"/>
 
         <ImageView
-            android:layout_width="@dimen/PlayerInfoIconSize"
-            android:layout_height="@dimen/PlayerInfoIconSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/imgSubmarineType"
-            android:src="@drawable/marker_ssbn"
+            android:src="@drawable/build_attack_sub"
             android:layout_margin="@dimen/ButtonEdgePadding"
+            android:padding="@dimen/CheckBoxBorderWidth"
+            android:background="@drawable/detail_button"
             android:layout_gravity="center"/>
     </LinearLayout>
 
@@ -75,7 +77,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
@@ -83,6 +85,14 @@
         android:layout_marginTop="@dimen/MainViewSpacing"
         android:layout_marginBottom="@dimen/MainViewSpacing"
         android:layout_marginRight="@dimen/MainViewSpacing">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Cost"
+            android:id="@+id/txtCost"
+            android:layout_gravity="center"/>
 
         <LinearLayout
             android:id="@+id/btnMove"

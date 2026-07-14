@@ -18,6 +18,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import launch.game.Defs;
 import launch.game.EntityPointer;
 import launch.game.LaunchClientGame;
 import launch.game.entities.AirplaneInterface;
@@ -36,6 +37,7 @@ public class SubmarineMaintenanceView extends LaunchView implements LaunchUIComm
 
     private TextView txtEmptySlots;
     private TextView txtFuelLevel;
+    private TextView txtCost;
     private LinearLayout btnMove;
     private LinearLayout btnCeaseFire;
 
@@ -77,9 +79,12 @@ public class SubmarineMaintenanceView extends LaunchView implements LaunchUIComm
         txtEmptySlots = findViewById(R.id.txtEmptySlots);
         btnMove = findViewById(R.id.btnMove);
         btnCeaseFire = findViewById(R.id.btnCeaseFire);
+        txtCost = findViewById(R.id.txtCost);
 
         Submarine iconControlSubmarine = submarineShadow == null ? (Submarine)SubmarineList.iterator().next() : submarineShadow;
         txtType.setText(TextUtilities.GetEntityTypeAndName(iconControlSubmarine, game));
+
+        imgType.setImageResource(EntityIconBitmaps.GetEntityImageResource(game, iconControlSubmarine));
 
         //If there is just one submarine in the list, just treat it like we selected a single submarine.
         if(submarineShadow == null && SubmarineList.size() == 1)
@@ -91,18 +96,16 @@ public class SubmarineMaintenanceView extends LaunchView implements LaunchUIComm
         if(submarineShadow != null)
         {
             if(submarineShadow.GetNuclear())
+            {
                 txtFuelLevel.setText(context.getString(R.string.infinite));
+            }
             else
+            {
                 TextUtilities.AssignFuelPercentageString(txtFuelLevel, submarineShadow);
+            }
 
             txtFuelLevel.setVisibility(VISIBLE);
             txtCount.setVisibility(GONE);
-
-            try
-            {
-                imgType.setImageBitmap(EntityIconBitmaps.GetOwnedNavalBitmap(context, game, submarineShadow));
-            }
-            catch(Exception ex) { /* Don't care.*/ }
         }
 
         if(SubmarineList != null)
@@ -216,6 +219,8 @@ public class SubmarineMaintenanceView extends LaunchView implements LaunchUIComm
 
             if (submarine != null)
             {
+                txtCost.setText(TextUtilities.GetCurrencyString(Defs.GetNavalMaintenanceCost(submarine.GetEntityType())));
+
                 if(submarineShadow.GetNuclear())
                     txtFuelLevel.setText(context.getString(R.string.infinite));
                 else
@@ -248,8 +253,6 @@ public class SubmarineMaintenanceView extends LaunchView implements LaunchUIComm
                 }
 
                 txtEmptySlots.setText(context.getString(R.string.empty_slot_count, lOccupiedSlots, lSlotCount));
-
-                //int OfflineUpkeepCost = (int) 0.1 * game.GetConfig().GetMaintenanceCost(structure); //In keeping with 10% offline cost from LaunchGame. -Corbin
 
                 if (lOccupiedSlots == lSlotCount)
                     txtEmptySlots.setTextColor(Utilities.ColourFromAttr(context, R.attr.GoodColour));
@@ -314,6 +317,8 @@ public class SubmarineMaintenanceView extends LaunchView implements LaunchUIComm
                         bShowCeaseFire = true;
                 }
             }
+
+            txtCost.setText(TextUtilities.GetCurrencyString(Defs.GetNavalMaintenanceCost(controlSubmarine.GetEntityType()) * CurrentSubmarines.size()));
         }
 
         if(bShowCeaseFire)

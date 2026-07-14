@@ -246,12 +246,6 @@ public class LaunchConsole
                 }
                 break;
                 
-                case "loadshipyards":
-                {
-                    XMLGameLoader.LoadShipyards("shipyards.txt", game);
-                }
-                break;
-                
                 case "devmessage":
                 {
                     Integer lID = Integer.valueOf(args[1]);

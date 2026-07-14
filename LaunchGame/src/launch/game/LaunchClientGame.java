@@ -209,14 +209,12 @@ public class LaunchClientGame extends LaunchGame implements LaunchClientGameInte
         AllEntities.addAll(Interceptors.values());
         AllEntities.addAll(GetAllStructures());
         AllEntities.addAll(Loots.values());
-        AllEntities.addAll(GetInfantries());
         AllEntities.addAll(GetAirplanes());
         AllEntities.addAll(GetTanks());
         AllEntities.addAll(GetShipyards());
         AllEntities.addAll(GetShips());
         AllEntities.addAll(GetSubmarines());
         AllEntities.addAll(GetRubbles());
-        AllEntities.addAll(GetCargoTrucks());
 
         //Find the nearest entities and store them in a list.
         int lExcluded = 0;
@@ -266,19 +264,11 @@ public class LaunchClientGame extends LaunchGame implements LaunchClientGameInte
         return Result;
     }
     
-    public boolean GetPlayerHasNoAirCover(Player player)
+    public boolean GetPlayerHasNoPerimeterDefences(Player player)
     {
-        for(SAMSite samSite : SAMSites.values())
+        for(Structure structure : player.GetStructures())
         {
-            if(samSite.GetOwnerID() == player.GetID())
-            {
-                return false;
-            }
-        }
-
-        for(SentryGun sentryGun : SentryGuns.values())
-        {
-            if(sentryGun.GetOwnerID() == player.GetID())
+            if(structure instanceof SentryGun sentry && sentry.GetIsWatchTower())
             {
                 return false;
             }
@@ -287,25 +277,24 @@ public class LaunchClientGame extends LaunchGame implements LaunchClientGameInte
         return true;
     }
     
-    public boolean GetPlayerHasNoMissileFactory(Player player)
+    public boolean GetPlayerHasNoAirCover(Player player)
     {
-        /*for(MissileFactory factory : GetMissileFactorys())
+        for(Structure structure : player.GetStructures())
         {
-            if(factory.GetOwnedBy(player.GetID()) && factory.GetOnline())
+            if(structure instanceof SAMSite || structure instanceof SentryGun sentry && !sentry.GetIsWatchTower())
             {
                 return false;
             }
-        }*/
+        }
         
-        return false;
+        return true;
     }
     
     public boolean GetPlayerHasNoAirOffenseCapability(Player player)
     {
-        //TODO: This is inefficient.
-        for(MissileSite missileSite : MissileSites.values())
+        for(Structure structure : player.GetStructures())
         {
-            if(missileSite.GetOwnerID() == player.GetID())
+            if(structure instanceof MissileSite)
             {
                 return false;
             }
@@ -316,45 +305,44 @@ public class LaunchClientGame extends LaunchGame implements LaunchClientGameInte
     
     public int GetPlayerTotalHourlyIncome(Player player)
     {
-        int lIncome = GetHourlyIncome(player);
+        int lIncome = GetHourlyIncome(player) + GetPlayerRankIncome(player) + GetHourlyBonusIncome(player);
         
         if(player != null)
         {
-            for(Structure structure : new ArrayList<>(player.GetStructures()))
+            
+            
+            Alliance alliance = GetAlliance(player.GetAllianceMemberID());
+            int lAllianceTax = 0;
+            
+            if(alliance != null)
             {
-                if(structure != null && structure.GetOwnerID() == player.GetID())
-                {
-                    if(structure.GetOnline() || structure.GetBooting())
-                    {
-                        lIncome -= config.GetMaintenanceCost();
-                    }
-                }
+                float fltAllianceTaxRate = alliance.GetTaxRate();
+                lAllianceTax = (int)(lIncome * fltAllianceTaxRate);
             }
+            
+            lIncome -= lAllianceTax;
+            lIncome -= GetStructureMaintenanceCost(player.GetID());
+            lIncome -= GetAircraftMaintenanceCost(player.GetID());
+            lIncome -= GetShipMaintenanceCost(player.GetID());
+            lIncome -= GetSubmarineMaintenanceCost(player.GetID());
+            lIncome -= GetICBMMaintenanceCost(player.GetID());
+            lIncome -= GetABMMaintenanceCost(player.GetID());
+            lIncome -= GetHourlyMissileMaintenance(player.GetID());
+            lIncome -= GetHourlyInterceptorMaintenance(player.GetID());
+            lIncome -= GetHourlyTorpedoMaintenance(player.GetID());
+            lIncome -= GetTankMaintenanceCost(player.GetID());
         }
-        
-        //TODO: This needs to factor in all maintenance items: Planes, ships, submarines, tanks, infantry, missiles, and interceptors, abms, and ICBMs.
         
         return lIncome;
-    }
-    
-    private Map<Byte, Integer> GetPricesFromData(byte[] cData)
-    {
-        Map<Byte, Integer> Result = new HashMap<>();
-        
-        ByteBuffer bb = ByteBuffer.wrap(cData);
-        
-        while(bb.hasRemaining())
-        {
-            Result.put(bb.get(), bb.getInt());
-        }
-        
-        return Result;
     }
     
     public boolean GetAnyAlerts(Player player)
     {
         if(player != null)
         {
+            if(GetPlayerHasNoPerimeterDefences(player))
+                return true;
+                
             if(GetPlayerHasNoAirCover(player))
                 return true;
 
@@ -1078,12 +1066,6 @@ public class LaunchClientGame extends LaunchGame implements LaunchClientGameInte
     protected void InterceptorReachedTarget(Interceptor interceptor)
     {
         application.InterceptorReachedTarget(interceptor);
-    }
-
-    @Override
-    protected void InfantryReachedTarget(Infantry infantry)
-    {
-        //Do nothing. Dealt with by events.
     }
     
     @Override
@@ -2099,6 +2081,15 @@ public class LaunchClientGame extends LaunchGame implements LaunchClientGameInte
     }
     
     @Override
+    public void RemoveShipyard(int lID)
+    {
+        Shipyard shipyard = GetShipyard(lID);
+        
+        Shipyards.remove(lID);
+        application.EntityRemoved(shipyard);
+    }
+    
+    @Override
     public void RemoveSubmarine(int lID)
     {
         Submarine submarine = GetSubmarine(lID);
@@ -2870,5 +2861,10 @@ public class LaunchClientGame extends LaunchGame implements LaunchClientGameInte
     public void AddBounty(int lPlayerID, int lAmount, boolean bPlayer)
     {
         comms.AddBounty(lPlayerID, lAmount, bPlayer);
+    }
+    
+    public void ConstructShipyard(GeoCoord geoOutput)
+    {
+        comms.ConstructShipyard(geoOutput);
     }
 }

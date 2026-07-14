@@ -1,18 +1,13 @@
 package com.apps.fast.launch.launchviews.entities;
 
-import android.view.View;
-
 import com.apps.fast.launch.R;
 import com.apps.fast.launch.activities.MainActivity;
-import com.apps.fast.launch.components.Utilities;
 import com.apps.fast.launch.launchviews.controls.ArmoryControl;
-import com.apps.fast.launch.launchviews.controls.CommandPostControl;
 
 import java.util.List;
 
 import launch.game.EntityPointer.EntityType;
 import launch.game.LaunchClientGame;
-import launch.game.entities.Armory;
 import launch.game.entities.LaunchEntity;
 import launch.game.entities.Structure;
 

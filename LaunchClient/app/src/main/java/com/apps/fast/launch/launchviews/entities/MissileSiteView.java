@@ -36,7 +36,9 @@ public class MissileSiteView extends StructureView
         imgLogo.setImageResource(R.drawable.build_missile_site);
 
         if(game.EntityIsFriendly(structureShadow, game.GetOurPlayer()))
+        {
             lytConfig.addView(systemView);
+        }
 
         Update();
     }
@@ -55,8 +57,10 @@ public class MissileSiteView extends StructureView
 
                 if(structure != null)
                 {
-                    if (!structure.GetSelling() && game.EntityIsFriendly(structure, game.GetOurPlayer()))
+                    if(!structure.GetSelling())
+                    {
                         systemView.Update();
+                    }
                 }
             }
         });

@@ -575,7 +575,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/detail_button"
                     android:gravity="right"
-                    android:text="$8-$80"
+                    android:text="n/a"
                     android:textColor="?attr/BadColour"
                     android:textStyle="normal" />
 

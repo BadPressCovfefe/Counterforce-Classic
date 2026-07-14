@@ -15,6 +15,7 @@ import launch.game.EntityPointer;
 import launch.game.EntityPointer.EntityType;
 import launch.game.LaunchClientGame;
 import launch.game.entities.Airbase;
+import launch.game.entities.AirbaseInterface;
 import launch.game.entities.Armory;
 import launch.game.entities.CommandPost;
 import launch.game.entities.LandUnit;
@@ -97,10 +98,9 @@ public class PurchaseButton extends LinearLayout
         });
     }
 
-    public void SetUnit(LaunchClientGame game, MainActivity activity, EntityPointer pointerOrigin, EntityType entityType, ResourceType resourceType, Map<ResourceType, Long> Costs)
+    public void SetUnit(LaunchClientGame game, MainActivity activity, EntityPointer pointerOrigin, EntityType entityType)
     {
         this.entityType = entityType;
-        this.resourceType = resourceType;
         this.game = game;
         this.activity = activity;
         this.pointerOrigin = pointerOrigin;
@@ -285,7 +285,7 @@ public class PurchaseButton extends LinearLayout
 
             case SSBN:
             {
-                unitIcon.setImageResource(R.drawable.build_ssbn_2);
+                unitIcon.setImageResource(R.drawable.build_ssbn);
                 oCost = Defs.SSBN_BUILD_COST.get(ResourceType.WEALTH);
                 txtDescription.setText(context.getString(R.string.desc_ssbn));
             }
@@ -336,6 +336,14 @@ public class PurchaseButton extends LinearLayout
                 unitIcon.setImageResource(R.drawable.build_ssb);
                 oCost = Defs.SSB_BUILD_COST.get(ResourceType.WEALTH);
                 txtDescription.setText(context.getString(R.string.desc_ssb));
+            }
+            break;
+
+            case SHIPYARD:
+            {
+                unitIcon.setImageResource(R.drawable.image_shipyard);
+                oCost = Defs.SHIPYARD_STRUCTURE_COST;
+                txtDescription.setText(context.getString(R.string.desc_shipyard));
             }
             break;
 
@@ -400,9 +408,23 @@ public class PurchaseButton extends LinearLayout
             }
         }
 
+        boolean bHostIsFullAirbase = false;
+
+        if(pointerOrigin != null && pointerOrigin.GetMapEntity(game) instanceof AirbaseInterface)
+        {
+            if(((AirbaseInterface)pointerOrigin.GetMapEntity(game)).GetAircraftSystem().Full())
+            {
+                bHostIsFullAirbase = true;
+            }
+        }
+
         if(bTooCloseToStructures)
         {
             activity.ShowBasicOKDialog(context.getString(R.string.cannot_build));
+        }
+        else if(bHostIsFullAirbase)
+        {
+            activity.ShowBasicOKDialog(context.getString(R.string.airbase_full));
         }
         else if(bFarmsTooClose)
         {
@@ -417,9 +439,9 @@ public class PurchaseButton extends LinearLayout
 
             if(game.GetOurPlayer().GetWealth() >= oCost)
             {
-                if(pointerOrigin != null && pointerOrigin.GetType() == EntityType.COMMAND_POST)
+                if(entityType == EntityType.SHIPYARD)
                 {
-                    activity.BuildStructureMode(pointerOrigin.GetID(), entityType, resourceType, false);
+                    activity.BuildShipyardMode();
                 }
                 else
                 {

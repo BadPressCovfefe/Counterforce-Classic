@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.apps.fast.launch.R;
+import com.apps.fast.launch.UI.EntityIconBitmaps;
 import com.apps.fast.launch.UI.LaunchUICommon;
 import com.apps.fast.launch.activities.MainActivity;
 import com.apps.fast.launch.components.TextUtilities;
@@ -53,7 +54,6 @@ public class StructureMaintenanceView extends LaunchView implements LaunchUIComm
     private TextView txtHealth;
     private TextView txtEmptySlots;
     private TextView txtCost;
-    //private TextView txtTime;
     private ImageView imgPower;
     private ImageButton btnAuto;
     private ImageButton btnSemi;
@@ -107,13 +107,14 @@ public class StructureMaintenanceView extends LaunchView implements LaunchUIComm
         txtHealth = findViewById(R.id.txtHealth);
         txtEmptySlots = findViewById(R.id.txtEmptySlots);
         txtCost = findViewById(R.id.txtCost);
-        //txtTime = findViewById(R.id.txtTime);
         imgPower = findViewById(R.id.imgPower);
 
         LaunchUICommon.SetPowerButtonOnClickListener(activity, btnPower, this, game);
 
         Structure iconControlStructure = structureShadow == null ? (Structure)StructureList.iterator().next() : structureShadow;
         txtType.setText(TextUtilities.GetEntityTypeAndName(iconControlStructure, game));
+
+        imgType.setImageResource(EntityIconBitmaps.GetEntityImageResource(game, iconControlStructure));
 
         if(structureShadow != null)
         {
@@ -139,8 +140,6 @@ public class StructureMaintenanceView extends LaunchView implements LaunchUIComm
         {
             if(((MissileSite)iconControlStructure).CanTakeICBM())
             {
-                imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_icbm_silo), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
-
                 lytModeControls.setVisibility(VISIBLE);
 
                 flasherAuto = new ButtonFlasher(btnAuto);
@@ -282,25 +281,10 @@ public class StructureMaintenanceView extends LaunchView implements LaunchUIComm
                     });
                 }
             }
-            else
-            {
-                imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_missilesite), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
-            }
         }
         else if(iconControlStructure instanceof SAMSite)
         {
             lytModeControls.setVisibility(VISIBLE);
-
-            SAMSite samSite = ((SAMSite)iconControlStructure);
-
-            if(samSite.GetIsABMSilo())
-            {
-                imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_abmsite), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
-            }
-            else
-            {
-                imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_samsite), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
-            }
 
             flasherAuto = new ButtonFlasher(btnAuto);
             flasherSemi = new ButtonFlasher(btnSemi);
@@ -445,35 +429,6 @@ public class StructureMaintenanceView extends LaunchView implements LaunchUIComm
                 });
             }
         }
-        else if(iconControlStructure instanceof SentryGun)
-        {
-            SentryGun gun = (SentryGun)iconControlStructure;
-
-            if(gun.GetIsWatchTower())
-            {
-                imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_artillery_gun), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
-            }
-            else
-            {
-                imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_sentry), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
-            }
-        }
-        else if(iconControlStructure instanceof CommandPost)
-        {
-            imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_command_post), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
-        }
-        else if(iconControlStructure instanceof Airbase)
-        {
-            imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_airbase), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
-        }
-        else if(iconControlStructure instanceof Armory)
-        {
-            imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_armory), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
-        }
-        else if(iconControlStructure instanceof Warehouse)
-        {
-            imgType.setImageBitmap(LaunchUICommon.TintBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.marker_bank), LaunchUICommon.AllegianceColours[game.GetAllegiance(game.GetOurPlayer(), iconControlStructure).ordinal()]));
-        }
 
         Update();
     }
@@ -612,25 +567,20 @@ public class StructureMaintenanceView extends LaunchView implements LaunchUIComm
 
                 txtEmptySlots.setText(context.getString(R.string.empty_slot_count, lOccupiedSlots, lSlotCount));
 
-                //int OfflineUpkeepCost = (int) 0.1 * game.GetConfig().GetMaintenanceCost(structure); //In keeping with 10% offline cost from LaunchGame. -Corbin
-
-                if (lOccupiedSlots == lSlotCount)
+                if(lOccupiedSlots == lSlotCount)
                     txtEmptySlots.setTextColor(Utilities.ColourFromAttr(context, R.attr.GoodColour));
                 else if (lOccupiedSlots == 0)
                     txtEmptySlots.setTextColor(Utilities.ColourFromAttr(context, R.attr.BadColour));
                 else
                     txtEmptySlots.setTextColor(Utilities.ColourFromAttr(context, R.attr.WarningColour));
 
-                if ((structure.GetOffline()) || (structure.GetSelling()))
+                if((structure.GetOffline()) || (structure.GetSelling()))
                 {
                     txtCost.setText(TextUtilities.GetCurrencyString(Defs.OFFLINE_MAINTENANCE_COST)); //Used to be 0. Changed to 10% of online cost as detailed in LaunchGame. -Corbin
-                    //txtTime.setVisibility(GONE);
                 }
                 else
                 {
-                    txtCost.setText(TextUtilities.GetCurrencyString(game.GetConfig().GetMaintenanceCost()));
-                    //txtTime.setText(TextUtilities.GetTimeAmount(structure.GetChargeOwnerTimeRemaining()));
-                    //txtTime.setVisibility(VISIBLE);
+                    txtCost.setText(TextUtilities.GetCurrencyString(Defs.GetMaintenanceCost(structure.GetEntityType())));
                 }
 
                 imgPower.setImageResource(structure.GetRunning() ? R.drawable.button_online : R.drawable.button_offline);
@@ -861,7 +811,7 @@ public class StructureMaintenanceView extends LaunchView implements LaunchUIComm
             else
                 imgPower.setImageResource(R.drawable.button_offline);
 
-            txtCost.setText(TextUtilities.GetCurrencyString(game.GetConfig().GetMaintenanceCost() * lNumberRunning));
+            txtCost.setText(TextUtilities.GetCurrencyString(Defs.GetMaintenanceCost(controlStructure.GetEntityType()) * lNumberRunning));
         }
     }
 

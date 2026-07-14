@@ -13,6 +13,7 @@ import com.apps.fast.launch.views.LaunchDialog;
 
 import java.util.List;
 
+import launch.game.Defs;
 import launch.game.LaunchClientGame;
 import launch.game.entities.AirplaneInterface;
 import launch.game.entities.CargoTruckInterface;
@@ -121,7 +122,7 @@ public class LaunchUICommon
                 if(infoProvider.IsSingleStructure())
                 {
                     Structure structure = infoProvider.GetCurrentStructure();
-                    int lMaintenanceCost = game.GetConfig().GetMaintenanceCost();
+                    int lMaintenanceCost = Defs.GetMaintenanceCost(structure.GetEntityType());
 
                     if(structure.GetRunning())
                     {

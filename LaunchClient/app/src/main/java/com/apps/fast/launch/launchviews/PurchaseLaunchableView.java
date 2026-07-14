@@ -28,12 +28,15 @@ import java.util.List;
 import java.util.Map;
 
 import launch.game.Config;
+import launch.game.EntityPointer;
+import launch.game.GeoCoord;
 import launch.game.LaunchClientGame;
 import launch.game.entities.Airbase;
 import launch.game.entities.AirplaneInterface;
 import launch.game.entities.LaunchEntity;
 import launch.game.entities.MapEntity;
 import launch.game.entities.MissileSite;
+import launch.game.entities.Movable.MoveOrders;
 import launch.game.entities.SAMSite;
 import launch.game.entities.Ship;
 import launch.game.entities.Submarine;
@@ -143,9 +146,13 @@ public class PurchaseLaunchableView extends LaunchView
     private TextView txtCount;
     private TextView txtTotalCost;
     private SystemType systemType;
+    private GeoCoord geoQuickSelect;
+    private MapEntity entityQuickSelect;
+    private MoveOrders quickSelectOrder;
     private MissileSystem system;
     private LaunchEntity host;
     private TextView btnSortBy;
+    private TextView btnCancel;
     private ImageView imgInterceptor;
     private ImageView imgMissile;
 
@@ -271,22 +278,70 @@ public class PurchaseLaunchableView extends LaunchView
             }
             break;
 
+            case PLAYER_MISSILES:
+            {
+                system = game.GetOurPlayer().GetMissileSystem();
+                bMissiles = true;
+                listType = LaunchableType.MISSILE;
+
+                Setup();
+                SetupMissiles();
+            }
+            break;
+
             case PLAYER_INTERCEPTORS:
             {
-                if(bMissiles)
-                {
-                    system = game.GetOurPlayer().GetMissileSystem();
+                system = game.GetOurPlayer().GetInterceptorSystem();
 
-                    Setup();
-                    SetupMissiles();
-                }
-                else
-                {
-                    system = game.GetOurPlayer().GetInterceptorSystem();
+                listType = LaunchableType.INTERCEPTOR;
 
-                    Setup();
-                    SetupInterceptors();
-                }
+                Setup();
+                SetupInterceptors();
+            }
+            break;
+        }
+
+        UpdateSelections();
+    }
+
+    //From aircraft quick select.
+    public PurchaseLaunchableView(LaunchClientGame game, MainActivity activity, LaunchEntity host, SystemType systemType, GeoCoord geoQuickSelect, MapEntity entityQuickSelect, MoveOrders quickSelectOrder)
+    {
+        super(game, activity, true);
+
+        this.lSlotNumber = 0;
+        this.host = host;
+        this.lFittedToID = host.GetID();
+        this.systemType = systemType;
+        this.geoQuickSelect = geoQuickSelect;
+        this.entityQuickSelect = entityQuickSelect;
+        this.quickSelectOrder = quickSelectOrder;
+
+        switch(systemType)
+        {
+            case STORED_AIRCRAFT_MISSILES:
+            case AIRCRAFT_MISSILES:
+            {
+                AirplaneInterface aircraft = (AirplaneInterface)host;
+
+                system = aircraft.GetMissileSystem();
+                bMissiles = true;
+
+                Setup();
+                SetupMissiles();
+                listType = LaunchableType.ALM;
+            }
+            break;
+
+            case AIRCRAFT_INTERCEPTORS:
+            case STORED_AIRCRAFT_INTERCEPTORS:
+            {
+                AirplaneInterface aircraft = (AirplaneInterface)host;
+                system = aircraft.GetInterceptorSystem();
+
+                Setup();
+                SetupInterceptors();
+                listType = LaunchableType.AIM;
             }
             break;
         }
@@ -308,6 +363,7 @@ public class PurchaseLaunchableView extends LaunchView
         imgMissile = findViewById(R.id.imgMissile);
         txtCount = findViewById(R.id.txtCount);
         btnSortBy = findViewById(R.id.btnSortBy);
+        btnCancel = findViewById(R.id.btnCancel);
 
         if(bMissiles)
             missileOrder = MissileSortOrder.RANGE;
@@ -525,7 +581,18 @@ public class PurchaseLaunchableView extends LaunchView
                 launchDialog.show(activity.getFragmentManager(), "");
             }
         });
+
+        btnCancel.setOnClickListener(new OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                ReturnToParentView();
+            }
+        });
     }
+
+
 
     private void SetupMissiles()
     {
@@ -577,6 +644,18 @@ public class PurchaseLaunchableView extends LaunchView
 
         switch(systemType)
         {
+            case PLAYER_MISSILES:
+            {
+                system = game.GetOurPlayer().GetMissileSystem();
+            }
+            break;
+
+            case PLAYER_INTERCEPTORS:
+            {
+                system = game.GetOurPlayer().GetInterceptorSystem();
+            }
+            break;
+
             case MISSILE_SITE:
             {
                 MissileSite site = game.GetMissileSite(lFittedToID);
@@ -723,7 +802,11 @@ public class PurchaseLaunchableView extends LaunchView
                         hostBase = ((AirplaneInterface)host).GetHomeBase().GetMapEntity(game);
                 }
 
-                if(hostBase != null)
+                if(geoQuickSelect != null || entityQuickSelect != null)
+                {
+                    activity.SelectForAction(geoQuickSelect, entityQuickSelect, EntityPointer.EntityType.AIRPLANE, quickSelectOrder);
+                }
+                else if(hostBase != null)
                 {
                     if(hostBase instanceof Ship)
                         mainView.BottomLayoutShowView(new ShipView(game, activity, (Ship)hostBase));
@@ -742,15 +825,16 @@ public class PurchaseLaunchableView extends LaunchView
             }
             break;
 
-            case SAM_SITE:
-            case MISSILE_SITE:
-            case AIRCRAFT_MISSILES:
-            case AIRCRAFT_INTERCEPTORS:
-            case ARTILLERY_GUN:
-            case SHIP_ARTILLERY:
-            case TANK_INTERCEPTORS:
-            case TANK_MISSILES:
-            case TANK_ARTILLERY:
+            case SHIP_MISSILES:
+            case SHIP_INTERCEPTORS:
+            {
+                MainNormalView mainView = new MainNormalView(game, activity);
+                activity.SetView(mainView);
+                mainView.BottomLayoutShowView(new ShipView(game, activity, (Ship)host));
+            }
+            break;
+
+            default:
             {
                 activity.ReturnToMainView();
             }
@@ -1138,4 +1222,12 @@ public class PurchaseLaunchableView extends LaunchView
     public MissileSystem GetSystem() { return system; }
 
     public List<Integer> GetTypes() { return Types; }
+
+    @Override
+    public boolean OnBackPressed()
+    {
+        ReturnToParentView();
+
+        return true;
+    }
 }

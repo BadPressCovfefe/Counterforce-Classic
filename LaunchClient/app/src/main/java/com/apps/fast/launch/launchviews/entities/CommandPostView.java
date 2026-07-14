@@ -5,36 +5,24 @@ import android.view.View;
 import com.apps.fast.launch.R;
 import com.apps.fast.launch.activities.MainActivity;
 import com.apps.fast.launch.components.Utilities;
-import com.apps.fast.launch.launchviews.controls.CommandPostControl;
 
 import java.util.List;
 
 import launch.game.LaunchClientGame;
-import launch.game.entities.CommandPost;
 import launch.game.entities.LaunchEntity;
 import launch.game.entities.Structure;
 import launch.game.EntityPointer.EntityType;
 
 public class CommandPostView extends StructureView
 {
-    boolean bHQ;
     public CommandPostView(LaunchClientGame game, MainActivity activity, LaunchEntity structure)
     {
         super(game, activity, structure);
-
-        if(structure instanceof CommandPost)
-        {
-            CommandPost post = (CommandPost) structure;
-
-            bHQ = post.GetIsHQ();
-        }
     }
 
     @Override
     protected void Setup()
     {
-        systemView = new CommandPostControl(game, activity, structureShadow.GetID());
-
         super.Setup();
 
         if(structureShadow.GetOwnerID() == game.GetOurPlayerID())
@@ -53,12 +41,8 @@ public class CommandPostView extends StructureView
             });
         }
 
-        if(bHQ)
-            imgLogo.setImageResource(R.drawable.build_headquarters);
-        else
-            imgLogo.setImageResource(R.drawable.build_command_post);
+        imgLogo.setImageResource(R.drawable.build_bunker);
 
-        lytConfig.addView(systemView);
         Update();
     }
 
@@ -66,21 +50,6 @@ public class CommandPostView extends StructureView
     public void Update()
     {
         super.Update();
-
-        activity.runOnUiThread(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                Structure structure = GetCurrentStructure();
-
-                if(structure != null)
-                {
-                    if (!structure.GetSelling())
-                        systemView.Update();
-                }
-            }
-        });
     }
 
     @Override

@@ -407,7 +407,7 @@ public class MissileSystemControl extends LaunchView implements SlotListener
             {
                 int lSlots = system.GetSlotCount();
 
-                if(lSlots < 126)
+                if(lSlots < Defs.MAX_MISSILE_SLOTS)
                 {
                     Config config = game.GetConfig();
 

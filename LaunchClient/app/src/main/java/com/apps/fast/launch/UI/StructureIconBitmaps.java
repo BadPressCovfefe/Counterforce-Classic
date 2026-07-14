@@ -20,6 +20,7 @@ import launch.game.entities.MissileFactory;
 import launch.game.entities.Distributor;
 import launch.game.entities.Processor;
 import launch.game.entities.LogisticsDepot;
+import launch.game.entities.Shipyard;
 import launch.game.entities.Warehouse;
 import launch.game.entities.MissileSite;
 import launch.game.entities.OreMine;
@@ -58,6 +59,7 @@ public class StructureIconBitmaps
     private static final Bitmap[] OreMineBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
     private static final Bitmap[] FarmBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
     private static final Bitmap[] SolarPanelBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
+    private static final Bitmap[] ShipyardBitmaps = new Bitmap[Allegiance.values().length * StructureIndexRunStatus.values().length];
 
     private static void GenerateStructureBitmap(Context context, Bitmap[] Container, int lIndex, Allegiance allegiance, StructureIndexRunStatus runStatus, int lRes)
     {
@@ -212,6 +214,16 @@ public class StructureIconBitmaps
             }
 
             return LogisticsDepotBitmaps[lIndex];
+        }
+
+        if(structure instanceof Shipyard)
+        {
+            if(ShipyardBitmaps[lIndex] == null)
+            {
+                GenerateStructureBitmap(context, ShipyardBitmaps, lIndex, allegiance, runStatus, R.drawable.marker_shipyard);
+            }
+
+            return ShipyardBitmaps[lIndex];
         }
 
         if(structure instanceof OreMine)

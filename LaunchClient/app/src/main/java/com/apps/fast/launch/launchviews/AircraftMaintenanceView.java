@@ -20,20 +20,12 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import launch.game.Defs;
 import launch.game.EntityPointer;
 import launch.game.LaunchClientGame;
 import launch.game.entities.AirplaneInterface;
-import launch.game.entities.Airplane;
-import launch.game.entities.AirplaneInterface;
-import launch.game.entities.Infantry;
 import launch.game.entities.LaunchEntity;
-import launch.game.entities.MapEntity;
 import launch.game.entities.Movable;
 import launch.game.entities.SAMSite;
-import launch.game.entities.Ship;
-import launch.game.entities.Structure;
-import launch.game.entities.conceptuals.Resource;
 
 public class AircraftMaintenanceView extends LaunchView implements LaunchUICommon.AircraftInfoProvider
 {
@@ -106,53 +98,53 @@ public class AircraftMaintenanceView extends LaunchView implements LaunchUICommo
 
         txtType.setText(TextUtilities.GetEntityTypeAndName((LaunchEntity)iconControlAircraft, game));
 
+        try
+        {
+            switch(iconControlAircraft.GetAircraftType())
+            {
+                case BOMBER:
+                {
+                    imgType.setImageResource(R.drawable.build_bomber);
+                }
+                break;
+
+                case FIGHTER:
+                {
+                    imgType.setImageResource(R.drawable.build_fighter);
+                }
+                break;
+
+                case ATTACK_AIRCRAFT:
+                {
+                    imgType.setImageResource(R.drawable.build_ground_attack);
+                }
+                break;
+
+                case REFUELER:
+                {
+                    imgType.setImageResource(R.drawable.build_refueler);
+                }
+                break;
+
+                case MULTI_ROLE:
+                {
+                    imgType.setImageResource(R.drawable.build_multi_role);
+                }
+                break;
+
+                case SSB:
+                {
+                    imgType.setImageResource(R.drawable.build_ssb);
+                }
+                break;
+            }
+        }
+        catch(Exception ex) { /* Don't care.*/ }
+
         if(aircraftShadow != null)
         {
             TextUtilities.AssignFuelPercentageString(txtFuelLevel, aircraftShadow);
             txtFuelLevel.setVisibility(VISIBLE);
-
-            try
-            {
-                switch(aircraftShadow.GetAircraftType())
-                {
-                    case BOMBER:
-                    {
-                        imgType.setImageResource(R.drawable.build_bomber);
-                    }
-                    break;
-
-                    case FIGHTER:
-                    {
-                        imgType.setImageResource(R.drawable.build_fighter);
-                    }
-                    break;
-
-                    case ATTACK_AIRCRAFT:
-                    {
-                        imgType.setImageResource(R.drawable.build_ground_attack);
-                    }
-                    break;
-
-                    case REFUELER:
-                    {
-                        imgType.setImageResource(R.drawable.build_refueler);
-                    }
-                    break;
-
-                    case MULTI_ROLE:
-                    {
-                        imgType.setImageResource(R.drawable.build_multi_role);
-                    }
-                    break;
-
-                    case SSB:
-                    {
-                        imgType.setImageResource(R.drawable.build_ssb);
-                    }
-                    break;
-                }
-            }
-            catch(Exception ex) { /* Don't care.*/ }
 
             txtCount.setVisibility(GONE);
 
@@ -270,7 +262,7 @@ public class AircraftMaintenanceView extends LaunchView implements LaunchUICommo
             txtCount.setText(Integer.toString(AircraftList.size()));
             txtFuelLevel.setVisibility(GONE);
 
-            imgType.setImageBitmap(EntityIconBitmaps.GetAircraftBitmap(context, game, (AirplaneInterface)AircraftList.iterator().next()));
+            imgType.setImageBitmap(EntityIconBitmaps.GetAircraftMarker(context, game, (AirplaneInterface)AircraftList.iterator().next()));
 
             final List<EntityPointer> Pointers = new ArrayList<>();
             boolean bNoneHaveInterceptors = true;
@@ -509,8 +501,6 @@ public class AircraftMaintenanceView extends LaunchView implements LaunchUICommo
                 }
 
                 txtEmptySlots.setText(context.getString(R.string.empty_slot_count, lOccupiedSlots, lSlotCount));
-
-                //int OfflineUpkeepCost = (int) 0.1 * game.GetConfig().GetMaintenanceCost(structure); //In keeping with 10% offline cost from LaunchGame. -Corbin
 
                 if (lOccupiedSlots == lSlotCount)
                     txtEmptySlots.setTextColor(Utilities.ColourFromAttr(context, R.attr.GoodColour));

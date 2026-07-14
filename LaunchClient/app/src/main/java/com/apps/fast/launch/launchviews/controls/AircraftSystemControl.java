@@ -94,22 +94,22 @@ public class AircraftSystemControl extends LaunchView
         if(bOwnedByPlayer)
         {
             PurchaseButton btnBuildFighter = findViewById(R.id.btnBuildFighter);
-            btnBuildFighter.SetUnit(game, activity, host.GetPointer(), EntityType.FIGHTER, ResourceType.FOOD, Defs.FIGHTER_BUILD_COST);
+            btnBuildFighter.SetUnit(game, activity, host.GetPointer(), EntityType.FIGHTER);
 
             PurchaseButton btnBuildBomber = findViewById(R.id.btnBuildBomber);
-            btnBuildBomber.SetUnit(game, activity, host.GetPointer(), EntityType.BOMBER, ResourceType.FOOD, Defs.BOMBER_BUILD_COST);
+            btnBuildBomber.SetUnit(game, activity, host.GetPointer(), EntityType.BOMBER);
 
             PurchaseButton btnBuildRefueler = findViewById(R.id.btnBuildRefueler);
-            btnBuildRefueler.SetUnit(game, activity, host.GetPointer(), EntityType.REFUELER, ResourceType.FOOD, Defs.REFUELER_BUILD_COST);
+            btnBuildRefueler.SetUnit(game, activity, host.GetPointer(), EntityType.REFUELER);
 
             PurchaseButton btnBuildAttackAircraft = findViewById(R.id.btnBuildAttackAircraft);
-            btnBuildAttackAircraft.SetUnit(game, activity, host.GetPointer(), EntityType.ATTACK_AIRCRAFT, ResourceType.FOOD, Defs.ATTACK_AIRCRAFT_BUILD_COST);
+            btnBuildAttackAircraft.SetUnit(game, activity, host.GetPointer(), EntityType.ATTACK_AIRCRAFT);
 
             PurchaseButton btnBuildSSB = findViewById(R.id.btnBuildSSB);
-            btnBuildSSB.SetUnit(game, activity, host.GetPointer(), EntityType.SSB, ResourceType.FOOD, Defs.SSB_BUILD_COST);
+            btnBuildSSB.SetUnit(game, activity, host.GetPointer(), EntityType.SSB);
 
             PurchaseButton btnBuildMultiRole = findViewById(R.id.btnBuildMultiRole);
-            btnBuildMultiRole.SetUnit(game, activity, host.GetPointer(), EntityType.MULTI_ROLE, ResourceType.FOOD, Defs.MULTI_ROLE_BUILD_COST);
+            btnBuildMultiRole.SetUnit(game, activity, host.GetPointer(), EntityType.MULTI_ROLE);
 
             if(host instanceof Airbase)
             {

@@ -16,10 +16,11 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/ButtonImagePadding"
             android:id="@+id/imgAircraftType"
             android:src="@drawable/build_bomber"
             android:layout_margin="@dimen/ButtonEdgePadding"
+            android:padding="@dimen/CheckBoxBorderWidth"
+            android:background="@drawable/detail_button"
             android:layout_gravity="center"/>
     </LinearLayout>
 
@@ -112,14 +113,6 @@
                     android:text="100%"
                     android:textColor="?attr/BadColour" />
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/txtHPTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:gravity="center_vertical"
-                android:text="HP" />
 
             <TextView
                 android:id="@+id/txtInfantryStatus"

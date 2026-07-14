@@ -1063,8 +1063,8 @@ public class Config
     public int GetFarmStructureCost() { return lFarmStructureCost; }
     public short GetFarmBaseHP() { return nFarmBaseHP; }
     public int GetCropMaxValue() { return lCropMaxValue; }
-    public int GetMinCropExpiry() { return lCropMinExpiry; }
-    public int GetMaxCropExpiry() { return lCropMaxExpiry; }
+    public int GetCropMinExpiry() { return lCropMinExpiry; }
+    public int GetCropMaxExpiry() { return lCropMaxExpiry; }
     public float GetFarmGenerateRadius() { return fltFarmGenerateRadius; }
     public int GetFarmGrowthTime() { return bDebugMode ? 300000 : lFarmGrowthTime; }
     public int GetMinCropCount() { return lMinCropCount; }
@@ -1289,11 +1289,6 @@ public class Config
     { 
         //Must be * 2 because otherwise the shelter radii will overlap and cause weirdness. 
         return fltCommandPostShelterRadius * 2; 
-    }
-
-    public int GetMaintenanceCost()
-    {
-        return Defs.ONLINE_MAINTENANCE_COST;
     }
 
     public float GetMissileSpeed(MissileType type)

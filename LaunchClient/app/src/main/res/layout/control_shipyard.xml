@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/PanelTransparency"
+        android:fadeScrollbars="false"
+        android:scrollbarThumbVertical="?attr/ScrollBarColour">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/MainViewSpacing"
+            android:layout_marginRight="@dimen/MainViewSpacing"
+            android:layout_marginBottom="@dimen/MainViewSpacing"
+            android:paddingBottom="@dimen/MainViewSpacing">
+
+            <LinearLayout
+                android:id="@+id/lytContents"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtDescUpgradeCapacity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/SeperatorMargins"
+                    android:background="?attr/TextViewBackgroundColour"
+                    android:text="@string/desc_shipyard_capacity_upgrade"
+                    android:textColor="?attr/InfoColour"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:id="@+id/lytPurchaseUpgrade"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/btnPurchaseUpgrade"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/MainViewSpacing"
+                        android:layout_marginBottom="@dimen/MainViewSpacing"
+                        android:background="@drawable/text_button_normal"
+                        android:clickable="true"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:id="@+id/imageView51"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/ButtonImagePadding"
+                            android:src="@drawable/marker_shipyard" />
+
+                        <TextView
+                            android:id="@+id/txtSlotUpgrade"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="@dimen/ButtonInset"
+                            android:layout_weight="0"
+                            android:text="@string/upgrade"
+                            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                        <LinearLayout
+                            android:id="@+id/lytMoreish"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:orientation="vertical"></LinearLayout>
+
+                        <TextView
+                            android:id="@+id/txtReloadUpgradeCost"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="@dimen/MainViewSpacing"
+                            android:layout_weight="0"
+                            android:text="£yay"
+                            android:textAppearance="?android:attr/textAppearanceLarge" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lytBuildOptions"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <com.apps.fast.launch.views.PurchaseButton
+                        android:id="@+id/btnBuildAttackSub"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <com.apps.fast.launch.views.PurchaseButton
+                        android:id="@+id/btnBuildSSBN"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <com.apps.fast.launch.views.PurchaseButton
+                        android:id="@+id/btnBuildFrigate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <com.apps.fast.launch.views.PurchaseButton
+                        android:id="@+id/btnBuildDestroyer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <com.apps.fast.launch.views.PurchaseButton
+                        android:id="@+id/btnBuildAmphib"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone" />
+
+                    <com.apps.fast.launch.views.PurchaseButton
+                        android:id="@+id/btnBuildCargoShip"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone" />
+
+                    <com.apps.fast.launch.views.PurchaseButton
+                        android:id="@+id/btnBuildFleetOiler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone" />
+
+                    <com.apps.fast.launch.views.PurchaseButton
+                        android:id="@+id/btnBuildSuperCarrier"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/SeparatorThickness"
+                    android:layout_marginTop="@dimen/SeperatorMargins"
+                    android:background="?attr/ButtonEdgeColour" />
+
+                <TextView
+                    android:id="@+id/txtQueue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/SeperatorMargins"
+                    android:text="@string/shipyard_queue"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="?attr/GoodColour" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/MainViewSpacing"
+                    android:id="@+id/lytQueue"
+                    android:layout_marginBottom="@dimen/MainViewSpacing">
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view4"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/SeparatorThickness"
+                android:background="?attr/ButtonEdgeColour"
+                android:layout_marginTop="@dimen/SeperatorMargins"
+                android:layout_marginBottom="@dimen/SeperatorMargins"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

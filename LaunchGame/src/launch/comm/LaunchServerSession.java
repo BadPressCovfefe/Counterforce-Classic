@@ -35,7 +35,6 @@ import launch.game.entities.Movable.MoveOrders;
 import launch.game.entities.conceptuals.Resource.ResourceType;
 import launch.game.systems.CargoSystem.LootType;
 import launch.game.systems.LaunchSystem.SystemType;
-import launch.game.types.*;
 import launch.utilities.*;
 import static launch.utilities.LaunchLog.LogType.CHEATING;
 import static launch.utilities.LaunchLog.LogType.DEVICE_CHECKS;
@@ -551,6 +550,17 @@ public class LaunchServerSession extends LaunchSession
                                     gameInterface.ConstructStructure(AuthenticatedUser.GetPlayerID(), structureType, type, lCommandPostID, geoRemoteBuild, bUseSubstitutes),
                                     "Player purchased a structure.",
                                     "Player couldn't build a structure.");
+                        }
+                        break;
+
+                        case BuildShipyard:
+                        {
+                            GeoCoord geoOutput = new GeoCoord(bb.getFloat(), bb.getFloat());
+                            
+                            HandleSimpleResult(tobComm, lInstanceNumber,
+                                    gameInterface.ConstructShipyard(AuthenticatedUser.GetPlayerID(), geoOutput),
+                                    "Player purchased a shipyard.",
+                                    "Player couldn't build a shipyard.");
                         }
                         break;
                         
@@ -1912,6 +1922,13 @@ public class LaunchServerSession extends LaunchSession
                             lastHandled = entity;
                             tobComm.SendObject(Warehouse, entity.GetID(), 0, entity.GetData(lTheirPlayerID));
                         }
+                        
+                        //Send all logistics depots.
+                        for(LogisticsDepot entity : game.GetLogisticsDepots())
+                        {
+                            lastHandled = entity;
+                            tobComm.SendObject(LogisticsDepot, entity.GetID(), 0, entity.GetData(lTheirPlayerID));
+                        }
 
                         //Send all warehouses.
                         for(OreMine entity : game.GetOreMines())
@@ -2236,6 +2253,8 @@ public class LaunchServerSession extends LaunchSession
                 tobComm.SendCommand(RemoveShip, entity.GetID());
             else if(entity instanceof Submarine)
                 tobComm.SendCommand(RemoveSubmarine, entity.GetID());
+            else if(entity instanceof Shipyard)
+                tobComm.SendCommand(RemoveShipyard, entity.GetID());
         }
     }
     

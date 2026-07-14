@@ -138,6 +138,7 @@ public class MissileSystem extends LaunchSystem
             while(GetSlotHasMissile(lSlotNo))
             {
                 lSlotNo++;
+                
                 if(lSlotNo >= lMissileSlotCount)
                     lSlotNo = 0;
             }

@@ -15,11 +15,14 @@ import com.apps.fast.launch.components.Utilities;
 import com.apps.fast.launch.views.ButtonFlasher;
 import com.apps.fast.launch.views.LaunchDialog;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import launch.game.Defs;
 import launch.game.EntityPointer;
 import launch.game.LaunchClientGame;
 import launch.game.entities.AirplaneInterface;
@@ -46,6 +49,7 @@ public class ShipMaintenanceView extends LaunchView implements LaunchUICommon.Sh
     private ImageButton btnAuto;
     private ImageButton btnSemi;
     private ImageButton btnManual;
+    private TextView txtCost;
     private LinearLayout btnCeaseFire;
     private ButtonFlasher flasherAuto;
     private ButtonFlasher flasherSemi;
@@ -94,9 +98,12 @@ public class ShipMaintenanceView extends LaunchView implements LaunchUICommon.Sh
         btnAuto = findViewById(R.id.btnModeAuto);
         btnSemi = findViewById(R.id.btnModeSemi);
         btnManual = findViewById(R.id.btnModeManual);
+        txtCost = findViewById(R.id.txtCost);
 
         Ship iconControlShip = shipShadow == null ? (Ship)ShipList.iterator().next() : shipShadow;
         txtType.setText(TextUtilities.GetEntityTypeAndName(iconControlShip, game));
+
+        imgType.setImageResource(EntityIconBitmaps.GetEntityImageResource(game, iconControlShip));
 
         flasherAuto = new ButtonFlasher(btnAuto);
         flasherSemi = new ButtonFlasher(btnSemi);
@@ -118,12 +125,6 @@ public class ShipMaintenanceView extends LaunchView implements LaunchUICommon.Sh
 
             txtFuelLevel.setVisibility(VISIBLE);
             txtCount.setVisibility(GONE);
-
-            try
-            {
-                imgType.setImageBitmap(EntityIconBitmaps.GetOwnedNavalBitmap(context, game, shipShadow));
-            }
-            catch(Exception ex) { /* Don't care.*/ }
 
             if(shipShadow.HasInterceptors())
             {
@@ -392,8 +393,10 @@ public class ShipMaintenanceView extends LaunchView implements LaunchUICommon.Sh
         {
             Ship ship = GetCurrentShip();
 
-            if (ship != null)
+            if(ship != null)
             {
+                txtCost.setText(TextUtilities.GetCurrencyString(Defs.GetNavalMaintenanceCost(ship.GetEntityType())));
+
                 if(shipShadow.GetNuclear())
                     txtFuelLevel.setText(context.getString(R.string.infinite));
                 else
@@ -453,8 +456,6 @@ public class ShipMaintenanceView extends LaunchView implements LaunchUICommon.Sh
                 }
 
                 txtEmptySlots.setText(context.getString(R.string.empty_slot_count, lOccupiedSlots, lSlotCount));
-
-                //int OfflineUpkeepCost = (int) 0.1 * game.GetConfig().GetMaintenanceCost(structure); //In keeping with 10% offline cost from LaunchGame. -Corbin
 
                 if (lOccupiedSlots == lSlotCount)
                     txtEmptySlots.setTextColor(Utilities.ColourFromAttr(context, R.attr.GoodColour));
@@ -570,6 +571,8 @@ public class ShipMaintenanceView extends LaunchView implements LaunchUICommon.Sh
                         bShowCeaseFire = true;
                 }
             }
+
+            txtCost.setText(TextUtilities.GetCurrencyString(Defs.GetMaintenanceCost(controlShip.GetEntityType()) * CurrentShips.size()));
         }
 
         if(bShowCeaseFire)

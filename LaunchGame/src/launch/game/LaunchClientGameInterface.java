@@ -87,6 +87,7 @@ public interface LaunchClientGameInterface
     void RemoveTank(int lID);
     void RemoveCargoTruck(int lID);
     void RemoveShip(int lID);
+    void RemoveShipyard(int lID);
     void RemoveSubmarine(int lID);
     void RemoveArtilleryGun(int lID);
     void RemoveLogisticsDepot(int lID);

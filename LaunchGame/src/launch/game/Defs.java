@@ -23,6 +23,7 @@ public class Defs
     
     public static final long COUNTERFORCE_START_DATE = 1682908800000L;
     public static final int SERVER_TICK_RATE = 1000;
+    public static final int PORT = 30069;
     
     public static final int MAX_PLAYER_NAME_LENGTH = 32;
     public static final int MAX_ALLIANCE_NAME_LENGTH = 32;
@@ -261,6 +262,8 @@ public class Defs
     public static final float AIRCRAFT_TURN_RATE = 0.45f;  
     public static final float TANKER_TURN_RATE = 0.1f;                          //The turn rate of a tanker that is providing fuel, in orer to make it easier for the receiving plane to get close.
     public static final float REFUELEE_TURN_RATE = 0.6f;                        //The turn rate of a plane that is refueling and is within the refuel distance.
+    public static final float NAVAL_TURN_RATE = 0.05f;                          //The turn rate of a plane that is refueling and is within the refuel distance.
+    public static final float TANK_TURN_RATE = 0.7f;                            //The turn rate of a plane that is refueling and is within the refuel distance.
     
     public static final short MAX_INTERCEPTOR_DAMAGE = 1500;
     public static final short MIN_INTERCEPTOR_DAMAGE = 200;
@@ -288,7 +291,6 @@ public class Defs
     
     public static final float STORED_UNIT_MAINTENANCE_MULTIPLIER = 0.0f;
     public static final int OFFLINE_MAINTENANCE_COST = 0;
-    public static final int ONLINE_MAINTENANCE_COST = 25;
     public static final int MISSILE_MAINTENANCE = 0;
     public static final int TORPEDO_MAINTENANCE = 0;
     public static final int MISSILE_ICBM_MAINTENANCE = 50;
@@ -409,6 +411,7 @@ public class Defs
     public static final short ORE_MINE_HP = 1500;
     public static final short FARM_HP = 3000;
     public static final short SOLAR_PANEL_HP = 250;
+    public static final short LOGISTICS_DEPOT_HP = 250;
     
     public static final int MISSILE_SLOT_UPGRADE_COST = 500;
     public static final int RELOAD_TIME_BASE = MS_PER_SEC * 120;
@@ -461,6 +464,7 @@ public class Defs
     public static final Map<ResourceType, Long> ARMORY_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)5000));
     public static final Map<ResourceType, Long> BARRACKS_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)5000));
     public static final Map<ResourceType, Long> DISTRIBUTOR_STRUCTURE_COST = Map.ofEntries(entry(ResourceType.WEALTH, (long)5000));
+    public static final long SHIPYARD_STRUCTURE_COST = 500000;
     
     public static final Map<ResourceType, Long> RESOURCE_COST_GRANARY = Map.ofEntries(entry(ResourceType.WEALTH, (long)30000));
     public static final Map<ResourceType, Long> RESOURCE_COST_OIL_REFINERY = Map.ofEntries(entry(ResourceType.WEALTH, (long)30000));
@@ -589,7 +593,7 @@ public class Defs
     }
     
     public static final int SHIPYARD_UPGRADE_WEALTH_COST = 30000;
-    public static final byte MAX_SHIPYARD_CAPACITY = 60;
+    public static final byte MAX_SHIPYARD_CAPACITY = 5;
     
     public static final int TANK_BUILD_TIME = MS_PER_HOUR * 1;
     public static final float BATTLE_TANK_FIRING_RANGE = 1.0f;
@@ -775,9 +779,6 @@ public class Defs
         {
             case FRIGATE: return Defs.FRIGATE_HOURLY_MAINTENANCE;
             case DESTROYER: return Defs.DESTROYER_HOURLY_MAINTENANCE;
-            case AMPHIB: return Defs.AMPHIB_HOURLY_MAINTENANCE;
-            case CARGO_SHIP: return Defs.CARGO_SHIP_HOURLY_MAINTENANCE;
-            case FLEET_OILER: return Defs.FLEET_OILER_HOURLY_MAINTENANCE;
             case SUPER_CARRIER: return Defs.SUPER_CARRIER_HOURLY_MAINTENANCE;
             case ATTACK_SUB: return Defs.ATTACK_SUB_HOURLY_MAINTENANCE;
             case SSBN: return Defs.SSBN_HOURLY_MAINTENANCE;
@@ -921,7 +922,7 @@ public class Defs
     public static final int ORE_MINE_GENERATE_TIME = MS_PER_MIN * 60;
     public static final int SOLAR_PANEL_GENERATE_TIME = MS_PER_MIN * 60;
     public static final int FARM_GENERATE_TIME = MS_PER_DAY * 3;
-    public static final int LOGISTICS_DEPOT_WEALTH_CAPACITY = 10000;
+    public static final int LOGISTICS_DEPOT_WEALTH_CAPACITY = 50000;
     public static final float LOGISTICS_DEPOT_COLLECT_RADIUS = 1.0f;
     public static final int LOGISTICS_DEPOT_COLLECT_COOLDOWN = MS_PER_HOUR * 3;
     
@@ -932,4 +933,44 @@ public class Defs
     public static final int BLUE_WATER_BONUS = 500;
     public static final int KOTH_BONUS_PLAYER = 10000;  //The bonus per hour for an individual player who controls the hill.
     public static final int KOTH_BONUS_ALLIANCE = 1000; //The bonus per player in an alliance that controls the hill.
+    
+    public static final int MISSILE_SITE_HOURLY_MAINTENANCE = 50;
+    public static final int ICBM_SILO_HOURLY_MAINTENANCE = 100;
+    public static final int SAM_SITE_HOURLY_MAINTENANCE = 50;
+    public static final int ABM_SILO_HOURLY_MAINTENANCE = 100;
+    public static final int BUNKER_HOURLY_MAINTENANCE = 50;
+    public static final int BANK_HOURLY_MAINTENANCE = 25;
+    public static final int LOGISTICS_DEPOT_HOURLY_MAINTENANCE = 500;
+    public static final int SOLAR_PANEL_HOURLY_MAINTENANCE = 5;
+    public static final int FARM_HOURLY_MAINTENANCE = 250;
+    public static final int ORE_MINE_HOURLY_MAINTENANCE = 5000;
+    public static final int AIRBASE_HOURLY_MAINTENANCE = 150;
+    public static final int ARTILLERY_GUN_HOURLY_MAINTENANCE = 10;
+    public static final int SENTRY_GUN_HOURLY_MAINTENANCE = 10;
+    public static final int ARMORY_HOURLY_MAINTENANCE = 50;
+    public static final int SHIPYARD_HOURLY_MAINTENANCE = 500;
+
+    public static final int GetMaintenanceCost(EntityType structureType)
+    {
+        switch(structureType)
+        {
+            case MISSILE_SITE: return MISSILE_SITE_HOURLY_MAINTENANCE;
+            case NUCLEAR_MISSILE_SITE: return ICBM_SILO_HOURLY_MAINTENANCE;
+            case SAM_SITE: return SAM_SITE_HOURLY_MAINTENANCE;
+            case ABM_SILO: return ABM_SILO_HOURLY_MAINTENANCE;
+            case COMMAND_POST: return BUNKER_HOURLY_MAINTENANCE;
+            case WAREHOUSE: return BANK_HOURLY_MAINTENANCE;
+            case LOGISTICS_DEPOT: return LOGISTICS_DEPOT_HOURLY_MAINTENANCE;
+            case SOLAR_PANEL: return SOLAR_PANEL_HOURLY_MAINTENANCE;
+            case FARM: return FARM_HOURLY_MAINTENANCE;
+            case ORE_MINE: return ORE_MINE_HOURLY_MAINTENANCE;
+            case AIRBASE: return AIRBASE_HOURLY_MAINTENANCE;
+            case ARTILLERY_GUN: return ARTILLERY_GUN_HOURLY_MAINTENANCE;
+            case SENTRY_GUN: return SENTRY_GUN_HOURLY_MAINTENANCE;
+            case ARMORY: return ARMORY_HOURLY_MAINTENANCE;
+            case SHIPYARD: return SHIPYARD_HOURLY_MAINTENANCE;
+        }
+
+        return 0;
+    }
 }   
